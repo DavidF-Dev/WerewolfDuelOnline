@@ -1,0 +1,172 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+  workflow_dispatch:
+
+permissions: {}
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  # Each deploy job runs only once its secrets and variables are set, so a fresh fork stays green.
+  settings:
+    name: Read the deployment settings
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    outputs:
+      referee: ${{ steps.check.outputs.referee }}
+      production-origins: ${{ steps.check.outputs.production-origins }}
+      staging-origins: ${{ steps.check.outputs.staging-origins }}
+    steps:
+      - name: Check the referee settings
+        id: check
+        env:
+          HAS_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
+          HAS_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
+          APP_ORIGINS: ${{ vars.APP_ORIGINS }}
+          STAGING_REFEREE_URL: ${{ vars.STAGING_REFEREE_URL }}
+        run: |
+          if [ "$HAS_TOKEN" != true ] || [ "$HAS_ACCOUNT" != true ] \
+            || [ -z "$APP_ORIGINS" ] || [ -z "$STAGING_REFEREE_URL" ]; then
+            echo "::notice::The referee is not deployed: set the CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets and the APP_ORIGINS and STAGING_REFEREE_URL variables to deploy it."
+            echo "referee=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          origins=""
+          IFS=',' read -ra entries <<< "$APP_ORIGINS"
+          for entry in "${entries[@]}"; do
+            origin="$(echo "$entry" | tr -d '[:space:]')"
+            if [ -z "$origin" ]; then continue; fi
+            # Only https origins, never a wildcard or a path.
+            if ! [[ "$origin" =~ ^https://[A-Za-z0-9.-]+(:[0-9]+)?$ ]]; then
+              echo "::error::APP_ORIGINS must list https origins such as https://user.github.io, separated by commas; '$origin' is not one."
+              exit 1
+            fi
+            origins="${origins:+$origins,}$origin"
+          done
+          if [ -z "$origins" ]; then
+            echo "::error::APP_ORIGINS lists no origins."
+            exit 1
+          fi
+          {
+            echo "referee=true"
+            echo "production-origins=$origins"
+            echo "staging-origins=$origins,http://localhost:5173,http://localhost:4173"
+          } >> "$GITHUB_OUTPUT"
+
+  referee-staging:
+    name: Referee to Cloudflare staging
+    needs: settings
+    if: needs.settings.outputs.referee == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    concurrency:
+      group: referee-staging
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-app
+      - name: Build the referee
+        working-directory: app
+        run: pnpm --filter "@wwd/referee-cloudflare..." build
+      - name: Deploy to staging
+        working-directory: app/packages/referee-cloudflare
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ORIGINS: ${{ needs.settings.outputs.staging-origins }}
+        run: pnpm run deploy:staging --var "ALLOWED_ORIGINS:$ORIGINS"
+      - name: Smoke-test staging
+        env:
+          REFEREE: ${{ vars.STAGING_REFEREE_URL }}
+        run: node scripts/smoke.mjs "$REFEREE"
+
+  referee-production:
+    name: Referee to Cloudflare production
+    needs: [settings, referee-staging]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    concurrency:
+      group: referee-production
+      cancel-in-progress: false
+    environment:
+      name: production
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-app
+      - name: Build the referee
+        working-directory: app
+        run: pnpm --filter "@wwd/referee-cloudflare..." build
+      - name: Deploy to production
+        working-directory: app/packages/referee-cloudflare
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ORIGINS: ${{ needs.settings.outputs.production-origins }}
+        run: pnpm run deploy:production --var "ALLOWED_ORIGINS:$ORIGINS"
+      - name: Smoke-test production
+        if: vars.REFEREE_URL != ''
+        env:
+          REFEREE: ${{ vars.REFEREE_URL }}
+        run: node scripts/smoke.mjs "$REFEREE"
+
+  web:
+    name: Web app to GitHub Pages
+    needs: [settings, referee-production]
+    # Waits for the production referee when it is configured, and runs only if that deploy succeeded.
+    if: >-
+      always() && vars.REFEREE_URL != '' && needs.settings.result == 'success' &&
+      (needs.settings.outputs.referee != 'true' || needs.referee-production.result == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: ./.github/actions/setup-app
+      - name: Read the Pages site
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Build the web app
+        working-directory: app
+        env:
+          VITE_REFEREE_URL: ${{ vars.REFEREE_URL }}
+          # Empty for a custom domain, or /<repo> for a project site.
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: |
+          if ! [[ "$VITE_REFEREE_URL" =~ ^https://[^/]+ ]]; then
+            echo "::error::REFEREE_URL must be an https URL such as https://wwd-referee.<subdomain>.workers.dev."
+            exit 1
+          fi
+          pnpm --filter "@wwd/web..." build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: app/apps/web/dist
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

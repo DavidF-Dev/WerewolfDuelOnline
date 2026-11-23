@@ -1,0 +1,26 @@
+{
+  "name": "@wwd/referee-cloudflare",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "wrangler deploy --dry-run --outdir dist",
+    "dev": "wrangler dev --var TEST_OVERRIDES:1",
+    "test": "vitest run && vitest run --config vitest.node.config.mjs",
+    "lint": "tsc -p tsconfig.json && tsc -p tsconfig.test.json && prettier --check .",
+    "deploy:staging": "node scripts/deploy.mjs staging",
+    "deploy:production": "node scripts/deploy.mjs production"
+  },
+  "dependencies": {
+    "@wwd/engine": "workspace:*",
+    "@wwd/protocol": "workspace:*",
+    "@wwd/referee-core": "workspace:*",
+    "@wwd/referee-service": "workspace:*"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "1.6.0",
+    "@cloudflare/workers-types": "5.20261104.1",
+    "vitest": "4.1.12",
+    "wrangler": "4.158.0"
+  }
+}

@@ -1,0 +1,65 @@
+name: app
+
+on:
+  push:
+    paths:
+      - "app/**"
+      - "engine/**"
+      - "scripts/**"
+      - ".github/actions/setup-app/**"
+      - ".github/workflows/app.yml"
+  pull_request:
+    paths:
+      - "app/**"
+      - "engine/**"
+      - "scripts/**"
+      - ".github/actions/setup-app/**"
+      - ".github/workflows/app.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-app
+      - run: pnpm build
+      - run: pnpm lint
+      - run: pnpm test
+      - name: Get the Playwright version
+        id: playwright
+        run: echo "version=$(pnpm --filter @wwd/web exec playwright --version | awk '{print $2}')" >> "$GITHUB_OUTPUT"
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright.outputs.version }}
+      - name: Install Playwright chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: pnpm --filter @wwd/web exec playwright install --with-deps chromium
+      - name: Install Playwright system dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: pnpm --filter @wwd/web exec playwright install-deps chromium
+      - run: pnpm --filter @wwd/web e2e
+      - run: pnpm --filter @wwd/web e2e:online
+      # The parity run repeats part of e2e:online against wrangler dev, so it runs only on request.
+      - name: Run the workerd parity end-to-end tests
+        if: github.event_name == 'workflow_dispatch'
+        run: pnpm --filter @wwd/web e2e:parity
+      - name: Upload Playwright traces
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-traces
+          path: app/apps/web/test-results
+          if-no-files-found: ignore

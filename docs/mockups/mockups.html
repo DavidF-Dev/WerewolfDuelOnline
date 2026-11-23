@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Duel Online Mockups</title>
+<style>
+:root{
+  --bg:#e7e3da; --frame:#1d2430; --surface:#fffdf8; --surface2:#f1ece1; --ink:#1c2230; --muted:#5d6472;
+  --line:#d8d0c0; --accent:#0072B2; --accent-ink:#fff; --human:#0072B2; --wolf:#D55E00; --ok:#009E73; --warn:#E69F00;
+  --heart:#c0392b; --chip:#e9e2d4;
+  --bar-a:#1f2a44; --bar-b:#33466e; --bar-ink:#f4ecd8; --moon:#f2d98d; --scenery:#2b3a5a; --scenery-o:.13; --sky-glow:#cfd9ee;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b0f17; --frame:#000; --surface:#18202d; --surface2:#111824; --ink:#e9edf3; --muted:#a3adbd;
+    --line:#2f3a4d; --accent:#56B4E9; --accent-ink:#0b1320; --human:#56B4E9; --wolf:#F0884A; --chip:#243042; --heart:#ff6b5e;
+    --bar-a:#0a0f1c; --bar-b:#1b2742; --bar-ink:#efe4c8; --moon:#f2d98d; --scenery:#7d93c4; --scenery-o:.12; --sky-glow:#1c2a48;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b0f17; --frame:#000; --surface:#18202d; --surface2:#111824; --ink:#e9edf3; --muted:#a3adbd;
+  --line:#2f3a4d; --accent:#56B4E9; --accent-ink:#0b1320; --human:#56B4E9; --wolf:#F0884A; --chip:#243042; --heart:#ff6b5e;
+  --bar-a:#0a0f1c; --bar-b:#1b2742; --bar-ink:#efe4c8; --moon:#f2d98d; --scenery:#7d93c4; --scenery-o:.12; --sky-glow:#1c2a48;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 "Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,sans-serif}
+header.page{max-width:1200px;margin:0 auto;padding:24px 16px 8px}
+header.page h1{margin:0 0 4px;font:700 22px/1.2 Georgia,serif}
+header.page p{margin:0;color:var(--muted);max-width:780px}
+.toolbar{margin-top:10px}
+.toolbar button{font:inherit;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.grid{max-width:1200px;margin:0 auto;padding:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:28px 20px}
+figure{margin:0}
+figcaption{margin-top:8px;color:var(--muted);font-size:13px}
+figcaption b{color:var(--ink)}
+.phone{width:100%;max-width:360px;height:740px;margin:0 auto;border:8px solid var(--frame);border-radius:30px;background:var(--surface);overflow:hidden;display:flex;flex-direction:column;position:relative}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:linear-gradient(160deg,var(--bar-a),var(--bar-b));color:var(--bar-ink)}
+.bar h2{margin:0;font:700 15px/1.2 Georgia,serif;display:flex;align-items:center;gap:7px;letter-spacing:.02em}
+.bar h2 .emblem{width:22px;height:22px;flex:none}
+.icon-btn{width:32px;height:32px;border-radius:8px;border:1px solid color-mix(in srgb,var(--bar-ink) 30%,transparent);display:grid;place-items:center;background:color-mix(in srgb,var(--bar-ink) 10%,transparent);color:var(--bar-ink);font-size:16px}
+.body{flex:1;overflow:hidden;padding:12px;display:flex;flex-direction:column;gap:10px;background:linear-gradient(to bottom,var(--surface2) 55%,color-mix(in srgb,var(--sky-glow) 45%,var(--surface2)));position:relative;isolation:isolate}
+.body > *:not(.scenery){position:relative;z-index:1}
+.scenery{position:absolute;left:0;right:0;bottom:0;width:100%;height:120px;z-index:0;color:var(--scenery);opacity:var(--scenery-o);pointer-events:none}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px;box-shadow:0 1px 2px color-mix(in srgb,var(--ink) 8%,transparent)}
+.label{font-family:Georgia,serif}
+.btn{display:block;width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 15px/1 inherit;text-align:center}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.small{display:inline-block;width:auto;padding:8px 12px;font-size:13px}
+.muted{color:var(--muted)}
+.row{display:flex;gap:8px;align-items:center}
+.wrap{flex-wrap:wrap}
+.spread{justify-content:space-between}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border-radius:999px;background:var(--chip);font-size:12px;font-weight:600}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--ok);display:inline-block}
+.phase{background:var(--surface);border-top:1px solid var(--line);padding:10px 12px}
+.phase .step{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.phase .instr{font-weight:600;margin:2px 0 8px}
+.steps{display:flex;gap:4px;margin-bottom:6px}
+.steps span{flex:1;height:4px;border-radius:2px;background:var(--line)}
+.steps span.on{background:var(--accent)}
+/* markers */
+.m{display:inline-flex;align-items:center;gap:2px;font-weight:700;font-size:12px}
+.m svg{width:16px;height:16px}
+/* character cards */
+.card{position:relative;width:74px;height:100px;border-radius:10px;border:2px solid var(--line);background:var(--surface);padding:5px;display:flex;flex-direction:column;justify-content:space-between;flex:none}
+.card .num{font:800 22px/1 Georgia,serif}
+.card .name{font-size:11px;font-weight:700;line-height:1.1}
+.card .fac{position:absolute;top:5px;right:5px;width:18px;height:18px}
+.card .glyph{position:absolute;left:50%;top:50%;transform:translate(-50%,-55%);width:30px;height:30px;opacity:.9}
+.card.human{border-color:var(--human);border-radius:14px}
+.card.wolf{border-color:var(--wolf);border-radius:3px;background:repeating-linear-gradient(135deg,var(--surface) 0 7px,color-mix(in srgb,var(--wolf) 14%,var(--surface)) 7px 9px);clip-path:polygon(0 0,86% 0,100% 12%,100% 100%,14% 100%,0 88%)}
+.card.sel{outline:3px solid var(--accent);outline-offset:2px}
+.card.back{background:repeating-linear-gradient(45deg,var(--chip) 0 6px,var(--surface2) 6px 12px);border-color:var(--muted)}
+.card.mini{width:44px;height:58px;padding:3px}
+.card.mini .num{font-size:15px}
+.card.mini .name{font-size:8.5px}
+.card.mini .fac{width:12px;height:12px;top:3px;right:3px}
+.card.mini .glyph{width:18px;height:18px}
+.card.off{opacity:.35}
+.hand .card{height:84px}
+.body.tight .panel{padding:7px 9px}
+.card.mine::after{content:"mine";position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-size:8px;background:var(--muted);color:var(--surface);padding:0 4px;border-radius:4px 4px 0 0}
+.card.ruled::before{content:"";position:absolute;inset:0;background:linear-gradient(to top right,transparent 47%,var(--muted) 48% 52%,transparent 53%)}
+.hand{display:flex;gap:6px}
+.targets{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;justify-items:center}
+.label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
+.track{display:flex;align-items:center;gap:0;margin-top:4px}
+.track .slot{flex:1;text-align:center;font-size:11px;color:var(--muted);border-top:2px solid var(--line);padding-top:3px;position:relative}
+.track .slot b{display:block;color:var(--ink);font-size:13px}
+.track .slot.me b{color:var(--accent)}
+.stepper{display:flex;align-items:center;gap:10px}
+.stepper button{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:700 20px/1 inherit}
+.stepper .val{font:800 24px/1 Georgia,serif;min-width:28px;text-align:center}
+ol.res{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+ol.res li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px;display:flex;gap:8px;align-items:flex-start}
+ol.res li .badge{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:800 13px/1 Georgia,serif;background:var(--chip)}
+ol.res li.done{opacity:.75}
+ol.res li.now{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 30%,transparent)}
+ol.res li.out{text-decoration:line-through;opacity:.6}
+.code{font:800 30px/1 ui-monospace,Consolas,monospace;letter-spacing:.12em;text-align:center}
+.qr{width:150px;height:150px;margin:6px auto;background:
+ conic-gradient(from 90deg at 20% 20%,var(--ink) 25%,transparent 0) 0 0/30px 30px, var(--surface);border:8px solid var(--surface);outline:1px solid var(--line)}
+.set{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.set:last-child{border-bottom:0}
+.toggle{width:38px;height:22px;border-radius:11px;background:var(--line);position:relative}
+.toggle.on{background:var(--accent)}
+.toggle::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff}
+.toggle.on::after{left:19px}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:12px}
+.seg span{padding:4px 8px}
+.seg span.on{background:var(--accent);color:var(--accent-ink)}
+.log{font-size:12px;color:var(--muted)}
+.note{font-size:11.5px;color:var(--muted);border-left:3px solid var(--warn);padding-left:6px}
+.big{font:800 26px/1.1 Georgia,serif;text-align:center;margin:4px 0}
+.list-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.body.settings .set{padding:3px 0}
+.body.settings .label{margin-bottom:2px}
+.select{border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;background:var(--surface);min-width:132px;display:inline-flex;justify-content:space-between;gap:8px}
+.btn.danger{border-color:var(--heart);color:var(--heart)}
+.btn.danger.solid{background:var(--heart);color:#fff}
+.body > .scrim, .scrim{position:absolute;inset:0;z-index:5;background:rgba(10,14,22,.55);display:flex;align-items:center;justify-content:center;padding:14px}
+.dialog{background:var(--surface);color:var(--ink);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px;box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.dialog h3{margin:0;font:700 17px/1.2 Georgia,serif}
+.dialog p{margin:0 0 6px;font-size:13px}
+.dialog ul{margin:0 0 6px;padding-left:18px;font-size:13px}
+a.ext{color:var(--accent);font-weight:600;text-underline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.legend{max-width:1200px;margin:0 auto;padding:0 16px 32px;color:var(--muted)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <defs>
+  <symbol id="f-human" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5z" fill="var(--human)"/></symbol>
+  <symbol id="f-wolf" viewBox="0 0 24 24"><path d="M3 21 7 3l3 8 2-8 2 8 3-8 4 18z" fill="var(--wolf)"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" fill="var(--heart)"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 24 24"><path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6z" fill="currentColor"/></symbol>
+  <symbol id="i-fang" viewBox="0 0 24 24"><path d="M6 3h12l-3 7-3 11-3-11z" fill="currentColor"/></symbol>
+  <symbol id="i-hour" viewBox="0 0 24 24"><path d="M6 2h12v2l-5 8 5 8v2H6v-2l5-8-5-8z" fill="currentColor"/></symbol>
+  <symbol id="i-potion" viewBox="0 0 24 24"><path d="M9 2h6v2h-1v5l5 9a3 3 0 0 1-3 4H8a3 3 0 0 1-3-4l5-9V4H9z" fill="var(--ok)"/></symbol>
+  <symbol id="i-badge" viewBox="0 0 24 24"><path d="m12 2 3 7h7l-5.5 4.5 2 7.5-6.5-4.5L5.5 21l2-7.5L2 9h7z" fill="var(--warn)"/></symbol>
+  <symbol id="emblem" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="var(--moon)"/><circle cx="16" cy="9" r="8" fill="var(--bar-a)" opacity=".55"/><path d="M5 20l2.5-6 1.5 2 1-4 1.5 3 1.5-3 1 4 1.5-2L19 20z" fill="var(--bar-a)"/></symbol>
+  <symbol id="scene" viewBox="0 0 360 120" preserveAspectRatio="xMidYMax slice"><path fill="currentColor" d="M0 120V92l14-4 10-22 10 22 12-30 12 30 10-18 10 18 8-4 16-8V60l12-8 12 8v16h6V66l10-7 10 7v12l10 4 10-26 12 26 9-20 9 20 12-34 12 34 10-16 10 16 10-6 14 3V70l10-6 10 6v12h6V58l9-14 9 14v26l12 2 10-20 10 20 12-28 12 28 10-12 10 12 8 4v34z"/><circle cx="300" cy="22" r="10" fill="currentColor" opacity=".6"/></symbol>
+  <symbol id="g-aim" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 1v6M12 17v6M1 12h6M17 12h6" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="g-claw" viewBox="0 0 24 24"><path d="M5 20 11 4M10 21l6-16M15 21l5-13" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></symbol>
+  <symbol id="g-fool" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10h.01M16 10h.01M8 15c2 2 6 2 8 0" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></symbol>
+ </defs>
+</svg>
+
+<header class="page">
+  <h1>Werewolf: Duel! Online — screen mockups</h1>
+  <p>Low-fidelity layouts for discussion, using placeholder shapes. Human cards are rounded shields with a solid border; Werewolf cards are notched and hatched, so the two factions differ in shape and pattern as well as colour. The large number is the initiative. Palette is Okabe–Ito. The default "Moonlit" theme adds a night-sky header with a moon emblem, warm parchment panels, and a faint treeline-and-village silhouette at the bottom of each screen. All of these are decorative, hidden from screen readers, and come from the theme pack. Use the button to switch between light and dark.</p>
+  <div class="toolbar"><button id="themeBtn" type="button">Toggle light / dark</button></div>
+</header>
+
+<main class="grid" id="grid"></main>
+
+<p class="legend">Not shown here: the Join screen (enter code / scan QR), the log and rules drawer, the replay viewer, the Backup screen, the Clear history confirmation and the tutorial. They reuse the same components.</p>
+
+<script>
+const C = {
+  1:["Hunter","human","aim"],2:["Wolf King","wolf","claw"],3:["Knight","human","aim"],4:["Wolfen","wolf","claw"],
+  5:["Seer","human","aim"],6:["Witch","human","potion"],7:["Wolf Beauty","wolf","claw"],8:["Villager","human","cross"],F:["Fool","fool","fool"]
+};
+const glyphId = g => ({aim:"g-aim",claw:"g-claw",fool:"g-fool",potion:"i-potion",cross:"i-cross"})[g];
+function card(n,cls=""){
+  if(n==="?") return `<div class="card back ${cls}" aria-label="Face-down card"></div>`;
+  const [name,fac,g]=C[n]; const f = fac==="fool"?"":`<svg class="fac"><use href="#f-${fac}"/></svg>`;
+  const facCls = fac==="wolf"?"wolf":(fac==="human"?"human":"");
+  return `<div class="card ${facCls} ${cls}" role="button" aria-label="${name}${n!=="F"?", initiative "+n+", "+(fac==="wolf"?"Werewolf":"Human"):""}">
+    <span class="num">${n==="F"?"–":n}</span>${f}<svg class="glyph"><use href="#${glyphId(g)}"/></svg><span class="name">${name}</span></div>`;
+}
+const mk=(id,v)=>`<span class="m"><svg><use href="#${id}"/></svg>${v}</span>`;
+function oppStrip(extra=""){
+  return `<div class="panel row spread"><div><div class="row"><b>Mika</b><span class="dot" title="Connected"></span><span class="muted" style="font-size:12px">connected</span></div>
+  <div class="row" style="margin-top:4px">${mk("i-heart","2")} ${mk("i-cross","1")} ${mk("i-fang","1")} ${mk("i-hour","1")}</div></div>
+  <div style="text-align:right">${extra}</div></div>`;
+}
+function myStrip(){
+  return `<div class="row spread"><div class="row">${mk("i-heart","2")} ${mk("i-cross","2")} ${mk("i-fang","0")} ${mk("i-hour","2")} <span class="chip"><svg width="14" height="14"><use href="#i-badge"/></svg>Badge</span></div><span class="muted" style="font-size:12px">You</span></div>`;
+}
+const screens = [
+{cap:"<b>1 · Home.</b> Paused and active games come first, with one-tap Continue. The install card appears once, after your first finished game, and only where installing is possible; dismissing it hides it for good. On iOS, Install shows the Share → Add to Home Screen steps instead. Wording is localised; the unofficial notice is always in the footer.",
+html:`<div class="bar"><h2>Werewolf: Duel! Online</h2><span class="icon-btn" aria-label="Settings">⚙</span></div>
+<div class="body">
+ <div class="panel"><div class="label">Continue</div>
+  <div class="list-item"><div><b>vs Mika</b><div class="muted" style="font-size:12px">Round 4 · your turn · 2 min ago</div></div><span class="btn primary small">Resume</span></div>
+  <div class="list-item" style="border:0"><div><b>vs Jo</b><div class="muted" style="font-size:12px">Paused · Round 2 · 21 Nov</div></div><span class="btn small">Resume</span></div>
+ </div>
+ <span class="btn primary">New game</span>
+ <span class="btn">Join game</span>
+ <div class="row"><span class="btn">How to play</span><span class="btn">History</span></div>
+ <div class="panel" role="region" aria-labelledby="inst-h"><div class="row spread"><b id="inst-h">Install the app</b><span class="icon-btn" style="width:26px;height:26px;font-size:13px;background:var(--surface2);color:var(--ink);border-color:var(--line)" role="button" aria-label="Dismiss">✕</span></div>
+  <div class="muted" style="font-size:12px;margin:4px 0 8px">Open it from your home screen like any other app, and keep your saved games safe.</div><span class="btn small primary">Install</span></div>
+ <div style="flex:1"></div>
+ <p class="muted" style="font-size:11.5px;text-align:center;margin:0;line-height:1.6">Made by David F Dev<br>An unofficial digital version of Werewolf: Duel!<br>Not affiliated with Whales Entertainment.<br><a class="ext" href="https://boardgamegeek.com/boardgame/436306/werewolf-duel#buyacopy" target="_blank" rel="noopener noreferrer">Get the physical game<span class="sr-only"> (opens in a new tab)</span> ↗</a></p>
+</div>`},
+{cap:"<b>2 · Invite.</b> After New game → options. The code, QR and share link all point to the same room. The opponent's arrival is shown live.",
+html:`<div class="bar"><span class="icon-btn">←</span><h2>Invite a friend</h2><span></span></div>
+<div class="body">
+ <div class="panel" style="text-align:center"><div class="label">Join code</div><div class="code">K7Q·2MX</div><div class="qr" role="img" aria-label="QR code for the invite link"></div>
+ <div class="row" style="justify-content:center"><span class="btn small">Copy code</span><span class="btn primary small">Share link</span></div></div>
+ <div class="panel"><div class="row spread"><span>Badge (first player)</span><div class="seg"><span class="on">Random</span><span>Choose</span></div></div>
+ <div class="row spread" style="margin-top:8px"><span>Reconnect grace</span><div class="seg"><span>5m</span><span class="on">10m</span><span>30m</span></div></div></div>
+ <div class="panel row"><span class="dot" style="background:var(--warn)"></span><span>Waiting for your opponent…</span></div>
+</div>`},
+{cap:"<b>3 · Plan phase.</b> I picked Knight. Only Werewolf targets and the Fool can be chosen; the rest are disabled, with the reason given on tap. My own hand is auto-marked “mine” in the deduction tracker. The opponent has sealed a plan with 1 target card.",
+html:`<div class="bar"><span class="icon-btn">☰</span><h2>Round 3</h2><span class="icon-btn" aria-label="Log">≡</span></div>
+<div class="body tight" style="gap:7px">
+ ${oppStrip(`<span class="chip">✓ plan sealed · 1 target</span>`)}
+ <div class="panel"><div class="label">Your plan</div><div class="row">${card(3,"mini sel")}<span class="muted">→</span>${card(4,"mini")}${card("F","mini")}<span class="muted" style="font-size:12px">Knight targets Wolfen + Fool</span></div></div>
+ <div class="panel"><div class="label">Your hand</div><div class="hand">${card(3,"sel")}${card(5)}${card(8)}${card(2)}</div></div>
+ <div class="panel"><div class="label">Targets · deduction</div><div class="targets">
+  ${card(1,"mini off")}${card(2,"mini mine")}${card(3,"mini off mine")}${card(4,"mini sel")}${card(5,"mini off mine")}
+  ${card(6,"mini off")}${card(7,"mini")}${card(8,"mini off mine")}${card("F","mini sel")}</div>
+  <div class="note" style="margin-top:6px">Knight: gain an Hourglass, then attack one Werewolf.</div></div>
+ ${myStrip()}
+</div>
+<div class="phase"><div class="steps"><span class="on"></span><span></span><span></span><span></span></div><div class="step">Plan · choose 1 character + targets</div><div class="instr">Ready to seal your plan?</div><span class="btn primary">Seal plan</span></div>`},
+{cap:"<b>4 · Reveal: hourglasses.</b> The Badge holder (me) decides first, and the opponent sees the number. The live track shows my effective initiative against the possible range for the opponent's character.",
+html:`<div class="bar"><span class="icon-btn">☰</span><h2>Round 3</h2><span class="icon-btn">≡</span></div>
+<div class="body">
+ ${oppStrip(`<span class="chip">waiting for you</span>`)}
+ <div class="panel row" style="justify-content:center;gap:20px">${card("?")}<span class="muted">vs</span>${card(3,"sel")}</div>
+ <div class="panel"><div class="label">Spend hourglasses</div>
+  <div class="row spread"><div class="stepper"><button aria-label="Fewer">−</button><span class="val">1</span><button aria-label="More">+</button></div>
+  <div style="text-align:right"><div class="muted" style="font-size:12px">Knight initiative</div><b style="font-size:18px">3 → 2</b></div></div>
+  <div class="track"><div class="slot">0</div><div class="slot">1</div><div class="slot me"><b>▲</b>2</div><div class="slot">3</div><div class="slot">4</div><div class="slot">5</div><div class="slot">6</div><div class="slot">7</div><div class="slot">8</div></div>
+  <div class="note" style="margin-top:8px">Lower resolves first. On a tie, more hourglasses goes first, then the Badge.</div></div>
+ ${myStrip()}
+</div>
+<div class="phase"><div class="steps"><span class="on"></span><span class="on"></span><span></span><span></span></div><div class="step">Reveal · step A (Badge holder)</div><div class="instr">Place 1 hourglass?</div><span class="btn primary">Confirm 1 hourglass</span></div>`},
+{cap:"<b>5 · Showdown.</b> Resolution is an ordered list, stepped by tap (or automatic or instant, per settings). Each line is written in plain language and announced to screen readers. Eliminated characters are struck through.",
+html:`<div class="bar"><span class="icon-btn">☰</span><h2>Round 3 · Showdown</h2><span class="icon-btn">≡</span></div>
+<div class="body">
+ <div class="panel row spread"><div class="row">${card(4,"mini")}<span style="font-size:12px"><b>Mika</b>: Wolfen → Knight<br><span class="muted">init 4, no hourglass</span></span></div></div>
+ <div class="panel row spread"><div class="row">${card(3,"mini sel")}<span style="font-size:12px"><b>You</b>: Knight → Wolfen + Fool<br><span class="muted">init 3 → 2 (1 hourglass)</span></span></div></div>
+ <ol class="res" aria-live="polite">
+  <li class="done"><span class="badge">P</span><span>No potion this round.</span></li>
+  <li class="now"><span class="badge">2</span><span><b>Your Knight</b> gains an hourglass, then attacks <b>Wolfen</b> — hit! Mika's Wolfen is eliminated. <b>Mika loses 1 health</b> (2 → 1).</span></li>
+  <li class="out"><span class="badge">4</span><span>Mika's Wolfen — eliminated, does not act.</span></li>
+ </ol>
+ <div style="flex:1"></div>
+ <div class="panel row spread">${mk("i-heart","1")}<span class="muted" style="font-size:12px">Mika</span><span class="muted">·</span><span class="muted" style="font-size:12px">You</span>${mk("i-heart","2")}</div>
+</div>
+<div class="phase"><div class="steps"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span></div><div class="step">Showdown</div><div class="instr">Badge passes to Mika for round 4.</div><span class="btn primary">Next round</span></div>`},
+{cap:"<b>6 · Game over and History.</b> Shows how the game was won and gives access to the replay, which shows both players' hands now the game is over. History holds stats and every past game.",
+html:`<div class="bar"><span class="icon-btn">←</span><h2>Game over</h2><span></span></div>
+<div class="body">
+ <div class="panel" style="text-align:center"><div class="big">You win!</div><div class="muted">Mika ran out of health in round 6</div>
+  <div class="row" style="justify-content:center;margin-top:8px">${mk("i-heart","2")} ${mk("i-cross","3")} ${mk("i-fang","0")}</div></div>
+ <div class="row"><span class="btn primary">View replay</span><span class="btn">Rematch</span></div>
+ <div class="panel"><div class="label">History</div>
+  <div class="row spread" style="font-size:12px;margin-bottom:6px"><span>Played <b>14</b></span><span>Won <b>9</b></span><span>Health <b>5</b> · Fang <b>1</b> · Cross <b>3</b></span></div>
+  <div class="list-item"><div><b>Won</b> vs Mika<div class="muted" style="font-size:12px">22 Nov · 6 rounds · Health</div></div><span class="btn small">Replay</span></div>
+  <div class="list-item"><div><b>Lost</b> vs Jo<div class="muted" style="font-size:12px">19 Nov · 4 rounds · Fangs</div></div><span class="btn small">Replay</span></div>
+  <div class="list-item" style="border:0"><div><b>Won</b> vs Mika<div class="muted" style="font-size:12px">18 Nov · 7 rounds · Crosses</div></div><span class="btn small">Replay</span></div></div>
+</div>`},
+{cap:"<b>7 · Settings (top).</b> Grouped. Language is a dropdown with each language named in itself. Install app shows Install, the iOS steps, or Installed, depending on the browser; it is hidden where installing is impossible. High contrast works with light and dark themes.",
+html:`<div class="bar"><span class="icon-btn">←</span><h2>Settings</h2><span></span></div>
+<div class="body tight settings" style="gap:4px">
+ <div class="panel"><div class="label">General</div>
+  <div class="set"><span>Language</span><span class="select" role="combobox" aria-label="Language">System (English) <span aria-hidden="true">▾</span></span></div>
+  <div class="set"><span>Theme</span><div class="seg"><span class="on">System</span><span>Light</span><span>Dark</span></div></div>
+  <div class="set"><span>Install app</span><span class="btn small">Install</span></div></div>
+ <div class="panel"><div class="label">Reading & accessibility</div>
+  <div class="set"><span>Text size</span><div class="seg"><span>90%</span><span class="on">100%</span><span>125%</span><span>150%</span></div></div>
+  <div class="set"><span>Reading font</span><div class="seg"><span class="on">Default</span><span>Lexend</span><span>OpenDys.</span></div></div>
+  <div class="set"><span>High contrast</span><span class="toggle"></span></div>
+  <div class="set"><span>Colour-blind patterns</span><span class="toggle on"></span></div>
+  <div class="set"><span>Reduced motion</span><div class="seg"><span class="on">System</span><span>On</span><span>Off</span></div></div>
+  <div class="set"><span>Showdown speed</span><div class="seg"><span class="on">Tap</span><span>Auto</span><span>Instant</span></div></div></div>
+ <div class="panel"><div class="label">Gameplay</div>
+  <div class="set"><span>Confirm before sealing</span><span class="toggle on"></span></div>
+  <div class="set"><span>Deduction auto-mark</span><span class="toggle on"></span></div>
+  <div class="set"><span>Rules hints</span><span class="toggle on"></span></div></div>
+</div>`},
+{cap:"<b>8 · Settings (scrolled).</b> Network, Data and About. Your data lives only on this device; Data explains that, offers a backup, and holds the two destructive actions, each marked with a warning icon as well as colour.",
+html:`<div class="bar"><span class="icon-btn">←</span><h2>Settings</h2><span></span></div>
+<div class="body tight settings" style="gap:6px">
+ <div class="panel"><div class="label">Network</div>
+  <div class="set"><span>Server</span><span class="select" role="combobox" aria-label="Server">Default <span aria-hidden="true">▾</span></span></div>
+  <div class="set"><span>Data saver</span><span class="toggle"></span></div></div>
+ <div class="panel"><div class="label">Data</div>
+  <div class="muted" style="font-size:12px;margin-bottom:6px">Your games, history and settings are stored only on this device.</div>
+  <div class="set"><span>Backup</span><span class="row"><span class="btn small">Export</span><span class="btn small">Import</span></span></div>
+  <div class="set"><span>Match history</span><span class="btn small danger"><span aria-hidden="true">⚠</span> Clear history</span></div>
+  <div class="set"><span>Everything on this device</span><span class="btn small danger"><span aria-hidden="true">⚠</span> Delete all data</span></div></div>
+ <div class="panel"><div class="label">About</div>
+  <div class="set"><span>Version 0.1.0</span><span class="row"><a class="ext" href="#">Credits</a><a class="ext" href="#">Licences</a></span></div>
+  <div class="muted" style="font-size:12px;padding-top:4px">© 2026 David F Dev</div></div>
+</div>`},
+{cap:"<b>9 · Delete all data.</b> A confirmation dialog that names exactly what goes, warns that paused and active games can't be resumed, offers a backup first, and is honest that it only affects this device.",
+html:`<div class="bar"><span class="icon-btn">←</span><h2>Settings</h2><span></span></div>
+<div class="body tight settings" style="gap:6px">
+ <div class="scrim"><div class="dialog" role="alertdialog" aria-labelledby="del-h" aria-describedby="del-d">
+  <h3 id="del-h"><span aria-hidden="true">⚠</span> Delete all data?</h3>
+  <div id="del-d"><p>This permanently deletes everything stored on this device:</p>
+   <ul><li>Settings and your display name</li><li>Match history and stats</li><li>Paused and active games, which can't be resumed afterwards</li></ul>
+   <p class="muted">Your opponents keep their own copies, and online rooms expire on their own.</p></div>
+  <span class="btn">Export backup first</span>
+  <span class="btn danger solid"><span aria-hidden="true">⚠</span> Delete all data</span>
+  <span class="btn">Cancel</span>
+ </div></div>
+</div>`}
+];
+document.getElementById("grid").innerHTML = screens.map(s=>`<figure><div class="phone">${s.html}</div><figcaption>${s.cap}</figcaption></figure>`).join("");
+// Theme decoration: purely decorative, hidden from assistive tech; supplied by the theme pack in the real app.
+document.querySelectorAll(".bar h2").forEach(h=>h.insertAdjacentHTML("afterbegin",'<svg class="emblem" aria-hidden="true"><use href="#emblem"/></svg>'));
+document.querySelectorAll(".body").forEach(b=>b.insertAdjacentHTML("beforeend",'<svg class="scenery" aria-hidden="true"><use href="#scene"/></svg>'));
+document.getElementById("themeBtn").onclick=()=>{
+  const r=document.documentElement; const dark = r.dataset.theme ? r.dataset.theme==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme = dark ? "light" : "dark";
+};
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# Applies to builds of this Dockerfile from the repository root.
+**/node_modules
+**/dist
+**/target
+**/.wrangler
+**/test-results
+**/playwright-report
+*.pdf
+.superpowers
+.github
+docs
+app/packages/engine/src/generated

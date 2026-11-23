@@ -1,0 +1,35 @@
+{
+  "name": "@wwd/client-core",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "gen": "node scripts/gen-ui-ftl.mjs",
+    "build": "pnpm gen && tsc -p tsconfig.build.json",
+    "test": "pnpm gen && vitest run",
+    "lint": "pnpm gen && tsc --noEmit -p tsconfig.json && prettier --check ."
+  },
+  "dependencies": {
+    "@fluent/bundle": "^0.19.0",
+    "@wwd/engine": "workspace:*",
+    "@wwd/protocol": "workspace:*",
+    "@wwd/transport": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@wwd/referee-memory": "workspace:*",
+    "@wwd/referee-service": "workspace:*",
+    "vitest": "^3.0.0"
+  }
+}

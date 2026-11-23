@@ -1,0 +1,45 @@
+name: Set up the app toolchain
+description: >-
+  Installs the pinned Rust toolchain, the pinned wasm-bindgen-cli, pnpm and Node 24, then the
+  app's dependencies, ready to build the engine package and the app.
+
+runs:
+  using: composite
+  steps:
+    # Installs the channel, components and targets pinned in rust-toolchain.toml.
+    - name: Install the pinned Rust toolchain
+      shell: bash
+      working-directory: engine
+      run: rustup toolchain install --no-self-update
+    - uses: Swatinem/rust-cache@v2
+      with:
+        workspaces: engine
+    - name: Read the pinned wasm-bindgen version
+      id: bindgen
+      shell: bash
+      run: |
+        version=$(sed -n 's/^wasm-bindgen *= *"=\([^"]*\)".*/\1/p' engine/crates/wwd-wasm/Cargo.toml)
+        echo "version=$version" >> "$GITHUB_OUTPUT"
+    - name: Cache wasm-bindgen-cli
+      id: bindgen-cache
+      uses: actions/cache@v4
+      with:
+        path: ~/.cargo/bin/wasm-bindgen
+        key: wasm-bindgen-cli-${{ steps.bindgen.outputs.version }}-${{ runner.os }}
+    - name: Install wasm-bindgen-cli
+      if: steps.bindgen-cache.outputs.cache-hit != 'true'
+      shell: bash
+      working-directory: engine
+      run: cargo install wasm-bindgen-cli --version ${{ steps.bindgen.outputs.version }} --locked
+    - uses: pnpm/action-setup@v4
+      with:
+        package_json_file: app/package.json
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24
+        cache: pnpm
+        cache-dependency-path: app/pnpm-lock.yaml
+    - name: Install the app's dependencies
+      shell: bash
+      working-directory: app
+      run: pnpm install --frozen-lockfile

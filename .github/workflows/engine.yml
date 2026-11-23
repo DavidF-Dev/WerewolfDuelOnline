@@ -1,0 +1,40 @@
+name: engine
+
+on:
+  push:
+    paths: ["engine/**", ".github/workflows/engine.yml"]
+  pull_request:
+    paths: ["engine/**", ".github/workflows/engine.yml"]
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: engine
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Installs the channel, components and targets pinned in rust-toolchain.toml.
+      - name: Install the pinned Rust toolchain
+        run: rustup toolchain install --no-self-update
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: engine
+      - run: cargo fmt --check
+      - run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+      - run: cargo test --workspace --all-features
+      - name: Test wwd-core without features
+        run: cargo test -p wwd-core
+      - name: Build wwd-core for wasm
+        run: |
+          rustup target add wasm32-unknown-unknown
+          cargo build -p wwd-core --target wasm32-unknown-unknown
+      - name: Build wwd-wasm for wasm
+        run: cargo build -p wwd-wasm --target wasm32-unknown-unknown --release

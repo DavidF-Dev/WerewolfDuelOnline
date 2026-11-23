@@ -1,0 +1,90 @@
+# Werewolf: Duel! Online
+
+**Werewolf: Duel! Online** is an unofficial digital version of the two-player bluffing card game *Werewolf: Duel!* by Whales Entertainment. It is played in the browser on desktop and mobile as an installable PWA. Friends connect with a join code. A server-side **referee** runs the rules engine and sends each player only their own view.
+
+**Status:** M1 (the rules engine and `wwd` CLI in `engine/`), M2 (WASM bindings, protocol, referee core, client core and an unstyled two-tab web table in `app/`) and M3 (online play: the Node and Cloudflare referees, join codes, reconnection, seat PINs, the mobile lifecycle, and the deploy workflow and guide in `docs/deploy.md`) are complete. The next step is to write the M4 plan.
+
+## Documents (read these first)
+
+| Document | Purpose |
+|---|---|
+| [`docs/superpowers/specs/2026-11-22-werewolf-duel-online-design.md`](docs/superpowers/specs/2026-11-22-werewolf-duel-online-design.md) | **The design spec.** §5 is the authoritative rules specification for the engine |
+| [`docs/superpowers/plans/2026-11-22-m1-engine.md`](docs/superpowers/plans/2026-11-22-m1-engine.md) | Implementation plan for M1 (engine + CLI) |
+| [`docs/research/2026-11-21-research-and-recommendations.md`](docs/research/2026-11-21-research-and-recommendations.md) | Background research, alternatives considered, sources |
+| [`docs/mockups/mockups.html`](docs/mockups/mockups.html) | Low-fidelity screen mockups (open in a browser) |
+| `rulebook.pdf`, `cards.pdf` | The physical game's rulebook and card scans. Reference only: git-ignored, never commit or reproduce them |
+
+## Layout
+
+```
+engine/   Rust workspace: wwd-core (rules library), wwd-cli (`wwd` binary), wwd-wasm (bindings)
+app/      TypeScript pnpm workspace: engine, protocol, transport, referee-core, referee-memory, referee-service, referee-node, referee-cloudflare, client-core, apps/web (Svelte 5 + Vite)
+scripts/  smoke.mjs: post-deploy smoke test of a referee
+docs/     spec, plans, research, mockups, deploy guide
+.github/  workflows: engine, app, deploy; actions/setup-app (shared toolchain set-up)
+```
+
+## Commands
+
+Prerequisites: Rust stable with the `wasm32-unknown-unknown` target, Node 24, pnpm 10 and `wasm-bindgen-cli` 0.2.129 (the version pinned in `engine/crates/wwd-wasm/Cargo.toml`): `cargo install wasm-bindgen-cli --version 0.2.129 --locked`.
+
+Engine, from `engine/`:
+- Test: `cargo test --workspace --all-features`
+- Lint: `cargo clippy --workspace --all-targets --all-features -- -D warnings`
+- Format check: `cargo fmt --check`
+
+App, from `app/`:
+- `pnpm install`
+- `pnpm build` (builds the engine package first)
+- `pnpm test`
+- `pnpm lint` (`tsc`/`svelte-check` plus `prettier --check`)
+- `pnpm --filter @wwd/web e2e` (Playwright; first run `pnpm --filter @wwd/web exec playwright install chromium`)
+- `pnpm --filter @wwd/web e2e:online` (Playwright vs a Node referee started in-process)
+- `pnpm --filter @wwd/web e2e:parity` (the `@parity` subset vs `wrangler dev`)
+- `pnpm --filter @wwd/web dev` (dev server; `window.__wwd` is available only here). It uses the referee at `http://localhost:8787`, so start one of:
+  - `pnpm --filter @wwd/referee-node start --test-overrides` (the Node referee; add `--port`, `--data`, `--origins` as needed)
+  - `pnpm --filter @wwd/referee-cloudflare dev` (`wrangler dev` in local workerd, with test overrides; never deploys)
+- `BASE_PATH=/<repo> pnpm --filter @wwd/web build` (a build served under a sub-path, as on a GitHub Pages project site)
+
+Smoke test, from the repository root: `node scripts/smoke.mjs <referee-url>` (for example `http://localhost:8787`). It makes four requests (up to seven while retrying `/health`) and creates one room. Deployment is in `docs/deploy.md`; never deploy to Cloudflare from a dev machine except as described there.
+
+## Ground rules
+
+- **The engine is the only authority on rules.** The UI and referee never re-implement them; they use `legal_actions()`, `apply()` and `view()`.
+- **Hidden information must never reach the wrong player.** Data leaves the engine only through `view(state, viewer)` and visibility-filtered events.
+- **Determinism:** in the engine, no `HashMap`/`HashSet`, floats, clock, environment, locale, or unseeded randomness.
+- **No display strings in the engine.** It emits IDs, and all text lives in Fluent `.ftl` files (EN, DE, JA).
+- **No Cloudflare-specific code outside the Cloudflare adapter.**
+- **IP:**
+  - Use the character role names as printed.
+  - Write rules text in our own words.
+  - Don't use the publisher's artwork or card layouts; use placeholder shapes and CC0/CC-BY icons with credits.
+  - Always show the "unofficial" notice.
+- **Accessibility:** never convey information by colour alone. Respect reduced motion. Keep the DOM semantic, since agents and screen readers rely on the accessibility tree.
+- **Testing:** test-driven development throughout. Every rule must map to a named test. Use the in-memory and local servers; never test against the Cloudflare quota.
+
+## Workflow
+
+### Source control
+- **Don't run `git init`, create commits, or push unless the user asks.** The user manages the repository.
+- Follow the current milestone plan task by task. Record new decisions in the spec rather than only in chat.
+
+### Naming conventions
+- **British English** in identifiers, comments and user-visible strings (`Colour`, not `Color`).
+- **User-facing string casing:** sentence case. Capitalise the first letter and proper nouns; everything else is lowercase. Exception: discrete state indicators (toggle `ON` / `OFF`) stay ALL CAPS.
+- **C# code** follows C# language conventions: `PascalCase` for types and members, `camelCase` for locals, `_camelCase` for private fields.
+
+### Code
+- Write code to an industry standard, using best practices.
+- Avoid creating garbage in hot paths (code that runs every frame). Flag any case where you think creating garbage is acceptable.
+- Write tests where you see fit.
+
+### Comments
+- Write conservatively. Default to no comment; add one only when the *why* is non-obvious (a hidden constraint, a subtle invariant, a workaround for a specific bug).
+- When a comment is warranted, keep `//` comments to a single concise line.
+- Class and method `///` summaries may be multi-line.
+- Describe what the target *is* or *does*; broader context belongs in external docs, not in code comments.
+- Keep comments self-contained and stable.
+- **Comments must not have dependencies.** The test: a comment should not need editing unless the code immediately below it changes.
+- A reader who has never seen the rest of the codebase should be able to verify the comment against the local code alone.
+- Do not refer to file paths or file names.

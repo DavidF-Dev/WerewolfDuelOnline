@@ -1,0 +1,44 @@
+# Normalise line endings: LF in the repository and working tree (tooling such as
+# rustfmt, prettier and shell scripts expects LF, including on Windows).
+* text=auto eol=lf
+
+# Windows-only scripts keep CRLF
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+*.ps1  text eol=crlf
+
+# Source & config (explicit for clarity)
+*.rs    text diff=rust
+*.toml  text
+*.ts    text
+*.js    text
+*.svelte text
+*.json  text
+*.html  text diff=html
+*.css   text diff=css
+*.md    text diff=markdown
+*.ftl   text
+*.yml   text
+*.yaml  text
+*.svg   text
+
+# Binary assets
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.ico   binary
+*.pdf   binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.wasm  binary
+*.zip   binary
+*.gz    binary
+
+# Lockfiles: generated; collapse in diffs and GitHub language stats
+Cargo.lock      linguist-generated=true -diff
+pnpm-lock.yaml  linguist-generated=true -diff
+package-lock.json linguist-generated=true -diff

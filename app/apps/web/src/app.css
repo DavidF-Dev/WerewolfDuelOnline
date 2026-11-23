@@ -1,0 +1,56 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 48rem;
+  padding: 1rem;
+}
+
+button,
+input {
+  font: inherit;
+  min-height: 44px;
+  min-width: 44px;
+}
+
+:focus-visible {
+  outline: 3px solid;
+  outline-offset: 2px;
+}
+
+[aria-pressed='true'] {
+  font-weight: bold;
+  outline: 2px dashed;
+}
+
+ul {
+  padding-left: 1.25rem;
+}
+
+li + li {
+  margin-top: 0.25rem;
+}
+
+.note {
+  display: block;
+  font-size: 0.875rem;
+}
+
+.code {
+  font-family: monospace;
+  font-size: 2rem;
+  letter-spacing: 0.1em;
+}
+
+.visually-hidden {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

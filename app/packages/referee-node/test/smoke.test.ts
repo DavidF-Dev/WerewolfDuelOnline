@@ -1,4 +1,4 @@
-import { execFile } from 'node:child_process';
+import { execFile, spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import { createServer, type Server } from 'node:http';
@@ -135,11 +135,27 @@ describe('smoke script', () => {
 
   it('retries the health check while a fresh deploy comes up', async () => {
     const port = await freePort();
-    const running = smoke(`http://127.0.0.1:${port}`, '--retry-delay', '400');
-    await new Promise((resolve) => setTimeout(resolve, 200));
+    const child = spawn(process.execPath, [
+      SMOKE_SCRIPT,
+      `http://127.0.0.1:${port}`,
+      '--retry-delay',
+      '400',
+    ]);
+    let stdout = '';
+    let stderr = '';
+    child.stderr.on('data', (chunk: Buffer) => (stderr += chunk.toString()));
+    const exited = new Promise<number>((resolve) =>
+      child.once('close', (code) => resolve(code ?? -1)),
+    );
+    await new Promise<void>((resolve) => {
+      child.stdout.on('data', (chunk: Buffer) => {
+        stdout += chunk.toString();
+        if (/retrying/i.test(stdout)) resolve();
+      });
+    });
     servers.push(await start({ port }));
 
-    const run = await running;
+    const run = { code: await exited, stdout, stderr };
 
     expect(run.stderr).toBe('');
     expect(run.code).toBe(0);

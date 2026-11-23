@@ -111,8 +111,8 @@ pub(crate) fn start_round(state: &mut State, events: &mut Vec<Event>) {
     state.phase = Phase::Plan;
 }
 
-/// The public event that opens a segment played under `seed`.
-pub(crate) fn game_started(config: RulesConfig, seed: &[u8; 32]) -> Event {
+/// The public event that opens a game played under `seed`.
+fn game_started(config: RulesConfig, seed: &[u8; 32]) -> Event {
     Event {
         visibility: Visibility::Public,
         kind: EventKind::GameStarted {

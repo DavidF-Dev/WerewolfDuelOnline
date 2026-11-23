@@ -1,5 +1,5 @@
 import {
-  MAX_MESSAGE_BYTES,
+  MAX_SAVE_BYTES,
   PROTOCOL_VERSION,
   parseCreateRoomRequest,
   type CreateRoomRequest,
@@ -16,8 +16,11 @@ export interface ServiceConfig {
   engineVersion: string;
 }
 
+/** How creating a room went: `invalid_save` when the save it was asked to continue fails verification. */
+export type CreateResult = 'created' | 'collision' | 'invalid_save';
+
 export interface RoomStore {
-  create(code: string, req: CreateRoomRequest): Promise<'created' | 'collision'>;
+  create(code: string, req: CreateRoomRequest): Promise<CreateResult>;
 }
 
 /** A valid WebSocket upgrade request for the room with join code `upgrade`. */
@@ -87,9 +90,12 @@ export class RateLimiter {
   }
 }
 
-/** The room-creation limiter: 20 attempts per IP per hour. */
-export function createRoomLimiter(clock: Clock): RateLimiter {
-  return new RateLimiter(LIMITS.ROOM_CREATE_LIMIT, ONE_HOUR_MS, clock);
+/** The room-creation limiter: `limit` attempts per IP per hour, 20 unless given. */
+export function createRoomLimiter(
+  clock: Clock,
+  limit: number = LIMITS.ROOM_CREATE_LIMIT,
+): RateLimiter {
+  return new RateLimiter(limit, ONE_HOUR_MS, clock);
 }
 
 function json(
@@ -157,10 +163,13 @@ export async function handleHttp(
   return json(404, { error: 'not_found' }, cors);
 }
 
-/** Reads a request body as text, or returns null once it exceeds the protocol size cap. */
+/**
+ * Reads a request body as text, or returns null once it exceeds the largest body any request
+ * may have; the parser applies the tighter cap to bodies without a save.
+ */
 async function readBody(req: Request): Promise<string | null> {
   const declared = Number(req.headers.get('content-length'));
-  if (Number.isFinite(declared) && declared > MAX_MESSAGE_BYTES) return null;
+  if (Number.isFinite(declared) && declared > MAX_SAVE_BYTES) return null;
   if (req.body === null) return '';
   const reader = req.body.getReader();
   const chunks: Uint8Array[] = [];
@@ -169,7 +178,7 @@ async function readBody(req: Request): Promise<string | null> {
     const { done, value } = await reader.read();
     if (done) break;
     total += value!.length;
-    if (total > MAX_MESSAGE_BYTES) {
+    if (total > MAX_SAVE_BYTES) {
       await reader.cancel();
       return null;
     }
@@ -196,16 +205,19 @@ async function createRoom(
   const body = await readBody(req);
   if (body === null) return json(413, { error: 'too_large' }, cors);
   const parsed = parseCreateRoomRequest(body);
-  if (!parsed.ok) return json(400, { error: parsed.code }, cors);
-  if (parsed.msg.test !== undefined && !ctx.config.testOverrides) {
+  if (!parsed.ok) {
+    return json(parsed.code === 'too_large' ? 413 : 400, { error: parsed.code }, cors);
+  }
+  const request = parsed.msg;
+  if (!('save' in request) && request.test !== undefined && !ctx.config.testOverrides) {
     return json(400, { error: 'test_overrides_disabled' }, cors);
   }
 
   for (let attempt = 0; attempt < CREATE_ATTEMPTS; attempt++) {
     const code = generateJoinCode(ctx.random);
-    if ((await ctx.store.create(code, parsed.msg)) === 'created') {
-      return json(201, { code }, cors);
-    }
+    const result = await ctx.store.create(code, request);
+    if (result === 'created') return json(201, { code }, cors);
+    if (result === 'invalid_save') return json(400, { error: 'invalid_save' }, cors);
   }
   return json(503, { error: 'unavailable' }, cors);
 }

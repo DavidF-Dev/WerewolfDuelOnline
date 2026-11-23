@@ -1,7 +1,12 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { defaultRulesConfig } from '@wwd/engine';
 import { loadEngineForNode } from '@wwd/engine/test-support';
-import { GRACE_CHOICES_MINUTES, MAX_MESSAGE_BYTES, parseCreateRoomRequest } from '../src/index.js';
+import {
+  GRACE_CHOICES_MINUTES,
+  MAX_MESSAGE_BYTES,
+  MAX_SAVE_BYTES,
+  parseCreateRoomRequest,
+} from '../src/index.js';
 
 beforeAll(loadEngineForNode);
 
@@ -71,5 +76,50 @@ describe('parseCreateRoomRequest', () => {
     expect(parseCreateRoomRequest(body({ extra: 1 })).ok).toBe(false);
     const big = body({ test: { seed: 'a'.repeat(MAX_MESSAGE_BYTES) } });
     expect(parseCreateRoomRequest(big)).toEqual({ ok: false, code: 'too_large' });
+  });
+});
+
+describe('parseCreateRoomRequest with a save', () => {
+  // Only the request's shape is checked here; the referee verifies the save itself.
+  const save = { format_version: 1, kind: 'wwd-save', hash: 'ab' };
+  const fromSave = (extra: Record<string, unknown> = {}): string =>
+    JSON.stringify({ save, seat: 'p1', grace_minutes: 5, ...extra });
+
+  it('accepts a save, a seat and a grace choice', () => {
+    expect(parseCreateRoomRequest(fromSave())).toEqual({
+      ok: true,
+      msg: { save, seat: 'p1', grace_minutes: 5 },
+    });
+  });
+
+  it('rejects a bad seat, a missing save, extra keys and test options', () => {
+    for (const extra of [{ seat: 'p2' }, { save: [] }, { save: null }, { extra: 1 }]) {
+      expect(parseCreateRoomRequest(fromSave(extra)).ok).toBe(false);
+    }
+    expect(parseCreateRoomRequest(fromSave({ test: { grace_ms: 1000 } })).ok).toBe(false);
+    expect(parseCreateRoomRequest(fromSave({ config: defaultRulesConfig() })).ok).toBe(false);
+  });
+
+  it('allows a save body up to the save cap only', () => {
+    expect(MAX_SAVE_BYTES).toBe(262_144);
+    const padded = (bytes: number): string => {
+      const raw = fromSave({ save: { ...save, pad: '' } });
+      return fromSave({ save: { ...save, pad: 'x'.repeat(bytes - raw.length) } });
+    };
+    expect(padded(MAX_SAVE_BYTES).length).toBe(MAX_SAVE_BYTES);
+    expect(parseCreateRoomRequest(padded(MAX_SAVE_BYTES)).ok).toBe(true);
+    expect(parseCreateRoomRequest(padded(MAX_SAVE_BYTES + 1))).toEqual({
+      ok: false,
+      code: 'too_large',
+    });
+  });
+
+  it('keeps the message cap for a body without a save', () => {
+    const big = body({ pad: 'x'.repeat(MAX_MESSAGE_BYTES) });
+    expect(parseCreateRoomRequest(big)).toEqual({ ok: false, code: 'too_large' });
+    expect(parseCreateRoomRequest('x'.repeat(MAX_MESSAGE_BYTES + 1))).toEqual({
+      ok: false,
+      code: 'too_large',
+    });
   });
 });

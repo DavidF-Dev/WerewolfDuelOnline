@@ -4,6 +4,7 @@ export {
   type GameClientOptions,
   type GameClientState,
   type OpponentState,
+  type PauseState,
   type RejoinAttempt,
 } from './game-client.js';
 export { createLocaliser, type Localiser, type MessageArgs } from './i18n.js';
@@ -16,6 +17,7 @@ export {
   RECONNECT_BASE_MS,
   RECONNECT_JITTER,
   RECONNECT_MAX_MS,
+  SERVER_UNAVAILABLE_AFTER_MS,
   TIMER_JUMP_MS,
   type ConnectionManagerOptions,
   type ConnectionPhase,

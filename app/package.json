@@ -17,6 +17,9 @@
     "onlyBuiltDependencies": [
       "esbuild",
       "workerd"
-    ]
+    ],
+    "overrides": {
+      "axe-core": "4.14.0"
+    }
   }
 }

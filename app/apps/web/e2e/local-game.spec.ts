@@ -6,6 +6,7 @@ import {
   openTable,
   perform,
   playToEnd,
+  resign,
   snapshot,
   tabTo,
   targetId,
@@ -22,6 +23,16 @@ const PRINTED_ORDER = [
   'villager',
   'fool',
 ];
+
+test('resign ends a local game', async ({ context }) => {
+  const table = await openTable(context);
+  await expect.poll(async () => (await snapshot(table.guest)).status).toBe('playing');
+  await resign(table.guest);
+  await expectGameOver(table);
+  await expect(table.host.getByTestId('game-over-result')).toHaveText(/resigned/);
+  await expect(table.guest.getByTestId('game-over-result')).toHaveText(/resigned/);
+  await expect(table.guest.getByTestId('problem')).toHaveText('');
+});
 
 test('two tabs play a full game', async ({ context }) => {
   const table = await openTable(context);
@@ -103,6 +114,12 @@ test('guest seals a plan with the keyboard alone', async ({ context }) => {
 
   await tabTo(guest, 'seal-plan');
   await expect(guest.getByTestId('seal-plan')).toBeFocused();
+  await guest.keyboard.press('Enter');
+
+  // The confirmation opens on its safe answer; the confirm button sits just before it.
+  await expect(guest.getByTestId('confirm-no')).toBeFocused();
+  await guest.keyboard.press('Shift+Tab');
+  await expect(guest.getByTestId('confirm-yes')).toBeFocused();
   await guest.keyboard.press('Enter');
 
   await expect(guest.getByTestId('plan-builder')).toBeHidden();

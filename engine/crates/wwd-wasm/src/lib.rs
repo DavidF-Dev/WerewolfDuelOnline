@@ -6,14 +6,17 @@
 use serde::Serialize;
 use serde::de::DeserializeOwned;
 use wasm_bindgen::prelude::*;
-use wwd_core::{Command, Event, EventKind, Replay, RulesConfig, Seat, Viewer};
+use wwd_core::{
+    Character, Command, Event, EventKind, Plan, Replay, RoundBoundary, RulesConfig, Seat, View,
+    Viewer,
+};
 
 #[doc(hidden)]
 pub mod api {
     use serde::Serialize;
     use wwd_core::{
-        Command, EditError, Event, EventKind, Pending, Recorder, Replay, ReplayError,
-        RoundBoundary, RuleError, RulesConfig, Seat, View, Viewer,
+        Character, Command, EditError, Event, EventKind, Pending, Plan, Recorder, Replay,
+        ReplayError, RoundBoundary, RuleError, RulesConfig, Seat, TimelineStep, View, Viewer,
     };
 
     /// An error as it crosses to JavaScript: the engine's localisation message ID.
@@ -92,6 +95,17 @@ pub mod api {
             })
         }
 
+        pub fn resume(
+            boundary: RoundBoundary,
+            prior: Replay,
+            seed_hex: &str,
+        ) -> Result<Self, ApiError> {
+            let seed = parse_seed(seed_hex)?;
+            Ok(Self {
+                recorder: Recorder::resume(boundary, prior, seed)?,
+            })
+        }
+
         pub fn apply(&mut self, seat: Seat, cmd: Command) -> Result<Vec<Event>, ApiError> {
             Ok(self.recorder.apply(seat, cmd)?)
         }
@@ -131,6 +145,28 @@ pub mod api {
 
     pub fn verify_replay(replay: &Replay) -> Result<(), ApiError> {
         Ok(wwd_core::verify(replay)?)
+    }
+
+    pub fn validate_plan(plan: &Plan, config: &RulesConfig) -> Option<&'static str> {
+        wwd_core::validate_plan(plan, config)
+            .err()
+            .map(RuleError::id)
+    }
+
+    pub fn effective_initiative(character: Character, placed: u8) -> u8 {
+        wwd_core::effective_initiative(character, placed)
+    }
+
+    pub fn showdown_order(view: &View) -> Option<[Seat; 2]> {
+        wwd_core::showdown_order(view)
+    }
+
+    pub fn replay_timeline(replay: &Replay, viewer: Viewer) -> Result<Vec<TimelineStep>, ApiError> {
+        Ok(wwd_core::replay_timeline(replay, viewer)?)
+    }
+
+    pub fn content_hash(text: &str) -> String {
+        to_hex(&wwd_core::content_hash(text))
     }
 
     pub fn seed_commitment(seed_hex: &str) -> Result<String, ApiError> {
@@ -190,6 +226,13 @@ impl WasmGame {
     pub fn create(seed_hex: &str, config: JsValue) -> Result<WasmGame, JsValue> {
         let config: RulesConfig = from_js(config)?;
         let inner = api::Game::create(seed_hex, config).map_err(error_value)?;
+        Ok(WasmGame { inner })
+    }
+
+    pub fn resume(boundary: JsValue, prior: JsValue, seed_hex: &str) -> Result<WasmGame, JsValue> {
+        let boundary: RoundBoundary = from_js(boundary)?;
+        let prior: Replay = from_js(prior)?;
+        let inner = api::Game::resume(boundary, prior, seed_hex).map_err(error_value)?;
         Ok(WasmGame { inner })
     }
 
@@ -253,6 +296,38 @@ impl WasmGame {
 pub fn verify_replay(replay: JsValue) -> Result<(), JsValue> {
     let replay: Replay = from_js(replay)?;
     api::verify_replay(&replay).map_err(error_value)
+}
+
+#[wasm_bindgen(js_name = validatePlan)]
+pub fn validate_plan(plan: JsValue, config: JsValue) -> Result<Option<String>, JsValue> {
+    let plan: Plan = from_js(plan)?;
+    let config: RulesConfig = from_js(config)?;
+    Ok(api::validate_plan(&plan, &config).map(str::to_owned))
+}
+
+#[wasm_bindgen(js_name = effectiveInitiative)]
+pub fn effective_initiative(character: JsValue, placed: u8) -> Result<u8, JsValue> {
+    let character: Character = from_js(character)?;
+    Ok(api::effective_initiative(character, placed))
+}
+
+#[wasm_bindgen(js_name = showdownOrder)]
+pub fn showdown_order(view: JsValue) -> Result<JsValue, JsValue> {
+    let view: View = from_js(view)?;
+    to_js(&api::showdown_order(&view))
+}
+
+#[wasm_bindgen(js_name = replayTimeline)]
+pub fn replay_timeline(replay: JsValue, viewer: JsValue) -> Result<JsValue, JsValue> {
+    let replay: Replay = from_js(replay)?;
+    let viewer: Viewer = from_js(viewer)?;
+    let steps = api::replay_timeline(&replay, viewer).map_err(error_value)?;
+    to_js(&steps)
+}
+
+#[wasm_bindgen(js_name = contentHash)]
+pub fn content_hash(text: &str) -> String {
+    api::content_hash(text)
 }
 
 #[wasm_bindgen(js_name = seedCommitment)]

@@ -36,4 +36,18 @@ describe('App', () => {
     render(App, { props: { localiser } });
     expect(screen.getByTestId('rejoin')).toBeTruthy();
   });
+
+  it('opens the settings, about and how to play screens with one notice each', async () => {
+    render(App, { props: { localiser } });
+    const notice = localiser.t('footer-unofficial');
+    for (const [hash, testId] of [
+      ['#/settings', 'settings'],
+      ['#/about', 'about'],
+      ['#/how-to-play', 'how-to-play'],
+    ] as const) {
+      await goTo(hash);
+      expect(screen.getByTestId(testId)).toBeTruthy();
+      expect(screen.getAllByText(notice)).toHaveLength(1);
+    }
+  });
 });

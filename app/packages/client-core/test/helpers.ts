@@ -1,5 +1,7 @@
 import { Game, defaultRulesConfig, type RulesConfig, type View } from '@wwd/engine';
-import type { GameClient } from '../src/index.js';
+import { MemoryReferee } from '@wwd/referee-memory';
+import { createInMemoryPair } from '@wwd/transport';
+import { GameClient } from '../src/index.js';
 
 export const MAX_ROUNDS = 200;
 
@@ -87,4 +89,46 @@ export function finishedGame(
     game.apply(seat, rng.pick(game.legalActions(seat)));
   }
   throw new Error('game did not finish');
+}
+
+/** A memory referee with a deterministic random source and an advancing clock, closed by `cleanups`. */
+export function testReferee(seed: number, cleanups: Array<() => void>): MemoryReferee {
+  // An advancing clock keeps long games clear of the per-connection rate limit.
+  let time = 0;
+  const referee = new MemoryReferee({
+    clock: { now: () => (time += 1000) },
+    random: new Xorshift(seed).asRandom(),
+  });
+  cleanups.push(() => referee.close());
+  return referee;
+}
+
+/** A client that has joined `room` on `referee` over an in-memory link, disposed by `cleanups`. */
+export function joinReferee(
+  referee: MemoryReferee,
+  room: string,
+  cleanups: Array<() => void>,
+): GameClient {
+  const client = new GameClient({ room });
+  const [clientEnd, serverEnd] = createInMemoryPair();
+  referee.accept(serverEnd);
+  client.attach(clientEnd);
+  cleanups.push(() => client.dispose());
+  return client;
+}
+
+/** Plays random legal commands until `done` holds, failing if nobody can act first. */
+export async function playUntil(
+  clients: GameClient[],
+  rng: Xorshift,
+  done: () => boolean,
+): Promise<void> {
+  for (let i = 0; i < 20_000; i++) {
+    if (done()) return;
+    if (!(await step(clients, rng))) {
+      if (done()) return;
+      throw new Error('no client has a legal command');
+    }
+  }
+  throw new Error('the wanted state never came');
 }

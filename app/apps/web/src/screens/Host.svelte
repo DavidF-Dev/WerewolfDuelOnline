@@ -86,10 +86,33 @@
       notice = 'problem-command-not-sent';
     }
   }
+
+  function resign(): void {
+    try {
+      client?.resign();
+    } catch {
+      notice = 'problem-command-not-sent';
+    }
+  }
+
+  function rematch(): void {
+    try {
+      client?.requestRematch();
+    } catch {
+      notice = 'problem-command-not-sent';
+    }
+  }
 </script>
 
 {#if snapshot !== null && snapshot.view !== null}
-  <Table localiser={l} state={snapshot} onCommand={command} {notice} />
+  <Table
+    localiser={l}
+    state={snapshot}
+    onCommand={command}
+    onResign={resign}
+    onRematch={rematch}
+    {notice}
+  />
 {:else}
   <main aria-labelledby="{uid}-heading" data-testid="host">
     <h1 id="{uid}-heading">{l.t('host-heading')}</h1>

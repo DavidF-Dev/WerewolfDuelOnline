@@ -29,19 +29,19 @@ pub use edit::apply_edit;
 pub use edit::{Edit, EditError};
 pub use event::{Event, EventKind, ForfeitReason, Marker, Visibility};
 #[cfg(feature = "fuzz")]
-pub use fuzz::{FuzzReport, check_invariants, fuzz, random_game};
+pub use fuzz::{FuzzReport, check_invariants, check_timeline_step, fuzz, random_game};
 pub use game::new_game;
-pub use hash::{hash_bytes, seed_commitment};
+pub use hash::{content_hash, hash_bytes, seed_commitment};
 pub use legal::{can_resign, legal_actions};
 pub use replay::{
     BoundaryPlayer, Checkpoint, REPLAY_FORMAT_VERSION, Recorder, Replay, ReplayEntry, ReplayError,
-    RoundBoundary, Segment, SegmentStart, replay, verify,
+    RoundBoundary, Segment, SegmentStart, TimelineStep, replay, replay_timeline, verify,
 };
 pub use rng::RngState;
 pub use state::*;
 pub use targeting::{AttackRule, attack_rule, validate_plan};
 pub use types::*;
 pub use view::{
-    Pending, PendingKind, PlanView, PlayerView, View, Viewer, events_since, pending, view,
-    visible_to,
+    Pending, PendingKind, PlanView, PlayerView, View, Viewer, events_since, pending,
+    showdown_order, view, visible_to,
 };

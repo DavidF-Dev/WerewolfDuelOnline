@@ -1,4 +1,4 @@
-import { defaultRulesConfig, type Seat } from '@wwd/engine';
+import { defaultRulesConfig, type RulesConfig, type Seat } from '@wwd/engine';
 import {
   ConnectionManager,
   GameClient,
@@ -6,7 +6,7 @@ import {
   type Lifecycle,
   type RejoinAttempt,
 } from '@wwd/client-core';
-import type { CreateRoomRequest } from '@wwd/protocol';
+import type { CreateRoomRequest, NewRoomRequest } from '@wwd/protocol';
 import { WebSocketTransport, type Transport } from '@wwd/transport';
 import { normaliseCode } from './code.js';
 
@@ -55,6 +55,10 @@ export const DEFAULT_SERVER: string = resolveDefaultServer(
   import.meta.env.PROD,
 );
 
+/** The referee for new games: the custom server from the settings when it is usable, otherwise the default. */
+export const serverFor = (custom: string | null): string =>
+  (custom === null ? undefined : parseServer(custom)) ?? DEFAULT_SERVER;
+
 /** The WebSocket URL of `room` on the referee at `server`. */
 export function socketUrl(server: string, room: string): string {
   const url = new URL(`${server.replace(/\/+$/, '')}/rooms/${room}/ws`);
@@ -67,9 +71,13 @@ const appBase = (): string => `${location.origin}${location.pathname}`;
 const serverQuery = (server: string): string =>
   server === DEFAULT_SERVER ? '' : `server=${encodeURIComponent(server)}`;
 
-/** The app route that joins `room`, naming `server` only when it is not the default. */
-export function joinHash(room: string, server: string): string {
-  const query = serverQuery(server);
+/**
+ * The app route that joins `room`, naming `server` only when it is not the default, and the
+ * seat to claim when one is given.
+ */
+export function joinHash(room: string, server: string, seat?: Seat): string {
+  const params = [serverQuery(server), seat === undefined ? '' : `seat=${seat}`];
+  const query = params.filter((p) => p !== '').join('&');
   return `#/join/${room}${query === '' ? '' : `?${query}`}`;
 }
 
@@ -88,22 +96,41 @@ export const rejoinLink = (room: string, seat: Seat, server: string): string =>
 /** A host name to show for `server`. */
 export const serverHost = (server: string): string => new URL(server).host;
 
-export type CreateRoomProblem = 'rate_limited' | 'unavailable' | 'network' | 'other';
+export type CreateRoomProblem =
+  'rate_limited' | 'unavailable' | 'network' | 'invalid_save' | 'other';
+
+const CREATE_PROBLEM_IDS: Readonly<Record<CreateRoomProblem, string>> = {
+  rate_limited: 'create-failed-rate-limited',
+  unavailable: 'create-failed-unavailable',
+  network: 'create-failed-network',
+  invalid_save: 'save-failed-invalid',
+  other: 'create-failed-other',
+};
+
+/** The Fluent id explaining `problem`; a network failure while `online` is put down to the server. */
+export const createProblemId = (problem: CreateRoomProblem, online: boolean): string =>
+  problem === 'network' && online ? 'create-failed-server' : CREATE_PROBLEM_IDS[problem];
 
 export type CreateRoomResult =
   { ok: true; code: string } | { ok: false; problem: CreateRoomProblem };
 
-/** Creates a room on the referee at `server` with the default rules; `test` needs a referee started with test overrides. */
+/** Creates a room on the referee at `server` under `config`; `test` needs a referee started with test overrides. */
 export async function createRoom(
   server: string,
-  graceMinutes: CreateRoomRequest['grace_minutes'],
-  test?: CreateRoomRequest['test'],
+  graceMinutes: NewRoomRequest['grace_minutes'],
+  test?: NewRoomRequest['test'],
+  config: RulesConfig = defaultRulesConfig(),
 ): Promise<CreateRoomResult> {
-  const body: CreateRoomRequest = {
-    config: defaultRulesConfig(),
+  const body: NewRoomRequest = {
+    config,
     grace_minutes: graceMinutes,
     ...(test === undefined ? {} : { test }),
   };
+  return postRoom(server, body);
+}
+
+/** Sends `body` to the referee at `server` to create a room. */
+export async function postRoom(server: string, body: CreateRoomRequest): Promise<CreateRoomResult> {
   let response: Response;
   try {
     response = await fetch(`${server}/rooms`, {
@@ -116,6 +143,9 @@ export async function createRoom(
   }
   if (response.status === 429) return { ok: false, problem: 'rate_limited' };
   if (response.status === 503) return { ok: false, problem: 'unavailable' };
+  if (response.status === 400 && (await errorOf(response)) === 'invalid_save') {
+    return { ok: false, problem: 'invalid_save' };
+  }
   if (response.status !== 201) return { ok: false, problem: 'other' };
   try {
     const parsed = (await response.json()) as { code?: unknown };
@@ -126,11 +156,23 @@ export async function createRoom(
   }
 }
 
+async function errorOf(response: Response): Promise<unknown> {
+  try {
+    return ((await response.json()) as { error?: unknown }).error;
+  } catch {
+    return undefined;
+  }
+}
+
 export interface OnlineGameOptions {
   server: string;
   room: string;
+  /** The display name sent to the referee. */
+  name?: string;
   seatToken?: string;
   rejoin?: RejoinAttempt;
+  /** The seat to claim in a room created from a save. */
+  seat?: Seat;
   lifecycle?: Lifecycle;
 }
 
@@ -150,14 +192,17 @@ export interface OnlineGame {
 export function startOnlineGame(opts: OnlineGameOptions): OnlineGame {
   const client = new GameClient({
     room: opts.room,
+    ...(opts.name === undefined ? {} : { name: opts.name }),
     ...(opts.seatToken === undefined ? {} : { seatToken: opts.seatToken }),
     ...(opts.rejoin === undefined ? {} : { rejoin: opts.rejoin }),
+    ...(opts.seat === undefined ? {} : { seat: opts.seat }),
   });
   const url = socketUrl(opts.server, opts.room);
   const manager = new ConnectionManager({
     client,
     connect: (): Transport => new WebSocketTransport(url),
     lifecycle: opts.lifecycle ?? browserLifecycle(),
+    isOnline: () => navigator.onLine,
   });
   const restart = (rejoin: RejoinAttempt | null): void => {
     manager.stop();

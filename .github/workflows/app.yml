@@ -26,6 +26,7 @@ env:
 jobs:
   check:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     defaults:
       run:
         working-directory: app
@@ -51,6 +52,7 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: pnpm --filter @wwd/web exec playwright install-deps chromium
       - run: pnpm --filter @wwd/web e2e
+      - run: pnpm --filter @wwd/web e2e:pwa
       - run: pnpm --filter @wwd/web e2e:online
       # The parity run repeats part of e2e:online against wrangler dev, so it runs only on request.
       - name: Run the workerd parity end-to-end tests
@@ -63,3 +65,26 @@ jobs:
           name: playwright-traces
           path: app/apps/web/test-results
           if-no-files-found: ignore
+
+  docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Build the referee image
+        run: docker build -f app/packages/referee-node/Dockerfile -t wwd-referee .
+      - name: Start the referee container
+        run: docker run -d --name wwd-referee -p 8787:8787 wwd-referee --origins https://example.test
+      - name: Smoke-test the referee container
+        run: node scripts/smoke.mjs http://localhost:8787
+      - name: Show the container logs
+        if: failure()
+        run: docker logs wwd-referee
+      - name: Remove the referee container
+        if: always()
+        run: docker rm --force wwd-referee

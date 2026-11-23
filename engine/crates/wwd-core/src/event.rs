@@ -110,6 +110,14 @@ pub enum EventKind {
     Resigned {
         seat: Seat,
     },
+    /// Opens a segment resumed from a round boundary under a new seed; `round` is the
+    /// next round to be dealt.
+    SegmentStarted {
+        round: u32,
+        #[serde(with = "crate::hex")]
+        #[cfg_attr(feature = "ts", ts(type = "string"))]
+        seed_commitment: [u8; 32],
+    },
 }
 
 impl EventKind {
@@ -134,6 +142,7 @@ impl EventKind {
             EventKind::NextRoundRequested { .. } => "event-next-round-requested",
             EventKind::Resigned { .. } => "event-resigned",
             EventKind::GameOver { .. } => "event-game-over",
+            EventKind::SegmentStarted { .. } => "event-segment-started",
         }
     }
 }

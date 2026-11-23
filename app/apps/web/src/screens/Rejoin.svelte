@@ -18,8 +18,10 @@
   } from '../online.js';
   import { hrefFor } from '../router.js';
   import { saveOnlineSession } from '../session.js';
+  import Screen from '../components/Screen.svelte';
   import ServerConfirm from '../components/ServerConfirm.svelte';
   import { stopReasonText } from '../text.js';
+  import { isStalePage, reloadApp } from '../pwa/update.js';
 
   interface Props {
     localiser: Localiser;
@@ -75,7 +77,13 @@
   function granted(room: string, state: GameClientState): void {
     if (state.seatToken === null || opening) return;
     opening = true;
-    saveOnlineSession({ room, seatToken: state.seatToken, server, lastSeq: state.lastSeq });
+    saveOnlineSession({
+      room,
+      seatToken: state.seatToken,
+      server,
+      lastSeq: state.lastSeq,
+      ...(state.seat === null ? {} : { seat: state.seat }),
+    });
     queueMicrotask(() => {
       stop();
       location.hash = joinHash(room, server);
@@ -126,8 +134,7 @@
   onMount(() => stop);
 </script>
 
-<main aria-labelledby="{uid}-heading" data-testid="rejoin">
-  <h1 id="{uid}-heading">{l.t('rejoin-heading')}</h1>
+<Screen title={l.t('rejoin-heading')} testId="rejoin" backLabel={l.t('back')}>
   {#if serverInvalid}
     <p role="alert" data-testid="server-invalid">{l.t('online-server-invalid')}</p>
   {:else if !trusted}
@@ -211,7 +218,12 @@
     </p>
     {#if stopText !== null}
       <p role="alert" data-testid="rejoin-problem">{stopText}</p>
+      {#if connection !== null && isStalePage(connection.stopReason, snapshot?.lastError ?? null)}
+        <p>
+          <button type="button" onclick={() => void reloadApp()}>{l.t('update-reload')}</button>
+        </p>
+      {/if}
     {/if}
   {/if}
   <p><a href={hrefFor('home')}>{l.t('back-home')}</a></p>
-</main>
+</Screen>

@@ -336,7 +336,7 @@ describe('BroadcastChannel transport', () => {
     raw.postMessage({ conn: 'other', dir: 's2c', text: '{}' });
     g.hello(code);
     await until(() => g.ofType('welcome').length > 0);
-    expect(g.received.map((m) => m.type)).toEqual(['welcome', 'waiting']);
+    expect(g.received.map((m) => m.type)).toEqual(['welcome', 'waiting', 'pause_status']);
   });
 
   it('referee close notifies broadcast guests', async () => {

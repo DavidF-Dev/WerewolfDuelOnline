@@ -4,7 +4,7 @@ const PORT = 5199;
 
 export default defineConfig({
   testDir: 'e2e',
-  testIgnore: 'online.spec.ts',
+  testMatch: 'local-game.spec.ts',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: 0,

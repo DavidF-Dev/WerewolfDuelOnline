@@ -1,5 +1,12 @@
-export const PROTOCOL_VERSION = 1;
+export const PROTOCOL_VERSION = 2;
+export const SAVE_FORMAT_VERSION = 1;
 export const MAX_MESSAGE_BYTES = 8192;
+/** The longest display name, in characters. */
+export const MAX_NAME_LENGTH = 24;
+/** The body cap for `POST /rooms` with a save; other bodies keep `MAX_MESSAGE_BYTES`. */
+export const MAX_SAVE_BYTES = 262_144;
+/** The most replay segments a save may have; each pause adds one. */
+export const MAX_SAVE_SEGMENTS = 32;
 
 export const FIXED_ERROR_CODES = [
   'invalid_message',
@@ -18,6 +25,8 @@ export const FIXED_ERROR_CODES = [
   'rejoin_declined',
   'rejoin_unavailable',
   'room_closed',
+  'paused',
+  'not_pausable',
 ] as const;
 
 /** Engine error ids pass through with their `error-` prefix. */

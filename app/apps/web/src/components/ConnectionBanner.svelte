@@ -7,6 +7,7 @@
     OpponentState,
   } from '@wwd/client-core';
   import { countdownText, liveNow } from '../now.svelte.js';
+  import { isStalePage, reloadApp } from '../pwa/update.js';
   import { stopReasonText } from '../text.js';
   import ConfirmDialog from './ConfirmDialog.svelte';
 
@@ -30,7 +31,13 @@
   };
 
   const phaseText = $derived(
-    l.t(connection.stopReason === null ? PHASES[connection.phase] : 'connection-stopped'),
+    l.t(
+      connection.stopReason !== null
+        ? 'connection-stopped'
+        : connection.serverUnavailable
+          ? 'connection-server-unavailable'
+          : PHASES[connection.phase],
+    ),
   );
   const stopText = $derived(stopReasonText(l, connection.stopReason, lastError));
   const claimable = $derived(!opponent.connected && opponent.can_claim_win === true);
@@ -73,6 +80,11 @@
   <p role="status" data-testid="connection-phase">{phaseText}</p>
   {#if stopText !== null}
     <p role="alert" data-testid="connection-stopped">{stopText}</p>
+    {#if isStalePage(connection.stopReason, lastError)}
+      <p>
+        <button type="button" onclick={() => void reloadApp()}>{l.t('update-reload')}</button>
+      </p>
+    {/if}
   {/if}
   <p role="status" class="visually-hidden" data-testid="opponent-announcement">{announcement}</p>
   {#if deadline !== undefined}

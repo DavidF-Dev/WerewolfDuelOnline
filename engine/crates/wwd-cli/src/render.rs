@@ -278,6 +278,7 @@ impl Locale {
             }
             EventKind::NextRoundRequested { seat } => self.format(id, &self.actor(*seat)),
             EventKind::Resigned { seat } => self.format(id, &self.actor(*seat)),
+            EventKind::SegmentStarted { round, .. } => self.format(id, &args!("round" => *round)),
             EventKind::GameOver { winner, reason } => {
                 let mut args = self.with_seat(self.actor(*winner), "other", winner.other());
                 args.set(
@@ -475,6 +476,10 @@ mod tests {
         EventKind::RoundEnded { .. } => [EventKind::RoundEnded { round: 3, next_badge: Seat::P1 }],
         EventKind::NextRoundRequested { .. } => [EventKind::NextRoundRequested { seat: Seat::P0 }],
         EventKind::Resigned { .. } => [EventKind::Resigned { seat: Seat::P0 }],
+        EventKind::SegmentStarted { .. } => [EventKind::SegmentStarted {
+            round: 3,
+            seed_commitment: [7; 32],
+        }],
         EventKind::GameOver { .. } => [EventKind::GameOver {
             winner: Seat::P1,
             reason: WinReason::Crosses,

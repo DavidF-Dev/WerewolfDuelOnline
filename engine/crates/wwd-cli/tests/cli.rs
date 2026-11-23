@@ -380,3 +380,38 @@ fn replay_step_stops_entirely_at_end_of_input() {
     assert!(!stepped.contains("Start of segment 1"), "{stepped}");
     assert_eq!(stepped.matches("Press Enter").count(), 1);
 }
+
+#[test]
+fn replay_announces_a_resumed_segment_from_every_perspective() {
+    use wwd_core::{Command, Phase, Recorder};
+
+    let mut recorder = Recorder::new([1; 32], config());
+    while recorder.state().phase != Phase::RoundOver {
+        let seat = pending(recorder.state()).seats[0];
+        let cmd = legal_actions(recorder.state(), seat)[0].clone();
+        recorder.apply(seat, cmd).unwrap();
+    }
+    let boundary = recorder.round_boundary().unwrap();
+    let mut resumed = Recorder::resume(boundary, recorder.replay().clone(), [2; 32]).unwrap();
+    resumed.apply(Seat::P0, Command::NextRound).unwrap();
+    let dir = TempDir::new().unwrap();
+    let file = write(
+        &dir,
+        "resumed.json",
+        &serde_json::to_string(resumed.replay()).unwrap(),
+    );
+
+    for viewer in ["p0", "p1", "all"] {
+        let out = wwd()
+            .arg("replay")
+            .arg(&file)
+            .args(["--as", viewer])
+            .assert()
+            .success();
+        let out = String::from_utf8(out.get_output().stdout.clone()).unwrap();
+        assert!(
+            out.contains("Start of segment 1\n  The game resumes in round 2.\n"),
+            "{viewer}: {out}"
+        );
+    }
+}

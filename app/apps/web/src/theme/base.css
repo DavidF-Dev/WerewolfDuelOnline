@@ -1,0 +1,155 @@
+:root[data-font='lexend'] {
+  --font-body: 'Lexend', var(--font-fallback);
+  --font-display: 'Lexend', var(--font-fallback);
+}
+
+:root[data-font='opendyslexic'] {
+  --font-body: 'OpenDyslexic', var(--font-fallback);
+  --font-display: 'OpenDyslexic', var(--font-fallback);
+}
+
+/* The text-spacing amounts of WCAG 1.4.12. */
+:root[data-spacing='extra'] {
+  --line-height: 1.8;
+  --letter-spacing: 0.12em;
+  --word-spacing: 0.16em;
+}
+
+:root[data-spacing='extra'] p {
+  margin-block-end: 2em;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: calc(100% * var(--text-scale, 1));
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-spacing);
+  word-spacing: var(--word-spacing);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 2px;
+}
+
+main,
+footer,
+.page-width {
+  margin-inline: auto;
+  max-width: 48rem;
+  padding-inline: 1rem;
+}
+
+button,
+input,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+}
+
+button,
+input,
+select {
+  min-height: var(--target);
+  min-width: var(--target);
+}
+
+button {
+  background: var(--surface);
+  border: 1px solid var(--control-line);
+  border-radius: var(--radius);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition:
+    background-color var(--motion-fast) ease-out,
+    border-color var(--motion-fast) ease-out;
+}
+
+button:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--surface-2);
+}
+
+button:disabled,
+button[aria-disabled='true'] {
+  border-style: dashed;
+  cursor: not-allowed;
+}
+
+input,
+select,
+textarea {
+  background: var(--surface);
+  border: 1px solid var(--control-line);
+  border-radius: var(--radius-small);
+  padding: 0.5rem 0.75rem;
+}
+
+:focus-visible {
+  outline: var(--focus-width) solid var(--focus);
+  outline-offset: 2px;
+}
+
+[aria-pressed='true'] {
+  font-weight: bold;
+  outline: 2px dashed;
+}
+
+ul {
+  padding-left: 1.25rem;
+}
+
+li + li {
+  margin-top: 0.25rem;
+}
+
+.note {
+  color: var(--muted);
+  display: block;
+  font-size: 0.875rem;
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  letter-spacing: 0.1em;
+}
+
+.visually-hidden {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+:root[data-motion='reduce'] *,
+:root[data-motion='reduce'] *::before,
+:root[data-motion='reduce'] *::after {
+  animation: none !important;
+  scroll-behavior: auto !important;
+  transition: none !important;
+}

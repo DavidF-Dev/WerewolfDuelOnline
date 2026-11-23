@@ -2,7 +2,7 @@
 
 **Werewolf: Duel! Online** is an unofficial digital version of the two-player bluffing card game *Werewolf: Duel!* by Whales Entertainment. It is played in the browser on desktop and mobile as an installable PWA. Friends connect with a join code. A server-side **referee** runs the rules engine and sends each player only their own view.
 
-**Status:** M1 (the rules engine and `wwd` CLI in `engine/`), M2 (WASM bindings, protocol, referee core, client core and an unstyled two-tab web table in `app/`) and M3 (online play: the Node and Cloudflare referees, join codes, reconnection, seat PINs, the mobile lifecycle, and the deploy workflow and guide in `docs/deploy.md`) are complete. The next step is to write the M4 plan.
+**Status:** M1 (the rules engine and `wwd` CLI in `engine/`), M2 (WASM bindings, protocol, referee core, client core and an unstyled two-tab web table in `app/`), M3 (online play: the Node and Cloudflare referees, join codes, reconnection, seat PINs, the mobile lifecycle, and the deploy workflow and guide in `docs/deploy.md`) and M4 (the product: every screen in the Moonlit theme, settings, pause and resume including from a save file, rematch, history with replays and stats, backups, and the installable PWA with an offline shell) are complete. The next step is to write the M5 plan.
 
 ## Documents (read these first)
 
@@ -18,10 +18,10 @@
 
 ```
 engine/   Rust workspace: wwd-core (rules library), wwd-cli (`wwd` binary), wwd-wasm (bindings)
-app/      TypeScript pnpm workspace: engine, protocol, transport, referee-core, referee-memory, referee-service, referee-node, referee-cloudflare, client-core, apps/web (Svelte 5 + Vite)
+app/      TypeScript pnpm workspace: engine, protocol, transport, referee-core, referee-memory, referee-service, referee-node, referee-cloudflare, client-core, apps/web (Svelte 5 + Vite PWA; its Playwright suites are in `apps/web/e2e`)
 scripts/  smoke.mjs: post-deploy smoke test of a referee
 docs/     spec, plans, research, mockups, deploy guide
-.github/  workflows: engine, app, deploy; actions/setup-app (shared toolchain set-up)
+.github/  workflows: engine, app (including the `docker` job), deploy; actions/setup-app (shared toolchain set-up)
 ```
 
 ## Commands
@@ -39,8 +39,10 @@ App, from `app/`:
 - `pnpm test`
 - `pnpm lint` (`tsc`/`svelte-check` plus `prettier --check`)
 - `pnpm --filter @wwd/web e2e` (Playwright; first run `pnpm --filter @wwd/web exec playwright install chromium`)
-- `pnpm --filter @wwd/web e2e:online` (Playwright vs a Node referee started in-process)
-- `pnpm --filter @wwd/web e2e:parity` (the `@parity` subset vs `wrangler dev`)
+- `pnpm --filter @wwd/web e2e:online` (Playwright vs a Node referee started in-process, including the axe accessibility checks)
+- `pnpm --filter @wwd/web e2e:pwa` (Playwright vs a production build served by `vite preview`: the offline shell)
+- `pnpm --filter @wwd/web e2e:parity` (the `@parity` subset vs `wrangler dev`; local workerd, no account)
+- `pnpm --filter @wwd/web icons` (renders the app icon PNGs from its SVG with Playwright's Chromium)
 - `pnpm --filter @wwd/web dev` (dev server; `window.__wwd` is available only here). It uses the referee at `http://localhost:8787`, so start one of:
   - `pnpm --filter @wwd/referee-node start --test-overrides` (the Node referee; add `--port`, `--data`, `--origins` as needed)
   - `pnpm --filter @wwd/referee-cloudflare dev` (`wrangler dev` in local workerd, with test overrides; never deploys)

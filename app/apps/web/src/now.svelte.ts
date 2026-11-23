@@ -19,11 +19,14 @@ export function liveNow(until: () => number | null | undefined): { readonly curr
   $effect(() => {
     const end = until();
     if (end === null || end === undefined || !visible) return;
-    now = Date.now();
-    if (now >= end) return;
+    // Reading `now` back here would make this effect depend on it and rerun on every write.
+    const started = Date.now();
+    now = started;
+    if (started >= end) return;
     const timer = setInterval(() => {
-      now = Date.now();
-      if (now >= end) clearInterval(timer);
+      const ticked = Date.now();
+      now = ticked;
+      if (ticked >= end) clearInterval(timer);
     }, 1000);
     return () => clearInterval(timer);
   });

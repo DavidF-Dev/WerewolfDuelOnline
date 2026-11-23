@@ -12,9 +12,10 @@ import {
   parseClientMessage,
   type ClientMessage,
   type ErrorCode,
+  type SaveFile,
   type ServerMessage,
 } from '@wwd/protocol';
-import { closesConnection, constantTimeEqual, generatePin, toHex } from './codes.js';
+import { constantTimeEqual, errorTo as error, generatePin, toHex } from './codes.js';
 import type {
   Clock,
   ConnId,
@@ -24,6 +25,12 @@ import type {
   RoomDeps,
   RoomOptions,
 } from './deps.js';
+import * as pausing from './pause.js';
+import { NOT_PAUSED, type Pause } from './pause.js';
+import { PauseFlow } from './pause-flow.js';
+import { verifySave } from './from-save.js';
+import * as rematch from './rematch.js';
+import { SEATS, opponentOf, type Pair, type SeatIndex } from './seats.js';
 import {
   UNLOCKED,
   clearFailures,
@@ -36,14 +43,14 @@ import {
 import {
   DEFAULT_GRACE_MS,
   upgradeSnapshot,
+  type FromSaveSnapshot,
   type PendingRejoin,
   type RoomSnapshot,
   type RoomSnapshotV1,
+  type RoomSnapshotV2,
   type SeatRecord,
 } from './snapshot.js';
 
-type SeatIndex = 0 | 1;
-type Pair<T> = [T, T];
 type Hello = Extract<ClientMessage, { type: 'hello' }>;
 type Rejoin = Extract<ClientMessage, { type: 'rejoin' }>;
 type OpponentStatus = Extract<ServerMessage, { type: 'opponent_status' }>;
@@ -51,7 +58,6 @@ type OpponentStatus = Extract<ServerMessage, { type: 'opponent_status' }>;
 /** How long a rejoin request waits for the opponent's answer before it is declined. */
 export const REJOIN_APPROVAL_TIMEOUT_MS = 120_000;
 
-const SEATS: readonly [Seat, Seat] = ['p0', 'p1'];
 const RATE_LIMIT = 30;
 const RATE_WINDOW_MS = 10_000;
 const SEAT_TOKEN_BYTES = 16;
@@ -77,6 +83,8 @@ interface RejoinRequest {
 interface RoomState {
   code: string;
   config: RulesConfig;
+  /** The rules of the game being played, which for a rematch differ from `config` in the Badge start. */
+  gameConfig: RulesConfig;
   seats: Pair<SeatRecord | null>;
   segmentBase: number;
   graceMs: number;
@@ -85,15 +93,11 @@ interface RoomState {
   pinLockouts: Pair<PinLockout>;
   lastActivityAt: number;
   finishedAt: number | null;
-}
-
-function error(conn: ConnId, code: ErrorCode): Outbound {
-  const msg: ServerMessage = { type: 'error', code };
-  return closesConnection(code) ? { conn, msg, close: true } : { conn, msg };
-}
-
-function opponentOf(i: SeatIndex): SeatIndex {
-  return i === 0 ? 1 : 0;
+  /** Which of the room's games is being played, from 0 for its first. */
+  game: number;
+  rematchReady: readonly Seat[];
+  /** For a room created from a save with a seat still unclaimed, the seat kept for its uploader. */
+  reservedSeat: SeatIndex | null;
 }
 
 function isGameOver(view: View): boolean {
@@ -103,6 +107,20 @@ function isGameOver(view: View): boolean {
 function earlier(a: number | null, b: number | null): number | null {
   if (a === null) return b;
   return b === null || a <= b ? a : b;
+}
+
+function graceOf(options: Partial<RoomOptions>): number {
+  const graceMs = options.graceMs ?? DEFAULT_GRACE_MS;
+  if (!Number.isSafeInteger(graceMs) || graceMs < 0) {
+    throw new Error('grace period must be a non-negative whole number of milliseconds');
+  }
+  return graceMs;
+}
+
+function reservedIndex(fromSave: FromSaveSnapshot): SeatIndex {
+  const i = SEATS.indexOf(fromSave.reserved_seat);
+  if (i !== 0 && i !== 1) throw new Error('room snapshot reserves an unknown seat');
+  return i;
 }
 
 function copySeats(seats: Pair<SeatRecord | null>): Pair<SeatRecord | null> {
@@ -117,6 +135,7 @@ export class Room {
   // Whether each seat's expired grace has been announced to its opponent.
   private readonly graceAnnounced: Pair<boolean> = [false, false];
   private pendingRejoin: RejoinRequest | null = null;
+  private readonly pauses: PauseFlow;
   private readonly clock: Clock;
   private readonly random: Random;
   private disposed = false;
@@ -126,10 +145,26 @@ export class Room {
   private constructor(
     private readonly state: RoomState,
     private game: Game | undefined,
+    pause: Pause,
     deps: RoomDeps,
   ) {
     this.clock = deps.clock;
     this.random = deps.random;
+    this.pauses = new PauseFlow(pause, {
+      code: state.code,
+      game: () => this.game,
+      now: () => this.clock.now(),
+      inProgress: () => this.inProgress(),
+      seatOf: (conn) => this.seatOfConn.get(conn),
+      connOf: (i) => this.bindings[i]?.conn,
+      touch: () => this.touch(),
+      stopGrace: () => this.stopGrace(),
+      continueIn: (next) => this.continueIn(next),
+      newSeed: () => this.newSeed(),
+      failure: (conn, thrown) => error(conn, this.codeFor(thrown)),
+      pushEvents: (i, out) => this.pushEvents(i, out),
+      opponentStatus: (conn, i) => this.opponentStatus(conn, i),
+    });
   }
 
   /** Creates an empty room; throws if the engine rejects `config` or the options are invalid. */
@@ -139,14 +174,12 @@ export class Room {
     deps: RoomDeps,
     options: Partial<RoomOptions> = {},
   ): Room {
-    const graceMs = options.graceMs ?? DEFAULT_GRACE_MS;
-    if (!Number.isSafeInteger(graceMs) || graceMs < 0) {
-      throw new Error('grace period must be a non-negative whole number of milliseconds');
-    }
+    const graceMs = graceOf(options);
     Game.create(CONFIG_PROBE_SEED, config).dispose();
     const state: RoomState = {
       code,
       config: { ...config },
+      gameConfig: { ...config },
       seats: [null, null],
       segmentBase: 0,
       graceMs,
@@ -155,61 +188,127 @@ export class Room {
       pinLockouts: [UNLOCKED, UNLOCKED],
       lastActivityAt: deps.clock.now(),
       finishedAt: null,
+      game: 0,
+      rematchReady: rematch.NO_ONE,
+      reservedSeat: null,
     };
-    return new Room(state, undefined, deps);
+    return new Room(state, undefined, NOT_PAUSED, deps);
   }
 
-  /** Rebuilds a room from a trusted v1 or v2 snapshot; throws if it or its replay is invalid. */
+  /**
+   * Creates a room that continues an uploaded save, paused at its boundary with both seats
+   * unclaimed and `seat` kept for the first tokenless hello that names it. Throws
+   * `InvalidSaveError` if the save does not verify, and throws if the options are invalid.
+   */
+  static fromSave(
+    code: string,
+    save: SaveFile,
+    seat: Seat,
+    deps: RoomDeps,
+    options: Partial<RoomOptions> = {},
+  ): Room {
+    const graceMs = graceOf(options);
+    const reserved = SEATS.indexOf(seat);
+    if (reserved !== 0 && reserved !== 1) throw new Error('unknown seat');
+    const { game, segmentBase } = verifySave(save);
+    const state: RoomState = {
+      code,
+      config: { ...save.config },
+      gameConfig: { ...save.config },
+      seats: [null, null],
+      segmentBase,
+      graceMs,
+      disconnectedAt: [null, null],
+      pins: [null, null],
+      pinLockouts: [UNLOCKED, UNLOCKED],
+      lastActivityAt: deps.clock.now(),
+      finishedAt: null,
+      game: 0,
+      rematchReady: rematch.NO_ONE,
+      reservedSeat: reserved,
+    };
+    return new Room(state, game, pausing.applied(NOT_PAUSED, save.saved_at), deps);
+  }
+
+  /** Rebuilds a room from a trusted v1, v2 or v3 snapshot; throws if it or its replay is invalid. */
   static restore(
-    snapshot: RoomSnapshot | RoomSnapshotV1,
+    snapshot: RoomSnapshot | RoomSnapshotV2 | RoomSnapshotV1,
     deps: RoomDeps,
     options: RestoreOptions = {},
   ): Room {
     const now = deps.clock.now();
-    const v2 =
-      snapshot.version === 1
-        ? upgradeSnapshot(snapshot, now)
-        : snapshot.version === 2
-          ? snapshot
-          : undefined;
-    if (v2 === undefined) throw new Error('unsupported room snapshot version');
+    const v3 = upgradeSnapshot(snapshot, now);
+    const wake = options.wake === true;
 
-    const seats = copySeats(v2.seats);
+    const seats = copySeats(v3.seats);
     const bothSeated = seats[0] !== null && seats[1] !== null;
-    if (v2.replay !== null && !bothSeated) {
+    const fromSave = v3.from_save;
+    if (fromSave !== null && (v3.replay === null || !v3.pause.paused)) {
+      throw new Error('room snapshot from a save is not paused at its boundary');
+    }
+    if (v3.replay !== null && !bothSeated && fromSave === null) {
       throw new Error('room snapshot has a game without two seats');
     }
-    if (v2.replay === null && bothSeated) {
+    if (v3.replay === null && bothSeated) {
       throw new Error('room snapshot has two seats without a game');
     }
-    const game = v2.replay === null ? undefined : Game.fromReplay(v2.replay);
+    const game = v3.replay === null ? undefined : Game.fromReplay(v3.replay);
     const finishedAt =
-      v2.finished_at ?? (game !== undefined && !game.canResign(SEATS[0]) ? now : null);
+      v3.finished_at ?? (game !== undefined && !game.canResign(SEATS[0]) ? now : null);
+    const stored = v3.pause;
+    if (
+      stored.paused &&
+      (game === undefined ||
+        finishedAt !== null ||
+        stored.paused_at === null ||
+        game.roundBoundary() === null)
+    ) {
+      game?.dispose();
+      throw new Error('room snapshot is paused away from a round boundary');
+    }
     const state: RoomState = {
-      code: v2.code,
-      config: { ...v2.config },
+      code: v3.code,
+      config: { ...v3.config },
+      gameConfig: { ...(v3.replay?.config ?? v3.config) },
       seats,
-      segmentBase: v2.segment_base,
-      graceMs: v2.grace_ms,
-      disconnectedAt: [...v2.disconnected_at],
-      pins: [...v2.pins],
+      segmentBase: v3.segment_base,
+      graceMs: v3.grace_ms,
+      disconnectedAt: [...v3.disconnected_at],
+      pins: [...v3.pins],
       pinLockouts: [
-        { failures: [...v2.pin_failures[0]], lockedUntil: v2.pin_locked_until[0] },
-        { failures: [...v2.pin_failures[1]], lockedUntil: v2.pin_locked_until[1] },
+        {
+          failures: [...v3.pin_failures[0]],
+          lockedUntil: v3.pin_locked_until[0],
+          lockouts: v3.pin_lockouts[0],
+        },
+        {
+          failures: [...v3.pin_failures[1]],
+          lockedUntil: v3.pin_locked_until[1],
+          lockouts: v3.pin_lockouts[1],
+        },
       ],
-      lastActivityAt: v2.last_activity_at,
+      lastActivityAt: v3.last_activity_at,
       finishedAt,
+      game: v3.game,
+      rematchReady: wake ? [...v3.rematch_ready] : rematch.NO_ONE,
+      reservedSeat: fromSave === null ? null : reservedIndex(fromSave),
     };
-    const room = new Room(state, game, deps);
-    const wake = options.wake === true;
+    const pause: Pause = {
+      requestedBy: stored.requested_by,
+      agreed: stored.agreed,
+      paused: stored.paused,
+      pausedAt: stored.paused ? stored.paused_at : null,
+      resumeReady: wake ? [...stored.resume_ready] : [],
+    };
+    const room = new Room(state, game, pause, deps);
     // No seat is bound after a restore, so a fresh window keeps downtime from counting against anyone.
-    if (room.inProgress()) {
+    if (room.graceRuns()) {
       for (const s of [0, 1] as const) {
         if (!wake || state.disconnectedAt[s] === null) room.startGrace(s);
-        else room.graceAnnounced[s] = v2.grace_announced?.[s] === true;
+        else room.graceAnnounced[s] = v3.grace_announced?.[s] === true;
       }
     }
-    const pending = v2.pending_rejoin;
+    const pending = v3.pending_rejoin;
     if (wake && pending != null) {
       const i = SEATS.indexOf(pending.seat);
       if ((i === 0 || i === 1) && seats[i] !== null) {
@@ -269,6 +368,16 @@ export class Room {
           return this.answerRejoin(conn, msg.approve);
         case 'claim_win':
           return this.claimWin(conn);
+        case 'pause_request':
+          return this.pauses.change(conn, pausing.request);
+        case 'pause_accept':
+          return this.pauses.change(conn, pausing.accept);
+        case 'pause_cancel':
+          return this.pauses.change(conn, pausing.cancel);
+        case 'resume_request':
+          return this.pauses.requestResume(conn);
+        case 'rematch_request':
+          return this.requestRematch(conn);
         case 'command':
           return this.command(conn, msg.cmd);
       }
@@ -355,15 +464,18 @@ export class Room {
       if (i === undefined) return [];
       this.seatOfConn.delete(conn);
       this.bindings[i] = undefined;
-      if (this.inProgress()) this.startGrace(i);
+      if (this.graceRuns()) this.startGrace(i);
       this.touch();
       const out: Outbound[] = [];
       if (request !== null && request.seat === opponentOf(i)) {
         this.setPendingRejoin(null);
         out.push(error(request.conn, 'rejoin_unavailable'));
       }
+      this.pauses.forgetReadiness(i, out);
+      this.forgetRematch(i, out);
       const opponent = this.bindings[opponentOf(i)];
-      if (opponent !== undefined) out.push(this.opponentStatus(opponent.conn, opponentOf(i)));
+      if (opponent === undefined) return out;
+      out.push(this.opponentStatus(opponent.conn, opponentOf(i)));
       return out;
     } catch {
       return [];
@@ -374,8 +486,9 @@ export class Room {
   snapshot(): RoomSnapshot {
     if (this.disposed) throw new Error('room has been disposed');
     const s = this.state;
+    const pause = this.pauses.current;
     return {
-      version: 2,
+      version: 3,
       code: s.code,
       config: { ...s.config },
       seats: copySeats(s.seats),
@@ -386,9 +499,20 @@ export class Room {
       pins: [...s.pins],
       pin_failures: [[...s.pinLockouts[0].failures], [...s.pinLockouts[1].failures]],
       pin_locked_until: [s.pinLockouts[0].lockedUntil, s.pinLockouts[1].lockedUntil],
+      pin_lockouts: [s.pinLockouts[0].lockouts, s.pinLockouts[1].lockouts],
       last_activity_at: s.lastActivityAt,
       finished_at: s.finishedAt,
       grace_announced: [...this.graceAnnounced],
+      pause: {
+        requested_by: pause.requestedBy,
+        agreed: pause.agreed,
+        paused: pause.paused,
+        paused_at: pause.pausedAt,
+        resume_ready: [...pause.resumeReady],
+      },
+      game: s.game,
+      rematch_ready: [...s.rematchReady],
+      from_save: s.reservedSeat === null ? null : { reserved_seat: SEATS[s.reservedSeat] },
       ...(this.pendingRejoin === null
         ? {}
         : { pending_rejoin: this.pendingSnapshot(this.pendingRejoin) }),
@@ -459,16 +583,27 @@ export class Room {
     return this.game !== undefined && this.state.finishedAt === null;
   }
 
+  /** True while a game is in progress and not paused, the only time grace windows run. */
+  private graceRuns(): boolean {
+    return this.inProgress() && !this.pauses.paused;
+  }
+
   private startGrace(i: SeatIndex): void {
     this.state.disconnectedAt[i] = this.clock.now();
     this.graceAnnounced[i] = false;
     this.changes += 1;
   }
 
+  private stopGrace(): void {
+    this.state.disconnectedAt = [null, null];
+    this.graceAnnounced[0] = false;
+    this.graceAnnounced[1] = false;
+  }
+
   /** When seat `i`'s grace window ends, or `null` if it is not in one. */
   private graceDeadline(i: SeatIndex): number | null {
     const at = this.state.disconnectedAt[i];
-    return at === null || !this.inProgress() ? null : at + this.state.graceMs;
+    return at === null || !this.graceRuns() ? null : at + this.state.graceMs;
   }
 
   private hello(conn: ConnId, msg: Hello): Outbound[] {
@@ -610,6 +745,8 @@ export class Room {
   }
 
   private claim(conn: ConnId, msg: Hello): Outbound[] {
+    if (this.state.reservedSeat !== null)
+      return this.claimSaved(conn, msg, this.state.reservedSeat);
     const seats = this.state.seats;
     const i: SeatIndex | undefined = seats[0] === null ? 0 : seats[1] === null ? 1 : undefined;
     if (i === undefined) return [error(conn, 'room_full')];
@@ -624,7 +761,7 @@ export class Room {
     let game: Game | undefined;
     if (starts) {
       try {
-        game = Game.create(toHex(this.random.bytes(SEED_BYTES)), this.state.config);
+        game = Game.create(this.newSeed(), this.state.config);
       } catch (thrown) {
         return [error(conn, this.codeFor(thrown))];
       }
@@ -637,6 +774,7 @@ export class Room {
     const out: Outbound[] = [this.welcome(conn, i)];
     if (game === undefined) {
       out.push({ conn, msg: { type: 'waiting' } });
+      this.pauses.pushState(conn, out);
       return out;
     }
 
@@ -647,9 +785,30 @@ export class Room {
       const binding = this.bindings[s];
       if (binding === undefined) continue;
       this.pushEvents(s, out);
+      if (s === i) this.pauses.pushState(conn, out);
       out.push(this.opponentStatus(binding.conn, s));
     }
     return out;
+  }
+
+  /**
+   * Claims a seat of a room created from a save: the reserved seat only for a hello that names
+   * it, the other for any hello. The game is already there, so the claimer joins it at once.
+   */
+  private claimSaved(conn: ConnId, msg: Hello, reserved: SeatIndex): Outbound[] {
+    const seats = this.state.seats;
+    const other = opponentOf(reserved);
+    let i: SeatIndex;
+    if (seats[reserved] === null && msg.seat === SEATS[reserved]) i = reserved;
+    else if (seats[other] === null) i = other;
+    else return [error(conn, 'room_full')];
+
+    const record: SeatRecord = { token: toHex(this.random.bytes(SEAT_TOKEN_BYTES)) };
+    if (msg.name !== undefined) record.name = msg.name;
+    seats[i] = record;
+    this.state.pins[i] = generatePin(this.random);
+    if (seats[opponentOf(i)] !== null) this.state.reservedSeat = null;
+    return this.resume(conn, i, 0);
   }
 
   /** Binds `conn` to claimed seat `i` from log index `mark`, superseding any earlier connection. */
@@ -665,13 +824,19 @@ export class Room {
     this.withdrawRejoinFor(i, out);
 
     out.push(this.welcome(conn, i));
+    // A new connection must ask again before the game resumes.
+    this.pauses.forgetReadiness(i, out);
+    this.forgetRematch(i, out);
     if (this.game === undefined) {
       out.push({ conn, msg: { type: 'waiting' } });
+      this.pauses.pushState(conn, out);
       return out;
     }
     if (isGameOver(this.pushEvents(i, out))) {
       out.push({ conn, msg: { type: 'game_over', replay: this.game.replay() } });
     }
+    this.pauses.pushState(conn, out);
+    if (this.state.finishedAt !== null) out.push({ conn, msg: this.rematchStatus() });
     out.push(this.opponentStatus(conn, i));
     const opponent = this.bindings[opponentOf(i)];
     if (opponent !== undefined) out.push(this.opponentStatus(opponent.conn, opponentOf(i)));
@@ -683,6 +848,7 @@ export class Room {
     const i = this.seatOfConn.get(conn);
     if (i === undefined) return [error(conn, 'not_joined')];
     if (this.game === undefined) return [error(conn, 'invalid_message')];
+    if (this.pauses.paused) return [error(conn, 'paused')];
     return this.applyAndBroadcast(conn, this.game, i, cmd);
   }
 
@@ -692,6 +858,7 @@ export class Room {
     if (i === undefined) return [error(conn, 'not_joined')];
     if (this.game === undefined) return [error(conn, 'not_expired')];
     if (this.state.finishedAt !== null) return [error(conn, 'error-game-over')];
+    if (this.pauses.paused) return [error(conn, 'paused')];
     const o = opponentOf(i);
     const deadline = this.graceDeadline(o);
     if (this.bindings[o] !== undefined || deadline === null || this.clock.now() < deadline) {
@@ -721,8 +888,100 @@ export class Room {
         if (binding !== undefined)
           out.push({ conn: binding.conn, msg: { type: 'game_over', replay } });
       }
+      this.pauses.end(out);
+    } else {
+      this.pauses.applyDue(out);
     }
     return out;
+  }
+
+  /** Marks `conn`'s seat ready for a rematch, starting the next game once both bound seats are. */
+  private requestRematch(conn: ConnId): Outbound[] {
+    const i = this.seatOfConn.get(conn);
+    if (i === undefined) return [error(conn, 'not_joined')];
+    const finished = this.game;
+    if (finished === undefined || this.state.finishedAt === null) {
+      return [error(conn, 'invalid_message')];
+    }
+    const current = this.boundRematchReady();
+    const next = rematch.request(current, SEATS[i]);
+    if (next === current) return [];
+    if (rematch.bothReady(next)) return this.startRematch(conn, finished);
+    this.setRematchReady(next);
+    const out: Outbound[] = [];
+    for (const binding of this.bindings) {
+      if (binding !== undefined) out.push({ conn: binding.conn, msg: this.rematchStatus() });
+    }
+    return out;
+  }
+
+  /** Starts the next game with the same seats, the Badge going to the loser of `finished`. */
+  private startRematch(conn: ConnId, finished: Game): Outbound[] {
+    const loser = rematch.loserOf(finished.view({ seat: SEATS[0] }).phase)!;
+    const gameConfig = rematch.rematchConfig(this.state.config, loser);
+    let next: Game;
+    try {
+      next = Game.create(this.newSeed(), gameConfig);
+    } catch (thrown) {
+      return [error(conn, this.codeFor(thrown))];
+    }
+    finished.dispose();
+    this.game = next;
+    this.state.gameConfig = gameConfig;
+    this.state.game += 1;
+    this.state.segmentBase = 0;
+    this.state.finishedAt = null;
+    this.state.rematchReady = rematch.NO_ONE;
+    this.stopGrace();
+    this.touch();
+    const out: Outbound[] = [];
+    for (const s of [0, 1] as const) {
+      this.bindings[s]!.mark = 0;
+      this.pushEvents(s, out);
+    }
+    return out;
+  }
+
+  /** Forgets that seat `i` asked for a rematch, telling its bound opponent if it had. */
+  private forgetRematch(i: SeatIndex, out: Outbound[]): void {
+    const next = rematch.forget(this.state.rematchReady, SEATS[i]);
+    if (next === this.state.rematchReady) return;
+    this.setRematchReady(next);
+    const waiting = this.bindings[opponentOf(i)];
+    if (waiting !== undefined) out.push({ conn: waiting.conn, msg: this.rematchStatus() });
+  }
+
+  private setRematchReady(ready: readonly Seat[]): void {
+    this.state.rematchReady = ready;
+    this.touch();
+  }
+
+  /** The seats ready for a rematch that are bound, since readiness belongs to a connection. */
+  private boundRematchReady(): readonly Seat[] {
+    let kept = this.state.rematchReady;
+    for (const s of [0, 1] as const) {
+      if (this.bindings[s] === undefined) kept = rematch.forget(kept, SEATS[s]);
+    }
+    return kept;
+  }
+
+  private rematchStatus(): ServerMessage {
+    return { type: 'rematch_status', ready: [...this.boundRematchReady()] };
+  }
+
+  private newSeed(): string {
+    return toHex(this.random.bytes(SEED_BYTES));
+  }
+
+  /** Replaces the game with `next`, the next segment of it, so every seat's events restart. */
+  private continueIn(next: Game): void {
+    const game = this.game!;
+    this.state.segmentBase += game.logLength();
+    game.dispose();
+    this.game = next;
+    for (const binding of this.bindings) {
+      if (binding !== undefined) binding.mark = 0;
+    }
   }
 
   private finish(): void {
@@ -744,6 +1003,8 @@ export class Room {
   /** Converts a client's game-wide `last_seq` to a log index, falling back to a full resend. */
   private markFor(lastSeq: number | undefined): number {
     if (lastSeq === undefined || this.game === undefined) return 0;
+    // A hello does not say which game its last_seq is from, so one is trusted only in the first game.
+    if (this.state.game !== 0) return 0;
     const index = lastSeq - this.state.segmentBase;
     if (index < 0 || index > this.game.logLength()) return 0;
     return index;
@@ -762,6 +1023,7 @@ export class Room {
     const view = game.view(viewer);
     const msg: ServerMessage = {
       type: 'events',
+      game: this.state.game,
       from_seq: base + binding.mark,
       events,
       view,
@@ -781,8 +1043,9 @@ export class Room {
       seat: SEATS[i],
       seat_token: this.state.seats[i]!.token,
       room: this.state.code,
-      config: { ...this.state.config },
+      config: { ...this.state.gameConfig },
       pin,
+      game: this.state.game,
     };
     return { conn, msg };
   }

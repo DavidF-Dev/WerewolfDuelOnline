@@ -47,17 +47,17 @@ pub fn apply(state: &mut State, seat: Seat, cmd: Command) -> Result<Vec<Event>, 
 }
 
 /// Printed initiative less placed Hourglasses, clamped at zero.
-///
-/// # Panics
-///
-/// Panics if `seat` has not submitted a plan.
-pub fn effective_initiative(state: &State, seat: Seat) -> u8 {
+pub fn effective_initiative(character: Character, placed: u8) -> u8 {
+    character.initiative().saturating_sub(placed)
+}
+
+fn seat_initiative(state: &State, seat: Seat) -> u8 {
     let player = state.player(seat);
     let plan = player
         .plan
         .as_ref()
         .expect("effective initiative needs a submitted plan");
-    plan.character.initiative().saturating_sub(player.placed)
+    effective_initiative(plan.character, player.placed)
 }
 
 /// The seats in showdown order: lowest effective initiative first, then the tiebreak.
@@ -68,7 +68,7 @@ pub fn effective_initiative(state: &State, seat: Seat) -> u8 {
 pub fn resolution_order(state: &State) -> [Seat; 2] {
     let badge = state.badge;
     let other = badge.other();
-    let first = match effective_initiative(state, badge).cmp(&effective_initiative(state, other)) {
+    let first = match seat_initiative(state, badge).cmp(&seat_initiative(state, other)) {
         Ordering::Less => badge,
         Ordering::Greater => other,
         Ordering::Equal => match state.config.tiebreak {
@@ -209,7 +209,7 @@ fn reveal(state: &mut State, events: &mut Vec<Event>) {
             .clone()
             .expect("both plans are submitted before reveal")
     });
-    let effective = [Seat::P0, Seat::P1].map(|s| effective_initiative(state, s));
+    let effective = [Seat::P0, Seat::P1].map(|s| seat_initiative(state, s));
     let order = resolution_order(state);
     public(
         events,

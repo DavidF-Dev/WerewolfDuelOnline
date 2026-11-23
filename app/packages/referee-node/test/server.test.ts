@@ -3,9 +3,9 @@ import { request } from 'node:http';
 import type { Socket } from 'node:net';
 import { join } from 'node:path';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
-import { verifyReplay } from '@wwd/engine';
+import { Game, defaultRulesConfig, verifyReplay } from '@wwd/engine';
 import { loadEngineForNode } from '@wwd/engine/test-support';
-import { PROTOCOL_VERSION, encode } from '@wwd/protocol';
+import { PROTOCOL_VERSION, encode, saveHash, type SaveFile } from '@wwd/protocol';
 import { Room } from '@wwd/referee-core';
 import { LIMITS } from '@wwd/referee-service';
 import {
@@ -75,7 +75,7 @@ describe('referee-node server', () => {
     const s = await server();
     const code = await createRoom(s);
     const saved = JSON.parse(await readFile(join(s.dataDir, `${code}.json`), 'utf8'));
-    expect(saved).toMatchObject({ version: 2, code, seats: [null, null], replay: null });
+    expect(saved).toMatchObject({ version: 3, code, seats: [null, null], replay: null });
   });
 
   it('tells an upgrade for an unknown room so, then closes it 1008', async () => {
@@ -338,6 +338,23 @@ describe('referee-node server', () => {
     expect((await post(direct, '10.0.2.1')).status).toBe(429);
   });
 
+  it('refuses a raised room creation limit without test overrides', async () => {
+    const limit = LIMITS.ROOM_CREATE_LIMIT + 5;
+    await expect(server({ roomCreateLimit: limit })).rejects.toThrow(/testOverrides/);
+    await expect(server({ roomCreateLimit: limit, testOverrides: false })).rejects.toThrow(
+      /testOverrides/,
+    );
+
+    const raised = await server({ roomCreateLimit: limit, testOverrides: true });
+    for (let i = 0; i < limit; i++) await createRoom(raised);
+    const limited = await fetch(`${raised.url}/rooms`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', origin: ORIGIN },
+      body: '{}',
+    });
+    expect(limited.status).toBe(429);
+  });
+
   it('honours test overrides only when enabled', async () => {
     const off = await server();
     const refused = await fetch(`${off.url}/rooms`, {
@@ -354,5 +371,59 @@ describe('referee-node server', () => {
     const on = await server({ testOverrides: true });
     const local = await fetch(`${on.url}/health`, { headers: { origin: 'http://localhost:5173' } });
     expect(local.headers.get('access-control-allow-origin')).toBe('http://localhost:5173');
+  });
+});
+
+/** A save of a game played to its first round over, built from the engine directly. */
+function firstRoundSave(): SaveFile {
+  const game = Game.create(SEED, defaultRulesConfig());
+  const choices = new Xorshift(3);
+  try {
+    let boundary = game.roundBoundary();
+    while (boundary === null) {
+      const seat = game.legalActions('p0').some((c) => c !== 'resign') ? 'p0' : 'p1';
+      const legal = game.legalActions(seat).filter((c) => c !== 'resign');
+      game.apply(seat, choices.pick(legal));
+      boundary = game.roundBoundary();
+    }
+    const fields: Omit<SaveFile, 'hash'> = {
+      format_version: 1,
+      kind: 'wwd-save',
+      room: 'ABCDEF',
+      config: defaultRulesConfig(),
+      boundary,
+      replay: game.replay(),
+      saved_at: 1000,
+    };
+    return { ...fields, hash: saveHash(fields) };
+  } finally {
+    game.dispose();
+  }
+}
+
+describe('rooms from saves', () => {
+  async function postSave(s: TestServer, save: SaveFile): Promise<Response> {
+    return fetch(`${s.url}/rooms`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', origin: ORIGIN },
+      body: JSON.stringify({ save, seat: 'p1', grace_minutes: 5 }),
+    });
+  }
+
+  it('creates a room from a verified save and refuses a tampered one', async () => {
+    const s = await server();
+    const save = firstRoundSave();
+    const tampered = await postSave(s, { ...save, hash: '0'.repeat(64) });
+    expect(tampered.status).toBe(400);
+    expect(await tampered.json()).toEqual({ error: 'invalid_save' });
+
+    const res = await postSave(s, save);
+    expect(res.status).toBe(201);
+    const { code } = (await res.json()) as { code: string };
+    const c = await open(s, code);
+    c.send(encode({ type: 'hello', protocol_version: PROTOCOL_VERSION, room: code, seat: 'p1' }));
+    await until(() => c.ofType('paused').length > 0);
+    expect(c.ofType('welcome')[0]).toMatchObject({ seat: 'p1', game: 0 });
+    expect(c.ofType('paused')[0]!.save.replay).toEqual(save.replay);
   });
 });

@@ -59,23 +59,28 @@ describe('Table hides opponent hand', () => {
     for (const card of theirs) expect(log, card).not.toContain(characterName(card));
   });
 
-  it('announces the log politely and never shows the seed commitment', () => {
+  it('keeps the log in a drawer, announces politely elsewhere and never shows the seed commitment', async () => {
     renderTable(stateFor(newGame(12), 'p1'));
+    expect(screen.getByRole('log', { name: 'Announcements' }).getAttribute('aria-live')).toBe(
+      'polite',
+    );
+    await userEvent.click(screen.getByText('Game log and rules'));
+    expect(screen.getByTestId('log-drawer').hasAttribute('open')).toBe(true);
     const log = screen.getByRole('region', { name: 'Game log' });
     const list = within(log).getByRole('list');
-    expect(list.getAttribute('aria-live')).toBe('polite');
+    expect(list.getAttribute('aria-live')).toBeNull();
     expect(within(list).getByText('The game has started.')).toBeTruthy();
     expect(log.textContent).not.toMatch(/[0-9a-f]{16}/);
   });
 });
 
 describe('Table keeps focus on the action', () => {
-  it('focuses the first action on mount and stays in the Actions region after acting', async () => {
+  it('focuses the first action on mount and stays in the phase bar after acting', async () => {
     const { game, seat } = atHourglassChoice();
     let sent: Command | undefined;
     const { rerender } = renderTable(stateFor(game, seat), (cmd) => (sent = cmd));
-    const actions = screen.getByRole('region', { name: 'Actions' });
-    expect(actions.contains(document.activeElement)).toBe(true);
+    const reveal = screen.getByRole('region', { name: 'Reveal' });
+    expect(reveal.contains(document.activeElement)).toBe(true);
     expect(document.activeElement?.textContent).toBe('Place 0 Hourglasses');
 
     await userEvent.keyboard('{Enter}');
@@ -84,9 +89,7 @@ describe('Table keeps focus on the action', () => {
     game.apply(seat, sent);
     await rerender({ state: stateFor(game, seat) });
     expect(document.activeElement).not.toBe(document.body);
-    expect(screen.getByRole('region', { name: 'Actions' }).contains(document.activeElement)).toBe(
-      true,
-    );
+    expect(screen.getByTestId('phase-bar').contains(document.activeElement)).toBe(true);
   });
 
   it('does not take focus from a text input', async () => {

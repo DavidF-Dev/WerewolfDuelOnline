@@ -44,6 +44,13 @@ export interface NodeRefereeOptions {
   preHelloTimeoutMs?: number;
   /** Defaults to `LIMITS.IDLE_TIMEOUT_MS`. */
   idleTimeoutMs?: number;
+  /** Defaults to `IDLE_UNLOAD_MS`. */
+  idleUnloadMs?: number;
+  /**
+   * Room creation attempts allowed per client address per hour, in place of
+   * `LIMITS.ROOM_CREATE_LIMIT`; refused unless `testOverrides` is on.
+   */
+  roomCreateLimit?: number;
 }
 
 export interface RunningReferee {
@@ -129,6 +136,9 @@ function isFull(hosted: HostedRoom): boolean {
 
 /** Starts a referee serving the shared HTTP API and room WebSockets on `opts.port`. */
 export async function startReferee(opts: NodeRefereeOptions): Promise<RunningReferee> {
+  if (opts.roomCreateLimit !== undefined && opts.testOverrides !== true) {
+    throw new Error('roomCreateLimit is honoured only with testOverrides');
+  }
   await loadEngine();
   const logger = opts.logger ?? console;
   const clock = opts.clock ?? systemClock;
@@ -144,13 +154,20 @@ export async function startReferee(opts: NodeRefereeOptions): Promise<RunningRef
   });
   await files.init();
   const testOverrides = opts.testOverrides ?? false;
-  const registry = new RoomRegistry({ files, clock, random, logger, testOverrides });
+  const registry = new RoomRegistry({
+    files,
+    clock,
+    random,
+    logger,
+    testOverrides,
+    idleUnloadMs: opts.idleUnloadMs,
+  });
   const config: ServiceConfig = {
     allowedOrigins: opts.allowedOrigins,
     testOverrides,
     engineVersion: engineVersion(),
   };
-  const limiter = createRoomLimiter(clock);
+  const limiter = createRoomLimiter(clock, opts.roomCreateLimit);
   const context = (req: IncomingMessage): ServiceContext => ({
     store: registry,
     config,
@@ -172,7 +189,7 @@ export async function startReferee(opts: NodeRefereeOptions): Promise<RunningRef
       const conn = new Connection(`n${nextConn++}`, ws, timeouts, (ended) =>
         registry.disconnect(hosted, ended),
       );
-      hosted.connections.set(conn.id, conn);
+      registry.connected(hosted, conn);
       const heard = () => conn.heard();
       ws.on('message', (data) => {
         conn.heard();

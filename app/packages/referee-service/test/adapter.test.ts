@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import type { CreateRoomRequest } from '@wwd/protocol';
+import type { CreateRoomRequest, NewRoomRequest, SaveFile } from '@wwd/protocol';
 import { Room, type Clock, type Random, type RoomDeps } from '@wwd/referee-core';
 import {
   CLOSE,
@@ -17,7 +17,7 @@ const CODE = 'K7Q2MX';
 const clock: Clock = { now: () => 1000 };
 const random: Random = { bytes: (n) => new Uint8Array(n).fill(7) };
 
-function request(extra: Partial<CreateRoomRequest> = {}): CreateRoomRequest {
+function request(extra: Partial<NewRoomRequest> = {}): NewRoomRequest {
   return {
     config: { tiebreak: 'badge_only', min_targets: 1, badge_start: 'random' },
     grace_minutes: 5,
@@ -132,5 +132,21 @@ describe('adapter helpers', () => {
       INTERNAL_ERROR: 1011,
       TRY_AGAIN_LATER: 1013,
     });
+  });
+});
+
+describe('createRequestedRoom with a save', () => {
+  it('creates the room from the save for the uploader seat', () => {
+    const room = {} as Room;
+    const spy = vi.spyOn(Room, 'fromSave').mockImplementation(() => room);
+    const save = { format_version: 1 } as unknown as SaveFile;
+    const req: CreateRoomRequest = { save, seat: 'p1', grace_minutes: 30 };
+    expect(createRequestedRoom(CODE, req, { clock, random }, true)).toBe(room);
+    const [code, given, seat, deps, options] = spy.mock.calls[0]!;
+    expect(code).toBe(CODE);
+    expect(given).toBe(save);
+    expect(seat).toBe('p1');
+    expect(deps).toEqual({ clock, random });
+    expect(options).toEqual({ graceMs: 30 * 60_000 });
   });
 });

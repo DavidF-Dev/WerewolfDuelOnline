@@ -16,7 +16,7 @@
 
 ## Status
 
-The rules engine, the local loop and online play (milestones M1 to M3) are complete. M4 adds the finished screens, settings, saved games, history and replays, backups, and installing as an app. M5 adds German and Japanese, an accessibility pass and a tutorial.
+Milestones M1 to M4 are complete: the rules engine, the local loop, online play, and the finished app, with its screens, settings, pausing and saved games, rematches, history with replays and stats, backups, and installing as an app that opens offline. M5 adds German and Japanese, a full accessibility audit, a rewritten rulebook and a tutorial.
 
 ## Repository layout
 

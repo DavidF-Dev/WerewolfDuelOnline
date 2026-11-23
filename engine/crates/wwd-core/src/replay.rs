@@ -6,8 +6,8 @@ use crate::ENGINE_VERSION;
 use crate::apply::apply;
 use crate::command::Command;
 use crate::edit::{Edit, EditError};
-use crate::event::{Event, EventKind};
-use crate::game::{game_started, new_game};
+use crate::event::{Event, EventKind, Visibility};
+use crate::game::new_game;
 use crate::hash::seed_commitment;
 use crate::rng::RngState;
 use crate::state::{
@@ -15,6 +15,7 @@ use crate::state::{
     WIN_CROSS, WIN_FANG, hash,
 };
 use crate::types::{RuleError, RulesConfig, Seat};
+use crate::view::{View, Viewer, view, visible_to};
 
 /// The replay file layout version this engine reads and writes.
 pub const REPLAY_FORMAT_VERSION: u32 = 1;
@@ -138,6 +139,21 @@ impl fmt::Display for ReplayError {
 }
 
 impl std::error::Error for ReplayError {}
+
+/// One step of a replay as one viewer may see it: the start of a segment, or one entry.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct TimelineStep {
+    pub index: u32,
+    /// The seat that sent this step's command; `None` at a segment start or an edit.
+    pub seat: Option<Seat>,
+    /// `None` at a segment start or an edit, and for another seat's command unless the
+    /// viewer is omniscient.
+    pub command: Option<Command>,
+    /// The events this step logged that the viewer may see.
+    pub events: Vec<Event>,
+    pub view: View,
+}
 
 /// Records the commands applied to a game so it can be replayed and verified.
 ///
@@ -314,7 +330,13 @@ fn state_from_boundary(
         showdown: None,
         phase: Phase::RoundOver,
         next_round_ready: [false; 2],
-        log: vec![game_started(config, &seed)],
+        log: vec![Event {
+            visibility: Visibility::Public,
+            kind: EventKind::SegmentStarted {
+                round: boundary.round + 1,
+                seed_commitment: seed_commitment(&seed),
+            },
+        }],
         tainted,
     }
 }
@@ -372,7 +394,44 @@ pub fn verify(r: &Replay) -> Result<(), ReplayError> {
     simulate(r, true).map(drop)
 }
 
+/// Every step of the replay as `viewer` may see it: the start of each segment, then each of
+/// its entries. The replay is checked as [`verify`] checks it.
+pub fn replay_timeline(r: &Replay, viewer: Viewer) -> Result<Vec<TimelineStep>, ReplayError> {
+    let mut steps = Vec::new();
+    simulate_with(r, true, |state, entry, from| {
+        let (seat, command) = match entry {
+            Some(ReplayEntry::Command { seat, cmd }) => {
+                let sees = viewer == Viewer::Omniscient || viewer == Viewer::Seat(*seat);
+                (Some(*seat), sees.then(|| cmd.clone()))
+            }
+            Some(ReplayEntry::Edit(_)) | None => (None, None),
+        };
+        steps.push(TimelineStep {
+            index: u32::try_from(steps.len()).expect("step count fits in u32"),
+            seat,
+            command,
+            events: state.log[from..]
+                .iter()
+                .filter(|event| visible_to(event, viewer))
+                .cloned()
+                .collect(),
+            view: view(state, viewer),
+        });
+    })?;
+    Ok(steps)
+}
+
 fn simulate(r: &Replay, check: bool) -> Result<State, ReplayError> {
+    simulate_with(r, check, |_, _, _| {})
+}
+
+/// Re-simulates the replay, calling `observe` with the state at the start of each segment
+/// and after each entry, together with that entry and the log index where its events begin.
+fn simulate_with(
+    r: &Replay,
+    check: bool,
+    mut observe: impl FnMut(&State, Option<&ReplayEntry>, usize),
+) -> Result<State, ReplayError> {
     if r.format_version != REPLAY_FORMAT_VERSION {
         return Err(ReplayError::FormatVersion(r.format_version));
     }
@@ -408,10 +467,13 @@ fn simulate(r: &Replay, check: bool) -> Result<State, ReplayError> {
                 state_from_boundary(r.config, boundary, segment.seed, previous.tainted)
             }
         };
+        observe(&state, None, 0);
         let mut checkpoints = segment.checkpoints.iter().peekable();
         for (i, entry) in segment.entries.iter().enumerate() {
             let index = u32::try_from(i).expect("segment entry count fits in u32");
+            let from = state.log.len();
             replay_entry(&mut state, entry, index)?;
+            observe(&state, Some(entry), from);
             while let Some(checkpoint) = checkpoints.next_if(|c| c.index == index) {
                 if check && checkpoint.hash != hash(&state) {
                     return Err(ReplayError::CheckpointMismatch {

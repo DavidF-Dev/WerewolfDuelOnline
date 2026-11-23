@@ -1,10 +1,14 @@
 import { expect, test, type Browser, type BrowserContext, type Page } from '@playwright/test';
 import {
   expectGameOver,
+  giveName,
+  joinAs,
   mulberry32,
+  openGameMenu,
   openOnlineTable,
   playToEnd,
   recordEvents,
+  resign,
   resumedFrom,
   roomSeed,
   snapshot,
@@ -104,6 +108,18 @@ test('guest goes offline and comes back', PARITY, async ({ browser }) => {
   await expectGameOver(t);
 });
 
+test('continue from home resumes the seat without a PIN', async ({ browser }) => {
+  const t = await table(browser, 5);
+  await t.guest.evaluate(() => {
+    location.hash = '#/';
+  });
+  const link = t.guest.getByTestId('home-continue');
+  await expect(link).toBeVisible();
+  await link.click();
+  await expect(t.guest.getByTestId('table')).toBeVisible();
+  await expect(t.guest.getByLabel('PIN')).toHaveCount(0);
+});
+
 test('hidden tab reconnects', async ({ browser }) => {
   const t = await table(browser, 3);
   let hidden = false;
@@ -131,6 +147,7 @@ test('hidden tab reconnects', async ({ browser }) => {
 test('rejoin from a new device with PIN', PARITY, async ({ browser }) => {
   const t = await table(browser, 4);
   await moveGuestOnce(t, 4, async ({ guest, code }) => {
+    await openGameMenu(guest);
     await guest.getByTestId('continue-elsewhere').locator('summary').click();
     await guest.getByTestId('toggle-pin').click();
     const pin = /\d{4}/.exec((await guest.getByTestId('pin').textContent()) ?? '')?.[0];
@@ -187,11 +204,38 @@ test('claim win after grace', PARITY, async ({ browser }) => {
 test('resign ends the game', async ({ browser }) => {
   const t = await table(browser, 7);
   await expect.poll(async () => (await snapshot(t.guest)).status).toBe('playing');
-  await t.guest.getByTestId('resign').click();
-  await t.guest.getByRole('alertdialog').getByTestId('confirm-yes').click();
+  await resign(t.guest);
   await expectGameOver(t);
   await expect(t.host.getByTestId('game-over-result')).toHaveText(/resigned/);
   await expect(t.guest.getByTestId('game-over-result')).toHaveText(/resigned/);
+
+  // The finished game stays on Home, with its opponent, while a rematch is still possible.
+  await t.guest.evaluate(() => {
+    location.hash = '#/';
+  });
+  const link = t.guest.getByTestId('home-continue');
+  await expect(link).toHaveText(/Host, room \w{6}\s*Game over · rematch possible/);
+});
+
+test('rematch gives the badge to the loser', async ({ browser }) => {
+  const t = await table(browser, 8);
+  await playToEnd(t, { random: mulberry32(8) });
+  await expectGameOver(t);
+  const { winner } = await snapshot(t.host);
+  expect(winner).not.toBeNull();
+  const loser = winner === 'p0' ? 'p1' : 'p0';
+
+  await t.host.getByTestId('rematch').click();
+  await expect(t.guest.getByTestId('rematch-status')).toHaveText('Your opponent wants a rematch.');
+  await t.guest.getByTestId('rematch').click();
+  for (const page of [t.host, t.guest]) {
+    await expect(page.getByTestId('game-announcement')).toHaveText(
+      'Rematch started: game 2 in this room.',
+    );
+    await expect.poll(async () => (await snapshot(page)).game).toBe(1);
+    await expect.poll(async () => (await snapshot(page)).badge).toBe(loser);
+    await expect.poll(async () => (await snapshot(page)).status).toBe('playing');
+  }
 });
 
 test('invite link joins', async ({ browser }) => {
@@ -199,12 +243,13 @@ test('invite link joins', async ({ browser }) => {
   await host.goto('/#/online/new');
   await host.getByTestId('grace-5').check();
   await host.getByTestId('create-submit').click();
+  await giveName(host, 'Host');
   const text = (await host.getByTestId('invite-link').textContent()) ?? '';
   const link = /https?:\/\/\S+/.exec(text)?.[0];
   expect(link).toMatch(/#\/join\/[0-9A-Z]{6}$/);
 
   const guest = await newDevice(browser);
-  await guest.goto(link!);
+  await joinAs(guest, link!, 'Guest');
   await expect(host.getByTestId('table')).toBeVisible();
   await expect(guest.getByTestId('table')).toBeVisible();
   for (const page of [host, guest]) {
@@ -219,7 +264,7 @@ test('unknown_room shows a friendly error', PARITY, async ({ browser }) => {
   page.on('websocket', (socket) => {
     if (socket.url().includes('/rooms/')) sockets += 1;
   });
-  await page.goto('/#/join/ZZZZZZ');
+  await joinAs(page, '/#/join/ZZZZZZ', 'Guest');
   await expect(page.getByTestId('connection-stopped')).toHaveText(
     "There's no game with that code; it may have expired. Check the code and try again.",
   );

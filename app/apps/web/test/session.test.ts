@@ -1,26 +1,36 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import 'fake-indexeddb/auto';
+import { IDBFactory } from 'fake-indexeddb';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   clearOnlineSession,
+  initSessions,
   loadOnlineSession,
   loadSession,
-  pruneOnlineSessions,
+  resetSessions,
   saveOnlineSession,
   saveSession,
 } from '../src/session.js';
+import { openDeviceStore } from '../src/storage/db.js';
+import { sessionId } from '../src/storage/sessions.js';
 
 const TOKEN = 'b'.repeat(32);
 const DAY_MS = 24 * 60 * 60 * 1000;
 const A = 'https://a.example';
 const B = 'https://b.example';
 
+beforeEach(() => {
+  vi.stubGlobal('indexedDB', new IDBFactory());
+});
+
 afterEach(() => {
-  vi.restoreAllMocks();
+  vi.unstubAllGlobals();
+  resetSessions();
   localStorage.clear();
   sessionStorage.clear();
 });
 
 describe('online sessions', () => {
-  it('keeps each room in localStorage, apart from local sessions', () => {
+  it('keeps each room, apart from local sessions', () => {
     saveOnlineSession({ room: 'K7Q2MX', seatToken: TOKEN, server: A, lastSeq: 4 }, 1000);
     saveOnlineSession({ room: 'ABCDEF', seatToken: TOKEN, server: A, lastSeq: 9 });
     expect(loadOnlineSession(A, 'K7Q2MX')).toEqual({
@@ -54,50 +64,143 @@ describe('online sessions', () => {
     expect(loadSession()?.room).toBe('K7Q2MX');
   });
 
-  it('prunes sessions older than 30 days', () => {
-    const now = 100 * DAY_MS;
-    saveOnlineSession(
-      { room: 'OLDOLD', seatToken: TOKEN, server: A, lastSeq: 0 },
-      now - 31 * DAY_MS,
+  it('keeps a known seat when a later save does not name one', () => {
+    saveOnlineSession({ room: 'K7Q2MX', seatToken: TOKEN, server: A, seat: 'p1', lastSeq: 1 });
+    saveOnlineSession({ room: 'K7Q2MX', seatToken: TOKEN, server: A, lastSeq: 2 });
+    expect(loadOnlineSession(A, 'K7Q2MX')).toMatchObject({ seat: 'p1', lastSeq: 2 });
+  });
+
+  it('writes through to the device store and loads from it after a restart', async () => {
+    const store = await openDeviceStore();
+    await initSessions(store);
+    saveOnlineSession({ room: 'K7Q2MX', seatToken: TOKEN, server: A, seat: 'p0', lastSeq: 3 }, 500);
+    await vi.waitFor(async () =>
+      expect(await store.sessions.get(sessionId(A, 'K7Q2MX'))).toMatchObject({
+        seatToken: TOKEN,
+        seat: 'p0',
+        lastSeq: 3,
+        game: 0,
+        status: 'active',
+        savedAt: 500,
+      }),
     );
-    saveOnlineSession({ room: 'NEWNEW', seatToken: TOKEN, server: A, lastSeq: 0 }, now - DAY_MS);
-    localStorage.setItem('unrelated', 'kept');
-    pruneOnlineSessions(now);
-    expect(loadOnlineSession(A, 'OLDOLD')).toBeUndefined();
-    expect(loadOnlineSession(A, 'NEWNEW')).toBeDefined();
-    expect(localStorage.getItem('unrelated')).toBe('kept');
+
+    resetSessions();
+    expect(loadOnlineSession(A, 'K7Q2MX')).toBeUndefined();
+    await initSessions(store, 500 + DAY_MS);
+    expect(loadOnlineSession(A, 'K7Q2MX')?.seat).toBe('p0');
+
+    clearOnlineSession(A, 'K7Q2MX');
+    await vi.waitFor(async () =>
+      expect(await store.sessions.get(sessionId(A, 'K7Q2MX'))).toBeUndefined(),
+    );
   });
 
-  it('moves an entry keyed by room alone to its server key', () => {
-    const now = 10 * DAY_MS;
-    const old = { room: 'K7Q2MX', seatToken: TOKEN, server: A, lastSeq: 3, savedAt: now };
-    localStorage.setItem('wwd.online.K7Q2MX', JSON.stringify(old));
-    expect(loadOnlineSession(A, 'K7Q2MX')).toBeUndefined();
-    pruneOnlineSessions(now);
-    expect(localStorage.getItem('wwd.online.K7Q2MX')).toBeNull();
-    expect(loadOnlineSession(A, 'K7Q2MX')).toEqual(old);
+  it('never lets a link to another server read or clear the default server entry', async () => {
+    saveOnlineSession({ room: 'K7Q2MX', seatToken: TOKEN, server: A, lastSeq: 1 });
+    expect(loadOnlineSession(B, 'K7Q2MX')).toBeUndefined();
+    clearOnlineSession(B, 'K7Q2MX');
+    expect(loadOnlineSession(A, 'K7Q2MX')?.seatToken).toBe(TOKEN);
   });
 
-  it('ignores malformed entries', () => {
-    const key = `wwd.online.${encodeURIComponent(A)}.K7Q2MX`;
-    localStorage.setItem(key, '{"room":"K7Q2MX"}');
-    expect(loadOnlineSession(A, 'K7Q2MX')).toBeUndefined();
-    localStorage.setItem(key, 'not json');
+  it('works when the store fails', async () => {
+    const store = await openDeviceStore();
+    vi.spyOn(store.sessions, 'put').mockRejectedValue(new Error('quota'));
+    vi.spyOn(store.sessions, 'delete').mockRejectedValue(new Error('quota'));
+    await initSessions(store);
+    saveOnlineSession({ room: 'K7Q2MX', seatToken: TOKEN, server: A, lastSeq: 5 });
+    await Promise.resolve();
+    expect(loadOnlineSession(A, 'K7Q2MX')).toMatchObject({ seatToken: TOKEN, lastSeq: 5 });
+    clearOnlineSession(A, 'K7Q2MX');
     expect(loadOnlineSession(A, 'K7Q2MX')).toBeUndefined();
   });
 
-  it('survives storage throwing', () => {
-    const fail = (): never => {
-      throw new DOMException('denied', 'SecurityError');
-    };
-    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(fail);
-    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(fail);
-    vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(fail);
-    vi.spyOn(Storage.prototype, 'key').mockImplementation(fail);
-    const session = { room: 'K7Q2MX', seatToken: TOKEN, server: A, lastSeq: 0 };
-    expect(() => saveOnlineSession(session)).not.toThrow();
+  it('clear right after save stays cleared', async () => {
+    const store = await openDeviceStore();
+    await initSessions(store);
+    saveOnlineSession({ room: 'K7Q2MX', seatToken: TOKEN, server: A, lastSeq: 1 });
+    clearOnlineSession(A, 'K7Q2MX');
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    expect(await store.sessions.get(sessionId(A, 'K7Q2MX'))).toBeUndefined();
     expect(loadOnlineSession(A, 'K7Q2MX')).toBeUndefined();
-    expect(() => clearOnlineSession(A, 'K7Q2MX')).not.toThrow();
-    expect(() => pruneOnlineSessions()).not.toThrow();
+  });
+
+  it('stores the opponent, the game and its end, and a rematch makes the seat active again', async () => {
+    const store = await openDeviceStore();
+    await initSessions(store);
+    const seat = { room: 'K7Q2MX', seatToken: TOKEN, server: A, lastSeq: 3 };
+    saveOnlineSession({ ...seat, opponentName: 'Jo', game: 0 }, 100);
+    saveOnlineSession({ ...seat, lastSeq: 4 }, 200);
+    const id = sessionId(A, 'K7Q2MX');
+    await vi.waitFor(async () =>
+      expect(await store.sessions.get(id)).toMatchObject({
+        opponentName: 'Jo',
+        game: 0,
+        status: 'active',
+        savedAt: 200,
+      }),
+    );
+
+    saveOnlineSession({ ...seat, lastSeq: 9, game: 0, finished: true }, 300);
+    saveOnlineSession({ ...seat, lastSeq: 9, game: 0, finished: true }, 400);
+    await vi.waitFor(async () =>
+      expect(await store.sessions.get(id)).toMatchObject({
+        status: 'finished',
+        finishedAt: 300,
+        savedAt: 400,
+      }),
+    );
+
+    // A reloaded client reports no finish until its events arrive, which keeps the game over.
+    saveOnlineSession({ ...seat, lastSeq: 0 }, 500);
+    await vi.waitFor(async () =>
+      expect(await store.sessions.get(id)).toMatchObject({ status: 'finished', savedAt: 500 }),
+    );
+
+    saveOnlineSession({ ...seat, lastSeq: 1, game: 1 }, 600);
+    await vi.waitFor(async () =>
+      expect(await store.sessions.get(id)).toMatchObject({ status: 'active', game: 1 }),
+    );
+    expect((await store.sessions.get(id))?.finishedAt).toBeUndefined();
+  });
+
+  it('prunes a finished session 24 hours after its game ended', async () => {
+    const store = await openDeviceStore();
+    await initSessions(store);
+    const seat = { seatToken: TOKEN, server: A, lastSeq: 3, game: 0 };
+    saveOnlineSession({ ...seat, room: 'DONEDN', finished: true }, 1000);
+    saveOnlineSession({ ...seat, room: 'PLAYNG' }, 1000);
+    await vi.waitFor(async () => expect(await store.sessions.list(1000)).toHaveLength(2));
+
+    resetSessions();
+    await initSessions(store, 1000 + DAY_MS - 1);
+    expect(loadOnlineSession(A, 'DONEDN')).toBeDefined();
+
+    resetSessions();
+    await initSessions(store, 1000 + DAY_MS);
+    expect(loadOnlineSession(A, 'DONEDN')).toBeUndefined();
+    expect(loadOnlineSession(A, 'PLAYNG')).toBeDefined();
+    expect(await store.sessions.get(sessionId(A, 'DONEDN'))).toBeUndefined();
+  });
+
+  it('keeps a newer record saved by another tab over a stale snapshot', async () => {
+    const store = await openDeviceStore();
+    await initSessions(store);
+    saveOnlineSession({ room: 'K7Q2MX', seatToken: TOKEN, server: A, lastSeq: 1 }, 100);
+    await vi.waitFor(async () =>
+      expect(await store.sessions.get(sessionId(A, 'K7Q2MX'))).toBeDefined(),
+    );
+
+    const stored = await store.sessions.get(sessionId(A, 'K7Q2MX'));
+    await store.sessions.put({ ...stored!, seatToken: 'e'.repeat(32), lastSeq: 9, savedAt: 900 });
+    saveOnlineSession({ room: 'K7Q2MX', seatToken: TOKEN, server: A, lastSeq: 2 }, 200);
+
+    await vi.waitFor(() =>
+      expect(loadOnlineSession(A, 'K7Q2MX')).toMatchObject({ lastSeq: 9, savedAt: 900 }),
+    );
+    expect(await store.sessions.get(sessionId(A, 'K7Q2MX'))).toMatchObject({
+      seatToken: 'e'.repeat(32),
+      lastSeq: 9,
+    });
   });
 });

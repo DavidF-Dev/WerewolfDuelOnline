@@ -2,8 +2,9 @@ import { expect, type Browser, type BrowserContext, type Page } from '@playwrigh
 import type { Command, Plan, Seat, TargetCard } from '@wwd/engine';
 
 const MAX_ROUNDS = 200;
-// The referee drops messages beyond 30 per rolling 10 s per connection; 28 leaves room for the hello.
-const SEND_BUDGET = 28;
+// The referee drops messages beyond 30 per rolling 10 s per connection; 26 commands leave room
+// for the greeting, the first ping and one request, such as to pause, resume or rematch.
+const SEND_BUDGET = 26;
 const BUDGET_WINDOW_MS = 10_000;
 
 /** A small seeded generator for move choices; it does not fix the deal. */
@@ -39,6 +40,15 @@ export interface Snapshot {
   opponentCanClaim: boolean;
   /** The online connection's phase; null in a local game. */
   phase: string | null;
+  /** Which of the room's games the page follows, from 0. */
+  game: number;
+  paused: boolean;
+  /** Who holds the Badge; null before the first deal. */
+  badge: Seat | null;
+  /** The winner of the page's game; null until it is over. */
+  winner: Seat | null;
+  /** How many segments the page's game-over replay has; 0 before game over. */
+  segments: number;
 }
 
 export const snapshot = (page: Page): Promise<Snapshot> =>
@@ -68,6 +78,13 @@ export const snapshot = (page: Page): Promise<Snapshot> =>
       opponentConnected: s.opponent.connected,
       opponentCanClaim: s.opponent.can_claim_win === true,
       phase: window.__wwd!.connection()?.phase ?? null,
+      game: s.game,
+      paused: s.pause.paused,
+      badge: s.view?.badge ?? null,
+      winner:
+        s.events.map(([, e]) => e.kind).find((kind) => 'game_over' in kind)?.game_over.winner ??
+        null,
+      segments: s.replay?.segments.length ?? 0,
     };
   });
 
@@ -156,6 +173,18 @@ export async function createSeededRoom(page: Page, seed: string): Promise<string
   return code;
 }
 
+/** Answers the display name question that a device asks before it first connects. */
+export async function giveName(page: Page, name: string): Promise<void> {
+  await page.getByTestId('display-name').fill(name);
+  await page.getByTestId('name-continue').click();
+}
+
+/** Opens `url` on a device that has not played before and answers the display name question. */
+export async function joinAs(page: Page, url: string, name: string): Promise<void> {
+  await page.goto(url);
+  await giveName(page, name);
+}
+
 /** Opens a host and a guest on separate devices (browser contexts) and seats them in a seeded room. */
 export async function openOnlineTable(browser: Browser, seed: string): Promise<OnlineTable> {
   const hostContext = await browser.newContext();
@@ -163,12 +192,12 @@ export async function openOnlineTable(browser: Browser, seed: string): Promise<O
   recordEvents(host);
   await host.goto('/');
   const code = await createSeededRoom(host, seed);
-  await host.goto(`/#/join/${code}`);
+  await joinAs(host, `/#/join/${code}`, 'Host');
   await expect(host.getByTestId('invite')).toBeVisible();
   const guestContext = await browser.newContext();
   const guest = await guestContext.newPage();
   recordEvents(guest);
-  await guest.goto(`/#/join/${code}`);
+  await joinAs(guest, `/#/join/${code}`, 'Guest');
   await expect(host.getByTestId('table')).toBeVisible();
   await expect(guest.getByTestId('table')).toBeVisible();
   return { host, guest, code, hostContext, guestContext };
@@ -176,13 +205,13 @@ export async function openOnlineTable(browser: Browser, seed: string): Promise<O
 
 export const targetId = (card: TargetCard): string => (card === 'fool' ? 'fool' : card.character);
 
-/** The test id that performs `cmd`, for every command except a plan. */
+/** The test id of the button that sends `cmd` once its panel is ready. */
 function buttonFor(cmd: Command): string {
   if (cmd === 'next_round') return 'action-next-round';
-  if (cmd === 'resign') return 'action-resign';
-  if ('place_hourglasses' in cmd) return `action-hourglasses-${cmd.place_hourglasses.n}`;
-  if ('choose_potion_target' in cmd) return `action-potion-${cmd.choose_potion_target.card}`;
-  if ('hunter_spend_cross' in cmd) {
+  if (typeof cmd === 'object' && 'choose_potion_target' in cmd) {
+    return `action-potion-${cmd.choose_potion_target.card}`;
+  }
+  if (typeof cmd === 'object' && 'hunter_spend_cross' in cmd) {
     return cmd.hunter_spend_cross.spend ? 'action-hunter-spend' : 'action-hunter-keep';
   }
   throw new Error(`no button for ${JSON.stringify(cmd)}`);
@@ -195,13 +224,53 @@ async function performPlan(page: Page, plan: Plan): Promise<void> {
   await page.getByTestId(`plan-character-${plan.character}`).click();
   for (const card of plan.targets) await page.getByTestId(`target-${targetId(card)}`).click();
   await page.getByTestId('seal-plan').click();
+  // A fresh device asks before sealing a plan.
+  await page.getByRole('alertdialog').getByTestId('confirm-yes').click();
+}
+
+/** Steps the Hourglass stepper to `n` and places them. */
+async function performHourglasses(page: Page, n: number): Promise<void> {
+  const count = page.getByTestId('hourglass-count');
+  for (let i = 0; i < 10; i += 1) {
+    const shown = Number(await count.getAttribute('data-value'));
+    if (shown === n) break;
+    await page.getByTestId(shown < n ? 'hourglass-more' : 'hourglass-fewer').click();
+  }
+  await expect(count).toHaveAttribute('data-value', String(n));
+  await page.getByTestId('place-hourglasses').click();
+}
+
+/** Steps through any showdown results still to be shown, so the prompts after them appear. */
+async function catchUpShowdown(page: Page): Promise<void> {
+  const next = page.getByTestId('showdown-next');
+  while (await next.isVisible()) await next.click();
+}
+
+/** Opens the game menu if it is closed. */
+export async function openGameMenu(page: Page): Promise<void> {
+  const menu = page.getByTestId('game-menu');
+  if ((await menu.getAttribute('open')) === null)
+    await page.getByTestId('game-menu-toggle').click();
+  await expect(menu).toHaveAttribute('open', '');
+}
+
+/** Resigns through the game menu, confirming the question it asks. */
+export async function resign(page: Page): Promise<void> {
+  await openGameMenu(page);
+  await page.getByTestId('resign').click();
+  await page.getByRole('alertdialog').getByTestId('confirm-yes').click();
 }
 
 /** Performs `cmd` through the visible controls. */
 export async function perform(page: Page, cmd: Command): Promise<void> {
   if (isPlan(cmd)) {
     await performPlan(page, cmd.submit_plan);
+  } else if (typeof cmd === 'object' && 'place_hourglasses' in cmd) {
+    await performHourglasses(page, cmd.place_hourglasses.n);
+  } else if (cmd === 'resign') {
+    await resign(page);
   } else {
+    if (typeof cmd === 'object' && 'hunter_spend_cross' in cmd) await catchUpShowdown(page);
     await page.getByTestId(buttonFor(cmd)).click();
   }
 }
@@ -212,6 +281,8 @@ export interface PlayOptions {
   afterStep?: (step: number, table: Table) => Promise<void>;
   /** Defers a page's next command while it returns true. */
   hold?: (page: Page, s: Snapshot, table: Table) => boolean;
+  /** Stops early, before game over, once this holds for both pages. */
+  until?: (s: Snapshot) => boolean;
 }
 
 /**
@@ -230,7 +301,10 @@ async function answered(page: Page, before: Snapshot): Promise<void> {
   );
 }
 
-/** Plays both seats to game over through the UI, choosing a random legal command each time. */
+/**
+ * Plays both seats through the UI, choosing a random legal command each time, until game over
+ * or until `options.until` holds for both pages; returns the number of commands played.
+ */
 export async function playToEnd(table: Table, options: PlayOptions): Promise<number> {
   const pages = (): Page[] => [table.host, table.guest];
   // Each page is keyed by what it last acted on, so a stale offer is not acted on twice.
@@ -243,9 +317,14 @@ export async function playToEnd(table: Table, options: PlayOptions): Promise<num
   for (;;) {
     let progressed = false;
     let over = 0;
+    let done = 0;
     for (const seat of ['host', 'guest'] as const) {
       const page = table[seat];
       const s = await snapshot(page);
+      if (options.until?.(s) === true) {
+        done += 1;
+        continue;
+      }
       expect(repeatedEvents(page), 'no event should reach a page twice').toEqual([]);
       expect(s.errorCount, `the referee rejected something: ${s.lastError ?? 'unknown'}`).toBe(0);
       expect(s.round, 'the game should end within the round cap').toBeLessThanOrEqual(MAX_ROUNDS);
@@ -271,14 +350,17 @@ export async function playToEnd(table: Table, options: PlayOptions): Promise<num
       progressed = true;
       await options.afterStep?.(steps, table);
     }
-    if (over === 2) return steps;
+    if (over === 2 || done === 2) return steps;
     if (!progressed) {
       await expect
         .poll(
           async () => {
             const current = pages();
             const states = await Promise.all(current.map(snapshot));
-            return states.some((s, i) => s.status === 'game_over' || pending(current[i]!, s));
+            const stopped = options.until !== undefined && states.every(options.until);
+            return (
+              stopped || states.some((s, i) => s.status === 'game_over' || pending(current[i]!, s))
+            );
           },
           { message: 'a page should be offered a command or the game should end' },
         )

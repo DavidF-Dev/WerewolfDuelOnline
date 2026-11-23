@@ -4,5 +4,11 @@ export { CLOSE, createRequestedRoom, errorReason, errorResponse } from './adapte
 export { corsHeaders, isOriginAllowed } from './cors.js';
 export { JOIN_CODE_PATTERN, seededRandom } from './codes.js';
 export { RateLimiter, createRoomLimiter, handleHttp } from './service.js';
-export type { RoomStore, ServiceConfig, ServiceContext, UpgradeRequest } from './service.js';
+export type {
+  CreateResult,
+  RoomStore,
+  ServiceConfig,
+  ServiceContext,
+  UpgradeRequest,
+} from './service.js';
 export { rateLimitKey } from './client-key.js';

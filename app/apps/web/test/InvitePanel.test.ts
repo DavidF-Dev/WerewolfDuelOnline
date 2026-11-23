@@ -49,17 +49,26 @@ describe('InvitePanel', () => {
     expect(writeText).toHaveBeenCalledWith(`${base()}#/join/K7Q2MX`);
   });
 
-  it('offers Share only where the browser can share', async () => {
-    const { unmount } = render(InvitePanel, {
-      props: { localiser, room: 'K7Q2MX', server: DEFAULT_SERVER },
-    });
-    expect(screen.queryByRole('button', { name: 'Share' })).toBeNull();
-    unmount();
-
+  it('shares the link with the browser share sheet when there is one', async () => {
     const share = vi.fn(async () => {});
     Object.defineProperty(navigator, 'share', { value: share, configurable: true });
     render(InvitePanel, { props: { localiser, room: 'K7Q2MX', server: DEFAULT_SERVER } });
     await userEvent.setup().click(screen.getByRole('button', { name: 'Share' }));
     expect(share).toHaveBeenCalledWith(expect.objectContaining({ url: `${base()}#/join/K7Q2MX` }));
+  });
+
+  it('share falls back to copy', async () => {
+    const user = userEvent.setup();
+    const writeText = stubClipboard();
+    render(InvitePanel, { props: { localiser, room: 'K7Q2MX', server: DEFAULT_SERVER } });
+    await user.click(screen.getByRole('button', { name: 'Share' }));
+    expect(writeText).toHaveBeenCalledWith(`${base()}#/join/K7Q2MX`);
+    await waitFor(() => expect(screen.getByTestId('invite-feedback').textContent).toBe('Copied'));
+  });
+
+  it('shows a QR code of the link and the waiting status', () => {
+    render(InvitePanel, { props: { localiser, room: 'K7Q2MX', server: DEFAULT_SERVER } });
+    expect(screen.getByRole('img', { name: `${base()}#/join/K7Q2MX` })).toBeTruthy();
+    expect(screen.getByText('Waiting for your opponent to join')).toBeTruthy();
   });
 });

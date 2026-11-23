@@ -10,6 +10,7 @@ const ONLINE: ConnectionState = {
   attempt: 0,
   nextRetryAt: null,
   stopReason: null,
+  serverUnavailable: false,
 };
 const START = 1_000_000;
 
@@ -35,6 +36,21 @@ describe('ConnectionBanner', () => {
     const status = screen.getByTestId('connection-phase');
     expect(status.getAttribute('role')).toBe('status');
     expect(status.textContent).toBe(localiser.t('connection-online'));
+  });
+
+  it('says calmly when the server seems unavailable', () => {
+    render(ConnectionBanner, {
+      props: {
+        localiser,
+        connection: { ...ONLINE, phase: 'offline', attempt: 12, serverUnavailable: true },
+        opponent: { connected: false },
+        lastError: null,
+        onClaimWin: vi.fn(),
+      },
+    });
+    expect(screen.getByTestId('connection-phase').textContent).toBe(
+      "The game server isn't responding. Your game is kept on the server; this link will work again later.",
+    );
   });
 
   it('counts down the opponent grace, then offers the claim', async () => {

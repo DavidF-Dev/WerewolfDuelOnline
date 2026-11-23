@@ -3,7 +3,7 @@ import { PORTS } from './e2e/ports.js';
 
 export default defineConfig({
   testDir: 'e2e',
-  testMatch: 'online.spec.ts',
+  testMatch: ['online.spec.ts', 'pause.spec.ts'],
   grep: /@parity/,
   globalSetup: './e2e/workerd-referee.ts',
   fullyParallel: true,

@@ -1,16 +1,9 @@
-import type { Command, Seat } from '@wwd/engine';
+import type { Command } from '@wwd/engine';
 import type { ConnectionState, GameClient, GameClientState, Localiser } from '@wwd/client-core';
-import type { CreateRoomRequest } from '@wwd/protocol';
+import type { NewRoomRequest } from '@wwd/protocol';
 import { DEFAULT_SERVER, createRoom } from './online.js';
-import {
-  characterName,
-  instructionText,
-  listText,
-  logLine,
-  markerLines,
-  planStatus,
-  statusText,
-} from './text.js';
+import { describe } from './table/describe.js';
+import { statusText } from './text.js';
 
 /** The client state without its secrets: the seat token and the PIN. */
 export type PublicState = Omit<GameClientState, 'seatToken' | 'pin'>;
@@ -29,9 +22,9 @@ export interface DevHook {
 }
 
 export interface CreateOnlineOptions {
-  grace_minutes?: CreateRoomRequest['grace_minutes'];
+  grace_minutes?: NewRoomRequest['grace_minutes'];
   /** Honoured only by a referee started with test overrides. */
-  test?: CreateRoomRequest['test'];
+  test?: NewRoomRequest['test'];
 }
 
 declare global {
@@ -40,40 +33,13 @@ declare global {
   }
 }
 
-const index = (seat: Seat): 0 | 1 => (seat === 'p0' ? 0 : 1);
-const other = (seat: Seat): Seat => (seat === 'p0' ? 'p1' : 'p0');
-
-export function describeTable(l: Localiser, state: GameClientState): string {
-  const lines = [l.t('table-status', { status: statusText(l, state.status) })];
+/** The table description for this client's seat, or its status while there is no table. */
+function describeTable(l: Localiser, state: GameClientState): string {
   const { view, seat } = state;
-  if (view !== null && seat !== null) {
-    const me = view.players[index(seat)];
-    const opponentSeat = other(seat);
-    const opponent = view.players[index(opponentSeat)];
-    const opponentName = state.opponent.name ?? l.t(`seat-${opponentSeat}`);
-    lines.push(
-      l.t('table-round', { round: view.round }),
-      instructionText(l, state),
-      l.t('describe-hand', { cards: listText((me.hand ?? []).map((c) => characterName(l, c))) }),
-      l.t('describe-markers', {
-        name: l.t(`seat-${seat}`),
-        markers: listText(markerLines(l, me, view.badge === seat)),
-      }),
-      planStatus(l, me.plan),
-      l.t('describe-markers', {
-        name: opponentName,
-        markers: listText(markerLines(l, opponent, view.badge === opponentSeat)),
-      }),
-      l.t('count-hand', { n: opponent.hand_size }),
-      planStatus(l, opponent.plan),
-    );
-    if (state.pending !== null && state.pending.seats.length > 0) {
-      const seats = state.pending.seats.map((s) => l.t(`seat-${s}`));
-      lines.push(l.t('describe-pending', { seats: listText(seats) }));
-    }
+  if (view === null || seat === null) {
+    return l.t('table-status', { status: statusText(l, state.status) });
   }
-  lines.push(...state.events.map(([, event]) => logLine(l, event, seat)));
-  return lines.join('\n');
+  return describe(view, seat, l);
 }
 
 function publicState(state: GameClientState): PublicState {

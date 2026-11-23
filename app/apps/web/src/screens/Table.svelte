@@ -2,19 +2,18 @@
   import { untrack, type Snippet } from 'svelte';
   import type { Command, Seat } from '@wwd/engine';
   import type { GameClientState, Localiser } from '@wwd/client-core';
-  import EventLog from '../components/EventLog.svelte';
-  import MyArea from '../components/MyArea.svelte';
-  import OpponentStrip from '../components/OpponentStrip.svelte';
-  import PhaseActions from '../components/PhaseActions.svelte';
-  import PlanBuilder from '../components/PlanBuilder.svelte';
-  import {
-    characterName,
-    instructionText,
-    logLine,
-    problemText,
-    rejectionText,
-    statusText,
-  } from '../text.js';
+  import LogDrawer from '../table/LogDrawer.svelte';
+  import MyArea from '../table/MyArea.svelte';
+  import OpponentStrip from '../table/OpponentStrip.svelte';
+  import PhaseBar from '../table/PhaseBar.svelte';
+  import TableArea from '../table/TableArea.svelte';
+  import GameMenu from '../table/GameMenu.svelte';
+  import GameOver from '../table/GameOver.svelte';
+  import PausedPanel from '../table/PausedPanel.svelte';
+  import RoundSummary from '../table/RoundSummary.svelte';
+  import { buzz } from '../haptics.js';
+  import { display } from '../settings/display.svelte.js';
+  import { problemText, rejectionText, statusText } from '../text.js';
 
   interface Props {
     localiser: Localiser;
@@ -24,11 +23,39 @@
     notice?: string | null;
     /** Whether the connection notices use the local wording; online ones come from `children`. */
     mode?: 'local' | 'online';
-    /** Shown below the heading, such as connection details and game menus. */
+    /** Shown below the heading, such as connection details. */
     children?: Snippet;
+    /** Extra game menu items, such as continuing on another device. */
+    menu?: Snippet;
+    /** Resigns this seat; the menu offers Resign only while this is given. */
+    onResign?: () => void;
+    /** Asks for a pause once the round ends; the menu leaves the item out while this is undefined. */
+    onPause?: () => void;
+    /** Answers the pause; the pause panel is left out while this is undefined. */
+    pauseActions?: { accept: () => void; cancel: () => void; resume: () => void };
+    /** Shown in the pause panel while paused, such as an invite. */
+    paused?: Snippet;
+    /** Asks for a rematch after game over; Rematch is left out while this is undefined. */
+    onRematch?: () => void;
+    /** Opens the finished game's replay; View replay is left out while this is undefined. */
+    onViewReplay?: () => void;
   }
 
-  let { localiser: l, state, onCommand, notice = null, mode = 'local', children }: Props = $props();
+  let {
+    localiser: l,
+    state,
+    onCommand,
+    notice = null,
+    mode = 'local',
+    children,
+    menu,
+    onResign,
+    onPause,
+    pauseActions,
+    paused,
+    onRematch,
+    onViewReplay,
+  }: Props = $props();
   const uid = $props.id();
   let root: HTMLElement | undefined;
 
@@ -38,19 +65,32 @@
   const view = $derived(state.view);
   const seat = $derived(state.seat);
   const opponentSeat = $derived(seat === null ? null : other(seat));
-  const canPlan = $derived(
-    state.legal.some((cmd) => typeof cmd === 'object' && 'submit_plan' in cmd),
-  );
-  const instruction = $derived(instructionText(l, state));
+  const names = $derived.by((): Record<Seat, string> => {
+    const opponentName = (s: Seat): string => state.opponent.name ?? l.t(`seat-${s}`);
+    return {
+      p0: seat === 'p0' ? l.t('table-you') : opponentName('p0'),
+      p1: seat === 'p1' ? l.t('table-you') : opponentName('p1'),
+    };
+  });
   const gameOverEvent = $derived(state.events.find(([, event]) => 'game_over' in event.kind)?.[1]);
   const problem = $derived(
     notice ??
       (state.status === 'rejected' || state.status === 'game_over' ? null : state.lastError),
   );
 
+  const roundOver = $derived(
+    view !== null &&
+      (view.phase === 'round_over' ||
+        (typeof view.phase === 'object' && 'game_over' in view.phase)),
+  );
+  // A pause can be asked for only while nothing about one is open yet.
+  const pausable = $derived(
+    state.status === 'playing' && state.pause.requestedBy === null && !state.pause.paused,
+  );
+
   // Changes only when what this seat is asked to do changes, not on every message.
   const phaseKey = $derived(
-    `${state.status}|${view?.round ?? 0}|${state.pending?.kind ?? 'none'}|${state.legal.length > 0}`,
+    `${state.game}|${state.status}|${view?.round ?? 0}|${state.pending?.kind ?? 'none'}|${state.legal.length > 0}|${state.pause.paused}`,
   );
 
   /** Moves focus to the first thing to do now, or to the heading of the region that explains why there is nothing. */
@@ -65,6 +105,8 @@
     if (typing && active.isConnected) return;
     const target =
       root.querySelector<HTMLElement>('[data-focus="game-over"]') ??
+      root.querySelector<HTMLElement>('[data-focus="paused"]') ??
+      root.querySelector<HTMLElement>('[data-phase-focus]:not([aria-disabled="true"])') ??
       root.querySelector<HTMLElement>(
         '[data-testid="plan-characters"] button:enabled, [data-testid="phase-actions"] li button:enabled',
       ) ??
@@ -75,6 +117,24 @@
   $effect(() => {
     void phaseKey;
     untrack(focusPhase);
+  });
+
+  // Names the offer this seat holds, so a reconnect that brings back the same offer stays silent.
+  const offer = $derived(
+    state.legal.length > 0 ? `${view?.round ?? 0}|${state.pending?.kind ?? 'none'}` : null,
+  );
+  // A rematch replaces the whole table, so its start is read out here.
+  const openedGame = untrack(() => state.game);
+  const rematchAnnouncement = $derived(
+    state.game === openedGame ? '' : l.t('rematch-started', { number: state.game + 1 }),
+  );
+
+  let buzzedFor: string | null = null;
+  $effect(() => {
+    const now = offer;
+    if (now === null || now === buzzedFor) return;
+    buzzedFor = now;
+    if (display.haptics) buzz();
   });
 </script>
 
@@ -97,56 +157,75 @@
       : l.t('problem-last', { detail: problemText(l, problem, mode === 'online') })}
   </p>
 
-  {#if state.status === 'game_over'}
-    <section aria-labelledby="{uid}-over" data-testid="game-over">
-      <h2 id="{uid}-over" tabindex="-1" data-focus="game-over">{l.t('game-over-heading')}</h2>
-      {#if gameOverEvent !== undefined}
-        <p data-testid="game-over-result">{logLine(l, gameOverEvent, seat)}</p>
-      {/if}
-      {#if state.replayVerified !== null}
-        <p data-testid="replay-verified">
-          {l.t(state.replayVerified ? 'replay-verified' : 'replay-unverified')}
-        </p>
-      {/if}
-    </section>
+  <p role="status" class="visually-hidden" data-testid="game-announcement">
+    {rematchAnnouncement}
+  </p>
+
+  {#if state.status === 'game_over' && seat !== null}
+    <GameOver
+      localiser={l}
+      {seat}
+      gameOver={gameOverEvent}
+      replayVerified={state.replayVerified}
+      rematchReady={state.rematchReady}
+      {onRematch}
+      {onViewReplay}
+    />
+  {/if}
+
+  {#if pauseActions !== undefined && seat !== null}
+    <PausedPanel
+      localiser={l}
+      pause={state.pause}
+      {seat}
+      onAccept={pauseActions.accept}
+      onCancel={pauseActions.cancel}
+      onResume={pauseActions.resume}
+      children={paused}
+    />
   {/if}
 
   {#if view !== null && seat !== null && opponentSeat !== null}
-    <p data-testid="round">{l.t('table-round', { round: view.round })}</p>
-    {#if view.potion_target !== null}
-      <p data-testid="potion-target">
-        {l.t('potion-target', { card: characterName(l, view.potion_target.card) })}
-      </p>
-    {/if}
-    <OpponentStrip
-      localiser={l}
-      name={state.opponent.name ?? l.t(`seat-${opponentSeat}`)}
-      connected={state.opponent.connected}
-      player={view.players[index(opponentSeat)]}
-      hasBadge={view.badge === opponentSeat}
-    />
-    <MyArea
-      localiser={l}
-      name={l.t(`seat-${seat}`)}
-      player={view.players[index(seat)]}
-      hasBadge={view.badge === seat}
-    />
-    {#if canPlan}
-      <PlanBuilder
-        localiser={l}
-        hand={view.players[index(seat)].hand ?? []}
-        legal={state.legal}
-        {onCommand}
-        errorCount={state.errorCount}
-      />
-    {/if}
-    <PhaseActions
-      localiser={l}
-      legal={state.legal}
-      {instruction}
-      {onCommand}
-      errorCount={state.errorCount}
-    />
-    <EventLog localiser={l} events={state.events} {seat} />
+    {#key state.game}
+      <div class="layout">
+        <GameMenu
+          localiser={l}
+          {view}
+          {seat}
+          canResign={state.status === 'playing' && !state.pause.paused && onResign !== undefined}
+          onResign={() => onResign?.()}
+          onPause={pausable ? onPause : undefined}
+          children={menu}
+        />
+        <OpponentStrip
+          localiser={l}
+          name={names[opponentSeat]}
+          connected={state.opponent.connected}
+          player={view.players[index(opponentSeat)]}
+          hasBadge={view.badge === opponentSeat}
+        />
+        <TableArea localiser={l} {view} {seat} events={state.events} {names} />
+        <MyArea localiser={l} name={l.t(`seat-${seat}`)} {view} {seat} />
+        <PhaseBar localiser={l} {state} {view} {seat} {onCommand} onCaughtUp={focusPhase} />
+        {#if roundOver}
+          <RoundSummary localiser={l} events={state.events} {seat} round={view.round} />
+        {/if}
+        <LogDrawer
+          localiser={l}
+          events={state.events}
+          {seat}
+          tiebreak={state.config?.tiebreak ?? null}
+        />
+      </div>
+    {/key}
   {/if}
 </main>
+
+<style>
+  .layout {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: minmax(0, 1fr);
+    margin-block-end: 1.5rem;
+  }
+</style>

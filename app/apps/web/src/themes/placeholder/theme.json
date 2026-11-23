@@ -1,0 +1,24 @@
+{
+  "id": "placeholder",
+  "licence": "MIT OR Apache-2.0",
+  "credits": ["Placeholder shapes drawn for Werewolf: Duel! Online."],
+  "cards": {
+    "hunter": "hunter.svg",
+    "wolf_king": "wolf_king.svg",
+    "knight": "knight.svg",
+    "wolfen": "wolfen.svg",
+    "seer": "seer.svg",
+    "witch": "witch.svg",
+    "wolf_beauty": "wolf_beauty.svg",
+    "villager": "villager.svg",
+    "fool": "fool.svg"
+  },
+  "markers": {
+    "health": "health.svg",
+    "cross": "cross.svg",
+    "fang": "fang.svg",
+    "hourglass": "hourglass.svg",
+    "badge": "badge.svg",
+    "potion": "potion.svg"
+  }
+}

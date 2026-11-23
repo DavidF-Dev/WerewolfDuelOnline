@@ -5,7 +5,7 @@ import { createLocaliser } from '@wwd/client-core';
 import { defaultRulesConfig } from '@wwd/engine';
 import { PROTOCOL_VERSION } from '@wwd/protocol';
 import Rejoin from '../src/screens/Rejoin.svelte';
-import { loadOnlineSession } from '../src/session.js';
+import { loadOnlineSession, resetSessions } from '../src/session.js';
 import { DEFAULT_SERVER } from '../src/online.js';
 import { FakeWebSocket } from './fake-socket.js';
 
@@ -19,7 +19,7 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.unstubAllGlobals();
-  localStorage.clear();
+  resetSessions();
   location.hash = '';
 });
 
@@ -53,6 +53,7 @@ describe('Rejoin', () => {
       room: 'K7Q2MX',
       config: defaultRulesConfig(),
       pin: '4821',
+      game: 0,
     });
     await waitFor(() => expect(location.hash).toBe('#/join/K7Q2MX'));
     expect(loadOnlineSession(DEFAULT_SERVER, 'K7Q2MX')?.seatToken).toBe(TOKEN);

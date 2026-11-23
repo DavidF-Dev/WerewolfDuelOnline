@@ -2,24 +2,31 @@
   import type { Command } from '@wwd/engine';
   import type { Localiser } from '@wwd/client-core';
   import { commandLabel } from '../text.js';
+  import Button from './Button.svelte';
 
   interface Props {
     localiser: Localiser;
     legal: Command[];
     /** The one-line instruction for the current phase. */
     instruction: string;
+    /** A second line explaining the rule behind this phase. */
+    hint?: string | null;
     onCommand: (cmd: Command) => void;
     /** Changes whenever the referee reports a problem, which frees a sent command for a retry. */
     errorCount?: number;
   }
 
-  let { localiser: l, legal, instruction, onCommand, errorCount = 0 }: Props = $props();
+  let {
+    localiser: l,
+    legal,
+    instruction,
+    hint = null,
+    onCommand,
+    errorCount = 0,
+  }: Props = $props();
   const uid = $props.id();
 
-  // Plans are built in the plan builder; every other legal command is one button.
-  const actions = $derived(
-    legal.filter((cmd) => typeof cmd === 'string' || !('submit_plan' in cmd)),
-  );
+  const actions = $derived(legal.filter((cmd): cmd is 'next_round' => cmd === 'next_round'));
 
   // One command per offer: the buttons stay inert until a new legal list or a reported problem.
   let sentFor = $state.raw<{ legal: Command[]; errorCount: number } | null>(null);
@@ -30,34 +37,44 @@
     sentFor = { legal, errorCount };
     onCommand(cmd);
   }
-
-  function testId(cmd: Command): string {
-    if (cmd === 'next_round') return 'action-next-round';
-    if (cmd === 'resign') return 'action-resign';
-    if ('place_hourglasses' in cmd) return `action-hourglasses-${cmd.place_hourglasses.n}`;
-    if ('choose_potion_target' in cmd) return `action-potion-${cmd.choose_potion_target.card}`;
-    if ('hunter_spend_cross' in cmd) {
-      return cmd.hunter_spend_cross.spend ? 'action-hunter-spend' : 'action-hunter-keep';
-    }
-    return 'action-plan';
-  }
 </script>
 
 <section aria-labelledby="{uid}-heading" data-testid="phase-actions">
   <h2 id="{uid}-heading" tabindex="-1">{l.t('actions-heading')}</h2>
-  <p aria-live="polite" data-testid="phase-instruction">{instruction}</p>
+  <p class="instruction" aria-live="polite" data-testid="phase-instruction">{instruction}</p>
+  {#if hint !== null}
+    <p class="note" data-testid="phase-hint">{hint}</p>
+  {/if}
   {#if actions.length > 0}
     <ul>
-      {#each actions as cmd (testId(cmd))}
+      {#each actions as cmd (cmd)}
         <li>
-          <button
-            type="button"
+          <Button
+            variant="primary"
             aria-disabled={sent}
-            data-testid={testId(cmd)}
-            onclick={() => send(cmd)}>{commandLabel(l, cmd)}</button
+            data-testid="action-next-round"
+            onclick={() => send(cmd)}>{commandLabel(l, cmd)}</Button
           >
         </li>
       {/each}
     </ul>
   {/if}
 </section>
+
+<style>
+  h2 {
+    font-size: 1.125rem;
+    margin: 0;
+  }
+
+  .instruction {
+    font-weight: 700;
+    margin: 0.25rem 0;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+  }
+</style>

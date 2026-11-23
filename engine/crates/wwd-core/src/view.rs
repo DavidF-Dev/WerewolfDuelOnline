@@ -56,6 +56,9 @@ pub struct View {
     pub supply: Supply,
     pub phase: Phase,
     pub potion_target: Option<PotionTarget>,
+    /// The seats in the order this round's showdown resolves them, from the reveal until
+    /// the next round is dealt.
+    pub showdown: Option<[Seat; 2]>,
     /// `Some` only for [`Viewer::Omniscient`].
     pub discard: Option<Character>,
     pub pending: Pending,
@@ -103,12 +106,18 @@ pub fn view(state: &State, viewer: Viewer) -> View {
         supply: state.supply.clone(),
         phase: state.phase.clone(),
         potion_target: state.potion_target,
+        showdown: state.showdown.as_ref().map(|showdown| showdown.order),
         discard: match viewer {
             Viewer::Omniscient => state.discard,
             Viewer::Seat(_) | Viewer::Spectator => None,
         },
         pending: pending(state),
     }
+}
+
+/// The seats in showdown order once the plans are revealed, until the next round is dealt.
+pub fn showdown_order(view: &View) -> Option<[Seat; 2]> {
+    view.showdown
 }
 
 fn player_view(player: &PlayerState, sees_all: bool, revealed: bool) -> PlayerView {

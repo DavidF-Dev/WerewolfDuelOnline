@@ -1,6 +1,38 @@
 import * as v from 'valibot';
-import type { Command, Event, Pending, Replay, RulesConfig, Seat, View } from '@wwd/engine';
-import { FIXED_ERROR_CODES, MAX_MESSAGE_BYTES, PROTOCOL_VERSION, type ErrorCode } from './codes.js';
+import type {
+  Command,
+  Event,
+  Pending,
+  Replay,
+  RoundBoundary,
+  RulesConfig,
+  Seat,
+  View,
+} from '@wwd/engine';
+import {
+  FIXED_ERROR_CODES,
+  MAX_MESSAGE_BYTES,
+  MAX_NAME_LENGTH,
+  PROTOCOL_VERSION,
+  SAVE_FORMAT_VERSION,
+  type ErrorCode,
+} from './codes.js';
+
+/**
+ * A paused game as a file: the round boundary it stopped at, its config and its replay so far,
+ * whose segments are all closed. `hash` is `saveHash` of the other fields.
+ */
+export interface SaveFile {
+  format_version: typeof SAVE_FORMAT_VERSION;
+  kind: 'wwd-save';
+  room: string;
+  config: RulesConfig;
+  boundary: RoundBoundary;
+  replay: Replay;
+  /** Epoch milliseconds by the referee's clock. */
+  saved_at: number;
+  hash: string;
+}
 
 export type ClientMessage =
   | {
@@ -10,6 +42,8 @@ export type ClientMessage =
       seat_token?: string;
       last_seq?: number;
       name?: string;
+      /** The seat asked for in a room created from a save; ignored by any other room. */
+      seat?: Seat;
     }
   | {
       type: 'rejoin';
@@ -21,6 +55,11 @@ export type ClientMessage =
     }
   | { type: 'approve_rejoin'; approve: boolean }
   | { type: 'claim_win' }
+  | { type: 'pause_request' }
+  | { type: 'pause_cancel' }
+  | { type: 'pause_accept' }
+  | { type: 'resume_request' }
+  | { type: 'rematch_request' }
   | { type: 'command'; cmd: Command }
   | { type: 'ping' };
 
@@ -32,6 +71,8 @@ export type ServerMessage =
       room: string;
       config: RulesConfig;
       pin: string;
+      /** Which of the room's games this is, from 0 for its first. */
+      game: number;
     }
   | { type: 'waiting' }
   | { type: 'rejoin_pending' }
@@ -45,6 +86,8 @@ export type ServerMessage =
   | { type: 'rejoin_withdrawn' }
   | {
       type: 'events';
+      /** Which of the room's games the events belong to; each game numbers its events from 0. */
+      game: number;
       from_seq: number;
       events: Array<[number, Event]>;
       view: View;
@@ -61,6 +104,13 @@ export type ServerMessage =
       can_claim_win?: boolean;
       pin_attempt_failed?: boolean;
     }
+  /** Who asked for a pause after the current round, and whether the other seat agreed. */
+  | { type: 'pause_status'; requested_by: Seat | null; agreed: boolean }
+  | { type: 'paused'; save: SaveFile }
+  /** The seats that have asked to resume the paused game. */
+  | { type: 'resume_status'; ready: Seat[] }
+  /** The seats that have asked for a rematch of the finished game. */
+  | { type: 'rematch_status'; ready: Seat[] }
   | { type: 'game_over'; replay: Replay }
   | { type: 'error'; code: ErrorCode }
   | { type: 'pong' };
@@ -69,7 +119,7 @@ export type ParseResult<T> = { ok: true; msg: T } | { ok: false; code: ErrorCode
 
 const room = v.pipe(v.string(), v.regex(/^[0-9A-HJKMNP-TV-Z]{6}$/));
 const seatToken = v.pipe(v.string(), v.regex(/^[0-9a-f]{32}$/));
-const seat = v.picklist(['p0', 'p1']);
+export const seat = v.picklist(['p0', 'p1']);
 const pin = v.pipe(v.string(), v.regex(/^[0-9]{4}$/));
 const seq = v.pipe(v.number(), v.safeInteger(), v.minValue(0));
 const name = v.pipe(
@@ -77,12 +127,12 @@ const name = v.pipe(
   v.trim(),
   v.check((s) => {
     const length = [...s].length;
-    return length >= 1 && length <= 24;
+    return length >= 1 && length <= MAX_NAME_LENGTH;
   }),
   v.regex(/^[^\p{Cc}\p{Cf}\u2028\u2029]*$/u),
 );
 // A custom guard keeps the original value; looseObject would rewrite arrays into objects.
-const anyObject = v.custom<Record<string, unknown>>(
+export const anyObject = v.custom<Record<string, unknown>>(
   (x) => typeof x === 'object' && x !== null && !Array.isArray(x),
 );
 
@@ -104,6 +154,7 @@ const clientSchema = v.variant('type', [
     seat_token: v.optional(seatToken),
     last_seq: v.optional(seq),
     name: v.optional(name),
+    seat: v.optional(seat),
   }),
   v.object({
     type: v.literal('rejoin'),
@@ -115,6 +166,11 @@ const clientSchema = v.variant('type', [
   }),
   v.object({ type: v.literal('approve_rejoin'), approve: v.boolean() }),
   v.object({ type: v.literal('claim_win') }),
+  v.object({ type: v.literal('pause_request') }),
+  v.object({ type: v.literal('pause_cancel') }),
+  v.object({ type: v.literal('pause_accept') }),
+  v.object({ type: v.literal('resume_request') }),
+  v.object({ type: v.literal('rematch_request') }),
   v.object({ type: v.literal('command'), cmd: command }),
   v.object({ type: v.literal('ping') }),
 ]);
@@ -133,6 +189,7 @@ const serverSchema = v.variant('type', [
     room,
     config: anyObject,
     pin,
+    game: seq,
   }),
   v.object({ type: v.literal('waiting') }),
   v.object({ type: v.literal('rejoin_pending') }),
@@ -140,6 +197,7 @@ const serverSchema = v.variant('type', [
   v.object({ type: v.literal('rejoin_withdrawn') }),
   v.object({
     type: v.literal('events'),
+    game: seq,
     from_seq: seq,
     events: v.array(v.tuple([seq, anyObject])),
     view: anyObject,
@@ -155,16 +213,24 @@ const serverSchema = v.variant('type', [
     can_claim_win: v.optional(v.boolean()),
     pin_attempt_failed: v.optional(v.boolean()),
   }),
+  v.object({
+    type: v.literal('pause_status'),
+    requested_by: v.nullable(seat),
+    agreed: v.boolean(),
+  }),
+  v.object({ type: v.literal('paused'), save: anyObject }),
+  v.object({ type: v.literal('resume_status'), ready: v.array(seat) }),
+  v.object({ type: v.literal('rematch_status'), ready: v.array(seat) }),
   v.object({ type: v.literal('game_over'), replay: anyObject }),
   v.object({ type: v.literal('error'), code: errorCode }),
   v.object({ type: v.literal('pong') }),
 ]);
 
-/** True when `raw` is longer than the message size limit in UTF-8 bytes. */
-function oversized(raw: string): boolean {
+/** True when `raw` is longer than `limit` in UTF-8 bytes. */
+export function oversized(raw: string, limit: number = MAX_MESSAGE_BYTES): boolean {
   // A UTF-16 length never exceeds the UTF-8 byte length, so this skips encoding long input.
-  if (raw.length > MAX_MESSAGE_BYTES) return true;
-  return new TextEncoder().encode(raw).length > MAX_MESSAGE_BYTES;
+  if (raw.length > limit) return true;
+  return new TextEncoder().encode(raw).length > limit;
 }
 
 /** True for a hello or rejoin whose numeric protocol version is not the one this build speaks. */

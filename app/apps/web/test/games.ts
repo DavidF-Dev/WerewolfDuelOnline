@@ -1,5 +1,5 @@
 import { afterEach } from 'vitest';
-import { Game, defaultRulesConfig, type Character, type Seat } from '@wwd/engine';
+import { Game, defaultRulesConfig, type Character, type Command, type Seat } from '@wwd/engine';
 import type { GameClientState } from '@wwd/client-core';
 
 const games: Game[] = [];
@@ -40,6 +40,11 @@ export function stateFor(game: Game, seat: Seat): GameClientState {
     rejoinRequested: false,
     rejoinDeadline: null,
     rejoinPending: false,
+    config: defaultRulesConfig(),
+    game: 0,
+    pause: { requestedBy: null, agreed: false, paused: false, resumeReady: [] },
+    save: null,
+    rematchReady: [],
     view,
     legal: game.legalActions(seat),
     pending: view.pending,
@@ -52,4 +57,23 @@ export function stateFor(game: Game, seat: Seat): GameClientState {
     lastPongAt: null,
     pongCount: 0,
   };
+}
+
+/**
+ * Plays a command for each pending seat until `done` holds: by default the first legal one other
+ * than resigning.
+ */
+export function playUntil(
+  game: Game,
+  done: () => boolean,
+  choose: (legal: Command[]) => Command | undefined = (legal) => legal.find((c) => c !== 'resign'),
+): void {
+  for (let step = 0; !done(); step++) {
+    if (step > 200) throw new Error('the game never reached the wanted state');
+    const seat = game.pending().seats[0];
+    if (seat === undefined) throw new Error('nobody can act');
+    const cmd = choose(game.legalActions(seat));
+    if (cmd === undefined) throw new Error('no command offered');
+    game.apply(seat, cmd);
+  }
 }

@@ -3,12 +3,13 @@ import wasm from '@wwd/engine/wasm';
 import { initEngine, type Seat } from '@wwd/engine';
 import { encode, type CreateRoomRequest, type ServerMessage } from '@wwd/protocol';
 import {
+  InvalidSaveError,
   Room,
   type Clock,
   type ConnId,
   type Outbound,
   type Random,
-  type RoomSnapshot,
+  type StoredRoomSnapshot,
 } from '@wwd/referee-core';
 import {
   CLOSE,
@@ -26,6 +27,9 @@ export const ROOM_URLS = {
   init: 'https://room.internal/init',
   socket: 'https://room.internal/socket',
 } as const;
+
+/** The error an internal room-creation request answers when its save does not verify. */
+export const INVALID_SAVE = 'invalid_save';
 
 /** The body of an internal room-creation request. */
 export interface InitRequest {
@@ -188,7 +192,13 @@ export class RoomObject extends DurableObject<Env> {
     if (await this.isKnown()) return new Response(null, { status: 409 });
     const { code, request } = body;
     const testOverrides = this.env.TEST_OVERRIDES === '1';
-    const room = createRequestedRoom(code, request, { clock, random: systemRandom }, testOverrides);
+    let room: Room;
+    try {
+      room = createRequestedRoom(code, request, { clock, random: systemRandom }, testOverrides);
+    } catch (thrown) {
+      if (thrown instanceof InvalidSaveError) return errorResponse(400, INVALID_SAVE);
+      throw thrown;
+    }
     await this.ctx.storage.put(KEY.room, room.snapshot());
     this.room = room;
     this.savedRevision = room.revision;
@@ -238,7 +248,7 @@ export class RoomObject extends DurableObject<Env> {
   private async load(): Promise<Room | undefined> {
     if (this.room !== undefined) return this.room;
     await initEngine(wasm);
-    const snapshot = await this.ctx.storage.get<RoomSnapshot>(KEY.room);
+    const snapshot = await this.ctx.storage.get<StoredRoomSnapshot>(KEY.room);
     if (snapshot === undefined) return undefined;
     let room: Room;
     try {
@@ -255,7 +265,8 @@ export class RoomObject extends DurableObject<Env> {
     }
     this.room = room;
     const out: Outbound[] = [];
-    for (const [seat, holder] of this.seatHolders(snapshot.pending_rejoin?.conn)) {
+    const asking = snapshot.version === 1 ? undefined : snapshot.pending_rejoin?.conn;
+    for (const [seat, holder] of this.seatHolders(asking)) {
       out.push(...room.rebind(holder.conn, seat));
     }
     out.push(...this.closeLapsed(clock.now()));

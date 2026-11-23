@@ -255,6 +255,8 @@ describe('claim win and resign', () => {
       'welcome',
       'events',
       'game_over',
+      'pause_status',
+      'rematch_status',
       'opponent_status',
     ]);
     expectResignation(back, 'c', 'p0');
@@ -331,7 +333,7 @@ describe('seat PINs', () => {
   });
 });
 
-describe('room snapshots v2', () => {
+describe('room snapshots', () => {
   function toV1(snapshot: RoomSnapshot): RoomSnapshotV1 {
     const { code, config, seats, replay, segment_base } = snapshot;
     return { version: 1, code, config, seats, replay, segment_base };
@@ -344,7 +346,7 @@ describe('room snapshots v2', () => {
     d.clock.time = 5_000_000;
     const restored = track(Room.restore(v1, d));
     expect(restored.snapshot()).toMatchObject({
-      version: 2,
+      version: 3,
       grace_ms: GRACE_MS,
       disconnected_at: [5_000_000, 5_000_000],
       pins: [null, null],
@@ -352,6 +354,7 @@ describe('room snapshots v2', () => {
       pin_locked_until: [null, null],
       last_activity_at: 5_000_000,
       finished_at: null,
+      pause: { requested_by: null, agreed: false, paused: false, resume_ready: [] },
     });
     expect(restored.lastActivityAt).toBe(5_000_000);
 
@@ -395,7 +398,7 @@ describe('room snapshots v2', () => {
     const { room, clock, pins, tokens } = startedRoom({ graceMs: 30_000 });
     room.disconnect('a');
     const snapshot = JSON.parse(JSON.stringify(room.snapshot())) as RoomSnapshot;
-    expect(snapshot.version).toBe(2);
+    expect(snapshot.version).toBe(3);
     expect(snapshot.disconnected_at).toEqual([clock.now(), null]);
     room.dispose();
 
@@ -511,7 +514,7 @@ describe('room snapshots v2', () => {
 
   it('restore rejects an unknown snapshot version', () => {
     const { room } = newRoom();
-    const snapshot = { ...room.snapshot(), version: 3 } as unknown as RoomSnapshot;
+    const snapshot = { ...room.snapshot(), version: 4 } as unknown as RoomSnapshot;
     expect(() => Room.restore(snapshot, deps())).toThrow();
   });
 });

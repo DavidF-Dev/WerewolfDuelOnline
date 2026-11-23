@@ -20,9 +20,9 @@ import {
   PONG_TIMEOUT_MS,
   TIMER_JUMP_MS,
   type ConnectionState,
-  type Lifecycle,
   type Readable,
 } from '../src/index.js';
+import { FakeLifecycle, FakeTimers } from './fakes.js';
 import { Xorshift, flush, playOut, step } from './helpers.js';
 
 beforeAll(loadEngineForNode);
@@ -31,110 +31,6 @@ const cleanups: Array<() => void> = [];
 afterEach(() => {
   for (const cleanup of cleanups.splice(0).reverse()) cleanup();
 });
-
-/** Deterministic timers: nothing fires until the test moves the clock. */
-class FakeTimers {
-  time = 1_000_000;
-  private nextId = 1;
-  private readonly pending = new Map<number, { at: number; fn: () => void }>();
-
-  readonly now = (): number => this.time;
-
-  readonly setTimeout = (fn: () => void, ms: number): unknown => {
-    const id = this.nextId++;
-    this.pending.set(id, { at: this.time + ms, fn });
-    return id;
-  };
-
-  readonly clearTimeout = (handle: unknown): void => {
-    this.pending.delete(handle as number);
-  };
-
-  get count(): number {
-    return this.pending.size;
-  }
-
-  /** Moves the clock forward, firing each timer at its due time. */
-  async advance(ms: number): Promise<void> {
-    const end = this.time + ms;
-    for (;;) {
-      const due = this.earliest(end);
-      if (due === undefined) break;
-      this.time = due[1].at;
-      this.pending.delete(due[0]);
-      due[1].fn();
-      await flush();
-    }
-    this.time = end;
-    await flush();
-  }
-
-  /** Moves the clock forward with nothing firing, as on a suspended device, then fires what is overdue. */
-  async sleep(ms: number): Promise<void> {
-    this.time += ms;
-    for (;;) {
-      const due = this.earliest(this.time);
-      if (due === undefined) break;
-      this.pending.delete(due[0]);
-      due[1].fn();
-      await flush();
-    }
-    await flush();
-  }
-
-  private earliest(limit: number): [number, { at: number; fn: () => void }] | undefined {
-    let best: [number, { at: number; fn: () => void }] | undefined;
-    for (const entry of this.pending) {
-      if (entry[1].at > limit) continue;
-      if (best === undefined || entry[1].at < best[1].at) best = entry;
-    }
-    return best;
-  }
-}
-
-class FakeLifecycle implements Lifecycle {
-  private readonly visibility = new Set<(visible: boolean) => void>();
-  private readonly pageShows = new Set<(persisted: boolean) => void>();
-  private readonly onlines = new Set<() => void>();
-
-  constructor(public visible = true) {}
-
-  isVisible(): boolean {
-    return this.visible;
-  }
-
-  onVisibilityChange(cb: (visible: boolean) => void): () => void {
-    this.visibility.add(cb);
-    return () => this.visibility.delete(cb);
-  }
-
-  onPageShow(cb: (persisted: boolean) => void): () => void {
-    this.pageShows.add(cb);
-    return () => this.pageShows.delete(cb);
-  }
-
-  onOnline(cb: () => void): () => void {
-    this.onlines.add(cb);
-    return () => this.onlines.delete(cb);
-  }
-
-  setVisible(visible: boolean): void {
-    this.visible = visible;
-    for (const cb of [...this.visibility]) cb(visible);
-  }
-
-  pageShow(persisted: boolean): void {
-    for (const cb of [...this.pageShows]) cb(persisted);
-  }
-
-  goOnline(): void {
-    for (const cb of [...this.onlines]) cb();
-  }
-
-  get listeners(): number {
-    return this.visibility.size + this.pageShows.size + this.onlines.size;
-  }
-}
 
 /** Wraps a transport so that it opens only when the test says so, holding sends until then. */
 class ManualOpen implements Transport {
@@ -294,6 +190,7 @@ function answeringWhile(server: Transport, enabled: () => boolean): void {
           room: 'ABCDEF',
           config: defaultRulesConfig(),
           pin: '1234',
+          game: 0,
         }),
       );
       server.send(encode({ type: 'waiting' }));
@@ -374,7 +271,13 @@ describe('ConnectionManager', () => {
     await flush();
     expect(h.links[0]?.client.open).toBe(false);
     expect(h.client.current.status).toBe('disconnected');
-    expect(h.state()).toEqual({ phase: 'hidden', attempt: 0, nextRetryAt: null, stopReason: null });
+    expect(h.state()).toEqual({
+      phase: 'hidden',
+      attempt: 0,
+      nextRetryAt: null,
+      stopReason: null,
+      serverUnavailable: false,
+    });
     expect(h.timers.count).toBe(0);
     await h.timers.advance(10 * 60_000);
     expect(h.links).toHaveLength(1);
@@ -420,7 +323,13 @@ describe('ConnectionManager', () => {
     expect(h.state()).toMatchObject({ phase: 'offline', attempt: 1 });
     await h.timers.advance(1000);
     expect(h.links).toHaveLength(2);
-    expect(h.state()).toEqual({ phase: 'online', attempt: 0, nextRetryAt: null, stopReason: null });
+    expect(h.state()).toEqual({
+      phase: 'online',
+      attempt: 0,
+      nextRetryAt: null,
+      stopReason: null,
+      serverUnavailable: false,
+    });
     expect(h.overlaps()).toBe(0);
   });
 
@@ -433,7 +342,13 @@ describe('ConnectionManager', () => {
     h.links[0]?.openNow?.();
     await flush();
     expect(h.links[0]?.sent.map((m) => m.type)).toEqual(['hello', 'ping']);
-    expect(h.state()).toEqual({ phase: 'online', attempt: 0, nextRetryAt: null, stopReason: null });
+    expect(h.state()).toEqual({
+      phase: 'online',
+      attempt: 0,
+      nextRetryAt: null,
+      stopReason: null,
+      serverUnavailable: false,
+    });
     await h.timers.advance(CONNECT_TIMEOUT_MS);
     expect(h.links).toHaveLength(1);
     expect(h.links[0]?.client.open).toBe(true);
@@ -551,6 +466,7 @@ describe('ConnectionManager', () => {
               room: 'ABCDEF',
               config: defaultRulesConfig(),
               pin: '1234',
+              game: 0,
             }),
           );
           s.send(encode({ type: 'waiting' }));
@@ -586,7 +502,13 @@ describe('ConnectionManager', () => {
     expect(h.links).toHaveLength(2);
     expect(h.links[1]?.sent[0]).toMatchObject({ type: 'hello' });
     expect(h.links[1]?.sent[0]).not.toHaveProperty('seat_token');
-    expect(h.state()).toEqual({ phase: 'online', attempt: 0, nextRetryAt: null, stopReason: null });
+    expect(h.state()).toEqual({
+      phase: 'online',
+      attempt: 0,
+      nextRetryAt: null,
+      stopReason: null,
+      serverUnavailable: false,
+    });
   });
 
   it('online reconnects at once while waiting to retry', async () => {
@@ -597,7 +519,13 @@ describe('ConnectionManager', () => {
     h.lifecycle.goOnline();
     await flush();
     expect(h.links).toHaveLength(2);
-    expect(h.state()).toEqual({ phase: 'online', attempt: 0, nextRetryAt: null, stopReason: null });
+    expect(h.state()).toEqual({
+      phase: 'online',
+      attempt: 0,
+      nextRetryAt: null,
+      stopReason: null,
+      serverUnavailable: false,
+    });
     await h.timers.advance(5000);
     expect(h.links).toHaveLength(2);
   });
@@ -619,7 +547,7 @@ describe('ConnectionManager', () => {
     expect(h.overlaps()).toBe(0);
   });
 
-  it('stops after game over', async () => {
+  it('keeps the connection through game over so a rematch can start', async () => {
     const referee = newReferee(2);
     const room = referee.createRoom(defaultRulesConfig());
     const rng = new Xorshift(5);
@@ -628,23 +556,24 @@ describe('ConnectionManager', () => {
     const p1 = join(referee, room);
     await flush();
     await playOut([h.client, p1], rng);
-    expect(h.state().stopReason).toBe('game_over');
+    expect(h.state().stopReason).toBeNull();
+    const pings = h.pings();
+    await h.timers.advance(PING_INTERVAL_MS);
+    expect(h.pings()).toBe(pings + 1);
 
     h.links[0]?.server.close();
     await flush();
-    await h.timers.advance(10 * 60_000);
-    h.lifecycle.setVisible(false);
-    h.lifecycle.setVisible(true);
-    h.lifecycle.pageShow(true);
-    h.lifecycle.goOnline();
-    await h.timers.advance(60_000);
-    expect(h.links).toHaveLength(1);
-    expect(h.state()).toEqual({
-      phase: 'offline',
-      attempt: 0,
-      nextRetryAt: null,
-      stopReason: 'game_over',
-    });
+    await h.timers.advance(1000);
+    expect(h.links).toHaveLength(2);
+    expect(h.state().phase).toBe('online');
+    expect(h.client.current.status).toBe('game_over');
+
+    h.client.requestRematch();
+    p1.requestRematch();
+    await flush();
+    expect(h.client.current.game).toBe(1);
+    expect(h.client.current.status).toBe('playing');
+    expect(h.state()).toMatchObject({ phase: 'online', stopReason: null });
   });
 
   it.each<ErrorCode>([
@@ -671,6 +600,7 @@ describe('ConnectionManager', () => {
       attempt: 0,
       nextRetryAt: null,
       stopReason: code,
+      serverUnavailable: false,
     });
   });
 

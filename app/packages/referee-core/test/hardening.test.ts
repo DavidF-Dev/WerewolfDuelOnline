@@ -88,7 +88,7 @@ describe('input hardening', () => {
   it('wrong protocol version is rejected', () => {
     const { room } = newRoom();
     const before = JSON.stringify(room.snapshot());
-    expect(room.handle('a', hello({ protocol_version: 2 }))).toEqual([
+    expect(room.handle('a', hello({ protocol_version: 1 }))).toEqual([
       { conn: 'a', msg: { type: 'error', code: 'protocol_version' }, close: true },
     ]);
     expect(JSON.stringify(room.snapshot())).toBe(before);
@@ -119,7 +119,12 @@ describe('input hardening', () => {
       { conn: 'a', msg: { type: 'error', code: 'superseded' }, close: true },
     ]);
     expect(out.filter((o) => o.conn !== 'a').every((o) => o.close === undefined)).toBe(true);
-    expect(to(out, 'c').map((m) => m.type)).toEqual(['welcome', 'events', 'opponent_status']);
+    expect(to(out, 'c').map((m) => m.type)).toEqual([
+      'welcome',
+      'events',
+      'pause_status',
+      'opponent_status',
+    ]);
 
     const after = driver.log.length;
     const played = driver.send('b', command(driver.latest.get('b')!.legal[0]!));

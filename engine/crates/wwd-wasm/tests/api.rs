@@ -105,3 +105,94 @@ fn can_resign_until_game_over() {
     let err = game.apply(Seat::P0, Command::Resign).unwrap_err();
     assert_eq!(err.id, "error-game-over");
 }
+
+#[test]
+fn validate_plan_returns_error_ids() {
+    use wwd_core::{Character, Plan, TargetCard};
+
+    let config = RulesConfig::default();
+    let plan = |character, targets: &[TargetCard]| Plan {
+        character,
+        targets: targets.iter().copied().collect(),
+    };
+    assert_eq!(
+        api::validate_plan(&plan(Character::Seer, &[TargetCard::Fool]), &config),
+        None
+    );
+    assert_eq!(
+        api::validate_plan(&plan(Character::Witch, &[]), &config),
+        Some("error-too-few-targets")
+    );
+    assert_eq!(
+        api::validate_plan(
+            &plan(Character::Hunter, &[TargetCard::Character(Character::Seer)]),
+            &config
+        ),
+        Some("error-target-not-allowed")
+    );
+}
+
+#[test]
+fn effective_initiative_and_showdown_order() {
+    use wwd_core::Character;
+
+    assert_eq!(api::effective_initiative(Character::Seer, 2), 3);
+    assert_eq!(api::effective_initiative(Character::Hunter, 2), 0);
+    assert_eq!(api::showdown_order(&game().view(Viewer::Spectator)), None);
+}
+
+/// A game played with the first legal actions until round 1 ends.
+fn at_round_over() -> Game {
+    let mut game = game();
+    while game.round_boundary().is_none() {
+        let seat = game.pending().seats[0];
+        let cmd = game.legal_actions(seat)[0].clone();
+        game.apply(seat, cmd).unwrap();
+    }
+    game
+}
+
+#[test]
+fn resume_continues_and_rejects_a_mismatched_boundary() {
+    let played = at_round_over();
+    let boundary = played.round_boundary().unwrap();
+    let new_seed = "02".repeat(32);
+    let resumed = Game::resume(boundary.clone(), played.replay(), &new_seed).unwrap();
+    assert_eq!(resumed.replay().segments.len(), 2);
+    let first = &resumed.events_since(0, Viewer::Spectator)[0].1;
+    assert_eq!(api::event_id(&first.kind), "event-segment-started");
+
+    let mut mismatched = boundary.clone();
+    mismatched.badge = mismatched.badge.other();
+    let err = Game::resume(mismatched, played.replay(), &new_seed)
+        .err()
+        .unwrap();
+    assert!(err.id.starts_with("error-replay-"), "{}", err.id);
+    let err = Game::resume(boundary, played.replay(), "zz").err().unwrap();
+    assert_eq!(err.id, "error-invalid-input");
+}
+
+#[test]
+fn replay_timeline_has_a_step_per_entry() {
+    let played = at_round_over();
+    let replay = played.replay();
+    let steps = api::replay_timeline(&replay, Viewer::Seat(Seat::P1)).unwrap();
+    assert_eq!(steps.len(), 1 + replay.segments[0].entries.len());
+    assert_eq!(
+        steps.last().unwrap().view,
+        played.view(Viewer::Seat(Seat::P1))
+    );
+
+    let mut tampered = replay;
+    tampered.segments[0].seed = [9; 32];
+    let err = api::replay_timeline(&tampered, Viewer::Spectator).unwrap_err();
+    assert!(err.id.starts_with("error-replay-"), "{}", err.id);
+}
+
+#[test]
+fn content_hash_matches_the_blake3_test_vector() {
+    assert_eq!(
+        api::content_hash(""),
+        "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
+    );
+}

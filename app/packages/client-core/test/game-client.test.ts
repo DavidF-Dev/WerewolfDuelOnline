@@ -91,12 +91,14 @@ function welcome(server: Transport, seat: Seat = 'p0'): void {
     room: 'ABCDEF',
     config: defaultRulesConfig(),
     pin: '1234',
+    game: 0,
   });
 }
 
 function sendEvents(server: Transport, game: Game, from = 0, seat: Seat = 'p0'): void {
   send(server, {
     type: 'events',
+    game: 0,
     from_seq: from,
     events: game.eventsSince(from, { seat }),
     view: game.view({ seat }),
@@ -172,6 +174,7 @@ describe('GameClient', () => {
       if (secondStart === undefined) throw new Error('expected a game start');
       send(server, {
         type: 'events',
+        game: 0,
         from_seq: 50,
         events: [[50, secondStart]],
         view: second.view({ seat: 'p0' }),
@@ -565,6 +568,22 @@ describe('online seat recovery', () => {
     send(server, { type: 'opponent_status', connected: false, can_claim_win: true });
     await flush();
     expect(client.current.opponent).toEqual({ connected: false, can_claim_win: true });
+  });
+
+  it('keeps the rules config from the welcome, including on a resumed seat', async () => {
+    const { client, server } = recorded({ seatToken: TOKEN });
+    expect(client.current.config).toBeNull();
+    send(server, {
+      type: 'welcome',
+      seat: 'p1',
+      seat_token: TOKEN,
+      room: 'ABCDEF',
+      config: { ...defaultRulesConfig(), tiebreak: 'badge_only' },
+      pin: '1234',
+      game: 0,
+    });
+    await flush();
+    expect(client.current.config?.tiebreak).toBe('badge_only');
   });
 
   it('rejoins a seat by PIN when it holds no token, then resumes by token', async () => {

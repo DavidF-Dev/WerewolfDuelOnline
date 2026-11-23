@@ -40,6 +40,7 @@ async function requestedClient(
       room: 'ABCDEF',
       config: defaultRulesConfig(),
       pin: '1234',
+      game: 0,
     }),
   );
   server.send(

@@ -17,9 +17,14 @@ export const RECONNECT_BASE_MS = 500;
 export const RECONNECT_MAX_MS = 15_000;
 /** Each retry delay is scaled by a random factor within this fraction either way. */
 export const RECONNECT_JITTER = 0.2;
+/**
+ * How long connections must keep failing while the device is online before the server counts as
+ * unavailable.
+ */
+export const SERVER_UNAVAILABLE_AFTER_MS = 180_000;
 
-/** Why a manager has stopped reconnecting: game over, rejection, or a closing error code. */
-export type StopReason = 'game_over' | 'rejected' | ClosingErrorCode;
+/** Why a manager has stopped reconnecting: rejection, or a closing error code. */
+export type StopReason = 'rejected' | ClosingErrorCode;
 
 export type ConnectionPhase = 'online' | 'connecting' | 'offline' | 'hidden';
 
@@ -30,6 +35,11 @@ export interface ConnectionState {
   /** When the next retry is due, by the manager's clock; null when none is scheduled. */
   nextRetryAt: number | null;
   stopReason: StopReason | null;
+  /**
+   * Set once connections have failed for `SERVER_UNAVAILABLE_AFTER_MS` while the device was
+   * online, so the referee rather than the network is likely at fault; cleared by the next pong.
+   */
+  serverUnavailable: boolean;
 }
 
 export interface Timers {
@@ -46,6 +56,8 @@ export interface ConnectionManagerOptions {
   timers?: Timers;
   /** A uniform random number in [0, 1), for retry jitter. */
   random?: () => number;
+  /** Whether the device has a network connection; assumed to when not given. */
+  isOnline?: () => boolean;
 }
 
 interface HostTimers {
@@ -75,9 +87,10 @@ function retryDelay(failures: number, random: () => number): number {
  * open it is pinged and must answer within `PONG_TIMEOUT_MS`, and after that it is pinged every
  * `PING_INTERVAL_MS` and must answer before the next ping.
  *
- * Reconnecting stops at game over, on rejection, or after a closing error code, and `stopReason`
- * says which. Calling `start` after `stop` clears `stopReason` and connects again, so the same
- * manager can serve a fresh attempt such as joining as a new player.
+ * The connection is kept through game over, so that a rematch can start. Reconnecting stops on
+ * rejection or after a closing error code, and `stopReason` says which. Calling `start` after
+ * `stop` clears `stopReason` and connects again, so the same manager can serve a fresh attempt
+ * such as joining as a new player.
  */
 export class ConnectionManager {
   private readonly store: Writable<ConnectionState>;
@@ -86,7 +99,10 @@ export class ConnectionManager {
   private readonly lifecycle: Lifecycle;
   private readonly timers: Timers;
   private readonly random: () => number;
+  private readonly isOnline: () => boolean;
   private running = false;
+  /** When connections began failing while the device was online; null while they are not. */
+  private failingSince: number | null = null;
   private subscriptions: Array<() => void> = [];
   private transport: Transport | undefined;
   private offTransportClose: (() => void) | undefined;
@@ -107,11 +123,13 @@ export class ConnectionManager {
     this.lifecycle = opts.lifecycle;
     this.timers = opts.timers ?? systemTimers;
     this.random = opts.random ?? Math.random;
+    this.isOnline = opts.isOnline ?? (() => true);
     this.store = writable<ConnectionState>({
       phase: 'offline',
       attempt: 0,
       nextRetryAt: null,
       stopReason: null,
+      serverUnavailable: false,
     });
   }
 
@@ -148,7 +166,8 @@ export class ConnectionManager {
     this.subscriptions = [];
     this.clearTimers();
     this.dropTransport();
-    this.patch({ phase: 'offline', attempt: 0, nextRetryAt: null });
+    this.failingSince = null;
+    this.patch({ phase: 'offline', attempt: 0, nextRetryAt: null, serverUnavailable: false });
   }
 
   private patch(patch: Partial<ConnectionState>): void {
@@ -158,6 +177,8 @@ export class ConnectionManager {
   private hide(): void {
     this.clearTimers();
     this.dropTransport();
+    // Time in the background is not spent reconnecting, so it does not count as failing.
+    this.failingSince = null;
     this.patch({ phase: 'hidden', attempt: 0, nextRetryAt: null });
   }
 
@@ -243,7 +264,28 @@ export class ConnectionManager {
       this.retryTimer = undefined;
       this.connect(failures);
     }, delay);
-    this.patch({ phase: 'offline', attempt: failures, nextRetryAt: this.timers.now() + delay });
+    const now = this.timers.now();
+    this.patch({
+      phase: 'offline',
+      attempt: failures,
+      nextRetryAt: now + delay,
+      serverUnavailable: this.failedTooLong(now),
+    });
+  }
+
+  /**
+   * Records a failed connection, returning whether connections have now failed for too long while
+   * the device was online.
+   */
+  private failedTooLong(now: number): boolean {
+    if (!this.isOnline()) {
+      this.failingSince = null;
+      return false;
+    }
+    this.failingSince ??= now;
+    return (
+      this.store.get().serverUnavailable || now - this.failingSince >= SERVER_UNAVAILABLE_AFTER_MS
+    );
   }
 
   private observe(state: GameClientState): void {
@@ -264,7 +306,8 @@ export class ConnectionManager {
     if (this.transport === undefined) return;
     if (ponged) {
       this.pongSincePing = true;
-      this.patch({ phase: 'online', attempt: 0, nextRetryAt: null });
+      this.failingSince = null;
+      this.patch({ phase: 'online', attempt: 0, nextRetryAt: null, serverUnavailable: false });
       return;
     }
     const answered =
@@ -277,7 +320,6 @@ export class ConnectionManager {
     newError: boolean,
     newlyRejected: boolean,
   ): StopReason | null {
-    if (state.status === 'game_over') return 'game_over';
     if (newError && isClosingErrorCode(state.lastError)) return state.lastError;
     if (newlyRejected) return 'rejected';
     return null;

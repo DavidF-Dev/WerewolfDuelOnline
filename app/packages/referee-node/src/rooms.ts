@@ -1,11 +1,19 @@
 import type { CreateRoomRequest, ErrorCode } from '@wwd/protocol';
-import { Room, type Clock, type ConnId, type Outbound, type Random } from '@wwd/referee-core';
+import {
+  InvalidSaveError,
+  Room,
+  type Clock,
+  type ConnId,
+  type Outbound,
+  type Random,
+} from '@wwd/referee-core';
 import {
   CLOSE,
   LIMITS,
   createRequestedRoom,
   errorReason as reason,
   isExpired,
+  type CreateResult,
   type RoomStore,
 } from '@wwd/referee-service';
 import type { Connection } from './connection.js';
@@ -23,6 +31,8 @@ export interface HostedRoom {
   readonly room: Room;
   readonly connections: Map<ConnId, Connection>;
   timer: ReturnType<typeof setTimeout> | undefined;
+  /** Unloads the room once it has had no connections for the idle time. */
+  idleTimer: ReturnType<typeof setTimeout> | undefined;
   /** The room revision last queued for writing. */
   savedRevision: number;
 }
@@ -34,7 +44,12 @@ export interface RoomRegistryDeps {
   logger: Logger;
   /** Whether rooms honour the `test` options of their creation request. */
   testOverrides: boolean;
+  /** Defaults to `IDLE_UNLOAD_MS`. */
+  idleUnloadMs?: number;
 }
+
+/** How long a room with no connections stays in memory before it is written out and dropped. */
+export const IDLE_UNLOAD_MS = 600_000;
 
 const HOUR_MS = 3_600_000;
 // The longest delay `setTimeout` accepts; a later deadline is simply rechecked when it fires.
@@ -56,13 +71,19 @@ export class RoomRegistry implements RoomStore {
 
   constructor(private readonly deps: RoomRegistryDeps) {}
 
-  async create(code: string, req: CreateRoomRequest): Promise<'created' | 'collision'> {
+  async create(code: string, req: CreateRoomRequest): Promise<CreateResult> {
     if (this.rooms.has(code) || this.creating.has(code)) return 'collision';
     this.creating.add(code);
     try {
       if (await this.deps.files.exists(code)) return 'collision';
       const { clock, random, testOverrides } = this.deps;
-      const room = createRequestedRoom(code, req, { clock, random }, testOverrides);
+      let room: Room;
+      try {
+        room = createRequestedRoom(code, req, { clock, random }, testOverrides);
+      } catch (thrown) {
+        if (thrown instanceof InvalidSaveError) return 'invalid_save';
+        throw thrown;
+      }
       try {
         await this.deps.files.write(code, room.snapshot());
       } catch (thrown) {
@@ -111,11 +132,19 @@ export class RoomRegistry implements RoomStore {
     this.afterChange(hosted, out);
   }
 
+  /** Records a newly accepted connection, which keeps its room in memory. */
+  connected(hosted: HostedRoom, conn: Connection): void {
+    hosted.connections.set(conn.id, conn);
+    clearTimeout(hosted.idleTimer);
+    hosted.idleTimer = undefined;
+  }
+
   /** Forgets a connection that has ended; later calls for the same connection do nothing. */
   disconnect(hosted: HostedRoom, conn: Connection): void {
     conn.release();
     if (!hosted.connections.delete(conn.id) || !this.isLive(hosted)) return;
     this.afterChange(hosted, hosted.room.disconnect(conn.id));
+    if (this.isLive(hosted) && hosted.connections.size === 0) this.startIdle(hosted);
   }
 
   /** Deletes expired rooms, live or only on disk, and stale leftover files; never overlaps itself. */
@@ -131,6 +160,7 @@ export class RoomRegistry implements RoomStore {
     this.closing = true;
     for (const hosted of this.rooms.values()) {
       clearTimeout(hosted.timer);
+      clearTimeout(hosted.idleTimer);
       for (const conn of hosted.connections.values()) conn.end(CLOSE.GOING_AWAY);
     }
     await Promise.allSettled([...this.loading.values(), this.sweeping]);
@@ -145,10 +175,37 @@ export class RoomRegistry implements RoomStore {
       room,
       connections: new Map(),
       timer: undefined,
+      idleTimer: undefined,
       savedRevision: room.revision,
     };
     this.schedule(hosted);
+    this.startIdle(hosted);
     return hosted;
+  }
+
+  private startIdle(hosted: HostedRoom): void {
+    clearTimeout(hosted.idleTimer);
+    hosted.idleTimer = setTimeout(
+      () => void this.unloadIfIdle(hosted),
+      this.deps.idleUnloadMs ?? IDLE_UNLOAD_MS,
+    );
+  }
+
+  /** Writes an idle room's pending changes, then drops it; the next connection reloads it. */
+  private async unloadIfIdle(hosted: HostedRoom): Promise<void> {
+    hosted.idleTimer = undefined;
+    if (!this.isLive(hosted) || hosted.connections.size > 0) return;
+    const code = hosted.room.code;
+    this.queueWrite(hosted);
+    await this.deps.files.settled(code);
+    // A connection may have arrived, or the room changed, while the write ran.
+    if (!this.isLive(hosted) || hosted.connections.size > 0) return;
+    if (hosted.room.revision !== hosted.savedRevision || hosted.room.faulted) {
+      if (!hosted.room.faulted) this.startIdle(hosted);
+      return;
+    }
+    this.drop(hosted, undefined, CLOSE.GOING_AWAY);
+    this.deps.logger.info(`room ${code} unloaded`);
   }
 
   private async load(code: string): Promise<HostedRoom | undefined> {
@@ -253,6 +310,7 @@ export class RoomRegistry implements RoomStore {
   private drop(hosted: HostedRoom, notice: ErrorCode | undefined, closeCode: number): void {
     this.rooms.delete(hosted.room.code);
     clearTimeout(hosted.timer);
+    clearTimeout(hosted.idleTimer);
     for (const conn of [...hosted.connections.values()]) {
       if (notice !== undefined) conn.send({ type: 'error', code: notice });
       conn.end(closeCode);

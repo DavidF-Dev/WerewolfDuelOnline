@@ -1,4 +1,4 @@
-import { EngineError, Game, seedCommitment, verifyReplay } from '@wwd/engine';
+import { EngineError, replayTimeline, seedCommitment } from '@wwd/engine';
 import type { Command, Event, Pending, Replay, RulesConfig, Seat, View } from '@wwd/engine';
 import {
   CLOSING_ERROR_CODES,
@@ -6,6 +6,7 @@ import {
   encode,
   parseServerMessage,
   type ClientMessage,
+  type SaveFile,
   type ServerMessage,
 } from '@wwd/protocol';
 import type { Transport } from '@wwd/transport';
@@ -25,6 +26,20 @@ export interface OpponentState {
   /** Set when someone has just entered a wrong PIN for the opponent's seat. */
   pin_attempt_failed?: boolean;
 }
+
+/** Where the room's pause stands, as the referee last said. */
+export interface PauseState {
+  /** The seat that asked for a pause after the current round, or null when none is asked for. */
+  requestedBy: Seat | null;
+  /** Set once the other seat agreed; the pause then applies at the next round boundary. */
+  agreed: boolean;
+  /** Set while the game is paused at a round boundary. */
+  paused: boolean;
+  /** The seats that have asked to resume the paused game. */
+  resumeReady: Seat[];
+}
+
+const NOT_PAUSED: PauseState = { requestedBy: null, agreed: false, paused: false, resumeReady: [] };
 
 /** How a client without a seat token asks for a seat that is already taken. */
 export interface RejoinAttempt {
@@ -47,6 +62,15 @@ export interface GameClientState {
   rejoinDeadline: number | null;
   /** Set while this client's PIN-less rejoin waits for the opponent's approval. */
   rejoinPending: boolean;
+  /** The room's rules, from the referee's welcome; null until it arrives. */
+  config: RulesConfig | null;
+  /** Which of the room's games this client follows, from 0 for its first. */
+  game: number;
+  pause: PauseState;
+  /** The save the referee sent when the game paused; null while it is not paused. */
+  save: SaveFile | null;
+  /** The seats that have asked for a rematch of the finished game. */
+  rematchReady: Seat[];
   view: View | null;
   legal: Command[];
   pending: Pending | null;
@@ -72,6 +96,8 @@ export interface GameClientOptions {
   seatToken?: string;
   /** Sent instead of a token-less `hello` until a seat is granted. */
   rejoin?: RejoinAttempt;
+  /** The seat a token-less `hello` asks for, which only a room created from a save honours. */
+  seat?: Seat;
   /** The clock for `lastPongAt`; defaults to `Date.now`. */
   now?: () => number;
 }
@@ -96,12 +122,23 @@ function canonical(value: unknown): string {
   });
 }
 
+/** The game start or segment start announced by `event`, if it is one. */
+function announcedStart(event: Event): { commitment: string; config?: RulesConfig } | null {
+  const { kind } = event;
+  if ('game_started' in kind) {
+    return { commitment: kind.game_started.seed_commitment, config: kind.game_started.config };
+  }
+  if ('segment_started' in kind) return { commitment: kind.segment_started.seed_commitment };
+  return null;
+}
+
 /** Mirrors one seat's side of a game hosted by a referee. */
 export class GameClient {
   private readonly store;
   private transport: Transport | undefined;
   private detach: Array<() => void> = [];
-  private start: { commitment: string; config: RulesConfig } | null = null;
+  // Set by the game's first announcement; a later one would let the commitment be swapped.
+  private gameStarted = false;
   private readonly now: () => number;
   // Set once a lost binding has been answered with a fresh hello, so repeated refusals cannot loop.
   private rehelloed = false;
@@ -120,6 +157,11 @@ export class GameClient {
       rejoinRequested: false,
       rejoinDeadline: null,
       rejoinPending: false,
+      config: null,
+      game: 0,
+      pause: NOT_PAUSED,
+      save: null,
+      rematchReady: [],
       view: null,
       legal: [],
       pending: null,
@@ -160,6 +202,9 @@ export class GameClient {
       rejoinRequested: false,
       rejoinDeadline: null,
       rejoinPending: false,
+      // Readiness belongs to a connection, so a new one must ask again.
+      pause: { ...this.current.pause, resumeReady: [] },
+      rematchReady: [],
     });
     this.sendHello(transport);
   }
@@ -206,6 +251,31 @@ export class GameClient {
     this.sendNow({ type: 'command', cmd: 'resign' });
   }
 
+  /** Asks for a pause once the current round ends. */
+  requestPause(): void {
+    this.sendNow({ type: 'pause_request' });
+  }
+
+  /** Withdraws this seat's pause request, or its agreement to the opponent's. */
+  cancelPause(): void {
+    this.sendNow({ type: 'pause_cancel' });
+  }
+
+  /** Agrees to the opponent's pause request. */
+  acceptPause(): void {
+    this.sendNow({ type: 'pause_accept' });
+  }
+
+  /** Asks to resume the paused game; it resumes once both seats have asked. */
+  requestResume(): void {
+    this.sendNow({ type: 'resume_request' });
+  }
+
+  /** Asks for a rematch of the finished game; it starts once both seats have asked. */
+  requestRematch(): void {
+    this.sendNow({ type: 'rematch_request' });
+  }
+
   private sendNow(msg: ClientMessage): void {
     if (this.transport === undefined || !this.transport.open) {
       throw new Error('not connected');
@@ -247,6 +317,7 @@ export class GameClient {
         protocol_version: PROTOCOL_VERSION,
         room: this.opts.room,
         ...(seatToken === null ? {} : { seat_token: seatToken, last_seq: lastSeq }),
+        ...(seatToken === null && this.opts.seat !== undefined ? { seat: this.opts.seat } : {}),
         ...(this.opts.name === undefined ? {} : { name: this.opts.name }),
       }),
     );
@@ -286,27 +357,55 @@ export class GameClient {
     const lostBinding = msg.type === 'error' && msg.code === 'not_joined';
     if (!lostBinding) this.rehelloed = false;
     switch (msg.type) {
-      case 'welcome':
+      case 'welcome': {
         // The new token supersedes any rejoin, so a later reconnect resumes by token.
         this.rejoin = null;
+        const sameGame = msg.game === this.current.game;
+        this.followGame(msg.game);
         this.update({
           seat: msg.seat,
           seatToken: msg.seat_token,
           pin: msg.pin,
+          config: msg.config,
           rejoinPending: false,
-          // A resumed game keeps connecting until its events arrive.
-          ...(this.current.status === 'connecting' && this.current.view === null
+          // A resumed game, or the next game of the room, keeps connecting until its events arrive.
+          ...(sameGame && this.current.status === 'connecting' && this.current.view === null
             ? { status: 'waiting' as const }
             : {}),
         });
         break;
+      }
       case 'waiting':
         if (this.current.status === 'connecting' && this.current.view === null) {
           this.update({ status: 'waiting' });
         }
         break;
       case 'events':
+        this.followGame(msg.game);
         this.mergeEvents(msg);
+        break;
+      case 'pause_status': {
+        const { requested_by: requestedBy, agreed } = msg;
+        // Only the end of a pause clears the request, so a cleared request ends any pause.
+        this.update(
+          requestedBy === null
+            ? { pause: NOT_PAUSED, save: null }
+            : { pause: { ...this.current.pause, requestedBy, agreed } },
+        );
+        break;
+      }
+      case 'paused':
+        this.update({
+          pause: { ...this.current.pause, paused: true, resumeReady: [] },
+          save: msg.save,
+          legal: [],
+        });
+        break;
+      case 'resume_status':
+        this.update({ pause: { ...this.current.pause, resumeReady: msg.ready } });
+        break;
+      case 'rematch_status':
+        this.update({ rematchReady: msg.ready });
         break;
       case 'opponent_status': {
         const { type: _type, grace_remaining_ms: remaining, ...opponent } = msg;
@@ -353,28 +452,33 @@ export class GameClient {
   private mergeEvents(msg: Extract<ServerMessage, { type: 'events' }>): void {
     const bySeq = new Map(this.current.events);
     let violation = false;
+    let resumed = false;
     for (const [seq, event] of msg.events) {
       if (bySeq.has(seq)) continue;
       if ('game_started' in event.kind) {
-        // Only the first announcement counts; a later one would let the commitment be swapped.
-        if (this.start !== null) {
+        if (this.gameStarted) {
           violation = true;
           continue;
         }
-        const { seed_commitment, config } = event.kind.game_started;
-        this.start = { commitment: seed_commitment, config };
+        this.gameStarted = true;
       }
+      // A new segment starts only when a paused game resumes.
+      if ('segment_started' in event.kind) resumed = true;
       bySeq.set(seq, event);
     }
     const events = [...bySeq].sort(([a], [b]) => a - b);
     const highest = events.at(-1)?.[0];
     const { status } = this.current;
     const settled = status === 'game_over' || status === 'rejected';
+    const pause = resumed ? { ...this.current.pause, paused: false, resumeReady: [] } : null;
+    const paused = (pause ?? this.current.pause).paused;
     this.update({
+      ...(pause === null ? {} : { pause, save: null }),
       events,
       lastSeq: highest === undefined ? 0 : highest + 1,
       view: msg.view,
-      legal: settled ? [] : msg.legal,
+      // A paused room refuses every command, so it offers none.
+      legal: settled || paused ? [] : msg.legal,
       pending: msg.pending,
       status: settled ? status : 'playing',
       // A fresh events message supersedes any earlier problem.
@@ -396,26 +500,63 @@ export class GameClient {
     });
   }
 
-  /** Returns why the replay cannot be trusted, or null when it matches everything this client saw. */
+  /** Forgets the game this client followed once the room has moved on to `game`. */
+  private followGame(game: number): void {
+    const current = this.current;
+    if (game === current.game) return;
+    this.gameStarted = false;
+    this.update({
+      game,
+      events: [],
+      lastSeq: 0,
+      replay: null,
+      replayVerified: null,
+      pause: NOT_PAUSED,
+      save: null,
+      rematchReady: [],
+      view: null,
+      legal: [],
+      pending: null,
+      ...(current.status === 'game_over' ? { status: 'connecting' as const } : {}),
+    });
+  }
+
+  /**
+   * Returns why the replay cannot be trusted, or null when it matches everything this client saw.
+   *
+   * Each segment start this client received must announce the commitment of that segment's seed,
+   * and the events rebuilt from the replay must end with exactly the events received. A client
+   * that joined a game continued from a save first hears of it at a segment start, so it cannot
+   * check the segments before that one; the referee verified them when the room was created.
+   */
   private check(replay: Replay): string | null {
-    const { start, current } = this;
-    if (start === null) return 'commitment_mismatch';
-    let game: Game | undefined;
+    const { current } = this;
+    const received = current.events.map(([, event]) => event);
+    const starts = received
+      .map(announcedStart)
+      .filter((start): start is NonNullable<typeof start> => start !== null);
+    const first = received[0];
+    if (first === undefined || announcedStart(first) === null) return 'commitment_mismatch';
+    if (current.seat === null) return 'replay_mismatch';
     try {
-      verifyReplay(replay);
-      const seed = replay.segments[0]?.seed;
-      if (seed === undefined || seedCommitment(seed) !== start.commitment) {
-        return 'commitment_mismatch';
+      const segments = replay.segments.slice(replay.segments.length - starts.length);
+      if (segments.length !== starts.length) return 'commitment_mismatch';
+      for (const [k, segment] of segments.entries()) {
+        if (seedCommitment(segment.seed) !== starts[k]?.commitment) return 'commitment_mismatch';
       }
-      if (canonical(replay.config) !== canonical(start.config)) return 'replay_mismatch';
-      if (current.seat === null) return 'replay_mismatch';
-      game = Game.fromReplay(replay);
-      const replayed = game.eventsSince(0, { seat: current.seat });
-      return canonical(replayed) === canonical(current.events) ? null : 'replay_mismatch';
+      const announced = starts[0]?.config ?? current.config;
+      if (canonical(replay.config) !== canonical(announced)) return 'replay_mismatch';
+      const rebuilt = replayTimeline(replay, { seat: current.seat }).flatMap((step) => step.events);
+      // A client that saw the game start must have received every event of it.
+      if ('game_started' in first.kind && rebuilt.length !== received.length) {
+        return 'replay_mismatch';
+      }
+      const tail = rebuilt.slice(rebuilt.length - received.length);
+      return rebuilt.length >= received.length && canonical(tail) === canonical(received)
+        ? null
+        : 'replay_mismatch';
     } catch (thrown) {
       return thrown instanceof EngineError ? thrown.id : 'error-invalid-input';
-    } finally {
-      game?.dispose();
     }
   }
 }

@@ -10,3 +10,8 @@ pub fn hash_bytes<T: Serialize>(value: &T) -> [u8; 32] {
         postcard::to_stdvec(value).expect("postcard serialisation of engine types is infallible");
     blake3::hash(&bytes).into()
 }
+
+/// BLAKE3 of the UTF-8 bytes of `text`.
+pub fn content_hash(text: &str) -> [u8; 32] {
+    blake3::hash(text.as_bytes()).into()
+}

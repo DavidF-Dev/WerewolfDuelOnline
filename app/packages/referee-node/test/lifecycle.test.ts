@@ -5,6 +5,7 @@ import { defaultRulesConfig, verifyReplay } from '@wwd/engine';
 import { loadEngineForNode } from '@wwd/engine/test-support';
 import { encode } from '@wwd/protocol';
 import { Room } from '@wwd/referee-core';
+import { FileStore } from '../src/file-store.js';
 import { LIMITS } from '@wwd/referee-service';
 import {
   Client,
@@ -100,6 +101,81 @@ describe('referee-node lifecycle', () => {
     await play([b0, b1], rng);
     const replay = b0.ofType('game_over')[0]!.replay;
     expect(() => verifyReplay(replay)).not.toThrow();
+  });
+
+  it('idle room unloads and reloads', async () => {
+    const clock = advancingClock();
+    const lines: string[] = [];
+    const logger = {
+      info: (m: string) => lines.push(m),
+      warn: () => {},
+      error: () => {},
+    };
+    const s = await server({ clock, logger, idleUnloadMs: 500 });
+    const code = await createRoom(s);
+    const [p0, p1] = await joinBoth(s, code);
+    clients.push(p0, p1);
+    await play([p0, p1], new Xorshift(9), 6);
+    const seen = [p0.nextSeq(), p1.nextSeq()];
+
+    // A room with a connection stays loaded however long it idles.
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    expect(lines).not.toContain(`room ${code} unloaded`);
+
+    p0.close();
+    p1.close();
+    await until(() => lines.includes(`room ${code} unloaded`), 10_000);
+    expect(entriesIn(await readSnapshot(s, code))).toBe(6);
+
+    const again = await open(s, code);
+    again.hello(code, p0.token(), seen[0]);
+    await until(() => again.latest() !== undefined);
+    expect(lines).toContain(`room ${code} restored`);
+    expect(again.latest()!.from_seq).toBe(seen[0]);
+    expect(again.ofType('welcome')[0]!.seat).toBe(p0.ofType('welcome')[0]!.seat);
+  });
+
+  it('a connection arriving before the idle time keeps the room loaded', async () => {
+    const lines: string[] = [];
+    const logger = { info: (m: string) => lines.push(m), warn: () => {}, error: () => {} };
+    const s = await server({ logger, idleUnloadMs: 500 });
+    const code = await createRoom(s);
+    const c = await open(s, code);
+    c.hello(code);
+    await until(() => c.ofType('welcome').length > 0);
+    await new Promise((resolve) => setTimeout(resolve, 800));
+    expect(lines).not.toContain(`room ${code} unloaded`);
+  });
+
+  it('an idle room whose revision changes during the unload write is unloaded later', async () => {
+    const lines: string[] = [];
+    const logger = { info: (m: string) => lines.push(m), warn: () => {}, error: () => {} };
+    const s = await server({ logger, idleUnloadMs: 300 });
+    const code = await createRoom(s);
+    const c = await open(s, code);
+    c.hello(code);
+    await until(() => c.ofType('welcome').length > 0);
+
+    let bump = 0;
+    const revision = Object.getOwnPropertyDescriptor(Room.prototype, 'revision')!.get!;
+    vi.spyOn(Room.prototype, 'revision', 'get').mockImplementation(function (this: Room) {
+      return revision.call(this) + bump;
+    });
+    const settled = FileStore.prototype.settled;
+    let armed = true;
+    vi.spyOn(FileStore.prototype, 'settled').mockImplementation(async function (
+      this: FileStore,
+      c,
+    ) {
+      await settled.call(this, c);
+      if (armed) {
+        armed = false;
+        bump = 1;
+      }
+    });
+    c.close();
+    await until(() => lines.includes(`room ${code} unloaded`), 10_000);
+    expect(armed).toBe(false);
   });
 
   it('treats a corrupt room file as missing', async () => {

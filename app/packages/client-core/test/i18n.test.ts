@@ -26,10 +26,33 @@ const GAME_TERMS = new Set([
   'Witch',
   'Beauty',
   'Villager',
+  'Human',
+  'Humans',
+  'Werewolf',
+  'Werewolves',
 ]);
 
 /** Acronyms, which keep their capitals in sentence case. */
 const ACRONYMS = new Set(['PIN', 'PINs']);
+
+/** The capitalised words in a UI string that sentence case does not allow. */
+function sentenceCaseProblems(value: string): string[] {
+  // A value may open with a placeholder, such as a number.
+  if (!/^(\p{Lu}|\{ \$)/u.test(value)) return [value];
+  // Placeables hold Fluent syntax; text in curly quotes is another product's label, as printed.
+  const words = value
+    .replace(/\{[^{}]*\}/g, '{}')
+    .replace(/“[^”]*”/gu, '“label”')
+    .split(/\s+/);
+  const problems: string[] = [];
+  for (const [i, word] of words.entries()) {
+    // The first word of each sentence, or of a quoted label, is capitalised.
+    if (i === 0 || /[.?!]$/.test(words[i - 1]!) || /^["“]/u.test(word)) continue;
+    const bare = word.replace(/^[^\p{L}]+|[^\p{L}]+$/gu, '');
+    if (/^\p{Lu}/u.test(bare) && !GAME_TERMS.has(bare) && !ACRONYMS.has(bare)) problems.push(bare);
+  }
+  return problems;
+}
 
 const COMMITMENT = '07'.repeat(32);
 const ev = (kind: EventKind): Event => ({ visibility: 'public', kind });
@@ -250,6 +273,14 @@ const GOLDEN: Golden[] = [
       'Player 2 wins by collecting enough Crosses.',
     ],
   },
+  {
+    event: { segment_started: { round: 3, seed_commitment: COMMITMENT } },
+    text: [
+      'The game resumes in round 3.',
+      'The game resumes in round 3.',
+      'The game resumes in round 3.',
+    ],
+  },
 ];
 
 /** One event per distinct kind and shape, gathered from several finished games. */
@@ -271,7 +302,7 @@ describe('localiser', () => {
 
   it('covers every event kind in the golden table', () => {
     const kinds = new Set(GOLDEN.map((g) => Object.keys(g.event)[0]));
-    expect(kinds.size).toBe(18);
+    expect(kinds.size).toBe(19);
   });
 
   for (const golden of GOLDEN) {
@@ -306,19 +337,15 @@ describe('localiser', () => {
       .map((line) => /^[a-z][a-z0-9-]*\s*=\s*(.+)$/.exec(line)?.[1])
       .filter((value): value is string => value !== undefined);
     expect(values.length).toBeGreaterThan(0);
-    for (const value of values) {
-      // A value may open with a placeholder, such as a number.
-      expect(value, value).toMatch(/^(\p{Lu}|\{ \$)/u);
-      // Placeables hold Fluent syntax, not words.
-      const words = value.replace(/\{[^{}]*\}/g, '{}').split(/\s+/);
-      for (const [i, word] of words.entries()) {
-        // The first word of each sentence, or of a quoted label, is capitalised.
-        if (i === 0 || /[.?!]$/.test(words[i - 1]!) || /^["“]/u.test(word)) continue;
-        const bare = word.replace(/^[^\p{L}]+|[^\p{L}]+$/gu, '');
-        if (/^\p{Lu}/u.test(bare)) {
-          expect(GAME_TERMS.has(bare) || ACRONYMS.has(bare), `${value}: ${word}`).toBe(true);
-        }
-      }
-    }
+    for (const value of values) expect(sentenceCaseProblems(value), value).toEqual([]);
+  });
+
+  it('exempts only a third-party label in curly quotes from sentence case', () => {
+    expect(sentenceCaseProblems('Tap the share button, then “Add to Home Screen”.')).toEqual([]);
+    expect(sentenceCaseProblems('Tap the share button, then "Add to Home Screen".')).toEqual([
+      'Home',
+      'Screen',
+    ]);
+    expect(sentenceCaseProblems('Tap “Share” on the Home Screen.')).toEqual(['Home', 'Screen']);
   });
 });

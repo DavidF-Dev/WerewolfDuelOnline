@@ -172,6 +172,7 @@ event-resigned = { $actor ->
         [opponent] Your opponent resigns.
        *[other] { $actorName } resigns.
     }
+event-segment-started = The game resumes in round { $round }.
 event-game-over = { $actor ->
         [you] You win
         [opponent] Your opponent wins

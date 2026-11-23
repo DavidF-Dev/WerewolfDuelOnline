@@ -6,16 +6,28 @@ export type Route =
   | { name: 'local-host' }
   | { name: 'local-join' }
   | { name: 'online-new' }
+  | { name: 'settings' }
+  | { name: 'about' }
+  | { name: 'how-to-play' }
+  | { name: 'history' }
+  | { name: 'stats' }
+  /** `id` is a history record's id, decoded. */
+  | { name: 'replay'; id: string }
   /** `code` and `server` are as written in the address, not yet checked. */
-  | { name: 'join'; code?: string; server?: string }
+  | { name: 'join'; code?: string; server?: string; seat?: Seat }
   | { name: 'rejoin'; code?: string; seat?: Seat; server?: string };
 
 export type RouteName = Route['name'];
 
-const STATIC: Readonly<Record<string, RouteName>> = {
+const STATIC: Readonly<Record<string, Exclude<RouteName, 'replay'>>> = {
   '#/local/host': 'local-host',
   '#/local/join': 'local-join',
   '#/online/new': 'online-new',
+  '#/settings': 'settings',
+  '#/about': 'about',
+  '#/how-to-play': 'how-to-play',
+  '#/history': 'history',
+  '#/stats': 'stats',
   '#/join': 'join',
   '#/rejoin': 'rejoin',
 };
@@ -25,11 +37,18 @@ const PATHS: Readonly<Record<RouteName, string>> = {
   'local-host': '#/local/host',
   'local-join': '#/local/join',
   'online-new': '#/online/new',
+  settings: '#/settings',
+  about: '#/about',
+  'how-to-play': '#/how-to-play',
+  history: '#/history',
+  stats: '#/stats',
+  replay: '#/history',
   join: '#/join',
   rejoin: '#/rejoin',
 };
 
 const JOIN_WITH_CODE = /^#\/join\/([^/]+)$/;
+const REPLAY_WITH_ID = /^#\/history\/([^/]+)$/;
 
 /** Reads a route from `hash`, such as `#/join/K7Q2MX?server=…`; anything unknown is home. */
 export function routeFor(hash: string): Route {
@@ -38,19 +57,23 @@ export function routeFor(hash: string): Route {
   const params = new URLSearchParams(mark === -1 ? '' : hash.slice(mark + 1));
   const server = params.get('server') ?? undefined;
   const withServer = server === undefined ? {} : { server };
+  const seat = params.get('seat');
+  const withSeat: { seat?: Seat } = seat === 'p0' || seat === 'p1' ? { seat } : {};
   const joinCode = JOIN_WITH_CODE.exec(path)?.[1];
-  if (joinCode !== undefined) return { name: 'join', code: joinCode, ...withServer };
+  if (joinCode !== undefined) return { name: 'join', code: joinCode, ...withServer, ...withSeat };
+  const replayId = REPLAY_WITH_ID.exec(path)?.[1];
+  if (replayId !== undefined) {
+    try {
+      return { name: 'replay', id: decodeURIComponent(replayId) };
+    } catch {
+      return { name: 'history' };
+    }
+  }
   const name = STATIC[path];
   if (name === 'join') return { name, ...withServer };
   if (name === 'rejoin') {
     const code = params.get('code') ?? undefined;
-    const seat = params.get('seat');
-    return {
-      name,
-      ...(code === undefined ? {} : { code }),
-      ...(seat === 'p0' || seat === 'p1' ? { seat } : {}),
-      ...withServer,
-    };
+    return { name, ...(code === undefined ? {} : { code }), ...withSeat, ...withServer };
   }
   return { name: name ?? 'home' };
 }
@@ -64,8 +87,23 @@ export const route: Readable<Route> = readable(routeFor(location.hash), (set) =>
   return () => window.removeEventListener('hashchange', update);
 });
 
+/** The address of the replay of history record `id`. */
+export const replayHref = (id: string): string => `#/history/${encodeURIComponent(id)}`;
+
 export const hrefFor = (name: RouteName): string => PATHS[name];
 
 export function navigate(name: RouteName): void {
   location.hash = hrefFor(name);
+}
+
+// Set once the address changes after the page loads, which means there is an earlier screen to go back to.
+let navigatedInApp = false;
+window.addEventListener('hashchange', () => {
+  navigatedInApp = true;
+});
+
+/** Returns to the previous screen, or to home when this page was opened on the current one. */
+export function goBack(): void {
+  if (navigatedInApp) history.back();
+  else navigate('home');
 }

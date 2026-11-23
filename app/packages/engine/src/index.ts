@@ -1,21 +1,29 @@
 // The glue sits in the build output and is addressed from both `src` and `dist`.
 import init, {
   WasmGame,
+  contentHash as wasmContentHash,
+  effectiveInitiative as wasmEffectiveInitiative,
   engineVersion as wasmEngineVersion,
   eventId as wasmEventId,
+  replayTimeline as wasmReplayTimeline,
   seedCommitment as wasmSeedCommitment,
+  showdownOrder as wasmShowdownOrder,
+  validatePlan as wasmValidatePlan,
   verifyReplay as wasmVerifyReplay,
   visibleTo as wasmVisibleTo,
 } from '../dist/wasm/wwd_wasm.js';
 import type {
+  Character,
   Command,
   Event,
   EventKind,
   Pending,
+  Plan,
   Replay,
   RoundBoundary,
   RulesConfig,
   Seat,
+  TimelineStep,
   View,
   Viewer,
 } from './generated/index.js';
@@ -100,6 +108,11 @@ export class Game {
     return new Game(guard(() => WasmGame.fromReplay(replay)));
   }
 
+  /** Continues `prior` from its round boundary in a new segment dealt from `seedHex`. */
+  static resume(boundary: RoundBoundary, prior: Replay, seedHex: string): Game {
+    return new Game(guard(() => WasmGame.resume(boundary, prior, seedHex)));
+  }
+
   apply(seat: Seat, cmd: Command): Event[] {
     return guard(() => this.live().apply(seat, cmd) as Event[]);
   }
@@ -144,6 +157,30 @@ export class Game {
 
 export function verifyReplay(replay: Replay): void {
   guard(() => wasmVerifyReplay(replay));
+}
+
+/** The Fluent ID of the first rule the plan breaks, or `null` if the rules allow it. */
+export function validatePlan(plan: Plan, config: RulesConfig): string | null {
+  return guard(() => wasmValidatePlan(plan, config) ?? null);
+}
+
+export function effectiveInitiative(character: Character, placed: number): number {
+  return guard(() => wasmEffectiveInitiative(character, placed));
+}
+
+/** The seats in showdown order, from the reveal until the next round is dealt. */
+export function showdownOrder(view: View): [Seat, Seat] | null {
+  return guard(() => wasmShowdownOrder(view) as [Seat, Seat] | null);
+}
+
+/** Every step of a verified replay as `viewer` may see it. */
+export function replayTimeline(replay: Replay, viewer: Viewer): TimelineStep[] {
+  return guard(() => wasmReplayTimeline(replay, viewer) as TimelineStep[]);
+}
+
+/** The BLAKE3 hash of the text's UTF-8 bytes, in lowercase hexadecimal. */
+export function contentHash(text: string): string {
+  return guard(() => wasmContentHash(text));
 }
 
 export function seedCommitment(seedHex: string): string {

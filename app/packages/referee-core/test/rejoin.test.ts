@@ -101,7 +101,12 @@ describe('PIN rejoin', () => {
     expect(out.find((o) => o.conn === 'a')?.close).toBe(true);
 
     const mine = to(out, 'c');
-    expect(mine.map((m) => m.type)).toEqual(['welcome', 'events', 'opponent_status']);
+    expect(mine.map((m) => m.type)).toEqual([
+      'welcome',
+      'events',
+      'pause_status',
+      'opponent_status',
+    ]);
     const welcome = welcomeOf(out, 'c');
     expect(welcome.seat).toBe('p0');
     expect(welcome.pin).toBe(pins.p0);
@@ -205,13 +210,45 @@ describe('PIN rejoin', () => {
     expect(s.room.snapshot().pin_locked_until).toEqual([null, null]);
   });
 
+  it('a second lock lasts twice as long and the count survives restore', () => {
+    const s = startedRoom();
+    failPins(s, PIN_MAX_FAILURES + 1);
+    expect(s.room.snapshot().pin_lockouts).toEqual([1, 0]);
+    s.clock.advance(PIN_LOCK_MS);
+    failPins(s, PIN_MAX_FAILURES + 1);
+    const lockedAt = s.clock.now();
+    expect(s.room.snapshot().pin_lockouts).toEqual([2, 0]);
+    expect(s.room.snapshot().pin_locked_until).toEqual([lockedAt + 2 * PIN_LOCK_MS, null]);
+
+    const snapshot = JSON.parse(JSON.stringify(s.room.snapshot())) as RoomSnapshot;
+    const restored = track(Room.restore(snapshot, deps(3)));
+    expect(restored.snapshot().pin_lockouts).toEqual([2, 0]);
+  });
+
+  it('a v3 snapshot without lockout counts restores with none', () => {
+    const s = startedRoom();
+    const snapshot = JSON.parse(JSON.stringify(s.room.snapshot())) as Partial<RoomSnapshot>;
+    delete snapshot.pin_lockouts;
+    const restored = track(Room.restore(snapshot as RoomSnapshot, deps(3)));
+    expect(restored.snapshot().pin_lockouts).toEqual([0, 0]);
+  });
+
+  it('pin rejoin resets the lockout count', () => {
+    const s = startedRoom();
+    failPins(s, PIN_MAX_FAILURES + 1);
+    s.clock.advance(PIN_LOCK_MS);
+    expect(s.room.snapshot().pin_lockouts).toEqual([1, 0]);
+    expect(welcomeOf(s.room.handle('c', rejoin('p0', s.pins.p0)), 'c').seat).toBe('p0');
+    expect(s.room.snapshot().pin_lockouts).toEqual([0, 0]);
+  });
+
   it('rejoins a claimed seat before the game starts', () => {
     const d = deps();
     const room = track(Room.create(ROOM_CODE, defaultRulesConfig(), d));
     const pin = welcomeOf(room.handle('a', hello()), 'a').pin;
     const out = room.handle('c', rejoin('p0', pin));
     expect(to(out, 'a')).toEqual([{ type: 'error', code: 'superseded' }]);
-    expect(to(out, 'c').map((m) => m.type)).toEqual(['welcome', 'waiting']);
+    expect(to(out, 'c').map((m) => m.type)).toEqual(['welcome', 'waiting', 'pause_status']);
   });
 
   it('a rejoin for an unclaimed seat is unavailable', () => {
@@ -272,7 +309,12 @@ describe('rejoin by opponent approval', () => {
 
     clock.advance(1000);
     const out = room.handle('b', approve(true));
-    expect(to(out, 'c').map((m) => m.type)).toEqual(['welcome', 'events', 'opponent_status']);
+    expect(to(out, 'c').map((m) => m.type)).toEqual([
+      'welcome',
+      'events',
+      'pause_status',
+      'opponent_status',
+    ]);
     const welcome = welcomeOf(out, 'c');
     expect(welcome.seat).toBe('p0');
     expect(welcome.pin).toBe(pins.p0);

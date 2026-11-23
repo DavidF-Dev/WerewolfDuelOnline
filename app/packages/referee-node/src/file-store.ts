@@ -1,10 +1,10 @@
 import { randomUUID } from 'node:crypto';
 import { mkdir, readFile, readdir, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import type { RoomSnapshot, RoomSnapshotV1 } from '@wwd/referee-core';
+import type { StoredRoomSnapshot } from '@wwd/referee-core';
 import { JOIN_CODE_PATTERN } from '@wwd/referee-service';
 
-export type StoredSnapshot = RoomSnapshot | RoomSnapshotV1;
+export type StoredSnapshot = StoredRoomSnapshot;
 
 /** Produces the snapshot to write when its turn comes, or `undefined` to write nothing. */
 export type SnapshotSource = () => StoredSnapshot | undefined;
@@ -27,8 +27,30 @@ const TEMP_FILE = /^\.[0-9A-Z]{6}\.[0-9a-f-]+\.tmp$/;
 // Snapshots hold seat tokens and PINs; the rename keeps the temporary file's mode.
 const OWNER_ONLY = 0o600;
 
+/** How many times a rename refused because its target is open is retried, and the first delay. */
+const RENAME_RETRIES = 6;
+const RENAME_RETRY_MS = 10;
+const TARGET_BUSY: ReadonlySet<string> = new Set(['EPERM', 'EACCES', 'EBUSY']);
+
 function isMissing(thrown: unknown): boolean {
   return (thrown as NodeJS.ErrnoException | null)?.code === 'ENOENT';
+}
+
+/**
+ * Renames `from` over `to`, retrying with a doubling delay while the target is busy: Windows
+ * refuses to replace a file that another handle, such as a reader or a virus scanner, has open.
+ */
+async function renameRetrying(from: string, to: string): Promise<void> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      await rename(from, to);
+      return;
+    } catch (thrown) {
+      const code = (thrown as NodeJS.ErrnoException | null)?.code ?? '';
+      if (attempt >= RENAME_RETRIES || !TARGET_BUSY.has(code)) throw thrown;
+      await new Promise((resolve) => setTimeout(resolve, RENAME_RETRY_MS * 2 ** attempt));
+    }
+  }
 }
 
 /**
@@ -196,7 +218,7 @@ export class FileStore {
     const temp = join(this.dir, `.${code}.${randomUUID()}.tmp`);
     try {
       await writeFile(temp, JSON.stringify(snapshot), { mode: OWNER_ONLY });
-      await rename(temp, this.path(code));
+      await renameRetrying(temp, this.path(code));
     } catch (thrown) {
       await rm(temp, { force: true });
       throw thrown;

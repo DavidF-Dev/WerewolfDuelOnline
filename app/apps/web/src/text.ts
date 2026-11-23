@@ -25,6 +25,15 @@ export const cardName = (l: Localiser, c: Character): string =>
     faction: l.t(`faction-${faction(c)}`),
   });
 
+/** A card button's accessible name, e.g. "3, Knight, Human. Gain an Hourglass, …". */
+export const characterLabel = (l: Localiser, c: Character, shownInitiative: number): string =>
+  l.t('card-name', {
+    name: characterName(l, c),
+    initiative: shownInitiative,
+    faction: l.t(`faction-${faction(c)}`),
+    ability: l.t(`card-ability-${c.replaceAll('_', '-')}`),
+  });
+
 export const targetName = (l: Localiser, card: TargetCard): string =>
   card === 'fool' ? l.t('card-fool') : cardName(l, card.character);
 
@@ -129,7 +138,7 @@ export function stopReasonText(
   reason: StopReason | null,
   lastError: string | null,
 ): string | null {
-  if (reason === null || reason === 'game_over') return null;
+  if (reason === null) return null;
   if (reason === 'rejected') return rejectionText(l, lastError, true);
   return l.t(`stop-${reason.replaceAll('_', '-')}`);
 }

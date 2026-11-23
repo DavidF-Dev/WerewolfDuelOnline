@@ -1,5 +1,5 @@
 import { isClosingErrorCode, type ErrorCode } from '@wwd/protocol';
-import type { Random } from './deps.js';
+import type { ConnId, Outbound, Random } from './deps.js';
 
 const JOIN_CODE_ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 const JOIN_CODE_LENGTH = 6;
@@ -46,4 +46,10 @@ export function constantTimeEqual(a: string, b: string): boolean {
 /** True for an error after which the connection is of no further use and should be closed. */
 export function closesConnection(code: ErrorCode): boolean {
   return isClosingErrorCode(code);
+}
+
+/** An error for `conn`, closing it when the error is a closing one. */
+export function errorTo(conn: ConnId, code: ErrorCode): Outbound {
+  const msg = { type: 'error', code } as const;
+  return closesConnection(code) ? { conn, msg, close: true } : { conn, msg };
 }

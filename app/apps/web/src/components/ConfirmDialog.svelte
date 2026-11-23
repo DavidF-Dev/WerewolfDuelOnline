@@ -8,11 +8,28 @@
     cancelLabel: string;
     onConfirm: () => void;
     onCancel: () => void;
+    /** Marks the confirming button as destructive. */
+    danger?: boolean;
+    /** The id of an element holding the full description, when `detail` alone is not enough. */
+    describedBy?: string;
+    /** Decoration shown before the confirming button's label. */
+    confirmIcon?: Snippet;
     /** Extra content shown below the detail. */
     children?: Snippet;
   }
 
-  let { title, detail, confirmLabel, cancelLabel, onConfirm, onCancel, children }: Props = $props();
+  let {
+    title,
+    detail,
+    confirmLabel,
+    cancelLabel,
+    onConfirm,
+    onCancel,
+    danger = false,
+    describedBy,
+    confirmIcon,
+    children,
+  }: Props = $props();
   const uid = $props.id();
   let dialog: HTMLDialogElement | undefined;
   let cancel: HTMLButtonElement | undefined;
@@ -51,7 +68,7 @@
 <dialog
   role="alertdialog"
   aria-labelledby="{uid}-title"
-  aria-describedby={detail === undefined ? undefined : `${uid}-detail`}
+  aria-describedby={describedBy ?? (detail === undefined ? undefined : `${uid}-detail`)}
   data-testid="confirm-dialog"
   bind:this={dialog}
   oncancel={cancelled}
@@ -62,10 +79,18 @@
     <p id="{uid}-detail">{detail}</p>
   {/if}
   {@render children?.()}
-  <button type="button" data-testid="confirm-yes" onclick={() => answer(true)}
-    >{confirmLabel}</button
-  >
+  <button type="button" class={{ danger }} data-testid="confirm-yes" onclick={() => answer(true)}>
+    {@render confirmIcon?.()}{confirmLabel}
+  </button>
   <button type="button" data-testid="confirm-no" bind:this={cancel} onclick={() => answer(false)}
     >{cancelLabel}</button
   >
 </dialog>
+
+<style>
+  .danger {
+    border-color: var(--danger);
+    color: var(--danger);
+    font-weight: 600;
+  }
+</style>

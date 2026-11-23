@@ -232,6 +232,11 @@ reverse proxy that terminates TLS, for example Caddy with `reverse_proxy localho
 node scripts/smoke.mjs https://referee.<your-domain>
 ```
 
+The `docker` job in the `app` workflow builds this image on every push and pull request that changes
+`app/`, `engine/`, `scripts/` or the workflow and its setup action (or when run by hand), starts
+it with `--origins https://example.test` and runs the smoke test against it, so a broken image
+shows up in CI before anyone self-hosts it. It never publishes the image.
+
 The public app creates rooms on its own default referee. To have games created on yours, build
 the web app with `VITE_REFEREE_URL=https://referee.<your-domain>` (plus `BASE_PATH` when it's
 served under a sub-path) and host `app/apps/web/dist` on any static HTTPS host. Players can still

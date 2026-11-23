@@ -4,6 +4,7 @@
   import { copyText } from '../clipboard.js';
   import { groupCode } from '../code.js';
   import { rejoinLink } from '../online.js';
+  import QrCode from './QrCode.svelte';
 
   interface Props {
     localiser: Localiser;
@@ -41,6 +42,8 @@
     >
   </p>
   <p role="status">{feedback}</p>
+  <p>{l.t('continue-qr-hint')}</p>
+  <QrCode {link} testId="rejoin-qr" />
   {#if pin !== null}
     <p>
       <button

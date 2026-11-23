@@ -11,14 +11,12 @@
   let confirming = $state(false);
 </script>
 
-<p>
-  <button
-    type="button"
-    data-testid="resign"
-    aria-haspopup="dialog"
-    onclick={() => (confirming = true)}>{l.t('resign')}</button
-  >
-</p>
+<button
+  type="button"
+  data-testid="resign"
+  aria-haspopup="dialog"
+  onclick={() => (confirming = true)}>{l.t('resign')}</button
+>
 {#if confirming}
   <ConfirmDialog
     title={l.t('resign-confirm')}

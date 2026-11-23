@@ -3,9 +3,10 @@
 use std::collections::BTreeMap;
 
 use crate::{
-    BADGE_HAND_SIZE, Event, EventKind, OTHER_HAND_SIZE, Phase, PlanView, Recorder, Replay,
+    BADGE_HAND_SIZE, Command, Event, EventKind, OTHER_HAND_SIZE, Phase, PlanView, Recorder, Replay,
     RngState, RulesConfig, START_HEALTH, Seat, State, TOTAL_CROSS, TOTAL_FANG, TOTAL_HOURGLASS,
-    View, Viewer, Visibility, WinReason, events_since, legal_actions, pending, verify, view,
+    TimelineStep, View, Viewer, Visibility, WinReason, events_since, legal_actions, pending,
+    verify, view, visible_to,
 };
 
 const MAX_ROUNDS: u32 = 200;
@@ -169,10 +170,14 @@ fn round_start(log: &[Event]) -> usize {
         .unwrap_or(0)
 }
 
-fn check_views(state: &State) -> Result<(), String> {
-    let revealed = state.log[round_start(&state.log)..]
+fn plans_revealed(state: &State) -> bool {
+    state.log[round_start(&state.log)..]
         .iter()
-        .any(|e| matches!(e.kind, EventKind::PlansRevealed { .. }));
+        .any(|e| matches!(e.kind, EventKind::PlansRevealed { .. }))
+}
+
+fn check_views(state: &State) -> Result<(), String> {
+    let revealed = plans_revealed(state);
     for viewer in [
         Viewer::Seat(Seat::P0),
         Viewer::Seat(Seat::P1),
@@ -234,6 +239,33 @@ fn check_view(state: &State, viewer: Viewer, shown: &View, revealed: bool) -> Re
     }
     if shown.pending != pending(state) {
         return Err(format!("{viewer:?} sees a wrong pending"));
+    }
+    Ok(())
+}
+
+/// Checks a replay timeline step given to `viewer` against `state`, the true state after
+/// it: the view must be redacted, and neither the events nor the command may reveal what
+/// the viewer may not see. Returns the first violation.
+pub fn check_timeline_step(
+    state: &State,
+    viewer: Viewer,
+    step: &TimelineStep,
+) -> Result<(), String> {
+    if let Some(event) = step.events.iter().find(|e| !visible_to(e, viewer)) {
+        return Err(format!("{viewer:?} sees a private event {event:?}"));
+    }
+    if viewer == Viewer::Omniscient {
+        return Ok(());
+    }
+    let others_plan = matches!(step.command, Some(Command::SubmitPlan { .. }))
+        && step.seat.is_none_or(|seat| viewer != Viewer::Seat(seat));
+    if others_plan {
+        return Err(format!("{viewer:?} sees another seat's plan command"));
+    }
+    check_view(state, viewer, &step.view, plans_revealed(state))?;
+    let events: Vec<(u32, Event)> = step.events.iter().map(|e| (0, e.clone())).collect();
+    if leaks_discard(state, &step.view, &events) {
+        return Err(format!("{viewer:?} step events name the discard"));
     }
     Ok(())
 }
@@ -407,6 +439,40 @@ mod tests {
             },
         ));
         assert!(leaks_discard(&state, &honest, &events));
+    }
+
+    #[test]
+    fn tampered_timeline_steps_are_reported() {
+        let state = fresh();
+        let me = Viewer::Seat(Seat::P0);
+        let honest = TimelineStep {
+            index: 0,
+            seat: None,
+            command: None,
+            events: events_since(&state, 0, me)
+                .into_iter()
+                .map(|(_, e)| e)
+                .collect(),
+            view: view(&state, me),
+        };
+        assert_eq!(check_timeline_step(&state, me, &honest), Ok(()));
+
+        let mut shown = honest.clone();
+        shown.events = state.log.clone();
+        assert!(check_timeline_step(&state, me, &shown).is_err());
+
+        let opponent = state.player(Seat::P1);
+        let mut shown = honest.clone();
+        shown.seat = Some(Seat::P1);
+        shown.command = Some(Command::SubmitPlan {
+            character: opponent.hand[0],
+            targets: Vec::new(),
+        });
+        assert!(check_timeline_step(&state, me, &shown).is_err());
+
+        let mut shown = honest;
+        shown.view.players[1].hand = Some(opponent.hand.clone());
+        assert!(check_timeline_step(&state, me, &shown).is_err());
     }
 
     #[test]

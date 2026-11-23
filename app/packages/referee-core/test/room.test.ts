@@ -72,8 +72,9 @@ describe('room lifecycle', () => {
   it('first hello gets seat p0 and waiting', () => {
     const { room } = newRoom();
     const out = room.handle('a', hello());
-    expect(out.map((o) => o.conn)).toEqual(['a', 'a']);
-    const [welcome, waiting] = out.map((o) => o.msg);
+    expect(out.map((o) => o.conn)).toEqual(['a', 'a', 'a']);
+    const [welcome, waiting, status] = out.map((o) => o.msg);
+    expect(status).toEqual({ type: 'pause_status', requested_by: null, agreed: false });
     expect(welcome).toMatchObject({ type: 'welcome', seat: 'p0', room: ROOM_CODE });
     expect(welcome?.type === 'welcome' && /^[0-9a-f]{32}$/.test(welcome.seat_token)).toBe(true);
     expect(welcome?.type === 'welcome' && welcome.config).toEqual(defaultRulesConfig());
@@ -88,9 +89,14 @@ describe('room lifecycle', () => {
     const toA = to(out, 'a');
     const toB = to(out, 'b');
     expect(toA.map((m) => m.type)).toEqual(['events', 'opponent_status']);
-    expect(toB.map((m) => m.type)).toEqual(['welcome', 'events', 'opponent_status']);
+    expect(toB.map((m) => m.type)).toEqual([
+      'welcome',
+      'events',
+      'pause_status',
+      'opponent_status',
+    ]);
     expect(toA[1]).toEqual({ type: 'opponent_status', connected: true, name: 'Bo' });
-    expect(toB[2]).toEqual({ type: 'opponent_status', connected: true, name: 'Ada' });
+    expect(toB[3]).toEqual({ type: 'opponent_status', connected: true, name: 'Ada' });
     expect(welcomeOf(toB).seat).toBe('p1');
 
     const eventsA = toA[0] as EventsMessage;
@@ -165,7 +171,7 @@ describe('room lifecycle', () => {
     expect(driver.view('p0').round).toBe(2);
 
     const snapshot = JSON.parse(JSON.stringify(driver.room.snapshot())) as RoomSnapshot;
-    expect(snapshot.version).toBe(2);
+    expect(snapshot.version).toBe(3);
     expect(snapshot.segment_base).toBe(0);
     expect(snapshot.seats[0]).toEqual({ token: tokens.p0, name: 'Ada' });
 
@@ -180,7 +186,12 @@ describe('room lifecycle', () => {
 
     const next = new Driver(restored, restoredDeps.clock, 'c', 'd');
     const outC = next.send('c', hello({ seat_token: tokens.p0, last_seq: 0 }));
-    expect(to(outC, 'c').map((m) => m.type)).toEqual(['welcome', 'events', 'opponent_status']);
+    expect(to(outC, 'c').map((m) => m.type)).toEqual([
+      'welcome',
+      'events',
+      'pause_status',
+      'opponent_status',
+    ]);
     expect(welcomeOf(to(outC, 'c'))).toMatchObject({ seat: 'p0', seat_token: tokens.p0 });
     const outD = next.send('d', hello({ seat_token: tokens.p1, last_seq: 0 }));
     expect(to(outD, 'c')).toEqual([{ type: 'opponent_status', connected: true, name: 'Bo' }]);
@@ -279,7 +290,12 @@ describe('room lifecycle', () => {
 
     random.shortSeeds = false;
     const out = room.handle('b', hello());
-    expect(to(out, 'b').map((m) => m.type)).toEqual(['welcome', 'events', 'opponent_status']);
+    expect(to(out, 'b').map((m) => m.type)).toEqual([
+      'welcome',
+      'events',
+      'pause_status',
+      'opponent_status',
+    ]);
     expect(to(out, 'a').map((m) => m.type)).toEqual(['events', 'opponent_status']);
   });
 
@@ -305,7 +321,12 @@ describe('reconnection', () => {
     const out = driver.send('c', hello({ seat_token: tokens.p0, last_seq: lastSeq + 1 }));
     expect(to(out, 'a')).toEqual([{ type: 'error', code: 'superseded' }]);
     const toC = to(out, 'c');
-    expect(toC.map((m) => m.type)).toEqual(['welcome', 'events', 'opponent_status']);
+    expect(toC.map((m) => m.type)).toEqual([
+      'welcome',
+      'events',
+      'pause_status',
+      'opponent_status',
+    ]);
     expect((toC[1] as EventsMessage).from_seq).toBe(lastSeq + 1);
     expect(to(out, 'b')).toEqual([{ type: 'opponent_status', connected: true, name: 'Ada' }]);
 
@@ -352,7 +373,14 @@ describe('reconnection', () => {
     driver.playUntil(() => false);
     const out = driver.send('c', hello({ seat_token: tokens.p1, last_seq: 0 }));
     const types = to(out, 'c').map((m) => m.type);
-    expect(types).toEqual(['welcome', 'events', 'game_over', 'opponent_status']);
+    expect(types).toEqual([
+      'welcome',
+      'events',
+      'game_over',
+      'pause_status',
+      'rematch_status',
+      'opponent_status',
+    ]);
   });
 
   it('an out-of-range last_seq does not crash', () => {
@@ -367,7 +395,7 @@ describe('reconnection', () => {
     const token = welcomeOf(to(room.handle('a', hello()), 'a')).seat_token;
     room.disconnect('a');
     const out = room.handle('c', hello({ seat_token: token }));
-    expect(to(out, 'c').map((m) => m.type)).toEqual(['welcome', 'waiting']);
+    expect(to(out, 'c').map((m) => m.type)).toEqual(['welcome', 'waiting', 'pause_status']);
   });
 });
 
@@ -383,7 +411,7 @@ describe('rejections', () => {
     expect(driver.room.handle('c', hello({ room: 'AAAAAA' }))).toEqual([
       { conn: 'c', msg: { type: 'error', code: 'unknown_room' }, close: true },
     ]);
-    expect(driver.room.handle('c', hello({ protocol_version: 2 }))).toEqual([
+    expect(driver.room.handle('c', hello({ protocol_version: 1 }))).toEqual([
       { conn: 'c', msg: { type: 'error', code: 'protocol_version' }, close: true },
     ]);
   });

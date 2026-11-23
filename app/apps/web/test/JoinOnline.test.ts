@@ -4,9 +4,11 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createLocaliser } from '@wwd/client-core';
 import { PROTOCOL_VERSION } from '@wwd/protocol';
 import JoinOnline from '../src/screens/JoinOnline.svelte';
-import { loadOnlineSession, saveOnlineSession } from '../src/session.js';
+import { loadOnlineSession, resetSessions, saveOnlineSession } from '../src/session.js';
 import { defaultRulesConfig } from '@wwd/engine';
 import { DEFAULT_SERVER } from '../src/online.js';
+import { resetDeviceStore, setDeviceStore } from '../src/device-store.js';
+import { openDeviceStore, type DeviceStore } from '../src/storage/db.js';
 import { FakeWebSocket } from './fake-socket.js';
 
 const localiser = createLocaliser('en');
@@ -19,7 +21,7 @@ beforeEach(() => {
 
 afterEach(() => {
   vi.unstubAllGlobals();
-  localStorage.clear();
+  resetSessions();
   location.hash = '';
 });
 
@@ -28,6 +30,55 @@ const socket = (): FakeWebSocket => {
   if (latest === undefined) throw new Error('no socket was opened');
   return latest;
 };
+
+describe('JoinOnline display name', () => {
+  let store: DeviceStore;
+
+  beforeEach(async () => {
+    store = await openDeviceStore();
+    await store.clearAll();
+    setDeviceStore(store);
+  });
+
+  afterEach(() => resetDeviceStore());
+
+  it('first join asks for a display name once', async () => {
+    const user = userEvent.setup();
+    const first = render(JoinOnline, { props: { localiser, code: 'K7Q2MX' } });
+    const field = await screen.findByLabelText('Your name');
+    expect(field.getAttribute('maxlength')).toBe('24');
+    await new Promise((resolve) => setTimeout(resolve, 20));
+    expect(FakeWebSocket.instances).toHaveLength(0);
+
+    await user.type(field, ' Ada ');
+    await user.click(screen.getByRole('button', { name: 'Continue' }));
+    await waitFor(() => expect(FakeWebSocket.instances).toHaveLength(1));
+    socket().accept();
+    expect(socket().messages()[0]).toEqual({
+      type: 'hello',
+      protocol_version: PROTOCOL_VERSION,
+      room: 'K7Q2MX',
+      name: 'Ada',
+    });
+    expect((await store.identity.get()).displayName).toBe('Ada');
+    first.unmount();
+
+    render(JoinOnline, { props: { localiser, code: 'K7Q2MX' } });
+    await waitFor(() => expect(FakeWebSocket.instances).toHaveLength(2));
+    expect(screen.queryByLabelText('Your name')).toBeNull();
+    socket().accept();
+    expect(socket().messages()[0]).toMatchObject({ name: 'Ada' });
+  });
+
+  it('joins without a name when the player skips the question', async () => {
+    render(JoinOnline, { props: { localiser, code: 'K7Q2MX' } });
+    await userEvent.setup().click(await screen.findByRole('button', { name: 'Skip' }));
+    await waitFor(() => expect(FakeWebSocket.instances).toHaveLength(1));
+    socket().accept();
+    expect(socket().messages()[0]).not.toHaveProperty('name');
+    expect((await store.identity.get()).displayName).toBeUndefined();
+  });
+});
 
 describe('JoinOnline', () => {
   it('joins the room in the link with a fresh hello', async () => {
@@ -94,6 +145,7 @@ describe('JoinOnline', () => {
       room: 'K7Q2MX',
       config: defaultRulesConfig(),
       pin: '1234',
+      game: 0,
     });
     await waitFor(() => expect(loadOnlineSession(other, 'K7Q2MX')?.seatToken).toBe(otherToken));
     expect(loadOnlineSession(DEFAULT_SERVER, 'K7Q2MX')?.seatToken).toBe(TOKEN);

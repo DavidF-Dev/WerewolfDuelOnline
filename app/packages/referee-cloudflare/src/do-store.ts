@@ -1,12 +1,12 @@
 import type { CreateRoomRequest } from '@wwd/protocol';
-import type { RoomStore } from '@wwd/referee-service';
-import { ROOM_URLS, type InitRequest } from './room-object.js';
+import type { CreateResult, RoomStore } from '@wwd/referee-service';
+import { INVALID_SAVE, ROOM_URLS, type InitRequest } from './room-object.js';
 
 /** Rooms kept by one Durable Object each, addressed by join code. */
 export class DurableRoomStore implements RoomStore {
   constructor(private readonly rooms: DurableObjectNamespace) {}
 
-  async create(code: string, request: CreateRoomRequest): Promise<'created' | 'collision'> {
+  async create(code: string, request: CreateRoomRequest): Promise<CreateResult> {
     const body: InitRequest = { code, request };
     const res = await this.stub(code).fetch(ROOM_URLS.init, {
       method: 'POST',
@@ -15,6 +15,7 @@ export class DurableRoomStore implements RoomStore {
     });
     if (res.status === 201) return 'created';
     if (res.status === 409) return 'collision';
+    if (res.status === 400 && (await isInvalidSave(res))) return 'invalid_save';
     throw new Error(`room creation failed with status ${res.status}`);
   }
 
@@ -25,5 +26,14 @@ export class DurableRoomStore implements RoomStore {
 
   private stub(code: string): DurableObjectStub {
     return this.rooms.get(this.rooms.idFromName(code));
+  }
+}
+
+async function isInvalidSave(res: Response): Promise<boolean> {
+  try {
+    const body = (await res.json()) as { error?: unknown };
+    return body.error === INVALID_SAVE;
+  } catch {
+    return false;
   }
 }

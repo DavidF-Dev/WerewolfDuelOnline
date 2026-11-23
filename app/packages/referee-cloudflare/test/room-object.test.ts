@@ -144,6 +144,68 @@ describe('referee-cloudflare room object', () => {
     expect(() => verifyReplay(p0.ofType('game_over')[0]!.replay)).not.toThrow();
   });
 
+  /** Plays seeded random commands until both clients see the round-over stop. */
+  async function playToRoundOver(clients: Client[], rng: Xorshift): Promise<void> {
+    const atRoundOver = () => clients.every((c) => c.latest()?.view.phase === 'round_over');
+    for (let steps = 0; steps < 2000 && !atRoundOver(); steps++) {
+      const movers = clients.filter((c) => (c.latest()?.legal.length ?? 0) > 0);
+      const mover = rng.pick(movers);
+      const seen = clients.map((c) => c.ofType('events').length);
+      mover.command(rng.pick(mover.latest()!.legal));
+      await until(() => clients.every((c, i) => c.ofType('events').length > seen[i]!));
+    }
+    expect(atRoundOver()).toBe(true);
+  }
+
+  it('pause and resume work across hibernation wakes', async () => {
+    const code = await createRoom({ test: { seed: SEED } });
+    const [p0, p1] = await join(code);
+    await playToRoundOver([p0, p1], new Xorshift(4));
+    p0.send(encode({ type: 'pause_request' }));
+    await until(() => p1.ofType('pause_status').length > 0);
+    p1.send(encode({ type: 'pause_accept' }));
+    await until(() => p0.ofType('paused').length > 0 && p1.ofType('paused').length > 0);
+
+    await evictDurableObject(roomStub(code), { webSockets: 'hibernate' });
+    p0.send(encode({ type: 'resume_request' }));
+    await until(() => p0.ofType('resume_status').some((m) => m.ready.length === 1));
+    const stored = await runInDurableObject(roomStub(code), (_instance, state) =>
+      state.storage.get<RoomSnapshot>('room'),
+    );
+    expect(stored!.pause.paused).toBe(true);
+
+    await evictDurableObject(roomStub(code), { webSockets: 'hibernate' });
+    const eventsBefore = p1.ofType('events').length;
+    p1.send(encode({ type: 'resume_request' }));
+    await until(() => p0.ofType('events').length > 1 && p1.ofType('events').length > eventsBefore);
+    expect(p0.ofType('error')).toEqual([]);
+    expect(p1.ofType('error')).toEqual([]);
+  });
+
+  it('a rematch works across a hibernation wake', async () => {
+    const code = await createRoom({ test: { seed: SEED } });
+    const [p0, p1] = await join(code);
+    await play([p0, p1], new Xorshift(1));
+    p0.send(encode({ type: 'rematch_request' }));
+    await until(() => p0.ofType('rematch_status').some((m) => m.ready.length === 1));
+
+    await evictDurableObject(roomStub(code), { webSockets: 'hibernate' });
+    const eventsBefore = [p0.ofType('events').length, p1.ofType('events').length];
+    p1.send(encode({ type: 'rematch_request' }));
+    await until(
+      () =>
+        p0.ofType('events').length > eventsBefore[0]! &&
+        p1.ofType('events').length > eventsBefore[1]!,
+    );
+    expect(p0.ofType('error')).toEqual([]);
+    expect(p1.ofType('error')).toEqual([]);
+    const stored = await runInDurableObject(roomStub(code), (_instance, state) =>
+      state.storage.get<RoomSnapshot>('room'),
+    );
+    expect(stored!.game).toBe(1);
+    expect(stored!.finished_at).toBeNull();
+  });
+
   it('a wake with nothing changed sends no status and writes nothing', async () => {
     const code = await createRoom();
     const [p0, p1] = await join(code);

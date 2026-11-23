@@ -215,7 +215,7 @@ app/     (TypeScript pnpm workspace)
   packages/referee-service    the HTTP API, CORS, limits, rate limiting and retention shared by the network adapters; no platform APIs
   packages/referee-node       ws server + JSON file storage: local dev, e2e, Docker, self-host
   packages/referee-cloudflare Worker + Durable Object adapter: the public free deployment
-  apps/web                    Svelte 5 + Vite SPA (plain Vite, not SvelteKit); PWA features arrive later
+  apps/web                    Svelte 5 + Vite SPA (plain Vite, not SvelteKit), installable as a PWA
 scripts/smoke.mjs  post-deploy smoke test of a referee (Node built-ins only)
 docs/deploy.md     the deployment guide
 ```
@@ -264,6 +264,15 @@ replay(Replay) -> Result<State, ReplayError>
 - A game that is never resumed from a save file has exactly one segment, whose `start_state` is the setup.
 - Resuming from a save file (§6.5) starts a new segment with a new seed, beginning from the saved round-boundary state.
 - History and stats count the whole thing as one game.
+- *(M4)* A resumed segment's log starts with the public `SegmentStarted{round, seed_commitment}`, where `round` is the next round to be dealt. It takes the place of `GameStarted`.
+
+**UI helpers** *(M4)*:
+- `validate_plan`, `effective_initiative(character, placed)` and `content_hash(text)` (BLAKE3 of the UTF-8 bytes, for save files and backups).
+- `View.showdown` holds the showdown order from the reveal until the next deal; `showdown_order(view)` returns it. The order isn't recomputed from the view, because at round over the Badge has already passed and the placed Hourglasses have been returned.
+  - At the start of a resumed segment `View.showdown` is `None`: the round-boundary state a segment starts from does not carry the finished round's order. A client that resumes therefore shows no showdown list until the next reveal.
+- `replay_timeline(replay, viewer)` checks the replay as `verify` does. It returns one step for the start of each segment plus one per entry, so `1 + commands + (segments − 1)` steps.
+  - Each step holds the viewer's events and view after that point.
+  - Another seat's command is hidden unless the viewer is omniscient.
 
 **Unsafe edits:**
 - Behind the cargo feature `unsafe-edit`, used by the CLI's `--unsafe` flag.
@@ -290,13 +299,16 @@ Output is human text (localised with Fluent `.ftl`, shared with the app) or `--j
 - *(M3)* `approve_rejoin{approve}`, sent by the opponent in answer to `rejoin_request`.
 - `command{cmd}`, where `cmd` is any engine `Command`, including *(M3)* `resign`.
 - *(M4)* `pause_request`, `pause_accept`.
+- *(M4)* `rematch_request`, after game over.
+- *(M4)* `hello` may carry `seat`. Only a room created from a save honours it (§6.5); any other room ignores it.
 - *(M3)* `claim_win`, after the opponent's grace window has expired.
 - `ping`.
 
 **Referee → client:**
-- `welcome{seat, seat_token, room, config, pin}`. *(M3)* `pin` is the seat's 4-digit PIN, shown under "Continue on another device".
+- `welcome{seat, seat_token, room, config, pin, game}`. *(M3)* `pin` is the seat's 4-digit PIN, shown under "Continue on another device".
+  - *(M4 final review)* **Welcome config:** `config` is the config of the game being played (game `game`), not the room's base config. For a rematch it is the room's rules with `badge_start: {seat: loser}`; for a room created from a save it is the save's config. A client whose first event is a `segment_started` checks the replay against it (§6.6).
 - `waiting`, sent to a connection while the opponent seat is still empty.
-- `events{from_seq, events[], view, legal, pending}`.
+- `events{game, from_seq, events[], view, legal, pending}`.
 - *(M3)* `opponent_status{connected, name?, grace_deadline?, grace_remaining_ms?, can_claim_win?, pin_attempt_failed?}`.
   - `grace_remaining_ms` is computed by the referee whenever `grace_deadline` is sent. Clients time the countdown from its arrival plus the remaining time, never from the absolute deadline, so clock skew between devices does not matter.
   - `can_claim_win: true` replaces `grace_deadline` once the window has passed.
@@ -306,6 +318,8 @@ Output is human text (localised with Fluent `.ftl`, shared with the app) or `--j
   - If the approver's seat is taken over by a new connection (`hello` with its token, or `rebind`) while the request is open, the request is sent again to the new connection, with a fresh `remaining_ms`.
 - *(M3)* `rejoin_withdrawn` to that approver when the request is no longer open: it expired, its seat was reclaimed by token or PIN, or the asking connection closed. The approver's dialog also closes itself at `deadline` as a fallback.
 - *(M4)* `paused{save}`.
+- *(M4)* `rematch_status{ready}`: the seats that have asked for a rematch. A welcome to a finished game sends it after `pause_status` (and `resume_status`, where that applies), before `opponent_status`.
+- *(M4)* `welcome` and `events` carry `game`, the room's game index: 0 for its first game, one more for each rematch.
 - `game_over{replay}`, sent only at game over. The client rebuilds the game from it and checks it against the commitment announced in `game_started`.
 - `error{code}`.
 - `pong`.
@@ -319,15 +333,16 @@ Notes:
 - **Closing errors:** `superseded`, `room_full`, `protocol_version`, `unknown_room`, `unknown_seat` and *(M3)* `rejoin_declined` and `rejoin_unavailable` end the connection: the referee sends the error, then closes that connection. The list is `CLOSING_ERROR_CODES` in `@wwd/protocol`; the referee, `GameClient` and `ConnectionManager` all use it. `room_closed` is followed by the adapter closing every socket of the room.
 - *(M3)* **Unknown room on upgrade:** a WebSocket upgrade for a join code that is well formed but names no servable room (never created, expired, quarantined or unrestorable) is accepted, sent `error{unknown_room}` at once and closed with code 1008, so the browser learns why and the client stops instead of retrying. It never counts towards any room's connection cap. A malformed code is still refused at the HTTP layer with `404`.
 - **Version first:** once a client message has passed the size and JSON checks, a `hello` whose `protocol_version` is a number other than `PROTOCOL_VERSION` gets `protocol_version` before the rest of the message is validated. A client from another version therefore always learns why it was refused, even if other fields have changed shape. A string longer than `MAX_MESSAGE_BYTES` UTF-16 units is rejected as `too_large` without being encoded, because its UTF-8 size can only be larger.
-- **Sequence numbers are game-wide:** `seq = segment_base + log_index`. `segment_base` is 0 for the first segment; later segments add the previous segments' log lengths.
+- **Sequence numbers are game-wide:** `seq = segment_base + log_index`. `segment_base` is 0 for the first segment; later segments add the previous segments' log lengths. *(M4)* A rematch starts a new game whose numbering starts again at 0. A `hello` does not yet say which game its `last_seq` is from, so the referee trusts a `last_seq` only while the room is on its first game; after a rematch, a reconnect gets the whole current game from seq 0.
 - **Limits:** `MAX_MESSAGE_BYTES` (8192) is enforced on client → referee messages only; the referee is trusted, so server messages have no cap. Each connection may send 30 messages per rolling 10 s; the excess is dropped with `error{rate_limited}`.
 - `events` always carries the full redacted `view`, so a client that misses anything self-heals.
 - Typical message: 100–400 bytes. A game is roughly 10–40 KB.
 
 **HTTP API** *(M3)*, identical on both network adapters and implemented once in `referee-service`:
 - `POST /rooms` with JSON `{config: RulesConfig, grace_minutes: 5|10|30, test?: {grace_ms?, seed?}}` returns `201 {code}`.
+  - *(M4)* Or `{save: SaveFile, seat: "p0"|"p1", grace_minutes}` creates a room that continues a save (§6.5), with `seat` kept for the uploader. A body with a save may be up to `MAX_SAVE_BYTES` (262 144); every other body keeps the `MAX_MESSAGE_BYTES` cap. A save that fails verification, including one whose replay has more than `MAX_SAVE_SEGMENTS` (32) segments, gets `400 {error: "invalid_save"}`. The shape is checked by the HTTP layer; the save itself is verified by `Room.fromSave` in `referee-core`, which both adapters reach through `createRequestedRoom`.
   - A disallowed `Origin` gets `403 {error: "forbidden_origin"}` before the rate limit or the body is checked, and isn't counted.
-  - The body is capped at `MAX_MESSAGE_BYTES` (`413 {error: "too_large"}`) and validated strictly (`400 {error: "invalid_message"}`).
+  - The body is capped at `MAX_MESSAGE_BYTES`, or at `MAX_SAVE_BYTES` when it carries a save (`413 {error: "too_large"}`), and validated strictly (`400 {error: "invalid_message"}`).
   - `test` is honoured only when the referee was started with test overrides; otherwise it gets `400 {error: "test_overrides_disabled"}`. `grace_ms` (1 s to 1 h) replaces the grace window, and `seed` (64 hex digits) makes the room's randomness deterministic.
   - `429 {error: "rate_limited"}` after 20 creation attempts per client address per hour (an IPv6 address counts by its /64). Every request from an allowed origin counts, including ones later refused as invalid, so a client cannot probe without limit, and `503 {error: "unavailable"}` if no free join code was found in five draws.
 - `GET /rooms/{CODE}/ws` is the WebSocket upgrade. A malformed code gets `404`, a request that isn't an upgrade `426`, and a disallowed `Origin` `403 {error: "forbidden_origin"}`.
@@ -355,7 +370,8 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
   - **On another device:** enter the **same join code**, then pick your seat ("Rejoin as Alex"), then enter your **4-digit seat PIN**.
     - The PIN is generated per seat when the seat is claimed, sent in `welcome.pin`, and shown in the game menu under "Continue on another device". *(M4)* A QR that encodes code + PIN.
     - The join code alone isn't enough, because the opponent, or anyone who saw the invite link, also knows it.
-    - PIN attempts are rate-limited. *(M3)* Up to `PIN_MAX_FAILURES` (5) wrong attempts within `PIN_LOCK_MS` (15 min) get `wrong_pin`. The next wrong one, the 6th, is itself answered `pin_locked` and locks that seat's PIN for 15 minutes; while it is locked, every attempt, even with the right PIN, gets `pin_locked`. Each wrong attempt sends the connected opponent `opponent_status` with `pin_attempt_failed: true`. The failures and the lock are part of the snapshot, so they survive a restore.
+    - PIN attempts are rate-limited. *(M3)* Up to `PIN_MAX_FAILURES` (5) wrong attempts within `PIN_LOCK_MS` (15 min) get `wrong_pin`. The next wrong one, the 6th, is itself answered `pin_locked` and locks that seat's PIN for 15 minutes; while it is locked, every attempt, even with the right PIN, gets `pin_locked`. Each wrong attempt sends the connected opponent `opponent_status` with `pin_attempt_failed: true`. The failures, the lock and the seat's lockout count are part of the snapshot, so they survive a restore.
+    - *(M4)* The lock escalates: the Nth lock since the seat's last successful PIN rejoin lasts `min(PIN_LOCK_MS * 2^(N-1), PIN_LOCK_MAX_MS)`, where `PIN_LOCK_MAX_MS` is 24 h (86 400 000). The failure window stays `PIN_LOCK_MS`. A successful PIN rejoin resets the count, so over a room's 30 idle days a seat gets only a few dozen attempts.
     - *(M3)* A successful PIN rejoin gives the seat a **new seat token**, so the old device's token stops working, and clears the recorded failures. A wrong or locked PIN never claims a seat.
   - **Forgotten PIN:** the connected opponent can approve the newcomer ("Let this device play as Alex?").
     - *(M3)* Only a seat that is **currently disconnected** can be requested this way. A PIN-less `rejoin` for a bound seat gets `rejoin_unavailable` (closing), so a player can never approve their own takeover of the opponent's live seat.
@@ -389,9 +405,14 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
     - The referee starts the new segment.
   - **Save file as a fallback:**
     - On pause, the referee also sends both clients a **save file**: the boundary state, config, and the replay-so-far, including the closed segments' seeds so their deals can be verified.
+  - **Rematch** *(M4)*: after game over, once both bound seats send `rematch_request`, the room starts its next game with a fresh seed and the Badge starting with the loser (`badge_start: {seat: loser}`; the room's own config is unchanged). Seat tokens, PINs and names are kept, `finished_at` is cleared, and both seats get `events` for the new game from seq 0. Readiness, like resume readiness, belongs to a connection: a seat that disconnects or reconnects must ask again. The finished game's replay is sent to a reconnecting seat only until the rematch starts.
+  - **Current game config** *(M4 final review)*: besides its base config, a room keeps the config of the game being played, which its `welcome` sends. It is the base config when the room is created, the save's config for a room created from a save, and the rematch config once a rematch starts. It is not a snapshot field: every restore, plain or waking, rebuilds it from `replay.config` (the base config while there is no game), so snapshot v3 is unchanged.
   - **Resuming from a save file:**
+    - *(M4, decided)* A single upload is enough (friend mode): `POST /rooms` with the save and the uploader's seat. The referee checks `format_version` and `kind`, the `hash`, that the replay verifies and is untainted, that the save's config is the replay's, and that the replay ends at exactly the save's `boundary`. The room then starts paused with both seats unclaimed: a tokenless `hello` naming the uploader's seat claims it, any other tokenless `hello` claims the other seat, and resuming works as for any paused room. The hash only detects damage; it is not a signature, so the trust rests on verifying the replay.
+    - A save may have at most `MAX_SAVE_SEGMENTS` (32) replay segments, one per pause; the count is checked before any engine work, since working out the game-wide numbering replays each prefix of the segments.
+    - Single-upload resume trusts the uploader: a rule-valid replay built from seeds of their choosing also verifies. This is accepted for friend games; public play would need both players' saves or saves signed by the server. The joining player sees the restored round and markers before pressing Resume.
     - Used if the room has expired, or the players move to another server.
-    - Either player creates a room from the save. The referee accepts it when both players present matching save hashes, or with a host-confirmed single upload in friend mode (builder's choice: see §11). It verifies the replay first.
+    - Either player creates a room from the save, with a single upload (above). The referee verifies the replay first.
     - This starts a new segment with a new seed.
   - **Hashes:** a hash of the whole state, which includes the live seed, may be sent to clients. Hashes that could be brute-forced against hidden plans must not be sent.
   - **Notes for M2** (from the M1 final review):
@@ -404,16 +425,22 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
     - **Decide the policy for a `hello` carrying an unknown token on a non-full room.** *Done:* it gets `error{unknown_seat}` and the connection is closed, whether or not the room is full; it never claims a seat. The client then offers "Join as a new player" (a `hello` without a token) only if the room isn't full.
     - **Mobile lifecycle:** handle `pageshow` with `persisted` (back/forward cache), and add a reconnect controller around `GameClient.attach`. *Done:* `ConnectionManager` (§6.6).
     - **Add an e2e seed.** *Done:* with test overrides on, `POST /rooms` takes `test.seed`, and the room then draws its tokens, PINs and game seed from `seededRandom(seed)` in `referee-service`. Production always uses `crypto.getRandomValues`.
-  - **Notes for M4** (from the M3 final review):
-    - **Unload idle rooms on Node.** `referee-node` keeps every room it has touched in memory until the sweep deletes it. Unload a room that has no connections and has been idle for a while; it reloads lazily from its file.
-    - **Bound PIN attempts over a room's lifetime.** The lockout allows six wrong PINs per 15-minute lock, so about 17 000 attempts over a room's 30 idle days against only 10⁴ PINs. Consider a lock that escalates with each lockout, or a cap on wrong attempts per seat.
-    - **Build the Docker image once** before advertising self-hosting; it has never been built.
+  - **Notes for M4** (from the M3 final review), all done in M4:
+    - **Unload idle rooms on Node.** *Done in M4:* a room with no connections for `IDLE_UNLOAD_MS` (10 min) is written if its revision changed and dropped from memory, and the next connection reloads it from its file.
+    - **Bound PIN attempts over a room's lifetime.** *Done in M4:* the lock escalates (see Rejoining).
+    - **Build the Docker image once** before advertising self-hosting. *Done in M4:* the `docker` job in `app.yml` builds it and smoke-tests the running container on every push and pull request that touches `app/`, `engine/`, `scripts/` or the workflow itself (the workflow is path-filtered), and on a manual run.
+    - **Say when the server is unavailable, not the player's connection.** When a Cloudflare free-plan daily limit is reached, or the referee is down, the browser sees only a failed request: Cloudflare's own error response carries no CORS headers, so the app can't read it. Today the player is told "check your connection" when creating a game, or sees "Connection lost; trying again" indefinitely. Two changes:
+      - When `navigator.onLine` is true but the referee can't be reached, word the message as the server not responding ("try again later"), not as the player's connection.
+      - After a few minutes of failed reconnects while online, replace "trying again" with a calm notice: the server may be unavailable for a while, the game is kept on the server, and the same link works later. Reconnecting continues in the background.
+      - Neither message may claim the daily limit as the cause, since it can't be detected.
+      - *Done in M4:* `ConnectionManager` takes `isOnline` (the web app passes `navigator.onLine`) and sets `serverUnavailable` after `SERVER_UNAVAILABLE_AFTER_MS` (180 000) of failed connections while online; time offline or in the background doesn't count, and the next pong clears it. The banner then says "The game server isn't responding. Your game is kept on the server; this link will work again later."
 - **Retention:**
   - Room data is deleted 24 h after a game ends (`FINISHED_ROOM_TTL_MS`).
   - Idle unfinished or paused rooms are deleted after 30 days without activity (`IDLE_ROOM_TTL_MS`).
   - *(M3)* The connected sockets of an expiring room are sent `error{room_closed}` and closed. `isExpired()` in `referee-service` decides expiry for both adapters.
   - Saves also live on the clients.
 - **Abuse limits (cheap, from day one):** a message size cap (8 KiB per message, 16 KiB per frame), a per-connection rate limit (30 messages per 10 s), and a cap on room creation per IP per hour (20, adapter-level).
+- **Snapshot v3** *(M4)* adds `pause`, `game`, `rematch_ready`, `pin_lockouts` and `from_save` (`{reserved_seat}` while a room created from a save still has a seat to claim, else `null`). Like `resume_ready`, `rematch_ready` is read only by a waking restore. `pin_lockouts: [n, n]` records each seat's lockout count. v1 and v2 snapshots upgrade with no pause, game 0, no rematch readiness, no `from_save` and no lockouts; a v3 snapshot written before one of these fields existed restores with its default.
 - **Snapshot v2** *(M3)*: `{version: 2, code, config, seats, replay, segment_base, grace_ms, disconnected_at, pins, pin_failures, pin_locked_until, last_activity_at, finished_at, pending_rejoin?, grace_announced?}`, with times in epoch ms. Like `pending_rejoin`, `grace_announced` is read only by a waking restore, and an absent one means no expiry has been announced.
   - A v1 snapshot is upgraded on restore, taking the restore time as its last activity. Its seats get PINs the next time they are welcomed.
   - `room.revision` increases with every change to the persisted state, including failed PIN attempts. Adapters write a snapshot only when it has changed, taking it lazily at write time.
@@ -434,7 +461,9 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
   - closes every socket of a faulted room with 1011 and drops the room from memory, so the next connection restores its last good snapshot. Three faults within an hour quarantine the room: it is no longer served, and its data is deleted within 24 h;
   - honours `test` room options only when started with test overrides, which also allow `http://localhost:*` origins;
   - never logs seat tokens, PINs or message bodies.
-- **The Node adapter** (`referee-node`) uses `ws`. Rooms live in memory and in `<data>/<CODE>.json`, loaded lazily. Snapshot files, which hold seat tokens and PINs, and their temporary files are created with mode `0600`. It closes a socket with 1013 when more than 1 MiB of output is unread. With `--trust-proxy` it rate-limits by the last `X-Forwarded-For` hop. Its Docker image is the self-hosting option.
+- **The Node adapter** (`referee-node`) uses `ws`. Rooms live in memory and in `<data>/<CODE>.json`, loaded lazily, and a room with no connections for `IDLE_UNLOAD_MS` (10 min) is written and unloaded. Snapshot files, which hold seat tokens and PINs, and their temporary files are created with mode `0600`. It closes a socket with 1013 when more than 1 MiB of output is unread. With `--trust-proxy` it rate-limits by the last `X-Forwarded-For` hop. Its Docker image is the self-hosting option.
+  - *(M4)* A snapshot rename that the file system refuses because the target is open elsewhere (`EPERM`, `EACCES` or `EBUSY`, as Windows does while a reader or a virus scanner holds the file) is retried six times with a doubling delay from 10 ms, so a write is not lost to a passing reader.
+  - *(M4)* The programmatic `roomCreateLimit` option replaces the 20-per-hour room-creation limit, for end-to-end runs that create more rooms than that. `startReferee` refuses it unless test overrides are on, and the CLI doesn't offer it.
 - **The Cloudflare adapter** (`referee-cloudflare`) is a Worker that serves the HTTP API and hands each upgrade to the Durable Object named by the join code.
   - The object uses the Hibernation WebSocket API, SQLite-backed storage and a single alarm. `ping` is answered with `pong` by the runtime's auto-response, without waking the object.
   - Each socket's serialised attachment holds `{conn, seat}` and its timestamps. An object woken after eviction restores the room with `{wake: true}`, rebinds every attached socket and closes any socket without an attachment, so play continues with no `not_joined`.
@@ -464,7 +493,9 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
 - **Game store:**
   - Holds the latest `View`, `legal`, `pending`, the event log and connection status.
   - `errorCount` increments on every reported problem, so a repeated error code is still a change the UI can react to.
-  - `replayVerified` is set at game over and is true only when the replay's commitment matches the one announced in `game_started`, the replay's config equals the announced config, and the events rebuilt from the replay equal the events received.
+  - `replayVerified` is set at game over and is true only when every segment start the client received announced its segment's seed commitment (`game_started` for the first segment, `segment_started` for each one after a pause), the replay's config equals the announced config, and the events rebuilt from the replay (its timeline, across every segment) end with exactly the events received.
+    - *(M4)* A client that joined a game continued from a save first hears of it at a `segment_started`, so it checks the segments from there on; the earlier ones were verified by the referee when the room was created, under the single-upload trust (§6.5). Each game is checked against its own `game_started` config. The welcome's config is used only for a client whose first event is a `segment_started`. *(M4 final review)* It is the current game's config (§6.4), so a seat that reloads during a paused and resumed rematch game still verifies its replay; before this fix the welcome carried the room's base config, whose Badge start differs from a rematch game's, and such a reload reported `replay_mismatch`. A client whose first event is `game_started` must have received every event the replay rebuilds.
+  - *(M4)* The store also holds `game` (from `welcome` and `events`), `pause {requestedBy, agreed, paused, resumeReady}`, the `save` from `paused` and `rematchReady`. A change of `game` drops the view, the log, the replay and its verification, the pause and the rematch readiness; the client stays `connecting` until the new game's events arrive. A new connection forgets both readinesses, since they belong to a connection. While paused, `legal` is empty, since the referee refuses commands. A `hello` still carries no game index, so after a rematch the referee resends the whole current game.
   - The UI is a pure function of the store.
   - The UI only offers actions from `legal`. Invalid actions can't be expressed.
 - **Mobile lifecycle** *(M3: `ConnectionManager` with `browserLifecycle()`)*:
@@ -474,7 +505,7 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
   - While visible, ping every `PING_INTERVAL_MS` (30 s); each ping must be answered before the next one is due.
   - Watchdog: if a ping goes unanswered, or the ping timer fires more than `TIMER_JUMP_MS` (10 s) late (the device was suspended), reconnect.
   - A lost connection is retried after 0.5 s, 1 s, 2 s, 4 s, 8 s and then every 15 s, each delay scaled by a random ±20 %. The backoff resets only once a connection has answered a ping, so a referee that welcomes and then drops connections can't cause a reconnect storm.
-  - Reconnecting stops at game over, on rejection, or after a closing error code, and `stopReason` says which. `start()` after `stop()` clears it and connects again, for a fresh attempt such as joining as a new player.
+  - Reconnecting stops on rejection or after a closing error code, and `stopReason` says which. *(M4)* It no longer stops at game over: the connection is kept so that a rematch can start, and a reconnect after game over must ask for the rematch again. `start()` after `stop()` clears it and connects again, for a fresh attempt such as joining as a new player.
   - The store's connection `phase` is `online`, `connecting`, `offline` or `hidden`, with the retry count and when the next retry is due, for the connection banner.
 - **Dev agent hook** (dev builds only):
   - `window.__wwd = { state(), legal(), act(cmd), describe() }`
@@ -485,25 +516,36 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
 - **IndexedDB** (via `idb`) holds:
   - `settings`
   - `identity` (display name, generated device id)
-  - `sessions` (active and paused: room, seat token, server URL, save, timestamps)
+  - `sessions` (active, paused and finished: room, seat token, server URL, save, timestamps)
+    - *(M4 final review)* **Session status and Continue:** each stored seat records the opponent's display name (from `opponent_status`) and the game index (once a `welcome` has said it), and writes again when the name changes. At `game_over` its status becomes `finished`, with `finishedAt` set when the game was first seen to end; a reload of the finished game keeps it finished, and a rematch (a later game index) makes it `active` again. Home's Continue lists it as "Game over · rematch possible" with the opponent's name. A finished session is pruned 24 hours after `finishedAt`, matching the referee's `FINISHED_ROOM_TTL_MS`, as well as by the 30-day limit.
   - `history` (completed games: full log after the game, result, metadata)
 - Call `navigator.storage.persist()`.
 - **Where data lives:** everything above is stored only on the device, in the browser's IndexedDB for the app's origin. There are no accounts. The referee holds only the live room (display names, seat tokens, the game in progress) until its retention expires (§6.5), and an opponent's device keeps its own history of shared games.
 - **Clear history** deletes `history` only. **Delete all data** deletes every store (settings, identity, sessions, history) and returns the app to its first-run state. Both need a confirmation dialog that names exactly what will be deleted, warns that paused and active games can't be resumed afterwards, offers "Export backup first", and states that it affects this device only (opponents keep their copies, and online rooms expire on their own). Destructive buttons carry a warning icon as well as colour.
+  - *(M4)* Delete all data also removes the M3 `localStorage` session keys. Other open tabs of the app are not reset: they keep what they hold in memory until reloaded, and may write it back. This is accepted for M4.
 - **Installing the app (PWA):**
   - Settings → General has an **Install app** row. It shows an Install button where the browser provides an install prompt (`beforeinstallprompt`: Chrome and Edge on desktop and Android); the Share → "Add to Home Screen" steps on iOS Safari; "Installed" when running in `display-mode: standalone`; and is hidden where installing is impossible (e.g. Firefox desktop).
-  - Home shows a dismissible **Install the app** card **once**, after the first finished game, never on a first visit. Dismissing it hides it for good (remembered in settings).
+  - Home shows a dismissible **Install the app** card after the first finished game, never on a first visit. *(Owner decision, M4)* It stays on Home, on every visit, until it is dismissed; dismissing it hides it for good (remembered in settings).
   - On iOS the card's text mentions keeping saved games safe, because Safari may evict storage for sites not visited for 7 days unless the app is installed.
+  - *(M4)* The card and the row show the browser's Install button where it offers a prompt, and the share button → “Add to Home Screen” steps on iOS Safari (not other iOS browsers; a third-party label in curly quotes keeps its own capitals); the card shows only where installing is possible. Its text suits desktop and mobile alike. Dismissing it, and the first-game flag, are saved through the same merged, one-at-a-time settings write as the Settings screen, and moves focus to the Settings button above it.
+  - *(M4)* **Service worker** (`vite-plugin-pwa`, `registerType: 'prompt'`, generated with Workbox): precaches the app shell (HTML, JS, CSS), the engine WebAssembly, the start-up fonts (Atkinson Hyperlegible Next 400 and 700, Cinzel 700, Latin woff2) and the icons. Lexend and OpenDyslexic font files are cached on first use (cache-first, same origin only). Navigations fall back to `index.html` (routes are hash routes), except under `/rooms`. Nothing from the referee is cached: it is another origin, and WebSockets never pass through a service worker. Outdated precaches are removed when a new version activates.
+  - *(M4)* **Updates:** a new version waits until the player chooses. While one is waiting, a status banner says "A new version is available" with Reload, which activates it and reloads every open tab that saw it, so no page mixes old and new assets. A `protocol_version` stop offers the same Reload; when no new version is waiting yet, it first asks the browser to check for one and waits up to 10 s for it to install, since a plain reload would be served the cached old version.
+  - *(M4)* The app icon is our own: a crescent moon in the Moonlit palette, SVG plus PNGs (192, 512, maskable 512, and a 180 px Apple touch icon) rendered from it by `pnpm --filter @wwd/web icons` with Playwright's Chromium.
 - **History stats:**
-  - win/loss by win condition (health / fangs / crosses);
+  - win/loss by win condition (health / fangs / crosses / resignation);
   - character pick frequency and success rate;
   - average rounds per game;
-  - the opponent's display name.
+  - results per opponent display name.
+  - *(M4)* Every figure is read from facts the engine emitted when the stored replay is played with the omniscient viewer, never from rule logic in the app. The record's seat is "you"; only your own picks count. A **pick** is a character in your revealed plan (`plans_revealed`). A pick **succeeds** when, after its `character_resolved`, and before the next character resolves or the round ends, the engine emitted an `attack_hit` or a `marker_gained` for your seat. A pick that is forfeited (`attack_forfeited`), misses (`attack_missed`) or never resolves scores no success. The **success rate** is successes over picks, and is shown as "Not picked" for a character never picked. **Rounds** is the highest `round_started` round. A replay this build cannot play still counts, using the result stored in its record, and adds nothing to the pick figures.
 - **Replay viewer:** step by round and phase. Show "my view" or "full" (the full log is shared by the referee after the game ends).
+  - *(M4)* Routes `#/history` (list, newest first, with a link to Stats), `#/history/<id>` (replay) and `#/stats`. The viewer steps one command at a time (the left and right arrow keys, or the Previous step and Next step buttons), jumps to the previous or next round start, and switches between **My view** (the record's seat) and **Full** (the omniscient viewer). Both are built with `replayTimeline`, so My view never holds the opponent's hand or command. The step position is announced as "Step 12 of 40, round 3". There is no animation.
 - **Backup file** `werewolf-duel-backup-YYYYMMDD.wwdb`:
   - gzip JSON: `{format_version, exported_at, settings, identity, sessions, history, checksum}`.
   - Export via the save-file picker, a download, or the share sheet.
   - Import shows a preview and then merges by ID.
+  - *(M4)* `BACKUP_FORMAT_VERSION` is 1. An import larger than `MAX_BACKUP_COMPRESSED_BYTES` (5 MiB), or that grows past `MAX_BACKUP_BYTES` (20 MiB) while it is decompressed, stops at once as unreadable. Each session is checked: its id must be the one made from its server and room, and its server must parse. The import keeps this device's own device id and adopts the backup's display name only when this device has none. Settings are replaced only when "Replace my settings with the backup's" is ticked. The export warns that the file holds seat tokens.
+    - *(M4 final review)* **Backups and the server setting:** an import never takes the backup's `settings.server`, even with "Replace my settings" ticked; this device keeps its own referee server, so a backup file can't move the device to another referee. The preview's "settings differ" ignores the server too.
+    - *(M4 final review)* **Backup session checks:** a session's `room`, and its `resumedAs` when present, must each be a well-formed join code (exactly as `normaliseCode` would write it). A session that fails is dropped and counted as skipped, like one with a wrong id or server. A `finished` status with its `finishedAt` is accepted.
 - **Schema versioning:** `format_version` and ordered migrations for saves, history and backups. Replays re-simulate using the recorded `engine_version`. The engine package keeps the old rules modules needed for that.
 
 ## 8. User experience
@@ -511,7 +553,7 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
 ### 8.1 Screens (see mockups)
 1. **Home**
    - Continue (active or paused sessions), New game, Join game, How to play, History, Settings.
-   - The one-time, dismissible **Install the app** card (see §7) sits below the main buttons when shown.
+   - The dismissible **Install the app** card (see §7) sits below the main buttons when shown.
    - Footer, four short lines: "Made by David F Dev"; "An unofficial digital version of Werewolf: Duel!"; "Not affiliated with Whales Entertainment."; and a link "Get the physical game ↗" to `https://boardgamegeek.com/boardgame/436306/werewolf-duel#buyacopy`, opening in a new tab (`rel="noopener noreferrer"`, accessible name includes "opens in a new tab").
 2. **New game:**
    - Rules options: Badge (random / choose), reconnect grace time, advanced variants.
@@ -526,13 +568,21 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
 5. **Plan:**
    - Tap a character to see its card detail and legal targets.
    - Tap targets: illegal ones are disabled, with the reason.
+     - *(M4)* A target is enabled only when some plan in `legal` contains the current selection plus it. A disabled target's reason is the engine's `validatePlan` error for that selection, localised from `engine.ftl`.
    - A summary ("Knight → Wolfen + Fool") and Confirm (with an optional confirm dialog).
 6. **Reveal:**
    - Hourglass stepper with the live effective initiative.
    - The opponent's choice is shown when it arrives.
    - Potion target picker if I hold the Potion.
 7. **Showdown:** an ordered resolution list that animates one step at a time (or appears instantly with reduced motion), with plain-language results. Hunter prompt inline.
+   - *(M4)* One step per resolution: the Potion, each character that resolves, then the round or game end. Speed comes from the Showdown speed setting (`step`: a "Next result" button; `auto`: one step every 1.2 s; `instant`). Reduced motion makes `auto` instant; `step` stays as chosen.
+   - *(M4)* The Hunter prompt appears once the steps so far are shown. Stepping is display only: "Next round" is never held back by it.
+   - *(M4)* The list is not a live region. Results are read out once, as they arrive, by the announcer log.
+   - *(M4)* **Game menu** on the table: "Pause after this round" (left out until pausing exists), "Continue on another device" (online: code, PIN behind a button, and a QR of the rejoin link that never holds the PIN), "Describe table" and Resign (with confirmation, local and online). With Haptics on, the device vibrates for 30 ms whenever this seat is offered a command after having none.
 8. **Round summary** (collapsible) and **Game over:** result, how it was won, "View replay", "Rematch" (same room, Badge to the loser).
+   - *(M4)* The round summary is a closed `<details>` listing the round's events, shown at round over and game over. Rematch shows the opponent's readiness and stays in place, marked unavailable, once asked. Pause and resume are online only: a local room lives in the host page, so local games offer Rematch but not pausing.
+   - *(M4)* The pause panel answers the opponent's request ("Agree to pause", "Keep playing"), says "Pause agreed: applies at the end of the round" once agreed, and while paused shows "Game paused" with Resume and the opponent's readiness. A paused session's save is kept in its session record and Home lists it as "Paused". When its room is gone (`unknown_room`, or `room_closed`), the join screen offers "Resume from save": `POST /rooms {save, seat, grace_minutes: 10}`, then the old session is marked `resumedAs: NEW` on this device and the new room opens (`#/join/NEW?seat=…`) with `hello.seat` and an invite, worded for a paused game, until the opponent joins. Once the new room's welcome is stored, only the session on the same server whose `resumedAs` names that room is deleted; nothing in the link can name a session to delete. A tab closed in between keeps the old session and its save, and Home's Continue for it opens the new room. Saves carry the current game's own config, so a save taken during a rematch resumes too.
+   - *(M4)* At game over an online game is written to `history` once, keyed by server, room and game index, and `requestPersistence` sets `firstGameFinished`. Local games are not recorded.
 9. **History** list, **Replay** viewer, **Stats**.
 10. **How to play:** rewritten rulebook, character reference, 5-step interactive tutorial (scripted local game via the memory referee).
 11. **Settings**, plus **Backup** (export/import).
@@ -540,6 +590,8 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
 **Deduction tracker:**
 - My 9 target cards double as a tracker: each is marked mine (auto), possible, or ruled out.
 - It can auto-mark using public facts (plan target count, revealed cards). A setting turns the help on or off.
+- *(M4)* Auto-marking marks the cards of my own hand and plan as mine, and rules out only the character of the opponent's revealed plan. A Potion target is not ruled out. Cards I rule out by hand are a distinct state (`aria-pressed`, with its own marker as well as colour).
+- *(M4)* The initiative track shows the effective initiatives the engine sent in `plans_revealed`. They stay unchanged through round over, even though the placed Hourglasses have gone back to the supply by then.
 
 ### 8.2 Settings
 | Group | Settings |
@@ -547,10 +599,14 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
 | General | Install app (see §7); Language: a dropdown, each language named in itself ("System (English)", "English", "Deutsch", "日本語"), so more can be added; Theme (System/Light/Dark); Display name |
 | Reading | Text size (90–150%); Reading font (Default / Lexend / OpenDyslexic); Extra letter and line spacing; Card text: icons + text / text only |
 | Accessibility | High contrast (on/off, applies to light and dark); Colour-blind patterns on/off (shapes are always on); Reduced motion (System/On/Off); Showdown speed (Step-by-step tap / Auto / Instant); Haptics on my turn |
-| Gameplay | Confirm before submitting plan; Rules hints; Deduction auto-mark; Warn on pointless targets; Hunter: always ask / auto when a target matches; Tutorial tips |
-| Network | Server (default / custom URL); Data saver (no avatars, no prefetch) |
+| Gameplay | Confirm before submitting plan; Rules hints; Deduction auto-mark; *(M5)* Warn on pointless targets; *(M5)* Hunter: always ask / auto when a target matches; *(M5)* Tutorial tips |
+| Network | Server (default / custom URL); *(M5)* Data saver (no avatars, no prefetch) |
+
+*(M4)* The settings marked M5 need rules reasoning the engine doesn't expose yet, or have nothing to act on yet (there are no avatars or prefetching for Data saver), so M4 leaves them out. M4 offers English only: the Language dropdown lists "System (English)" and "English" until DE and JA arrive in M5.
 | Data | A note that data is stored only on this device; Backup (export / import); Clear history; Delete all data (both with confirmation, see §7) |
 | About | Version, credits, licences, "© 2026 David F Dev" |
+
+*(M4 final review)* **System preferences follow the OS live:** Theme "System" and Reduced motion "System" follow the operating system while the app is open. The app listens for `change` on the `prefers-color-scheme` and `prefers-reduced-motion` media queries and re-applies the current settings, so the theme, the `data-motion` attribute and the showdown's instant mode switch without a reload.
 
 ### 8.3 Visual language & assets
 - **Placeholder theme:** the default.
@@ -558,13 +614,14 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
   - **Faction carried by shape and pattern, not colour alone:**
     - Humans: rounded shield silhouette, solid fill.
     - Werewolves: angular claw-notched silhouette, diagonal hatch.
-  - **Marker icons** from Kenney Board Game Icons (CC0), with game-icons.net (CC BY) where needed and credits shown.
+  - **Marker icons:** our own simple SVG shapes in the placeholder pack *(owner decision, M4)*. A free pack such as Kenney Board Game Icons (CC0) may replace them later through a theme pack, with credits shown.
   - **Initiative** is always shown as a large number in a fixed corner.
 - **Theme packs:**
   - Location: `themes/<id>/theme.json`.
-  - Contents: tokens (colours, radii, fonts), `cards` and `markers` maps from engine IDs to SVG files or sprite symbols, credits, licence.
+  - Contents: `cards` and `markers` maps from engine IDs to SVG files, credits, licence. The placeholder pack's colour, radius and font tokens live in the app stylesheet; per-pack tokens are deferred until a second pack ships.
   - Missing entries fall back to the placeholder theme.
 - **Palette:** Okabe–Ito-based. All text 4.5:1, UI elements 3:1, tested in light, dark and high-contrast themes.
+  - *(M4)* Links are accent-coloured text, so `--accent` must reach 4.5:1 on the page background and on panels as well as on cards. The light theme's accent is therefore `#0068a3`, a darker shade of the Okabe–Ito blue. The Human faction colour stays `#0072b2`.
 
 ### 8.4 Localisation & fonts
 - **Fluent `.ftl` files:**
@@ -592,7 +649,7 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
   - Everything works by tap and keyboard, with no drag required.
   - Reflows at 320 px and at 200% text size.
 - **Screen readers:**
-  - Cards are `button`s with full accessible names, e.g. "Knight, initiative 3, Human. Gain an Hourglass; attack a Werewolf."
+  - Cards are `button`s with full accessible names, e.g. "3, Knight, Human. Gain an Hourglass, then attack a Werewolf." *(M4, WCAG 2.5.3 label in name)* The name begins with the card's visible text in the order it is drawn, the initiative and then the name, so a speech user can say what they see. The faction and ability follow. The Fool, which has no initiative, starts with "The Fool".
   - Opponent actions are announced through an `aria-live` log.
   - A "Describe table" command.
 - **No time pressure by default.**
@@ -606,6 +663,8 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
 | Network while hidden | 0 bytes: socket closed |
 | Network while visible and idle | A ping every 30 s, about 25 KB/hour |
 
+*(M4)* A unit test builds the app and checks the initial load: `index.html`, the entry JS and CSS with their static imports, the engine WebAssembly and the woff2 fonts the start-up CSS names, each gzipped at level 9. Lexend and OpenDyslexic are not part of it.
+
 ## 10. Testing & delivery
 
 **Test tiers:**
@@ -615,14 +674,15 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
 | Engine | `cargo test`, proptest, `wwd fuzz` | Every rule in §5 as a named test; determinism (same seed + commands → same hash); redaction (no `View` for seat X ever contains Y's hidden data) |
 | Referee | Vitest, memory adapter, fake clock | Join, seats, reconnect, grace, pause/resume, rate limits, redaction on the wire |
 | Client | Vitest + Testing Library, in-memory transport | Components and stores |
-| End-to-end | Playwright: `e2e` (local mode) and *(M3)* `e2e:online` vs the Node referee started in the test runner's process on localhost, with test overrides and a temporary data folder | Desktop Chrome and Pixel 7 emulation; later an Android emulator via Playwright `_android` or Appium (`10.0.2.2`). Two-browser-context games: a full game, going offline and back, a hidden tab reconnecting, PIN rejoin, approval rejoin, claim win after a short `test.grace_ms`, resign, invite links and an unknown room |
+| End-to-end | Playwright: `e2e` (local mode) and *(M3)* `e2e:online` vs the Node referee started in the test runner's process on localhost, with test overrides and a temporary data folder. *(M4)* That referee unloads a room after 1 s without connections, so a test can see a room leave memory, and takes a raised room-creation limit (`roomCreateLimit`, test overrides only), because one run creates about 32 rooms. *(M4)* `e2e:pwa` runs against a production build served by `vite preview` | Desktop Chrome and Pixel 7 emulation, as two projects of every config; later an Android emulator via Playwright `_android` or Appium (`10.0.2.2`). Two-browser-context games: a full game, going offline and back, a hidden tab reconnecting, PIN rejoin, approval rejoin, claim win after a short `test.grace_ms`, resign, invite links and an unknown room. *(M4)* Also: pause and resume across devices (agreed mid-round, both tabs closed and reopened from Home, the replay verifies with two segments); resume from a save after the room is gone (its file deleted and the room unloaded); rematch with the Badge to the loser; a finished game in history with its replay stepped; a backup exported and imported on a fresh context; and the app opening offline |
 | Parity | *(M3)* `e2e:parity`: the tests tagged `@parity` vs `wrangler dev` (local workerd, no account) | Catches Cloudflare-specific differences, locally |
-| Accessibility | axe-core in Playwright | Plus a manual screen-reader pass per milestone |
+| Accessibility | axe-core in Playwright. *(M4)* `@axe-core/playwright` in `e2e:online` checks every screen: Home, Settings, About, How to play, New game, the name prompt, Invite, Join, the table at plan, plan confirmation, reveal, showdown and round over, the game menu, a pause request, Game over, Replay (my view and full), History and Stats. Each is checked in light, dark and high contrast (light and dark), and a serious or critical violation fails the run. No rule is turned off | Plus a manual screen-reader pass per milestone; the full audit is M5 |
 | Staging | *(M3)* `scripts/smoke.mjs` after each deploy | The only tier touching Cloudflare: `/health`, one room, two players welcomed and sent the opening events, then one resigns so the room is kept only for the finished-room retention. Four requests, or up to seven when `/health` is retried after a fresh deploy; Node built-ins only, with a time limit and a bounded close. Its own test runs it against a Node referee on a free port |
 
 **CI (GitHub Actions):**
 - The `engine` workflow runs fmt, clippy, tests and fuzz.
-- The `app` workflow builds the engine's WASM and the app, then runs lint, the unit tests (including the smoke script's test and a check that a sub-path build loads every asset from under its base), `e2e` and `e2e:online`. `e2e:parity` runs only when the workflow is started by hand.
+- The `app` workflow builds the engine's WASM and the app, then runs lint, the unit tests (including the smoke script's test, a check that a sub-path build loads every asset, the manifest and the service worker scope from under its base, and *(M4)* the initial-load budget), `e2e`, *(M4)* `e2e:pwa` (a production build served by `vite preview`: after one visit the app opens offline and a local game starts) and `e2e:online`. `e2e:parity` runs only when the workflow is started by hand.
+- *(M4)* The `app` workflow's `docker` job builds the `referee-node` image, runs it, smoke-tests it with `scripts/smoke.mjs` and shows the container logs if that fails, on every push and pull request that touches `app/`, `engine/`, `scripts/`, the `setup-app` action or `app.yml` (the workflow is path-filtered), and on a manual run.
 - *(M3)* The `deploy` workflow runs on pushes to `main` and by hand. Each job runs only when its secrets and variables are set, so a fresh fork stays green, and each has least-privilege `permissions`.
   - `referee-staging` deploys with `--env staging`, then runs the smoke test. `referee-production` follows only if that passed, behind the `production` environment's required reviewers, and smoke-tests production. Both deploy through the package's `deploy:*` scripts, which refuse to run without a safe `ALLOWED_ORIGINS` list, with any `TEST_OVERRIDES` var, or with an `--env`, `-e`, `--name`, `--config` or `-c` option that would deploy another environment, Worker or config. Their tests run a stub named by `WWD_WRANGLER_BIN` (which no workflow sets) and assert the exact arguments handed to wrangler; the one test that runs the real wrangler uses `--dry-run`, with no Cloudflare credential variables and empty config directories, so it cannot authenticate.
   - `web` builds the app with `VITE_REFEREE_URL` from the `REFEREE_URL` variable and `BASE_PATH` from the Pages site, then publishes it with `actions/upload-pages-artifact` and `actions/deploy-pages`. When the referee is configured it waits for `referee-production` and runs only if that succeeded, so the site never goes live ahead of its referee.
@@ -634,7 +694,7 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
 
 | Piece | Where |
 |---|---|
-| App | GitHub Pages: the project site `https://<github-user>.github.io/<repo>/`, or optionally `https://duel.<your-domain>` (a CNAME to `<github-user>.github.io`, HTTPS enforced) |
+| App | GitHub Pages at `https://werewolf-duel.davidfdev.com` (a custom domain: a CNAME to `<github-user>.github.io`, HTTPS enforced). The project site `https://<github-user>.github.io/<repo>/` also works without one |
 | Referee | `https://wwd-referee.davidfdev.workers.dev`, with staging at `https://wwd-referee-staging.davidfdev.workers.dev`; optionally a custom subdomain if the DNS is on Cloudflare |
 | Self-hosting | A Docker image of `referee-node`, behind a TLS reverse proxy. The server URL is embedded in the invite link (`#/join/CODE?server=URL`), or *(M4)* set in Settings |
 
@@ -642,7 +702,7 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
 - Exact libraries inside the chosen stack (e.g. idb vs Dexie, the QR library, the WASM binding helpers).
 - Visual details within the mockups' structure.
 - Exact message field names.
-- The resume-from-save trust rule: require both players' matching saves, or allow host upload in friend mode. The default suggestion is both, with a fallback.
+- The resume-from-save trust rule: require both players' matching saves, or allow host upload in friend mode. *(M4: host upload, see §6.5.)*
 - Join-code alphabet and length (≥ 6 characters, unambiguous), and storage schemas.
 - Wording of rulebook and tutorial text, which should then be reviewed by the project owner.
 
@@ -657,9 +717,30 @@ interfaces: Clock, Random (seat tokens, PINs, codes, seeds)
    - Node referee and Cloudflare referee.
    - Join codes, reconnection, the mobile lifecycle.
    - Deployed to GitHub Pages + Workers.
-4. **M4 Product:**
+4. **M4 Product** *(done)*:
    - All screens as mocked, settings, saves/pause, history/replay/stats, backup.
    - PWA install and offline shell.
+   - Moved to M5: DE and JA with their fonts; the pseudo-locale CI check; the full accessibility audit; the rewritten rulebook and the tutorial (M4's "How to play" is the character reference); the gameplay settings that need rules help from the engine ("Warn on pointless targets", "Hunter: auto when a target matches", "Tutorial tips"); and "Data saver".
+   - **Accepted residual risks** at the end of M4:
+     - Resuming from a save trusts the uploader, because a single verified upload is enough (§6.5). A rule-valid replay made from seeds of their choosing also verifies. This is acceptable for friend games; public play would need both players' saves or saves signed by the server.
+     - The joining player is shown the restored round and markers before pressing Resume. Their resume request is their consent to the uploaded state.
+     - Delete all data doesn't reset the app's other open tabs (§7).
+
+   **M4 decisions** (from the M4 plan):
+
+   | Topic | Decision |
+   |---|---|
+   | Protocol version | `PROTOCOL_VERSION` is **2**. The app is deployed, so an old cached page gets `protocol_version` and the existing "reload" message |
+   | When a pause applies | At the **first round boundary** after both seats agree (`Phase::RoundOver` with neither seat ready). Agreed during a round, it waits for the round's end. Agreed in `RoundOver` after one seat already chose "Next round", it applies at the next round's end |
+   | Resume | A paused room resumes only when both seats are connected **and** both have sent `resume_request`. Connecting alone never resumes |
+   | Resume from a save file | Friend mode: **one verified upload** (§11). `POST /rooms` with the save and the uploader's seat. The referee verifies the replay, refuses a tainted one, and checks that the boundary is where the replay ends |
+   | Rematch | Same room. Both seats send `rematch_request`; the new game has a fresh seed and `badge_start: Seat(loser)`. Each game in a room has an index, and sequence numbers restart at 0 for each game |
+   | PIN lockout over a room's life | Each lockout doubles the lock: 15 min, 30 min, 1 h … capped at 24 h. The count resets on a successful PIN rejoin. About 230 attempts fit in 30 days, not 17 000 |
+   | Node memory | A room with no connections is written and dropped from memory after `IDLE_UNLOAD_MS` (10 min); it reloads lazily |
+   | Docker | Built and smoke-tested in CI (the `docker` job), since there is no Docker on the development machine |
+   | Storage | IndexedDB via `idb`. M3's `localStorage` sessions are migrated once, then removed |
+   | Icons | Our own SVGs for characters (shape + pattern + glyph + number) and markers |
+   | Fonts | Self-hosted `@fontsource` packages, Latin subsets only. Body and headings load at start; Lexend and OpenDyslexic load only when chosen. OpenDyslexic comes from `@fontsource/opendyslexic` |
 5. **M5 Reach:**
    - DE and JA, the accessibility pass, the rewritten rulebook, the tutorial.
 6. **Later:**

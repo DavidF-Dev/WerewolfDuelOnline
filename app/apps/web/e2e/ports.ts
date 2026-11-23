@@ -4,4 +4,7 @@ export const PORTS = {
   onlineReferee: 8797,
   parityApp: 5197,
   parityReferee: 8798,
+  pwaApp: 5196,
+  /** Nothing listens here, so the offline build can never reach a real referee. */
+  pwaReferee: 8799,
 } as const;

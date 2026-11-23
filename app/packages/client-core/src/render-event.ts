@@ -134,6 +134,7 @@ function eventArgs(ctx: Context, event: Event): MessageArgs {
     return seatArgs(ctx, 'actor', kind.next_round_requested.seat);
   }
   if ('resigned' in kind) return seatArgs(ctx, 'actor', kind.resigned.seat);
+  if ('segment_started' in kind) return { round: kind.segment_started.round };
   const { winner, reason } = kind.game_over;
   return {
     ...seatArgs(ctx, 'actor', winner),

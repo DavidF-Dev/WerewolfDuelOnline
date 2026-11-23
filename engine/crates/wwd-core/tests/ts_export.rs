@@ -5,7 +5,8 @@ use std::path::PathBuf;
 
 use ts_rs::{Config, TS};
 use wwd_core::{
-    Command, Event, Pending, Replay, RoundBoundary, RuleError, RulesConfig, View, Viewer,
+    Command, Event, Pending, Replay, RoundBoundary, RuleError, RulesConfig, TimelineStep, View,
+    Viewer,
 };
 
 fn export_dir(name: &str) -> PathBuf {
@@ -26,6 +27,7 @@ fn export_everything(dir: &std::path::Path) {
     RulesConfig::export_all(&cfg).unwrap();
     RuleError::export_all(&cfg).unwrap();
     Viewer::export_all(&cfg).unwrap();
+    TimelineStep::export_all(&cfg).unwrap();
 }
 
 #[test]
@@ -46,6 +48,8 @@ fn exports_all_public_types() {
         "Phase",
         "RoundBoundary",
         "Viewer",
+        "TimelineStep",
+        "Plan",
     ] {
         let text = fs::read_to_string(dir.join(format!("{name}.ts")))
             .unwrap_or_else(|_| panic!("{name}.ts missing"));

@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import type { CreateRoomRequest } from '@wwd/protocol';
+import {
+  MAX_MESSAGE_BYTES,
+  MAX_SAVE_BYTES,
+  PROTOCOL_VERSION,
+  type CreateRoomRequest,
+} from '@wwd/protocol';
 import { generateJoinCode } from '@wwd/referee-core';
 import {
   LIMITS,
@@ -10,6 +15,7 @@ import {
   isExpired,
   rateLimitKey,
   seededRandom,
+  type CreateResult,
   type RoomStore,
   type ServiceConfig,
   type ServiceContext,
@@ -27,7 +33,9 @@ const BODY = {
 class FakeStore implements RoomStore {
   readonly rooms = new Map<string, CreateRoomRequest>();
   collisions = 0;
-  async create(code: string, req: CreateRoomRequest): Promise<'created' | 'collision'> {
+  invalidSave = false;
+  async create(code: string, req: CreateRoomRequest): Promise<CreateResult> {
+    if (this.invalidSave) return 'invalid_save';
     if (this.collisions > 0) {
       this.collisions -= 1;
       return 'collision';
@@ -218,7 +226,11 @@ describe('routes', () => {
     const { ctx } = setup();
     const res = await run(new Request('https://api.example.com/health'), ctx());
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ ok: true, protocol_version: 1, engine_version: '9.9.9' });
+    expect(await res.json()).toEqual({
+      ok: true,
+      protocol_version: PROTOCOL_VERSION,
+      engine_version: '9.9.9',
+    });
   });
 
   it('gives 404 for unknown routes and 405 for wrong methods', async () => {
@@ -335,5 +347,50 @@ describe('rateLimitKey', () => {
   it('passes anything else through', () => {
     expect(rateLimitKey('unknown')).toBe('unknown');
     expect(rateLimitKey('1:2:3')).toBe('1:2:3');
+  });
+});
+
+describe('POST /rooms with a save', () => {
+  // The store stands in for the referee, which verifies the save itself.
+  const save = { format_version: 1, kind: 'wwd-save', hash: 'ab' };
+  const saveBody = (pad = 0): string =>
+    JSON.stringify({ save: { ...save, pad: 'x'.repeat(pad) }, seat: 'p1', grace_minutes: 30 });
+
+  it('creates a room from a save larger than a message', async () => {
+    const { store, ctx } = setup();
+    const raw = saveBody(MAX_MESSAGE_BYTES * 4);
+    const res = await run(post(raw), ctx());
+    expect(res.status).toBe(201);
+    const { code } = (await res.json()) as { code: string };
+    expect(store.rooms.get(code)).toMatchObject({ seat: 'p1', grace_minutes: 30, save });
+  });
+
+  it('room from save rejects tampered saves', async () => {
+    const { store, ctx } = setup();
+    store.invalidSave = true;
+    const res = await run(post(saveBody()), ctx());
+    expect(res.status).toBe(400);
+    expect(await res.json()).toEqual({ error: 'invalid_save' });
+    expect(store.rooms.size).toBe(0);
+  });
+
+  it('caps a body with a save at the save limit', async () => {
+    const { store, ctx } = setup();
+    const raw = saveBody(MAX_SAVE_BYTES);
+    expect((await run(post(raw), ctx())).status).toBe(413);
+    const declared = new Request('https://api.example.com/rooms', {
+      method: 'POST',
+      headers: { origin: ORIGIN, 'content-length': String(MAX_SAVE_BYTES + 1) },
+      body: 'x'.repeat(MAX_SAVE_BYTES + 1),
+    });
+    expect((await run(declared, ctx())).status).toBe(413);
+    expect(store.rooms.size).toBe(0);
+  });
+
+  it('applies the origin rule and the rate limit to saves too', async () => {
+    const { ctx } = setup();
+    expect((await run(post(saveBody(), 'https://evil.example.com'), ctx())).status).toBe(403);
+    for (let i = 0; i < LIMITS.ROOM_CREATE_LIMIT; i++) await run(post(saveBody()), ctx());
+    expect((await run(post(saveBody()), ctx())).status).toBe(429);
   });
 });

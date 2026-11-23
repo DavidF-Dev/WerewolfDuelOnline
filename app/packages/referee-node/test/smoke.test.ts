@@ -33,9 +33,11 @@ function smoke(...args: string[]): Promise<Run> {
 
 const servers: TestServer[] = [];
 const silent: Server[] = [];
+const upgraded: Socket[] = [];
 
 afterEach(async () => {
   for (const s of servers.splice(0)) await s.close();
+  for (const socket of upgraded.splice(0)) socket.destroy();
   for (const s of silent.splice(0)) {
     s.closeAllConnections();
     await new Promise((resolve) => s.close(resolve));
@@ -63,7 +65,6 @@ async function freePort(): Promise<number> {
  * frame or answers a close.
  */
 async function silentSockets(): Promise<string> {
-  const sockets: Socket[] = [];
   const server = createServer((req, res) => {
     res.setHeader('content-type', 'application/json');
     if (req.url === '/health') {
@@ -74,7 +75,7 @@ async function silentSockets(): Promise<string> {
     }
   });
   server.on('upgrade', (req, socket: Socket) => {
-    sockets.push(socket);
+    upgraded.push(socket);
     const accept = createHash('sha1')
       .update(`${req.headers['sec-websocket-key']}258EAFA5-E914-47DA-95CA-C5AB0DC85B11`)
       .digest('base64');
@@ -84,7 +85,6 @@ async function silentSockets(): Promise<string> {
         `Sec-WebSocket-Accept: ${accept}\r\n\r\n`,
     );
   });
-  server.on('close', () => sockets.forEach((s) => s.destroy()));
   return listen(server);
 }
 

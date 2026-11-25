@@ -42,6 +42,10 @@
     resetSessions();
     await initSessions(store);
     applySettings(DEFAULT_SETTINGS, root);
+    // With the fonts in before the entry mounts, its labels are fitted once, before they are first drawn.
+    const loads: Array<Promise<unknown>> = [];
+    document.fonts?.forEach((face) => loads.push(face.load().catch(() => undefined)));
+    await Promise.all(loads);
   }
 
   /** Two animation frames, by when the screen has drawn what it loaded. */

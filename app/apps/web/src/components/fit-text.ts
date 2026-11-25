@@ -21,6 +21,8 @@ interface Fit {
   /** The width of the text and of the room for it, in CSS pixels, from the last measurement. */
   need: number;
   room: number;
+  /** How many font faces had loaded when the label was last fitted. */
+  faces: number;
   texts: MutationObserver;
 }
 
@@ -68,6 +70,15 @@ function measure(fit: Fit): void {
 
 const overflows = (fit: Fit): boolean => fit.need > fit.room + EPSILON;
 
+/** How many of the document's font faces have loaded. */
+function loadedFaces(): number {
+  let loaded = 0;
+  document.fonts?.forEach((face) => {
+    if (face.status === 'loaded') loaded += 1;
+  });
+  return loaded;
+}
+
 /** Records the label's final box and whether it is cut, which shows its full text as a tooltip. */
 function finish(fit: Fit, cut: boolean): void {
   const { element } = fit;
@@ -86,7 +97,11 @@ function run(): void {
   scheduled = false;
   const pending = Array.from(dirty);
   dirty.clear();
-  for (const fit of pending) fit.element.style.fontSize = '';
+  const faces = loadedFaces();
+  for (const fit of pending) {
+    fit.faces = faces;
+    fit.element.style.fontSize = '';
+  }
   let trying: Fit[] = [];
   for (const fit of pending) {
     const { element } = fit;
@@ -130,6 +145,12 @@ function scheduleAll(): void {
   for (const fit of fits.values()) schedule(fit);
 }
 
+/** Fits again the labels fitted before the latest fonts loaded; a load they already used changes nothing. */
+function onFontsLoaded(): void {
+  const faces = loadedFaces();
+  for (const fit of fits.values()) if (fit.faces !== faces) schedule(fit);
+}
+
 function onResize(entries: ResizeObserverEntry[]): void {
   for (const entry of entries) {
     const fit = fits.get(entry.target);
@@ -167,7 +188,7 @@ function start(): void {
   // The text-size, reading-font and spacing settings live on the root element, beside unrelated styles.
   root = new MutationObserver(onRootChange);
   root.observe(html, { attributes: true, attributeFilter: ['style', 'data-font', 'data-spacing'] });
-  document.fonts?.addEventListener('loadingdone', scheduleAll);
+  document.fonts?.addEventListener('loadingdone', onFontsLoaded);
 }
 
 function stop(): void {
@@ -176,7 +197,7 @@ function stop(): void {
   root?.disconnect();
   root = null;
   range = null;
-  document.fonts?.removeEventListener('loadingdone', scheduleAll);
+  document.fonts?.removeEventListener('loadingdone', onFontsLoaded);
 }
 
 /**
@@ -208,6 +229,7 @@ export function fitText(
     steps: 0,
     need: 0,
     room: 0,
+    faces: -1,
     texts: new MutationObserver(() => {
       if (element.textContent !== fit.text) schedule(fit);
     }),

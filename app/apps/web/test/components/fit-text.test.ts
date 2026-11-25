@@ -234,4 +234,31 @@ describe('fitText', () => {
     await frame();
     expect(fontSize(element)).toBeCloseTo(8.25, 5);
   });
+
+  it('fits again when a font finishes loading, but not for a load it has already fitted with', async () => {
+    const faces = [{ status: 'loaded' }, { status: 'loading' }];
+    const fonts = Object.assign(new EventTarget(), {
+      forEach: (each: (face: { status: string }) => void) => faces.forEach(each),
+    });
+    Object.defineProperty(document, 'fonts', { value: fonts, configurable: true });
+    try {
+      const { element } = label('Wolf Beauty', 55);
+      fit(element);
+      await frame();
+      expect(fontSize(element)).toBeCloseTo(8.25, 5);
+      // A load reported after the fit that already used it changes nothing.
+      style.textContent = '.label { font-size: 12px; }';
+      fonts.dispatchEvent(new Event('loadingdone'));
+      await frame();
+      expect(fontSize(element)).toBeCloseTo(8.25, 5);
+      // A face that has loaded since the fit can change the text's width.
+      faces[1]!.status = 'loaded';
+      fonts.dispatchEvent(new Event('loadingdone'));
+      await frame();
+      expect(fontSize(element)).toBeCloseTo(9.6, 5);
+    } finally {
+      style.textContent = '.label { font-size: 10px; }';
+      Reflect.deleteProperty(document, 'fonts');
+    }
+  });
 });

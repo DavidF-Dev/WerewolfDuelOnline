@@ -56,7 +56,11 @@
     gap: 8px;
     justify-content: space-between;
     min-height: 52px;
-    padding: 10px 12px;
+    padding-block: 10px;
+    padding-inline: max(
+      var(--gutter, 12px),
+      calc((100% - var(--column)) / 2 + var(--gutter, 12px))
+    );
   }
 
   h1 {

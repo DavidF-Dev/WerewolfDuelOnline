@@ -2,6 +2,7 @@
   export type IconName =
     | 'back'
     | 'menu'
+    | 'more'
     | 'log'
     | 'settings'
     | 'close'
@@ -35,6 +36,10 @@
     <path d="M19 12H5M11 6l-6 6 6 6" />
   {:else if name === 'menu'}
     <path d="M4 6h16M4 12h16M4 18h16" />
+  {:else if name === 'more'}
+    <circle cx="5" cy="12" r="1.25" fill="currentColor" />
+    <circle cx="12" cy="12" r="1.25" fill="currentColor" />
+    <circle cx="19" cy="12" r="1.25" fill="currentColor" />
   {:else if name === 'log'}
     <path d="M4 6h16M4 12h12M4 18h8" />
   {:else if name === 'first'}

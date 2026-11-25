@@ -20,9 +20,15 @@
   --radius: 10px;
   --radius-large: 14px;
   --target: 44px;
+  /* The width of the centred column that holds every screen's content. */
+  --column: 30rem;
   --focus-width: 3px;
   --motion-fast: 150ms;
   --motion: 250ms;
+  /* The look of an unselected, enabled control under a fine pointer. */
+  --hover-bg: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  --hover-line: color-mix(in srgb, var(--accent) 55%, var(--control-line));
+  --hover-halo: color-mix(in srgb, var(--accent) 45%, transparent);
 }
 
 :root,

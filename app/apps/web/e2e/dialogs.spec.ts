@@ -19,6 +19,7 @@ const DIALOGS: Readonly<Record<string, { answers: string[]; danger?: true }>> = 
     danger: true,
   },
   'table-resign': { answers: ['confirm-yes', 'confirm-no'], danger: true },
+  'home-remove': { answers: ['confirm-yes', 'confirm-no'], danger: true },
   'backup-export': { answers: ['confirm-yes', 'confirm-no'] },
   'backup-import': { answers: ['confirm-yes', 'confirm-no'] },
   'display-name': { answers: ['name-continue', 'name-skip'] },

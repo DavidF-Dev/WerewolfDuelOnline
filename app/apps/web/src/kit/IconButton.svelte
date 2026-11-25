@@ -39,7 +39,10 @@
     width: 32px;
   }
 
-  .icon-button:hover:not(:disabled) {
-    background: color-mix(in srgb, currentColor 20%, transparent);
+  @media (hover: hover) and (pointer: fine) {
+    .icon-button:hover:not(:disabled, [aria-disabled='true']) {
+      background: color-mix(in srgb, currentColor 20%, transparent);
+      border-color: color-mix(in srgb, currentColor 45%, transparent);
+    }
   }
 </style>

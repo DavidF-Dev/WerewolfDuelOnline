@@ -203,6 +203,47 @@ describe('merging', () => {
     expect(await other.history.get('g3')).toBeDefined();
   });
 
+  it('a removed session is never exported, and importing it again restores it', async () => {
+    const removed = sessionRecord('AAAAAA', NOW);
+    await store.sessions.put(removed);
+    const backup = await readBackup(await exportBackup(store));
+    await store.sessions.remove(removed.id, removed.seatToken);
+    expect((await readBackup(await exportBackup(store))).sessions).toEqual([]);
+
+    expect(await mergeBackup(store, backup)).toEqual({ added: 1, updated: 0 });
+    expect(await store.sessions.get(removed.id)).toEqual(removed);
+    expect(await store.sessions.removedSeat(removed.id)).toBeUndefined();
+  });
+
+  it("restoring a removed session survives another tab's list between its steps", async () => {
+    const removed = sessionRecord('AAAAAA', NOW);
+    await store.sessions.put(removed);
+    const backup = await readBackup(await exportBackup(store));
+    await store.sessions.remove(removed.id, removed.seatToken);
+
+    const put = store.sessions.put.bind(store.sessions);
+    const clearRemoved = store.sessions.clearRemoved.bind(store.sessions);
+    let steps = 0;
+    // After whichever step comes first, another tab lists the sessions.
+    const thenList = async (): Promise<void> => {
+      if (steps++ === 0) await store.sessions.list();
+    };
+    vi.spyOn(store.sessions, 'put').mockImplementation(async (record) => {
+      await put(record);
+      await thenList();
+    });
+    vi.spyOn(store.sessions, 'clearRemoved').mockImplementation(async (id) => {
+      await clearRemoved(id);
+      await thenList();
+    });
+
+    await mergeBackup(store, backup);
+    expect(steps).toBe(2);
+    vi.restoreAllMocks();
+    expect(await store.sessions.list()).toEqual([removed]);
+    expect(await store.sessions.removedSeat(removed.id)).toBeUndefined();
+  });
+
   it('keeps this device identity and settings unless asked', async () => {
     await populate(store);
     await other.identity.put({ deviceId: 'device-2', displayName: 'Local' });

@@ -30,7 +30,17 @@
     content: '';
     inset: 10px 0;
     position: absolute;
+    transition:
+      background-color var(--motion-fast) ease-out,
+      border-color var(--motion-fast) ease-out;
     z-index: -1;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .select:has(select:hover:not(:disabled))::before {
+      background: var(--hover-bg);
+      border-color: var(--hover-line);
+    }
   }
 
   .select:has(select:focus-visible)::before {
@@ -53,6 +63,10 @@
 
   select:focus-visible {
     outline: none;
+  }
+
+  select:disabled {
+    cursor: not-allowed;
   }
 
   /* Mobile browsers zoom the page into a focused field drawn under 16 px. */

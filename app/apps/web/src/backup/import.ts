@@ -83,10 +83,19 @@ export async function mergeBackup(
     if (held !== undefined && held.savedAt >= record.savedAt) continue;
     if (held === undefined) added++;
     else updated++;
+    const removedSeat = await store.sessions.removedSeat(record.id);
     steps.push({
-      apply: () => store.sessions.put(record),
-      undo: () =>
-        held === undefined ? store.sessions.delete(record.id) : store.sessions.put(held),
+      // Restoring a removed session from a backup brings it back for good.
+      apply: async () => {
+        // The mark goes first, so that no tab listing meanwhile drops the restored record.
+        if (removedSeat !== undefined) await store.sessions.clearRemoved(record.id);
+        await store.sessions.put(record);
+      },
+      undo: async () => {
+        if (removedSeat !== undefined) await store.sessions.remove(record.id, removedSeat);
+        if (held === undefined) await store.sessions.delete(record.id);
+        else await store.sessions.put(held);
+      },
     });
   }
 

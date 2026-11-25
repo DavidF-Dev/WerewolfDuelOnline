@@ -78,6 +78,7 @@
   input {
     appearance: none;
     border: 0;
+    cursor: pointer;
     height: 100%;
     inset: 0;
     margin: 0;
@@ -96,7 +97,17 @@
     border-block: 1px solid var(--line);
     padding: 4px clamp(4px, 1.5vw, 8px);
     text-align: center;
+    transition:
+      background-color var(--motion-fast) ease-out,
+      border-color var(--motion-fast) ease-out;
     width: 100%;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .option:hover input:not(:checked, :disabled) + .face {
+      background: var(--hover-bg);
+      border-color: var(--hover-line);
+    }
   }
 
   .option:first-child .face {

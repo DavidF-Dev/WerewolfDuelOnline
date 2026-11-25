@@ -32,7 +32,7 @@
 
 | # | Decision |
 |---|---|
-| 1 | **Desktop:** the app is one phone-style column, at most 30 rem (480 px) wide, centred on wider screens, with the page background (`--bg`) either side. The bar and the phase bar span the column. |
+| 1 | **Desktop:** the app's content is one phone-style column, at most 30 rem (480 px) wide, centred on wider screens. *(Revised 2026-11-25: the bar, sky gradient, treeline and phase bar span the window; only their content stays in the column.)* |
 | 2 | **Heading font** *(revised 2026-11-24: Cinzel dropped; Marcellus everywhere, including the app title and the big result line)*: Marcellus (the spec's named fallback; mixed case, OFL, self-hosted) is used for section labels, panel titles and dialog titles. |
 | 3 | **Target size:** controls are drawn at the mockup's size, but every interactive element has a hit area of at least 44 × 44 px. |
 | 4 | **Decoration:** the night-sky bar with its moon emblem and the treeline silhouette ship as in the mockup. They're decorative, `aria-hidden`, static, and come from the placeholder theme pack. |

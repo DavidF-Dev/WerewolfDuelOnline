@@ -65,6 +65,7 @@ const OVERLAYS: Readonly<Record<string, { entry: string; selector: string }>> = 
   PlanSheet: { entry: 'table-plan-seal', selector: '[data-testid="confirm-dialog"]' },
   Replay: { entry: 'replay-menu', selector: '[data-testid="replay-menu"][open]' },
   RejoinRequest: { entry: 'table-rejoin-request', selector: '[data-testid="confirm-dialog"]' },
+  RemoveGameDialog: { entry: 'home-remove', selector: '[data-testid="confirm-dialog"]' },
   ResignButton: { entry: 'table-resign', selector: '[data-testid="confirm-dialog"]' },
   Settings: { entry: 'backup-export', selector: '[data-testid="confirm-dialog"]' },
   ServerConfirm: { entry: 'server-confirm', selector: '[data-testid="server-confirm"]' },

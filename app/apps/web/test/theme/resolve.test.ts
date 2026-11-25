@@ -15,7 +15,11 @@ describe('theme packs', () => {
   it('the placeholder pack covers every card and marker, with credits and a licence', () => {
     expect(Object.keys(placeholder.cards).sort()).toEqual(TARGET_CARDS.map(targetId).sort());
     expect(Object.keys(placeholder.markers).sort()).toEqual([...MARKERS].sort());
-    expect(Object.keys(placeholder.scenery)).toEqual(['treeline']);
+    expect(Object.keys(placeholder.scenery)).toEqual([
+      'treeline',
+      'treeline-wide',
+      'treeline-band',
+    ]);
     expect(Object.keys(placeholder.factions).sort()).toEqual(['human', 'werewolf']);
     expect(Object.keys(placeholder.abilities)).toEqual(['spend']);
     expect(placeholder.credits.length).toBeGreaterThan(0);

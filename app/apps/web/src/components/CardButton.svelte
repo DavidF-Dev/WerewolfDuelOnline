@@ -59,6 +59,7 @@
   const uid = $props.id();
 
   const disabled = $derived(shownState === 'disabled');
+  const actionable = $derived(onselect !== undefined);
   const inspectable = $derived(size !== 'large');
   const showReason = $derived(disabled && reason !== undefined);
   const describedBy = $derived(
@@ -181,7 +182,12 @@
 </script>
 
 <span class="slot">
-  <span class="frame card {size}" class:selected={shownState === 'selected'} class:disabled>
+  <span
+    class="frame card {size}"
+    class:selected={shownState === 'selected'}
+    class:disabled
+    class:actionable
+  >
     <!-- The face is drawn over the button, not inside it: the button's name says all the face shows. -->
     <button
       bind:this={button}
@@ -189,6 +195,7 @@
       class="hit"
       class:selected={shownState === 'selected'}
       class:disabled
+      class:actionable
       aria-label={label}
       aria-pressed={onselect === undefined || !toggle ? undefined : shownState === 'selected'}
       aria-disabled={disabled ? 'true' : undefined}
@@ -265,7 +272,9 @@
     display: block;
     height: var(--card-large-height);
     position: relative;
-    transition: translate var(--motion-fast) ease-out;
+    transition:
+      translate var(--motion-fast) ease-out,
+      box-shadow var(--motion-fast) ease-out;
     width: var(--card-large-width);
   }
 
@@ -301,6 +310,18 @@
 
   .hit:hover {
     background: none;
+  }
+
+  /* A card only on show does nothing on a click, though a long press or focus may inspect it. */
+  .hit:not(.actionable, .disabled) {
+    cursor: default;
+  }
+
+  /* The face covers the button, so the hover ring is drawn around the card. */
+  @media (hover: hover) and (pointer: fine) {
+    .card.actionable:not(.selected, .disabled):has(> .hit:hover) {
+      box-shadow: 0 0 0 2px var(--hover-line);
+    }
   }
 
   /* The frame's outline and the tick already show the choice. */

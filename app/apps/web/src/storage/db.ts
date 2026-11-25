@@ -63,6 +63,20 @@ export interface DeviceStore {
     get(id: string): Promise<SessionRecord | undefined>;
     put(r: SessionRecord): Promise<void>;
     delete(id: string): Promise<void>;
+    /**
+     * Deletes the session the player removed, keeping a mark of its seat token for 30 days so
+     * that a tab still holding that seat does not store it again.
+     */
+    remove(id: string, seatToken: string, now?: number): Promise<void>;
+    /** The seat token of the session removed under `id`, while its mark is kept. */
+    removedSeat(id: string): Promise<string | undefined>;
+    /** Drops the removal mark, as when the player brings the session back from a backup. */
+    clearRemoved(id: string): Promise<void>;
+    /**
+     * Deletes the record under `id` if it holds the seat its removal mark names, checking and
+     * deleting in one transaction; resolves to whether it did.
+     */
+    dropIfRemoved(id: string): Promise<boolean>;
   };
   history: {
     list(): Promise<HistoryRecord[]>;
@@ -81,6 +95,16 @@ export interface Backend {
   put(store: StoreName, key: string, value: unknown): Promise<void>;
   delete(store: StoreName, key: string): Promise<void>;
   clear(store: StoreName): Promise<void>;
+  /**
+   * In one transaction, reads `key` and `other` and deletes `key` when `when` holds for their
+   * values; resolves to whether it did.
+   */
+  deleteWhen(
+    store: StoreName,
+    key: string,
+    other: string,
+    when: (value: unknown, otherValue: unknown) => boolean,
+  ): Promise<boolean>;
 }
 
 function idbBackend(db: IDBPDatabase): Backend {
@@ -92,6 +116,14 @@ function idbBackend(db: IDBPDatabase): Backend {
     },
     delete: (store, key) => db.delete(store, key),
     clear: (store) => db.clear(store),
+    deleteWhen: async (store, key, other, when) => {
+      const tx = db.transaction(store, 'readwrite');
+      const [value, otherValue] = await Promise.all([tx.store.get(key), tx.store.get(other)]);
+      const drop = when(value, otherValue);
+      if (drop) await tx.store.delete(key);
+      await tx.done;
+      return drop;
+    },
   };
 }
 
@@ -114,6 +146,11 @@ function memoryBackend(): Backend {
     clear: (store) => {
       of(store).clear();
       return Promise.resolve();
+    },
+    deleteWhen: (store, key, other, when) => {
+      const drop = when(of(store).get(key), of(store).get(other));
+      if (drop) of(store).delete(key);
+      return Promise.resolve(drop);
     },
   };
 }

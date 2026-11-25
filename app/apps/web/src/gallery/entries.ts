@@ -118,6 +118,12 @@ async function openSheet(toggle: string, sheet: string): Promise<void> {
 
 const openMenu: Act = () => openSheet('game-menu-toggle', 'game-menu');
 
+/** Opens the More menu of the first Continue row. */
+const openHomeMore: Act = async () => {
+  await click('home-more');
+  await byTestId('home-more-menu');
+};
+
 const settingsNamed: Stage = async () => {
   await nameThisDevice();
   return offerInstall();
@@ -134,6 +140,26 @@ export const GALLERY: GalleryEntry[] = [
       stage: async () => {
         await returningPlayer();
         return offerInstall();
+      },
+    }),
+  },
+  {
+    id: 'home-more',
+    game: false,
+    title: 'Home with the More menu of a game open',
+    ...staged({ screen: Home, stage: returningPlayer, act: openHomeMore }),
+  },
+  {
+    id: 'home-remove',
+    game: false,
+    title: 'Home asking before removing a game',
+    ...staged({
+      screen: Home,
+      stage: returningPlayer,
+      act: async (l) => {
+        await openHomeMore(l);
+        await click('home-remove');
+        await byTestId('confirm-dialog');
       },
     }),
   },

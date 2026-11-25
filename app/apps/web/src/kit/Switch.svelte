@@ -43,7 +43,7 @@
     padding: 0;
   }
 
-  .switch:hover:not(:disabled) {
+  .switch:hover {
     background: none;
   }
 
@@ -60,8 +60,16 @@
     flex: none;
     height: 22px;
     position: relative;
-    transition: background-color var(--motion-fast) ease-out;
+    transition:
+      background-color var(--motion-fast) ease-out,
+      box-shadow var(--motion-fast) ease-out;
     width: 38px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .switch:hover:not(:disabled, [aria-disabled='true']) .track {
+      box-shadow: 0 0 0 3px var(--hover-halo);
+    }
   }
 
   .track::after {

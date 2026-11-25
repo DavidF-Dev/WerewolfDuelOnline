@@ -3,14 +3,17 @@ import { IDBFactory } from 'fake-indexeddb';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   clearOnlineSession,
+  confirmOnlineSession,
   initSessions,
   loadOnlineSession,
   loadSession,
+  removeOnlineSession,
   resetSessions,
   saveOnlineSession,
   saveSession,
+  setOnlineSessionSave,
 } from '../src/session.js';
-import { openDeviceStore } from '../src/storage/db.js';
+import { openDeviceStore, type DeviceStore } from '../src/storage/db.js';
 import { sessionId } from '../src/storage/sessions.js';
 
 const TOKEN = 'b'.repeat(32);
@@ -223,5 +226,103 @@ describe('online sessions', () => {
       seatToken: 'e'.repeat(32),
       lastSeq: 9,
     });
+  });
+});
+
+describe('removing an online session', () => {
+  const ID = sessionId(A, 'K7Q2MX');
+  const seat = (lastSeq: number, seatToken = TOKEN) =>
+    ({ room: 'K7Q2MX', seatToken, server: A, lastSeq }) as const;
+
+  async function stored(): Promise<DeviceStore> {
+    const store = await openDeviceStore();
+    await initSessions(store);
+    await saveOnlineSession(seat(1), 100);
+    return store;
+  }
+
+  it('forgets the seat in this tab and in the store', async () => {
+    const store = await stored();
+    await removeOnlineSession(store, A, 'K7Q2MX');
+    expect(loadOnlineSession(A, 'K7Q2MX')).toBeUndefined();
+    expect(await store.sessions.get(ID)).toBeUndefined();
+    expect(await store.sessions.list()).toEqual([]);
+  });
+
+  it('a later save from a tab that still holds the removed seat does not bring it back', async () => {
+    const store = await stored();
+    // Another tab removes it; this tab's cache still holds the seat.
+    await store.sessions.remove(ID, TOKEN);
+    expect(loadOnlineSession(A, 'K7Q2MX')).toBeDefined();
+
+    expect(await saveOnlineSession(seat(2), 200)).toBe(false);
+    expect(await store.sessions.get(ID)).toBeUndefined();
+    expect(loadOnlineSession(A, 'K7Q2MX')).toBeUndefined();
+    setOnlineSessionSave(A, 'K7Q2MX', null, 300);
+    expect(await saveOnlineSession(seat(3), 400)).toBe(false);
+    expect(await store.sessions.get(ID)).toBeUndefined();
+  });
+
+  it('a save that raced the removal is undone by the next one', async () => {
+    const store = await stored();
+    await store.sessions.remove(ID, TOKEN);
+    // As if the other tab's write landed just after the removal.
+    await store.sessions.put({
+      id: ID,
+      server: A,
+      room: 'K7Q2MX',
+      seatToken: TOKEN,
+      lastSeq: 2,
+      game: 0,
+      status: 'active',
+      savedAt: 150,
+    });
+    expect(await saveOnlineSession(seat(3), 200)).toBe(false);
+    expect(await store.sessions.get(ID)).toBeUndefined();
+  });
+
+  it('undoing a raced save never deletes a seat rejoined with a new token meanwhile', async () => {
+    const store = await stored();
+    await store.sessions.remove(ID, TOKEN);
+    const fresh = 'f'.repeat(32);
+    const rejoined = {
+      id: ID,
+      server: A,
+      room: 'K7Q2MX',
+      seatToken: fresh,
+      lastSeq: 5,
+      game: 0,
+      status: 'active' as const,
+      savedAt: 300,
+    };
+    // This tab read the old record just before another tab's PIN rejoin stored the new seat.
+    vi.spyOn(store.sessions, 'get').mockImplementationOnce(async () => {
+      await store.sessions.put(rejoined);
+      return { ...rejoined, seatToken: TOKEN };
+    });
+    expect(await saveOnlineSession(seat(2), 200)).toBe(false);
+    expect(await store.sessions.get(ID)).toEqual(rejoined);
+  });
+
+  it('a new seat in the same room is stored again', async () => {
+    const store = await stored();
+    await removeOnlineSession(store, A, 'K7Q2MX');
+    const fresh = 'f'.repeat(32);
+    expect(await saveOnlineSession(seat(1, fresh), 500)).toBe(true);
+    expect(await store.sessions.get(ID)).toMatchObject({ seatToken: fresh });
+    expect(await store.sessions.removedSeat(ID)).toBeUndefined();
+  });
+
+  it('checking before a join drops a seat removed in another tab', async () => {
+    const store = await stored();
+    await store.sessions.remove(ID, TOKEN);
+    expect(loadOnlineSession(A, 'K7Q2MX')).toBeDefined();
+    expect(await confirmOnlineSession(A, 'K7Q2MX')).toBeUndefined();
+    expect(loadOnlineSession(A, 'K7Q2MX')).toBeUndefined();
+  });
+
+  it('checking before a join keeps a seat that was not removed', async () => {
+    await stored();
+    expect(await confirmOnlineSession(A, 'K7Q2MX')).toMatchObject({ seatToken: TOKEN });
   });
 });

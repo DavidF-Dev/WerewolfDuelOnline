@@ -128,7 +128,7 @@
       >
         {@render children()}
       </main>
-      <div class="page-footer">{@render pageFooter()}</div>
+      <div class="page-footer" data-part="page-footer">{@render pageFooter()}</div>
     </div>
   {:else}
     <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
@@ -144,7 +144,7 @@
     </main>
   {/if}
   {#if footer}
-    <div class="footer" bind:this={footerPart}>{@render footer()}</div>
+    <div class="footer" data-part="footer" bind:this={footerPart}>{@render footer()}</div>
   {/if}
   {#if note}
     <div class="note" data-part="note">{@render note()}</div>
@@ -155,8 +155,6 @@
   .screen {
     display: flex;
     flex-direction: column;
-    margin-inline: auto;
-    max-width: 30rem;
     min-height: 100vh;
     min-height: 100dvh;
     width: 100%;
@@ -196,7 +194,11 @@
     isolation: isolate;
     margin: 0;
     max-width: none;
-    padding: 12px;
+    padding-block: 12px;
+    padding-inline: max(
+      var(--gutter, 12px),
+      calc((100% - var(--column)) / 2 + var(--gutter, 12px))
+    );
     position: relative;
   }
 
@@ -218,12 +220,17 @@
   }
 
   .page-footer {
-    padding: 0 12px 12px;
+    padding-bottom: 12px;
+    padding-inline: max(
+      var(--gutter, 12px),
+      calc((100% - var(--column)) / 2 + var(--gutter, 12px))
+    );
   }
 
   .tight {
+    --gutter: 10px;
     gap: 6px;
-    padding: 10px;
+    padding-block: 10px;
   }
 
   [data-fit] .body {
@@ -236,14 +243,22 @@
     border-top: 1px solid var(--line);
     bottom: 0;
     flex: none;
-    padding: 6px 12px 8px;
+    padding-block: 6px 8px;
+    padding-inline: max(
+      var(--gutter, 12px),
+      calc((100% - var(--column)) / 2 + var(--gutter, 12px))
+    );
     position: sticky;
     z-index: 2;
   }
 
   .note {
     flex: none;
-    padding: 2px 12px 4px;
+    padding-block: 2px 4px;
+    padding-inline: max(
+      var(--gutter, 12px),
+      calc((100% - var(--column)) / 2 + var(--gutter, 12px))
+    );
   }
 
   .note > :global(*) {

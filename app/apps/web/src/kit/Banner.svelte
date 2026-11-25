@@ -37,7 +37,27 @@
     font-size: 0.8125rem;
     gap: 4px 8px;
     line-height: 1.35;
-    padding: 6px 12px 6px 9px;
+    padding-block: 6px;
+    padding-inline: max(9px, calc((100% - var(--column)) / 2 + 9px))
+      max(12px, calc((100% - var(--column)) / 2 + 12px));
+  }
+
+  /* Wider than the column, the tone's stripe sits at the column's edge. */
+  @media (width > 30rem) {
+    .kit-banner {
+      border-inline-start: none;
+      /* Holds the stripe without becoming positioned, which would bring a visually hidden banner back into the flow. */
+      contain: layout;
+      padding-inline-start: max(12px, calc((100% - var(--column)) / 2 + 12px));
+    }
+
+    .kit-banner::before {
+      border-inline-start: 3px solid var(--tone);
+      content: '';
+      inset-block: 0;
+      inset-inline-start: max(0px, calc((100% - var(--column)) / 2));
+      position: absolute;
+    }
   }
 
   .update {

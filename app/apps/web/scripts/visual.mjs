@@ -20,6 +20,7 @@ const SIZES = [
   { width: 360, height: 740 },
   { width: 390, height: 844 },
   { width: 1280, height: 800 },
+  { width: 1920, height: 1080 },
 ];
 /** Each look's `data-theme` and `data-contrast`, and the mockup look it is compared with. */
 const LOOKS = {

@@ -126,10 +126,16 @@ function writeThrough(record: SessionRecord): Promise<boolean> {
   const target = store;
   if (target === undefined) return Promise.resolve(false);
   const generation = clears.get(record.id) ?? 0;
-  return target.sessions
-    .get(record.id)
-    .then(async (stored) => {
+  return Promise.all([target.sessions.get(record.id), target.sessions.removedSeat(record.id)])
+    .then(async ([stored, removedSeat]) => {
       if ((clears.get(record.id) ?? 0) !== generation) return false;
+      if (removedSeat === record.seatToken) {
+        // The player removed this seat on this device; a write that raced the removal is undone too.
+        forget(record.id);
+        if (stored?.seatToken === removedSeat) await target.sessions.dropIfRemoved(record.id);
+        return false;
+      }
+      if (removedSeat !== undefined) await target.sessions.clearRemoved(record.id);
       if (stored !== undefined && stored.savedAt > record.savedAt) {
         if (cache.get(record.id) === record) cache.set(record.id, stored);
         return true;
@@ -253,11 +259,54 @@ export function loadOnlineSave(
   return { save: record.save, seat: record.seat };
 }
 
-export function clearOnlineSession(server: string, room: string): void {
-  const id = sessionId(server, room);
+/** Drops `id` from this tab and cancels its pending writes. */
+function forget(id: string): void {
   cache.delete(id);
   clears.set(id, (clears.get(id) ?? 0) + 1);
+}
+
+export function clearOnlineSession(server: string, room: string): void {
+  const id = sessionId(server, room);
+  forget(id);
   store?.sessions.delete(id).catch(ignoreFailure);
+}
+
+/**
+ * Removes the seat for `room` on `server` from this device at the player's request: this tab
+ * forgets it, and no tab that still holds it stores it again. Rejects when the store could not.
+ */
+export async function removeOnlineSession(
+  deviceStore: DeviceStore,
+  server: string,
+  room: string,
+  seatToken?: string,
+): Promise<void> {
+  const id = sessionId(server, room);
+  const token =
+    seatToken ?? cache.get(id)?.seatToken ?? (await deviceStore.sessions.get(id))?.seatToken;
+  forget(id);
+  if (token === undefined) await deviceStore.sessions.delete(id);
+  else await deviceStore.sessions.remove(id, token);
+}
+
+/**
+ * Reads the stored seat for `room` on `server` as `loadOnlineSession` does, first dropping it
+ * when another tab has removed it from this device.
+ */
+export async function confirmOnlineSession(
+  server: string,
+  room: string,
+): Promise<OnlineSession | undefined> {
+  const id = sessionId(server, room);
+  const cached = cache.get(id);
+  if (cached !== undefined && store !== undefined) {
+    try {
+      if ((await store.sessions.removedSeat(id)) === cached.seatToken) forget(id);
+    } catch {
+      // Without the store the cached seat is all there is.
+    }
+  }
+  return loadOnlineSession(server, room);
 }
 
 /** Forgets every cached session and detaches the device store; for tests. */

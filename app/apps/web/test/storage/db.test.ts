@@ -122,6 +122,80 @@ describe('device store', () => {
     expect(await store.sessions.get('old')).toBeUndefined();
   });
 
+  it('a removed session is marked, hidden from the list, and the mark expires after 30 days', async () => {
+    const now = 100 * DAY_MS;
+    const store = await openDeviceStore();
+    const id = sessionId(SERVER, 'K7Q2MX');
+    await store.sessions.put({
+      id,
+      server: SERVER,
+      room: 'K7Q2MX',
+      seatToken: TOKEN,
+      lastSeq: 0,
+      game: 0,
+      status: 'active',
+      savedAt: now - DAY_MS,
+    });
+    await store.sessions.remove(id, TOKEN, now);
+    expect(await store.sessions.get(id)).toBeUndefined();
+    expect(await store.sessions.list(now)).toEqual([]);
+    expect(await store.sessions.removedSeat(id)).toBe(TOKEN);
+
+    expect(await store.sessions.list(now + 29 * DAY_MS)).toEqual([]);
+    expect(await store.sessions.removedSeat(id)).toBe(TOKEN);
+    await store.sessions.list(now + 31 * DAY_MS);
+    expect(await store.sessions.removedSeat(id)).toBeUndefined();
+  });
+
+  it('a removed seat written back by a tab that raced the removal is never listed again', async () => {
+    const store = await openDeviceStore();
+    const id = sessionId(SERVER, 'K7Q2MX');
+    const record = {
+      id,
+      server: SERVER,
+      room: 'K7Q2MX',
+      seatToken: TOKEN,
+      lastSeq: 1,
+      game: 0,
+      status: 'active' as const,
+      savedAt: Date.now(),
+    };
+    await store.sessions.put(record);
+    // Tab B reads before the removal, tab A removes, then B's last save lands.
+    const seenByB = await store.sessions.get(id);
+    await store.sessions.remove(id, TOKEN);
+    await store.sessions.put({ ...seenByB!, lastSeq: 2 });
+
+    expect(await store.sessions.list()).toEqual([]);
+    expect(await store.sessions.get(id)).toBeUndefined();
+    expect(await store.sessions.removedSeat(id)).toBe(TOKEN);
+  });
+
+  it('dropping a removed seat keeps a record rejoined with a new token', async () => {
+    const store = await openDeviceStore();
+    const id = sessionId(SERVER, 'K7Q2MX');
+    const rejoined = {
+      id,
+      server: SERVER,
+      room: 'K7Q2MX',
+      seatToken: 'e'.repeat(32),
+      lastSeq: 1,
+      game: 0,
+      status: 'active' as const,
+      savedAt: Date.now(),
+    };
+    await store.sessions.remove(id, TOKEN);
+    // The PIN rejoin lands between a stale read and the drop.
+    await store.sessions.put(rejoined);
+    expect(await store.sessions.dropIfRemoved(id)).toBe(false);
+    expect(await store.sessions.get(id)).toEqual(rejoined);
+    expect(await store.sessions.list()).toEqual([rejoined]);
+
+    await store.sessions.put({ ...rejoined, seatToken: TOKEN });
+    expect(await store.sessions.dropIfRemoved(id)).toBe(true);
+    expect(await store.sessions.get(id)).toBeUndefined();
+  });
+
   it('clearAll returns to first run', async () => {
     const store = await openDeviceStore();
     const { deviceId } = await store.identity.get();

@@ -32,6 +32,8 @@
     "spend": "spend.svg"
   },
   "scenery": {
-    "treeline": "scenery.svg"
+    "treeline": "scenery.svg",
+    "treeline-wide": "scenery-wide.svg",
+    "treeline-band": "scenery-band.svg"
   }
 }

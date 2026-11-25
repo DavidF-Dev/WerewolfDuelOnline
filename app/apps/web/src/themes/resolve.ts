@@ -8,8 +8,11 @@ export type { MarkerId };
 /** A part of a card's ability row: the arrow from a spent marker to the attack it pays for. */
 export type AbilityArtId = 'spend';
 
-/** Decoration drawn behind a screen. */
-export type SceneryId = 'treeline';
+/**
+ * Decoration drawn behind a screen: the treeline for a phone-width column, and for wider windows
+ * a wide treeline with a plain band of trees that repeats beyond its ends.
+ */
+export type SceneryId = 'treeline' | 'treeline-wide' | 'treeline-band';
 
 /** Every marker, in display order. */
 export const MARKERS: readonly MarkerId[] = [

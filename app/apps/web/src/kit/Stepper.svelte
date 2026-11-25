@@ -87,7 +87,6 @@
   }
 
   button[aria-disabled='true'] {
-    cursor: default;
     opacity: 0.45;
   }
 

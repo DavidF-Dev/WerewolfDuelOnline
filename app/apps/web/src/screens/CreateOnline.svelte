@@ -234,6 +234,15 @@
     cursor: pointer;
     font-weight: 600;
     padding-block: 12px 4px;
+    transition: color var(--motion-fast) ease-out;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    summary:hover {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
   }
 
   .spacer {

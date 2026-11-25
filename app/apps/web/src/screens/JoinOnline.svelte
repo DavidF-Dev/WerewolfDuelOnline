@@ -25,6 +25,7 @@
   import { createRoomFromSave, historyId, historyRecordFor, recordFinishedGame } from '../saves.js';
   import {
     clearOnlineSession,
+    confirmOnlineSession,
     forgetResumedInto,
     loadOnlineSave,
     markResumedAs,
@@ -62,7 +63,9 @@
   const serverInvalid = linkedServer !== undefined && linked === undefined;
   const server = linked ?? DEFAULT_SERVER;
   const stored = room === undefined ? undefined : loadOnlineSession(server, room);
-  const seatToken = stored?.seatToken;
+  let seatToken = stored?.seatToken;
+  // Set once the stored seat has been checked against removals made in other tabs.
+  let checked = false;
 
   let game: OnlineGame | null = null;
   let stopGame: (() => void) | null = null;
@@ -184,6 +187,11 @@
   });
 
   async function start(): Promise<void> {
+    if (room !== undefined && seatToken !== undefined) {
+      seatToken = (await confirmOnlineSession(server, room))?.seatToken;
+      if (seatToken === undefined) storedSave = null;
+    }
+    checked = true;
     const store = getDeviceStore();
     if (store !== undefined && room !== undefined && seatToken === undefined) {
       try {
@@ -198,7 +206,7 @@
 
   function trust(): void {
     trusted = true;
-    if (!nameNeeded) begin();
+    if (!nameNeeded && checked) begin();
   }
 
   async function answerName(skip: boolean): Promise<void> {

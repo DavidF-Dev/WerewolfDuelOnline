@@ -87,7 +87,7 @@ main,
 footer,
 .page-width {
   margin-inline: auto;
-  max-width: 30rem;
+  max-width: var(--column);
   padding-inline: 1rem;
 }
 
@@ -119,10 +119,6 @@ button {
     border-color var(--motion-fast) ease-out;
 }
 
-button:hover:not(:disabled, [aria-disabled='true']) {
-  background: var(--surface-2);
-}
-
 button:disabled,
 button[aria-disabled='true'] {
   border-style: dashed;
@@ -136,6 +132,24 @@ textarea {
   border: 1px solid var(--control-line);
   border-radius: var(--radius-small);
   padding: 0.5rem 0.75rem;
+  transition:
+    background-color var(--motion-fast) ease-out,
+    border-color var(--motion-fast) ease-out;
+}
+
+input,
+textarea {
+  cursor: text;
+}
+
+input:is([type='checkbox'], [type='radio'], [type='file']),
+label:has(> input:is([type='checkbox'], [type='radio']):not(:disabled)),
+select {
+  cursor: pointer;
+}
+
+:is(input, select, textarea):disabled {
+  cursor: not-allowed;
 }
 
 /* Mobile browsers zoom the page into a focused field drawn under 16 px. */
@@ -189,6 +203,7 @@ li + li {
   border: 1px solid var(--line);
   border-radius: 10px;
   color: var(--ink);
+  cursor: pointer;
   display: flex;
   font-size: 0.9375rem;
   font-weight: 600;
@@ -198,6 +213,9 @@ li + li {
   min-width: 0;
   text-align: center;
   text-decoration: none;
+  transition:
+    background-color var(--motion-fast) ease-out,
+    border-color var(--motion-fast) ease-out;
 }
 
 .kit-button.block {
@@ -214,12 +232,9 @@ li + li {
   width: auto;
 }
 
-.kit-button:hover:not(:disabled, [aria-disabled='true']) {
-  background: var(--surface-2);
-}
-
 .kit-button:disabled,
 .kit-button[aria-disabled='true'] {
+  cursor: not-allowed;
   opacity: 0.55;
 }
 
@@ -227,10 +242,6 @@ li + li {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--accent-ink);
-}
-
-.kit-button.primary:hover:not(:disabled, [aria-disabled='true']) {
-  background: color-mix(in srgb, var(--accent) 85%, var(--ink));
 }
 
 .kit-button.danger {
@@ -244,8 +255,35 @@ li + li {
   color: var(--danger-ink);
 }
 
-.kit-button.danger-solid:hover:not(:disabled, [aria-disabled='true']) {
-  background: color-mix(in srgb, var(--danger) 85%, var(--ink));
+/* Hover is an extra cue for a mouse; a touch screen's taps would leave it stuck on. */
+@media (hover: hover) and (pointer: fine) {
+  :where(button, .kit-button):hover:not(:disabled, [aria-disabled='true']) {
+    background: var(--hover-bg);
+    border-color: var(--hover-line);
+  }
+
+  /* Danger text on the hover tint needs a little more ink to keep 4.5:1. */
+  .kit-button.danger:hover:not(:disabled, [aria-disabled='true']) {
+    border-color: var(--danger);
+    color: color-mix(in srgb, var(--danger) 90%, var(--ink));
+  }
+
+  .kit-button.primary:hover:not(:disabled, [aria-disabled='true']) {
+    background: color-mix(in srgb, var(--accent) 85%, var(--ink));
+    border-color: var(--accent);
+  }
+
+  .kit-button.danger-solid:hover:not(:disabled, [aria-disabled='true']) {
+    background: color-mix(in srgb, var(--danger) 85%, var(--ink));
+    border-color: var(--danger);
+  }
+
+  :where(input:not([type='checkbox'], [type='radio'], [type='file']), textarea):hover:not(
+      :disabled
+    ) {
+    background: var(--hover-bg);
+    border-color: var(--hover-line);
+  }
 }
 
 /* Widens a control drawn smaller than a fingertip to a full target, without moving its neighbours. */

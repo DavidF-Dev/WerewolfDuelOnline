@@ -1,17 +1,20 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import type { Localiser } from '@wwd/client-core';
   import { getDeviceStore, patchSettings } from '../device-store.js';
   import { joinHash, rejoinHash } from '../online.js';
   import { install } from '../pwa/install.js';
   import { navigate } from '../router.js';
+  import { removeOnlineSession } from '../session.js';
   import type { SessionRecord } from '../storage/db.js';
   import { describeWhen } from '../when.js';
   import Button from '../components/Button.svelte';
   import InstallCard from '../components/InstallCard.svelte';
+  import RemoveGameDialog from '../components/RemoveGameDialog.svelte';
   import Screen from '../components/Screen.svelte';
   import IconButton from '../kit/IconButton.svelte';
   import ListRow from '../kit/ListRow.svelte';
+  import MenuButton from '../kit/MenuButton.svelte';
   import Panel from '../kit/Panel.svelte';
 
   interface Props {
@@ -62,10 +65,49 @@
     installCardWanted && ($install === 'prompt' || $install === 'ios') ? $install : null,
   );
 
+  let removing = $state.raw<SessionRecord | null>(null);
+  let removedStatus = $state('');
+  let newGameButton = $state<HTMLButtonElement>();
+  let sessionList = $state<HTMLElement>();
+
   function dismissInstallCard(): void {
     installCardWanted = false;
     settingsButton?.focus();
     void patchSettings({ installCardDismissed: true });
+  }
+
+  function showSessions(records: readonly SessionRecord[]): void {
+    now = Date.now();
+    sessions = [...records].sort((a, b) => b.savedAt - a.savedAt);
+  }
+
+  const moreLabel = (session: SessionRecord): string =>
+    session.opponentName === undefined
+      ? l.t('home-more-label-unknown')
+      : l.t('home-more-label', { opponent: session.opponentName });
+
+  async function remove(session: SessionRecord): Promise<void> {
+    removing = null;
+    // Emptied first, so that a second removal is announced again.
+    removedStatus = '';
+    const store = getDeviceStore();
+    const at = sessions.findIndex((s) => s.id === session.id);
+    try {
+      if (store === undefined) throw new Error('no device store');
+      await removeOnlineSession(store, session.server, session.room, session.seatToken);
+    } catch {
+      removedStatus = l.t('home-remove-failed');
+      return;
+    }
+    removedStatus = l.t('home-removed');
+    try {
+      showSessions(await store.sessions.list());
+    } catch {
+      sessions = sessions.filter((s) => s.id !== session.id);
+    }
+    await tick();
+    const buttons = sessionList?.querySelectorAll<HTMLElement>('[data-testid="home-more"]') ?? [];
+    (buttons[Math.min(at, buttons.length - 1)] ?? newGameButton)?.focus();
   }
 
   onMount(() => {
@@ -82,10 +124,7 @@
     );
     store?.sessions.list().then(
       (records) => {
-        if (active) {
-          now = Date.now();
-          sessions = [...records].sort((a, b) => b.savedAt - a.savedAt);
-        }
+        if (active) showSessions(records);
       },
       () => {
         // Without stored sessions there is nothing to continue.
@@ -109,34 +148,62 @@
   {/snippet}
   {#if sessions.length > 0}
     <Panel title={l.t('home-continue-heading')}>
-      <ul class="sessions">
+      <ul class="sessions" bind:this={sessionList}>
         {#each sessions as session (session.id)}
           <ListRow data-testid="home-session">
             <b>{opponentOf(session)}</b>
             <div class="status">{statusOf(session)}</div>
             {#snippet end()}
-              <Button
-                size="small"
-                variant={session.status === 'active' ? 'primary' : 'default'}
-                href={continueHash(session)}
-                aria-label={l.t(
-                  session.status === 'finished' ? 'home-open-label' : 'home-resume-label',
-                  {
-                    opponent: opponentOf(session),
-                    room: session.room,
-                  },
-                )}
-                data-testid="home-continue"
-                >{l.t(session.status === 'finished' ? 'home-open' : 'home-resume')}</Button
-              >
+              <div class="actions">
+                <Button
+                  size="small"
+                  variant={session.status === 'active' ? 'primary' : 'default'}
+                  href={continueHash(session)}
+                  aria-label={l.t(
+                    session.status === 'finished' ? 'home-open-label' : 'home-resume-label',
+                    {
+                      opponent: opponentOf(session),
+                      room: session.room,
+                    },
+                  )}
+                  data-testid="home-continue"
+                  >{l.t(session.status === 'finished' ? 'home-open' : 'home-resume')}</Button
+                >
+                <MenuButton
+                  label={moreLabel(session)}
+                  data-testid="home-more"
+                  menuTestId="home-more-menu"
+                  items={[
+                    {
+                      label: l.t('home-remove'),
+                      'data-testid': 'home-remove',
+                      onselect: () => (removing = session),
+                    },
+                  ]}
+                />
+              </div>
             {/snippet}
           </ListRow>
         {/each}
       </ul>
     </Panel>
   {/if}
-  <Button variant="primary" data-testid="home-create-online" onclick={() => navigate('online-new')}
-    >{l.t('home-create-online')}</Button
+  <p class="visually-hidden" role="status">{removedStatus}</p>
+  {#if removing !== null}
+    {@const session = removing}
+    <RemoveGameDialog
+      localiser={l}
+      opponent={session.opponentName ?? null}
+      finished={session.status === 'finished'}
+      onremove={() => void remove(session)}
+      oncancel={() => (removing = null)}
+    />
+  {/if}
+  <Button
+    variant="primary"
+    data-testid="home-create-online"
+    bind:element={newGameButton}
+    onclick={() => navigate('online-new')}>{l.t('home-create-online')}</Button
   >
   <Button data-testid="home-join-online" onclick={() => navigate('join')}
     >{l.t('home-join-online')}</Button
@@ -180,6 +247,12 @@
   .status {
     color: var(--muted);
     font-size: 0.75rem;
+  }
+
+  .actions {
+    align-items: center;
+    display: flex;
+    gap: 8px;
   }
 
   .pair {

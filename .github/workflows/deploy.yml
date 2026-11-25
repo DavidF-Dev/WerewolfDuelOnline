@@ -125,8 +125,8 @@ jobs:
           REFEREE: ${{ vars.REFEREE_URL }}
         run: node scripts/smoke.mjs "$REFEREE"
 
-  web:
-    name: Web app to GitHub Pages
+  web-build:
+    name: Build the web app
     needs: [settings, referee-production]
     # Waits for the production referee when it is configured, and runs only if that deploy succeeded.
     if: >-
@@ -136,14 +136,7 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: read
-      pages: write
-      id-token: write
-    concurrency:
-      group: pages
-      cancel-in-progress: false
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      pages: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -167,6 +160,24 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: app/apps/web/dist
+
+  web:
+    name: Web app to GitHub Pages
+    needs: web-build
+    # A job of its own, so the uploaded site is listed before it deploys and a retry reuses it.
+    if: needs.web-build.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

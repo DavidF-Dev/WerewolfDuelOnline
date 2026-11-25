@@ -25,14 +25,15 @@ jobs run in this order:
    (`scripts/smoke.mjs`) against it.
 3. **Referee to Cloudflare production** runs only if staging passed. It waits for your approval
    (section 3), deploys the production Worker and smoke-tests it.
-4. **Web app to GitHub Pages** builds the app against `REFEREE_URL` and publishes it. It runs only
-   when `REFEREE_URL` is set.
+4. **Build the web app** builds the app against `REFEREE_URL` and uploads it for Pages. It runs
+   only when `REFEREE_URL` is set.
+5. **Web app to GitHub Pages** publishes the uploaded app. It runs only if the build succeeded.
 
 The two referee jobs run only when both Cloudflare secrets and the `APP_ORIGINS` and
 `STAGING_REFEREE_URL` variables are set. When they are, the web app waits for the production
 referee and is published only if that deploy succeeded, so the site never goes live ahead of the
 referee it talks to. If staging fails or you reject the production deploy, the site isn't updated
-either. When the referee isn't configured, the web job runs on its own.
+either. When the referee isn't configured, the two web jobs run on their own.
 
 ## 1. Cloudflare
 
@@ -121,13 +122,13 @@ the rest.
 ## 4. GitHub Pages
 
 Settings → Pages → Build and deployment → Source: **GitHub Actions**. GitHub then creates the
-`github-pages` environment that the web job deploys to. Under Settings → Environments →
+`github-pages` environment that **Web app to GitHub Pages** deploys to. Under Settings → Environments →
 `github-pages`, check that Deployment branches and tags allows only `main`, as for
 `production`.
 
 GitHub Pages is free for public repositories. A private repository needs a paid plan.
 
-The web job asks Pages for the site's base path, so a project site is built for `/<repo>/` and a
+**Build the web app** asks Pages for the site's base path, so a project site is built for `/<repo>/` and a
 custom domain for `/`. To try a sub-path build locally:
 
 ```sh
@@ -143,8 +144,8 @@ BASE_PATH=/<repo> VITE_REFEREE_URL=https://wwd-referee.davidfdev.workers.dev pnp
    - **Referee to Cloudflare staging** ends with `Smoke test passed for https://wwd-referee-staging.davidfdev.workers.dev`.
    - **Referee to Cloudflare production** waits. Choose Review deployments → `production` →
      Approve and deploy.
-   - **Web app to GitHub Pages** starts once production has deployed, and prints the site's URL
-     when it's done.
+   - **Build the web app** starts once production has deployed. **Web app to GitHub Pages** then
+     publishes it and prints the site's URL when it's done.
 3. Open `https://<github-user>.github.io/<repo>/`, create an online game, and join it from a
    second browser or device with the invite link.
 
@@ -169,7 +170,7 @@ You need a domain whose DNS you can edit. The examples use `duel.<your-domain>`.
 3. Tick **Enforce HTTPS**. GitHub issues the certificate, which can take a while.
 4. Add the new origin to `APP_ORIGINS`, for example
    `https://duel.<your-domain>,https://<github-user>.github.io`.
-5. Run the workflow again. The web job now builds for `/`, and the referees allow the new origin.
+5. Run the workflow again. **Build the web app** now builds for `/`, and the referees allow the new origin.
 
 GitHub redirects the github.io address to the custom domain. To stop anyone else from claiming
 the domain on GitHub, verify it under your account's Settings → Pages.
@@ -279,6 +280,10 @@ current pricing pages before relying on these figures.
   `Smoke test failed for https://… while creating a room: expected 201 {code}, got 429 …`. A `429`
   means 20 room-creation attempts came from that address in the last hour; wait and run it
   again.
+- **Publishing to Pages fails** (for example "No artifacts named github-pages were found"). Re-run
+  only **Web app to GitHub Pages**: on the run, choose Re-run jobs, then that job. It publishes the
+  app **Build the web app** already uploaded. Re-running the build as well uploads a second copy,
+  and publishing then fails with "Multiple artifacts named github-pages".
 - **A bad referee release.** Workers & Pages → the Worker → Deployments lets you roll back to an
   earlier version.
 - **"The game record could not be verified" after an engine upgrade.** A game that was in progress

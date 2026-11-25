@@ -2,6 +2,10 @@
   import type { Snippet } from 'svelte';
   import type { Seat } from '@wwd/engine';
   import type { Localiser, PauseState } from '@wwd/client-core';
+  import Button from '../components/Button.svelte';
+  import Panel from '../kit/Panel.svelte';
+  import Spinner from '../kit/Spinner.svelte';
+  import { handPrimary } from './primary.svelte.js';
 
   interface Props {
     localiser: Localiser;
@@ -35,66 +39,94 @@
           ? l.t('pause-agreed')
           : l.t(mine ? 'pause-requested-you' : 'pause-requested-opponent'),
   );
+
+  /** Whether this seat waits for the opponent: to agree to its pause, or to resume. */
+  const waiting = $derived(
+    pause.paused ? ready : pause.requestedBy !== null && mine && !pause.agreed,
+  );
+
+  const hosted = handPrimary(
+    () => resumeButton,
+    () => pause.paused,
+  );
 </script>
+
+{#snippet resumeButton()}
+  <!-- Stays in place once asked, so focus is not lost. -->
+  <Button
+    variant="primary"
+    data-testid="resume"
+    aria-disabled={ready}
+    onclick={() => {
+      if (!ready) onResume();
+    }}>{l.t('resume')}</Button
+  >
+{/snippet}
 
 <!-- Always present, so that each change to the pause is read out. -->
 <p role="status" class="visually-hidden" data-testid="pause-announcement">{statusText}</p>
 {#if active}
-  <section aria-labelledby="{uid}-heading" data-testid="pause-panel">
-    {#if pause.paused}
-      <h2 id="{uid}-heading" tabindex="-1" data-focus="paused">{l.t('paused-heading')}</h2>
-      <p>{l.t('paused-detail')}</p>
-    {:else}
-      <h2 id="{uid}-heading">{l.t('pause-heading')}</h2>
-    {/if}
-    {#if statusText !== ''}
-      <p data-testid="pause-status">{statusText}</p>
-    {/if}
-    {#if pause.paused}
-      <!-- Stays in place once asked, so focus is not lost. -->
-      <button
-        type="button"
-        data-testid="resume"
-        aria-disabled={ready}
-        onclick={() => {
-          if (!ready) onResume();
-        }}>{l.t('resume')}</button
-      >
-      {@render children?.()}
-    {:else if !pause.agreed && !mine}
-      <ul class="actions">
-        <li>
-          <button type="button" data-testid="pause-accept" onclick={onAccept}
-            >{l.t('pause-accept')}</button
-          >
-        </li>
-        <li>
-          <button type="button" data-testid="pause-decline" onclick={onCancel}
-            >{l.t('pause-decline')}</button
-          >
-        </li>
-      </ul>
-    {:else}
-      <button type="button" data-testid="pause-cancel" onclick={onCancel}
-        >{l.t('pause-cancel')}</button
-      >
-    {/if}
-  </section>
+  <Panel tight role="region" aria-labelledby="{uid}-heading" data-testid="pause-panel">
+    <div class="content">
+      {#if pause.paused}
+        <h2 id="{uid}-heading" class="title" tabindex="-1" data-focus="paused">
+          {l.t('paused-heading')}
+        </h2>
+        <p>{l.t('paused-detail')}</p>
+      {:else}
+        <h2 id="{uid}-heading" class="title">{l.t('pause-heading')}</h2>
+      {/if}
+      {#if statusText !== ''}
+        <p data-testid="pause-status">
+          {statusText}{#if waiting}<Spinner />{/if}
+        </p>
+      {/if}
+      {#if pause.paused}
+        {#if !hosted}{@render resumeButton()}{/if}
+        {@render children?.()}
+      {:else if !pause.agreed && !mine}
+        <ul class="actions">
+          <li>
+            <Button data-testid="pause-accept" onclick={onAccept}>{l.t('pause-accept')}</Button>
+          </li>
+          <li>
+            <Button data-testid="pause-decline" onclick={onCancel}>{l.t('pause-decline')}</Button>
+          </li>
+        </ul>
+      {:else}
+        <Button data-testid="pause-cancel" onclick={onCancel}>{l.t('pause-cancel')}</Button>
+      {/if}
+    </div>
+  </Panel>
 {/if}
 
 <style>
-  section {
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 0 0.75rem 0.75rem;
+  .content {
+    display: grid;
+    font-size: 0.875rem;
+    gap: 6px;
+  }
+
+  .title {
+    font: 400 1.0625rem/1.3 var(--font-label);
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
   }
 
   .actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 8px;
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+
+  .actions li {
+    flex: 1 1 0;
+    margin: 0;
   }
 </style>

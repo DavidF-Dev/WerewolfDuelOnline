@@ -1,29 +1,41 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, untrack } from 'svelte';
   import type { Command } from '@wwd/engine';
   import { GameClient, type GameClientState, type Localiser } from '@wwd/client-core';
   import { BroadcastChannelTransport } from '@wwd/transport';
-  import { EXAMPLE_CODE, normaliseCode } from '../code.js';
+  import { normaliseCode } from '../code.js';
   import { installDevHook } from '../dev-hook.js';
   import { loadEngine } from '../engine.js';
   import { channelFor, isHosted, watchHost } from '../local-room.js';
-  import { hrefFor } from '../router.js';
+  import { DEFAULT_SERVER, joinHash } from '../online.js';
+  import type { Place } from '../place.js';
   import { clearSession, loadSession, saveSession } from '../session.js';
   import { rejectionText, statusText } from '../text.js';
+  import Button from '../components/Button.svelte';
+  import PlaceChoice from '../components/PlaceChoice.svelte';
+  import CodeField from '../components/CodeField.svelte';
+  import Screen from '../components/Screen.svelte';
+  import WaitingStatus, { waitStateOf } from '../components/WaitingStatus.svelte';
+  import Note from '../kit/Note.svelte';
+  import Panel from '../kit/Panel.svelte';
   import Table from './Table.svelte';
 
   interface Props {
     localiser: Localiser;
+    /** A join code from the address, as written, to join at once. */
+    code?: string;
   }
 
-  let { localiser: l }: Props = $props();
-  const uid = $props.id();
+  let { localiser: l, code: linked }: Props = $props();
 
   let client: GameClient | null = null;
   let snapshot = $state.raw<GameClientState | null>(null);
   let notice = $state<string | null>(null);
-  let typed = $state('');
+  // The address is fixed for this screen: a new address mounts a new one.
+  const linkedCode = untrack(() => linked);
+  let typed = $state(linkedCode ?? '');
   let invalid = $state(false);
+  let place = $state<Place>('device');
   let rejection = $state<string | null>(null);
   let release: Array<() => void> = [];
   let mounted = true;
@@ -75,7 +87,8 @@
     const code = normaliseCode(typed);
     invalid = code === undefined;
     if (code === undefined) return;
-    void open(code);
+    if (place === 'online') location.hash = joinHash(code, DEFAULT_SERVER);
+    else void open(code);
   }
 
   /** Connects to `room` if a tab in this browser hosts it, and otherwise says so. */
@@ -123,7 +136,14 @@
 
   onMount(() => {
     const session = loadSession();
-    if (session !== undefined) void open(session.room, session.seatToken);
+    const linkedRoom = linkedCode === undefined ? undefined : normaliseCode(linkedCode);
+    // A kept seat in another room gives way to the code in the address.
+    if (session !== undefined && (linkedCode === undefined || session.room === linkedRoom)) {
+      void open(session.room, session.seatToken);
+    } else if (linkedCode !== undefined) {
+      invalid = linkedRoom === undefined;
+      if (linkedRoom !== undefined) void open(linkedRoom);
+    }
     // Closing the connection lets the host see this tab leave; the kept session rejoins on reload.
     window.addEventListener('pagehide', disconnect);
     return () => {
@@ -145,39 +165,45 @@
     {notice}
   />
 {:else}
-  <main aria-labelledby="{uid}-heading" data-testid="join">
-    <h1 id="{uid}-heading">{l.t('join-heading')}</h1>
+  <Screen title={l.t('join-heading')} testId="join" back={l.t('back')}>
     {#if snapshot !== null}
-      <p role="status" data-testid="join-status">{statusText(l, snapshot.status)}</p>
+      <WaitingStatus
+        text={statusText(l, snapshot.status)}
+        state={waitStateOf(snapshot.status)}
+        testId="join-status"
+      />
       {#if snapshot.status === 'disconnected'}
         <p role="alert">{l.t('status-disconnected-detail')}</p>
       {:else}
-        <p>{l.t('join-connecting-hint')}</p>
+        <Note>{l.t('join-connecting-hint')}</Note>
       {/if}
     {:else}
       {#if rejection !== null}
         <p role="alert" data-testid="join-rejected">{rejection}</p>
       {/if}
-      <form onsubmit={submit} novalidate>
-        <label for="{uid}-code">{l.t('join-code-label')}</label>
-        <input
-          id="{uid}-code"
-          name="code"
-          autocomplete="off"
-          autocapitalize="characters"
-          spellcheck="false"
-          aria-invalid={invalid}
-          aria-describedby={invalid ? `${uid}-hint ${uid}-error` : `${uid}-hint`}
-          data-testid="join-code-input"
-          bind:value={typed}
-        />
-        <p id="{uid}-hint">{l.t('join-code-hint', { example: EXAMPLE_CODE })}</p>
-        {#if invalid}
-          <p id="{uid}-error" role="alert">{l.t('join-code-invalid')}</p>
-        {/if}
-        <button type="submit" data-testid="join-submit">{l.t('join-submit')}</button>
+      <form class="join-form" onsubmit={submit} novalidate>
+        <Panel class="join-panel">
+          <PlaceChoice localiser={l} purpose="join" bind:value={place} />
+          <CodeField
+            localiser={l}
+            bind:value={typed}
+            {invalid}
+            error={l.t('join-code-invalid')}
+            testId="join-code-input"
+          />
+          <Button type="submit" variant="primary" data-testid="join-submit"
+            >{l.t('join-submit')}</Button
+          >
+        </Panel>
       </form>
     {/if}
-    <p><a href={hrefFor('home')}>{l.t('back-home')}</a></p>
-  </main>
+  </Screen>
 {/if}
+
+<style>
+  .join-form :global(.join-panel) {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+</style>

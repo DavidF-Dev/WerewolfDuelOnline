@@ -115,6 +115,7 @@ fn lower_initiative_attacks_first_and_wins() {
             EventKind::AttackHit {
                 seat: Seat::P0,
                 target_seat: Seat::P1,
+                attacker: Knight,
                 character: Wolfen,
                 health_lost: 1,
             },
@@ -159,8 +160,14 @@ fn resolved_character_is_immune() {
         [0, 0],
     );
     let kinds = kinds(&events);
-    assert!(kinds.contains(&EventKind::AttackMissed { seat: Seat::P0 }));
-    assert!(kinds.contains(&EventKind::AttackMissed { seat: Seat::P1 }));
+    assert!(kinds.contains(&EventKind::AttackMissed {
+        seat: Seat::P0,
+        attacker: Wolfen,
+    }));
+    assert!(kinds.contains(&EventKind::AttackMissed {
+        seat: Seat::P1,
+        attacker: Seer,
+    }));
     assert_eq!(resolved(&events, Seat::P1), 1);
     assert_eq!(state.player(Seat::P0).health, 2);
     assert_eq!(state.player(Seat::P1).health, 2);
@@ -213,6 +220,7 @@ fn seer_deals_two() {
     assert!(kinds(&events).contains(&EventKind::AttackHit {
         seat: Seat::P1,
         target_seat: Seat::P0,
+        attacker: Seer,
         character: Wolfen,
         health_lost: 2,
     }));
@@ -268,6 +276,7 @@ fn hunter_choice_spend_and_decline() {
             EventKind::AttackHit {
                 seat: Seat::P0,
                 target_seat: Seat::P1,
+                attacker: Hunter,
                 character: WolfBeauty,
                 health_lost: 1,
             },
@@ -305,7 +314,10 @@ fn hunter_choice_spend_and_decline() {
                 marker: Marker::Fang,
                 from_opponent: false,
             },
-            EventKind::AttackMissed { seat: Seat::P1 },
+            EventKind::AttackMissed {
+                seat: Seat::P1,
+                attacker: WolfBeauty,
+            },
         ]
     );
     assert_eq!(state.player(Seat::P0).cross, 1);
@@ -411,6 +423,7 @@ fn wolf_king_payment_edges() {
             EventKind::AttackHit {
                 seat: Seat::P0,
                 target_seat: Seat::P1,
+                attacker: WolfKing,
                 character: Seer,
                 health_lost: 1,
             },
@@ -518,7 +531,10 @@ fn potion_eliminated_character_cannot_be_hit_again() {
         hit: true,
         health_lost: 1,
     }));
-    assert!(kinds.contains(&EventKind::AttackMissed { seat: Seat::P0 }));
+    assert!(kinds.contains(&EventKind::AttackMissed {
+        seat: Seat::P0,
+        attacker: Knight,
+    }));
     assert!(
         !kinds
             .iter()
@@ -586,6 +602,7 @@ fn wolf_king_single_target_pays_nothing() {
         assert!(kinds.contains(&EventKind::AttackHit {
             seat: Seat::P0,
             target_seat: Seat::P1,
+            attacker: WolfKing,
             character: Seer,
             health_lost: 1,
         }));

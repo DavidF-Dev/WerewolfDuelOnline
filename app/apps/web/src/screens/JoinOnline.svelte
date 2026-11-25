@@ -8,7 +8,7 @@
   import InvitePanel from '../components/InvitePanel.svelte';
   import RejoinRequest from '../components/RejoinRequest.svelte';
   import ServerConfirm from '../components/ServerConfirm.svelte';
-  import { EXAMPLE_CODE, normaliseCode } from '../code.js';
+  import { normaliseCode } from '../code.js';
   import { getDeviceStore, rememberDisplayName } from '../device-store.js';
   import { installDevHook } from '../dev-hook.js';
   import {
@@ -21,7 +21,7 @@
     startOnlineGame,
     type OnlineGame,
   } from '../online.js';
-  import { hrefFor, replayHref } from '../router.js';
+  import { hrefFor, localJoinHash, replayHref } from '../router.js';
   import { createRoomFromSave, historyId, historyRecordFor, recordFinishedGame } from '../saves.js';
   import {
     clearOnlineSession,
@@ -33,6 +33,14 @@
     saveOnlineSession,
     setOnlineSessionSave,
   } from '../session.js';
+  import Button from '../components/Button.svelte';
+  import PlaceChoice from '../components/PlaceChoice.svelte';
+  import CodeField from '../components/CodeField.svelte';
+  import Screen from '../components/Screen.svelte';
+  import Note from '../kit/Note.svelte';
+  import Panel from '../kit/Panel.svelte';
+  import Spinner from '../kit/Spinner.svelte';
+  import type { Place } from '../place.js';
   import Table from './Table.svelte';
 
   interface Props {
@@ -46,7 +54,6 @@
   }
 
   let { localiser: l, ...address }: Props = $props();
-  const uid = $props.id();
 
   // The address is fixed for this screen: a new address mounts a new one.
   const { code, server: linkedServer, seat: askedSeat } = untrack(() => ({ ...address }));
@@ -63,6 +70,7 @@
   let connection = $state.raw<ConnectionState | null>(null);
   let notice = $state<string | null>(null);
   let typed = $state(code ?? '');
+  let place = $state<Place>('online');
   let invalid = $state(code !== undefined && room === undefined);
   // Nothing is sent to a server other than the default until the player agrees.
   let trusted = $state(server === DEFAULT_SERVER);
@@ -99,6 +107,12 @@
         ...(state.opponent.name === undefined ? {} : { opponentName: state.opponent.name }),
         // The game index is known only once the referee's welcome has arrived.
         ...(state.config === null ? {} : { game: state.game }),
+        ...(state.view === null
+          ? {}
+          : {
+              round: state.view.round,
+              yourTurn: state.seat !== null && (state.pending?.seats.includes(state.seat) ?? false),
+            }),
         ...(state.status === 'game_over' ? { finished: true } : {}),
       });
       if (!handedOver) {
@@ -139,6 +153,27 @@
 
   /** The history record kept for the finished game, once it is stored. */
   let keptId = $state<string | null>(null);
+
+  /** The game's state and connection while the screen shows them: the server trusted, the room known and the name given. */
+  const joined = $derived(
+    !serverInvalid &&
+      room !== undefined &&
+      trusted &&
+      !nameNeeded &&
+      snapshot !== null &&
+      connection !== null
+      ? { state: snapshot, connection }
+      : null,
+  );
+
+  /** Whether the screen shows the invite: this seat waits in the room for its opponent. */
+  const inviting = $derived(
+    trusted &&
+      !nameNeeded &&
+      connection !== null &&
+      connection.stopReason === null &&
+      snapshot?.status === 'waiting',
+  );
 
   onMount(() => {
     void start();
@@ -213,21 +248,27 @@
     event.preventDefault();
     const typedRoom = normaliseCode(typed);
     invalid = typedRoom === undefined;
-    if (typedRoom !== undefined) location.hash = joinHash(typedRoom, linked ?? DEFAULT_SERVER);
+    if (typedRoom === undefined) return;
+    location.hash =
+      place === 'device' ? localJoinHash(typedRoom) : joinHash(typedRoom, linked ?? DEFAULT_SERVER);
   }
 
-  /** Runs `action` on the client, noting a problem when it cannot be sent. */
-  function attempt(action: (game: OnlineGame) => void): void {
-    if (game === null) return;
+  /** Runs `action` on the game; false, with a notice, when it could not be sent. */
+  function attempt(action: (game: OnlineGame) => void): boolean {
+    if (game === null) return false;
     try {
       action(game);
+      return true;
     } catch {
       notice =
         connection?.phase === 'online' ? 'problem-command-not-sent' : 'problem-not-connected';
+      return false;
     }
   }
 
-  const command = (cmd: Command): void => attempt((g) => g.client.command(cmd));
+  const command = (cmd: Command): void => {
+    attempt((g) => g.client.command(cmd));
+  };
 
   /** Continues this seat's saved game in a new room on the same server, then opens it. */
   async function resumeFromSave(): Promise<void> {
@@ -253,11 +294,13 @@
 
 {#snippet serverWarning()}
   {#if server !== DEFAULT_SERVER}
-    <p data-testid="server-warning">{l.t('online-server-other', { host: serverHost(server) })}</p>
+    <Note data-testid="server-warning"
+      >{l.t('online-server-other', { host: serverHost(server) })}</Note
+    >
   {/if}
 {/snippet}
 
-{#snippet banner(state: GameClientState, conn: ConnectionState)}
+{#snippet connectionBanner(state: GameClientState, conn: ConnectionState)}
   <ConnectionBanner
     localiser={l}
     connection={conn}
@@ -269,20 +312,27 @@
 
 {#snippet savedGame(state: GameClientState, conn: ConnectionState)}
   {#if room !== undefined && (conn.stopReason === 'unknown_room' || state.lastError === 'room_closed') && loadOnlineSave(server, room) !== undefined}
-    <section aria-labelledby="{uid}-saved" data-testid="saved-game">
-      <h2 id="{uid}-saved">{l.t('save-resume')}</h2>
+    <Panel title={l.t('save-resume')} data-testid="saved-game">
       <p>{l.t('save-room-gone')}</p>
-      <button
-        type="button"
+      <Button
+        variant="primary"
         data-testid="resume-from-save"
         aria-disabled={resuming}
-        onclick={() => void resumeFromSave()}>{l.t('save-resume')}</button
+        onclick={() => void resumeFromSave()}>{l.t('save-resume')}</Button
       >
-      <p role="status">{resuming ? l.t('save-resuming') : ''}</p>
+      <p role="status">
+        {#if resuming}{l.t('save-resuming')}<Spinner />{/if}
+      </p>
       {#if resumeProblem !== null}
         <p role="alert" data-testid="resume-from-save-problem">{l.t(resumeProblem)}</p>
       {/if}
-    </section>
+    </Panel>
+  {/if}
+{/snippet}
+
+{#snippet waitingBanner()}
+  {#if joined !== null}
+    {@render connectionBanner(joined.state, joined.connection)}
   {/if}
 {/snippet}
 
@@ -323,8 +373,10 @@
     {#snippet menu()}
       {@render continueElsewhere(state)}
     {/snippet}
+    {#snippet banner()}
+      {@render connectionBanner(state, conn)}
+    {/snippet}
     {@render serverWarning()}
-    {@render banner(state, conn)}
     {@render savedGame(state, conn)}
     <RejoinRequest
       localiser={l}
@@ -335,72 +387,83 @@
     />
   </Table>
 {:else}
-  <main aria-labelledby="{uid}-heading" data-testid="join-online">
-    <h1 id="{uid}-heading">{l.t('online-join-heading')}</h1>
+  <Screen
+    title={l.t(inviting ? 'invite-title' : 'online-join-heading')}
+    testId="join-online"
+    back={l.t('back')}
+    banner={waitingBanner}
+  >
     {#if serverInvalid}
       <p role="alert" data-testid="server-invalid">{l.t('online-server-invalid')}</p>
     {:else if room !== undefined && !trusted}
       <ServerConfirm localiser={l} {server} onContinue={trust} />
     {:else if room === undefined}
       {@render serverWarning()}
-      <form onsubmit={submit} novalidate>
-        <label for="{uid}-code">{l.t('join-code-label')}</label>
-        <input
-          id="{uid}-code"
-          name="code"
-          autocomplete="off"
-          autocapitalize="characters"
-          spellcheck="false"
-          aria-invalid={invalid}
-          aria-describedby={invalid ? `${uid}-hint ${uid}-error` : `${uid}-hint`}
-          data-testid="join-code-input"
-          bind:value={typed}
-        />
-        <p id="{uid}-hint">{l.t('join-code-hint', { example: EXAMPLE_CODE })}</p>
-        {#if invalid}
-          <p id="{uid}-error" role="alert">{l.t('online-join-code-invalid')}</p>
-        {/if}
-        <button type="submit" data-testid="join-submit">{l.t('join-submit')}</button>
+      <form class="join-form" onsubmit={submit} novalidate>
+        <Panel class="join-panel">
+          <PlaceChoice localiser={l} purpose="join" bind:value={place} />
+          <CodeField
+            localiser={l}
+            bind:value={typed}
+            {invalid}
+            error={l.t('online-join-code-invalid')}
+            testId="join-code-input"
+          />
+          <Button type="submit" variant="primary" data-testid="join-submit"
+            >{l.t('join-submit')}</Button
+          >
+        </Panel>
       </form>
     {:else if nameNeeded}
-      <form
-        data-testid="name-prompt"
-        onsubmit={(event) => {
-          event.preventDefault();
-          void answerName(false);
-        }}
-      >
-        <DisplayNamePrompt localiser={l} bind:value={typedName} />
-        <button type="submit" data-testid="name-continue">{l.t('name-continue')}</button>
-        <button type="button" data-testid="name-skip" onclick={() => void answerName(true)}
-          >{l.t('name-skip')}</button
-        >
-      </form>
-    {:else if snapshot !== null && connection !== null}
-      {@const state = snapshot}
+      <DisplayNamePrompt
+        localiser={l}
+        bind:value={typedName}
+        onanswer={(skip) => void answerName(skip)}
+      />
+    {:else if joined !== null}
+      {@const { state, connection } = joined}
       {@render serverWarning()}
-      {@render banner(state, connection)}
       {@render savedGame(state, connection)}
       {#if connection.stopReason === 'unknown_seat'}
-        <ul>
-          <li>
-            <button type="button" data-testid="join-as-new" onclick={joinAsNew}
-              >{l.t('online-join-new')}</button
-            >
-          </li>
-          <li>
-            <a href={rejoinHash(room, null, server)} data-testid="rejoin-with-pin"
-              >{l.t('online-rejoin-pin')}</a
-            >
-          </li>
-        </ul>
+        <Button variant="primary" data-testid="join-as-new" onclick={joinAsNew}
+          >{l.t('online-join-new')}</Button
+        >
+        <Button href={rejoinHash(room, null, server)} data-testid="rejoin-with-pin"
+          >{l.t('online-rejoin-pin')}</Button
+        >
       {:else if connection.stopReason !== null}
-        <p><a href={hrefFor('join')}>{l.t('online-join-other')}</a></p>
+        {#if connection.stopReason === 'room_full'}
+          <Button
+            variant="primary"
+            data-testid="room-full-rejoin"
+            onclick={() => {
+              location.hash = rejoinHash(room, null, server);
+            }}>{l.t('online-room-full-rejoin')}</Button
+          >
+        {/if}
+        <Button href={hrefFor('join')}>{l.t('online-join-other')}</Button>
       {:else if state.status === 'waiting'}
-        <InvitePanel localiser={l} {room} {server} />
+        <InvitePanel
+          localiser={l}
+          {room}
+          {server}
+          titled={false}
+          config={state.config}
+          seat={state.seat}
+          opponentJoined={state.opponent.connected}
+        />
       {/if}
-      {@render continueElsewhere(state)}
+      {#if !inviting}
+        {@render continueElsewhere(state)}
+      {/if}
     {/if}
-    <p><a href={hrefFor('home')}>{l.t('back-home')}</a></p>
-  </main>
+  </Screen>
 {/if}
+
+<style>
+  .join-form :global(.join-panel) {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+</style>

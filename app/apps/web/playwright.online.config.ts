@@ -6,6 +6,8 @@ export default defineConfig({
   testMatch: ['online.spec.ts', 'pause.spec.ts', 'history.spec.ts', 'a11y.spec.ts'],
   globalSetup: './e2e/node-referee.ts',
   fullyParallel: true,
+  // Tests drive two or more pages through whole games, so one worker per core overloads a local machine.
+  workers: process.env.CI ? undefined : 4,
   forbidOnly: !!process.env.CI,
   retries: 0,
   reporter: process.env.CI ? [['github'], ['list']] : 'list',

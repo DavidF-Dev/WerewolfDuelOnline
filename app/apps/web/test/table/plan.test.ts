@@ -43,6 +43,7 @@ function setUp(confirmPlan = false, cards: Character[] = ['knight', 'seer', 'vil
 }
 
 const target = (id: string): HTMLElement => screen.getByTestId(`target-${id}`);
+const TARGET_IDS = [...WEREWOLVES, ...HUMANS, 'fool'];
 
 /** The text of whatever describes `element`. */
 const description = (element: HTMLElement): string =>
@@ -58,15 +59,80 @@ describe('PlanSheet', () => {
     expect(characters.getByRole('button', { name: /^3, Knight, Human[.]/ })).toBeTruthy();
   });
 
-  it('shows the targets and the card detail only once a character is chosen', async () => {
-    const { choose } = setUp();
-    expect(screen.getByText('Choose a character first.')).toBeTruthy();
-    expect(screen.queryByTestId('plan-targets')).toBeNull();
+  it('tapping a hand card chooses the character', async () => {
+    const { choose, onCommand } = setUp();
+    for (const card of TARGET_IDS) {
+      expect(target(card).getAttribute('aria-disabled'), card).toBe('true');
+      expect(description(target(card))).toContain('Choose a character first.');
+    }
     await choose(/^[0-9], Knight,/);
-    expect(screen.getByTestId('plan-detail').textContent).toBe(
-      `Knight: ${localiser.t('card-ability-knight')}`,
-    );
     expect(screen.getByTestId('plan-character-knight').getAttribute('aria-pressed')).toBe('true');
+    expect(screen.getByTestId('plan-character-seer').getAttribute('aria-pressed')).toBe('false');
+    expect(target('wolfen').getAttribute('aria-disabled')).toBeNull();
+    expect(onCommand).not.toHaveBeenCalled();
+  });
+
+  // The 14 px rise itself is measured in the e2e layout spec ("the chosen hand card rises").
+  it('the chosen hand card is drawn selected in a Your hand region', async () => {
+    const { choose } = setUp();
+    const frame = (c: Character) =>
+      screen.getByTestId(`plan-character-${c}`).closest('.frame') as HTMLElement;
+    expect(
+      ['knight', 'seer', 'villager'].map((c) =>
+        frame(c as Character).classList.contains('selected'),
+      ),
+    ).toEqual([false, false, false]);
+    await choose(/^[0-9], Seer,/);
+    expect(frame('seer').classList.contains('selected')).toBe(true);
+    expect(frame('seer').classList.contains('medium')).toBe(true);
+    expect(frame('knight').classList.contains('selected')).toBe(false);
+    expect(screen.getByTestId('plan-characters').closest('section')?.textContent).toContain(
+      'Your hand',
+    );
+  });
+
+  it('tapping a target card toggles it only when legal', async () => {
+    const { choose } = setUp();
+    await userEvent.click(target('wolfen'));
+    expect(target('wolfen').getAttribute('aria-pressed')).toBe('false');
+    await choose(/^[0-9], Knight,/);
+    await userEvent.click(target('seer'));
+    expect(target('seer').getAttribute('aria-pressed')).toBe('false');
+    target('seer').focus();
+    await userEvent.keyboard('{Enter}');
+    expect(target('seer').getAttribute('aria-pressed'), 'nor by the keyboard').toBe('false');
+    await userEvent.click(target('wolfen'));
+    expect(target('wolfen').getAttribute('aria-pressed')).toBe('true');
+    await userEvent.click(target('wolf_king'));
+    expect(target('wolf_king').getAttribute('aria-pressed')).toBe('false');
+    await userEvent.click(target('wolfen'));
+    expect(target('wolfen').getAttribute('aria-pressed')).toBe('false');
+  });
+
+  it('pressing the chosen hand card again clears the choice and its targets', async () => {
+    const { choose, seal } = setUp();
+    await choose(/^[0-9], Knight,/);
+    await userEvent.click(target('wolfen'));
+    await choose(/^[0-9], Knight,/);
+    expect(screen.getByTestId('plan-character-knight').getAttribute('aria-pressed')).toBe('false');
+    expect(target('wolfen').getAttribute('aria-pressed')).toBe('false');
+    expect(target('wolfen').getAttribute('aria-disabled')).toBe('true');
+    expect(seal().disabled).toBe(true);
+    await choose(/^[0-9], Knight,/);
+    expect(screen.getByTestId('plan-character-knight').getAttribute('aria-pressed')).toBe('true');
+  });
+
+  it('a target that cannot be chosen shows its reason when tapped', async () => {
+    const { choose } = setUp();
+    await choose(/^[0-9], Knight,/);
+    const slot = (id: string) => target(id).closest('.slot') as HTMLElement;
+    expect(slot('seer').querySelector('[data-part="reason"]')).toBeNull();
+    await userEvent.click(target('seer'));
+    expect(slot('seer').querySelector('[data-part="reason"]')?.textContent).toBe(
+      localiser.t('error-target-not-allowed'),
+    );
+    await userEvent.click(target('wolfen'));
+    expect(slot('seer').querySelector('[data-part="reason"]')).toBeNull();
   });
 
   it("disallowed targets show the engine's reason", async () => {
@@ -86,14 +152,15 @@ describe('PlanSheet', () => {
     expect(target('fool').getAttribute('aria-disabled')).toBeNull();
   });
 
-  it('notes a target that is in my own hand', async () => {
+  it('marks a target that is in my own hand', async () => {
     const { choose, hand } = setUp(false, ['wolf_king', 'knight']);
+    expect(description(target('knight'))).toContain('In hand');
     await choose(/^[0-9], Wolf King,/);
     expect(target('knight').getAttribute('aria-disabled')).toBeNull();
-    expect(description(target('knight'))).toContain('In your hand: no effect');
+    expect(description(target('knight'))).toContain('In hand');
     const elsewhere = HUMANS.find((c) => !hand.includes(c));
     if (elsewhere === undefined) throw new Error('unexpected deal');
-    expect(description(target(elsewhere))).not.toContain('In your hand');
+    expect(description(target(elsewhere))).not.toContain('In hand');
   });
 
   it('summarises the plan as it is built', async () => {
@@ -102,8 +169,10 @@ describe('PlanSheet', () => {
     await userEvent.click(target('fool'));
     await userEvent.click(target('wolfen'));
     const summary = screen.getByTestId('plan-summary');
-    expect(within(summary).getByText('Knight → Wolfen + Fool')).toBeTruthy();
-    expect(summary.textContent).toContain('Knight targeting Wolfen and the Fool');
+    expect(summary.querySelector('[aria-hidden="true"]')?.textContent).toBe(
+      'Knight → Wolfen + Fool',
+    );
+    expect(summary.textContent).toContain('Knight targeting the Wolfen and the Fool');
   });
 
   it('seals the engine entry whatever the click order', async () => {
@@ -134,6 +203,7 @@ describe('PlanSheet', () => {
     await userEvent.click(second.seal());
     const dialog = screen.getByRole('alertdialog', { name: 'Seal this plan?' });
     expect(dialog.textContent).toContain('Villager targeting the Fool');
+    expect(within(dialog).getByTestId('plan-hint').textContent).toBe(localiser.t('hint-plan'));
     expect(second.onCommand).not.toHaveBeenCalled();
     await userEvent.click(within(dialog).getByRole('button', { name: 'Keep choosing' }));
     expect(second.onCommand).not.toHaveBeenCalled();
@@ -148,10 +218,13 @@ describe('PlanSheet', () => {
     const { choose, seal, onCommand } = setUp();
     await choose(/^[0-9], Villager,/);
     await userEvent.click(target('fool'));
+    expect(seal().querySelector('[data-part="spinner"]')).toBeNull();
     await userEvent.dblClick(seal());
     await userEvent.click(seal());
     expect(onCommand).toHaveBeenCalledTimes(1);
     expect(seal().getAttribute('aria-disabled')).toBe('true');
+    expect(seal().querySelector('[data-part="spinner"]')?.getAttribute('aria-hidden')).toBe('true');
+    expect(seal().textContent?.trim()).toBe('Seal plan');
   });
 
   it('clears the targets when the character changes', async () => {

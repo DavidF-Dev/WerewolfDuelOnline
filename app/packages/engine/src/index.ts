@@ -1,6 +1,7 @@
 // The glue sits in the build output and is addressed from both `src` and `dist`.
 import init, {
   WasmGame,
+  abilitySummary as wasmAbilitySummary,
   contentHash as wasmContentHash,
   effectiveInitiative as wasmEffectiveInitiative,
   engineVersion as wasmEngineVersion,
@@ -13,6 +14,7 @@ import init, {
   visibleTo as wasmVisibleTo,
 } from '../dist/wasm/wwd_wasm.js';
 import type {
+  AbilitySummary,
   Character,
   Command,
   Event,
@@ -166,6 +168,11 @@ export function validatePlan(plan: Plan, config: RulesConfig): string | null {
 
 export function effectiveInitiative(character: Character, placed: number): number {
   return guard(() => wasmEffectiveInitiative(character, placed));
+}
+
+/** What `character` gains, spends and attacks when it resolves, for drawing its ability. */
+export function abilitySummary(character: Character): AbilitySummary {
+  return guard(() => wasmAbilitySummary(character) as AbilitySummary);
 }
 
 /** The seats in showdown order, from the reveal until the next round is dealt. */

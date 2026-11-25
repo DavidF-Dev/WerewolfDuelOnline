@@ -339,6 +339,8 @@ export class GameClient {
   private closed(transport: Transport): void {
     if (transport !== this.transport) return;
     const { status } = this.current;
+    // The referee drops a rejoin request when this seat disconnects, so there is nothing left to answer.
+    this.update({ rejoinRequested: false, rejoinDeadline: null });
     if (status === 'game_over' || status === 'rejected') return;
     this.update({ status: 'disconnected', legal: [] });
   }

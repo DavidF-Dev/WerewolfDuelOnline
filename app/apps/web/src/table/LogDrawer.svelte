@@ -3,7 +3,12 @@
   import type { Event, EventKind, Seat, Tiebreak } from '@wwd/engine';
   import type { Localiser } from '@wwd/client-core';
   import { CHARACTERS, initiative } from '../cards.js';
-  import { characterLabel, logLine } from '../text.js';
+  import AbilityLegend from '../components/AbilityLegend.svelte';
+  import Label from '../kit/Label.svelte';
+  import RichText from '../kit/RichText.svelte';
+  import Sheet from '../kit/Sheet.svelte';
+  import { display } from '../settings/display.svelte.js';
+  import { abilityText, characterLabel, logLine, logParts } from '../text.js';
 
   interface Props {
     localiser: Localiser;
@@ -11,9 +16,13 @@
     seat: Seat;
     /** The room's tiebreak rule; null until the referee has said which. */
     tiebreak: Tiebreak | null;
+    /** Whether the log and rules sheet is shown. */
+    open: boolean;
+    /** Closes the sheet. */
+    onclose: () => void;
   }
 
-  let { localiser: l, events, seat, tiebreak }: Props = $props();
+  let { localiser: l, events, seat, tiebreak, open, onclose }: Props = $props();
   const uid = $props.id();
 
   /** How many recent announcements stay in the live log. */
@@ -43,51 +52,52 @@
   {/each}
 </div>
 
-<details class="drawer" data-testid="log-drawer">
-  <summary>{l.t('drawer-summary')}</summary>
-  <section aria-labelledby="{uid}-log" data-testid="event-log">
-    <h2 id="{uid}-log">{l.t('log-heading')}</h2>
-    <ol class="log">
-      {#each events as [seq, event] (seq)}
-        <li data-testid="log-{seq}">{logLine(l, event, seat)}</li>
-      {/each}
-    </ol>
-  </section>
-  <section aria-labelledby="{uid}-rules">
-    <h2 id="{uid}-rules">{l.t('rules-heading')}</h2>
-    <p data-testid="rules-order">
-      {l.t('rules-order')}
-      {#if tiebreak !== null}
-        {l.t(`rules-tiebreak-${tiebreak.replaceAll('_', '-')}`)}
+{#if open}
+  <Sheet
+    title={l.t('drawer-summary')}
+    closeLabel={l.t('sheet-close')}
+    {onclose}
+    testId="log-drawer"
+  >
+    <section aria-labelledby="{uid}-log" data-testid="event-log">
+      <Label as="h3" id="{uid}-log">{l.t('log-heading')}</Label>
+      <ol class="log">
+        {#each events as [seq, event] (seq)}
+          <li data-testid="log-{seq}"><RichText parts={logParts(l, event, seat)} /></li>
+        {/each}
+      </ol>
+    </section>
+    <section aria-labelledby="{uid}-rules">
+      <Label as="h3" id="{uid}-rules">{l.t('rules-heading')}</Label>
+      <p data-testid="rules-order">
+        {l.t('rules-order')}
+        {#if tiebreak !== null}
+          {l.t(`rules-tiebreak-${tiebreak.replaceAll('_', '-')}`)}
+        {/if}
+      </p>
+      {#if display.rulesHints}
+        <p data-testid="rules-plan-hint">{l.t('hint-plan')}</p>
       {/if}
-    </p>
-    <ul>
-      {#each CHARACTERS as c (c)}
-        <li>{characterLabel(l, c, initiative(c))}</li>
-      {/each}
-      <li>{l.t('card-fool-name', { ability: l.t('card-ability-fool') })}</li>
-    </ul>
-  </section>
-</details>
+      <ul>
+        {#each CHARACTERS as c (c)}
+          <li>{characterLabel(l, c, initiative(c))}</li>
+        {/each}
+        <li>{l.t('card-fool-name', { ability: abilityText(l, 'fool') })}</li>
+      </ul>
+    </section>
+    <AbilityLegend localiser={l} />
+  </Sheet>
+{/if}
 
 <style>
-  .drawer {
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 0 0.75rem;
+  p,
+  ul,
+  ol {
+    margin: 0 0 0.5rem;
   }
 
-  summary {
-    cursor: pointer;
-    font-weight: 700;
-    padding-block: 0.625rem;
-  }
-
-  h2 {
-    font-size: 1.125rem;
-  }
-
-  .log {
-    padding-left: 1.5rem;
+  .log,
+  ul {
+    padding-left: 1.25rem;
   }
 </style>

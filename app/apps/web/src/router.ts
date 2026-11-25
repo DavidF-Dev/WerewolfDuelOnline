@@ -4,7 +4,8 @@ import type { Seat } from '@wwd/engine';
 export type Route =
   | { name: 'home' }
   | { name: 'local-host' }
-  | { name: 'local-join' }
+  /** `code` is as written in the address, not yet checked. */
+  | { name: 'local-join'; code?: string }
   | { name: 'online-new' }
   | { name: 'settings' }
   | { name: 'about' }
@@ -15,11 +16,16 @@ export type Route =
   | { name: 'replay'; id: string }
   /** `code` and `server` are as written in the address, not yet checked. */
   | { name: 'join'; code?: string; server?: string; seat?: Seat }
-  | { name: 'rejoin'; code?: string; seat?: Seat; server?: string };
+  | { name: 'rejoin'; code?: string; seat?: Seat; server?: string }
+  /** Development builds only: a gallery entry by its id, or the list of entries when null. */
+  | { name: 'gallery'; id: string | null };
 
 export type RouteName = Route['name'];
 
-const STATIC: Readonly<Record<string, Exclude<RouteName, 'replay'>>> = {
+/** The routes the app links to; the gallery has no address in production builds. */
+export type PageName = Exclude<RouteName, 'gallery'>;
+
+const STATIC: Readonly<Record<string, Exclude<PageName, 'replay'>>> = {
   '#/local/host': 'local-host',
   '#/local/join': 'local-join',
   '#/online/new': 'online-new',
@@ -32,7 +38,7 @@ const STATIC: Readonly<Record<string, Exclude<RouteName, 'replay'>>> = {
   '#/rejoin': 'rejoin',
 };
 
-const PATHS: Readonly<Record<RouteName, string>> = {
+const PATHS: Readonly<Record<PageName, string>> = {
   home: '#/',
   'local-host': '#/local/host',
   'local-join': '#/local/join',
@@ -59,6 +65,10 @@ export function routeFor(hash: string): Route {
   const withServer = server === undefined ? {} : { server };
   const seat = params.get('seat');
   const withSeat: { seat?: Seat } = seat === 'p0' || seat === 'p1' ? { seat } : {};
+  if (import.meta.env.DEV) {
+    const gallery = /^#\/dev\/gallery(?:\/([^/]+))?$/.exec(path);
+    if (gallery !== null) return { name: 'gallery', id: gallery[1] ?? null };
+  }
   const joinCode = JOIN_WITH_CODE.exec(path)?.[1];
   if (joinCode !== undefined) return { name: 'join', code: joinCode, ...withServer, ...withSeat };
   const replayId = REPLAY_WITH_ID.exec(path)?.[1];
@@ -71,10 +81,10 @@ export function routeFor(hash: string): Route {
   }
   const name = STATIC[path];
   if (name === 'join') return { name, ...withServer };
-  if (name === 'rejoin') {
-    const code = params.get('code') ?? undefined;
-    return { name, ...(code === undefined ? {} : { code }), ...withSeat, ...withServer };
-  }
+  const code = params.get('code') ?? undefined;
+  const withCode = code === undefined ? {} : { code };
+  if (name === 'local-join') return { name, ...withCode };
+  if (name === 'rejoin') return { name, ...withCode, ...withSeat, ...withServer };
   return { name: name ?? 'home' };
 }
 
@@ -90,9 +100,13 @@ export const route: Readable<Route> = readable(routeFor(location.hash), (set) =>
 /** The address of the replay of history record `id`. */
 export const replayHref = (id: string): string => `#/history/${encodeURIComponent(id)}`;
 
-export const hrefFor = (name: RouteName): string => PATHS[name];
+/** The address that joins local room `code` in this browser. */
+export const localJoinHash = (code: string): string =>
+  `${PATHS['local-join']}?code=${encodeURIComponent(code)}`;
 
-export function navigate(name: RouteName): void {
+export const hrefFor = (name: PageName): string => PATHS[name];
+
+export function navigate(name: PageName): void {
   location.hash = hrefFor(name);
 }
 

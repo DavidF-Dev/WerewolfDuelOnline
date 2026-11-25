@@ -97,6 +97,9 @@ describe('Rejoin', () => {
       seat: 'p0',
     });
     socket().receive({ type: 'rejoin_pending' });
-    expect(await screen.findByText(localiser.t('rejoin-waiting-approval'))).toBeTruthy();
+    const waiting = await screen.findByText(localiser.t('rejoin-waiting-approval'));
+    expect(waiting.querySelector('[data-part="spinner"]')?.getAttribute('aria-hidden')).toBe(
+      'true',
+    );
   });
 });

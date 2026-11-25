@@ -29,8 +29,8 @@ describe('Game menu', () => {
         onResign,
       },
     });
+    await userEvent.click(screen.getByRole('button', { name: 'Game menu' }));
     const menu = screen.getByTestId('game-menu');
-    await userEvent.click(within(menu).getByText('Game menu'));
     expect(menu.hasAttribute('open')).toBe(true);
     expect(within(menu).getByRole('button', { name: 'Describe table' })).toBeTruthy();
     expect(within(menu).queryByRole('button', { name: 'Pause after this round' })).toBeNull();
@@ -42,6 +42,7 @@ describe('Game menu', () => {
     });
     await userEvent.click(within(dialog).getByRole('button', { name: 'Resign' }));
     expect(onResign).toHaveBeenCalledOnce();
+    expect(screen.queryByTestId('game-menu'), 'resigning closes the menu').toBeNull();
     expect(sent, 'resigning is never sent as a legal command').toEqual([]);
   });
 
@@ -49,8 +50,8 @@ describe('Game menu', () => {
     render(Table, {
       props: { localiser, state: stateFor(newGame(12), 'p1'), onCommand: () => {} },
     });
+    await userEvent.click(screen.getByRole('button', { name: 'Game menu' }));
     const menu = screen.getByTestId('game-menu');
-    await userEvent.click(within(menu).getByText('Game menu'));
     expect(within(menu).queryByRole('button', { name: 'Resign' })).toBeNull();
   });
 
@@ -65,6 +66,7 @@ describe('Game menu', () => {
         canResign: false,
         onResign: () => {},
         onPause,
+        onclose: () => {},
       },
     });
     expect(screen.queryByRole('button', { name: 'Resign' })).toBeNull();

@@ -2,6 +2,7 @@ import { rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { expect, test, type Browser, type BrowserContext, type Page } from '@playwright/test';
 import {
+  FULL_GAME_TIMEOUT_MS,
   expectGameOver,
   mulberry32,
   openGameMenu,
@@ -58,9 +59,11 @@ async function continueFromHome(context: BrowserContext, room: string): Promise<
   const page = await context.newPage();
   recordEvents(page);
   await page.goto('/');
-  const link = page.getByTestId('home-continue').filter({ hasText: room });
-  await expect(link).toContainText('Paused');
-  await link.click();
+  const row = page
+    .getByTestId('home-session')
+    .filter({ has: page.getByRole('link', { name: new RegExp(room) }) });
+  await expect(row).toContainText('Paused');
+  await row.getByTestId('home-continue').click();
   return page;
 }
 
@@ -106,6 +109,7 @@ async function dropRoom(code: string): Promise<void> {
 }
 
 test('pause and resume across devices', { tag: '@parity' }, async ({ browser }) => {
+  test.setTimeout(FULL_GAME_TIMEOUT_MS);
   const t = await table(browser, 21);
   await agreePause(t);
   const round = await playToPause(t, 21);
@@ -126,6 +130,7 @@ test('pause and resume across devices', { tag: '@parity' }, async ({ browser }) 
 });
 
 test('resume from a save after the room is gone', async ({ browser }) => {
+  test.setTimeout(FULL_GAME_TIMEOUT_MS);
   const t = await table(browser, 22);
   await agreePause(t);
   const round = await playToPause(t, 22);

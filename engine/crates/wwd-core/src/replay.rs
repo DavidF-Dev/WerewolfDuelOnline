@@ -20,6 +20,10 @@ use crate::view::{View, Viewer, view, visible_to};
 /// The replay file layout version this engine reads and writes.
 pub const REPLAY_FORMAT_VERSION: u32 = 1;
 
+/// Earlier engine versions whose replays this engine plays the same way. Their logs, and so
+/// their checkpoint hashes, differ, so those checkpoints are not compared.
+const COMPATIBLE_ENGINE_VERSIONS: [&str; 1] = ["0.1.0"];
+
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
 #[serde(rename_all = "snake_case")]
@@ -187,9 +191,9 @@ impl Recorder {
     }
 
     /// Rebuilds a recorder from a saved replay, verifying its seed commitments and
-    /// checkpoints first.
+    /// checkpoints first. A replay from an earlier compatible engine is upgraded to this one.
     pub fn from_replay(replay: Replay) -> Result<Self, ReplayError> {
-        let state = simulate(&replay, true)?;
+        let (state, replay) = upgraded(replay)?;
         Ok(Self { state, replay })
     }
 
@@ -245,7 +249,7 @@ impl Recorder {
         new_seed: [u8; 32],
     ) -> Result<Self, ReplayError> {
         validate_boundary(&boundary)?;
-        let prior_state = simulate(&prior, true)?;
+        let (prior_state, prior) = upgraded(prior)?;
         if boundary_of(&prior_state).as_ref() != Some(&boundary) {
             return Err(ReplayError::SegmentDiscontinuity(prior.segments.len()));
         }
@@ -425,6 +429,39 @@ fn simulate(r: &Replay, check: bool) -> Result<State, ReplayError> {
     simulate_with(r, check, |_, _, _| {})
 }
 
+/// Verifies the replay and returns its final state, with the replay itself moved to this
+/// engine version: an earlier compatible version's checkpoints are taken again here.
+fn upgraded(mut r: Replay) -> Result<(State, Replay), ReplayError> {
+    if r.engine_version == ENGINE_VERSION {
+        return simulate(&r, true).map(|state| (state, r));
+    }
+    let mut rehashed: Vec<Vec<Checkpoint>> = Vec::new();
+    let mut index = 0;
+    let state = simulate_with(&r, true, |state, entry, _| {
+        if entry.is_none() {
+            rehashed.push(Vec::new());
+            index = 0;
+            return;
+        }
+        let segment = rehashed.len() - 1;
+        let taken = r.segments[segment]
+            .checkpoints
+            .iter()
+            .filter(|c| c.index == index)
+            .map(|c| Checkpoint {
+                index: c.index,
+                hash: hash(state),
+            });
+        rehashed[segment].extend(taken);
+        index += 1;
+    })?;
+    for (segment, checkpoints) in r.segments.iter_mut().zip(rehashed) {
+        segment.checkpoints = checkpoints;
+    }
+    r.engine_version = ENGINE_VERSION.to_string();
+    Ok((state, r))
+}
+
 /// Re-simulates the replay, calling `observe` with the state at the start of each segment
 /// and after each entry, together with that entry and the log index where its events begin.
 fn simulate_with(
@@ -435,7 +472,8 @@ fn simulate_with(
     if r.format_version != REPLAY_FORMAT_VERSION {
         return Err(ReplayError::FormatVersion(r.format_version));
     }
-    if r.engine_version != ENGINE_VERSION {
+    let current = r.engine_version == ENGINE_VERSION;
+    if !current && !COMPATIBLE_ENGINE_VERSIONS.contains(&r.engine_version.as_str()) {
         return Err(ReplayError::EngineVersion(r.engine_version.clone()));
     }
     let has_edit = r
@@ -475,7 +513,7 @@ fn simulate_with(
             replay_entry(&mut state, entry, index)?;
             observe(&state, Some(entry), from);
             while let Some(checkpoint) = checkpoints.next_if(|c| c.index == index) {
-                if check && checkpoint.hash != hash(&state) {
+                if check && current && checkpoint.hash != hash(&state) {
                     return Err(ReplayError::CheckpointMismatch {
                         segment: segment_index,
                         index,

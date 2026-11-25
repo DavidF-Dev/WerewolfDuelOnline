@@ -2,6 +2,7 @@
   import { tick } from 'svelte';
   import type { Seat, View } from '@wwd/engine';
   import type { Localiser } from '@wwd/client-core';
+  import Button from '../components/Button.svelte';
   import { describe } from './describe.js';
 
   interface Props {
@@ -23,22 +24,24 @@
 </script>
 
 <div class="describe">
-  <button type="button" data-testid="describe-table" onclick={() => void read()}>
-    {l.t('describe-button')}
-  </button>
-  <p role="status" class="description" data-testid="table-description">{description}</p>
+  <Button data-testid="describe-table" onclick={() => void read()}>{l.t('describe-button')}</Button>
+  <p
+    role="status"
+    class={['description', { filled: description !== '' }]}
+    data-testid="table-description"
+  >
+    {description}
+  </p>
 </div>
 
 <style>
-  .describe {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
   .description {
-    flex: 1 1 16rem;
+    font-size: 0.8125rem;
     margin: 0;
     white-space: pre-line;
+  }
+
+  .filled {
+    margin-top: 8px;
   }
 </style>

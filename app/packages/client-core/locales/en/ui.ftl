@@ -16,29 +16,30 @@ app-title =
     { -game-name } Online
 
 ## Home
-home-online-heading = Play online
-home-create-online = Create a game
-home-join-online = Join a game
-home-rejoin-online = Rejoin a game
-home-local-heading = Play on this device
-home-host = Host a local game
-home-join = Join a local game
+home-create-online = New game
+home-join-online = Join game
 footer-made-by = Made by { -author }
 footer-unofficial = An unofficial digital version of { -game-name }
 footer-not-affiliated = Not affiliated with { -publisher }.
 footer-get-game = Get the physical game ↗
 footer-get-game-label = Get the physical game (opens in a new tab)
-back-home = Back to home
 back = Back
 
 ## Home: continue and more
 home-continue-heading = Continue
-home-continue-session = { $opponent }, room { $room }
+home-status-line = { $status } · { $when }
+home-status-turn = Round { $round } · your turn · { $when }
+home-status-waiting = Round { $round } · waiting for the opponent · { $when }
+home-status-round = Round { $round } · { $when }
+home-status-paused-round = Paused · Round { $round } · { $when }
+home-resume = Resume
+home-open = Open
+home-open-label = Open game with { $opponent }, room { $room }
+home-resume-label = Resume game with { $opponent }, room { $room }
 home-opponent-unknown = Unknown opponent
 home-status-paused = Paused
 home-status-active = In progress
 home-status-finished = Game over · rematch possible
-home-more-heading = More
 home-how-to-play = How to play
 home-history = History
 home-settings = Settings
@@ -72,15 +73,15 @@ settings-theme-light = Light
 settings-theme-dark = Dark
 settings-display-name = Display name
 settings-display-name-hint = Shown to your opponent. Leave it empty to be asked each time.
-settings-reading = Reading
-settings-text-size = Text size: { $percent }%
+settings-reading = Reading & accessibility
+settings-text-size = Text size
+settings-text-size-option = { $percent }%
 settings-reading-font = Reading font
 settings-font-default = Default
 settings-extra-spacing = Extra letter and line spacing
 settings-card-text = Card text
 settings-card-text-icons = Icons and text
 settings-card-text-only = Text only
-settings-accessibility = Accessibility
 settings-high-contrast = High contrast
 settings-colour-blind-patterns = Colour-blind patterns
 settings-reduced-motion = Reduced motion
@@ -95,11 +96,10 @@ settings-haptics = Vibrate on my turn
 settings-gameplay = Gameplay
 settings-confirm-plan = Confirm before sealing a plan
 settings-rules-hints = Rules hints
-settings-deduction-auto-mark = Deduction auto-mark
 settings-network = Network
 settings-server = Server
 settings-server-default = Default
-settings-server-custom = Custom
+settings-server-custom = Custom…
 settings-server-address = Server address
 settings-server-save = Use this server
 settings-server-saved = Server saved.
@@ -161,7 +161,9 @@ delete-device-only = This affects this device only. Your opponents keep their ow
 delete-export-first = Export backup first
 delete-cancel = Cancel
 delete-failed = The data could not be deleted.
-settings-about-link = About this app
+settings-about = About
+settings-credits = Credits
+settings-licences = Licences
 toggle-on = ON
 toggle-off = OFF
 
@@ -177,7 +179,7 @@ about-licences-heading = Licences
 ## Host and join
 host-heading = Host a local game
 host-code-label = Join code
-host-instructions = Open this page in another tab of this browser, choose "Join a local game" and enter this code.
+host-instructions = Open this app in another tab of this browser, choose "Join game", then "On this device", and enter this code.
 host-starting = Starting the game
 host-failed = The game could not be started.
 join-heading = Join a local game
@@ -201,10 +203,16 @@ rejected-pin-locked = Too many wrong PINs were entered for that seat. Try again 
 ## Table
 table-heading = Table
 table-round = Round { $round }
+table-round-showdown = Round { $round } · Showdown
 table-status = Status: { $status }
 opponent-heading = Opponent: { $name }
 opponent-connected = Connected
 opponent-not-connected = Not connected
+opponent-waiting-for-you = Waiting for you
+opponent-plan-sealed = Sealed · { $count ->
+        [one] 1 target
+       *[other] { $count } targets
+    }
 my-area-heading = You: { $name }
 my-hand-heading = Your hand
 my-hand-empty = Your hand is empty.
@@ -212,15 +220,26 @@ actions-heading = Actions
 log-heading = Game log
 log-game-started = The game has started.
 game-over-heading = Game over
-replay-verified = The game record was checked and matches what you saw.
-replay-unverified = The game record could not be verified.
+game-over-won = You win!
+game-over-lost = You lose.
+game-over-how = { $reason ->
+        [health] { $loser } ran out of { $health } in round { $round }.
+        [fangs] { $winner } collected enough { $fangs } in round { $round }.
+        [crosses] { $winner } collected enough { $crosses } in round { $round }.
+       *[resignation] { $loser } resigned in round { $round }.
+    }
+game-over-markers = Your markers
 game-over-view-replay = View replay
 rematch = Rematch
-rematch-hint = Play again in the same room, with the Badge going to whoever lost.
 rematch-waiting = You asked for a rematch. Waiting for your opponent.
 rematch-opponent-ready = Your opponent wants a rematch.
 rematch-started = Rematch started: game { $number } in this room.
 round-summary = Round { $round } summary
+round-summary-set-aside = Set aside: { $character }
+round-summary-badge = { $who ->
+        [you] { $player } take
+       *[opponent] { $player } takes
+    } the { $badge } for round { $next }.
 
 ## Markers and cards
 count-health = Health: { $n }
@@ -242,23 +261,48 @@ card-character =
 card-fool = The Fool
 count-badge = Badge: { $n }
 count-potion = Potion: { $n }
-marker-health = Health
-marker-badge = Badge
 # Starts with the card's visible text in the order it is drawn: the initiative, then the name.
 card-name =
     { $initiative }, { $name }, { $faction }. { $ability }
 card-fool-name = The Fool. { $ability }
+# A pill drawn on a target card, in place of its abilities, when the card is in the player's own hand.
+card-in-hand = In hand
 
-## Card abilities, in our own words
-card-ability-hunter = You may spend a Cross to attack up to 2 Werewolves.
-card-ability-wolf-king = Attack any number of Humans. Each Human after the first costs a Fang, or there is no attack.
-card-ability-knight = Gain an Hourglass, then attack a Werewolf.
-card-ability-wolfen = Gain an Hourglass, then attack any character.
-card-ability-seer = Attack a Werewolf. A hit costs your opponent 2 health.
-card-ability-witch = Gain the Potion. Can only target the Fool.
-card-ability-wolf-beauty = Gain a Fang, then attack any character.
-card-ability-villager = Gain a Cross. Can only target the Fool.
+## Card abilities, in our own words; each marker named is an argument, so it can be drawn as a token
+card-ability-hunter = You may spend a { $cross } to attack up to 2 Werewolves.
+card-ability-wolf-king = Attack any number of Humans. Each Human after the first costs a { $fang }, or there is no attack.
+card-ability-knight = Gain an { $hourglass }, then attack a Werewolf.
+card-ability-wolfen = Gain an { $hourglass }, then attack any character.
+card-ability-seer = Attack a Werewolf. A hit costs your opponent 2 Health.
+card-ability-witch = Gain the { $potion }. Can only target the Fool.
+card-ability-wolf-beauty = Gain a { $fang }, then attack any character.
+card-ability-villager = Gain a { $cross }. Can only target the Fool.
 card-ability-fool = No effect. Add it to any plan to bluff.
+
+## Card text, drawn on large and medium cards; its words also appear in the matching card-ability message
+card-text-hunter = Spend a { $cross } to attack up to 2 Werewolves.
+card-text-wolf-king = Attack Humans. Each after the first costs a { $fang }.
+card-text-knight = Gain an { $hourglass }, then attack a Werewolf.
+card-text-wolfen = Gain an { $hourglass }, then attack any character.
+card-text-seer = Attack a Werewolf. A hit costs 2 Health.
+card-text-witch = Gain the { $potion }. Can only target the Fool.
+card-text-wolf-beauty = Gain a { $fang }, then attack any character.
+card-text-villager = Gain a { $cross }. Can only target the Fool.
+card-text-fool = No effect. Add it to any plan to bluff.
+
+## How to read abilities
+legend-heading = How to read abilities
+legend-gain = Gain
+legend-gain-text = Gain the marker shown.
+legend-attack = Attack
+legend-attack-text = Attack one character for each shape.
+legend-shape-werewolf = Werewolf
+legend-shape-human = Human
+legend-shape-any = Any character
+legend-damage = Extra damage
+legend-damage-text = A hit costs 2 Health instead of 1.
+legend-spend = Spend
+legend-spend-text = Spend the marker before the arrow to make this attack.
 
 ## Phases
 phase-plan = Choose a character and its targets, then seal your plan.
@@ -266,23 +310,26 @@ phase-reveal-hourglass = Choose how many Hourglasses to place on your character.
 phase-reveal-potion = Choose a card for the Potion to target.
 phase-hunter-choice = Your Hunter is resolving: choose whether to spend a Cross to attack.
 phase-round-over = The round is over.
+phase-final-showdown = The last round's results are in.
 phase-waiting = Waiting for your opponent.
 phase-none = Nothing to do right now.
+phase-step-plan = Plan
+phase-step-reveal = Reveal
+phase-step-potion = Potion
+phase-step-showdown = Showdown
+phase-step-round-over = Round over
 
 ## Plan builder
 plan-heading = Your plan
-plan-characters-heading = Choose a character
-plan-targets-heading = Choose targets
+plan-targets-heading = Targets
 plan-summary = Plan: { $plan }
-plan-summary-empty = Choose a character to start a plan.
+plan-summary-empty = Choose a character
 plan-seal = Seal plan
 plan-seal-incomplete = This is not a complete plan yet.
+plan-character-not-offered = This character can't be played this round.
 target-not-allowed = The chosen character can't target this card.
 target-limit = Remove a target first: this plan can't take another.
 target-choose-character-first = Choose a character first.
-potion-target = Potion target: { $card }
-plan-detail = { $name }: { $ability }
-plan-target-in-hand = In your hand: no effect
 plan-summary-short = { $character } → { $targets }
 plan-summary-short-none = { $character } → no targets
 plan-summary-fool = Fool
@@ -291,35 +338,50 @@ plan-confirm-cancel = Keep choosing
 
 ## Reveal
 reveal-heading = Reveal
-reveal-hourglasses-heading = Place Hourglasses
+reveal-hourglasses-heading = Spend Hourglasses
+reveal-stepper = Hourglasses to place
+reveal-hourglass-instruction = How many Hourglasses will you place?
 reveal-fewer = Fewer Hourglasses
 reveal-more = More Hourglasses
 reveal-initiative = { $character }: initiative { $effective } (printed { $printed })
-reveal-opponent-placed = Your opponent placed { $n ->
+reveal-initiative-label = { $character } initiative
+reveal-initiative-change = { $printed } → { $effective }
+reveal-order-note = Lower initiative resolves first.
+reveal-opponent-placed = Placed { $n ->
         [one] 1 Hourglass
        *[other] { $n } Hourglasses
-    }.
+    }
+reveal-face-down = Your opponent's character, face down
+reveal-versus = vs
+reveal-my-plan = Your plan: { $plan }
 reveal-potion-heading = Choose the Potion target
+reveal-potion-confirm = Choose a card first
 
 ## Showdown
 showdown-heading = Showdown
 showdown-next = Next result
 showdown-empty = The results appear here as the showdown resolves.
 showdown-hunter-heading = Your Hunter
+showdown-out-yours = { $owner } { $character } is eliminated and doesn't act.
+showdown-out-opponent = { $owner }'s { $character } is eliminated and doesn't act.
+plan-panels-heading = Plans
+plan-panel-plan = { $name }: { $plan }
+plan-panel-position = { $position ->
+        [1] First
+       *[other] Second
+    }
+plan-panel-initiative = Initiative { $initiative }
+plan-panel-spoken = { $name }: { $plan }. { $position ->
+        [1] Resolves first
+       *[other] Resolves second
+    }, initiative { $effective } (printed { $printed }).
+plan-panel-spoken-unknown = { $name }: { $plan }. { $position ->
+        [1] Resolves first
+       *[other] Resolves second
+    }.
 
 ## Table layout
-table-area-heading = In play
 table-you = You
-table-plan = { $name }: { $status }
-initiative-heading = Showdown order
-initiative-entry = { $position }. { $name }: { $character }, initiative { $initiative }
-initiative-entry-unknown = { $position }. { $name }: { $character }
-deduction-heading = Deduction
-deduction-help = Tap a card to rule it out as your opponent's character, and again to undo.
-deduction-possible = Possible
-deduction-ruled-out = Ruled out
-deduction-mine = In your hand
-deduction-revealed = Ruled out: revealed this round
 drawer-summary = Game log and rules
 rules-heading = Rules
 rules-order = Lower initiative resolves first.
@@ -376,12 +438,21 @@ problem-other-online = The game server couldn't use the last message.
 problem-not-connected = You're not connected at the moment; wait for the connection to come back and try again.
 problem-command-not-sent = That action is no longer available.
 
+## Where to play
+play-label = Play
+play-online = Online
+play-device = This device
+play-create-hint-online = Play a friend anywhere with a join code.
+play-create-hint-device = Two tabs of this browser, to try the game out.
+play-join-hint-online = Enter the code your friend shared.
+play-join-hint-device = Enter the code shown in the other tab.
+
 ## Online: creating a game
-create-heading = Create an online game
-create-grace-legend = Reconnect time
+create-heading = New game
+create-grace-legend = Reconnect grace
 create-grace-hint = How long a player who loses their connection has to come back before their opponent may claim the win.
-create-grace-option = { $minutes } minutes
-create-badge-legend = Who starts with the Badge
+create-grace-option = { $minutes } min
+create-badge-legend = Badge (first player)
 create-badge-random = Random
 create-badge-me = I start
 create-badge-opponent = Opponent starts
@@ -392,7 +463,7 @@ create-tiebreak-badge_only = Badge only
 create-min-targets-legend = Minimum targets
 create-min-targets-hint = How few target cards a plan may name.
 create-min-targets-option = { $count }
-create-submit = Create the game
+create-submit = Create game
 create-creating = Creating the game
 create-failed-rate-limited = Too many games were created from this network recently; try again later.
 create-failed-unavailable = The game server is busy or unavailable; try again in a moment.
@@ -401,6 +472,7 @@ create-failed-network = The game server couldn't be reached; check your connecti
 create-failed-other = The game couldn't be created.
 
 ## Online: display name
+name-title = What should your opponent call you?
 name-label = Your name
 name-hint = Shown to your opponent. You can change it later in the settings.
 name-continue = Continue
@@ -413,19 +485,25 @@ online-server-other = This game uses a different server: { $host }
 online-server-invalid = The server address in this link isn't valid, so the game wasn't opened.
 online-join-new = Join as a new player
 online-rejoin-pin = Rejoin with PIN
+online-room-full-rejoin = Rejoin with your PIN
 online-join-other = Join a different game
 
 ## Online: inviting
+invite-title = Invite a friend
 invite-heading = Invite your opponent
 invite-code-label = Join code
-invite-instructions = Share the code or the link with your opponent. The game starts when they join.
 invite-instructions-resumed = Share the code or the link with your opponent. The game is paused: it continues once they join and you both choose "Resume".
 invite-link = Invite link: { $link }
 invite-copy-code = Copy code
-invite-copy-link = Copy link
-invite-share = Share
-invite-qr-note = Scan this code to open the invite link.
-invite-waiting = Waiting for your opponent to join
+invite-share = Share link
+invite-waiting = Waiting for your opponent…
+invite-joined = Your opponent has joined; starting the game…
+invite-options = Game options
+invite-option-badge-random = Badge: random
+invite-option-badge-you = Badge: you start
+invite-option-badge-opponent = Badge: your opponent starts
+invite-option-tiebreak = Tiebreak: { $rule }
+invite-option-min-targets = Minimum targets: { $count }
 invite-share-text = Join my game of { -game-name } with the code { $code }.
 copy-done = Copied
 copy-failed = Couldn't copy; select the text and copy it instead.
@@ -454,7 +532,7 @@ stop-rejoin-unavailable = That seat can't be rejoined this way right now. If it'
 
 ## Online: continuing on another device
 continue-heading = Continue on another device
-continue-instructions = On the other device, open the rejoin link, or choose "Rejoin a game" and enter the code, then enter the PIN.
+continue-instructions = On the other device, open the rejoin link, or choose "Join game" and enter the code, then choose "Rejoin with your PIN".
 continue-code = Join code: { $code }
 continue-seat = Your seat: { $seat }
 continue-link = Rejoin link: { $link }
@@ -474,6 +552,7 @@ pin-attempt-failed = Someone entered a wrong PIN for your opponent's seat.
 
 ## Game menu
 menu-summary = Game menu
+sheet-close = Close
 menu-pause = Pause after this round
 
 ## Pausing
@@ -534,6 +613,12 @@ history-meta = { $date }, { $rounds ->
         [one] 1 round
        *[other] { $rounds } rounds
     }, { $reason }
+history-row-meta = { $date } · { $rounds ->
+        [one] 1 round
+       *[other] { $rounds } rounds
+    } · { $reason }
+history-played = Played
+history-won-by = Won by { $reason }
 history-replay = Replay
 history-replay-label = Replay: { $summary }, { $meta }
 reason-health = Health
@@ -543,6 +628,7 @@ reason-resignation = Resignation
 
 ## Replay
 replay-heading = Replay
+replay-menu = Replay menu
 replay-missing = This game is not on this device.
 replay-position = Step { $step } of { $total }, round { $round }
 replay-controls = Replay controls
@@ -555,8 +641,8 @@ replay-view-group = Viewpoint
 replay-view-mine = My view
 replay-view-full = Full
 replay-command = { $who } chose: { $command }
-replay-player-heading = { $name }
-replay-hand-heading = Hand
+replay-hands-heading = Hands
+replay-hand-of = { $name }'s hand
 replay-hand-hidden = { $n ->
         [one] 1 card, hidden
        *[other] { $n } cards, hidden
@@ -564,9 +650,11 @@ replay-hand-hidden = { $n ->
 replay-hand-empty = No cards
 replay-log-heading = Events at this step
 replay-log-empty = Nothing happened at this step.
+replay-log-above = What happened is shown above.
 
 ## Stats
 stats-heading = Stats
+stats-overall-caption = Overall
 stats-empty = No finished games yet, so there are no stats.
 stats-games = Games played: { $n }
 stats-record = Won { $won }, lost { $lost }

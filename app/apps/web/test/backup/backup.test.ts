@@ -156,6 +156,25 @@ describe('limits and session checks', () => {
     const backup = await readBackup(await exportBackup(store));
     expect(backup.sessions[0]).toMatchObject({ status: 'finished', finishedAt: NOW });
   });
+
+  it('accepts the round and turn, and files without them', async () => {
+    await store.sessions.put(sessionRecord('AAAAAA', NOW, { round: 4, yourTurn: true }));
+    await store.sessions.put(sessionRecord('BBBBBB', NOW));
+    const backup = await readBackup(await exportBackup(store));
+    expect(backup.sessions.find((s) => s.room === 'AAAAAA')).toMatchObject({
+      round: 4,
+      yourTurn: true,
+    });
+    expect(backup.sessions.find((s) => s.room === 'BBBBBB')?.round).toBeUndefined();
+  });
+
+  it('refuses a session whose round has the wrong type', async () => {
+    await store.sessions.put(sessionRecord('AAAAAA', NOW));
+    const blob = await reseal((body) => {
+      (body['sessions'] as Record<string, unknown>[])[0]!['round'] = 'four';
+    });
+    expect(await rejection(blob)).toBeDefined();
+  });
 });
 
 describe('merging', () => {

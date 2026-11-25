@@ -28,6 +28,10 @@ export interface SessionRecord {
   /** The room on the same server that this device created from `save`, until its seat is stored. */
   resumedAs?: string;
   opponentName?: string;
+  /** The round the game had reached when last saved; unknown for an older record. */
+  round?: number;
+  /** Whether this seat was asked for a decision when last saved; unknown for an older record. */
+  yourTurn?: boolean;
   /** When game `game` was first seen to be over, while `status` is `'finished'`. */
   finishedAt?: number;
   savedAt: number;
@@ -172,6 +176,9 @@ async function openPersistent(): Promise<DeviceStore> {
   return store;
 }
 
+/** A device store that lasts only as long as the page, like the fallback when IndexedDB fails. */
+export const memoryDeviceStore = (): DeviceStore => build(memoryBackend(), false);
+
 /**
  * Opens the device database, moving any M3 localStorage sessions into it. Falls back to an
  * in-memory store when IndexedDB is unavailable, fails to open, or does not open within a few seconds.
@@ -180,7 +187,7 @@ export async function openDeviceStore(): Promise<DeviceStore> {
   try {
     return await openPersistent();
   } catch {
-    return build(memoryBackend(), false);
+    return memoryDeviceStore();
   }
 }
 

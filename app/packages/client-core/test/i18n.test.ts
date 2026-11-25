@@ -15,6 +15,7 @@ const GAME_TERMS = new Set([
   'Hourglass',
   'Hourglasses',
   'Potion',
+  'Health',
   'Badge',
   'Fool',
   'Hunter',
@@ -35,6 +36,18 @@ const GAME_TERMS = new Set([
 /** Acronyms, which keep their capitals in sentence case. */
 const ACRONYMS = new Set(['PIN', 'PINs']);
 
+// "vs" between two cards is a shorthand that reads as printed in lower case, never a sentence.
+const LOWER_CASE_SHORTHANDS: ReadonlySet<string> = new Set(['reveal-versus']);
+
+/** Every single-line message of the UI file, as [id, value]. */
+function uiMessages(): Array<[string, string]> {
+  const ftl = readFileSync(new URL('../locales/en/ui.ftl', import.meta.url), 'utf8');
+  return ftl.split('\n').flatMap((line): Array<[string, string]> => {
+    const match = /^([a-z][a-z0-9-]*)\s*=\s*(.+)$/.exec(line);
+    return match === null ? [] : [[match[1]!, match[2]!]];
+  });
+}
+
 /** The capitalised words in a UI string that sentence case does not allow. */
 function sentenceCaseProblems(value: string): string[] {
   // A value may open with a placeholder, such as a number.
@@ -46,8 +59,9 @@ function sentenceCaseProblems(value: string): string[] {
     .split(/\s+/);
   const problems: string[] = [];
   for (const [i, word] of words.entries()) {
-    // The first word of each sentence, or of a quoted label, is capitalised.
-    if (i === 0 || /[.?!]$/.test(words[i - 1]!) || /^["“]/u.test(word)) continue;
+    // The first word of each sentence or `·` segment, or of a quoted label, is capitalised.
+    if (i === 0 || /[.?!]$/.test(words[i - 1]!) || words[i - 1] === '·' || /^["“]/u.test(word))
+      continue;
     const bare = word.replace(/^[^\p{L}]+|[^\p{L}]+$/gu, '');
     if (/^\p{Lu}/u.test(bare) && !GAME_TERMS.has(bare) && !ACRONYMS.has(bare)) problems.push(bare);
   }
@@ -119,6 +133,14 @@ const GOLDEN: Golden[] = [
     ],
   },
   {
+    event: { hourglasses_placed: { seat: 'p0', n: 0 } },
+    text: [
+      'You place no Hourglasses.',
+      'Your opponent places no Hourglasses.',
+      'Player 1 places no Hourglasses.',
+    ],
+  },
+  {
     event: { hourglasses_placed: { seat: 'p0', n: 1 } },
     text: [
       'You place 1 Hourglass.',
@@ -146,17 +168,17 @@ const GOLDEN: Golden[] = [
       },
     },
     text: [
-      'Plans revealed. You play Hunter targeting the Fool and Seer at initiative 5. Your opponent plays Villager with no targets at initiative 8. Your opponent resolves first.',
-      'Plans revealed. You play Villager with no targets at initiative 8. Your opponent plays Hunter targeting the Fool and Seer at initiative 5. You resolve first.',
-      'Plans revealed. Player 1 plays Hunter targeting the Fool and Seer at initiative 5. Player 2 plays Villager with no targets at initiative 8. Player 2 resolves first.',
+      'Plans revealed. You play Hunter targeting the Fool and the Seer at initiative 5. Your opponent plays Villager with no targets at initiative 8. Your opponent resolves first.',
+      'Plans revealed. You play Villager with no targets at initiative 8. Your opponent plays Hunter targeting the Fool and the Seer at initiative 5. You resolve first.',
+      'Plans revealed. Player 1 plays Hunter targeting the Fool and the Seer at initiative 5. Player 2 plays Villager with no targets at initiative 8. Player 2 resolves first.',
     ],
   },
   {
     event: { potion_resolved: { target: 'seer', victim: 'p0', hit: true, health_lost: 1 } },
     text: [
-      'The Potion hits your Seer! You lose 1 health.',
-      "The Potion hits your opponent's Seer! Your opponent loses 1 health.",
-      "The Potion hits Player 1's Seer! Player 1 loses 1 health.",
+      'The Potion hits your Seer! You lose 1 Health.',
+      "The Potion hits your opponent's Seer! Your opponent loses 1 Health.",
+      "The Potion hits Player 1's Seer! Player 1 loses 1 Health.",
     ],
   },
   {
@@ -178,40 +200,46 @@ const GOLDEN: Golden[] = [
   {
     event: { marker_gained: { seat: 'p0', marker: 'cross', from_opponent: true } },
     text: [
-      'You take one Cross marker from your opponent.',
-      'Your opponent takes one Cross marker from you.',
-      'Player 1 takes one Cross marker from Player 2.',
+      'You take 1 Cross from your opponent.',
+      'Your opponent takes 1 Cross from you.',
+      'Player 1 takes 1 Cross from Player 2.',
     ],
   },
   {
     event: { marker_gained: { seat: 'p0', marker: 'fang', from_opponent: false } },
-    text: [
-      'You gain one Fang marker.',
-      'Your opponent gains one Fang marker.',
-      'Player 1 gains one Fang marker.',
-    ],
+    text: ['You gain 1 Fang.', 'Your opponent gains 1 Fang.', 'Player 1 gains 1 Fang.'],
+  },
+  {
+    event: { marker_gained: { seat: 'p0', marker: 'potion', from_opponent: false } },
+    text: ['You gain the Potion.', 'Your opponent gains the Potion.', 'Player 1 gains the Potion.'],
   },
   {
     event: { marker_spent: { seat: 'p0', marker: 'fang', n: 2 } },
-    text: [
-      'You return 2 Fang markers to the supply.',
-      'Your opponent returns 2 Fang markers to the supply.',
-      'Player 1 returns 2 Fang markers to the supply.',
-    ],
+    text: ['You spend 2 Fangs.', 'Your opponent spends 2 Fangs.', 'Player 1 spends 2 Fangs.'],
+  },
+  {
+    event: { marker_spent: { seat: 'p0', marker: 'cross', n: 1 } },
+    text: ['You spend 1 Cross.', 'Your opponent spends 1 Cross.', 'Player 1 spends 1 Cross.'],
   },
   {
     event: {
-      attack_hit: { seat: 'p0', target_seat: 'p1', character: 'wolf_king', health_lost: 1 },
+      attack_hit: {
+        seat: 'p0',
+        target_seat: 'p1',
+        attacker: 'knight',
+        character: 'wolfen',
+        health_lost: 1,
+      },
     },
     text: [
-      'Your Wolf King hits your opponent! Your opponent loses 1 health.',
-      "Your opponent's Wolf King hits you! You lose 1 health.",
-      "Player 1's Wolf King hits Player 2! Player 2 loses 1 health.",
+      "Your Knight hits your opponent's Wolfen! Your opponent loses 1 Health.",
+      "Your opponent's Knight hits your Wolfen! You lose 1 Health.",
+      "Player 1's Knight hits Player 2's Wolfen! Player 2 loses 1 Health.",
     ],
   },
   {
-    event: { attack_missed: { seat: 'p0' } },
-    text: ['Your attack misses.', "Your opponent's attack misses.", "Player 1's attack misses."],
+    event: { attack_missed: { seat: 'p0', attacker: 'knight' } },
+    text: ['Your Knight misses.', "Your opponent's Knight misses.", "Player 1's Knight misses."],
   },
   {
     event: { attack_forfeited: { seat: 'p0', reason: 'no_cross' } },
@@ -240,9 +268,9 @@ const GOLDEN: Golden[] = [
   {
     event: { game_over: { winner: 'p0', reason: 'health' } },
     text: [
-      "You win by reducing your opponent's health to zero.",
-      'Your opponent wins by reducing your health to zero.',
-      "Player 1 wins by reducing Player 2's health to zero.",
+      "You win by reducing your opponent's Health to zero.",
+      'Your opponent wins by reducing your Health to zero.',
+      "Player 1 wins by reducing Player 2's Health to zero.",
     ],
   },
   {
@@ -274,6 +302,14 @@ const GOLDEN: Golden[] = [
     ],
   },
   {
+    event: { discard_revealed: { round: 2, character: 'wolf_beauty' } },
+    text: [
+      'The card set aside in round 2 was the Wolf Beauty.',
+      'The card set aside in round 2 was the Wolf Beauty.',
+      'The card set aside in round 2 was the Wolf Beauty.',
+    ],
+  },
+  {
     event: { segment_started: { round: 3, seed_commitment: COMMITMENT } },
     text: [
       'The game resumes in round 3.',
@@ -302,7 +338,7 @@ describe('localiser', () => {
 
   it('covers every event kind in the golden table', () => {
     const kinds = new Set(GOLDEN.map((g) => Object.keys(g.event)[0]));
-    expect(kinds.size).toBe(19);
+    expect(kinds.size).toBe(20);
   });
 
   for (const golden of GOLDEN) {
@@ -331,13 +367,16 @@ describe('localiser', () => {
   });
 
   it('ui strings are sentence case', () => {
-    const ftl = readFileSync(new URL('../locales/en/ui.ftl', import.meta.url), 'utf8');
-    const values = ftl
-      .split('\n')
-      .map((line) => /^[a-z][a-z0-9-]*\s*=\s*(.+)$/.exec(line)?.[1])
-      .filter((value): value is string => value !== undefined);
+    const values = uiMessages()
+      .filter(([id]) => !LOWER_CASE_SHORTHANDS.has(id))
+      .map(([, value]) => value);
     expect(values.length).toBeGreaterThan(0);
     for (const value of values) expect(sentenceCaseProblems(value), value).toEqual([]);
+  });
+
+  it('exempts only the lower-case shorthand between two cards from sentence case', () => {
+    expect([...LOWER_CASE_SHORTHANDS]).toEqual(['reveal-versus']);
+    expect(uiMessages().find(([id]) => id === 'reveal-versus')?.[1]).toBe('vs');
   });
 
   it('exempts only a third-party label in curly quotes from sentence case', () => {

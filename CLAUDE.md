@@ -10,8 +10,11 @@
 |---|---|
 | [`docs/superpowers/specs/2026-11-22-werewolf-duel-online-design.md`](docs/superpowers/specs/2026-11-22-werewolf-duel-online-design.md) | **The design spec.** §5 is the authoritative rules specification for the engine |
 | [`docs/superpowers/plans/2026-11-22-m1-engine.md`](docs/superpowers/plans/2026-11-22-m1-engine.md) | Implementation plan for M1 (engine + CLI) |
+| [`docs/superpowers/plans/2026-11-23-layout-pass.md`](docs/superpowers/plans/2026-11-23-layout-pass.md) | Implementation plan for the layout pass |
+| [`docs/superpowers/specs/2026-11-24-cards-plan-home-design.md`](docs/superpowers/specs/2026-11-24-cards-plan-home-design.md) | Design note for the cards, the plan screen and Home |
 | [`docs/research/2026-11-21-research-and-recommendations.md`](docs/research/2026-11-21-research-and-recommendations.md) | Background research, alternatives considered, sources |
 | [`docs/mockups/mockups.html`](docs/mockups/mockups.html) | Low-fidelity screen mockups (open in a browser) |
+| [`docs/mockups/cards-and-plan.html`](docs/mockups/cards-and-plan.html) | Card and plan-screen mockups; sections H and I are binding |
 | `rulebook.pdf`, `cards.pdf` | The physical game's rulebook and card scans. Reference only: git-ignored, never commit or reproduce them |
 
 ## Layout
@@ -43,6 +46,8 @@ App, from `app/`:
 - `pnpm --filter @wwd/web e2e:pwa` (Playwright vs a production build served by `vite preview`: the offline shell)
 - `pnpm --filter @wwd/web e2e:parity` (the `@parity` subset vs `wrangler dev`; local workerd, no account)
 - `pnpm --filter @wwd/web icons` (renders the app icon PNGs from its SVG with Playwright's Chromium)
+- `pnpm --filter @wwd/web visual` (draws every gallery entry at four sizes in light, dark and high contrast, beside the mockups, into `apps/web/visual-output/`; open its `index.html`)
+- `pnpm --filter @wwd/web transcript` (writes three seeded games as Markdown logs, one per view, into `apps/web/visual-output/transcripts/`; `--search` finds seeds for its scenarios)
 - `pnpm --filter @wwd/web dev` (dev server; `window.__wwd` is available only here). It uses the referee at `http://localhost:8787`, so start one of:
   - `pnpm --filter @wwd/referee-node start --test-overrides` (the Node referee; add `--port`, `--data`, `--origins` as needed)
   - `pnpm --filter @wwd/referee-cloudflare dev` (`wrangler dev` in local workerd, with test overrides; never deploys)

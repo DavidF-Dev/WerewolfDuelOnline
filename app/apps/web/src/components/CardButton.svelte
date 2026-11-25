@@ -1,11 +1,19 @@
 <script lang="ts" module>
-  export type CardState = 'normal' | 'selected' | 'disabled' | 'ruled-out';
-  export type CardFaction = 'human' | 'werewolf' | 'neutral';
+  export type CardState = 'normal' | 'selected' | 'disabled';
+  export type { CardFaction, CardSize } from './CardFace.svelte';
+
+  /** How long a pointer must be held on a smaller card to show it at large size. */
+  const LONG_PRESS_MS = 500;
+  /** The space kept between the popover and the card or the viewport's edge. */
+  const POPOVER_GAP = 6;
 </script>
 
 <script lang="ts">
-  import { display } from '../settings/display.svelte.js';
-  import { resolveArt, type CardArtId } from '../themes/resolve.js';
+  import type { Attachment } from 'svelte/attachments';
+  import type { RichPart } from '@wwd/client-core';
+  import type { AbilityPill } from '../cards.js';
+  import type { CardArtId } from '../themes/resolve.js';
+  import CardFace, { type CardFaction, type CardSize } from './CardFace.svelte';
 
   interface Props {
     /** The full accessible name. */
@@ -16,11 +24,16 @@
     /** The initiative shown in the corner, or null for a card without one. */
     initiative: number | null;
     art: CardArtId;
+    /** What the card does, drawn as its ability row. */
+    pills: readonly AbilityPill[];
+    /** What the card does, in words, drawn on large and medium cards. */
+    text: readonly RichPart[];
+    size?: CardSize;
     state?: CardState;
-    /** Why the card can't be chosen, shown and announced while it is disabled. */
+    /** Why the card can't be chosen: announced while it is disabled, and shown on focus or a tap. */
     reason?: string;
-    /** A short status shown under the card and announced with it, such as a deduction mark. */
-    mark?: string;
+    /** The words of a pill drawn in place of the ability pills and announced with the card, such as "In hand". */
+    inHand?: string;
     onselect?: () => void;
     /** Whether choosing the card toggles it on and off, rather than acting at once. */
     toggle?: boolean;
@@ -33,100 +46,178 @@
     faction,
     initiative,
     art,
-    state = 'normal',
+    pills,
+    text,
+    size = 'large',
+    state: shownState = 'normal',
     reason,
-    mark,
+    inHand,
     onselect,
     toggle = true,
     testId,
   }: Props = $props();
   const uid = $props.id();
 
-  const SILHOUETTES: Record<CardFaction, string> = {
-    human: 'M14 3H86Q97 3 97 14V106Q97 123 50 137Q3 123 3 106V14Q3 3 14 3Z',
-    werewolf: 'M3 3H68L76 12L84 3H97V30L88 36L97 42V137H32L24 128L16 137H3V110L12 104L3 98Z',
-    neutral: 'M28 3H72L97 28V112L72 137H28L3 112V28Z',
-  };
-
-  const disabled = $derived(state === 'disabled');
-  const hatched = $derived(display.colourBlindPatterns && faction === 'werewolf');
-  const textOnly = $derived(display.cardText === 'text-only');
+  const disabled = $derived(shownState === 'disabled');
+  const inspectable = $derived(size !== 'large');
   const showReason = $derived(disabled && reason !== undefined);
   const describedBy = $derived(
-    [showReason ? `${uid}-reason` : null, mark === undefined ? null : `${uid}-mark`]
+    [inHand === undefined ? null : `${uid}-in-hand`, showReason ? `${uid}-reason` : null]
       .filter((id) => id !== null)
       .join(' ') || undefined,
   );
 
-  function select(): void {
-    if (!disabled) onselect?.();
+  let button = $state<HTMLButtonElement>();
+  let open = $state(false);
+  let reasonOpen = $state(false);
+  let pointerUsed = false;
+  let pressedLong = false;
+  let pressTimer: ReturnType<typeof setTimeout> | undefined;
+
+  function select(event: MouseEvent): void {
+    const afterLongPress = pressedLong;
+    pressedLong = false;
+    // A pointer's click ends the long press that opened the popover; a key's click still chooses.
+    if (afterLongPress && event.detail > 0) return;
+    if (disabled) reasonOpen = showReason;
+    else onselect?.();
   }
+
+  // A key press after a pointer press means the keyboard is in use, even if the card never took focus.
+  function keyUsed(): void {
+    pointerUsed = false;
+  }
+
+  function pressStart(event: PointerEvent): void {
+    pointerUsed = true;
+    document.addEventListener('keydown', keyUsed, { capture: true, once: true });
+    if (!inspectable || event.button > 0) return;
+    pressedLong = false;
+    clearTimeout(pressTimer);
+    pressTimer = setTimeout(() => {
+      open = true;
+      reasonOpen = showReason;
+      pressedLong = true;
+    }, LONG_PRESS_MS);
+  }
+
+  function pressEnd(): void {
+    clearTimeout(pressTimer);
+  }
+
+  // Only keyboard focus opens the popover; some browsers focus a tapped button after the pointer is up.
+  function focused(): void {
+    if (pointerUsed || !button?.matches(':focus-visible')) return;
+    if (inspectable) open = true;
+    reasonOpen = showReason;
+  }
+
+  function close(): void {
+    open = false;
+    reasonOpen = false;
+  }
+
+  function blurred(): void {
+    pointerUsed = false;
+    close();
+  }
+
+  function keydown(event: KeyboardEvent): void {
+    if (event.key !== 'Escape' || !(open || reasonOpen)) return;
+    event.preventDefault();
+    event.stopPropagation();
+    close();
+  }
+
+  $effect(() => {
+    if (!open && !reasonOpen) return;
+    const outside = (event: PointerEvent): void => {
+      if (!(event.target instanceof Node && button?.contains(event.target))) close();
+    };
+    document.addEventListener('pointerdown', outside, true);
+    return () => document.removeEventListener('pointerdown', outside, true);
+  });
+
+  $effect(() => () => {
+    clearTimeout(pressTimer);
+    document.removeEventListener('keydown', keyUsed, { capture: true });
+  });
+
+  /**
+   * Shows the popover in the top layer, above the card or below it when there is no room, inside
+   * the viewport, and keeps it beside the card while the page scrolls or resizes.
+   */
+  const place: Attachment<HTMLElement> = (popover) => {
+    if (typeof popover.showPopover !== 'function') return;
+    popover.showPopover();
+    let frame = 0;
+    const position = (): void => {
+      frame = 0;
+      if (button === undefined) return;
+      const card = button.getBoundingClientRect();
+      const own = popover.getBoundingClientRect();
+      const above = card.top - own.height - POPOVER_GAP;
+      const top = above >= POPOVER_GAP ? above : card.bottom + POPOVER_GAP;
+      const centred = card.left + card.width / 2 - own.width / 2;
+      const left = Math.max(
+        POPOVER_GAP,
+        Math.min(centred, window.innerWidth - own.width - POPOVER_GAP),
+      );
+      popover.style.top = `${top}px`;
+      popover.style.left = `${left}px`;
+    };
+    const follow = (): void => {
+      if (frame === 0) frame = requestAnimationFrame(position);
+    };
+    position();
+    window.addEventListener('scroll', follow, { capture: true, passive: true });
+    window.addEventListener('resize', follow, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', follow, { capture: true });
+      window.removeEventListener('resize', follow);
+      cancelAnimationFrame(frame);
+    };
+  };
 </script>
 
 <span class="slot">
-  <button
-    type="button"
-    class="card {faction}"
-    class:selected={state === 'selected'}
-    class:disabled
-    class:ruled-out={state === 'ruled-out'}
-    aria-label={label}
-    aria-pressed={onselect === undefined || !toggle ? undefined : state === 'selected'}
-    aria-disabled={disabled ? 'true' : undefined}
-    aria-describedby={describedBy}
-    data-testid={testId}
-    onclick={select}
-  >
-    <svg class="shape" viewBox="0 0 100 140" preserveAspectRatio="none" aria-hidden="true">
-      {#if hatched}
-        <defs>
-          <pattern
-            id="{uid}-hatch"
-            patternUnits="userSpaceOnUse"
-            width="9"
-            height="9"
-            patternTransform="rotate(45)"
-          >
-            <rect width="9" height="9" fill="var(--card-fill)" />
-            <rect width="3" height="9" fill="var(--card-hatch)" />
-          </pattern>
-        </defs>
-      {/if}
-      <path
-        data-part="silhouette"
-        d={SILHOUETTES[faction]}
-        fill={hatched ? `url(#${uid}-hatch)` : 'var(--card-fill)'}
-        stroke="var(--card-edge)"
-        stroke-width="3"
-        vector-effect="non-scaling-stroke"
-      />
-    </svg>
-    {#if initiative !== null}
-      <span class="initiative" data-part="initiative" aria-hidden="true">{initiative}</span>
-    {/if}
-    {#if textOnly}
-      <span class="name name-only" aria-hidden="true">{name}</span>
-    {:else}
-      <span
-        class="glyph"
-        data-part="glyph"
-        aria-hidden="true"
-        style:mask-image={`url("${resolveArt('placeholder', 'cards', art)}")`}
-      ></span>
-      <span class="name" aria-hidden="true">{name}</span>
-    {/if}
-    {#if state === 'ruled-out'}
-      <svg class="strike" viewBox="0 0 100 140" preserveAspectRatio="none" aria-hidden="true">
-        <path
-          d="M12 18 88 122M88 18 12 122"
-          stroke="var(--ink)"
-          stroke-width="4"
-          stroke-linecap="round"
-          vector-effect="non-scaling-stroke"
-        />
-      </svg>
-    {/if}
-    {#if state === 'selected'}
+  <span class="frame card {size}" class:selected={shownState === 'selected'} class:disabled>
+    <!-- The face is drawn over the button, not inside it: the button's name says all the face shows. -->
+    <button
+      bind:this={button}
+      type="button"
+      class="hit"
+      class:selected={shownState === 'selected'}
+      class:disabled
+      aria-label={label}
+      aria-pressed={onselect === undefined || !toggle ? undefined : shownState === 'selected'}
+      aria-disabled={disabled ? 'true' : undefined}
+      aria-describedby={describedBy}
+      data-testid={testId}
+      onclick={select}
+      onfocus={focused}
+      onblur={blurred}
+      onkeydown={keydown}
+      onpointerdown={pressStart}
+      onpointerup={pressEnd}
+      onpointercancel={pressEnd}
+      onpointerleave={pressEnd}
+      oncontextmenu={(event) => {
+        if (inspectable) event.preventDefault();
+      }}
+    ></button>
+    <CardFace
+      {name}
+      {faction}
+      {initiative}
+      {art}
+      {size}
+      {pills}
+      {text}
+      {inHand}
+      inHandId="{uid}-in-hand"
+    />
+    {#if shownState === 'selected'}
       <svg class="tick" viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="12" cy="12" r="11" fill="var(--accent)" />
         <path
@@ -139,12 +230,21 @@
         />
       </svg>
     {/if}
-  </button>
+    {#if open}
+      <span class="popover" data-part="popover" aria-hidden="true" popover="manual" {@attach place}>
+        <span class="popover-card">
+          <CardFace {name} {faction} {initiative} {art} {pills} {text} {inHand} />
+        </span>
+        {#if reasonOpen}<span class="bubble" data-part="reason">{reason}</span>{/if}
+      </span>
+    {:else if reasonOpen}
+      <span class="popover" aria-hidden="true" popover="manual" {@attach place}>
+        <span class="bubble" data-part="reason">{reason}</span>
+      </span>
+    {/if}
+  </span>
   {#if showReason}
-    <span id="{uid}-reason" class="note reason">{reason}</span>
-  {/if}
-  {#if mark !== undefined}
-    <span id="{uid}-mark" class="mark">{mark}</span>
+    <span id="{uid}-reason" class="visually-hidden">{reason}</span>
   {/if}
 </span>
 
@@ -153,60 +253,83 @@
     display: inline-flex;
     flex-direction: column;
     gap: 0.25rem;
-    max-width: 6rem;
+    max-width: var(--card-large-width);
   }
 
-  .mark {
-    font-size: 0.875rem;
-    font-weight: 700;
+  .frame {
+    align-self: flex-start;
   }
 
   .card {
-    --card-fill: var(--surface);
-    --card-edge: var(--neutral);
-    --card-hatch: color-mix(in srgb, var(--card-edge) 30%, var(--surface));
-    aspect-ratio: 100 / 140;
-    background: none;
-    border: 0;
-    border-radius: var(--radius);
-    color: var(--ink);
+    border-radius: 9px;
     display: block;
-    padding: 0;
+    height: var(--card-large-height);
     position: relative;
     transition: translate var(--motion-fast) ease-out;
-    width: 5.5rem;
+    width: var(--card-large-width);
   }
 
-  .card.human {
-    --card-edge: var(--human);
+  .card > :global(:not(.hit, .popover)) {
+    pointer-events: none;
   }
 
-  .card.werewolf {
-    --card-edge: var(--werewolf);
-  }
-
-  .card:hover:not(.disabled) {
+  .hit {
     background: none;
+    border: 0;
+    border-radius: inherit;
+    inset: 0;
+    padding: 0;
+    position: absolute;
+  }
+
+  .card.medium {
+    height: var(--card-medium-height);
+    width: var(--card-medium-width);
+  }
+
+  .card.target {
+    height: var(--card-target-height);
+    width: var(--card-target-width);
+  }
+
+  .card.medium,
+  .card.target {
+    -webkit-touch-callout: none;
+    touch-action: manipulation;
+    user-select: none;
+  }
+
+  .hit:hover {
+    background: none;
+  }
+
+  /* The frame's outline and the tick already show the choice. */
+  .hit[aria-pressed='true']:not(:focus-visible) {
+    outline: none;
   }
 
   .card.selected {
     font-weight: normal;
     outline: var(--focus-width) solid var(--accent);
-    outline-offset: 3px;
+    outline-offset: 2px;
     translate: 0 -0.25rem;
   }
 
-  .card:focus-visible {
+  .card.medium.selected {
+    translate: 0 -14px;
+  }
+
+  .card.target.selected {
+    translate: none;
+  }
+
+  .hit:focus-visible {
     outline: var(--focus-width) solid var(--focus);
-    outline-offset: 3px;
+    outline-offset: 2px;
   }
 
   .card.disabled {
-    border-style: none;
-  }
-
-  .card.disabled > :not(.shape) {
-    opacity: 0.45;
+    --card-content-opacity: 0.45;
   }
 
   .card.disabled::after {
@@ -218,69 +341,68 @@
     );
     content: '';
     inset: 0;
+    pointer-events: none;
     position: absolute;
-  }
-
-  .card.ruled-out .name {
-    text-decoration: line-through;
-    text-decoration-thickness: 2px;
-  }
-
-  .card.ruled-out > :not(.shape, .strike) {
-    opacity: 0.6;
-  }
-
-  .shape,
-  .strike {
-    height: 100%;
-    inset: 0;
-    position: absolute;
-    width: 100%;
-  }
-
-  .initiative {
-    font: 700 1.5rem/1 var(--font-display);
-    left: 0.6rem;
-    position: absolute;
-    top: 0.55rem;
-  }
-
-  .glyph {
-    background: var(--card-edge);
-    height: 2.25rem;
-    left: 50%;
-    mask-position: center;
-    mask-repeat: no-repeat;
-    mask-size: contain;
-    position: absolute;
-    top: 45%;
-    translate: -50% -50%;
-    width: 2.25rem;
-  }
-
-  .name {
-    bottom: 1.4rem;
-    font-size: 0.75rem;
-    font-weight: 700;
-    left: 0.4rem;
-    line-height: 1.1;
-    position: absolute;
-    right: 0.4rem;
-    text-align: center;
-  }
-
-  .name-only {
-    bottom: auto;
-    font-size: 0.875rem;
-    top: 50%;
-    translate: 0 -50%;
   }
 
   .tick {
-    height: 1.5rem;
+    bottom: -0.45rem;
+    height: 1.125rem;
     position: absolute;
-    right: -0.5rem;
-    top: -0.5rem;
-    width: 1.5rem;
+    right: -0.45rem;
+    width: 1.125rem;
+  }
+
+  .target .tick {
+    bottom: auto;
+    height: 1rem;
+    right: 0.25rem;
+    top: 2rem;
+    width: 1rem;
+  }
+
+  .popover {
+    --card-content-opacity: 1;
+    background: none;
+    border: 0;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    translate: -50% 0;
+    z-index: 2;
+  }
+
+  .popover:popover-open {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    inset: auto;
+    position: fixed;
+    translate: none;
+  }
+
+  .bubble {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px color-mix(in srgb, var(--ink) 25%, transparent);
+    color: var(--ink);
+    display: block;
+    font-size: 0.75rem;
+    line-height: 1.3;
+    max-width: 14rem;
+    padding: 5px 8px;
+    text-align: center;
+  }
+
+  .popover-card {
+    display: block;
+    filter: drop-shadow(0 2px 6px color-mix(in srgb, var(--ink) 30%, transparent));
+    height: var(--card-large-height);
+    position: relative;
+    width: var(--card-large-width);
   }
 </style>

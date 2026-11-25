@@ -1,45 +1,32 @@
 <script lang="ts">
   import type { Localiser } from '@wwd/client-core';
-  import { reloadApp, updateWaiting } from '../pwa/update.js';
+  import Banner from '../kit/Banner.svelte';
+  import { markUpdateAnnounced, reloadApp, updateAnnounced, updateWaiting } from '../pwa/update.js';
+  import Button from './Button.svelte';
 
   interface Props {
     localiser: Localiser;
   }
 
   let { localiser: l }: Props = $props();
+  // A banner mounted on a later screen shows an update already announced without announcing it again.
+  const live = !updateAnnounced();
+  $effect(() => {
+    if (live && $updateWaiting) markUpdateAnnounced();
+  });
 </script>
 
-<section
-  class="update page-width"
-  class:shown={$updateWaiting}
+{#snippet actions()}
+  <Button size="small" onclick={() => void reloadApp()}>{l.t('update-reload')}</Button>
+{/snippet}
+
+<!-- The region and its status stay in the page so that the status is announced when it appears. -->
+<Banner
+  icon="update"
+  actions={$updateWaiting ? actions : undefined}
+  class={{ 'visually-hidden': !$updateWaiting }}
   aria-label={l.t('update-region')}
   data-testid="update-banner"
 >
-  <!-- The status stays in the page so that its text is announced when it appears. -->
-  <p role="status">{$updateWaiting ? l.t('update-available') : ''}</p>
-  {#if $updateWaiting}
-    <button type="button" onclick={() => void reloadApp()}>{l.t('update-reload')}</button>
-  {/if}
-</section>
-
-<style>
-  .update {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1rem;
-    justify-content: space-between;
-  }
-
-  .shown {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    margin-block: 0.5rem;
-    padding-block: 0.25rem;
-  }
-
-  p {
-    margin: 0;
-  }
-</style>
+  <p role={live ? 'status' : undefined}>{$updateWaiting ? l.t('update-available') : ''}</p>
+</Banner>

@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import type { Localiser } from '@wwd/client-core';
-  import { hrefFor } from '../router.js';
+  import Dialog from '../kit/Dialog.svelte';
+  import { hrefFor, navigate } from '../router.js';
   import { serverHost } from '../online.js';
+  import Button from './Button.svelte';
 
   interface Props {
     localiser: Localiser;
@@ -11,22 +12,20 @@
   }
 
   let { localiser: l, server, onContinue }: Props = $props();
-  const uid = $props.id();
-  let heading: HTMLElement | undefined;
-
-  onMount(() => heading?.focus());
 </script>
 
-<section aria-labelledby="{uid}-heading" data-testid="server-confirm">
-  <h2 id="{uid}-heading" tabindex="-1" bind:this={heading}>
-    {l.t('server-confirm', { host: serverHost(server) })}
-  </h2>
-  <ul>
-    <li>
-      <button type="button" data-testid="server-continue" onclick={onContinue}
-        >{l.t('server-continue')}</button
-      >
-    </li>
-    <li><a href={hrefFor('home')} data-testid="server-cancel">{l.t('server-cancel')}</a></li>
-  </ul>
-</section>
+<Dialog
+  title={l.t('server-confirm', { host: serverHost(server) })}
+  role="alertdialog"
+  data-testid="server-confirm"
+  oncancel={() => navigate('home')}
+>
+  {#snippet actions()}
+    <Button variant="primary" data-testid="server-continue" onclick={onContinue}
+      >{l.t('server-continue')}</Button
+    >
+    <Button href={hrefFor('home')} data-testid="server-cancel" data-autofocus
+      >{l.t('server-cancel')}</Button
+    >
+  {/snippet}
+</Dialog>

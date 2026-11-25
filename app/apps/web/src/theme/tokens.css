@@ -3,8 +3,16 @@
 :root {
   --font-fallback: system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body: 'Atkinson Hyperlegible Next', var(--font-fallback);
-  --font-display: 'Cinzel', Georgia, serif;
+  --font-display: 'Marcellus', Georgia, serif;
+  --font-label: 'Marcellus', Georgia, serif;
   --font-mono: ui-monospace, Consolas, monospace;
+  /* The three card sizes, in rem so that cards grow with the text size. */
+  --card-large-width: 7.5rem;
+  --card-large-height: 11rem;
+  --card-medium-width: 6.125rem;
+  --card-medium-height: 9.125rem;
+  --card-target-width: 3.625rem;
+  --card-target-height: 5.25rem;
   --line-height: 1.5;
   --letter-spacing: normal;
   --word-spacing: normal;
@@ -43,6 +51,9 @@
   --bar-b: #33466e;
   --bar-ink: #f4ecd8;
   --moon: #f2d98d;
+  --sky-glow: #cfd9ee;
+  --scenery: #2b3a5a;
+  --scenery-o: 0.13;
 }
 
 :root[data-theme='dark'] {
@@ -70,6 +81,9 @@
   --bar-b: #1b2742;
   --bar-ink: #efe4c8;
   --moon: #f2d98d;
+  --sky-glow: #1c2a48;
+  --scenery: #7d93c4;
+  --scenery-o: 0.12;
 }
 
 :root[data-contrast='high'],
@@ -98,6 +112,9 @@
   --bar-b: #0d1426;
   --bar-ink: #ffffff;
   --moon: #ffe08a;
+  --sky-glow: #f2f2f2;
+  --scenery: #000000;
+  --scenery-o: 0.08;
 }
 
 :root[data-theme='dark'][data-contrast='high'] {
@@ -125,4 +142,7 @@
   --bar-b: #000000;
   --bar-ink: #ffffff;
   --moon: #ffe08a;
+  --sky-glow: #0d0d0d;
+  --scenery: #ffffff;
+  --scenery-o: 0.1;
 }

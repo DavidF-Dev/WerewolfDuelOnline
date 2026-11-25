@@ -27,14 +27,14 @@ describe('applySettings', () => {
       reducedMotion: 'on',
       readingFont: 'lexend',
       extraSpacing: true,
-      textSize: 120,
+      textSize: 125,
     });
     expect(root.getAttribute('data-theme')).toBe('dark');
     expect(root.getAttribute('data-contrast')).toBe('high');
     expect(root.getAttribute('data-motion')).toBe('reduce');
     expect(root.getAttribute('data-font')).toBe('lexend');
     expect(root.getAttribute('data-spacing')).toBe('extra');
-    expect(root.style.getPropertyValue('--text-scale')).toBe('1.2');
+    expect(root.style.getPropertyValue('--text-scale')).toBe('1.25');
   });
 
   it('removes the optional attributes when the settings are off', () => {
@@ -64,10 +64,13 @@ describe('applySettings', () => {
     expect(apply({ reducedMotion: 'system' }).hasAttribute('data-motion')).toBe(false);
   });
 
-  it('clamps the text size to 90 to 150', () => {
+  it('moves the text size to the nearest offered one', () => {
     media([]);
     expect(apply({ textSize: 10 }).style.getPropertyValue('--text-scale')).toBe('0.9');
     expect(apply({ textSize: 999 }).style.getPropertyValue('--text-scale')).toBe('1.5');
+    expect(apply({ textSize: 110 }).style.getPropertyValue('--text-scale')).toBe('1');
+    expect(apply({ textSize: 120 }).style.getPropertyValue('--text-scale')).toBe('1.25');
+    expect(apply({ textSize: 140 }).style.getPropertyValue('--text-scale')).toBe('1.5');
   });
 });
 

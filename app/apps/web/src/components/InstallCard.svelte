@@ -1,6 +1,9 @@
 <script lang="ts">
   import type { Localiser } from '@wwd/client-core';
+  import IconButton from '../kit/IconButton.svelte';
+  import Panel from '../kit/Panel.svelte';
   import { promptInstall } from '../pwa/install.js';
+  import Button from './Button.svelte';
 
   interface Props {
     localiser: Localiser;
@@ -13,36 +16,39 @@
   const uid = $props.id();
 </script>
 
-<section class="card" aria-labelledby="{uid}-heading" data-testid="install-card">
-  <h2 id="{uid}-heading">{l.t('install-card-heading')}</h2>
-  <p>{l.t(platform === 'ios' ? 'install-card-text-ios' : 'install-card-text')}</p>
-  {#if platform === 'ios'}
-    <p>{l.t('install-ios-steps')}</p>
-  {/if}
-  <div class="actions">
-    {#if platform === 'prompt'}
-      <button type="button" onclick={() => void promptInstall()}>{l.t('install-button')}</button>
-    {/if}
-    <button type="button" onclick={onDismiss}>{l.t('install-card-dismiss')}</button>
+<Panel role="region" aria-labelledby="{uid}-heading" data-testid="install-card">
+  <div class="head">
+    <h2 id="{uid}-heading">{l.t('install-card-heading')}</h2>
+    <IconButton icon="close" label={l.t('install-card-dismiss')} onclick={onDismiss} />
   </div>
-</section>
+  <p class="text">{l.t(platform === 'ios' ? 'install-card-text-ios' : 'install-card-text')}</p>
+  {#if platform === 'ios'}
+    <p class="text">{l.t('install-ios-steps')}</p>
+  {:else}
+    <Button size="small" variant="primary" onclick={() => void promptInstall()}
+      >{l.t('install-button')}</Button
+    >
+  {/if}
+</Panel>
 
 <style>
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    margin-block: 1rem;
-    padding: 0.5rem 1rem 1rem;
+  .head {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
   }
 
   h2 {
-    font-size: 1.125rem;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    margin: 0;
   }
 
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+  .text {
+    color: var(--muted);
+    font-size: 0.75rem;
+    margin: 4px 0 8px;
   }
 </style>

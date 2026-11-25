@@ -4,6 +4,7 @@
   import { copyText } from '../clipboard.js';
   import { groupCode } from '../code.js';
   import { rejoinLink } from '../online.js';
+  import Button from './Button.svelte';
   import QrCode from './QrCode.svelte';
 
   interface Props {
@@ -31,30 +32,23 @@
 </script>
 
 <details data-testid="continue-elsewhere" ontoggle={toggled}>
-  <summary>{l.t('continue-heading')}</summary>
+  <summary class="kit-button block">{l.t('continue-heading')}</summary>
   <p>{l.t('continue-instructions')}</p>
   <p>{l.t('continue-code', { code: groupCode(room) })}</p>
   <p>{l.t('continue-seat', { seat: l.t(`seat-${seat}`) })}</p>
   <p data-testid="rejoin-link">{l.t('continue-link', { link })}</p>
-  <p>
-    <button type="button" data-testid="copy-rejoin-link" onclick={copy}
-      >{l.t('continue-copy-link')}</button
-    >
-  </p>
+  <Button data-testid="copy-rejoin-link" onclick={copy}>{l.t('continue-copy-link')}</Button>
   <p role="status">{feedback}</p>
   <p>{l.t('continue-qr-hint')}</p>
   <QrCode {link} testId="rejoin-qr" />
   {#if pin !== null}
-    <p>
-      <button
-        type="button"
-        data-testid="toggle-pin"
-        aria-expanded={revealed}
-        aria-controls="{uid}-pin"
-        onclick={() => (revealed = !revealed)}
-        >{l.t(revealed ? 'continue-hide-pin' : 'continue-show-pin')}</button
-      >
-    </p>
+    <Button
+      data-testid="toggle-pin"
+      aria-expanded={revealed}
+      aria-controls="{uid}-pin"
+      onclick={() => (revealed = !revealed)}
+      >{l.t(revealed ? 'continue-hide-pin' : 'continue-show-pin')}</Button
+    >
     <div id="{uid}-pin">
       {#if revealed}
         <p class="code" data-testid="pin">{l.t('continue-pin', { pin })}</p>
@@ -63,3 +57,24 @@
     </div>
   {/if}
 </details>
+
+<style>
+  /* A list item keeps the disclosure triangle that a flex box would drop. */
+  summary {
+    cursor: pointer;
+    display: list-item;
+  }
+
+  details[open] > summary {
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 0.8125rem;
+    margin: 0 0 6px;
+  }
+
+  details > :global(.button) {
+    margin-bottom: 6px;
+  }
+</style>

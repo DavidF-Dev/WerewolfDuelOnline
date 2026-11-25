@@ -64,6 +64,27 @@ describe('online sessions', () => {
     expect(loadSession()?.room).toBe('K7Q2MX');
   });
 
+  it('stores the round and turn, and keeps them when a later save leaves them out', async () => {
+    const store = await openDeviceStore();
+    await initSessions(store);
+    saveOnlineSession(
+      { room: 'K7Q2MX', seatToken: TOKEN, server: A, lastSeq: 1, round: 3, yourTurn: true },
+      1000,
+    );
+    saveOnlineSession({ room: 'K7Q2MX', seatToken: TOKEN, server: A, lastSeq: 2 }, 2000);
+    await vi.waitFor(async () => {
+      const record = await store.sessions.get(sessionId(A, 'K7Q2MX'));
+      expect(record).toMatchObject({ round: 3, yourTurn: true, lastSeq: 2 });
+    });
+    saveOnlineSession(
+      { room: 'K7Q2MX', seatToken: TOKEN, server: A, lastSeq: 3, round: 3, yourTurn: false },
+      3000,
+    );
+    await vi.waitFor(async () => {
+      expect((await store.sessions.get(sessionId(A, 'K7Q2MX')))?.yourTurn).toBe(false);
+    });
+  });
+
   it('keeps a known seat when a later save does not name one', () => {
     saveOnlineSession({ room: 'K7Q2MX', seatToken: TOKEN, server: A, seat: 'p1', lastSeq: 1 });
     saveOnlineSession({ room: 'K7Q2MX', seatToken: TOKEN, server: A, lastSeq: 2 });

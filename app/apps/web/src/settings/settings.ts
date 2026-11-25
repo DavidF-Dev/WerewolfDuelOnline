@@ -1,12 +1,11 @@
-export const TEXT_SIZE_MIN = 90;
-export const TEXT_SIZE_MAX = 150;
-export const TEXT_SIZE_STEP = 10;
+/** The text sizes offered, as percentages. */
+export const TEXT_SIZES = [90, 100, 125, 150] as const;
 
 export interface Settings {
   language: 'system' | 'en';
   theme: 'system' | 'light' | 'dark';
   highContrast: boolean;
-  /** A percentage from 90 to 150. */
+  /** A percentage, one of `TEXT_SIZES`. */
   textSize: number;
   readingFont: 'default' | 'lexend' | 'opendyslexic';
   extraSpacing: boolean;
@@ -17,7 +16,6 @@ export interface Settings {
   haptics: boolean;
   confirmPlan: boolean;
   rulesHints: boolean;
-  deductionAutoMark: boolean;
   /** The referee URL for online games; null uses the default. */
   server: string | null;
   installCardDismissed: boolean;
@@ -38,19 +36,30 @@ export const DEFAULT_SETTINGS: Readonly<Settings> = {
   haptics: false,
   confirmPlan: true,
   rulesHints: true,
-  deductionAutoMark: true,
   server: null,
   installCardDismissed: false,
   firstGameFinished: false,
 };
 
-export function clampTextSize(size: number): number {
+/** The offered text size nearest to `size`, the smaller one on a tie. */
+export function nearestTextSize(size: number): number {
   if (!Number.isFinite(size)) return DEFAULT_SETTINGS.textSize;
-  return Math.min(TEXT_SIZE_MAX, Math.max(TEXT_SIZE_MIN, size));
+  return TEXT_SIZES.reduce<number>(
+    (best, preset) => (Math.abs(preset - size) < Math.abs(best - size) ? preset : best),
+    TEXT_SIZES[0],
+  );
 }
 
-/** Fills any missing settings with defaults and clamps the text size, so older records stay usable. */
+/**
+ * Fills any missing settings with defaults, drops keys that are no longer settings and moves the
+ * text size to the nearest offered one, so older records stay usable.
+ */
 export function normaliseSettings(stored: Partial<Settings> | undefined): Settings {
-  const merged: Settings = { ...DEFAULT_SETTINGS, ...stored };
-  return { ...merged, textSize: clampTextSize(merged.textSize) };
+  const merged = { ...DEFAULT_SETTINGS } as Record<keyof Settings, unknown>;
+  for (const key of Object.keys(DEFAULT_SETTINGS) as (keyof Settings)[]) {
+    const value = stored?.[key];
+    if (value !== undefined) merged[key] = value;
+  }
+  const settings = merged as Settings;
+  return { ...settings, textSize: nearestTextSize(settings.textSize) };
 }

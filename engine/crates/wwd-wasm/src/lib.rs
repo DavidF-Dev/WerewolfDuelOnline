@@ -15,8 +15,9 @@ use wwd_core::{
 pub mod api {
     use serde::Serialize;
     use wwd_core::{
-        Character, Command, EditError, Event, EventKind, Pending, Plan, Recorder, Replay,
-        ReplayError, RoundBoundary, RuleError, RulesConfig, Seat, TimelineStep, View, Viewer,
+        AbilitySummary, Character, Command, EditError, Event, EventKind, Pending, Plan, Recorder,
+        Replay, ReplayError, RoundBoundary, RuleError, RulesConfig, Seat, TimelineStep, View,
+        Viewer,
     };
 
     /// An error as it crosses to JavaScript: the engine's localisation message ID.
@@ -155,6 +156,10 @@ pub mod api {
 
     pub fn effective_initiative(character: Character, placed: u8) -> u8 {
         wwd_core::effective_initiative(character, placed)
+    }
+
+    pub fn ability_summary(character: Character) -> AbilitySummary {
+        wwd_core::ability_summary(character)
     }
 
     pub fn showdown_order(view: &View) -> Option<[Seat; 2]> {
@@ -309,6 +314,12 @@ pub fn validate_plan(plan: JsValue, config: JsValue) -> Result<Option<String>, J
 pub fn effective_initiative(character: JsValue, placed: u8) -> Result<u8, JsValue> {
     let character: Character = from_js(character)?;
     Ok(api::effective_initiative(character, placed))
+}
+
+#[wasm_bindgen(js_name = abilitySummary)]
+pub fn ability_summary(character: JsValue) -> Result<JsValue, JsValue> {
+    let character: Character = from_js(character)?;
+    to_js(&api::ability_summary(character))
 }
 
 #[wasm_bindgen(js_name = showdownOrder)]

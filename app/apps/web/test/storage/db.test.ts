@@ -36,7 +36,7 @@ describe('device store', () => {
 
   it('keeps settings, identity and history across opens', async () => {
     const first = await openDeviceStore();
-    await first.settings.put({ ...DEFAULT_SETTINGS, theme: 'dark', textSize: 120 });
+    await first.settings.put({ ...DEFAULT_SETTINGS, theme: 'dark', textSize: 125 });
     await first.identity.put({ deviceId: 'device-1', displayName: 'Ada' });
     const record: HistoryRecord = {
       id: 'g1',
@@ -52,17 +52,28 @@ describe('device store', () => {
     await first.history.put({ ...record, id: 'g2', finishedAt: 9 });
 
     const second = await openDeviceStore();
-    expect(await second.settings.get()).toMatchObject({ theme: 'dark', textSize: 120 });
+    expect(await second.settings.get()).toMatchObject({ theme: 'dark', textSize: 125 });
     expect(await second.identity.get()).toEqual({ deviceId: 'device-1', displayName: 'Ada' });
     expect((await second.history.list()).map((r) => r.id)).toEqual(['g2', 'g1']);
     await second.history.clear();
     expect(await second.history.list()).toEqual([]);
   });
 
-  it('clamps a stored text size', async () => {
+  it('moves a stored text size to the nearest offered one', async () => {
     const store = await openDeviceStore();
     await store.settings.put({ ...DEFAULT_SETTINGS, textSize: 400 });
     expect((await store.settings.get()).textSize).toBe(150);
+    await store.settings.put({ ...DEFAULT_SETTINGS, textSize: 110 });
+    expect((await store.settings.get()).textSize).toBe(100);
+  });
+
+  it('ignores the old deduction auto-mark setting', async () => {
+    const store = await openDeviceStore();
+    const old = { ...DEFAULT_SETTINGS, haptics: true, deductionAutoMark: false };
+    await store.settings.put(old);
+    const settings = await store.settings.get();
+    expect(settings).toEqual({ ...DEFAULT_SETTINGS, haptics: true });
+    expect('deductionAutoMark' in settings).toBe(false);
   });
 
   it('migrates localStorage sessions once', async () => {

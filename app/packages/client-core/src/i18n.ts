@@ -2,7 +2,8 @@ import { FluentBundle, FluentResource, type FluentVariable } from '@fluent/bundl
 import { engineFtl } from '@wwd/engine';
 import type { Event, Seat } from '@wwd/engine';
 import { uiFtl } from './generated/ui-ftl.js';
-import { renderEvent } from './render-event.js';
+import { renderEvent, richEvent } from './render-event.js';
+import type { RichPart } from './rich-text.js';
 
 export type MessageArgs = Record<string, string | number>;
 
@@ -32,14 +33,23 @@ function createTranslator(locale: 'en'): Translator {
 export interface Localiser extends Translator {
   /** Describes an event as one sentence, with seats worded for `perspective`; a null perspective names them Player 1 and Player 2. */
   renderEvent(event: Event, perspective: Seat | null): string;
+  /** The same sentence as `renderEvent`, with player and character names and markers marked out. */
+  richEvent(event: Event, perspective: Seat | null): RichPart[];
+  /** The locale that dates, times and lists are formatted in. */
+  readonly locale: string;
 }
+
+const FORMAT_LOCALES = { en: 'en-GB' } as const;
 
 export function createLocaliser(locale: 'en'): Localiser {
   const translator = createTranslator(locale);
-  const listFormat = new Intl.ListFormat('en-GB', { type: 'conjunction' });
-  const list = (items: string[]): string => listFormat.format(items);
+  const formatLocale = FORMAT_LOCALES[locale];
+  const listFormat = new Intl.ListFormat(formatLocale, { type: 'conjunction' });
+  const list = (items: string[]) => listFormat.formatToParts(items);
   return {
     t: translator.t,
+    locale: formatLocale,
     renderEvent: (event, perspective) => renderEvent(translator, list, event, perspective),
+    richEvent: (event, perspective) => richEvent(translator, list, event, perspective),
   };
 }

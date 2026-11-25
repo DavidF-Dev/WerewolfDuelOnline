@@ -23,3 +23,6 @@ if (typeof HTMLDialogElement !== 'undefined' && !('showModal' in HTMLDialogEleme
     },
   });
 }
+
+// jsdom does not scroll and reports `scrollTo` as not implemented; this stands in for it.
+if (typeof window !== 'undefined') window.scrollTo = () => undefined;

@@ -1,6 +1,6 @@
 import '@fontsource/atkinson-hyperlegible-next/latin-400.css';
 import '@fontsource/atkinson-hyperlegible-next/latin-700.css';
-import '@fontsource/cinzel/latin-700.css';
+import '@fontsource/marcellus/latin-400.css';
 import type { Settings } from '../settings/settings.js';
 
 export type ReadingFont = Settings['readingFont'];

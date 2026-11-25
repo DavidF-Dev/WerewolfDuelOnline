@@ -7,7 +7,7 @@
     Localiser,
     RejoinAttempt,
   } from '@wwd/client-core';
-  import { EXAMPLE_CODE, normaliseCode } from '../code.js';
+  import { normaliseCode } from '../code.js';
   import {
     DEFAULT_SERVER,
     joinHash,
@@ -16,10 +16,16 @@
     startOnlineGame,
     type OnlineGame,
   } from '../online.js';
-  import { hrefFor } from '../router.js';
   import { saveOnlineSession } from '../session.js';
+  import Button from '../components/Button.svelte';
+  import CodeField from '../components/CodeField.svelte';
   import Screen from '../components/Screen.svelte';
   import ServerConfirm from '../components/ServerConfirm.svelte';
+  import Label from '../kit/Label.svelte';
+  import Note from '../kit/Note.svelte';
+  import Panel from '../kit/Panel.svelte';
+  import Segmented from '../kit/Segmented.svelte';
+  import Spinner from '../kit/Spinner.svelte';
   import { stopReasonText } from '../text.js';
   import { isStalePage, reloadApp } from '../pwa/update.js';
 
@@ -41,6 +47,11 @@
   const serverInvalid = initial.server !== undefined && linked === undefined;
   const server = linked ?? DEFAULT_SERVER;
   const SEATS: readonly Seat[] = ['p0', 'p1'];
+  const seatOptions = SEATS.map((option) => ({
+    value: option,
+    label: l.t(`seat-${option}`),
+    testId: `rejoin-seat-${option}`,
+  }));
   const PIN = /^[0-9]{4}$/;
 
   let typedCode = $state(initial.code ?? '');
@@ -134,96 +145,121 @@
   onMount(() => stop);
 </script>
 
-<Screen title={l.t('rejoin-heading')} testId="rejoin" backLabel={l.t('back')}>
+<Screen title={l.t('rejoin-heading')} testId="rejoin" back={l.t('back')}>
   {#if serverInvalid}
     <p role="alert" data-testid="server-invalid">{l.t('online-server-invalid')}</p>
   {:else if !trusted}
     <ServerConfirm localiser={l} {server} onContinue={() => (trusted = true)} />
   {:else}
     {#if server !== DEFAULT_SERVER}
-      <p data-testid="server-warning">{l.t('online-server-other', { host: serverHost(server) })}</p>
+      <Note data-testid="server-warning"
+        >{l.t('online-server-other', { host: serverHost(server) })}</Note
+      >
     {/if}
-    <form onsubmit={submit} novalidate>
-      <p>
-        <label for="{uid}-code">{l.t('join-code-label')}</label>
-        <input
-          id="{uid}-code"
-          name="code"
-          autocomplete="off"
-          autocapitalize="characters"
-          spellcheck="false"
-          aria-invalid={problems.code}
-          aria-describedby="{uid}-code-hint"
-          data-testid="rejoin-code"
+    <form class="rejoin-form" onsubmit={submit} novalidate>
+      <Panel class="rejoin-panel">
+        <CodeField
+          localiser={l}
           bind:value={typedCode}
+          invalid={problems.code}
+          error={l.t('online-join-code-invalid')}
+          testId="rejoin-code"
         />
-      </p>
-      <p id="{uid}-code-hint">{l.t('join-code-hint', { example: EXAMPLE_CODE })}</p>
-      {#if problems.code}
-        <p role="alert">{l.t('online-join-code-invalid')}</p>
-      {/if}
-      <fieldset>
-        <legend>{l.t('rejoin-seat-legend')}</legend>
-        {#each SEATS as option (option)}
-          <label>
-            <input
-              type="radio"
-              name="seat"
-              value={option}
-              data-testid="rejoin-seat-{option}"
-              bind:group={seat}
-            />
-            {l.t(`seat-${option}`)}
-          </label>
-        {/each}
-      </fieldset>
-      {#if problems.seat}
-        <p role="alert">{l.t('rejoin-seat-missing')}</p>
-      {/if}
-      <p>
-        <label for="{uid}-pin">{l.t('rejoin-pin-label')}</label>
-        <input
-          id="{uid}-pin"
-          name="pin"
-          inputmode="numeric"
-          autocomplete="off"
-          maxlength="4"
-          aria-invalid={problems.pin}
-          aria-describedby="{uid}-pin-hint"
-          data-testid="rejoin-pin"
-          bind:value={pin}
-        />
-      </p>
-      <p id="{uid}-pin-hint">{l.t('rejoin-pin-hint')}</p>
-      {#if problems.pin}
-        <p role="alert">{l.t('rejoin-pin-invalid')}</p>
-      {/if}
-      <p><button type="submit" data-testid="rejoin-submit">{l.t('rejoin-submit')}</button></p>
-      <p>
-        <button
-          type="button"
-          aria-describedby="{uid}-ask-hint"
-          data-testid="rejoin-ask"
-          onclick={ask}>{l.t('rejoin-ask')}</button
+        <div>
+          <Label id="{uid}-seat">{l.t('rejoin-seat-legend')}</Label>
+          <Segmented
+            labelledby="{uid}-seat"
+            stretch
+            value={seat ?? ''}
+            options={seatOptions}
+            onchange={(value) => (seat = value === '' ? undefined : value)}
+          />
+          {#if problems.seat}
+            <p class="error" role="alert">{l.t('rejoin-seat-missing')}</p>
+          {/if}
+        </div>
+        <div class="field">
+          <Label as="label" for="{uid}-pin">{l.t('rejoin-pin-label')}</Label>
+          <input
+            id="{uid}-pin"
+            class="pin"
+            name="pin"
+            inputmode="numeric"
+            autocomplete="off"
+            maxlength="4"
+            aria-invalid={problems.pin}
+            aria-describedby="{uid}-pin-hint"
+            data-testid="rejoin-pin"
+            bind:value={pin}
+          />
+          <p id="{uid}-pin-hint" class="hint">{l.t('rejoin-pin-hint')}</p>
+          {#if problems.pin}
+            <p class="error" role="alert">{l.t('rejoin-pin-invalid')}</p>
+          {/if}
+        </div>
+        <Button type="submit" variant="primary" data-testid="rejoin-submit"
+          >{l.t('rejoin-submit')}</Button
         >
-      </p>
-      <p id="{uid}-ask-hint">{l.t('rejoin-ask-hint')}</p>
+        <div class="field">
+          <Button aria-describedby="{uid}-ask-hint" data-testid="rejoin-ask" onclick={ask}
+            >{l.t('rejoin-ask')}</Button
+          >
+          <p id="{uid}-ask-hint" class="hint">{l.t('rejoin-ask-hint')}</p>
+        </div>
+      </Panel>
     </form>
-    <p role="status" data-testid="rejoin-status">
+    <p class="message" role="status" data-testid="rejoin-status">
       {#if snapshot?.seatToken != null}
         {l.t('rejoin-joined')}
       {:else if snapshot?.rejoinPending === true}
-        {l.t('rejoin-waiting-approval')}
+        {l.t('rejoin-waiting-approval')}<Spinner />
       {/if}
     </p>
     {#if stopText !== null}
-      <p role="alert" data-testid="rejoin-problem">{stopText}</p>
+      <p class="message" role="alert" data-testid="rejoin-problem">{stopText}</p>
       {#if connection !== null && isStalePage(connection.stopReason, snapshot?.lastError ?? null)}
-        <p>
-          <button type="button" onclick={() => void reloadApp()}>{l.t('update-reload')}</button>
-        </p>
+        <Button onclick={() => void reloadApp()}>{l.t('update-reload')}</Button>
       {/if}
     {/if}
   {/if}
-  <p><a href={hrefFor('home')}>{l.t('back-home')}</a></p>
 </Screen>
+
+<style>
+  .rejoin-form :global(.rejoin-panel) {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .pin {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.3em;
+    text-align: center;
+    width: 100%;
+  }
+
+  .hint,
+  .error,
+  .message {
+    font-size: 0.75rem;
+    margin: 0;
+  }
+
+  .hint {
+    color: var(--muted);
+  }
+
+  .error {
+    color: var(--danger);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+</style>

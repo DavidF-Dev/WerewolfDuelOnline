@@ -335,9 +335,14 @@ describe('server messages', () => {
   });
 });
 
-describe('protocol v2', () => {
-  it('a v1 hello gets protocol_version', () => {
-    expect(PROTOCOL_VERSION).toBe(2);
+describe('protocol v3', () => {
+  it('a v2 hello gets protocol_version, since the event shapes changed', () => {
+    const raw = JSON.stringify({ type: 'hello', protocol_version: 2, room: ROOM });
+    expect(parseClientMessage(raw)).toEqual({ ok: false, code: 'protocol_version' });
+  });
+
+  it('is version 3, and a v1 hello gets protocol_version', () => {
+    expect(PROTOCOL_VERSION).toBe(3);
     const raw = JSON.stringify({
       type: 'hello',
       protocol_version: 1,
@@ -346,7 +351,9 @@ describe('protocol v2', () => {
     });
     expect(parseClientMessage(raw)).toEqual({ ok: false, code: 'protocol_version' });
   });
+});
 
+describe('pause and resume messages', () => {
   it('parses every pause and resume client message', () => {
     const msgs: ClientMessage[] = [
       { type: 'pause_request' },

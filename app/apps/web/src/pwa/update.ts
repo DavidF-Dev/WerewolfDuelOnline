@@ -16,13 +16,23 @@ const INSTALL_WAIT_MS = 10_000;
 const waiting = writable(false);
 let activate: ((reloadPage?: boolean) => Promise<void>) | undefined;
 let registration: ServiceWorkerRegistration | undefined;
+let announced = false;
 
 /** True once a new version of the app is installed and waiting for this page to reload. */
 export const updateWaiting: Readable<boolean> = { subscribe: waiting.subscribe };
 
+/** Whether a banner has already announced the waiting version, so that later banners show it quietly. */
+export const updateAnnounced = (): boolean => announced;
+
+/** Records that the waiting version has been announced. */
+export function markUpdateAnnounced(): void {
+  announced = true;
+}
+
 /** Registers the service worker through `register` and watches it for new versions. */
 export function watchForUpdates(register: RegisterUpdates): void {
   waiting.set(false);
+  announced = false;
   registration = undefined;
   activate = register({
     onNeedRefresh: () => waiting.set(true),

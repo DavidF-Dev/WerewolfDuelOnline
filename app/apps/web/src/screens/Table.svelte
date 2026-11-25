@@ -1,19 +1,28 @@
 <script lang="ts">
-  import { untrack, type Snippet } from 'svelte';
+  import { tick, untrack, type Snippet } from 'svelte';
   import type { Command, Seat } from '@wwd/engine';
   import type { GameClientState, Localiser } from '@wwd/client-core';
+  import Screen from '../components/Screen.svelte';
+  import UnofficialNotice from '../components/UnofficialNotice.svelte';
+  import IconButton from '../kit/IconButton.svelte';
+  import GameMenu from '../table/GameMenu.svelte';
+  import GameOver from '../table/GameOver.svelte';
+  import HandFan from '../table/HandFan.svelte';
   import LogDrawer from '../table/LogDrawer.svelte';
   import MyArea from '../table/MyArea.svelte';
   import OpponentStrip from '../table/OpponentStrip.svelte';
-  import PhaseBar from '../table/PhaseBar.svelte';
-  import TableArea from '../table/TableArea.svelte';
-  import GameMenu from '../table/GameMenu.svelte';
-  import GameOver from '../table/GameOver.svelte';
   import PausedPanel from '../table/PausedPanel.svelte';
-  import RoundSummary from '../table/RoundSummary.svelte';
+  import PhaseBar from '../table/PhaseBar.svelte';
+  import PlanPanels from '../table/PlanPanels.svelte';
+  import PlanSheet from '../table/PlanSheet.svelte';
+  import RevealPanel from '../table/RevealPanel.svelte';
+  import ShowdownList from '../table/ShowdownList.svelte';
+  import TargetGrid from '../table/TargetGrid.svelte';
+  import { providePrimary } from '../table/primary.svelte.js';
   import { buzz } from '../haptics.js';
   import { display } from '../settings/display.svelte.js';
-  import { problemText, rejectionText, statusText } from '../text.js';
+  import { targetId } from '../cards.js';
+  import { problemText, rejectionText } from '../text.js';
 
   interface Props {
     localiser: Localiser;
@@ -21,9 +30,11 @@
     onCommand: (cmd: Command) => void;
     /** A Fluent id for a problem found on this side, such as a command that could not be sent. */
     notice?: string | null;
-    /** Whether the connection notices use the local wording; online ones come from `children`. */
+    /** Whether the connection notices use the local wording; online ones come from `banner`. */
     mode?: 'local' | 'online';
-    /** Shown below the heading, such as connection details. */
+    /** Notices right under the bar, outside the scrolling middle, such as the connection banner. */
+    banner?: Snippet;
+    /** Shown at the top of the body, such as a saved game to resume. */
     children?: Snippet;
     /** Extra game menu items, such as continuing on another device. */
     menu?: Snippet;
@@ -43,10 +54,11 @@
 
   let {
     localiser: l,
-    state,
+    state: client,
     onCommand,
     notice = null,
     mode = 'local',
+    banner,
     children,
     menu,
     onResign,
@@ -56,44 +68,101 @@
     onRematch,
     onViewReplay,
   }: Props = $props();
-  const uid = $props.id();
   let root: HTMLElement | undefined;
+  const primary = providePrimary();
+  let menuOpen = $state(false);
+  let logOpen = $state(false);
 
   const other = (seat: Seat): Seat => (seat === 'p0' ? 'p1' : 'p0');
   const index = (seat: Seat): 0 | 1 => (seat === 'p0' ? 0 : 1);
 
-  const view = $derived(state.view);
-  const seat = $derived(state.seat);
+  const view = $derived(client.view);
+  const seat = $derived(client.seat);
   const opponentSeat = $derived(seat === null ? null : other(seat));
   const names = $derived.by((): Record<Seat, string> => {
-    const opponentName = (s: Seat): string => state.opponent.name ?? l.t(`seat-${s}`);
+    const opponentName = (s: Seat): string => client.opponent.name ?? l.t(`seat-${s}`);
     return {
       p0: seat === 'p0' ? l.t('table-you') : opponentName('p0'),
       p1: seat === 'p1' ? l.t('table-you') : opponentName('p1'),
     };
   });
-  const gameOverEvent = $derived(state.events.find(([, event]) => 'game_over' in event.kind)?.[1]);
+  const gameOverEvent = $derived(client.events.find(([, event]) => 'game_over' in event.kind)?.[1]);
   const problem = $derived(
     notice ??
-      (state.status === 'rejected' || state.status === 'game_over' ? null : state.lastError),
+      (client.status === 'rejected' || client.status === 'game_over' ? null : client.lastError),
   );
 
-  const roundOver = $derived(
-    view !== null &&
-      (view.phase === 'round_over' ||
-        (typeof view.phase === 'object' && 'game_over' in view.phase)),
+  const phase = $derived(view?.phase ?? null);
+  const finished = $derived(typeof phase === 'object' && phase !== null && 'game_over' in phase);
+  const inShowdown = $derived(
+    phase === 'round_over' ||
+      finished ||
+      (typeof phase === 'object' && phase !== null && 'hunter_choice' in phase),
+  );
+  const canPlan = $derived(
+    client.legal.some((cmd) => typeof cmd === 'object' && 'submit_plan' in cmd),
+  );
+  const revealing = $derived(
+    typeof phase === 'object' &&
+      phase !== null &&
+      ('reveal_hourglass' in phase || 'reveal_potion' in phase),
+  );
+  // The Hunter prompt lives in the showdown list, which must show while it is offered.
+  const showdown = $derived(
+    (view !== null && view.showdown !== null) ||
+      client.legal.some((cmd) => typeof cmd === 'object' && 'hunter_spend_cross' in cmd),
+  );
+  const hand = $derived(seat === null ? [] : (view?.players[index(seat)].hand ?? []));
+  // My own sealed plan is revealed to me.
+  const myPlan = $derived.by(() => {
+    const plan = seat === null ? 'none' : (view?.players[index(seat)].plan ?? 'none');
+    return typeof plan === 'object' && 'revealed' in plan ? plan.revealed : null;
+  });
+  // The opponent waits for this seat when only this seat is asked to act, outside the plan.
+  const waitingForMe = $derived(
+    phase !== 'plan' &&
+      seat !== null &&
+      opponentSeat !== null &&
+      (client.pending?.seats.includes(seat) ?? false) &&
+      !(client.pending?.seats.includes(opponentSeat) ?? false),
   );
   // A pause can be asked for only while nothing about one is open yet.
   const pausable = $derived(
-    state.status === 'playing' && state.pause.requestedBy === null && !state.pause.paused,
+    client.status === 'playing' && client.pause.requestedBy === null && !client.pause.paused,
+  );
+
+  // The game and round whose showdown has shown all its results; a game ending in one shows them first.
+  let shownAllFor = $state<string | null>(null);
+  const roundKey = $derived(`${client.game}|${view?.round ?? 0}`);
+  const resignation = $derived(
+    gameOverEvent !== undefined &&
+      'game_over' in gameOverEvent.kind &&
+      gameOverEvent.kind.game_over.reason === 'resignation',
+  );
+  // The game this mount saw unfinished; a game already over when it is opened skips its showdown.
+  let liveFor = $state<number | null>(null);
+  $effect.pre(() => {
+    if (view !== null && !finished) liveFor = client.game;
+  });
+  const over = $derived(
+    client.status === 'game_over' &&
+      (liveFor !== client.game || !showdown || shownAllFor === roundKey || resignation),
+  );
+
+  const title = $derived(
+    over
+      ? l.t('game-over-heading')
+      : view === null
+        ? l.t('table-heading')
+        : l.t(inShowdown ? 'table-round-showdown' : 'table-round', { round: view.round }),
   );
 
   // Changes only when what this seat is asked to do changes, not on every message.
   const phaseKey = $derived(
-    `${state.game}|${state.status}|${view?.round ?? 0}|${state.pending?.kind ?? 'none'}|${state.legal.length > 0}|${state.pause.paused}`,
+    `${client.game}|${client.status}|${over}|${view?.round ?? 0}|${client.pending?.kind ?? 'none'}|${client.legal.length > 0}|${client.pause.paused}`,
   );
 
-  /** Moves focus to the first thing to do now, or to the heading of the region that explains why there is nothing. */
+  /** Moves focus to the first thing to do now, or to the instruction that explains why there is nothing. */
   function focusPhase(): void {
     if (root === undefined) return;
     const active = document.activeElement;
@@ -103,30 +172,55 @@
       active instanceof HTMLSelectElement ||
       (active instanceof HTMLElement && active.isContentEditable);
     if (typing && active.isConnected) return;
+    // An open sheet or dialog keeps focus; a sheet that closes hands it on to what changed meanwhile.
+    if (active instanceof HTMLElement && active.closest('dialog[open]') !== null) {
+      focusMissed = true;
+      return;
+    }
+    focusMissed = false;
     const target =
       root.querySelector<HTMLElement>('[data-focus="game-over"]') ??
       root.querySelector<HTMLElement>('[data-focus="paused"]') ??
       root.querySelector<HTMLElement>('[data-phase-focus]:not([aria-disabled="true"])') ??
-      root.querySelector<HTMLElement>(
-        '[data-testid="plan-characters"] button:enabled, [data-testid="phase-actions"] li button:enabled',
-      ) ??
-      root.querySelector<HTMLElement>('[data-testid="phase-actions"] h2');
+      root.querySelector<HTMLElement>('[data-testid="phase-actions"] li button:enabled') ??
+      // Until focus has been on the table, the screen's heading keeps it, not the instruction.
+      (hadFocus ? root.querySelector<HTMLElement>('[data-testid="phase-instruction"]') : null);
     target?.focus();
   }
 
+  let focusMissed = false;
+  let hadFocus = false;
+  // The panels hand their primary actions to the phase bar after they mount.
+  const hostedKey = $derived(primary.shown.map((hosted) => hosted.id).join(','));
+
   $effect(() => {
     void phaseKey;
+    void hostedKey;
     untrack(focusPhase);
   });
 
+  /** Opens a sheet; only a change that arrives while it is open moves focus once it closes. */
+  function openSheet(open: () => void): void {
+    focusMissed = false;
+    open();
+  }
+
+  /** Closes a sheet, then moves focus to the action that arrived while it was open. */
+  async function closeSheet(close: () => void): Promise<void> {
+    close();
+    if (!focusMissed) return;
+    await tick();
+    focusPhase();
+  }
+
   // Names the offer this seat holds, so a reconnect that brings back the same offer stays silent.
   const offer = $derived(
-    state.legal.length > 0 ? `${view?.round ?? 0}|${state.pending?.kind ?? 'none'}` : null,
+    client.legal.length > 0 ? `${view?.round ?? 0}|${client.pending?.kind ?? 'none'}` : null,
   );
   // A rematch replaces the whole table, so its start is read out here.
-  const openedGame = untrack(() => state.game);
+  const openedGame = untrack(() => client.game);
   const rematchAnnouncement = $derived(
-    state.game === openedGame ? '' : l.t('rematch-started', { number: state.game + 1 }),
+    client.game === openedGame ? '' : l.t('rematch-started', { number: client.game + 1 }),
   );
 
   let buzzedFor: string | null = null;
@@ -138,94 +232,235 @@
   });
 </script>
 
-<main aria-labelledby="{uid}-heading" data-testid="table" bind:this={root}>
-  <h1 id="{uid}-heading">{l.t('table-heading')}</h1>
-  {#if mode === 'local'}
-    <p role="status" data-testid="connection-status">
-      {l.t('table-status', { status: statusText(l, state.status) })}
-    </p>
-    {#if state.status === 'disconnected'}
-      <p role="alert" data-testid="disconnected">{l.t('status-disconnected-detail')}</p>
-    {:else if state.status === 'rejected'}
-      <p role="alert" data-testid="rejected">{rejectionText(l, state.lastError)}</p>
+{#snippet menuButton()}
+  <IconButton
+    icon="menu"
+    label={l.t('menu-summary')}
+    aria-haspopup="dialog"
+    data-testid="game-menu-toggle"
+    onclick={() => openSheet(() => (menuOpen = true))}
+  />
+{/snippet}
+
+{#snippet logButton()}
+  <IconButton
+    icon="log"
+    label={l.t('drawer-summary')}
+    aria-haspopup="dialog"
+    data-testid="log-toggle"
+    onclick={() => openSheet(() => (logOpen = true))}
+  />
+{/snippet}
+
+{#snippet unofficialNotice()}
+  <UnofficialNotice localiser={l} placement="inline" />
+{/snippet}
+
+{#snippet phaseBar()}
+  {#if view !== null && seat !== null}
+    {#key client.game}
+      <PhaseBar
+        localiser={l}
+        state={client}
+        {view}
+        {onCommand}
+        hosted={primary.shown}
+        hostedInstruction={primary.instruction}
+      />
+    {/key}
+  {/if}
+{/snippet}
+
+<div class="frame" bind:this={root} onfocusin={() => (hadFocus = true)}>
+  <Screen
+    {title}
+    testId="table"
+    fit
+    tight
+    back={over ? l.t('back') : undefined}
+    left={menuButton}
+    right={logButton}
+    {banner}
+    footer={over ? undefined : phaseBar}
+    note={over ? unofficialNotice : undefined}
+  >
+    {#if mode === 'local'}
+      {#if client.status === 'disconnected'}
+        <p class="alert" role="alert" data-testid="disconnected">
+          {l.t('status-disconnected-detail')}
+        </p>
+      {:else if client.status === 'rejected'}
+        <p class="alert" role="alert" data-testid="rejected">
+          {rejectionText(l, client.lastError)}
+        </p>
+      {/if}
     {/if}
-  {/if}
-  {@render children?.()}
-  <p role="status" data-testid="problem">
-    {problem === null
-      ? ''
-      : l.t('problem-last', { detail: problemText(l, problem, mode === 'online') })}
-  </p>
-
-  <p role="status" class="visually-hidden" data-testid="game-announcement">
-    {rematchAnnouncement}
-  </p>
-
-  {#if state.status === 'game_over' && seat !== null}
-    <GameOver
-      localiser={l}
-      {seat}
-      gameOver={gameOverEvent}
-      replayVerified={state.replayVerified}
-      rematchReady={state.rematchReady}
-      {onRematch}
-      {onViewReplay}
-    />
-  {/if}
-
-  {#if pauseActions !== undefined && seat !== null}
-    <PausedPanel
-      localiser={l}
-      pause={state.pause}
-      {seat}
-      onAccept={pauseActions.accept}
-      onCancel={pauseActions.cancel}
-      onResume={pauseActions.resume}
-      children={paused}
-    />
-  {/if}
-
-  {#if view !== null && seat !== null && opponentSeat !== null}
-    {#key state.game}
-      <div class="layout">
+    {@render children?.()}
+    <p
+      role="status"
+      class={['alert', { 'visually-hidden': problem === null }]}
+      data-testid="problem"
+    >
+      {problem === null
+        ? ''
+        : l.t('problem-last', { detail: problemText(l, problem, mode === 'online') })}
+    </p>
+    <p role="status" class="visually-hidden" data-testid="game-announcement">
+      {rematchAnnouncement}
+    </p>
+    {#if view !== null && seat !== null}
+      {#if menuOpen}
         <GameMenu
           localiser={l}
           {view}
           {seat}
-          canResign={state.status === 'playing' && !state.pause.paused && onResign !== undefined}
-          onResign={() => onResign?.()}
-          onPause={pausable ? onPause : undefined}
+          canResign={client.status === 'playing' && !client.pause.paused && onResign !== undefined}
+          onResign={() => {
+            menuOpen = false;
+            onResign?.();
+          }}
+          onPause={pausable && onPause !== undefined
+            ? () => {
+                menuOpen = false;
+                onPause();
+              }
+            : undefined}
+          onclose={() => void closeSheet(() => (menuOpen = false))}
           children={menu}
         />
+      {/if}
+      {#key client.game}
+        <LogDrawer
+          localiser={l}
+          events={client.events}
+          {seat}
+          tiebreak={client.config?.tiebreak ?? null}
+          open={logOpen}
+          onclose={() => void closeSheet(() => (logOpen = false))}
+        />
+      {/key}
+    {/if}
+
+    {#if over && view !== null && seat !== null && opponentSeat !== null}
+      <GameOver
+        localiser={l}
+        {seat}
+        gameOver={gameOverEvent}
+        round={view.round}
+        player={view.players[index(seat)]}
+        opponentName={client.opponent.name ?? l.t('player-opponent-cap')}
+        rematchReady={client.rematchReady}
+        {onRematch}
+        {onViewReplay}
+      />
+    {:else}
+      {#if view !== null && seat !== null && opponentSeat !== null}
         <OpponentStrip
           localiser={l}
           name={names[opponentSeat]}
-          connected={state.opponent.connected}
+          connected={client.opponent.connected}
           player={view.players[index(opponentSeat)]}
           hasBadge={view.badge === opponentSeat}
+          {waitingForMe}
         />
-        <TableArea localiser={l} {view} {seat} events={state.events} {names} />
-        <MyArea localiser={l} name={l.t(`seat-${seat}`)} {view} {seat} />
-        <PhaseBar localiser={l} {state} {view} {seat} {onCommand} onCaughtUp={focusPhase} />
-        {#if roundOver}
-          <RoundSummary localiser={l} events={state.events} {seat} round={view.round} />
+      {/if}
+
+      <div class="middle" data-testid="phase-panels">
+        {#if pauseActions !== undefined && seat !== null}
+          <PausedPanel
+            localiser={l}
+            pause={client.pause}
+            {seat}
+            onAccept={pauseActions.accept}
+            onCancel={pauseActions.cancel}
+            onResume={pauseActions.resume}
+            children={paused}
+          />
         {/if}
-        <LogDrawer
-          localiser={l}
-          events={state.events}
-          {seat}
-          tiebreak={state.config?.tiebreak ?? null}
-        />
+
+        <!-- While paused, the pause panel stands alone, so only Resume is offered. -->
+        {#if view !== null && seat !== null && !client.pause.paused}
+          {#key client.game}
+            {#if canPlan}
+              <PlanSheet
+                localiser={l}
+                {hand}
+                legal={client.legal}
+                config={client.config}
+                {onCommand}
+                errorCount={client.errorCount}
+              />
+            {:else if phase === 'plan'}
+              <TargetGrid
+                localiser={l}
+                {hand}
+                shown={(card) => ({
+                  state: myPlan?.targets.some((t) => targetId(t) === targetId(card))
+                    ? 'selected'
+                    : 'normal',
+                })}
+              />
+              <HandFan localiser={l} {hand} chosen={myPlan?.character ?? null} testId="my-hand" />
+            {/if}
+            {#if revealing}
+              <RevealPanel
+                localiser={l}
+                {view}
+                {seat}
+                events={client.events}
+                legal={client.legal}
+                {onCommand}
+                tiebreak={client.config?.tiebreak ?? null}
+                errorCount={client.errorCount}
+              />
+            {/if}
+            {#if showdown}
+              <PlanPanels localiser={l} {view} events={client.events} {seat} {names} />
+              {#key view.round}
+                <ShowdownList
+                  localiser={l}
+                  events={client.events}
+                  {seat}
+                  legal={client.legal}
+                  {onCommand}
+                  errorCount={client.errorCount}
+                  onCaughtUp={focusPhase}
+                  onShown={(all) => (shownAllFor = all ? roundKey : null)}
+                />
+              {/key}
+            {/if}
+          {/key}
+        {/if}
       </div>
-    {/key}
-  {/if}
-</main>
+
+      {#if view !== null && seat !== null}
+        <MyArea localiser={l} name={l.t(`seat-${seat}`)} {view} {seat} />
+      {/if}
+    {/if}
+  </Screen>
+</div>
 
 <style>
-  .layout {
-    display: grid;
-    gap: 0.75rem;
-    grid-template-columns: minmax(0, 1fr);
-    margin-block-end: 1.5rem;
+  .frame {
+    display: contents;
+  }
+
+  .middle {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 0;
+  }
+
+  .alert {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-inline-start: 3px solid var(--warn);
+    border-radius: 8px;
+    flex: none;
+    font-size: 0.8125rem;
+    margin: 0;
+    padding: 6px 9px;
   }
 </style>

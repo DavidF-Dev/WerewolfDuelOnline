@@ -12,25 +12,32 @@ import { historyId } from '../../src/saves.js';
 import JoinOnline from '../../src/screens/JoinOnline.svelte';
 import Table from '../../src/screens/Table.svelte';
 import { initSessions, resetSessions } from '../../src/session.js';
+import { characterName, instructionText } from '../../src/text.js';
 import { openDeviceStore, type DeviceStore } from '../../src/storage/db.js';
 import { FakeWebSocket } from '../fake-socket.js';
-import { newGame, stateFor } from '../games.js';
+import { newGame, playUntil, stateFor } from '../games.js';
 
 const localiser = createLocaliser('en');
 const TOKEN = 'c'.repeat(32);
 const ROOM = 'K7Q2MX';
+// A finished game's first screen can take over a second while other test files build the app.
+const FIRST_SCREEN = { timeout: 5_000 };
 
 const isOver = (game: Game): boolean => {
   const { phase } = game.view({ seat: 'p0' });
   return typeof phase === 'object' && 'game_over' in phase;
 };
 
-/** A game played to its end, each seat choosing a pseudo-random legal command other than resigning. */
-function finished(seed: number): Game {
+/**
+ * A game played to its end, each seat choosing a pseudo-random legal command other than
+ * resigning; `before` sees the game before each command.
+ */
+function finished(seed: number, before?: (game: Game) => void): Game {
   const game = newGame(seed);
   let pick = seed;
   for (let step = 0; !isOver(game); step++) {
     if (step > 5000) throw new Error('the game did not end');
+    before?.(game);
     const seat = game.pending().seats[0];
     const legal = seat === undefined ? [] : game.legalActions(seat).filter((c) => c !== 'resign');
     pick = (pick * 1103515245 + 12345) % 2147483648;
@@ -69,6 +76,18 @@ function finishedWelcome(game: Game, seat: Seat, index = 0): ServerMessage[] {
   ];
 }
 
+/** Steps through the final showdown, which a game ending in one seen live shows before its result. */
+async function catchUp(): Promise<void> {
+  await screen.findByTestId('showdown', {}, FIRST_SCREEN);
+  for (
+    let next = screen.queryByTestId('showdown-next');
+    next !== null;
+    next = screen.queryByTestId('showdown-next')
+  ) {
+    await userEvent.click(next);
+  }
+}
+
 const socket = (): FakeWebSocket => {
   const latest = FakeWebSocket.instances.at(-1);
   if (latest === undefined) throw new Error('no socket was opened');
@@ -105,7 +124,7 @@ describe('game over', () => {
     await waitFor(() => expect(FakeWebSocket.instances).toHaveLength(1));
     socket().accept();
     for (const msg of finishedWelcome(game, 'p1')) socket().receive(msg);
-    const button = await screen.findByTestId('view-replay');
+    const button = await screen.findByTestId('view-replay', {}, FIRST_SCREEN);
     await userEvent.setup().click(button);
     expect(location.hash).toBe(
       `#/history/${encodeURIComponent(historyId(DEFAULT_SERVER, ROOM, 0))}`,
@@ -127,7 +146,9 @@ describe('game over', () => {
     ]) {
       socket().receive(msg);
     }
-    expect(await screen.findByTestId('game-over')).toBeTruthy();
+    // A game that was already over when this screen opened shows its result at once.
+    expect(await screen.findByTestId('game-over', {}, FIRST_SCREEN)).toBeTruthy();
+    expect(screen.queryByTestId('showdown')).toBeNull();
 
     const id = historyId(DEFAULT_SERVER, ROOM, 0);
     await waitFor(async () => expect(await store.history.list()).toHaveLength(1));
@@ -153,6 +174,7 @@ describe('game over', () => {
     socket().accept();
     for (const msg of finishedWelcome(game, 'p1')) socket().receive(msg);
     expect(await screen.findByTestId('game-over')).toBeTruthy();
+    expect(screen.queryByTestId('showdown')).toBeNull();
     await new Promise((resolve) => setTimeout(resolve, 50));
     expect(await store.history.list()).toEqual([record]);
     expect(persist).toHaveBeenCalledOnce();
@@ -173,21 +195,150 @@ describe('game over', () => {
 });
 
 describe('game over panel', () => {
+  const ended = (game: Game, seat: Seat): GameClientState => ({
+    ...stateFor(game, seat),
+    status: 'game_over',
+    legal: [],
+    replayVerified: true,
+  });
+
   function over(seed: number, seat: Seat): GameClientState {
-    const game = finished(seed);
-    return { ...stateFor(game, seat), status: 'game_over', legal: [], replayVerified: true };
+    return ended(finished(seed), seat);
   }
 
-  it('shows the result, how it was won and the round summary', () => {
+  /** The table just before a game's last command, and once it has ended, as seen live. */
+  function lastCommand(seed: number, seat: Seat): [GameClientState, GameClientState] {
+    let before: GameClientState | undefined;
+    const game = finished(seed, (g) => {
+      before = stateFor(g, seat);
+    });
+    return [before!, ended(game, seat)];
+  }
+
+  it('shows the result, how it was won and my markers', () => {
     const state = over(12, 'p0');
-    render(Table, { props: { localiser, state, onCommand: () => {}, onRematch: () => {} } });
-    const panel = within(screen.getByTestId('game-over'));
-    expect(panel.getByRole('heading', { name: 'Game over' })).toBeTruthy();
-    expect(screen.getByTestId('game-over-result').textContent).toMatch(/^(You|Your opponent) win/);
-    expect(screen.getByTestId('replay-verified').textContent).toBe(
-      'The game record was checked and matches what you saw.',
+    render(Table, {
+      props: { localiser, state, onCommand: () => {}, onRematch: () => {}, onViewReplay: () => {} },
+    });
+    expect(screen.getByRole('heading', { level: 1, name: 'Game over' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Back' })).toBeTruthy();
+    expect(screen.queryByTestId('phase-bar')).toBeNull();
+    const result = within(screen.getByTestId('game-over-result'));
+    const phase = state.view?.phase;
+    if (typeof phase !== 'object' || phase === null || !('game_over' in phase)) {
+      throw new Error('not over');
+    }
+    const won = phase.game_over.winner === 'p0';
+    expect(result.getByRole('heading', { level: 2 }).textContent?.trim()).toBe(
+      won ? 'You win!' : 'You lose.',
     );
-    expect(screen.getByText(`Round ${state.view?.round} summary`)).toBeTruthy();
+    expect(result.getByTestId('game-over-how').textContent?.trim()).toMatch(
+      new RegExp(`in round ${state.view!.round}\\.$`),
+    );
+    const me = state.view!.players[0];
+    expect(
+      within(result.getByTestId('game-over-markers'))
+        .getAllByRole('listitem')
+        .map((item) => item.textContent?.replace(/\s+/g, ' ').trim()),
+    ).toEqual([
+      expect.stringMatching(new RegExp(`\\b${me.health}$`)),
+      expect.stringMatching(new RegExp(`\\b${me.cross}$`)),
+      expect.stringMatching(new RegExp(`\\b${me.fang}$`)),
+    ]);
+    expect(screen.queryByTestId('replay-verified')).toBeNull();
+    const shown = screen.getByTestId('game-over').textContent;
+    expect(shown).not.toMatch(/game record/);
+    expect(shown).not.toMatch(/Play again in the same room/);
+    expect(screen.getByRole('button', { name: 'Rematch' }).hasAttribute('aria-describedby')).toBe(
+      false,
+    );
+    const actions = screen
+      .getAllByRole('button')
+      .filter((b) => b.closest('[data-testid="game-over"]'));
+    expect(actions.map((b) => b.textContent?.trim())).toEqual(['View replay', 'Rematch']);
+  });
+
+  it('a game already over when the table opens shows the result at once, without its showdown', () => {
+    const state = over(12, 'p0');
+    expect(state.view?.showdown).not.toBeNull();
+    render(Table, { props: { localiser, state, onCommand: () => {} } });
+    expect(screen.getByTestId('game-over')).toBeTruthy();
+    expect(screen.queryByTestId('showdown')).toBeNull();
+  });
+
+  it('game over shows the unofficial notice at the foot of the screen', () => {
+    render(Table, { props: { localiser, state: over(12, 'p0'), onCommand: () => {} } });
+    expect(screen.queryByRole('button', { name: 'Game menu' })).toBeNull();
+    const notices = screen.getAllByTestId('unofficial-notice');
+    expect(notices).toHaveLength(1);
+    expect(notices[0]!.textContent?.trim()).toBe(localiser.t('footer-unofficial'));
+    expect(notices[0]!.closest('[data-part="note"]')?.parentElement?.dataset['part']).toBe(
+      'screen',
+    );
+  });
+
+  it('a game that ends in a showdown seen live shows its results before the result', async () => {
+    const [before, after] = lastCommand(12, 'p0');
+    const props = { localiser, onCommand: () => {} };
+    const view = render(Table, { props: { ...props, state: before } });
+    await view.rerender({ ...props, state: after });
+    expect(screen.getByTestId('showdown')).toBeTruthy();
+    expect(screen.queryByTestId('game-over')).toBeNull();
+    expect(screen.getByTestId('showdown-next')).toBeTruthy();
+    // The bar and the phase bar both name the showdown until the result is shown.
+    expect(screen.getByRole('heading', { level: 1 }).textContent?.trim()).toBe(
+      `Round ${after.view!.round} · Showdown`,
+    );
+    expect(screen.getByTestId('phase-step').textContent?.trim()).toBe('Showdown');
+    expect(screen.getByTestId('phase-bar').textContent).not.toMatch(/Game over/);
+    await catchUp();
+    expect(screen.getByTestId('game-over')).toBeTruthy();
+    expect(screen.queryByTestId('showdown')).toBeNull();
+    expect(document.activeElement?.textContent?.trim()).toMatch(/^You (win!|lose\.)$/);
+  });
+
+  it('a resignation during a showdown shows the result at once, saying who resigned', async () => {
+    const game = newGame(12);
+    playUntil(game, () => game.view({ seat: 'p0' }).phase === 'round_over');
+    const props = { localiser, onCommand: () => {} };
+    const view = render(Table, { props: { ...props, state: stateFor(game, 'p0') } });
+    expect(screen.getByTestId('showdown')).toBeTruthy();
+    game.apply('p1', 'resign');
+    const after = ended(game, 'p0');
+    expect(after.view?.showdown).not.toBeNull();
+    await view.rerender({ ...props, state: after });
+    expect(screen.getByTestId('game-over')).toBeTruthy();
+    expect(screen.queryByTestId('showdown')).toBeNull();
+    expect(screen.getByRole('heading', { level: 2 }).textContent?.trim()).toBe('You win!');
+    expect(screen.getByTestId('game-over-how').textContent?.trim()).toBe(
+      'Your opponent resigned in round 1.',
+    );
+  });
+
+  it('the final-showdown instruction is given only after a final showdown', () => {
+    expect(instructionText(localiser, over(12, 'p0'))).toBe("The last round's results are in.");
+    const game = newGame(12);
+    playUntil(game, () => game.view({ seat: 'p0' }).phase === 'round_over');
+    game.apply('p1', 'resign');
+    const resigned = ended(game, 'p0');
+    expect(resigned.view?.showdown).not.toBeNull();
+    expect(instructionText(localiser, resigned)).toBe('Game over');
+  });
+
+  it("game over never names the opponent's hidden cards", () => {
+    const game = newGame(12);
+    game.apply('p1', 'resign');
+    const state = ended(game, 'p0');
+    expect(state.view?.players[1].hand).toBeNull();
+    const mine = new Set(state.view?.players[0].hand ?? []);
+    const hidden = (game.view('omniscient').players[1].hand ?? []).filter((c) => !mine.has(c));
+    expect(hidden.length).toBeGreaterThan(0);
+    render(Table, {
+      props: { localiser, state, onCommand: () => {}, onRematch: () => {}, onViewReplay: () => {} },
+    });
+    expect(screen.getByTestId('game-over')).toBeTruthy();
+    const shown = document.body.textContent ?? '';
+    for (const c of hidden) expect(shown).not.toContain(characterName(localiser, c));
   });
 
   it("shows the opponent's readiness and keeps Rematch in place once asked", async () => {
@@ -201,12 +352,14 @@ describe('game over panel', () => {
 
     await view.rerender({ ...props, state: { ...state, rematchReady: ['p1'] } });
     expect(status.textContent?.trim()).toBe('Your opponent wants a rematch.');
+    expect(status.querySelector('[data-part="spinner"]')).toBeNull();
     const button = screen.getByRole('button', { name: 'Rematch' });
     await userEvent.click(button);
     expect(onRematch).toHaveBeenCalledOnce();
 
     await view.rerender({ ...props, state: { ...state, rematchReady: ['p0'] } });
     expect(status.textContent?.trim()).toBe('You asked for a rematch. Waiting for your opponent.');
+    expect(status.querySelector('[data-part="spinner"]')?.getAttribute('aria-hidden')).toBe('true');
     expect(button.getAttribute('aria-disabled')).toBe('true');
     await userEvent.click(button);
     expect(onRematch).toHaveBeenCalledOnce();

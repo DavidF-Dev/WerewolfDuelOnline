@@ -64,6 +64,10 @@ export interface OnlineSessionUpdate extends Omit<OnlineSession, 'savedAt'> {
   opponentName?: string;
   /** Which of the room's games the seat follows, once the referee has said. */
   game?: number;
+  /** The round of the game, once its view has arrived. */
+  round?: number;
+  /** Whether the seat is being asked for a decision. */
+  yourTurn?: boolean;
   /** Set once game `game` is over. */
   finished?: boolean;
 }
@@ -148,6 +152,8 @@ export function saveOnlineSession(
   const previous = cache.get(id);
   const seat = session.seat ?? previous?.seat;
   const opponentName = session.opponentName ?? previous?.opponentName;
+  const round = session.round ?? previous?.round;
+  const yourTurn = session.yourTurn ?? previous?.yourTurn;
   const game = session.game ?? previous?.game ?? 0;
   const wasFinished = previous?.status === 'finished' && previous.game === game;
   // A seat that is playing here continues in no other room.
@@ -172,6 +178,8 @@ export function saveOnlineSession(
     savedAt: now,
     ...(seat === undefined ? {} : { seat }),
     ...(opponentName === undefined ? {} : { opponentName }),
+    ...(round === undefined ? {} : { round }),
+    ...(yourTurn === undefined ? {} : { yourTurn }),
     ...(finishedAt === undefined ? {} : { finishedAt }),
   };
   cache.set(id, record);

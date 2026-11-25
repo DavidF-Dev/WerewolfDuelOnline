@@ -11,7 +11,8 @@
     deadline: number | null;
     /** The latest opponent status; each one with `pin_attempt_failed` raises the warning again. */
     opponent: OpponentState;
-    onAnswer: (approve: boolean) => void;
+    /** Sends the answer; false when it could not be sent, which offers the question again. */
+    onAnswer: (approve: boolean) => boolean | void;
   }
 
   let { localiser: l, requested, deadline, opponent, onAnswer }: Props = $props();
@@ -21,6 +22,13 @@
 
   const now = liveNow(() => (requested ? deadline : null));
   const open = $derived(requested && (deadline === null || now.current < deadline));
+
+  // Each answer that could not be sent asks again with a fresh dialog, since a dialog answers only once.
+  let failures = $state(0);
+
+  function answer(approve: boolean): void {
+    if (onAnswer(approve) === false) failures += 1;
+  }
 
   let pinWarning = $state(false);
   $effect(() => {
@@ -36,18 +44,20 @@
   <p role="alert" data-testid="pin-attempt-failed">{l.t('pin-attempt-failed')}</p>
 {/if}
 {#if open}
-  <ConfirmDialog
-    title={l.t('rejoin-request-title')}
-    detail={l.t('rejoin-request-detail')}
-    confirmLabel={l.t('rejoin-allow')}
-    cancelLabel={l.t('rejoin-deny')}
-    onConfirm={() => onAnswer(true)}
-    onCancel={() => onAnswer(false)}
-  >
-    {#if deadline !== null}
-      <p data-testid="rejoin-expires">
-        {l.t('rejoin-request-expires', { time: countdownText(l, deadline, now.current) })}
-      </p>
-    {/if}
-  </ConfirmDialog>
+  {#key failures}
+    <ConfirmDialog
+      title={l.t('rejoin-request-title')}
+      detail={l.t('rejoin-request-detail')}
+      confirmLabel={l.t('rejoin-allow')}
+      cancelLabel={l.t('rejoin-deny')}
+      onConfirm={() => answer(true)}
+      onCancel={() => answer(false)}
+    >
+      {#if deadline !== null}
+        <p data-testid="rejoin-expires">
+          {l.t('rejoin-request-expires', { time: countdownText(l, deadline, now.current) })}
+        </p>
+      {/if}
+    </ConfirmDialog>
+  {/key}
 {/if}

@@ -4,7 +4,15 @@ const PORT = 5199;
 
 export default defineConfig({
   testDir: 'e2e',
-  testMatch: 'local-game.spec.ts',
+  testMatch: [
+    'local-game.spec.ts',
+    'gallery.spec.ts',
+    'kit.spec.ts',
+    'cards.spec.ts',
+    'bar.spec.ts',
+    'layout.spec.ts',
+    'dialogs.spec.ts',
+  ],
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: 0,

@@ -16,7 +16,8 @@ const isResult = (kind: EventKind): boolean =>
   'marker_spent' in kind ||
   'attack_hit' in kind ||
   'attack_missed' in kind ||
-  'attack_forfeited' in kind;
+  'attack_forfeited' in kind ||
+  'discard_revealed' in kind;
 
 /**
  * The results of the current round's showdown, in the order the engine reported them, grouped
@@ -44,4 +45,16 @@ export function showdownSteps(events: readonly SequencedEvent[]): SequencedEvent
     else current.push(entry);
   }
   return steps;
+}
+
+export type Reveal = Extract<EventKind, { plans_revealed: unknown }>['plans_revealed'];
+
+/** This round's revealed plans, once held: both plans, effective initiatives and the order. */
+export function roundReveal(events: readonly SequencedEvent[]): Reveal | null {
+  for (let i = events.length - 1; i >= 0; i--) {
+    const kind = events[i]![1].kind;
+    if ('plans_revealed' in kind) return kind.plans_revealed;
+    if ('round_started' in kind || 'segment_started' in kind) return null;
+  }
+  return null;
 }

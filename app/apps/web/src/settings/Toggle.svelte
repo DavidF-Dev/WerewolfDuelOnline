@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Switch from '../kit/Switch.svelte';
+
   interface Props {
     label: string;
     checked: boolean;
@@ -9,42 +11,12 @@
   }
 
   let { label, checked, onText, offText, onchange }: Props = $props();
+  const uid = $props.id();
 </script>
 
-<label class="row toggle">
-  <span>{label}</span>
-  <span class="control">
-    <input
-      type="checkbox"
-      role="switch"
-      {checked}
-      onchange={(event) => onchange(event.currentTarget.checked)}
-    />
-    <span class="state" aria-hidden="true">{checked ? onText : offText}</span>
+<div data-part="setting">
+  <label for="{uid}-switch" data-part="setting-name">{label}</label>
+  <span data-part="setting-control">
+    <Switch id="{uid}-switch" {checked} {onText} {offText} {onchange} />
   </span>
-</label>
-
-<style>
-  .toggle {
-    min-height: var(--target);
-  }
-
-  .control {
-    align-items: center;
-    display: inline-flex;
-    gap: 0.5rem;
-  }
-
-  input {
-    height: 1.5rem;
-    margin: 0;
-    min-height: 0;
-    min-width: 0;
-    width: 1.5rem;
-  }
-
-  .state {
-    font-weight: 700;
-    min-width: 2.5rem;
-  }
-</style>
+</div>

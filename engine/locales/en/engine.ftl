@@ -20,21 +20,41 @@ faction-human = Human
 faction-werewolf = Werewolf
 
 target-fool = the Fool
+target-character = the { $character }
 
 ## Markers
 marker-cross = Cross
 marker-fang = Fang
 marker-hourglass = Hourglass
 marker-potion = Potion
+marker-health = Health
+marker-badge = Badge
+# A marker's name for an uncounted number of them.
+marker-crosses = Crosses
+marker-fangs = Fangs
+# A marker's name after a count of them.
+marker-cross-count = { $n ->
+        [one] Cross
+       *[other] Crosses
+    }
+marker-fang-count = { $n ->
+        [one] Fang
+       *[other] Fangs
+    }
+marker-hourglass-count = { $n ->
+        [one] Hourglass
+       *[other] Hourglasses
+    }
 
 ## Why an attack was not made
-forfeit-no-cross = there is no Cross to spend
-forfeit-declined = the Cross was not spent
-forfeit-cannot-pay-fangs = there are not enough Fangs for the extra targets
+# `cross` and `fangs` hold the marker names.
+forfeit-no-cross = there is no { $cross } to spend
+forfeit-declined = the { $cross } was not spent
+forfeit-cannot-pay-fangs = there are not enough { $fangs } for the extra targets
 forfeit-no-targets = there are no character targets
 
 ## Why the game ended
-win-reason-health = by reducing the opponent's health to zero
+win-reason-health = by reducing the opponent's Health to zero
 win-reason-fangs = by collecting enough Fangs
 win-reason-crosses = by collecting enough Crosses
 win-reason-resignation = because the opponent resigned
@@ -43,153 +63,165 @@ win-reason-resignation = because the opponent resigned
 plan-targeting = { $character } targeting { $targets }
 plan-no-targets = { $character } with no targets
 
+## Words for a player, seen from one seat
+player-you-cap = You
+player-you = you
+player-your-cap = Your
+player-your = your
+player-opponent-cap = Your opponent
+player-opponent = your opponent
+
 ## Events
 # Seat arguments are raw selector values: you, opponent, p0 or p1. The matching
-# `...Name` argument holds the display name used for p0 and p1.
+# `...Name` argument holds the display name used for p0 and p1. `badge`, `potion`,
+# `health`, `hourglasses` and `marker` hold the name of a marker, counted where needed.
+# `youCap`, `you`, `yourCap`, `your`, `opponentCap` and `opponent` hold the words that stand
+# for a player in the you and opponent variants, so that they can be emphasised.
 event-game-started = The game begins. Seed commitment: { $commitment }.
 event-round-started = Round { $round } begins. { $actor ->
-        [you] You hold
-        [opponent] Your opponent holds
+        [you] { $youCap } hold
+        [opponent] { $opponentCap } holds
        *[other] { $actorName } holds
-    } the Badge.
+    } the { $badge }.
 event-hand-dealt = { $actor ->
-        [you] You are
-        [opponent] Your opponent is
+        [you] { $youCap } are
+        [opponent] { $opponentCap } is
        *[other] { $actorName } is
     } dealt { $cards }.
 event-plan-submitted = { $actor ->
-        [you] You seal
-        [opponent] Your opponent seals
+        [you] { $youCap } seal
+        [opponent] { $opponentCap } seals
        *[other] { $actorName } seals
     } a plan with { $count ->
         [one] 1 target card
        *[other] { $count } target cards
     }.
 event-hourglasses-placed = { $actor ->
-        [you] You place
-        [opponent] Your opponent places
+        [you] { $youCap } place
+        [opponent] { $opponentCap } places
        *[other] { $actorName } places
     } { $n ->
-        [one] 1 Hourglass
-       *[other] { $n } Hourglasses
-    }.
+        [0] no
+       *[other] { $n }
+    } { $hourglasses }.
 event-potion-target-chosen = { $actor ->
-        [you] You aim
-        [opponent] Your opponent aims
+        [you] { $youCap } aim
+        [opponent] { $opponentCap } aims
        *[other] { $actorName } aims
-    } the Potion at the { $card }.
+    } the { $potion } at the { $card }.
 event-plans-revealed = Plans revealed. { $actor ->
-        [you] You play
+        [you] { $youCap } play
        *[other] { $actorName } plays
     } { $actorPlan } at initiative { $actorInitiative }. { $other ->
-        [opponent] Your opponent plays
+        [opponent] { $opponentCap } plays
        *[other] { $otherName } plays
     } { $otherPlan } at initiative { $otherInitiative }. { $first ->
-        [you] You resolve
-        [opponent] Your opponent resolves
+        [you] { $youCap } resolve
+        [opponent] { $opponentCap } resolves
        *[other] { $firstName } resolves
     } first.
 event-potion-resolved = { $result ->
-        [hit] The Potion hits { $victim ->
-            [you] your
-            [opponent] your opponent's
+        [hit] The { $potion } hits { $victim ->
+            [you] { $your }
+            [opponent] { $opponent }'s
            *[other] { $victimName }'s
         } { $card }! { $victim ->
-            [you] You lose
-            [opponent] Your opponent loses
+            [you] { $youCap } lose
+            [opponent] { $opponentCap } loses
            *[other] { $victimName } loses
-        } { $health } health.
-       *[miss] The Potion misses: { $victim ->
-            [you] you
-            [opponent] your opponent
+        } { $lost } { $health }.
+       *[miss] The { $potion } misses: { $victim ->
+            [you] { $you }
+            [opponent] { $opponent }
            *[other] { $victimName }
         } did not play the { $card }.
     }
 event-character-resolved = { $actor ->
-        [you] Your
-        [opponent] Your opponent's
+        [you] { $yourCap }
+        [opponent] { $opponentCap }'s
        *[other] { $actorName }'s
     } { $character } resolves.
 event-marker-gained = { $source ->
         [opponent] { $actor ->
-            [you] You take
-            [opponent] Your opponent takes
+            [you] { $youCap } take
+            [opponent] { $opponentCap } takes
            *[other] { $actorName } takes
-        } one { $marker } marker from { $other ->
-            [you] you
-            [opponent] your opponent
+        } 1 { $marker } from { $other ->
+            [you] { $you }
+            [opponent] { $opponent }
            *[other] { $otherName }
         }.
        *[supply] { $actor ->
-            [you] You gain
-            [opponent] Your opponent gains
+            [you] { $youCap } gain
+            [opponent] { $opponentCap } gains
            *[other] { $actorName } gains
-        } one { $marker } marker.
+        } { $markerId ->
+            [potion] the { $marker }
+           *[other] 1 { $marker }
+        }.
     }
 event-marker-spent = { $actor ->
-        [you] You return
-        [opponent] Your opponent returns
-       *[other] { $actorName } returns
-    } { $n } { $marker } { $n ->
-        [one] marker
-       *[other] markers
-    } to the supply.
+        [you] { $youCap } spend
+        [opponent] { $opponentCap } spends
+       *[other] { $actorName } spends
+    } { $n } { $marker }.
 event-attack-hit = { $actor ->
-        [you] Your
-        [opponent] Your opponent's
+        [you] { $yourCap }
+        [opponent] { $opponentCap }'s
        *[other] { $actorName }'s
-    } { $character } hits { $targetSeat ->
-        [you] you
-        [opponent] your opponent
-       *[other] { $targetSeatName }
-    }! { $targetSeat ->
-        [you] You lose
-        [opponent] Your opponent loses
+    } { $attacker } hits { $targetSeat ->
+        [you] { $your }
+        [opponent] { $opponent }'s
+       *[other] { $targetSeatName }'s
+    } { $character }! { $targetSeat ->
+        [you] { $youCap } lose
+        [opponent] { $opponentCap } loses
        *[other] { $targetSeatName } loses
-    } { $health } health.
+    } { $lost } { $health }.
 event-attack-missed = { $actor ->
-        [you] Your
-        [opponent] Your opponent's
+        [you] { $yourCap }
+        [opponent] { $opponentCap }'s
        *[other] { $actorName }'s
-    } attack misses.
+    } { $attacker } misses.
 event-attack-forfeited = { $actor ->
-        [you] You make
-        [opponent] Your opponent makes
+        [you] { $youCap } make
+        [opponent] { $opponentCap } makes
        *[other] { $actorName } makes
     } no attack: { $reason }.
 event-round-ended = Round { $round } ends. { $actor ->
-        [you] You take
-        [opponent] Your opponent takes
+        [you] { $youCap } take
+        [opponent] { $opponentCap } takes
        *[other] { $actorName } takes
-    } the Badge.
+    } the { $badge }.
+event-discard-revealed = The card set aside in round { $round } was the { $character }.
 event-next-round-requested = { $actor ->
-        [you] You are
-        [opponent] Your opponent is
+        [you] { $youCap } are
+        [opponent] { $opponentCap } is
        *[other] { $actorName } is
     } ready for the next round.
 event-resigned = { $actor ->
-        [you] You resign.
-        [opponent] Your opponent resigns.
+        [you] { $youCap } resign.
+        [opponent] { $opponentCap } resigns.
        *[other] { $actorName } resigns.
     }
 event-segment-started = The game resumes in round { $round }.
 event-game-over = { $actor ->
-        [you] You win
-        [opponent] Your opponent wins
+        [you] { $youCap } win
+        [opponent] { $opponentCap } wins
        *[other] { $actorName } wins
     } { $reason ->
         [health] by reducing { $other ->
-            [you] your
-            [opponent] your opponent's
+            [you] { $your }
+            [opponent] { $opponent }'s
            *[other] { $otherName }'s
-        } health to zero.
-        [fangs] by collecting enough Fangs.
+        } { $health } to zero.
+        [fangs] by collecting enough { $fangs }.
         [resignation] because { $other ->
-            [you] you
-            [opponent] your opponent
+            [you] { $you }
+            [opponent] { $opponent }
            *[other] { $otherName }
         } resigned.
-       *[crosses] by collecting enough Crosses.
+       *[crosses] by collecting enough { $crosses }.
     }
 
 ## Commands, as offered to a player
@@ -223,7 +255,7 @@ error-invalid-potion-target = That card can't be the Potion target.
 error-edit-wrong-phase = Hands can only be edited before any plan is submitted.
 error-edit-supply-exceeded = That would need more markers than exist.
 error-edit-invalid-hands = Hands must use each character exactly once, with the right sizes.
-error-edit-would-end-game = An edit cannot end the game: health must stay above 0, Crosses below 4 and Fangs below 3.
+error-edit-would-end-game = An edit cannot end the game: Health must stay above 0, Crosses below 4 and Fangs below 3.
 
 ## Replay errors
 error-replay-format-version = Replay format version { $version } is not supported.
@@ -263,7 +295,7 @@ cli-your-markers = Health { $health }, Crosses { $cross }, Fangs { $fang }, Hour
         [yes] , holding the Potion
        *[no] { "" }
     }.
-cli-opponent-markers = Opponent: health { $health }, Crosses { $cross }, Fangs { $fang }, Hourglasses { $hourglass }, placed { $placed }{ $potion ->
+cli-opponent-markers = Opponent: Health { $health }, Crosses { $cross }, Fangs { $fang }, Hourglasses { $hourglass }, placed { $placed }{ $potion ->
         [yes] , holding the Potion
        *[no] { "" }
     }.

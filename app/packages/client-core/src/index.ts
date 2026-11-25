@@ -7,7 +7,15 @@ export {
   type PauseState,
   type RejoinAttempt,
 } from './game-client.js';
-export { createLocaliser, type Localiser, type MessageArgs } from './i18n.js';
+export { createLocaliser, type Localiser, type MessageArgs, type Translator } from './i18n.js';
+export {
+  plainText,
+  richMessage,
+  type RichKind,
+  type RichKinds,
+  type MarkerId,
+  type RichPart,
+} from './rich-text.js';
 export type { Readable } from './store.js';
 export {
   CONNECT_TIMEOUT_MS,

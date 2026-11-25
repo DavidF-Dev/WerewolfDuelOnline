@@ -1,7 +1,10 @@
 {
   "id": "placeholder",
   "licence": "MIT OR Apache-2.0",
-  "credits": ["Placeholder shapes drawn for Werewolf: Duel! Online."],
+  "credits": [
+    "Placeholder shapes drawn for Werewolf: Duel! Online.",
+    "Ability and faction icons drawn for Werewolf: Duel! Online."
+  ],
   "cards": {
     "hunter": "hunter.svg",
     "wolf_king": "wolf_king.svg",
@@ -20,5 +23,15 @@
     "hourglass": "hourglass.svg",
     "badge": "badge.svg",
     "potion": "potion.svg"
+  },
+  "factions": {
+    "human": "human.svg",
+    "werewolf": "werewolf.svg"
+  },
+  "abilities": {
+    "spend": "spend.svg"
+  },
+  "scenery": {
+    "treeline": "scenery.svg"
   }
 }

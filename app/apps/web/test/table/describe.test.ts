@@ -37,6 +37,7 @@ group('describe table', () => {
     const game = newGame(12);
     const state = stateFor(game, SEAT);
     render(Table, { props: { localiser, state, onCommand: () => {} } });
+    await userEvent.click(screen.getByRole('button', { name: 'Game menu' }));
     await userEvent.click(screen.getByRole('button', { name: 'Describe table' }));
     const expected = describe(game.view({ seat: SEAT }), SEAT, localiser);
     expect(screen.getByTestId('table-description').textContent).toBe(expected);

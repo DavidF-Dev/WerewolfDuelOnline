@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { tick } from 'svelte';
   import type { Localiser } from '@wwd/client-core';
+  import { provideAppBanner } from './banner.js';
+  import UnofficialNotice from './components/UnofficialNotice.svelte';
   import UpdateBanner from './components/UpdateBanner.svelte';
   import { route } from './router.js';
   import About from './screens/About.svelte';
@@ -14,45 +17,70 @@
   import Replay from './screens/Replay.svelte';
   import Settings from './screens/Settings.svelte';
   import Stats from './screens/Stats.svelte';
+  import { showScreenTop } from './shell.js';
 
   interface Props {
     localiser: Localiser;
   }
 
   let { localiser }: Props = $props();
+  provideAppBanner(updateBanner);
 
   // Each distinct address gets a fresh screen, so screens read their address only once.
   const key = $derived(JSON.stringify($route));
+
+  // The first screen keeps the focus and scroll position the browser gives it.
+  let shown: string | undefined;
+  $effect(() => {
+    const now = key;
+    if (shown !== undefined && shown !== now) void tick().then(showScreenTop);
+    shown = now;
+  });
+
+  // Production builds leave the gallery out altogether.
+  const loadGallery = import.meta.env.DEV ? () => import('./gallery/Gallery.svelte') : null;
 </script>
 
-<UpdateBanner {localiser} />
-{#key key}
-  {#if $route.name === 'local-host'}
-    <Host {localiser} />
-  {:else if $route.name === 'local-join'}
-    <Join {localiser} />
-  {:else if $route.name === 'online-new'}
-    <CreateOnline {localiser} />
-  {:else if $route.name === 'join'}
-    <JoinOnline {localiser} code={$route.code} server={$route.server} seat={$route.seat} />
-  {:else if $route.name === 'rejoin'}
-    <Rejoin {localiser} code={$route.code} seat={$route.seat} server={$route.server} />
-  {:else if $route.name === 'settings'}
-    <Settings {localiser} />
-  {:else if $route.name === 'about'}
-    <About {localiser} />
-  {:else if $route.name === 'history'}
-    <History {localiser} />
-  {:else if $route.name === 'replay'}
-    <Replay {localiser} id={$route.id} />
-  {:else if $route.name === 'stats'}
-    <Stats {localiser} />
-  {:else if $route.name === 'how-to-play'}
-    <CharacterReference {localiser} />
-  {:else}
-    <Home {localiser} />
+{#snippet updateBanner()}
+  <UpdateBanner {localiser} />
+{/snippet}
+
+{#if $route.name === 'gallery' && loadGallery !== null}
+  {@const id = $route.id}
+  {#key key}
+    {#await loadGallery() then gallery}
+      <gallery.default {localiser} {id} />
+    {/await}
+  {/key}
+{:else}
+  {#key key}
+    {#if $route.name === 'local-host'}
+      <Host {localiser} />
+    {:else if $route.name === 'local-join'}
+      <Join {localiser} code={$route.code} />
+    {:else if $route.name === 'online-new'}
+      <CreateOnline {localiser} />
+    {:else if $route.name === 'join'}
+      <JoinOnline {localiser} code={$route.code} server={$route.server} seat={$route.seat} />
+    {:else if $route.name === 'rejoin'}
+      <Rejoin {localiser} code={$route.code} seat={$route.seat} server={$route.server} />
+    {:else if $route.name === 'settings'}
+      <Settings {localiser} />
+    {:else if $route.name === 'about'}
+      <About {localiser} />
+    {:else if $route.name === 'history'}
+      <History {localiser} />
+    {:else if $route.name === 'replay'}
+      <Replay {localiser} id={$route.id} />
+    {:else if $route.name === 'stats'}
+      <Stats {localiser} />
+    {:else if $route.name === 'how-to-play'}
+      <CharacterReference {localiser} />
+    {:else}
+      <Home {localiser} />
+    {/if}
+  {/key}
+  {#if $route.name !== 'home' && $route.name !== 'about'}
+    <UnofficialNotice {localiser} placement="page" />
   {/if}
-{/key}
-{#if $route.name !== 'home' && $route.name !== 'about'}
-  <p class="page-width" data-testid="unofficial-notice">{localiser.t('footer-unofficial')}</p>
 {/if}

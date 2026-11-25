@@ -143,9 +143,11 @@ export async function openTable(context: BrowserContext): Promise<Table> {
   await host.goto('/#/local/host');
   const code = (await host.getByTestId('join-code').textContent()) ?? '';
   const guest = await context.newPage();
-  await guest.goto('/#/local/join');
+  await guest.goto('/#/join');
+  await guest.getByRole('radio', { name: 'This device' }).check();
   await guest.getByTestId('join-code-input').fill(code.trim());
   await guest.getByTestId('join-submit').click();
+  await expect(guest).toHaveURL(/#\/local\/join\?code=/);
   await expect(host.getByTestId('table')).toBeVisible();
   await expect(guest.getByTestId('table')).toBeVisible();
   return { host, guest };
@@ -153,6 +155,9 @@ export async function openTable(context: BrowserContext): Promise<Table> {
 
 /** How long a seat may stay away in an online test room before its opponent can claim the win. */
 export const GRACE_MS = 3_000;
+
+/** The time a test that plays a whole game may take while other workers share the machine. */
+export const FULL_GAME_TIMEOUT_MS = 180_000;
 
 /** A 64-hex-digit room seed made from `n`, so each test deals its own fixed game. */
 export const roomSeed = (n: number): string => n.toString(16).padStart(8, '0').repeat(8);
@@ -223,7 +228,7 @@ export const isPlan = (cmd: Command): cmd is Extract<Command, { submit_plan: Pla
 async function performPlan(page: Page, plan: Plan): Promise<void> {
   await page.getByTestId(`plan-character-${plan.character}`).click();
   for (const card of plan.targets) await page.getByTestId(`target-${targetId(card)}`).click();
-  await page.getByTestId('seal-plan').click();
+  await page.getByTestId('phase-bar').getByTestId('seal-plan').click();
   // A fresh device asks before sealing a plan.
   await page.getByRole('alertdialog').getByTestId('confirm-yes').click();
 }
@@ -237,21 +242,21 @@ async function performHourglasses(page: Page, n: number): Promise<void> {
     await page.getByTestId(shown < n ? 'hourglass-more' : 'hourglass-fewer').click();
   }
   await expect(count).toHaveAttribute('data-value', String(n));
-  await page.getByTestId('place-hourglasses').click();
+  await page.getByTestId('phase-bar').getByTestId('place-hourglasses').click();
 }
 
 /** Steps through any showdown results still to be shown, so the prompts after them appear. */
-async function catchUpShowdown(page: Page): Promise<void> {
+export async function catchUpShowdown(page: Page): Promise<void> {
   const next = page.getByTestId('showdown-next');
   while (await next.isVisible()) await next.click();
 }
 
-/** Opens the game menu if it is closed. */
+/** Opens the game menu sheet from the bar if it is not open yet. */
 export async function openGameMenu(page: Page): Promise<void> {
   const menu = page.getByTestId('game-menu');
-  if ((await menu.getAttribute('open')) === null)
-    await page.getByTestId('game-menu-toggle').click();
+  if ((await menu.count()) === 0) await page.getByTestId('game-menu-toggle').click();
   await expect(menu).toHaveAttribute('open', '');
+  await expect(menu).toBeVisible();
 }
 
 /** Resigns through the game menu, confirming the question it asks. */
@@ -259,6 +264,7 @@ export async function resign(page: Page): Promise<void> {
   await openGameMenu(page);
   await page.getByTestId('resign').click();
   await page.getByRole('alertdialog').getByTestId('confirm-yes').click();
+  await expect(page.getByTestId('game-menu'), 'resigning closes the menu').toHaveCount(0);
 }
 
 /** Performs `cmd` through the visible controls. */
@@ -269,6 +275,11 @@ export async function perform(page: Page, cmd: Command): Promise<void> {
     await performHourglasses(page, cmd.place_hourglasses.n);
   } else if (cmd === 'resign') {
     await resign(page);
+  } else if (typeof cmd === 'object' && 'choose_potion_target' in cmd) {
+    // Choosing a card aims the Potion; the phase bar sends it.
+    await page.getByTestId(buttonFor(cmd)).click();
+    await expect(page.getByTestId(buttonFor(cmd))).toHaveAttribute('aria-pressed', 'true');
+    await page.getByTestId('phase-bar').getByTestId('confirm-potion').click();
   } else {
     if (typeof cmd === 'object' && 'hunter_spend_cross' in cmd) await catchUpShowdown(page);
     await page.getByTestId(buttonFor(cmd)).click();
@@ -369,9 +380,19 @@ export async function playToEnd(table: Table, options: PlayOptions): Promise<num
   }
 }
 
+/** Waits for game over on both pages, stepping through a final showdown before its result. */
 export async function expectGameOver(table: Table): Promise<void> {
   for (const page of [table.host, table.guest]) {
-    await expect(page.getByRole('heading', { name: 'Game over' })).toBeVisible();
+    await expect.poll(async () => (await snapshot(page)).status).toBe('game_over');
+    const heading = page.getByRole('heading', { name: 'Game over', level: 1 });
+    const next = page.getByTestId('showdown-next');
+    // Waits for either, so a showdown that has not rendered yet is not taken as caught up.
+    for (let step = 0; step < 50; step++) {
+      await expect(next.or(heading)).toBeVisible();
+      if (await heading.isVisible()) break;
+      await next.click();
+    }
+    await expect(heading).toBeVisible();
     await expect.poll(async () => (await snapshot(page)).replayVerified).toBe(true);
     expect(repeatedEvents(page), 'no event should reach a page twice').toEqual([]);
   }

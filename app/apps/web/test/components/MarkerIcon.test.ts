@@ -18,6 +18,29 @@ describe('MarkerIcon', () => {
     }
   });
 
+  it('marker tokens wrap Cross, Fang, Hourglass and Potion but not Health or Badge', () => {
+    const tokens = MARKERS.filter((marker) => {
+      const { container, unmount } = render(MarkerIcon, { props: { localiser, marker } });
+      const icon = container.querySelector<HTMLElement>('[data-part="icon"]');
+      expect(icon?.querySelector('svg use')?.getAttribute('href'), marker).toContain(
+        `markers-${marker}`,
+      );
+      const token = icon?.dataset['token'] !== undefined;
+      expect(icon?.classList.contains('token'), marker).toBe(token);
+      unmount();
+      return token;
+    });
+    expect(tokens).toEqual(['cross', 'fang', 'hourglass', 'potion']);
+  });
+
+  it('a gained marker has a ringed token and no words', () => {
+    const { container } = render(MarkerIcon, { props: { marker: 'hourglass', ring: 'gain' } });
+    const marker = container.querySelector('[data-part="marker"]');
+    expect(marker?.getAttribute('aria-hidden')).toBe('true');
+    expect(marker?.querySelector('[data-part="icon"]')?.getAttribute('data-ring')).toBe('gain');
+    expect(marker?.textContent?.trim()).toBe('');
+  });
+
   it('shows a count with its label', () => {
     render(MarkerIcon, { props: { localiser, marker: 'fang', count: 2 } });
     expect(screen.getByText('Fangs: 2')).toBeTruthy();

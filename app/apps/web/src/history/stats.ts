@@ -34,6 +34,28 @@ export interface Stats {
   opponents: OpponentStats[];
 }
 
+/** The games played, the games won and the wins by each condition. */
+export interface Totals {
+  games: number;
+  wins: number;
+  winsBy: Record<WinReason, number>;
+}
+
+/** Totals over `records`, from the result stored with each game, without replaying it. */
+export function totals(records: readonly HistoryRecord[]): Totals {
+  const winsBy = Object.fromEntries(WIN_REASONS.map((reason) => [reason, 0])) as Record<
+    WinReason,
+    number
+  >;
+  let wins = 0;
+  for (const record of records) {
+    if (record.winner !== record.seat) continue;
+    wins += 1;
+    winsBy[record.reason] += 1;
+  }
+  return { games: records.length, wins, winsBy };
+}
+
 function summaryOf(record: HistoryRecord): Summary {
   try {
     return summarise(record);

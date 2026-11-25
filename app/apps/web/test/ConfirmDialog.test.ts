@@ -30,4 +30,18 @@ describe('ConfirmDialog', () => {
     expect(onConfirm).toHaveBeenCalledTimes(1);
     expect(onCancel).not.toHaveBeenCalled();
   });
+
+  it('once answered, neither answer nor Escape answers again while it stays open', async () => {
+    const { dialog, onConfirm, onCancel } = renderDialog();
+    const user = userEvent.setup();
+    await user.click(screen.getByRole('button', { name: 'Yes' }));
+    expect(dialog.open).toBe(true);
+    for (const name of ['Yes', 'No']) {
+      expect(screen.getByRole('button', { name }).getAttribute('aria-disabled')).toBe('true');
+      await user.click(screen.getByRole('button', { name }));
+    }
+    dialog.dispatchEvent(new Event('cancel', { cancelable: true }));
+    expect(onConfirm).toHaveBeenCalledTimes(1);
+    expect(onCancel).not.toHaveBeenCalled();
+  });
 });

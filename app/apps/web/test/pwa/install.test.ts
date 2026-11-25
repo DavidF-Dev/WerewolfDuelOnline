@@ -156,7 +156,7 @@ describe('install in Settings and Home', () => {
   it('install card only after the first finished game', async () => {
     onPlatform('prompt');
     const first = render(Home, { props: { localiser } });
-    await screen.findByRole('button', { name: 'Create a game' });
+    await screen.findByRole('button', { name: 'New game' });
     await new Promise((resolve) => setTimeout(resolve, 20));
     expect(screen.queryByRole('region', { name: 'Install the app' })).toBeNull();
     first.unmount();
@@ -172,7 +172,7 @@ describe('install in Settings and Home', () => {
 
     onPlatform('unavailable');
     const third = render(Home, { props: { localiser } });
-    await screen.findByRole('button', { name: 'Create a game' });
+    await screen.findByRole('button', { name: 'New game' });
     await new Promise((resolve) => setTimeout(resolve, 20));
     expect(screen.queryByRole('region', { name: 'Install the app' })).toBeNull();
     third.unmount();
@@ -200,7 +200,7 @@ describe('install in Settings and Home', () => {
     first.unmount();
 
     render(Home, { props: { localiser } });
-    await screen.findByRole('button', { name: 'Create a game' });
+    await screen.findByRole('button', { name: 'New game' });
     await new Promise((resolve) => setTimeout(resolve, 20));
     expect(screen.queryByRole('region', { name: 'Install the app' })).toBeNull();
   });

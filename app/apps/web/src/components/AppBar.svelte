@@ -1,44 +1,45 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import IconButton from '../kit/IconButton.svelte';
+  import { trimToCaps } from './trim-to-caps.js';
 
   interface Props {
     title: string;
+    /** Draws the title as the app's name, in the display face. */
+    brand?: boolean;
     /** The id for the heading, so a region can be labelled by it. */
     headingId: string;
-    actions?: Snippet;
-    /** The accessible name of a back button; without it there is no back button. */
-    backLabel?: string;
+    /** The accessible name of a back button, shown on the left; without it there is none. */
+    back?: string;
     onback?: () => void;
+    /** What sits before the title when there is no back button, such as a menu button. */
+    left?: Snippet;
+    /** What sits after the title, such as a settings or log button. */
+    right?: Snippet;
   }
 
-  let { title, headingId, actions, backLabel, onback }: Props = $props();
+  let { title, brand = false, headingId, back, onback, left, right }: Props = $props();
+  const hasLeft = $derived(back !== undefined || left !== undefined);
 </script>
 
 <header class="app-bar">
-  {#if backLabel !== undefined}
-    <button type="button" class="back" aria-label={backLabel} onclick={onback}>
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path
-          d="M15 5 8 12l7 7"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
-    </button>
+  {#if back !== undefined}
+    <IconButton icon="back" label={back} onclick={onback} />
+  {:else if left}
+    {@render left()}
   {/if}
-  <h1 id={headingId}>
-    <svg class="emblem" viewBox="0 0 24 24" aria-hidden="true">
+  <h1 id={headingId} tabindex="-1">
+    <svg class="emblem" data-part="emblem" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
       <circle cx="12" cy="12" r="10" fill="var(--moon)" />
       <circle cx="16" cy="9" r="8" fill="var(--bar-a)" opacity="0.55" />
       <path d="M5 20l2.5-6 1.5 2 1-4 1.5 3 1.5-3 1 4 1.5-2L19 20z" fill="var(--bar-a)" />
     </svg>
-    {title}
+    <span class={['title', { brand }]} data-part="bar-title" use:trimToCaps>{title}</span>
   </h1>
-  {#if actions}
-    <div class="actions">{@render actions()}</div>
+  {#if right}
+    <div class="right">{@render right()}</div>
+  {:else if hasLeft}
+    <span class="balance" aria-hidden="true"></span>
   {/if}
 </header>
 
@@ -49,48 +50,58 @@
     background: linear-gradient(160deg, var(--bar-a), var(--bar-b));
     color: var(--bar-ink);
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 0.75rem;
-    padding: 0.5rem 1rem;
+    gap: 8px;
+    justify-content: space-between;
+    min-height: 52px;
+    padding: 10px 12px;
   }
 
   h1 {
     align-items: center;
     display: flex;
-    font-size: 1.25rem;
-    gap: 0.5rem;
+    font-size: 0.9375rem;
+    gap: 7px;
     letter-spacing: 0.02em;
+    line-height: 1;
     margin: 0;
+    min-width: 0;
+  }
+
+  h1:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* The title's box is trimmed to its capitals' top and its baseline, so centring it centres the drawn letters. */
+  .title {
+    display: block;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+
+  .brand {
+    font-family: var(--font-display);
+  }
+
+  @supports (text-box: trim-both cap alphabetic) {
+    .title {
+      text-box: trim-both cap alphabetic;
+    }
   }
 
   .emblem {
     flex: none;
-    height: 1.75rem;
-    width: 1.75rem;
+    height: 22px;
+    width: 22px;
   }
 
-  .back {
-    align-items: center;
-    background: none;
-    border-color: var(--bar-ink);
-    color: var(--bar-ink);
+  .right {
     display: flex;
-    justify-content: center;
-    padding: 0;
+    flex: none;
+    gap: 8px;
   }
 
-  .back:hover:not(:disabled) {
-    background: none;
-  }
-
-  .back svg {
-    height: 1.5rem;
-    width: 1.5rem;
-  }
-
-  .actions {
-    display: flex;
-    margin-inline-start: auto;
-    gap: 0.5rem;
+  .balance {
+    flex: none;
+    width: 0;
   }
 </style>

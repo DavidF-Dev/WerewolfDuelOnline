@@ -1,3 +1,7 @@
+use serde::{Deserialize, Serialize};
+
+use crate::event::Marker;
+use crate::showdown::{asks_owner, cost, damage, gain};
 use crate::types::{Character, Faction, Plan, RuleError, RulesConfig, TargetCard};
 
 /// Which non-Fool cards a character may target, and how many.
@@ -16,6 +20,69 @@ pub fn attack_rule(c: Character) -> AttackRule {
         Character::Knight | Character::Seer => AttackRule::Werewolves { max: 1 },
         Character::Wolfen | Character::WolfBeauty => AttackRule::Any { max: 1 },
         Character::Witch | Character::Villager => AttackRule::None,
+    }
+}
+
+/// What a character must spend for its attack to be made.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+#[serde(rename_all = "snake_case")]
+pub enum Cost {
+    /// One of the marker.
+    One(Marker),
+    /// One of the marker for each character target after the first; short of that, it
+    /// pays nothing and makes no attack.
+    PerExtraTarget(Marker),
+}
+
+/// The character targets an attack may name.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct AttackShape {
+    /// The faction targets must belong to; `None` for any.
+    pub faction: Option<Faction>,
+    /// The most character targets; `None` for any number.
+    pub max: Option<u8>,
+}
+
+/// What a character does when it resolves, for showing its ability.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
+pub struct AbilitySummary {
+    /// Markers gained before attacking.
+    pub gains: Vec<Marker>,
+    pub spends: Option<Cost>,
+    /// `None` when the character never attacks.
+    pub attack: Option<AttackShape>,
+    /// Health a hit removes; 0 without an attack.
+    pub damage: u8,
+    /// Whether the owner chooses whether to spend the Cross in `spends`.
+    pub optional_cross: bool,
+}
+
+/// The ability of `c`, taken from its targeting rule and its showdown effects.
+pub fn ability_summary(c: Character) -> AbilitySummary {
+    let attack = match attack_rule(c) {
+        AttackRule::None => None,
+        AttackRule::Werewolves { max } => Some(AttackShape {
+            faction: Some(Faction::Werewolf),
+            max: Some(max),
+        }),
+        AttackRule::Humans { max } => Some(AttackShape {
+            faction: Some(Faction::Human),
+            max,
+        }),
+        AttackRule::Any { max } => Some(AttackShape {
+            faction: None,
+            max: Some(max),
+        }),
+    };
+    AbilitySummary {
+        gains: gain(c).into_iter().collect(),
+        spends: cost(c),
+        damage: if attack.is_some() { damage(c) } else { 0 },
+        attack,
+        optional_cross: asks_owner(c),
     }
 }
 

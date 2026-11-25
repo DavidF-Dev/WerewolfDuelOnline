@@ -20,7 +20,7 @@ afterEach(() => {
 });
 
 describe('InvitePanel', () => {
-  it('shows the grouped code and copies the link built from the code and server', async () => {
+  it('shows the grouped code and copies the link built from the code and server without a share sheet', async () => {
     // userEvent installs its own clipboard, so it is set up before the stub replaces it.
     const user = userEvent.setup();
     const writeText = stubClipboard();
@@ -29,7 +29,7 @@ describe('InvitePanel', () => {
     });
     expect(screen.getByTestId('invite-code').textContent).toBe('K7Q·2MX');
 
-    await user.click(screen.getByRole('button', { name: 'Copy link' }));
+    await user.click(screen.getByRole('button', { name: 'Share link' }));
     expect(writeText).toHaveBeenCalledWith(
       `${base()}#/join/K7Q2MX?server=https%3A%2F%2Fother.example`,
     );
@@ -45,7 +45,7 @@ describe('InvitePanel', () => {
     const user = userEvent.setup();
     const writeText = stubClipboard();
     render(InvitePanel, { props: { localiser, room: 'K7Q2MX', server: DEFAULT_SERVER } });
-    await user.click(screen.getByRole('button', { name: 'Copy link' }));
+    await user.click(screen.getByRole('button', { name: 'Share link' }));
     expect(writeText).toHaveBeenCalledWith(`${base()}#/join/K7Q2MX`);
   });
 
@@ -53,7 +53,7 @@ describe('InvitePanel', () => {
     const share = vi.fn(async () => {});
     Object.defineProperty(navigator, 'share', { value: share, configurable: true });
     render(InvitePanel, { props: { localiser, room: 'K7Q2MX', server: DEFAULT_SERVER } });
-    await userEvent.setup().click(screen.getByRole('button', { name: 'Share' }));
+    await userEvent.setup().click(screen.getByRole('button', { name: 'Share link' }));
     expect(share).toHaveBeenCalledWith(expect.objectContaining({ url: `${base()}#/join/K7Q2MX` }));
   });
 
@@ -61,7 +61,7 @@ describe('InvitePanel', () => {
     const user = userEvent.setup();
     const writeText = stubClipboard();
     render(InvitePanel, { props: { localiser, room: 'K7Q2MX', server: DEFAULT_SERVER } });
-    await user.click(screen.getByRole('button', { name: 'Share' }));
+    await user.click(screen.getByRole('button', { name: 'Share link' }));
     expect(writeText).toHaveBeenCalledWith(`${base()}#/join/K7Q2MX`);
     await waitFor(() => expect(screen.getByTestId('invite-feedback').textContent).toBe('Copied'));
   });
@@ -69,6 +69,6 @@ describe('InvitePanel', () => {
   it('shows a QR code of the link and the waiting status', () => {
     render(InvitePanel, { props: { localiser, room: 'K7Q2MX', server: DEFAULT_SERVER } });
     expect(screen.getByRole('img', { name: `${base()}#/join/K7Q2MX` })).toBeTruthy();
-    expect(screen.getByText('Waiting for your opponent to join')).toBeTruthy();
+    expect(screen.getByText('Waiting for your opponent…')).toBeTruthy();
   });
 });

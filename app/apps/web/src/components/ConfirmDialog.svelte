@@ -1,5 +1,7 @@
 <script lang="ts">
-  import { onMount, type Snippet } from 'svelte';
+  import type { Snippet } from 'svelte';
+  import Dialog from '../kit/Dialog.svelte';
+  import Button from './Button.svelte';
 
   interface Props {
     title: string;
@@ -8,14 +10,14 @@
     cancelLabel: string;
     onConfirm: () => void;
     onCancel: () => void;
-    /** Marks the confirming button as destructive. */
+    /** Marks the question as destructive: the title and the confirming button carry the warning icon. */
     danger?: boolean;
     /** The id of an element holding the full description, when `detail` alone is not enough. */
     describedBy?: string;
-    /** Decoration shown before the confirming button's label. */
-    confirmIcon?: Snippet;
     /** Extra content shown below the detail. */
     children?: Snippet;
+    /** Safe alternatives to answering, such as exporting a backup first, shown above the answers. */
+    alternatives?: Snippet;
   }
 
   let {
@@ -27,70 +29,47 @@
     onCancel,
     danger = false,
     describedBy,
-    confirmIcon,
     children,
+    alternatives,
   }: Props = $props();
   const uid = $props.id();
-  let dialog: HTMLDialogElement | undefined;
-  let cancel: HTMLButtonElement | undefined;
-  // Set once an answer is given, so closing afterwards is not taken as a second one.
-  let answered = false;
-
-  // Modal while mounted; focus starts on the safe answer and returns where it was on close.
-  onMount(() => {
-    const opener = document.activeElement;
-    dialog?.showModal();
-    cancel?.focus();
-    return () => {
-      answered = true;
-      if (dialog?.open === true) dialog.close();
-      if (opener instanceof HTMLElement && opener.isConnected) opener.focus();
-    };
-  });
+  // Only the first answer counts, until the owner removes the dialog.
+  let answered = $state(false);
 
   function answer(confirmed: boolean): void {
+    if (answered) return;
     answered = true;
     if (confirmed) onConfirm();
     else onCancel();
   }
-
-  function cancelled(event: Event): void {
-    event.preventDefault();
-    answer(false);
-  }
-
-  // The browser may close a modal dialog itself, for example on Escape without a `cancel` event.
-  function closed(): void {
-    if (!answered) answer(false);
-  }
 </script>
 
-<dialog
+<!-- Focus starts on the safe answer. -->
+<Dialog
+  {title}
   role="alertdialog"
-  aria-labelledby="{uid}-title"
-  aria-describedby={describedBy ?? (detail === undefined ? undefined : `${uid}-detail`)}
+  {danger}
+  describedby={describedBy ?? (detail === undefined ? undefined : `${uid}-detail`)}
   data-testid="confirm-dialog"
-  bind:this={dialog}
-  oncancel={cancelled}
-  onclose={closed}
+  oncancel={() => answer(false)}
 >
-  <p id="{uid}-title"><strong>{title}</strong></p>
   {#if detail !== undefined}
     <p id="{uid}-detail">{detail}</p>
   {/if}
   {@render children?.()}
-  <button type="button" class={{ danger }} data-testid="confirm-yes" onclick={() => answer(true)}>
-    {@render confirmIcon?.()}{confirmLabel}
-  </button>
-  <button type="button" data-testid="confirm-no" bind:this={cancel} onclick={() => answer(false)}
-    >{cancelLabel}</button
-  >
-</dialog>
-
-<style>
-  .danger {
-    border-color: var(--danger);
-    color: var(--danger);
-    font-weight: 600;
-  }
-</style>
+  {#snippet actions()}
+    {@render alternatives?.()}
+    <Button
+      variant={danger ? 'danger-solid' : 'primary'}
+      data-testid="confirm-yes"
+      aria-disabled={answered || undefined}
+      onclick={() => answer(true)}>{confirmLabel}</Button
+    >
+    <Button
+      data-testid="confirm-no"
+      data-autofocus
+      aria-disabled={answered || undefined}
+      onclick={() => answer(false)}>{cancelLabel}</Button
+    >
+  {/snippet}
+</Dialog>

@@ -94,7 +94,13 @@ test('guest seals a plan with the keyboard alone', async ({ context }) => {
   expect(plan).toBeDefined();
   if (plan === undefined) return;
 
-  // Focus lands on the first plan control by itself, so tabbing starts from there.
+  // Entering the plan gives no card focus, so no large card covers the table.
+  const focused = await guest.evaluate(
+    () => (document.activeElement as HTMLElement | null)?.dataset['testid'] ?? '',
+  );
+  expect(focused).not.toMatch(/^(plan-character|target)-/);
+  await expect(guest.locator('[data-part="popover"]')).toHaveCount(0);
+
   await tabTo(guest, `plan-character-${plan.character}`);
   await guest.keyboard.press('Space');
   await expect(guest.getByTestId(`plan-character-${plan.character}`)).toHaveAttribute(
@@ -102,7 +108,7 @@ test('guest seals a plan with the keyboard alone', async ({ context }) => {
     'true',
   );
 
-  // The targets are listed in printed order, which is the tab order.
+  // The targets are listed in printed order, which is the tab order; Tab wraps round to them.
   const targets = plan.targets
     .map(targetId)
     .sort((a, b) => PRINTED_ORDER.indexOf(a) - PRINTED_ORDER.indexOf(b));

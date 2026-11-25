@@ -2,6 +2,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Browser, type BrowserContext, type Page } from '@playwright/test';
 import type { Command } from '@wwd/engine';
 import {
+  catchUpShowdown,
   createSeededRoom,
   giveName,
   isPlan,
@@ -15,6 +16,7 @@ import {
   snapshot,
   targetId,
 } from './game.js';
+import { GALLERY_ENTRIES, expectGalleryEntries, openGalleryEntry } from './gallery-entries.js';
 
 interface Theme {
   name: string;
@@ -173,7 +175,8 @@ test('every screen passes axe in each theme', async ({ browser }) => {
     until: (s) => s.status === 'game_over' || s.legal.includes('next_round'),
   });
   await expect(host.getByTestId('action-next-round')).toBeVisible();
-  await host.getByTestId('round-summary').locator('summary').click();
+  await catchUpShowdown(host);
+  await expect(host.getByTestId('round-summary')).toBeVisible();
   await expectAccessible(host, 'Table, round over');
 
   await openGameMenu(host);
@@ -193,7 +196,7 @@ test('every screen passes axe in each theme', async ({ browser }) => {
   await guest.getByTestId('view-replay').click();
   await expect(guest.getByTestId('replay-position')).toBeVisible();
   await expectAccessible(guest, 'Replay');
-  await guest.getByRole('button', { name: 'Full' }).click();
+  await guest.getByRole('radio', { name: 'Full' }).check();
   await expectAccessible(guest, 'Replay, full view');
   await guest.goto('/#/history');
   await expect(guest.getByRole('link', { name: /^Replay:/ })).toBeVisible();
@@ -204,4 +207,20 @@ test('every screen passes axe in each theme', async ({ browser }) => {
   await guest.goto('/');
   await expect(guest.getByTestId('home')).toBeVisible();
   await expectAccessible(guest, 'Home after a game');
+});
+
+test.describe('every gallery entry passes axe in each theme', () => {
+  test('the list names every gallery entry', async ({ page }, info) => {
+    test.skip(info.project.name !== 'desktop', 'the gallery is the same in every project');
+    await expectGalleryEntries(page);
+  });
+
+  for (const id of GALLERY_ENTRIES) {
+    test(id, async ({ page }, info) => {
+      test.skip(info.project.name !== 'desktop', 'checked at one phone size');
+      await page.setViewportSize({ width: 360, height: 740 });
+      await openGalleryEntry(page, id);
+      await expectAccessible(page, id);
+    });
+  }
 });

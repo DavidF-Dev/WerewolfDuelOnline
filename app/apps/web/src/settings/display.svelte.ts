@@ -6,7 +6,6 @@ export type DisplaySettings = Pick<
   | 'colourBlindPatterns'
   | 'cardText'
   | 'rulesHints'
-  | 'deductionAutoMark'
   | 'confirmPlan'
   | 'showdownSpeed'
   | 'haptics'
@@ -17,7 +16,6 @@ export const display: DisplaySettings = $state({
   colourBlindPatterns: DEFAULT_SETTINGS.colourBlindPatterns,
   cardText: DEFAULT_SETTINGS.cardText,
   rulesHints: DEFAULT_SETTINGS.rulesHints,
-  deductionAutoMark: DEFAULT_SETTINGS.deductionAutoMark,
   confirmPlan: DEFAULT_SETTINGS.confirmPlan,
   showdownSpeed: DEFAULT_SETTINGS.showdownSpeed,
   haptics: DEFAULT_SETTINGS.haptics,
@@ -31,7 +29,6 @@ export function setDisplaySettings(settings: DisplaySettings): void {
   display.colourBlindPatterns = settings.colourBlindPatterns;
   display.cardText = settings.cardText;
   display.rulesHints = settings.rulesHints;
-  display.deductionAutoMark = settings.deductionAutoMark;
   display.confirmPlan = settings.confirmPlan;
   display.showdownSpeed = settings.showdownSpeed;
   display.haptics = settings.haptics;

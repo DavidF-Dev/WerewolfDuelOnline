@@ -90,6 +90,6 @@ fn golden_cross_round_hash() {
     let hex: String = hash(&state).iter().map(|b| format!("{b:02x}")).collect();
     assert_eq!(
         hex,
-        "362f1086440543ac124834d2af2eddbce88f82a3ce8ee2597b674d61aa950c5f"
+        "aa9ea5535019461e30a6174e10ed2fa69dc7136ef27496c9fab148d3112c6bba"
     );
 }

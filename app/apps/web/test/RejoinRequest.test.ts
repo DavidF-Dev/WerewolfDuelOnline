@@ -75,6 +75,52 @@ describe('RejoinRequest', () => {
     client.dispose();
   });
 
+  it('an answer that could not be sent can be given again, and Escape still works', async () => {
+    const answers: boolean[] = [];
+    render(RejoinRequest, {
+      props: {
+        localiser,
+        requested: true,
+        deadline: null,
+        opponent: { connected: false },
+        // Not connected: nothing can be sent.
+        onAnswer: (approve: boolean) => {
+          answers.push(approve);
+          return false;
+        },
+      },
+    });
+    const user = userEvent.setup();
+    await user.click(screen.getByRole('button', { name: 'Allow' }));
+    const allow = screen.getByRole('button', { name: 'Allow' });
+    expect(allow.getAttribute('aria-disabled')).toBeNull();
+    expect(document.activeElement?.textContent).toBe("Don't allow");
+    const dialog = screen.getByRole('alertdialog') as HTMLDialogElement;
+    expect(dialog.open).toBe(true);
+    dialog.dispatchEvent(new Event('cancel', { cancelable: true }));
+    expect(answers).toEqual([true, false]);
+  });
+
+  it('a sent answer is final while the request stays', async () => {
+    const answers: boolean[] = [];
+    render(RejoinRequest, {
+      props: {
+        localiser,
+        requested: true,
+        deadline: null,
+        opponent: { connected: false },
+        onAnswer: (approve: boolean) => {
+          answers.push(approve);
+          return true;
+        },
+      },
+    });
+    const user = userEvent.setup();
+    await user.click(screen.getByRole('button', { name: 'Allow' }));
+    await user.click(screen.getByRole('button', { name: "Don't allow" }));
+    expect(answers).toEqual([true]);
+  });
+
   it('opens and counts down when this device clock is ahead of the referee', async () => {
     vi.useFakeTimers({ toFake: ['setInterval', 'clearInterval', 'Date'] });
     const refereeNow = 1_000_000;

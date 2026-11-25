@@ -7,6 +7,7 @@ import CharacterCard from '../../src/components/CharacterCard.svelte';
 import { CHARACTERS } from '../../src/cards.js';
 import { setDisplaySettings } from '../../src/settings/display.svelte.js';
 import { DEFAULT_SETTINGS } from '../../src/settings/settings.js';
+import { abilityText } from '../../src/text.js';
 
 const localiser = createLocaliser('en');
 
@@ -16,25 +17,19 @@ function renderCard(character: Character, props: Record<string, unknown> = {}) {
   return render(CharacterCard, { props: { localiser, character, ...props } });
 }
 
-const silhouette = (container: HTMLElement): SVGPathElement => {
-  const path = container.querySelector<SVGPathElement>('[data-part="silhouette"]');
-  if (path === null) throw new Error('no silhouette');
-  return path;
-};
-
 describe('CharacterCard', () => {
   it('card accessible name includes initiative, faction and ability', () => {
     renderCard('knight');
     const card = screen.getByRole('button');
     expect(card.getAttribute('aria-label')).toBe(
-      `3, Knight, Human. ${localiser.t('card-ability-knight')}`,
+      '3, Knight, Human. Gain an Hourglass, then attack a Werewolf.',
     );
     expect(screen.getByRole('button', { name: /^3, Knight, Human[.] / })).toBe(card);
   });
 
   it('every character has its own ability text', () => {
-    const abilities = CHARACTERS.map((c) => localiser.t(`card-ability-${c.replaceAll('_', '-')}`));
-    for (const text of abilities) expect(text).toMatch(/^\p{Lu}.*\.$/u);
+    const abilities = CHARACTERS.map((character) => abilityText(localiser, { character }));
+    for (const text of abilities) expect(text).toMatch(/^\p{Lu}[^{}]*\.$/u);
     expect(new Set(abilities).size).toBe(CHARACTERS.length);
   });
 
@@ -64,39 +59,26 @@ describe('CharacterCard', () => {
     expect(onselect).toHaveBeenCalledOnce();
   });
 
-  it('faction is never colour alone', () => {
-    const human = renderCard('knight');
-    const werewolf = renderCard('wolfen');
-    const humanPath = silhouette(human.container);
-    const werewolfPath = silhouette(werewolf.container);
-    expect(humanPath.getAttribute('d')).not.toBe(werewolfPath.getAttribute('d'));
-    expect(humanPath.getAttribute('fill')).not.toMatch(/url\(/);
-    expect(werewolfPath.getAttribute('fill')).not.toMatch(/url\(/);
-  });
-
-  it('faction also changes the fill pattern with colour-blind patterns on', () => {
-    setDisplaySettings({ ...DEFAULT_SETTINGS, colourBlindPatterns: true });
-    const human = renderCard('knight');
-    const werewolf = renderCard('wolfen');
-    const humanPath = silhouette(human.container);
-    const werewolfPath = silhouette(werewolf.container);
-    expect(humanPath.getAttribute('d')).not.toBe(werewolfPath.getAttribute('d'));
-    expect(humanPath.getAttribute('fill')).not.toMatch(/url\(/);
-    const hatch = /^url\(#(.+)\)$/.exec(werewolfPath.getAttribute('fill') ?? '')?.[1];
-    expect(hatch).toBeDefined();
-    expect(werewolf.container.querySelector(`pattern[id="${hatch}"]`)).not.toBeNull();
-  });
-
   it('shows a glyph and the name by default', () => {
     const { container } = renderCard('witch');
     expect(container.querySelector('[data-part="glyph"]')).not.toBeNull();
     expect(screen.getByText('Witch')).toBeTruthy();
   });
 
-  it('text-only card text shows the name', () => {
+  it('text-only card text shows the name and the ability text', () => {
     setDisplaySettings({ ...DEFAULT_SETTINGS, cardText: 'text-only' });
     const { container } = renderCard('witch');
     expect(container.querySelector('[data-part="glyph"]')).toBeNull();
     expect(screen.getByText('Witch')).toBeTruthy();
+    expect(container.querySelector('[data-part="text"]')?.textContent).toContain('Potion');
+  });
+
+  it('colour-blind patterns strengthen the Werewolf hatching', () => {
+    const plain = renderCard('wolfen');
+    expect(plain.container.querySelector('.face')?.classList.contains('strong')).toBe(false);
+    plain.unmount();
+    setDisplaySettings({ ...DEFAULT_SETTINGS, colourBlindPatterns: true });
+    const strong = renderCard('wolfen');
+    expect(strong.container.querySelector('.face')?.classList.contains('strong')).toBe(true);
   });
 });

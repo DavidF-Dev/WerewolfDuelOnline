@@ -281,6 +281,11 @@ current pricing pages before relying on these figures.
   again.
 - **A bad referee release.** Workers & Pages → the Worker → Deployments lets you roll back to an
   earlier version.
+- **"The game record could not be verified" after an engine upgrade.** A game that was in progress
+  while a referee with a new engine version was deployed carries on, but at game over the client's
+  check can report a mismatch, because the earlier rounds' events came from the old engine. After a
+  reconnect its log can also repeat or skip lines, since the new engine's event sequence differs
+  from the one the client saw. Games started after the deploy are not affected.
 - **Deploying by hand.** Use the package scripts, which pass `--env` and refuse to deploy
   without allowed origins, with a wildcard, with a non-`https` origin (staging also accepts
   `http://localhost:<port>`), with any `TEST_OVERRIDES` value, or with `--env`, `-e`, `--name`,

@@ -69,6 +69,21 @@ describe('UpdateBanner', () => {
     await userEvent.setup().click(within(region).getByRole('button', { name: 'Reload' }));
     expect(worker.updateSW).toHaveBeenCalledWith(true);
   });
+
+  it('a banner on a later screen shows the update without announcing it again', async () => {
+    const worker = fakeWorker(false);
+    const first = render(UpdateBanner, { props: { localiser } });
+    worker.newVersionWaiting();
+    await waitFor(() =>
+      expect(screen.getByRole('status').textContent).toBe('A new version is available'),
+    );
+    first.unmount();
+    render(UpdateBanner, { props: { localiser } });
+    const region = screen.getByRole('region', { name: 'App updates' });
+    expect(region.textContent).toContain('A new version is available');
+    expect(within(region).queryByRole('status')).toBeNull();
+    expect(within(region).getByRole('button', { name: 'Reload' })).toBeTruthy();
+  });
 });
 
 describe('protocol version stop', () => {

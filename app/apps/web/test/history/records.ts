@@ -1,27 +1,11 @@
 import type { Character, Game, Seat } from '@wwd/engine';
-import type { HistoryRecord } from '../../src/storage/db.js';
+import { finishedGame as finished } from '../../src/gallery/games.js';
 import { newGame } from '../games.js';
 
-const isOver = (game: Game): boolean => {
-  const { phase } = game.view({ seat: 'p0' });
-  return typeof phase === 'object' && 'game_over' in phase;
-};
+export { recordFrom } from '../../src/gallery/games.js';
 
 /** A game played to its end, each seat choosing a pseudo-random legal command other than resigning. */
-export function finishedGame(seed: number): Game {
-  const game = newGame(seed);
-  let pick = seed;
-  for (let step = 0; !isOver(game); step++) {
-    if (step > 5000) throw new Error('the game did not end');
-    const seat = game.pending().seats[0];
-    const legal = seat === undefined ? [] : game.legalActions(seat).filter((c) => c !== 'resign');
-    pick = (pick * 1103515245 + 12345) % 2147483648;
-    const cmd = legal[pick % legal.length];
-    if (seat === undefined || cmd === undefined) throw new Error('nobody can act');
-    game.apply(seat, cmd);
-  }
-  return game;
-}
+export const finishedGame = (seed: number): Game => finished(seed, newGame);
 
 /** The first round of `game` played with `seat` choosing `character`, then `loser` resigning. */
 export function oneRound(game: Game, seat: Seat, character: Character, loser: Seat): Game {
@@ -45,28 +29,4 @@ export function oneRound(game: Game, seat: Seat, character: Character, loser: Se
   }
   game.apply(loser, 'resign');
   return game;
-}
-
-export function recordFrom(
-  game: Game,
-  seat: Seat,
-  id: string,
-  extra: Partial<HistoryRecord> = {},
-): HistoryRecord {
-  const view = game.view({ seat });
-  if (typeof view.phase !== 'object' || !('game_over' in view.phase)) {
-    throw new Error('the game is not over');
-  }
-  const replay = game.replay();
-  return {
-    id,
-    finishedAt: 1_000,
-    seat,
-    config: replay.config,
-    replay,
-    winner: view.phase.game_over.winner,
-    reason: view.phase.game_over.reason,
-    rounds: view.round,
-    ...extra,
-  };
 }

@@ -2,13 +2,17 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import {
   EngineError,
   Game,
+  abilitySummary,
   contentHash,
+  verifyReplay,
   defaultRulesConfig,
   effectiveInitiative,
   replayTimeline,
   showdownOrder,
   validatePlan,
 } from '../src/index.js';
+import { readFileSync } from 'node:fs';
+import type { Replay } from '../src/index.js';
 import { loadEngineForNode } from '../src/test-support.js';
 
 const SEED = '01'.repeat(32);
@@ -47,6 +51,40 @@ describe('UI helpers', () => {
     expect(validatePlan({ character: 'hunter', targets: [{ character: 'seer' }] }, config)).toBe(
       'error-target-not-allowed',
     );
+  });
+
+  it('abilitySummary describes what each character does', () => {
+    expect(abilitySummary('hunter')).toEqual({
+      gains: [],
+      spends: { one: 'cross' },
+      attack: { faction: 'werewolf', max: 2 },
+      damage: 1,
+      optional_cross: true,
+    });
+    expect(abilitySummary('seer').damage).toBe(2);
+    expect(abilitySummary('villager')).toEqual({
+      gains: ['cross'],
+      spends: null,
+      attack: null,
+      damage: 0,
+      optional_cross: false,
+    });
+    expect(idOf(() => abilitySummary('dragon' as never))).toBe('error-invalid-input');
+  });
+
+  it('a replay saved by engine 0.1.0 still verifies and replays', () => {
+    const old = JSON.parse(
+      readFileSync(
+        new URL(
+          '../../../../engine/crates/wwd-core/tests/fixtures/replay-0.1.0.json',
+          import.meta.url,
+        ),
+        'utf8',
+      ),
+    ) as Replay;
+    expect(() => verifyReplay(old)).not.toThrow();
+    const events = replayTimeline(old, 'omniscient').flatMap((step) => step.events);
+    expect(events.some((event) => 'discard_revealed' in event.kind)).toBe(true);
   });
 
   it('effectiveInitiative clamps at zero', () => {

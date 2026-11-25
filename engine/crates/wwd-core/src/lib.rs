@@ -39,7 +39,9 @@ pub use replay::{
 };
 pub use rng::RngState;
 pub use state::*;
-pub use targeting::{AttackRule, attack_rule, validate_plan};
+pub use targeting::{
+    AbilitySummary, AttackRule, AttackShape, Cost, ability_summary, attack_rule, validate_plan,
+};
 pub use types::*;
 pub use view::{
     Pending, PendingKind, PlanView, PlayerView, View, Viewer, events_since, pending,

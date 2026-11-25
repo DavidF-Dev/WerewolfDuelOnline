@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import Panel from '../kit/Panel.svelte';
 
   interface Props {
     title: string;
@@ -7,33 +8,40 @@
   }
 
   let { title, children }: Props = $props();
-  const uid = $props.id();
 </script>
 
-<section class="group" aria-labelledby="{uid}-heading">
-  <h2 id="{uid}-heading">{title}</h2>
-  {@render children()}
-</section>
+<Panel {title} tight class="settings-group">{@render children()}</Panel>
 
 <style>
-  .group {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    margin-block: 1rem;
-    padding: 0.5rem 1rem 1rem;
+  :global(.settings-group) {
+    font-size: 0.875rem;
   }
 
-  h2 {
-    font-size: 1.125rem;
-  }
-
-  .group :global(.row) {
+  :global(.settings-group [data-part='setting']) {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem 1rem;
+    gap: 0 12px;
     justify-content: space-between;
-    margin-block: 0.75rem;
+    margin: 0;
+    min-height: var(--target);
+  }
+
+  :global(.settings-group [data-part='setting'] ~ [data-part='setting']) {
+    border-top: 1px solid var(--line);
+  }
+
+  :global(.settings-group [data-part='setting-name']) {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  :global(.settings-group [data-part='setting-control']) {
+    align-items: center;
+    display: inline-flex;
+    flex: none;
+    gap: 8px;
+    margin-inline-start: auto;
+    max-width: 100%;
   }
 </style>

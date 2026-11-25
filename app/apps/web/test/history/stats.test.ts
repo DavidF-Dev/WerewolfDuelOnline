@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { replayTimeline } from '@wwd/engine';
-import { stats } from '../../src/history/stats.js';
+import { stats, totals } from '../../src/history/stats.js';
 import { summarise } from '../../src/history/summary.js';
 import { gameDealing } from '../games.js';
 import { finishedGame, oneRound, recordFrom } from './records.js';
@@ -72,5 +72,23 @@ describe('stats', () => {
     const jo = result.opponents.find((o) => o.name === 'Jo');
     expect(jo!.won + jo!.lost).toBe(2);
     expect(result.opponents.find((o) => o.name === null)).toBeDefined();
+  });
+});
+
+describe('totals', () => {
+  it('totals count games, wins and the wins by each condition', () => {
+    const all = records();
+    const result = totals(all);
+    const won = all.filter((r) => r.winner === r.seat);
+    expect(result.games).toBe(all.length);
+    expect(result.wins).toBe(won.length);
+    for (const reason of ['health', 'fangs', 'crosses', 'resignation'] as const) {
+      expect(result.winsBy[reason]).toBe(won.filter((r) => r.reason === reason).length);
+    }
+    expect(totals([])).toEqual({
+      games: 0,
+      wins: 0,
+      winsBy: { health: 0, fangs: 0, crosses: 0, resignation: 0 },
+    });
   });
 });

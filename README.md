@@ -57,6 +57,9 @@ The dev server plays a two-tab game against an in-browser referee. For browser t
 - [Design spec](docs/superpowers/specs/2026-11-22-werewolf-duel-online-design.md): architecture, protocol and the rules specification.
 - [Deployment guide](docs/deploy.md): GitHub Pages, Cloudflare Workers and self-hosting.
 - [Mockups](docs/mockups/mockups.html): low-fidelity screen designs (open in a browser).
+- [Card and plan-screen mockups](docs/mockups/cards-and-plan.html): sections H and I are binding for the cards and the plan screen.
+- [Cards, plan screen and Home design note](docs/superpowers/specs/2026-11-24-cards-plan-home-design.md): the card anatomy, the plan screen and Home.
+- [Layout pass plan](docs/superpowers/plans/2026-11-23-layout-pass.md): the implementation plan for the layout pass.
 - [Research and recommendations](docs/research/2026-11-21-research-and-recommendations.md): background and alternatives considered.
 
 ## Licence

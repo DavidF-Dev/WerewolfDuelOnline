@@ -1,8 +1,15 @@
-import type { Character } from '@wwd/engine';
+import type { MarkerId } from '@wwd/client-core';
+import type { Character, Faction } from '@wwd/engine';
 
 export type CardArtId = Character | 'fool';
 
-export type MarkerId = 'health' | 'cross' | 'fang' | 'hourglass' | 'badge' | 'potion';
+export type { MarkerId };
+
+/** A part of a card's ability row: the arrow from a spent marker to the attack it pays for. */
+export type AbilityArtId = 'spend';
+
+/** Decoration drawn behind a screen. */
+export type SceneryId = 'treeline';
 
 /** Every marker, in display order. */
 export const MARKERS: readonly MarkerId[] = [
@@ -17,6 +24,9 @@ export const MARKERS: readonly MarkerId[] = [
 interface ArtIds {
   cards: CardArtId;
   markers: MarkerId;
+  factions: Faction;
+  abilities: AbilityArtId;
+  scenery: SceneryId;
 }
 
 export type ArtKind = keyof ArtIds;
@@ -27,6 +37,9 @@ export type ThemeArt = { [K in ArtKind]: Partial<Record<ArtIds[K], string>> };
 interface ThemeManifest {
   cards: Record<string, string>;
   markers: Record<string, string>;
+  factions?: Record<string, string>;
+  abilities?: Record<string, string>;
+  scenery?: Record<string, string>;
 }
 
 export const FALLBACK_THEME = 'placeholder';
@@ -56,7 +69,13 @@ export const THEME_PACKS: Readonly<Record<string, ThemeArt>> = Object.fromEntrie
     const dir = path.slice(0, path.lastIndexOf('/'));
     return [
       dir.slice(2),
-      { cards: artFor(dir, manifest.cards), markers: artFor(dir, manifest.markers) },
+      {
+        cards: artFor(dir, manifest.cards),
+        markers: artFor(dir, manifest.markers),
+        factions: artFor(dir, manifest.factions ?? {}),
+        abilities: artFor(dir, manifest.abilities ?? {}),
+        scenery: artFor(dir, manifest.scenery ?? {}),
+      },
     ];
   }),
 );
@@ -75,3 +94,64 @@ export function createArtResolver(packs: Readonly<Record<string, ThemeArt>>) {
 
 /** The URL of the art for `id` in the bundled theme `themeId`, or the placeholder's. */
 export const resolveArt = createArtResolver(THEME_PACKS);
+
+/** The art kinds drawn from the inline sprite, so they take the text colour and forced colours. */
+export type SpriteKind = Exclude<ArtKind, 'scenery'>;
+
+const SPRITE_KINDS: readonly SpriteKind[] = ['cards', 'markers', 'factions', 'abilities'];
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+const sources = import.meta.glob<string>('./*/*.svg', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+});
+
+/** The SVG source of `id` in the theme `themeId`, or the placeholder's. */
+function sourceFor(themeId: string, kind: SpriteKind, id: string): string {
+  for (const theme of [themeId, FALLBACK_THEME]) {
+    const file = manifests[`./${theme}/theme.json`]?.[kind]?.[id];
+    const source = file === undefined ? undefined : sources[`./${theme}/${file}`];
+    if (source !== undefined) return source;
+  }
+  throw new Error(`the ${FALLBACK_THEME} theme has no ${kind} art for ${id}`);
+}
+
+/** Turns a standalone SVG into a `<symbol>` drawn in the colour of the element that uses it. */
+function toSymbol(symbolId: string, svg: string): string {
+  const viewBox = /viewBox="([^"]+)"/.exec(svg)?.[1] ?? '0 0 24 24';
+  const inner = svg
+    .replace(/^[\s\S]*?<svg[^>]*>/, '')
+    .replace(/<\/svg>\s*$/, '')
+    .replaceAll('#000', 'currentColor');
+  return `<symbol id="${symbolId}" viewBox="${viewBox}">${inner}</symbol>`;
+}
+
+const spriteId = (themeId: string): string => `art-${themeId}`;
+
+/** The id of the sprite symbol for `id` in the theme `themeId`. */
+export const symbolId = <K extends SpriteKind>(themeId: string, kind: K, id: ArtIds[K]): string =>
+  `${spriteId(themeId)}-${kind}-${id}`;
+
+/** Every sprite symbol of the theme `themeId`, each falling back to the placeholder's art. */
+export function spriteMarkup(themeId: string): string {
+  const fallback = manifests[`./${FALLBACK_THEME}/theme.json`];
+  return SPRITE_KINDS.flatMap((kind) =>
+    Object.keys(fallback?.[kind] ?? {}).map((id) =>
+      toSymbol(`${spriteId(themeId)}-${kind}-${id}`, sourceFor(themeId, kind, id)),
+    ),
+  ).join('');
+}
+
+/** A `<use>` reference to `id` in the theme `themeId`, adding the theme's sprite to the page once. */
+export function artSymbol<K extends SpriteKind>(themeId: string, kind: K, id: ArtIds[K]): string {
+  if (typeof document !== 'undefined' && document.getElementById(spriteId(themeId)) === null) {
+    const sprite = document.createElementNS(SVG_NS, 'svg');
+    sprite.id = spriteId(themeId);
+    sprite.setAttribute('aria-hidden', 'true');
+    sprite.setAttribute('style', 'position: absolute; width: 0; height: 0; overflow: hidden');
+    sprite.innerHTML = spriteMarkup(themeId);
+    document.body.prepend(sprite);
+  }
+  return `#${symbolId(themeId, kind, id)}`;
+}

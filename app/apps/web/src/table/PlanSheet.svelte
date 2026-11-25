@@ -8,13 +8,16 @@
     type TargetCard as Card,
   } from '@wwd/engine';
   import type { Localiser } from '@wwd/client-core';
-  import { CHARACTERS, TARGET_CARDS, canonicalTargets, targetId } from '../cards.js';
+  import { CHARACTERS, canonicalTargets, targetId } from '../cards.js';
   import Button from '../components/Button.svelte';
-  import CharacterCard from '../components/CharacterCard.svelte';
   import ConfirmDialog from '../components/ConfirmDialog.svelte';
-  import TargetCard from '../components/TargetCard.svelte';
+  import RichText from '../kit/RichText.svelte';
+  import Spinner from '../kit/Spinner.svelte';
   import { display } from '../settings/display.svelte.js';
-  import { characterName, planText } from '../text.js';
+  import { characterName, planSummaryParts, planText } from '../text.js';
+  import HandFan from './HandFan.svelte';
+  import TargetGrid from './TargetGrid.svelte';
+  import { handInstruction, handPrimary } from './primary.svelte.js';
 
   interface Props {
     localiser: Localiser;
@@ -72,7 +75,8 @@
 
   /** Why `card` can't be added: the engine's reason when it gives one, else a fallback from `legal`. */
   function blockedReason(card: Card): string | null {
-    if (active === null || includes(selected, card)) return null;
+    if (active === null) return l.t('target-choose-character-first');
+    if (includes(selected, card)) return null;
     const grown = [...selected, card];
     if (forActive.some((p) => fits(p, grown))) return null;
     const engine =
@@ -83,31 +87,16 @@
     return l.t(forActive.some((p) => fits(p, [card])) ? 'target-limit' : 'target-not-allowed');
   }
 
-  const inHand = (card: Card): boolean => card !== 'fool' && hand.includes(card.character);
-
-  function targetProps(card: Card) {
+  function targetShown(card: Card) {
     const reason = blockedReason(card);
-    if (reason !== null) return { state: 'disabled' as const, reason, mark: undefined };
-    return {
-      state: includes(selected, card) ? ('selected' as const) : ('normal' as const),
-      reason: undefined,
-      mark: inHand(card) ? l.t('plan-target-in-hand') : undefined,
-    };
+    if (reason !== null) return { state: 'disabled' as const, reason };
+    return { state: includes(selected, card) ? ('selected' as const) : ('normal' as const) };
   }
 
-  function shortSummary(plan: Plan): string {
-    const character = characterName(l, plan.character);
-    if (plan.targets.length === 0) return l.t('plan-summary-short-none', { character });
-    const targets = plan.targets
-      .map((card) =>
-        card === 'fool' ? l.t('plan-summary-fool') : characterName(l, card.character),
-      )
-      .join(' + ');
-    return l.t('plan-summary-short', { character, targets });
-  }
-
+  /** The plan in short, such as "Knight → Wolfen + Fool", with each card's name emphasised. */
+  /** Chooses `c` as the plan's character, or clears the choice when it is already chosen. */
   function choose(c: Character): void {
-    chosen = c;
+    chosen = c === active ? null : c;
     selected = [];
   }
 
@@ -129,76 +118,55 @@
     if (display.confirmPlan) confirming = true;
     else send();
   }
+
+  const hosted = handPrimary(() => sealButton);
+  const instructed = handInstruction(() => summary);
 </script>
 
-<section aria-labelledby="{uid}-heading" class="sheet" data-testid="plan-builder">
-  <h2 id="{uid}-heading">{l.t('plan-heading')}</h2>
-
-  <h3 id="{uid}-characters">{l.t('plan-characters-heading')}</h3>
-  <ul class="cards" aria-labelledby="{uid}-characters" data-testid="plan-characters">
-    {#each offered as c (c)}
-      <li>
-        <CharacterCard
-          localiser={l}
-          character={c}
-          state={active === c ? 'selected' : 'normal'}
-          testId="plan-character-{c}"
-          onselect={() => choose(c)}
-        />
-      </li>
-    {/each}
-  </ul>
-
-  {#if active === null}
-    <p class="note">{l.t('target-choose-character-first')}</p>
-  {:else}
-    <p class="detail" data-testid="plan-detail">
-      {l.t('plan-detail', {
-        name: characterName(l, active),
-        ability: l.t(`card-ability-${active.replaceAll('_', '-')}`),
-      })}
-    </p>
-    <h3 id="{uid}-targets">{l.t('plan-targets-heading')}</h3>
-    <ul class="cards" aria-labelledby="{uid}-targets" data-testid="plan-targets">
-      {#each TARGET_CARDS as card (targetId(card))}
-        {@const shown = targetProps(card)}
-        <li>
-          <TargetCard
-            localiser={l}
-            {card}
-            state={shown.state}
-            reason={shown.reason}
-            mark={shown.mark}
-            testId="target-{targetId(card)}"
-            onselect={() => toggle(card)}
-          />
-        </li>
-      {/each}
-    </ul>
-  {/if}
-
-  <p class="summary" aria-live="polite" data-testid="plan-summary">
+{#snippet summary()}
+  <span data-testid="plan-summary">
     {#if draft === null}
       {l.t('plan-summary-empty')}
     {:else}
-      <span aria-hidden="true">{shortSummary(draft)}</span>
+      <span aria-hidden="true"><RichText parts={planSummaryParts(l, draft)} /></span>
       <span class="visually-hidden">{l.t('plan-summary', { plan: planText(l, draft) })}</span>
     {/if}
-  </p>
-  <p class="seal">
-    <Button
-      variant="primary"
-      disabled={match === undefined}
-      aria-disabled={sent}
-      aria-describedby={match === undefined ? `${uid}-seal-note` : undefined}
-      aria-haspopup={display.confirmPlan ? 'dialog' : undefined}
-      data-testid="seal-plan"
-      onclick={seal}>{l.t('plan-seal')}</Button
-    >
-    {#if match === undefined}
-      <span id="{uid}-seal-note" class="note">{l.t('plan-seal-incomplete')}</span>
-    {/if}
-  </p>
+  </span>
+{/snippet}
+
+{#snippet sealButton()}
+  <Button
+    variant="primary"
+    disabled={match === undefined}
+    aria-disabled={sent}
+    aria-describedby={match === undefined ? `${uid}-seal-note` : undefined}
+    aria-haspopup={display.confirmPlan ? 'dialog' : undefined}
+    data-testid="seal-plan"
+    onclick={seal}
+    >{l.t('plan-seal')}{#if sent}<Spinner spaced={false} />{/if}</Button
+  >
+  {#if match === undefined}
+    <span id="{uid}-seal-note" class="visually-hidden">{l.t('plan-seal-incomplete')}</span>
+  {/if}
+{/snippet}
+
+<section aria-label={l.t('plan-heading')} class="plan" data-testid="plan-builder">
+  <TargetGrid localiser={l} {hand} shown={targetShown} onselect={toggle} />
+  <HandFan
+    localiser={l}
+    {hand}
+    chosen={active}
+    onchoose={choose}
+    {offered}
+    reason={l.t('plan-character-not-offered')}
+    testId="plan-characters"
+  />
+  {#if !instructed}
+    <p class="summary" aria-live="polite">{@render summary()}</p>
+  {/if}
+  {#if !hosted}
+    <p class="seal">{@render sealButton()}</p>
+  {/if}
   {#if confirming && draft !== null}
     <ConfirmDialog
       title={l.t('plan-confirm-title')}
@@ -207,49 +175,25 @@
       cancelLabel={l.t('plan-confirm-cancel')}
       onConfirm={send}
       onCancel={() => (confirming = false)}
-    />
+    >
+      {#if display.rulesHints}<p class="note" data-testid="plan-hint">{l.t('hint-plan')}</p>{/if}
+    </ConfirmDialog>
   {/if}
 </section>
 
 <style>
-  .sheet {
-    display: grid;
-    gap: 0.5rem;
-  }
-
-  h2 {
-    font-size: 1.125rem;
-    margin: 0;
-  }
-
-  h3 {
-    font-size: 1rem;
-    margin: 0;
+  .plan {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+    gap: 6px;
   }
 
   p {
     margin: 0;
   }
 
-  .cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .cards li {
-    margin: 0;
-  }
-
-  .detail {
-    border-inline-start: 4px solid var(--accent);
-    padding-inline-start: 0.5rem;
-  }
-
   .summary {
-    font-weight: 700;
+    font-weight: 600;
   }
 </style>

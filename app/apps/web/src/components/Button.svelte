@@ -1,35 +1,63 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import type { HTMLButtonAttributes } from 'svelte/elements';
+  import type { HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
+  import WarningIcon from './WarningIcon.svelte';
 
-  interface Props extends HTMLButtonAttributes {
-    variant?: 'primary' | 'secondary' | 'danger';
+  interface Common {
+    /** `block` fills the width; `small` sits inline. */
+    size?: 'block' | 'small';
+    /** Decoration shown before the label; danger buttons always show the warning icon instead. */
+    icon?: Snippet;
     children: Snippet;
   }
 
-  let { variant = 'secondary', type = 'button', children, ...rest }: Props = $props();
+  interface ActionProps extends Common, Omit<HTMLButtonAttributes, 'children'> {
+    variant?: 'default' | 'primary' | 'danger' | 'danger-solid';
+    element?: HTMLButtonElement;
+    href?: undefined;
+  }
+
+  /** A link drawn as a button; it cannot be a danger button, which carries a warning icon. */
+  interface LinkProps extends Common, Omit<HTMLAnchorAttributes, 'children'> {
+    variant?: 'default' | 'primary';
+    element?: undefined;
+    href: string;
+  }
+
+  type Props = ActionProps | LinkProps;
+
+  let {
+    variant = 'default',
+    size = 'block',
+    type = 'button',
+    icon,
+    element = $bindable(),
+    href,
+    children,
+    ...rest
+  }: Props = $props();
+  const danger = $derived(variant === 'danger' || variant === 'danger-solid');
 </script>
 
-<button {...rest} {type} class={['button', variant, rest.class]}>{@render children()}</button>
+{#if href !== undefined}
+  <a
+    {...rest as HTMLAnchorAttributes}
+    {href}
+    class={['button', 'kit-button', 'hit-area', variant, size, rest.class]}
+    >{@render icon?.()}{@render children()}</a
+  >
+{:else}
+  <button
+    {...rest as HTMLButtonAttributes}
+    type={type as HTMLButtonAttributes['type']}
+    bind:this={element}
+    class={['button', 'kit-button', 'hit-area', variant, size, rest.class]}
+    >{#if danger}<WarningIcon />{:else}{@render icon?.()}{/if}{@render children()}</button
+  >
+{/if}
 
 <style>
-  .button {
-    font-weight: 600;
-    padding: 0.75rem 1.25rem;
-  }
-
-  .primary {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--accent-ink);
-  }
-
-  .primary:hover:not(:disabled, [aria-disabled='true']) {
-    background: color-mix(in srgb, var(--accent) 85%, var(--ink));
-  }
-
-  .danger {
-    border-color: var(--danger);
-    color: var(--danger);
+  .button :global(.warning-icon) {
+    margin-inline-end: 0;
   }
 </style>

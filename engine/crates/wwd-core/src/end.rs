@@ -37,8 +37,9 @@ fn game_result(state: &State) -> Option<(Seat, WinReason)> {
         .map(|winner| (winner, WinReason::Crosses))
 }
 
-/// Returns placed Hourglasses, passes the Badge, appends `RoundEnded` and stops in
-/// [`Phase::RoundOver`] with nothing dealt, forgetting the round's discard.
+/// Returns placed Hourglasses, passes the Badge, appends `RoundEnded` and then
+/// `DiscardRevealed`, and stops in [`Phase::RoundOver`] with nothing dealt, forgetting the
+/// round's discard.
 pub(crate) fn end_round(state: &mut State, events: &mut Vec<Event>) {
     for player in &mut state.players {
         state.supply.hourglass += player.placed;
@@ -52,7 +53,15 @@ pub(crate) fn end_round(state: &mut State, events: &mut Vec<Event>) {
             next_badge: state.badge,
         },
     });
-    state.discard = None;
+    if let Some(character) = state.discard.take() {
+        events.push(Event {
+            visibility: Visibility::Public,
+            kind: EventKind::DiscardRevealed {
+                round: state.round,
+                character,
+            },
+        });
+    }
     state.next_round_ready = [false; 2];
     state.phase = Phase::RoundOver;
 }

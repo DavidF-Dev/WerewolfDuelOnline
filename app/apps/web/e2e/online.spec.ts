@@ -1,5 +1,6 @@
 import { expect, test, type Browser, type BrowserContext, type Page } from '@playwright/test';
 import {
+  FULL_GAME_TIMEOUT_MS,
   expectGameOver,
   giveName,
   joinAs,
@@ -78,12 +79,14 @@ async function moveGuestOnce(
 }
 
 test('two devices play a full online game', PARITY, async ({ browser }) => {
+  test.setTimeout(FULL_GAME_TIMEOUT_MS);
   const t = await table(browser, 1);
   await playToEnd(t, { random: mulberry32(1) });
   await expectGameOver(t);
 });
 
 test('guest goes offline and comes back', PARITY, async ({ browser }) => {
+  test.setTimeout(FULL_GAME_TIMEOUT_MS);
   const t = await table(browser, 2);
   let away = false;
   await playToEnd(t, {
@@ -121,6 +124,7 @@ test('continue from home resumes the seat without a PIN', async ({ browser }) =>
 });
 
 test('hidden tab reconnects', async ({ browser }) => {
+  test.setTimeout(FULL_GAME_TIMEOUT_MS);
   const t = await table(browser, 3);
   let hidden = false;
   await playToEnd(t, {
@@ -145,6 +149,7 @@ test('hidden tab reconnects', async ({ browser }) => {
 });
 
 test('rejoin from a new device with PIN', PARITY, async ({ browser }) => {
+  test.setTimeout(FULL_GAME_TIMEOUT_MS);
   const t = await table(browser, 4);
   await moveGuestOnce(t, 4, async ({ guest, code }) => {
     await openGameMenu(guest);
@@ -165,6 +170,7 @@ test('rejoin from a new device with PIN', PARITY, async ({ browser }) => {
 });
 
 test('rejoin with opponent approval', PARITY, async ({ browser }) => {
+  test.setTimeout(FULL_GAME_TIMEOUT_MS);
   const t = await table(browser, 5);
   await moveGuestOnce(t, 5, async ({ host, guestContext, code }) => {
     // A seat still connected elsewhere can only be taken with its PIN.
@@ -213,11 +219,13 @@ test('resign ends the game', async ({ browser }) => {
   await t.guest.evaluate(() => {
     location.hash = '#/';
   });
-  const link = t.guest.getByTestId('home-continue');
-  await expect(link).toHaveText(/Host, room \w{6}\s*Game over · rematch possible/);
+  const row = t.guest.getByTestId('home-session');
+  await expect(row).toContainText('Host');
+  await expect(row).toContainText('Game over · rematch possible');
 });
 
 test('rematch gives the badge to the loser', async ({ browser }) => {
+  test.setTimeout(FULL_GAME_TIMEOUT_MS);
   const t = await table(browser, 8);
   await playToEnd(t, { random: mulberry32(8) });
   await expectGameOver(t);

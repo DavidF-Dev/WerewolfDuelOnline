@@ -12,8 +12,8 @@ export const OFL = 'SIL Open Font License 1.1';
 
 export const FONT_CREDITS: readonly Credit[] = [
   { name: 'Atkinson Hyperlegible Next', licence: OFL },
-  { name: 'Cinzel', licence: OFL },
   { name: 'Lexend', licence: OFL },
+  { name: 'Marcellus', licence: OFL },
   { name: 'OpenDyslexic', licence: OFL },
 ];
 

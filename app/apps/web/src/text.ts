@@ -9,7 +9,16 @@ import type {
   Seat,
   TargetCard,
 } from '@wwd/engine';
-import type { ClientStatus, GameClientState, Localiser, StopReason } from '@wwd/client-core';
+import {
+  plainText,
+  richMessage,
+  type ClientStatus,
+  type GameClientState,
+  type Localiser,
+  type RichKinds,
+  type RichPart,
+  type StopReason,
+} from '@wwd/client-core';
 import { faction, initiative } from './cards.js';
 
 const list = new Intl.ListFormat('en-GB', { type: 'conjunction' });
@@ -31,8 +40,31 @@ export const characterLabel = (l: Localiser, c: Character, shownInitiative: numb
     name: characterName(l, c),
     initiative: shownInitiative,
     faction: l.t(`faction-${faction(c)}`),
-    ability: l.t(`card-ability-${c.replaceAll('_', '-')}`),
+    ability: abilityText(l, { character: c }),
   });
+
+const TEXT_MARKERS = ['cross', 'fang', 'hourglass', 'potion'] as const;
+const TEXT_MARKER_KINDS: RichKinds = Object.fromEntries(
+  TEXT_MARKERS.map((marker) => [marker, { marker }]),
+);
+
+const cardId = (card: TargetCard): string =>
+  card === 'fool' ? 'fool' : card.character.replaceAll('_', '-');
+
+const markerArgs = (l: Localiser): Record<string, string> =>
+  Object.fromEntries(TEXT_MARKERS.map((marker) => [marker, l.t(`marker-${marker}`)]));
+
+/** The ability text drawn on a card, with each marker it names marked out. */
+export const cardText = (l: Localiser, card: TargetCard): RichPart[] =>
+  richMessage(l, `card-text-${cardId(card)}`, markerArgs(l), TEXT_MARKER_KINDS);
+
+/** A card's full ability, as it is read out with the card, e.g. "Gain an Hourglass, then …". */
+export const abilityText = (l: Localiser, card: TargetCard): string =>
+  l.t(`card-ability-${cardId(card)}`, markerArgs(l));
+
+/** A card's full ability with each marker it names marked out. */
+export const abilityParts = (l: Localiser, card: TargetCard): RichPart[] =>
+  richMessage(l, `card-ability-${cardId(card)}`, markerArgs(l), TEXT_MARKER_KINDS);
 
 export const targetName = (l: Localiser, card: TargetCard): string =>
   card === 'fool' ? l.t('card-fool') : cardName(l, card.character);
@@ -41,9 +73,31 @@ export function planText(l: Localiser, plan: Plan): string {
   const character = characterName(l, plan.character);
   if (plan.targets.length === 0) return l.t('plan-no-targets', { character });
   const targets = plan.targets.map((card) =>
-    card === 'fool' ? l.t('target-fool') : characterName(l, card.character),
+    card === 'fool'
+      ? l.t('target-fool')
+      : l.t('target-character', { character: characterName(l, card.character) }),
   );
   return l.t('plan-targeting', { character, targets: list.format(targets) });
+}
+
+/** A plan as short rich text, such as "**Knight** → **Wolfen** + **Fool**". */
+export function planSummaryParts(l: Localiser, plan: Plan): RichPart[] {
+  const character = characterName(l, plan.character);
+  if (plan.targets.length === 0) {
+    return richMessage(l, 'plan-summary-short-none', { character }, { character: 'character' });
+  }
+  const names: RichPart[] = plan.targets.flatMap((card, i) => {
+    const name: RichPart = {
+      character: card === 'fool' ? l.t('plan-summary-fool') : characterName(l, card.character),
+    };
+    return i === 0 ? [name] : [{ text: ' + ' }, name];
+  });
+  return richMessage(
+    l,
+    'plan-summary-short',
+    { character, targets: plainText(names) },
+    { character: 'character', targets: { parts: names } },
+  );
 }
 
 export function planStatus(l: Localiser, plan: PlanView): string {
@@ -76,6 +130,10 @@ export function commandLabel(l: Localiser, cmd: Command): string {
 export const logLine = (l: Localiser, event: Event, seat: Seat | null): string =>
   'game_started' in event.kind ? l.t('log-game-started') : l.renderEvent(event, seat);
 
+/** `logLine` with player and character names and markers marked out. */
+export const logParts = (l: Localiser, event: Event, seat: Seat | null): RichPart[] =>
+  'game_started' in event.kind ? [{ text: l.t('log-game-started') }] : l.richEvent(event, seat);
+
 export const statusText = (l: Localiser, status: ClientStatus): string =>
   l.t(`status-${status.replaceAll('_', '-')}`);
 
@@ -103,8 +161,17 @@ const INSTRUCTIONS: Readonly<Record<PendingKind, string>> = {
   none: 'phase-none',
 };
 
+/** Whether the game was won in a showdown: every win but a resignation is decided in one. */
+function endedInShowdown(state: GameClientState): boolean {
+  const phase = state.view?.phase;
+  return (
+    typeof phase === 'object' && 'game_over' in phase && phase.game_over.reason !== 'resignation'
+  );
+}
+
 /** The one-line instruction for what this seat should do now. */
 export function instructionText(l: Localiser, state: GameClientState): string {
+  if (state.status === 'game_over' && endedInShowdown(state)) return l.t('phase-final-showdown');
   if (state.status !== 'playing') return statusText(l, state.status);
   if (state.legal.length === 0) return l.t('phase-waiting');
   return l.t(INSTRUCTIONS[state.pending?.kind ?? 'none']);

@@ -671,6 +671,19 @@ describe('online seat recovery', () => {
     expect(client.current.rejoinDeadline).toBeNull();
   });
 
+  it('forgets a rejoin request when the connection closes, as the referee does', async () => {
+    const { client, server } = recorded();
+    welcome(server);
+    send(server, { type: 'rejoin_request', deadline: 120_000, remaining_ms: 120_000 });
+    await flush();
+    expect(client.current.rejoinRequested).toBe(true);
+    server.close();
+    await flush();
+    expect(client.current.status).toBe('disconnected');
+    expect(client.current.rejoinRequested).toBe(false);
+    expect(client.current.rejoinDeadline).toBeNull();
+  });
+
   it('times the opponent grace by its own clock from the remaining time', async () => {
     let time = 1_000;
     const { client, server } = recorded({ now: () => time });

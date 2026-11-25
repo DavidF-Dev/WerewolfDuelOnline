@@ -10,6 +10,7 @@ import Replay from '../../src/screens/Replay.svelte';
 import Stats from '../../src/screens/Stats.svelte';
 import { routeFor } from '../../src/router.js';
 import { openDeviceStore, type DeviceStore, type HistoryRecord } from '../../src/storage/db.js';
+import { characterName } from '../../src/text.js';
 import { finishedGame, recordFrom } from './records.js';
 
 const localiser = createLocaliser('en');
@@ -19,7 +20,8 @@ let record: HistoryRecord;
 beforeEach(async () => {
   store = await openDeviceStore();
   setDeviceStore(store);
-  record = recordFrom(finishedGame(3), 'p0', 'https%3A%2F%2Fx.example.K7Q2MX.0', {
+  // A short game: three tests step through every step of it.
+  record = recordFrom(finishedGame(6), 'p0', 'https%3A%2F%2Fx.example.K7Q2MX.0', {
     opponentName: 'Mika',
   });
   await store.history.put(record);
@@ -31,8 +33,11 @@ afterEach(() => {
 });
 
 const position = (): string => screen.getByTestId('replay-position').textContent ?? '';
-const handItems = (seat: string): HTMLElement[] =>
-  within(screen.getByTestId(`replay-hand-${seat}`)).queryAllByRole('listitem');
+// Once a round's showdown has begun with both hands empty, the hands are left out.
+const handItems = (seat: string): HTMLElement[] => {
+  const hand = screen.queryByTestId(`replay-hand-${seat}`);
+  return hand === null ? [] : within(hand).queryAllByRole('listitem');
+};
 
 async function open(): Promise<void> {
   render(Replay, { props: { localiser, id: record.id } });
@@ -65,6 +70,35 @@ describe('Replay', () => {
     expect(position()).toMatch(new RegExp(`^Step ${total} of ${total}`));
   });
 
+  it("my view never names the opponent's cards before the showdown", async () => {
+    const mine = replayTimeline(record.replay, { seat: 'p0' });
+    const full = replayTimeline(record.replay, 'omniscient');
+    expect(full).toHaveLength(mine.length);
+    await open();
+    let checked = 0;
+    for (let i = 0; i < mine.length; i++) {
+      const view = mine[i]!.view;
+      if (view.showdown === null) {
+        // My own cards and the targets of my own plan may name the same characters.
+        const plan = view.players[0].plan;
+        const own = new Set<string>([
+          ...(view.players[0].hand ?? []),
+          ...(typeof plan === 'object' && 'revealed' in plan
+            ? plan.revealed.targets.flatMap((t) => (t === 'fool' ? [] : [t.character]))
+            : []),
+        ]);
+        const hidden = (full[i]!.view.players[1].hand ?? []).filter((c) => !own.has(c));
+        const shown = document.body.textContent ?? '';
+        for (const c of hidden) {
+          expect(shown, `step ${i + 1}`).not.toContain(characterName(localiser, c));
+        }
+        checked += hidden.length;
+      }
+      await fireEvent.keyDown(document.body, { key: 'ArrowRight' });
+    }
+    expect(checked, 'some hidden cards were checked').toBeGreaterThan(0);
+  });
+
   it("my view never shows the opponent's commands", async () => {
     const mine = replayTimeline(record.replay, { seat: 'p0' });
     const theirs = mine.filter((step) => step.seat === 'p1');
@@ -85,11 +119,11 @@ describe('Replay', () => {
   it('full view shows both', async () => {
     await open();
     const user = userEvent.setup();
-    await user.click(screen.getByRole('button', { name: 'Full' }));
-    expect(screen.getByRole('button', { name: 'Full' }).getAttribute('aria-pressed')).toBe('true');
+    await user.click(screen.getByRole('radio', { name: 'Full' }));
+    expect((screen.getByRole('radio', { name: 'Full' }) as HTMLInputElement).checked).toBe(true);
     expect(handItems('p0').length).toBeGreaterThan(0);
     expect(handItems('p1').length).toBeGreaterThan(0);
-    await user.click(screen.getByRole('button', { name: 'My view' }));
+    await user.click(screen.getByRole('radio', { name: 'My view' }));
     expect(handItems('p1')).toHaveLength(0);
   });
 
@@ -123,6 +157,39 @@ describe('Replay', () => {
     expect(position()).toMatch(/round 2$/);
     await user.click(screen.getByRole('button', { name: 'Previous round' }));
     expect(position()).toMatch(/^Step 1 of /);
+  });
+
+  it('a showdown step shows the plan panels and every result, and logs the rest', async () => {
+    await open();
+    const user = userEvent.setup();
+    const total = replayTimeline(record.replay, { seat: 'p0' }).length;
+    for (let i = 1; i < total && screen.queryByTestId('showdown') === null; i++) {
+      await user.click(screen.getByRole('button', { name: 'Next step' }));
+    }
+    expect(screen.getByTestId('opponent')).toBeTruthy();
+    expect(screen.getByTestId('plan-panels')).toBeTruthy();
+    expect(screen.getByTestId('my-area')).toBeTruthy();
+    expect(screen.queryByTestId('showdown-next')).toBeNull();
+    expect(screen.getByTestId('round-summary')).toBeTruthy();
+    const log = screen.getByTestId('replay-log').textContent ?? '';
+    expect(log).not.toMatch(/Plans revealed/);
+    expect(log).not.toMatch(/resolves/);
+  });
+
+  it('the bar menu shows the unofficial notice, and arrow keys wait while it is open', async () => {
+    await open();
+    const user = userEvent.setup();
+    await user.click(screen.getByRole('button', { name: 'Replay menu' }));
+    const menu = screen.getByTestId('replay-menu');
+    expect(within(menu).getByTestId('unofficial-notice').textContent?.trim()).toBe(
+      'An unofficial digital version of Werewolf: Duel!',
+    );
+    await fireEvent.keyDown(document.body, { key: 'ArrowRight' });
+    expect(position()).toMatch(/^Step 1 of /);
+    await user.click(within(menu).getByRole('button', { name: 'Close' }));
+    expect(screen.queryByTestId('replay-menu')).toBeNull();
+    await fireEvent.keyDown(document.body, { key: 'ArrowRight' });
+    expect(position()).toMatch(/^Step 2 of /);
   });
 
   it('says so when the game is not on this device', async () => {

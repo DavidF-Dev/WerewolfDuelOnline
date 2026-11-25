@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Localiser } from '@wwd/client-core';
+  import Button from './Button.svelte';
   import ConfirmDialog from './ConfirmDialog.svelte';
 
   interface Props {
@@ -11,17 +12,18 @@
   let confirming = $state(false);
 </script>
 
-<button
-  type="button"
+<Button
+  variant="danger"
   data-testid="resign"
   aria-haspopup="dialog"
-  onclick={() => (confirming = true)}>{l.t('resign')}</button
+  onclick={() => (confirming = true)}>{l.t('resign')}</Button
 >
 {#if confirming}
   <ConfirmDialog
     title={l.t('resign-confirm')}
     confirmLabel={l.t('resign')}
     cancelLabel={l.t('resign-cancel')}
+    danger
     onConfirm={() => {
       confirming = false;
       onResign();

@@ -55,7 +55,7 @@ export default defineConfig({
         globPatterns: [
           '**/*.{html,js,css,wasm}',
           'assets/atkinson-hyperlegible-next-latin-{400,700}-normal-*.woff2',
-          'assets/cinzel-latin-700-normal-*.woff2',
+          'assets/marcellus-latin-400-normal-*.woff2',
         ],
         navigateFallback: 'index.html',
         navigateFallbackDenylist: [/\/rooms(\/|$)/],

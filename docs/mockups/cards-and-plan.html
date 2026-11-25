@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cards and plan mockups</title>
+<style>
+:root{
+  --bg:#e7e3da; --frame:#1d2430; --surface:#fffdf8; --surface2:#f1ece1; --ink:#1c2230; --muted:#5d6472;
+  --line:#d8d0c0; --accent:#0072B2; --accent-ink:#fff; --human:#0072B2; --wolf:#D55E00; --ok:#007a59; --warn:#a86b00;
+  --heart:#c0392b; --chip:#e9e2d4; --bar-a:#1f2a44; --bar-b:#33466e; --bar-ink:#f4ecd8; --moon:#f2d98d;
+  --night:#1b2333; --night2:#26314a; --night-ink:#efe8d8;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 "Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,sans-serif}
+header.page{max-width:1240px;margin:0 auto;padding:24px 16px 4px}
+header.page h1{margin:0 0 4px;font:700 22px/1.2 Georgia,serif}
+header.page p{margin:0 0 6px;color:var(--muted);max-width:860px}
+h2.section{max-width:1240px;margin:22px auto 4px;padding:0 16px;font:700 18px/1.2 Georgia,serif}
+p.section{max-width:1240px;margin:0 auto 6px;padding:0 16px;color:var(--muted)}
+.grid{max-width:1240px;margin:0 auto;padding:12px 16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:26px 20px}
+figure{margin:0}
+figcaption{margin-top:8px;color:var(--muted);font-size:13px}
+figcaption b{color:var(--ink)}
+.sheet{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}
+.phone{width:100%;max-width:360px;height:740px;margin:0 auto;border:8px solid var(--frame);border-radius:30px;background:var(--surface);overflow:hidden;display:flex;flex-direction:column;position:relative}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:linear-gradient(160deg,var(--bar-a),var(--bar-b));color:var(--bar-ink)}
+.bar h3{margin:0;font:700 15px/1 Georgia,serif;display:flex;align-items:center;gap:7px}
+.bar h3 i{width:20px;height:20px;border-radius:50%;background:var(--moon);display:inline-block}
+.icon-btn{width:32px;height:32px;border-radius:8px;border:1px solid rgba(244,236,216,.3);display:grid;place-items:center;background:rgba(244,236,216,.1);color:var(--bar-ink);font-size:16px}
+.body{flex:1;overflow:hidden;padding:10px;display:flex;flex-direction:column;gap:8px;background:linear-gradient(to bottom,var(--surface2) 55%,#e4e3e4)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 10px}
+.label{font:600 11px/1.2 Georgia,serif;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:6px}
+.row{display:flex;gap:8px;align-items:center}
+.spread{justify-content:space-between}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:999px;background:var(--chip);font-size:12px;font-weight:600}
+.chip svg{width:14px;height:14px}
+.card.sm .nm{font-size:10px}
+.hand-row .card.sm{width:70px;height:100px}
+.hand-row .card.sel{transform:none}
+.m{display:inline-flex;align-items:center;gap:2px;font-weight:700;font-size:12px}
+.m svg{width:15px;height:15px}
+.btn{display:block;width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 15px/1 inherit;text-align:center}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.ghost{background:transparent}
+.phase{background:var(--surface);border-top:1px solid var(--line);padding:8px 12px 10px}
+.steps{display:flex;gap:4px;margin-bottom:5px}.steps span{flex:1;height:4px;border-radius:2px;background:var(--line)}.steps span.on{background:var(--accent)}
+.step{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.instr{font-weight:600;margin:2px 0 7px}
+.note{font-size:12px;color:var(--muted)}
+.home-link{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+
+/* ===== Card designs ===== */
+.card{position:relative;flex:none;border-radius:9px;border:2.5px solid var(--line);background:var(--surface);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.card.human{border-color:var(--human)} .card.wolf{border-color:var(--wolf)} .card.fool{border-color:#6b6f78}
+.card .top{display:flex;align-items:center;gap:4px;padding:4px 5px 3px}
+.card .ini{font:700 11px/1 Georgia,serif;min-width:12px}
+.card .nm{flex:1;text-align:center;font:700 11px/1.05 "Atkinson Hyperlegible",system-ui,sans-serif}
+.card .fac{width:14px;height:14px;flex:none}
+.card .art{flex:1;min-height:0;display:grid;place-items:center;margin:0 5px;border-radius:5px}
+.card.human .art{background:color-mix(in srgb,var(--human) 10%,var(--surface))}
+.card.wolf .art{background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--wolf) 8%,var(--surface)) 0 6px,color-mix(in srgb,var(--wolf) 16%,var(--surface)) 6px 8px)}
+.card.fool .art{background:#eeeef0}
+.card .art svg{width:40px;height:40px}
+.card.md .art svg{width:34px;height:34px}.card.sm .art svg{width:30px;height:30px}
+.card.human .art svg{color:var(--human)} .card.wolf .art svg{color:var(--wolf)} .card.fool .art svg{color:#5b5f68}
+.card .abil{display:flex;align-items:center;justify-content:center;gap:4px;padding:4px 4px 2px;font-weight:700;font-size:11px}
+.card .abil svg{width:13px;height:13px}
+.card .txt{font-size:9.5px;line-height:1.2;text-align:center;padding:0 5px 5px;color:var(--ink)}
+/* sizes */
+.card.lg{width:120px;height:170px}
+.card.lg .ini,.card.lg .nm{font-size:12.5px}.card.lg .fac{width:16px;height:16px}.card.lg .txt{font-size:10.5px}
+.card.md{width:96px;height:136px}
+.card.sm{width:80px;height:112px}
+.card.sm .txt{display:none}
+/* dark variant (option A2) */
+.dark .card{background:var(--night);color:var(--night-ink);box-shadow:0 2px 5px rgba(0,0,0,.35)}
+.dark .card .txt{color:var(--night-ink)}
+.dark .card.human .art{background:radial-gradient(circle at 50% 45%,#2f4a6e,var(--night2) 70%)}
+.dark .card.wolf .art{background:radial-gradient(circle at 50% 45%,#5a3524,var(--night2) 70%)}
+.dark .card.fool .art{background:radial-gradient(circle at 50% 45%,#3a3f4a,var(--night2) 70%)}
+.dark .card.human .art svg{color:#8cc8ef}.dark .card.wolf .art svg{color:#f3a06a}.dark .card.fool .art svg{color:#c9ccd4}
+/* states */
+.card.sel{outline:3px solid var(--accent);outline-offset:2px;transform:translateY(-14px)}
+.card.off{opacity:.38}
+/* target tiles (plan) */
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.tile{position:relative;display:flex;align-items:center;gap:5px;padding:7px 6px;border-radius:8px;border:2px solid var(--line);background:var(--surface);font-weight:700;font-size:12px;min-height:44px}
+.tile.human{border-color:var(--human)}.tile.wolf{border-color:var(--wolf)}.tile.fool{border-color:#6b6f78}
+.tile .n{font:700 12px/1 Georgia,serif;color:var(--muted);min-width:10px}
+.tile svg.fi{width:13px;height:13px;flex:none}
+.tile .t{flex:1;line-height:1.1}
+.tile.on{background:var(--accent);color:#fff;border-color:var(--accent)}.tile.on .n{color:#dbe9f4}
+.tile.off{opacity:.38}
+.tile.mine{border-style:dashed}
+.tile .tag{position:absolute;top:-7px;right:6px;font-size:9px;font-weight:700;background:var(--muted);color:var(--surface);padding:0 4px;border-radius:4px}
+.tile .tick{position:absolute;top:3px;right:5px;font-size:11px}
+/* overlapping hand */
+.hand-fan{position:relative;height:178px;display:flex;justify-content:center;align-items:flex-end;padding-bottom:4px}
+.hand-fan .card{margin-left:-34px}.hand-fan .card:first-child{margin-left:0}
+.hand-row{display:flex;gap:6px;justify-content:center}
+.detail{display:flex;gap:10px;align-items:center}
+.detail .d-title{font:700 16px/1.1 Georgia,serif}
+.detail .d-sub{font-size:12px;color:var(--muted)}
+.opp{display:flex;align-items:center;justify-content:space-between}
+.carousel{display:flex;gap:10px;align-items:flex-end;justify-content:center;padding:6px 0 0}
+.dots{display:flex;gap:5px;justify-content:center;margin-top:6px}.dots span{width:7px;height:7px;border-radius:50%;background:var(--line)}.dots span.on{background:var(--accent)}
+.stage-tabs{display:flex;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:12px;font-weight:700}
+.stage-tabs span{flex:1;text-align:center;padding:6px 4px;background:var(--surface)}.stage-tabs span.on{background:var(--accent);color:#fff}
+.compare{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.compare .lbl{font-size:12px;color:var(--muted);margin-bottom:6px}
+.legend{max-width:1240px;margin:0 auto;padding:4px 16px 32px;color:var(--muted)}
+/* ===== Round 2: v2 cards (fixed art, ability pills) ===== */
+.v2{position:relative;flex:none;border-radius:9px;border:2.5px solid var(--line);background:var(--surface);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.18)}
+.v2.human{border-color:var(--human)}.v2.wolf{border-color:var(--wolf)}.v2.fool{border-color:#6b6f78}
+.v2 .top{display:flex;align-items:center;gap:3px;padding:4px 5px 3px;flex:none}
+.v2 .ini{font:700 11px/1 Georgia,serif;min-width:11px}
+.v2 .nm{flex:1;text-align:center;font:700 11px/1.05 "Atkinson Hyperlegible",system-ui,sans-serif}
+.v2 .fac{width:14px;height:14px;flex:none}
+.v2 .art{flex:none;display:grid;place-items:center;margin:0 5px;border-radius:5px}
+.v2.human .art{background:color-mix(in srgb,var(--human) 10%,var(--surface))}
+.v2.wolf .art{background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--wolf) 8%,var(--surface)) 0 6px,color-mix(in srgb,var(--wolf) 16%,var(--surface)) 6px 8px)}
+.v2.fool .art{background:#eeeef0}
+.v2.human .art svg{color:var(--human)}.v2.wolf .art svg{color:var(--wolf)}.v2.fool .art svg{color:#5b5f68}
+.v2 .pills{display:flex;flex-wrap:wrap;justify-content:center;gap:3px;padding:5px 4px 3px;flex:none}
+.pill{display:inline-flex;align-items:center;gap:1px;padding:1px 6px;border-radius:999px;background:var(--chip);font-weight:700;font-size:11px;line-height:16px;white-space:nowrap}
+.pill svg{width:12px;height:12px}
+.pill.atk{background:color-mix(in srgb,var(--heart) 14%,var(--surface));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--heart) 45%,transparent)}
+.v2 .txt{flex:1;font-size:9.5px;line-height:1.2;text-align:center;padding:0 5px 5px}
+.v2.lg{width:120px;height:176px}.v2.lg .art{height:62px}.v2.lg .art svg{width:40px;height:40px}.v2.lg .ini,.v2.lg .nm{font-size:12.5px}.v2.lg .fac{width:16px;height:16px}.v2.lg .txt{font-size:10.5px}
+.v2.md{width:98px;height:146px}.v2.md .art{height:50px}.v2.md .art svg{width:32px;height:32px}
+.v2.tg{width:58px;height:84px}.v2.tg .art{height:44px;margin-top:1px}.v2.tg .art svg{width:26px;height:26px}.v2.tg .nm{font-size:9.5px}.v2.tg .ini{font-size:9.5px;min-width:8px}.v2.tg .fac{width:11px;height:11px}.v2.tg .top{padding:3px 4px 2px}
+.v2.sel{outline:3px solid var(--accent);outline-offset:2px}
+.v2.lift{transform:translateY(-14px)}
+.v2.off{opacity:.38}
+.v2 .chk{position:absolute;bottom:4px;right:4px;width:18px;height:18px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;display:grid;place-items:center;font-weight:700}
+.v2 .tagm{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);font-size:8.5px;font-weight:700;background:var(--muted);color:var(--surface);padding:0 4px;border-radius:4px;white-space:nowrap}
+.tgrid{display:grid;grid-template-columns:repeat(5,58px);gap:4px;justify-content:center}
+.tfan{display:flex;justify-content:center;padding-top:4px}.tfan .v2{margin-left:-26px}.tfan .v2:first-child{margin-left:0}
+/* ===== Round 3: attack / gain pill grammar ===== */
+.pill3{display:inline-flex;align-items:center;gap:1px;padding:1px 6px;border-radius:999px;font-weight:700;font-size:11px;line-height:16px;white-space:nowrap}
+.pill3 svg{width:13px;height:13px}
+.pill3.atk{background:color-mix(in srgb,var(--heart) 13%,var(--surface));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--heart) 60%,transparent)}
+.pill3.gain{background:color-mix(in srgb,var(--ok) 14%,var(--surface));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--ok) 60%,transparent)}
+.pill3 .to{font-size:9px;color:var(--heart);margin:0 1px}
+.pill3 .sep{color:var(--muted);margin:0 1px;font-weight:400}
+.pill3 .rep{font-size:9px;font-weight:700;color:var(--muted);margin-left:1px}
+.pill3 .or{color:var(--muted);font-weight:400;margin:0 .5px}
+.tok{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;background:var(--surface);box-shadow:inset 0 0 0 1.2px color-mix(in srgb,var(--ink) 45%,transparent),0 1px 0 color-mix(in srgb,var(--ink) 18%,transparent);vertical-align:-2px;margin:0 2px 0 1px;color:var(--ink)}
+.tok svg{width:10px!important;height:10px!important}
+.v2 .txt .tok{width:12px;height:12px;vertical-align:-2.5px;margin:0 1.5px 0 0}.v2 .txt .tok svg{width:8px!important;height:8px!important}
+.m .tok{width:20px;height:20px;margin:0 3px 0 0}.m .tok svg{width:13px!important;height:13px!important}
+.tall .pill3,.legend3.tall>.pill3{padding:3px 7px;gap:2px}
+.tall .pill3 .tok{width:16px;height:16px}
+.tall .pill3 .tok svg{width:11px!important;height:11px!important}
+.v2.tg.t4 .art{height:30px}.v2.tg.t4 .art svg{width:20px;height:20px}
+.v2.tg .pills{padding:3px 1px 0;gap:2px}
+.v2.tg .pill3{font-size:8px;line-height:10px;padding:1.5px 3px;gap:0;box-shadow:inset 0 0 0 1px color-mix(in srgb,currentColor 0%,transparent)}
+.v2.tg .pill3.atk{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--heart) 60%,transparent)}.v2.tg .pill3.gain{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ok) 60%,transparent)}
+.v2.tg .pill3 svg{width:8px;height:8px}.v2.tg .pill3 .to{font-size:6px;margin:0}.v2.tg .pill3 .rep{font-size:7px}.v2.tg .pill3 .or{margin:0}
+.v2.tg .pill3 .tok{width:11px;height:11px;margin:0 1px 0 0}.v2.tg .pill3 .tok svg{width:7px!important;height:7px!important}
+.v2.tg.t4.dense .art{height:18px}.v2.tg.t4.dense .art svg{width:14px;height:14px}.v2.tg.t4.dense .pills{padding-top:2px;gap:1px}
+.v2.t4 .tagm{bottom:auto;top:44px}.v2.t4 .chk{bottom:auto;top:30px;right:4px;width:16px;height:16px;font-size:11px}
+
+.v2.dense .txt{font-size:8.5px!important;line-height:1.1}
+.v2.dense .pills{padding-top:3px;gap:2px 3px}
+.v2 .pills.one{flex-wrap:nowrap;gap:2px;padding-left:2px;padding-right:2px}
+.v2 .pills.one .pill3{padding:3px 4px;gap:1px}
+.v2 .pills.one .pill3 .to{margin:0}
+.v2.tg .pills.one{gap:1px;padding:3px 1px 0}
+.v2.tg .pills.one .pill3{padding:1.5px 2px;gap:0}
+.v2.tg .pills.one .pill3 svg{width:7.5px;height:7.5px}
+.v2.tg .pills.one .pill3 .to{font-size:5.5px}
+.v2.tg .pills.one .pill3 .rep{font-size:6.5px;margin-left:0}
+.v2.tg .pills.one .pill3 .tok{width:10px;height:10px;margin-right:.5px}
+.pill3.inhand{background:var(--chip);color:var(--muted);font-size:10px;box-shadow:inset 0 0 0 1px var(--line)}
+.v2.tg .pill3.inhand{font-size:8px;line-height:13px;padding:0 5px}
+.tok.gain{box-shadow:inset 0 0 0 1.8px var(--ok),0 1px 0 color-mix(in srgb,var(--ink) 18%,transparent)}
+.v2 .pills .tok.gain{width:20px;height:20px;margin:0}.v2 .pills .tok.gain svg{width:12px!important;height:12px!important}
+.v2.tg .pills .tok.gain{width:13px;height:13px}.v2.tg .pills .tok.gain svg{width:8px!important;height:8px!important}
+.v2 .nm{white-space:nowrap}.v2.md .nm{font-size:10px}.v2.md .top{gap:2px;padding:4px 4px 3px}
+.v2.t4 .top{justify-content:center;padding:3px 2px 2px}.v2.t4 .nm{font-size:8.5px;flex:none}
+.v2.t4 .art{position:relative}.v2.t4 .art .ini{position:absolute;top:2px;left:3px;font-size:8.5px}.v2.tg.t4 .art svg.fac{position:absolute;top:3px;right:3px;width:9px;height:9px}.v2.t4.human .art svg.fac{color:var(--human)}.v2.t4.wolf .art svg.fac{color:var(--wolf)}
+.v2 .pills.one.k{gap:4px}.v2 .pills.one.k .pill3{padding:3px 6px;gap:2px}
+.v2.tg .pills.one.k{gap:2px}.v2.tg .pills.one.k .pill3{padding:2px 3.5px;gap:.5px}
+.legend3{display:grid;grid-template-columns:auto 1fr;gap:8px 10px;align-items:center;font-size:12.5px}
+.legend3>.pill3{justify-self:start;font-size:13px;padding:2px 8px}
+.legend3>.pill3 svg{width:15px;height:15px}
+.legend3>span:not(.pill3) svg{width:13px;height:13px;vertical-align:-2px}
+.hand2{position:relative;display:flex;justify-content:center;align-items:flex-end;padding-top:14px}.hand2 .v2{margin-left:-30px}.hand2 .v2:first-child{margin-left:0}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+ <symbol id="f-human" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5z" fill="var(--human)"/></symbol>
+ <symbol id="f-wolf" viewBox="0 0 24 24"><path d="M3 21 7 3l3 8 2-8 2 8 3-8 4 18z" fill="var(--wolf)"/></symbol>
+ <symbol id="f-fool" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#6b6f78"/></symbol>
+ <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" fill="var(--heart)"/></symbol>
+ <symbol id="i-cross" viewBox="0 0 24 24"><path d="M10 2h4v6h6v4h-6v10h-4V12H4V8h6z" fill="currentColor"/></symbol>
+ <symbol id="i-fang" viewBox="0 0 24 24"><path d="M6 3h12l-3 7-3 11-3-11z" fill="currentColor"/></symbol>
+ <symbol id="i-hour" viewBox="0 0 24 24"><path d="M6 2h12v2l-5 8 5 8v2H6v-2l5-8-5-8z" fill="currentColor"/></symbol>
+ <symbol id="i-potion" viewBox="0 0 24 24"><path d="M9 2h6v2h-1v5l5 9a3 3 0 0 1-3 4H8a3 3 0 0 1-3-4l5-9V4H9z" fill="var(--ok)"/></symbol>
+ <symbol id="i-badge" viewBox="0 0 24 24"><path d="m12 2 3 7h7l-5.5 4.5 2 7.5-6.5-4.5L5.5 21l2-7.5L2 9h7z" fill="var(--warn)"/></symbol>
+ <symbol id="i-atk" viewBox="0 0 24 24"><path d="M3 12h13M12 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-burst" viewBox="0 0 24 24"><path d="M12 2l2 6 6-3-3 6 5 2-6 2 3 6-6-3-1 6-2-6-6 3 3-6-5-2 6-2-3-6 6 3z" fill="var(--heart)"/></symbol>
+ <symbol id="i-swords" viewBox="0 0 24 24"><path d="M4 4l11 11M20 4 9 15M13 17l4 4M11 17l-4 4M15 15l3-1-1 3M9 15l-3-1 1 3" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="g-hunter" viewBox="0 0 24 24"><path d="M4 20 20 4M14 4h6v6M4 14v6h6" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round"/></symbol>
+ <symbol id="g-crown" viewBox="0 0 24 24"><path d="M3 18 5 7l5 5 2-7 2 7 5-5 2 11z" fill="currentColor"/></symbol>
+ <symbol id="g-sword" viewBox="0 0 24 24"><path d="M12 2v14M8 13h8M12 16v4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+ <symbol id="g-claw" viewBox="0 0 24 24"><path d="M7 20 11 4M11.5 21l4-16M16 21l4-13" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></symbol>
+ <symbol id="g-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></symbol>
+ <symbol id="g-hat" viewBox="0 0 24 24"><path d="M3 20h18M7 20l4-16 6 16" fill="currentColor"/></symbol>
+ <symbol id="g-moon" viewBox="0 0 24 24"><path d="M15 3a9 9 0 1 0 6 13A7 7 0 0 1 15 3z" fill="currentColor"/></symbol>
+ <symbol id="g-house" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9h-6v-6H9v6H3z" fill="currentColor"/></symbol>
+ <symbol id="g-fool" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10h.01M16 10h.01M8 15c2 2 6 2 8 0" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></symbol>
+</defs></svg>
+
+<header class="page">
+  <h1>Cards and the plan screen: redesign options</h1>
+  <p>Design options for discussion, in the Moonlit theme. All cards share one rounded-card outline; faction is shown by the outline colour, the faction icon (top right) and the art panel's pattern, never by colour alone. Layout follows common card conventions (initiative top-left, name top-centre, faction top-right, ability at the bottom). Art is placeholder glyphs; ability wording and icons are our own.</p>
+</header>
+
+<h2 class="section">A · Character cards</h2>
+<p class="section">Same content, three sizes: large (hand, inspect), medium (reveal/showdown) and small (target list or compact hand). Each card: initiative and name the same size along the top, faction icon top-right, a placeholder art panel, an icon row, and the ability in our own words.</p>
+<div class="grid" id="cardsA"></div>
+
+<h2 class="section">B · The plan screen</h2>
+<p class="section">Three ways to choose a character and its targets on a phone, each fitting 360 × 740 with no scrolling. The opponent strip, round bar and phase bar are the same in all three.</p>
+<div class="grid" id="plan"></div>
+
+<h2 class="section">C · Home, simplified</h2>
+<p class="section">"Play on this device" and "Rejoin with PIN" are removed from Home: Join game handles PIN rejoin, and local play becomes a choice inside New game.</p>
+<div class="grid" id="home"></div>
+
+<h2 class="section">D · Round 2: ability pills and a fixed art panel</h2>
+<p class="section">Each ability gets its own pill, with a small gap between pills. The art panel is now a fixed size on every card, so the glyphs line up across a hand; the ability text takes the space below. Three ways to show an attack, since the arrow was easy to miss:</p>
+<div class="grid" id="pillsD"></div>
+
+<h2 class="section">E · Round 2: targets as small character cards</h2>
+<p class="section">Targets as smaller versions of the character cards, without the ability text (hold to inspect). Two arrangements at real phone width:</p>
+<div class="grid" id="targetsE"></div>
+
+<h2 class="section">F · Round 2: B1 with the new cards</h2>
+<div class="grid" id="planF"></div>
+
+<h2 class="section">G · Round 3: attack and gain pills</h2>
+<p class="section">Two kinds of pill, following the physical game's three ideas (attack, gain, spend a marker for an effect) with our own icons. <b>Gain</b> pills are green with the marker gained. <b>Attack</b> pills are red: any marker spent, then ▸, then one faction shape per target, then extra damage after a colon. Effects read left to right in the order they happen.</p>
+<div class="grid" id="grammarG"></div>
+
+<h2 class="section">H · G3 with marker tokens</h2>
+<p class="section">Every marker sits on a round token, wherever it is drawn: in pills, in card text, in the marker counts and in the game log. Hearts are Health, not markers, so they stay bare.</p>
+<div class="grid" id="tokensH"></div>
+
+<h2 class="section">I · B1 plan screen with the final cards</h2>
+<p class="section">B1 again, now with the chosen card design: hand along the bottom, targets as small cards with pills, marker tokens in the counts.</p>
+<div class="grid" id="planI"></div>
+
+<p class="legend">Throwaway design mockup. Card art is a placeholder glyph; a future theme pack can supply real art.</p>
+
+<script>
+const C={1:["Hunter","human","g-hunter"],2:["Wolf King","wolf","g-crown"],3:["Knight","human","g-sword"],4:["Wolfen","wolf","g-claw"],5:["Seer","human","g-eye"],6:["Witch","human","g-hat"],7:["Wolf Beauty","wolf","g-moon"],8:["Villager","human","g-house"],F:["Fool","fool","g-fool"]};
+const ic=(id,cls="")=>`<svg class="${cls}"><use href="#${id}"/></svg>`;
+const fac=f=>f==="fool"?"":`<svg class="fac"><use href="#f-${f}"/></svg>`;
+const T={ // ability icon rows and text (our own words)
+ 1:[`<span>−${ic("i-cross")}?</span><span>${ic("i-atk")}2${ic("f-wolf")}</span>`,"Spend a Cross to attack up to two Werewolves."],
+ 2:[`<span>${ic("i-atk")}∞${ic("f-human")}</span><span>−${ic("i-fang")}×</span>`,"Attack any number of Humans; pay a Fang for each after the first."],
+ 3:[`<span>+${ic("i-hour")}</span><span>${ic("i-atk")}1${ic("f-wolf")}</span>`,"Gain an Hourglass, then attack a Werewolf."],
+ 4:[`<span>+${ic("i-hour")}</span><span>${ic("i-atk")}1${ic("f-human")}${ic("f-wolf")}</span>`,"Gain an Hourglass, then attack any character."],
+ 5:[`<span>${ic("i-atk")}1${ic("f-wolf")}</span><span>${ic("i-heart")}2</span>`,"Attack a Werewolf; a hit costs 2 Health."],
+ 6:[`<span>+${ic("i-potion")}</span>`,"Gain the Potion."],
+ 7:[`<span>+${ic("i-fang")}</span><span>${ic("i-atk")}1${ic("f-human")}${ic("f-wolf")}</span>`,"Gain a Fang, then attack any character."],
+ 8:[`<span>+${ic("i-cross")}</span>`,"Gain a Cross."],
+ F:["","A bluff. Has no effect."]};
+function card(n,size="lg",cls=""){const [name,f,g]=C[n];const [ab,tx]=T[n];
+ return `<div class="card ${size} ${f} ${cls}" role="img" aria-label="${name}"><div class="top"><span class="ini">${n==="F"?"–":n}</span><span class="nm">${name}</span>${fac(f)}</div><div class="art">${ic(g)}</div><div class="abil">${ab}</div><div class="txt">${tx}</div></div>`;}
+function tile(n,cls=""){const [name,f]=C[n];return `<div class="tile ${f} ${cls}"><span class="n">${n==="F"?"–":n}</span><span class="t">${name}</span>${f==="fool"?"":`<svg class="fi"><use href="#f-${f}"/></svg>`}${cls.includes("mine")?'<span class="tag">in hand</span>':""}${cls.includes("on")?'<span class="tick">✓</span>':""}</div>`;}
+const mk=(id,v)=>`<span class="m"><svg><use href="#${id}"/></svg>${v}</span>`;
+const bar=t=>`<div class="bar"><span class="icon-btn">☰</span><h3><i></i>${t}</h3><span class="icon-btn">≡</span></div>`;
+const opp=chip=>`<div class="panel opp"><div><div class="row"><b>Mika</b><span class="note">● connected</span></div><div class="row" style="margin-top:3px">${mk("i-heart","2")}${mk("i-cross","1")}${mk("i-fang","1")}${mk("i-hour","1")}</div></div><span class="chip">${chip}</span></div>`;
+const me=`<div class="row spread" style="padding:0 2px">${mk("i-heart","2")}${mk("i-cross","2")}${mk("i-fang","0")}${mk("i-hour","2")}<span class="chip">${ic("i-badge")}Badge</span><span class="note">You</span></div>`;
+const phase=(on,step,instr,btn,dis)=>`<div class="phase"><div class="steps">${[0,1,2,3].map(i=>`<span class="${i<on?"on":""}"></span>`).join("")}</div><div class="step">${step}</div><div class="instr">${instr}</div><span class="btn primary" style="${dis?"opacity:.45":""}">${btn}</span></div>`;
+
+// ---- A: cards
+document.getElementById("cardsA").innerHTML=[
+ `<figure><div class="sheet">${[3,2,5,7].map(n=>card(n,"lg")).join("")}</div><figcaption><b>A1 · Parchment cards, large (112 × 160).</b> The theme's light card with a tinted art panel; Werewolves' art panel is hatched. Initiative is no bigger than the name.</figcaption></figure>`,
+ `<figure><div class="sheet dark" style="background:#202838;border-color:#2f3a4d">${[3,2,5,7].map(n=>card(n,"lg")).join("")}</div><figcaption><b>A2 · Night cards, large.</b> A darker card, closer in mood to a physical card, with a glowing art panel. Same layout and icons as A1; works in light and dark themes.</figcaption></figure>`,
+ `<figure><div class="sheet">${[1,4,6,8,"F"].map(n=>card(n,"md")).join("")}</div><figcaption><b>A1 at medium (96 × 136).</b> Used on Reveal and Showdown. The Fool has no faction and no ability icons.</figcaption></figure>`,
+ `<figure><div class="sheet">${[1,2,3,4,5,6,7,8].map(n=>card(n,"sm")).join("")}${card("F","sm")}</div><figcaption><b>A1 at small (80 × 112).</b> Text drops away; icon row stays. Smallest size that keeps the name and icons readable.</figcaption></figure>`,
+ `<figure><div class="sheet"><div style="width:100%"><div class="label">Targets as tiles</div><div class="tiles">${[1,2,3,4,5,6,7,8,"F"].map(n=>tile(n)).join("")}</div></div></div><figcaption><b>A3 · Target tiles.</b> Targets don't need art or ability text, only which character they name. A tile (initiative, name, faction icon) is far more compact than a mini card and is 44 px tall for touch.</figcaption></figure>`
+].join("");
+
+// ---- B: plan screens
+const planA=`${bar("Round 3")}<div class="body">${opp("✓ sealed · 1 target")}
+ <div class="panel"><div class="label">Targets</div><div class="tiles">${tile(1,"off")}${tile(2,"off mine")}${tile(3,"off mine")}${tile(4,"on")}${tile(5,"off mine")}${tile(6,"off")}${tile(7,"")}${tile(8,"off")}${tile("F","on")}</div><div class="note" style="margin-top:6px"><b>Knight:</b> gain an Hourglass, then attack a Werewolf.</div></div>
+ <div style="flex:1"></div>
+ <div class="hand-fan">${card(3,"md","sel")}${card(2,"md")}${card(5,"md")}${card(8,"md")}</div>
+ ${me}</div>${phase(1,"Plan · your hand at the bottom","Ready to seal your plan?","Seal plan")}`;
+
+const planB=`${bar("Round 3")}<div class="body">${opp("✓ sealed · 1 target")}
+ <div class="stage-tabs"><span>1 · Character</span><span class="on">2 · Targets</span></div>
+ <div class="panel"><div class="detail">${card(3,"sm")}<div><div class="d-title">Knight</div><div class="d-sub">Gain an Hourglass, then attack a Werewolf.</div><div class="note" style="margin-top:4px">Choose one Werewolf, and the Fool if you like.</div></div></div></div>
+ <div class="panel"><div class="label">Targets</div><div class="tiles">${tile(1,"off")}${tile(2,"off mine")}${tile(3,"off mine")}${tile(4,"on")}${tile(5,"off mine")}${tile(6,"off")}${tile(7,"")}${tile(8,"off")}${tile("F","on")}</div></div>
+ <div style="flex:1"></div>${me}</div>${phase(1,"Plan · step 2 of 2","Knight → Wolfen + Fool","Seal plan")}`;
+
+const planB1=`${bar("Round 3")}<div class="body">${opp("✓ sealed · 1 target")}
+ <div class="stage-tabs"><span class="on">1 · Character</span><span>2 · Targets</span></div>
+ <div class="carousel">${card(2,"md","")}${card(3,"lg","sel")}${card(5,"md","")}</div><div class="dots"><span></span><span class="on"></span><span></span><span></span></div>
+ <div class="note" style="text-align:center">Swipe or tap to look through your hand</div>
+ <div style="flex:1"></div>${me}</div>${phase(1,"Plan · step 1 of 2","Play the Knight?","Choose Knight →")}`;
+
+const planC=`${bar("Round 3")}<div class="body">${opp("✓ sealed · 1 target")}
+ <div class="panel"><div class="label">Your hand</div><div class="hand-row">${card(3,"sm","sel")}${card(2,"sm")}${card(5,"sm")}${card(8,"sm")}</div></div>
+ <div class="panel"><div class="label">Targets</div><div class="tiles">${tile(1,"off")}${tile(2,"off mine")}${tile(3,"off mine")}${tile(4,"on")}${tile(5,"off mine")}${tile(6,"off")}${tile(7,"")}${tile(8,"off")}${tile("F","on")}</div><div class="note" style="margin-top:6px">Knight: gain an Hourglass, then attack a Werewolf. Hold a card to read it.</div></div>
+ <div style="flex:1"></div>${me}</div>${phase(1,"Plan","Knight → Wolfen + Fool","Seal plan")}`;
+
+const inspect=`${bar("Round 3")}<div class="body" style="position:relative">${opp("✓ sealed · 1 target")}
+ <div style="position:absolute;inset:0;background:rgba(10,14,22,.55);display:grid;place-items:center;z-index:2"><div style="display:flex;flex-direction:column;align-items:center;gap:10px">${card(2,"lg","").replace('class="card lg','style="transform:scale(1.7);transform-origin:center;margin:60px 0" class="card lg')}<span class="btn" style="width:auto;padding:10px 18px">Close</span></div></div>
+ </div>${phase(1,"Plan","Hold any card to look at it closely","Seal plan",true)}`;
+
+document.getElementById("plan").innerHTML=[
+ `<figure><div class="phone">${planA}</div><figcaption><b>B1 · Hand along the bottom (recommended).</b> Your 3–4 cards sit at the bottom at medium size (with their ability text), overlapping slightly like a held hand; the chosen card rises. Target tiles sit above with the chosen card's ability as a reminder. One screen, one flow: tap a card, tap targets, Seal.</figcaption></figure>`,
+ `<figure><div class="phone">${planB1}</div><figcaption><b>B2 · Two steps, step 1.</b> Your hand as a carousel of large cards; swipe through and choose one.</figcaption></figure>`,
+ `<figure><div class="phone">${planB}</div><figcaption><b>B2 · Two steps, step 2.</b> Then pick targets. Very clear for first-timers, but an extra screen every round and you can't compare hand and targets together.</figcaption></figure>`,
+ `<figure><div class="phone">${planC}</div><figcaption><b>B3 · Compact.</b> Small cards in a row and target tiles, closest to today. Everything is visible at once, but cards are small and the ability needs a hold to read.</figcaption></figure>`,
+ `<figure><div class="phone">${inspect}</div><figcaption><b>Inspect (all options).</b> Holding any card (or focusing it with the keyboard) shows it enlarged over a dimmed screen. A normal tap never opens it, so it can't clash with choosing.</figcaption></figure>`
+].join("");
+
+// ---- Round 2
+const fw=ic("f-wolf"),fh=ic("f-human");
+// ability definitions: [kind, content] ; kind gain/spend/atk/dmg
+const AB={1:[["spend",`−${ic("i-cross")}?`],["atk",`2${fw}`]],2:[["atk",`∞${fh}`],["spend",`−${ic("i-fang")} each extra`]],3:[["gain",`+${ic("i-hour")}`],["atk",`1${fw}`]],4:[["gain",`+${ic("i-hour")}`],["atk",`1${fh}${fw}`]],5:[["atk",`1${fw}`],["dmg",`${ic("i-heart")}2`]],6:[["gain",`+${ic("i-potion")}`]],7:[["gain",`+${ic("i-fang")}`],["atk",`1${fh}${fw}`]],8:[["gain",`+${ic("i-cross")}`]],F:[]};
+function pills(n,style){return AB[n].map(([k,c])=>{if(k!=="atk")return `<span class="pill">${c}</span>`;
+ if(style==="P1")return `<span class="pill atk">${c}</span>`;
+ if(style==="P2")return `<span class="pill">${ic("i-burst")}${c}</span>`;
+ return `<span class="pill">${ic("i-swords")}${c}</span>`;}).join("");}
+function card2(n,size="lg",cls="",style="P1"){const [name,f,g]=C[n];const tx=T[n][1];const showText=size!=="tg";
+ return `<div class="v2 ${size} ${f} ${cls}"><div class="top"><span class="ini">${n==="F"?"–":n}</span><span class="nm">${name}</span>${fac(f)}</div><div class="art">${ic(g)}</div>${showText?`<div class="pills">${pills(n,style)}</div><div class="txt">${tx}</div>`:""}${cls.includes("on")?'<span class="chk">✓</span>':""}${cls.includes("mine")?'<span class="tagm">in hand</span>':""}</div>`;}
+document.getElementById("pillsD").innerHTML=[["P1","Attack pill tinted red, with no extra icon: the count and the target's faction shape. Gains and costs are plain pills with + and −."],["P2","Attack pill with an impact burst before the count. Most explicit; the burst reads as \"hit\"."],["P3","Attack pill with crossed swords. Familiar \"fight\" symbol; heavier at small sizes."]].map(([s,d])=>
+ `<figure><div class="sheet">${[1,2,3,5,7,8].map(n=>card2(n,"lg","",s)).join("")}</div><figcaption><b>${s} · ${s==="P1"?"Tinted attack pill":s==="P2"?"Burst icon":"Crossed swords"}.</b> ${d}</figcaption></figure>`).join("")
+ +`<figure><div class="sheet">${[3,2,6,"F"].map(n=>card2(n,"md","", "P1")).join("")}</div><figcaption><b>Medium size, P1.</b> The art panel is the same height on every card at a size (62 px large, 50 px medium), whatever the ability.</figcaption></figure>`;
+const tg=(n,cls)=>card2(n,"tg",cls);
+const T1=`<div class="sheet" style="display:block"><div class="label">Targets</div><div class="tgrid">${tg(1,"off")}${tg(2,"off mine")}${tg(3,"off mine")}${tg(4,"on")}${tg(5,"off mine")}${tg(6,"off")}${tg(7,"")}${tg(8,"off")}${tg("F","on")}</div></div>`;
+const T2=`<div class="sheet" style="display:block"><div class="label">Targets</div><div class="tfan">${tg(1,"off")}${tg(2,"off mine")}${tg(3,"off mine")}${tg(4,"on")}${tg(5,"off mine")}</div><div class="tfan" style="margin-top:6px">${tg(6,"off")}${tg(7,"")}${tg(8,"off")}${tg("F","on")}</div></div>`;
+document.getElementById("targetsE").innerHTML=`<figure style="max-width:360px">${T1}<figcaption><b>T1 · Two rows, side by side (recommended).</b> Nine small cards (58 × 84): five then four. Every name stays readable; each card is a full 44 px+ touch target. Chosen targets get a tick and an outline; disallowed ones are dimmed; cards in your hand are tagged.</figcaption></figure>
+ <figure style="max-width:360px">${T2}<figcaption><b>T2 · Two rows, overlapping like the hand.</b> Matches the hand's look, but overlap hides the right half of each card, including part of the name, and leaves narrower touch strips. Works for the 3–4 hand cards; cramped for nine.</figcaption></figure>`;
+const planF=`${bar("Round 3")}<div class="body">${opp("✓ sealed · 1 target")}
+ <div class="panel" style="padding:8px 6px"><div class="label" style="margin-left:4px">Targets</div><div class="tgrid">${tg(1,"off")}${tg(2,"off mine")}${tg(3,"off mine")}${tg(4,"on")}${tg(5,"off mine")}${tg(6,"off")}${tg(7,"")}${tg(8,"off")}${tg("F","on")}</div><div class="note" style="margin:6px 4px 0"><b>Knight</b> → <b>Wolfen</b> + <b>Fool</b></div></div>
+ <div style="flex:1"></div>
+ <div class="hand2">${card2(3,"md","sel lift")}${card2(2,"md")}${card2(5,"md")}${card2(8,"md")}</div>
+ ${me}</div>${phase(1,"Plan · choose 1 character + targets","Ready to seal your plan?","Seal plan")}`;
+document.getElementById("planF").innerHTML=`<figure><div class="phone">${planF}</div><figcaption><b>F1 · B1 with P1 pills and T1 targets.</b> Hand along the bottom at medium size with ability pills and text; the chosen Knight rises. Targets as small cards above. Hold any card to inspect it.</figcaption></figure>`;
+
+// ---- Round 3: grammar
+const FH=ic("f-human"),FW=ic("f-wolf"),ANY=`${FH}<span class="or">/</span>${FW}`;
+// gains: markers; attacks: {cost, targets:[..], dmg, rep}
+const AB3={1:{a:[{cost:"i-cross",t:[FW,FW]}]},2:{a:[{t:[FH]},{cost:"i-fang",t:[FH],rep:true}]},3:{g:["i-hour"],a:[{t:[FW]}]},4:{g:["i-hour"],a:[{t:[ANY]}]},5:{a:[{t:[FW],dmg:2}]},6:{g:["i-potion"]},7:{g:["i-fang"],a:[{t:[ANY]}]},8:{g:["i-cross"]},F:{}};
+function pills3(n,v){const d=AB3[n];const out=[];
+ (d.g||[]).forEach(m=>out.push(v.bare?`<span class="tok gain">${ic(m)}</span>`:`<span class="pill3 gain">${v.plus?"+":""}${v.tok?tk(m):ic(m)}</span>`));
+ (d.a||[]).forEach(a=>{const sw=v.swords?ic("i-swords"):"";
+  const head=a.cost?`${v.tok?tk(a.cost):ic(a.cost)}<span class="to">▶</span>`:(v.swords||v.bare?"":`<span class="to">▶</span>`);
+  const dmg=a.dmg?`<span class="sep">:</span>${ic("i-heart").repeat(a.dmg)}`:"";
+  const rep=a.rep&&v.rep?`<span class="rep">${v.rep}</span>`:"";
+  out.push(`<span class="pill3 atk">${sw}${head}${a.t.join("")}${dmg}${rep}</span>`);});
+ return out.join("");}
+function card3(n,v,size="lg"){const [name,f,g]=C[n];const tx=v.tx?TX[n]:T[n][1];
+ return `<div class="v2 ${size} ${f}"><div class="top"><span class="ini">${n==="F"?"–":n}</span><span class="nm">${name}</span>${fac(f)}</div><div class="art">${ic(g)}</div><div class="pills">${pills3(n,v)}</div><div class="txt">${tx}</div></div>`;}
+const V={G1:{swords:true,plus:false,rep:"×n"},G2:{swords:false,plus:false,rep:"×n"},G3:{swords:true,plus:true,rep:"↻"}};
+const desc={G1:"<b>G1 · Swords + red outline (P1 + P3).</b> Every attack pill starts with crossed swords; a spend comes first and ▶ points at the targets. The Hunter reads \"spend a Cross ▶ two Werewolves\" (the old ? is gone: being asked whether to spend is part of every spend). The Wolf King has a second pill, \"spend a Fang ▶ one more Human\", marked ×n because it repeats.",
+ G2:"<b>G2 · Your exact grammar.</b> No swords: an attack pill is red and always contains ▶ (\"[cost] ▶ [factions] : [hearts]\"). Lightest, closest to the physical notation; attack and gain still differ by more than colour (▶ and outline style).",
+ G3:"<b>G3 · G1 with + on gains and ↻ for repeats.</b> Adds a + to gain pills and a ↻ \"repeatable\" mark instead of ×n. More explicit, slightly busier."};
+document.getElementById("grammarG").innerHTML=Object.keys(V).map(k=>`<figure><div class="sheet">${[1,2,3,4,5,6,7,8].map(n=>card3(n,V[k])).join("")}</div><figcaption>${desc[k]}</figcaption></figure>`).join("")
+ +`<figure><div class="sheet" style="display:block"><div class="label">How to read abilities (G1)</div><div class="legend3">
+ <span class="pill3 gain">${ic("i-hour")}</span><span>Gain the marker shown.</span>
+ <span class="pill3 atk">${ic("i-swords")}${FW}</span><span>Attack: one shape per target. ${FW} Werewolf, ${FH} Human, ${ANY} any character.</span>
+ <span class="pill3 atk">${ic("i-swords")}${FW}<span class="sep">:</span>${ic("i-heart")}${ic("i-heart")}</span><span>A hit costs your opponent 2 Health instead of 1.</span>
+ <span class="pill3 atk">${ic("i-swords")}${ic("i-cross")}<span class="to">▶</span>${FW}${FW}</span><span>Spend the marker before ▶ to make this attack.</span>
+ <span class="pill3 atk">${ic("i-swords")}${ic("i-fang")}<span class="to">▶</span>${FH}<span class="rep">×n</span></span><span>×n: spend again for each extra target.</span>
+ </div></div><figcaption><b>Legend.</b> Shown in How to play and in the rules sheet during a game, like the physical Player Aid.</figcaption></figure>`;
+
+// ---- H: tokens
+const tk=id=>`<span class="tok">${ic(id)}</span>`;
+const TX={1:`Spend a ${tk("i-cross")}<b>Cross</b> to attack up to two Werewolves.`,2:`Attack a Human, plus one per ${tk("i-fang")}<b>Fang</b> spent.`,3:`Gain an ${tk("i-hour")}<b>Hourglass</b>, then attack a Werewolf.`,4:`Gain an ${tk("i-hour")}<b>Hourglass</b>, then attack any character.`,5:`Attack a Werewolf; a hit costs 2 Health.`,6:`Gain the ${tk("i-potion")}<b>Potion</b>.`,7:`Gain a ${tk("i-fang")}<b>Fang</b>, then attack any character.`,8:`Gain a ${tk("i-cross")}<b>Cross</b>.`};
+const VH={swords:false,plus:false,rep:"",tok:true,tx:true,bare:true};
+const mkt=(id,v)=>`<span class="m">${tk(id)}${v}</span>`;
+document.getElementById("tokensH").innerHTML=`<figure><div class="sheet tall">${[1,2,3,4,5,6,7,8].map(n=>card3(n,VH)).join("")}</div><figcaption><b>Cards.</b> A gain is the marker token alone, ringed in green; an attack is a red pill of target shapes, with a spent marker and ▶ in front when it has a cost; card text puts the token before the marker's name, which is bold, as the game log already does.</figcaption></figure>`
++`<figure><div class="sheet" style="display:block;font-size:13px"><div class="label">Marker counts</div><div class="row" style="gap:12px">${mk("i-heart","2")}${mkt("i-cross","1")}${mkt("i-fang","1")}${mkt("i-hour","1")}</div>
+<div class="label" style="margin-top:14px">Game log</div><p style="margin:4px 0">Your <b>Knight</b> gains an ${tk("i-hour")}<b>Hourglass</b>.</p><p style="margin:4px 0"><b>Mika</b> spends a ${tk("i-cross")}<b>Cross</b>: the <b>Hunter</b> attacks two Werewolves.</p>
+<div class="label" style="margin-top:14px">Legend</div><div class="legend3 tall">
+ <span class="tok gain">${ic("i-hour")}</span><span>Gain the marker shown.</span>
+ <span class="pill3 atk">${FW}</span><span>Attack: one shape per target. ${FW} Werewolf, ${FH} Human, ${ANY} any character.</span>
+ <span class="pill3 atk">${FW}<span class="sep">:</span>${ic("i-heart")}${ic("i-heart")}</span><span>A hit costs 2 Health instead of 1.</span>
+ <span class="pill3 atk">${tk("i-cross")}<span class="to">▶</span>${FW}${FW}</span><span>Spend the marker before ▶ to make this attack.</span>
+</div></div><figcaption><b>Elsewhere.</b> The same token in the marker counts, the log and the legend.</figcaption></figure>`;
+
+// ---- I: B1 with final cards
+function card4(n,size,cls=""){const [name,f,g]=C[n];const tg=size==="tg";const dense="";const inHand=cls.includes("mine");
+ const ini=`<span class="ini">${n==="F"?"–":n}</span>`;
+ return `<div class="v2 ${size}${tg?" t4":""} ${f}${dense} ${cls}">${tg?`<div class="top"><span class="nm">${name}</span></div><div class="art">${ini}${ic(g)}${fac(f)}</div>`:`<div class="top">${ini}<span class="nm">${name}</span>${fac(f)}</div><div class="art">${ic(g)}</div>`}<div class="pills tall one k">${inHand?'<span class="pill3 inhand">In hand</span>':pills3(n,VH)}</div>${tg?"":`<div class="txt">${n==="F"?"A bluff. Has no effect.":TX[n]}</div>`}${cls.includes("on")?'<span class="chk">✓</span>':""}</div>`;}
+const opp4=chip=>`<div class="panel opp"><div><div class="row"><b>Mika</b><span class="note">● connected</span></div><div class="row" style="margin-top:3px">${mk("i-heart","2")}${mkt("i-cross","1")}${mkt("i-fang","1")}${mkt("i-hour","1")}</div></div><span class="chip">${chip}</span></div>`;
+const me4=`<div class="row spread" style="padding:0 2px">${mk("i-heart","2")}${mkt("i-cross","2")}${mkt("i-fang","0")}${mkt("i-hour","2")}<span class="chip">${ic("i-badge")}Badge</span><span class="note">You</span></div>`;
+const t4=(n,c)=>card4(n,"tg",c);
+const planI=`${bar("Round 3")}<div class="body">${opp4("✓ sealed · 1 target")}
+ <div class="panel" style="padding:8px 6px"><div class="label" style="margin-left:4px">Targets</div><div class="tgrid">${t4(1,"off")}${t4(2,"off mine")}${t4(3,"off mine")}${t4(4,"on")}${t4(5,"off mine")}${t4(6,"off")}${t4(7,"")}${t4(8,"off")}${t4("F","on")}</div><div class="note" style="margin:6px 4px 0"><b>Knight</b> → <b>Wolfen</b> + <b>Fool</b></div></div>
+ <div style="flex:1"></div>
+ <div class="hand2">${card4(3,"md","sel lift")}${card4(2,"md")}${card4(5,"md")}${card4(8,"md")}</div>
+ ${me4}</div>${phase(1,"Plan · choose 1 character + targets","Ready to seal your plan?","Seal plan")}`;
+document.getElementById("planI").innerHTML=`<figure><div class="phone">${planI}</div><figcaption><b>B1 · Plan screen.</b> Your 3–4 cards overlap along the bottom like a held hand; tap one and it rises. The nine targets sit above as small cards (initiative, name, faction, art and pills, no text); tap to tick, dimmed when not allowed, tagged when in your hand. One screen, then Seal plan. Hold any card to see it enlarged.</figcaption></figure>
+ <figure><div class="sheet">${[1,2,3,4,5,6,7,8,"F"].map(n=>card4(n,"tg")).join("")}</div><figcaption><b>Target cards up close (58 × 84).</b> The art panel shrinks to make room for the pills.</figcaption></figure>`;
+
+// ---- C: home
+document.getElementById("home").innerHTML=`<figure><div class="phone"><div class="bar"><h3><i></i>Werewolf: Duel! Online</h3><span class="icon-btn">⚙</span></div><div class="body">
+ <div class="panel"><div class="label">Continue</div><div class="row spread" style="padding:6px 0;border-bottom:1px solid var(--line)"><div><b>Jun</b><div class="note">Round 4 · your turn · 10 minutes ago</div></div><span class="btn primary" style="width:auto;padding:8px 12px;font-size:13px">Resume</span></div><div class="row spread" style="padding:6px 0"><div><b>Mika</b><div class="note">Paused · Round 2 · 2 hours ago</div></div><span class="btn" style="width:auto;padding:8px 12px;font-size:13px">Resume</span></div></div>
+ <span class="btn primary">New game</span><span class="btn">Join game</span><div class="row"><span class="btn">How to play</span><span class="btn">History</span></div>
+ <div style="flex:1"></div><p class="note" style="text-align:center;margin:0;line-height:1.6">Made by David F Dev<br>An unofficial digital version of Werewolf: Duel!<br>Not affiliated with Whales Entertainment.<br><span class="home-link">Get the physical game ↗</span></p></div></div><figcaption><b>C1 · Home without the extra links.</b> Exactly the mockup's buttons. Bar title in mixed case.</figcaption></figure>
+ <figure><div class="phone"><div class="bar"><span class="icon-btn">←</span><h3><i></i>New game</h3><span></span></div><div class="body">
+ <div class="panel"><div class="label">Play</div><div class="stage-tabs"><span class="on">Online with a friend</span><span>On this device</span></div><div class="note" style="margin-top:6px">On this device: two browser tabs on one device, for trying the game out.</div></div>
+ <div class="panel"><div class="row spread"><span>Badge (first player)</span><div class="stage-tabs" style="flex:0 0 auto"><span class="on">Random</span><span>Me</span><span>Them</span></div></div><div class="row spread" style="margin-top:8px"><span>Reconnect time</span><div class="stage-tabs" style="flex:0 0 auto"><span>5m</span><span class="on">10m</span><span>30m</span></div></div></div>
+ <div style="flex:1"></div><span class="btn primary">Create game</span></div></div><figcaption><b>C2 · Local play moves into New game.</b> A "Play" choice at the top; Join game recognises a code from this device automatically.</figcaption></figure>`;
+</script>
+</body>
+</html>

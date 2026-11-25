@@ -105,6 +105,7 @@ const isObject = (value: unknown): value is Fields =>
 const isString = (value: unknown): value is string => typeof value === 'string';
 const isNumber = (value: unknown): value is number =>
   typeof value === 'number' && Number.isFinite(value);
+const isBoolean = (value: unknown): value is boolean => typeof value === 'boolean';
 const isSeat = (value: unknown): boolean => value === 'p0' || value === 'p1';
 const optional = (value: unknown, check: (v: unknown) => boolean): boolean =>
   value === undefined || check(value);
@@ -142,6 +143,8 @@ function validSession(value: unknown): value is SessionRecord {
     optional(value['resumedAs'], isString) &&
     optional(value['opponentName'], isString) &&
     optional(value['finishedAt'], isNumber) &&
+    optional(value['round'], isNumber) &&
+    optional(value['yourTurn'], isBoolean) &&
     isNumber(value['savedAt'])
   );
 }

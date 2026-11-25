@@ -310,11 +310,18 @@ fn check_events(
 
 /// Whether the serialised view, or the viewer's events since the round started, name the
 /// discard although nothing the viewer has legitimately seen this round does: the plans
-/// the view reveals, the Potion target, or the public events.
+/// the view reveals, the Potion target, or the public events. A `DiscardRevealed` event is
+/// always a leak here, since the round's end clears the discard as it reveals it.
 fn leaks_discard(state: &State, shown: &View, events: &[(u32, Event)]) -> bool {
     let Some(discard) = state.discard else {
         return false;
     };
+    if events
+        .iter()
+        .any(|(_, e)| matches!(e.kind, EventKind::DiscardRevealed { .. }))
+    {
+        return true;
+    }
     let Ok(name) = serde_json::to_string(&discard) else {
         return false;
     };
@@ -417,7 +424,10 @@ mod tests {
             0,
             Event {
                 visibility: Visibility::Seat(Seat::P0),
-                kind: EventKind::AttackMissed { seat: Seat::P0 },
+                kind: EventKind::AttackMissed {
+                    seat: Seat::P0,
+                    attacker: crate::Character::Knight,
+                },
             },
         ));
         assert!(check_events(&state, spectator, 0, &events).is_err());
@@ -473,6 +483,32 @@ mod tests {
         let mut shown = honest;
         shown.view.players[1].hand = Some(opponent.hand.clone());
         assert!(check_timeline_step(&state, me, &shown).is_err());
+    }
+
+    #[test]
+    fn a_discard_reveal_before_the_round_ends_is_a_leak() {
+        let state = fresh();
+        let me = Viewer::Seat(Seat::P0);
+        let honest = view(&state, me);
+        let mut events = events_since(&state, 0, me);
+        events.push((
+            99,
+            Event {
+                visibility: Visibility::Public,
+                kind: EventKind::DiscardRevealed {
+                    round: state.round,
+                    character: state.discard.expect("a round is dealt"),
+                },
+            },
+        ));
+        assert!(leaks_discard(&state, &honest, &events));
+        assert!(check_view(&state, me, &honest, false).is_ok());
+
+        let mut early = state.clone();
+        early
+            .log
+            .push(events.pop().expect("the reveal was pushed").1);
+        assert!(check_invariants(&early).is_err());
     }
 
     #[test]

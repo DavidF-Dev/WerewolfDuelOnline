@@ -44,27 +44,29 @@ describe('Table hides opponent hand', () => {
     expect(hand.length).toBeGreaterThan(0);
     renderTable(state);
     const mine = within(screen.getByRole('region', { name: /^You:/ }));
-    expect(mine.getAllByTestId(/^card-/)).toHaveLength(hand.length);
+    expect(mine.queryAllByTestId(/^card-/), 'my strip holds markers only').toEqual([]);
     const builder = within(screen.getByTestId('plan-characters'));
     expect(builder.getAllByRole('button')).toHaveLength(hand.length);
   });
 
-  it('never names the opponent dealt cards in the log', () => {
+  it('never names the opponent dealt cards in the log', async () => {
     const game = newGame(12);
     const theirs = game.view('omniscient').players[0].hand ?? [];
     expect(theirs.length).toBeGreaterThan(0);
     renderTable(stateFor(game, 'p1'));
+    await userEvent.click(screen.getByRole('button', { name: 'Game log and rules' }));
     const log = screen.getByRole('region', { name: 'Game log' }).textContent ?? '';
     expect(log).toContain('You are dealt');
     for (const card of theirs) expect(log, card).not.toContain(characterName(card));
   });
 
-  it('keeps the log in a drawer, announces politely elsewhere and never shows the seed commitment', async () => {
+  it('keeps the log in a sheet, announces politely elsewhere and never shows the seed commitment', async () => {
     renderTable(stateFor(newGame(12), 'p1'));
     expect(screen.getByRole('log', { name: 'Announcements' }).getAttribute('aria-live')).toBe(
       'polite',
     );
-    await userEvent.click(screen.getByText('Game log and rules'));
+    expect(screen.queryByTestId('log-drawer')).toBeNull();
+    await userEvent.click(screen.getByRole('button', { name: 'Game log and rules' }));
     expect(screen.getByTestId('log-drawer').hasAttribute('open')).toBe(true);
     const log = screen.getByRole('region', { name: 'Game log' });
     const list = within(log).getByRole('list');
@@ -79,8 +81,8 @@ describe('Table keeps focus on the action', () => {
     const { game, seat } = atHourglassChoice();
     let sent: Command | undefined;
     const { rerender } = renderTable(stateFor(game, seat), (cmd) => (sent = cmd));
-    const reveal = screen.getByRole('region', { name: 'Reveal' });
-    expect(reveal.contains(document.activeElement)).toBe(true);
+    expect(screen.getByRole('region', { name: 'Reveal' })).toBeTruthy();
+    expect(screen.getByTestId('phase-bar').contains(document.activeElement)).toBe(true);
     expect(document.activeElement?.textContent).toBe('Place 0 Hourglasses');
 
     await userEvent.keyboard('{Enter}');
@@ -90,6 +92,42 @@ describe('Table keeps focus on the action', () => {
     await rerender({ state: stateFor(game, seat) });
     expect(document.activeElement).not.toBe(document.body);
     expect(screen.getByTestId('phase-bar').contains(document.activeElement)).toBe(true);
+  });
+
+  it('entering the plan focuses no card and opens no large card', () => {
+    renderTable(stateFor(newGame(12), 'p1'));
+    expect(screen.getByTestId('plan-builder')).toBeTruthy();
+    expect(document.activeElement, 'the route gives the heading focus').toBe(document.body);
+    expect(document.querySelector('[data-part="popover"]')).toBeNull();
+  });
+
+  it('a sheet opened after a dialog missed a phase change gives focus back to its button', async () => {
+    const { game, seat } = atHourglassChoice();
+    const { rerender } = renderTable(stateFor(game, seat));
+    // Stands in for a confirmation, such as sealing a plan or a rejoin request, open as the phase moves on.
+    const dialog = document.createElement('dialog');
+    const answer = document.createElement('button');
+    dialog.append(answer);
+    document.body.append(dialog);
+    dialog.showModal();
+    answer.focus();
+    game.apply(seat, { place_hourglasses: { n: 0 } });
+    await rerender({ state: stateFor(game, seat) });
+    expect(document.activeElement, 'the dialog keeps focus').toBe(answer);
+    dialog.close();
+    dialog.remove();
+
+    const user = userEvent.setup();
+    for (const [toggle, sheet] of [
+      ['Game menu', 'game-menu'],
+      ['Game log and rules', 'log-drawer'],
+    ] as const) {
+      const opener = screen.getByRole('button', { name: toggle });
+      await user.click(opener);
+      await user.click(within(screen.getByTestId(sheet)).getByRole('button', { name: 'Close' }));
+      expect(screen.queryByTestId(sheet)).toBeNull();
+      expect(document.activeElement, `${toggle} has focus again`).toBe(opener);
+    }
   });
 
   it('does not take focus from a text input', async () => {

@@ -38,6 +38,52 @@ describe('ConnectionBanner', () => {
     expect(status.textContent).toBe(localiser.t('connection-online'));
   });
 
+  it('keeps being connected out of sight while the opponent is away', () => {
+    renderBanner({ connected: false, grace_deadline: START + 60_000 });
+    expect(screen.getByTestId('connection-banner').classList.contains('visually-hidden')).toBe(
+      false,
+    );
+    expect(screen.getByTestId('connection-phase').classList.contains('visually-hidden')).toBe(true);
+    expect(screen.getByTestId('opponent-away').textContent).toBe(
+      'Waiting for your opponent to reconnect (1:00)',
+    );
+  });
+
+  it('shows a spinner while connecting, reconnecting or waiting for the opponent to return', () => {
+    const spinnerIn = (id: string): Element | null =>
+      screen.getByTestId(id).querySelector('[data-part="spinner"]');
+    const cases: Array<[Partial<ConnectionState>, boolean]> = [
+      [{ phase: 'connecting' }, true],
+      [{ phase: 'offline', attempt: 2 }, true],
+      [{ phase: 'online' }, false],
+      [{ phase: 'hidden' }, false],
+      [{ phase: 'offline', attempt: 12, serverUnavailable: true }, false],
+      [{ phase: 'offline', stopReason: 'unknown_room' }, false],
+    ];
+    for (const [connection, spins] of cases) {
+      const { unmount } = render(ConnectionBanner, {
+        props: {
+          localiser,
+          connection: { ...ONLINE, ...connection },
+          opponent: { connected: true },
+          lastError: null,
+          onClaimWin: vi.fn(),
+        },
+      });
+      expect(spinnerIn('connection-phase') !== null, JSON.stringify(connection)).toBe(spins);
+      unmount();
+    }
+
+    const away = renderBanner({ connected: false, grace_deadline: START + 60_000 });
+    expect(spinnerIn('opponent-away')?.getAttribute('aria-hidden')).toBe('true');
+    expect(screen.getByTestId('opponent-away').textContent).toBe(
+      'Waiting for your opponent to reconnect (1:00)',
+    );
+    away.unmount();
+    renderBanner({ connected: false, can_claim_win: true });
+    expect(spinnerIn('opponent-away')).toBeNull();
+  });
+
   it('says calmly when the server seems unavailable', () => {
     render(ConnectionBanner, {
       props: {

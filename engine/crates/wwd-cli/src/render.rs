@@ -79,9 +79,13 @@ impl Locale {
         self.plain(character.id())
     }
 
+    /// A target card as a plan names it, with its article.
     pub fn target_card(&self, card: TargetCard) -> String {
         match card {
-            TargetCard::Character(character) => self.character(character),
+            TargetCard::Character(character) => self.text(
+                "target-character",
+                &args!("character" => self.character(character)),
+            ),
             TargetCard::Fool => self.plain("target-fool"),
         }
     }
@@ -95,6 +99,17 @@ impl Locale {
         })
     }
 
+    /// A marker's name after a count of `n` of them.
+    fn marker_count(&self, marker: Marker, n: u8) -> String {
+        let id = match marker {
+            Marker::Cross => "marker-cross-count",
+            Marker::Fang => "marker-fang-count",
+            Marker::Hourglass => "marker-hourglass-count",
+            Marker::Potion => return self.marker(marker),
+        };
+        self.text(id, &args!("n" => u32::from(n)))
+    }
+
     pub fn win_reason(&self, reason: WinReason) -> String {
         self.plain(match reason {
             WinReason::Health => "win-reason-health",
@@ -105,12 +120,19 @@ impl Locale {
     }
 
     fn forfeit(&self, reason: ForfeitReason) -> String {
-        self.plain(match reason {
+        let id = match reason {
             ForfeitReason::NoCross => "forfeit-no-cross",
             ForfeitReason::Declined => "forfeit-declined",
             ForfeitReason::CannotPayFangs => "forfeit-cannot-pay-fangs",
             ForfeitReason::NoTargets => "forfeit-no-targets",
-        })
+        };
+        self.text(
+            id,
+            &args!(
+                "cross" => self.marker(Marker::Cross),
+                "fangs" => self.plain("marker-fangs"),
+            ),
+        )
     }
 
     pub fn character_list(&self, cards: &[Character]) -> String {
@@ -186,6 +208,7 @@ impl Locale {
             EventKind::RoundStarted { round, badge } => {
                 let mut args = self.actor(*badge);
                 args.set("round", *round);
+                args.set("badge", self.plain("marker-badge"));
                 self.format(id, &args)
             }
             EventKind::HandDealt { seat, cards } => {
@@ -201,10 +224,12 @@ impl Locale {
             EventKind::HourglassesPlaced { seat, n } => {
                 let mut args = self.actor(*seat);
                 args.set("n", u32::from(*n));
+                args.set("hourglasses", self.marker_count(Marker::Hourglass, *n));
                 self.format(id, &args)
             }
             EventKind::PotionTargetChosen { seat, card } => {
                 let mut args = self.actor(*seat);
+                args.set("potion", self.marker(Marker::Potion));
                 args.set("card", self.character(*card));
                 self.format(id, &args)
             }
@@ -229,8 +254,10 @@ impl Locale {
             } => {
                 let mut args = self.with_seat(FluentArgs::new(), "victim", *victim);
                 args.set("result", if *hit { "hit" } else { "miss" });
+                args.set("potion", self.marker(Marker::Potion));
                 args.set("card", self.character(*target));
-                args.set("health", u32::from(*health_lost));
+                args.set("lost", u32::from(*health_lost));
+                args.set("health", self.plain("marker-health"));
                 self.format(id, &args)
             }
             EventKind::CharacterResolved { seat, character } => {
@@ -245,27 +272,35 @@ impl Locale {
             } => {
                 let mut args = self.with_seat(self.actor(*seat), "other", seat.other());
                 args.set("marker", self.marker(*marker));
+                args.set("markerId", marker_id(*marker));
                 args.set("source", if *from_opponent { "opponent" } else { "supply" });
                 self.format(id, &args)
             }
             EventKind::MarkerSpent { seat, marker, n } => {
                 let mut args = self.actor(*seat);
-                args.set("marker", self.marker(*marker));
+                args.set("marker", self.marker_count(*marker, *n));
                 args.set("n", u32::from(*n));
                 self.format(id, &args)
             }
             EventKind::AttackHit {
                 seat,
                 target_seat,
+                attacker,
                 character,
                 health_lost,
             } => {
                 let mut args = self.with_seat(self.actor(*seat), "targetSeat", *target_seat);
+                args.set("attacker", self.character(*attacker));
                 args.set("character", self.character(*character));
-                args.set("health", u32::from(*health_lost));
+                args.set("lost", u32::from(*health_lost));
+                args.set("health", self.plain("marker-health"));
                 self.format(id, &args)
             }
-            EventKind::AttackMissed { seat } => self.format(id, &self.actor(*seat)),
+            EventKind::AttackMissed { seat, attacker } => {
+                let mut args = self.actor(*seat);
+                args.set("attacker", self.character(*attacker));
+                self.format(id, &args)
+            }
             EventKind::AttackForfeited { seat, reason } => {
                 let mut args = self.actor(*seat);
                 args.set("reason", self.forfeit(*reason));
@@ -274,13 +309,21 @@ impl Locale {
             EventKind::RoundEnded { round, next_badge } => {
                 let mut args = self.actor(*next_badge);
                 args.set("round", *round);
+                args.set("badge", self.plain("marker-badge"));
                 self.format(id, &args)
             }
+            EventKind::DiscardRevealed { round, character } => self.format(
+                id,
+                &args!("round" => *round, "character" => self.character(*character)),
+            ),
             EventKind::NextRoundRequested { seat } => self.format(id, &self.actor(*seat)),
             EventKind::Resigned { seat } => self.format(id, &self.actor(*seat)),
             EventKind::SegmentStarted { round, .. } => self.format(id, &args!("round" => *round)),
             EventKind::GameOver { winner, reason } => {
                 let mut args = self.with_seat(self.actor(*winner), "other", winner.other());
+                args.set("health", self.plain("marker-health"));
+                args.set("fangs", self.plain("marker-fangs"));
+                args.set("crosses", self.plain("marker-crosses"));
                 args.set(
                     "reason",
                     match reason {
@@ -337,6 +380,16 @@ impl Locale {
     /// A CLI message with its ID prefix, for error output.
     pub fn error(&self, id: &str, args: &FluentArgs) -> String {
         with_id(id, &self.text(id, args))
+    }
+}
+
+/// A marker's raw selector value, as its wire name.
+fn marker_id(marker: Marker) -> &'static str {
+    match marker {
+        Marker::Cross => "cross",
+        Marker::Fang => "fang",
+        Marker::Hourglass => "hourglass",
+        Marker::Potion => "potion",
     }
 }
 
@@ -465,14 +518,21 @@ mod tests {
         EventKind::AttackHit { .. } => [EventKind::AttackHit {
             seat: Seat::P0,
             target_seat: Seat::P1,
-            character: Character::Seer,
+            attacker: Character::Knight,
+            character: Character::Wolfen,
             health_lost: 1,
         }],
-        EventKind::AttackMissed { .. } => [EventKind::AttackMissed { seat: Seat::P1 }],
-        EventKind::AttackForfeited { .. } => [EventKind::AttackForfeited {
-            seat: Seat::P0,
-            reason: ForfeitReason::NoCross,
+        EventKind::AttackMissed { .. } => [EventKind::AttackMissed {
+            seat: Seat::P1,
+            attacker: Character::Seer,
         }],
+        EventKind::AttackForfeited { .. } => [
+            ForfeitReason::NoCross,
+            ForfeitReason::Declined,
+            ForfeitReason::CannotPayFangs,
+            ForfeitReason::NoTargets,
+        ]
+        .map(|reason| EventKind::AttackForfeited { seat: Seat::P0, reason }),
         EventKind::RoundEnded { .. } => [EventKind::RoundEnded { round: 3, next_badge: Seat::P1 }],
         EventKind::NextRoundRequested { .. } => [EventKind::NextRoundRequested { seat: Seat::P0 }],
         EventKind::Resigned { .. } => [EventKind::Resigned { seat: Seat::P0 }],
@@ -483,6 +543,10 @@ mod tests {
         EventKind::GameOver { .. } => [EventKind::GameOver {
             winner: Seat::P1,
             reason: WinReason::Crosses,
+        }],
+        EventKind::DiscardRevealed { .. } => [EventKind::DiscardRevealed {
+            round: 1,
+            character: Character::Villager,
         }],
     });
 
@@ -554,10 +618,11 @@ mod tests {
             "marker-fang",
             "marker-hourglass",
             "marker-potion",
-            "forfeit-no-cross",
-            "forfeit-declined",
-            "forfeit-cannot-pay-fangs",
+            "marker-health",
+            "marker-badge",
             "forfeit-no-targets",
+            "marker-crosses",
+            "marker-fangs",
             "win-reason-health",
             "win-reason-fangs",
             "win-reason-crosses",
@@ -621,18 +686,179 @@ mod tests {
     }
 
     #[test]
-    fn attack_text_is_sentence_case() {
+    fn attack_hit_names_the_attacker_and_the_victim() {
         let loc = Locale::new();
         let text = loc.event(&EventKind::AttackHit {
             seat: Seat::P0,
             target_seat: Seat::P1,
-            character: Character::WolfKing,
+            attacker: Character::Knight,
+            character: Character::Wolfen,
             health_lost: 1,
         });
         assert_eq!(
             text,
-            "Player 1's Wolf King hits Player 2! Player 2 loses 1 health."
+            "Player 1's Knight hits Player 2's Wolfen! Player 2 loses 1 Health."
         );
+    }
+
+    #[test]
+    fn changed_event_text_reads_as_prose() {
+        let loc = Locale::new();
+        let cases = [
+            (
+                EventKind::DiscardRevealed {
+                    round: 3,
+                    character: Character::Seer,
+                },
+                "The card set aside in round 3 was the Seer.",
+            ),
+            (
+                EventKind::RoundStarted {
+                    round: 2,
+                    badge: Seat::P1,
+                },
+                "Round 2 begins. Player 2 holds the Badge.",
+            ),
+            (
+                EventKind::HourglassesPlaced {
+                    seat: Seat::P1,
+                    n: 2,
+                },
+                "Player 2 places 2 Hourglasses.",
+            ),
+            (
+                EventKind::HourglassesPlaced {
+                    seat: Seat::P1,
+                    n: 1,
+                },
+                "Player 2 places 1 Hourglass.",
+            ),
+            (
+                EventKind::PotionTargetChosen {
+                    seat: Seat::P0,
+                    card: Character::Witch,
+                },
+                "Player 1 aims the Potion at the Witch.",
+            ),
+            (
+                EventKind::PotionResolved {
+                    target: Character::Seer,
+                    victim: Seat::P1,
+                    hit: true,
+                    health_lost: 1,
+                },
+                "The Potion hits Player 2's Seer! Player 2 loses 1 Health.",
+            ),
+            (
+                EventKind::PotionResolved {
+                    target: Character::Seer,
+                    victim: Seat::P0,
+                    hit: false,
+                    health_lost: 0,
+                },
+                "The Potion misses: Player 1 did not play the Seer.",
+            ),
+            (
+                EventKind::MarkerGained {
+                    seat: Seat::P0,
+                    marker: Marker::Hourglass,
+                    from_opponent: true,
+                },
+                "Player 1 takes 1 Hourglass from Player 2.",
+            ),
+            (
+                EventKind::MarkerGained {
+                    seat: Seat::P1,
+                    marker: Marker::Cross,
+                    from_opponent: false,
+                },
+                "Player 2 gains 1 Cross.",
+            ),
+            (
+                EventKind::MarkerGained {
+                    seat: Seat::P1,
+                    marker: Marker::Potion,
+                    from_opponent: false,
+                },
+                "Player 2 gains the Potion.",
+            ),
+            (
+                EventKind::MarkerSpent {
+                    seat: Seat::P0,
+                    marker: Marker::Fang,
+                    n: 2,
+                },
+                "Player 1 spends 2 Fangs.",
+            ),
+            (
+                EventKind::MarkerSpent {
+                    seat: Seat::P0,
+                    marker: Marker::Cross,
+                    n: 1,
+                },
+                "Player 1 spends 1 Cross.",
+            ),
+            (
+                EventKind::RoundEnded {
+                    round: 3,
+                    next_badge: Seat::P1,
+                },
+                "Round 3 ends. Player 2 takes the Badge.",
+            ),
+            (
+                EventKind::AttackMissed {
+                    seat: Seat::P1,
+                    attacker: Character::Knight,
+                },
+                "Player 2's Knight misses.",
+            ),
+            (
+                EventKind::AttackForfeited {
+                    seat: Seat::P0,
+                    reason: ForfeitReason::CannotPayFangs,
+                },
+                "Player 1 makes no attack: there are not enough Fangs for the extra targets.",
+            ),
+            (
+                EventKind::GameOver {
+                    winner: Seat::P1,
+                    reason: WinReason::Fangs,
+                },
+                "Player 2 wins by collecting enough Fangs.",
+            ),
+            (
+                EventKind::HourglassesPlaced {
+                    seat: Seat::P0,
+                    n: 0,
+                },
+                "Player 1 places no Hourglasses.",
+            ),
+            (
+                EventKind::PlansRevealed {
+                    plans: [
+                        Plan {
+                            character: Character::Seer,
+                            targets: [
+                                TargetCard::Character(Character::Wolfen),
+                                TargetCard::Character(Character::WolfKing),
+                                TargetCard::Fool,
+                            ]
+                            .into(),
+                        },
+                        Plan {
+                            character: Character::Villager,
+                            targets: [TargetCard::Fool].into(),
+                        },
+                    ],
+                    effective: [5, 8],
+                    order: [Seat::P0, Seat::P1],
+                },
+                "Plans revealed. Player 1 plays Seer targeting the Wolf King, the Wolfen and the Fool at initiative 5. Player 2 plays Villager targeting the Fool at initiative 8. Player 1 resolves first.",
+            ),
+        ];
+        for (kind, text) in cases {
+            assert_eq!(loc.event(&kind), text, "{kind:?}");
+        }
     }
 
     #[test]
@@ -652,7 +878,7 @@ mod tests {
             winner: Seat::P0,
             reason: WinReason::Health,
         });
-        assert_eq!(text, "Player 1 wins by reducing Player 2's health to zero.");
+        assert_eq!(text, "Player 1 wins by reducing Player 2's Health to zero.");
     }
 
     #[test]
@@ -665,6 +891,12 @@ mod tests {
                 "other" => other.to_string(),
                 "otherName" => "Player 2",
                 "reason" => "resignation",
+                "youCap" => loc.plain("player-you-cap"),
+                "you" => loc.plain("player-you"),
+                "yourCap" => loc.plain("player-your-cap"),
+                "your" => loc.plain("player-your"),
+                "opponentCap" => loc.plain("player-opponent-cap"),
+                "opponent" => loc.plain("player-opponent"),
             )
         };
         let resigned = ["you", "opponent", "p0"].map(|actor| {

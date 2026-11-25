@@ -42,7 +42,7 @@ export const pausedSession = (room: string, savedAt: number): SessionRecord =>
 
 /** Fills `store` with a settings change, an identity, two sessions and two games. */
 export async function populate(store: DeviceStore, base = Date.now()): Promise<void> {
-  await store.settings.put({ ...DEFAULT_SETTINGS, theme: 'dark', textSize: 120 });
+  await store.settings.put({ ...DEFAULT_SETTINGS, theme: 'dark', textSize: 125 });
   await store.identity.put({ deviceId: 'device-1', displayName: 'Mika' });
   await store.sessions.put(sessionRecord('AAAAAA', base));
   await store.sessions.put(pausedSession('BBBBBB', base + 1));

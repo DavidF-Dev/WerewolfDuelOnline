@@ -166,6 +166,7 @@ fn seer_damage_clamps_at_zero() {
     assert!(kinds(&events).contains(&EventKind::AttackHit {
         seat: Seat::P0,
         target_seat: Seat::P1,
+        attacker: Seer,
         character: Wolfen,
         health_lost: 1,
     }));
@@ -228,15 +229,28 @@ fn round_end_returns_placed_and_passes_badge() {
     assert_eq!(state.badge, Seat::P1);
     assert_eq!(state.round, 1);
     assert_eq!(state.phase, Phase::RoundOver);
+    let tail: Vec<_> = events[events.len() - 2..]
+        .iter()
+        .map(|e| (&e.visibility, &e.kind))
+        .collect();
     assert_eq!(
-        events.last().map(|e| (&e.visibility, &e.kind)),
-        Some((
-            &Visibility::Public,
-            &EventKind::RoundEnded {
-                round: 1,
-                next_badge: Seat::P1,
-            }
-        ))
+        tail,
+        [
+            (
+                &Visibility::Public,
+                &EventKind::RoundEnded {
+                    round: 1,
+                    next_badge: Seat::P1,
+                }
+            ),
+            (
+                &Visibility::Public,
+                &EventKind::DiscardRevealed {
+                    round: 1,
+                    character: Witch,
+                }
+            ),
+        ]
     );
     assert!(game_over_event(&events).is_none());
     assert_conserved(&state);
@@ -525,7 +539,10 @@ fn view_redaction() {
 fn visibility_filter() {
     let public = Event {
         visibility: Visibility::Public,
-        kind: EventKind::AttackMissed { seat: Seat::P0 },
+        kind: EventKind::AttackMissed {
+            seat: Seat::P0,
+            attacker: Character::Knight,
+        },
     };
     let private = Event {
         visibility: Visibility::Seat(Seat::P1),

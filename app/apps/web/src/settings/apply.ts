@@ -1,6 +1,6 @@
 import { loadReadingFont } from '../theme/fonts.js';
 import { setDisplaySettings, system } from './display.svelte.js';
-import { clampTextSize, type Settings } from './settings.js';
+import { nearestTextSize, type Settings } from './settings.js';
 
 const DARK_QUERY = '(prefers-color-scheme: dark)';
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
@@ -37,7 +37,7 @@ export function applySettings(settings: Settings, root: HTMLElement): void {
   if (settings.extraSpacing) root.setAttribute('data-spacing', 'extra');
   else root.removeAttribute('data-spacing');
 
-  root.style.setProperty('--text-scale', String(clampTextSize(settings.textSize) / 100));
+  root.style.setProperty('--text-scale', String(nearestTextSize(settings.textSize) / 100));
 
   setDisplaySettings(settings);
 }

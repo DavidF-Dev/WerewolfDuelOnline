@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Localiser } from '@wwd/client-core';
+  import Button from './Button.svelte';
   import ConfirmDialog from './ConfirmDialog.svelte';
   import WarningIcon from './WarningIcon.svelte';
 
@@ -42,7 +43,6 @@
   {onConfirm}
   {onCancel}
 >
-  {#snippet confirmIcon()}<WarningIcon />{/snippet}
   <div id="{uid}-body">
     <p>{l.t(scope === 'all' ? 'delete-all-intro' : 'delete-history-intro')}</p>
     <ul>
@@ -59,15 +59,18 @@
     {/if}
     <p class="note">{l.t('delete-device-only')}</p>
   </div>
-  <p>
-    <button type="button" aria-disabled={exporting ? 'true' : undefined} onclick={exportFirst}>
-      {l.t('delete-export-first')}
-    </button>
-  </p>
-  <p class="note">{l.t('backup-seat-token-warning')}</p>
-  {#if exported === 'saved'}
-    <p role="status">{l.t('backup-saved')}</p>
-  {:else if exported === 'failed'}
+  <p class="note" id="{uid}-tokens">{l.t('backup-seat-token-warning')}</p>
+  {#if exported === 'failed'}
     <p role="alert"><WarningIcon />{l.t('backup-save-failed')}</p>
   {/if}
+  <p role="status" class={{ 'visually-hidden': exported !== 'saved' }}>
+    {exported === 'saved' ? l.t('backup-saved') : ''}
+  </p>
+  {#snippet alternatives()}
+    <Button
+      aria-disabled={exporting ? 'true' : undefined}
+      aria-describedby="{uid}-tokens"
+      onclick={exportFirst}>{l.t('delete-export-first')}</Button
+    >
+  {/snippet}
 </ConfirmDialog>

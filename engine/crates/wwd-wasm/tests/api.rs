@@ -196,3 +196,19 @@ fn content_hash_matches_the_blake3_test_vector() {
         "af1349b9f5f9a1a6a0404dea36dcc9499bcb25c9adc112b7cc9a93cae41f3262"
     );
 }
+
+#[test]
+fn ability_summary_serialises_for_the_card_icons() {
+    use wwd_core::Character;
+    let json = serde_json::to_value(api::ability_summary(Character::WolfKing)).unwrap();
+    assert_eq!(
+        json,
+        serde_json::json!({
+            "gains": [],
+            "spends": { "per_extra_target": "fang" },
+            "attack": { "faction": "human", "max": null },
+            "damage": 1,
+            "optional_cross": false,
+        })
+    );
+}

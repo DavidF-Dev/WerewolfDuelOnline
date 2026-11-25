@@ -122,7 +122,7 @@ describe('paused games', () => {
 
     render(Home, { props: { localiser } });
     const region = await screen.findByRole('region', { name: 'Continue' });
-    expect(within(region).getByRole('link').textContent).toContain('Paused');
+    expect(within(region).getByTestId('home-session').textContent).toContain('Paused');
   });
 
   it('resume from save offers a new room when the old one is gone', async () => {
@@ -191,7 +191,9 @@ describe('paused games', () => {
 
     socket().receive({ type: 'opponent_status', connected: true });
     await waitFor(() => expect(within(panel).queryByText('Invite your opponent')).toBeNull());
-    await user.click(within(panel).getByRole('button', { name: 'Resume' }));
+    await user.click(
+      within(screen.getByTestId('phase-bar')).getByRole('button', { name: 'Resume' }),
+    );
     expect(socket().messages().at(-1)).toEqual({ type: 'resume_request' });
   });
 
@@ -355,6 +357,41 @@ describe('paused games', () => {
     expect(loadOnlineSession(DEFAULT_SERVER, 'ABCDEF')).toBeDefined();
   });
 
+  it('shows a spinner while the room for the save is created', async () => {
+    const game = atRoundOver();
+    await store.sessions.put({
+      id: sessionId(DEFAULT_SERVER, OLD),
+      server: DEFAULT_SERVER,
+      room: OLD,
+      seatToken: TOKEN,
+      seat: 'p0',
+      lastSeq: 9,
+      game: 0,
+      status: 'paused',
+      save: saveOf(game, OLD),
+      savedAt: Date.now(),
+    });
+    resetSessions();
+    await initSessions(store);
+    let respond: (response: Response) => void = () => {};
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(() => new Promise<Response>((resolve) => (respond = resolve))),
+    );
+    render(JoinOnline, { props: { localiser, code: OLD } });
+    await waitFor(() => expect(FakeWebSocket.instances).toHaveLength(1));
+    socket().accept();
+    socket().receive({ type: 'error', code: 'unknown_room' });
+    const panel = await screen.findByTestId('saved-game');
+    expect(panel.querySelector('[data-part="spinner"]')).toBeNull();
+    await userEvent.click(within(panel).getByRole('button', { name: 'Resume from save' }));
+    const status = within(panel).getByText('Creating a room from the save');
+    expect(status.querySelector('[data-part="spinner"]')?.getAttribute('aria-hidden')).toBe('true');
+    respond(new Response(JSON.stringify({ error: 'invalid_save' }), { status: 400 }));
+    await screen.findByTestId('resume-from-save-problem');
+    expect(panel.querySelector('[data-part="spinner"]')).toBeNull();
+  });
+
   it('a refused save is explained', async () => {
     const game = atRoundOver();
     await store.sessions.put({
@@ -401,15 +438,25 @@ describe('pause panel', () => {
     const onPause = vi.fn();
     const props = { localiser, onCommand: () => {}, onPause, pauseActions: actions() };
     const view = render(Table, { props: { ...props, state: withPause({}) } });
-    await userEvent.click(screen.getByText('Game menu'));
+    const openMenu = () => userEvent.click(screen.getByRole('button', { name: 'Game menu' }));
+    await openMenu();
     await userEvent.click(screen.getByRole('button', { name: 'Pause after this round' }));
     expect(onPause).toHaveBeenCalledOnce();
+    expect(screen.queryByTestId('game-menu'), 'asking to pause closes the menu').toBeNull();
 
     await view.rerender({ ...props, state: withPause({ requestedBy: 'p1' }) });
+    await openMenu();
+    expect(screen.getByTestId('game-menu')).toBeTruthy();
     expect(screen.queryByRole('button', { name: 'Pause after this round' })).toBeNull();
     expect(screen.getByTestId('pause-status').textContent).toBe(
       'You asked to pause after this round. Waiting for your opponent to agree.',
     );
+    expect(
+      screen
+        .getByTestId('pause-status')
+        .querySelector('[data-part="spinner"]')
+        ?.getAttribute('aria-hidden'),
+    ).toBe('true');
   });
 
   it("answers the opponent's request and says when an agreed pause applies", async () => {
@@ -426,6 +473,7 @@ describe('pause panel', () => {
 
     await view.rerender({ ...props, state: withPause({ requestedBy: 'p0', agreed: true }) });
     expect(announcement.textContent).toBe('Pause agreed: applies at the end of the round');
+    expect(screen.getByTestId('pause-panel').querySelector('[data-part="spinner"]')).toBeNull();
     expect(screen.getByRole('button', { name: 'Cancel the pause' })).toBeTruthy();
   });
 
@@ -439,6 +487,13 @@ describe('pause panel', () => {
     await waitFor(() => expect(document.activeElement).toBe(heading));
 
     const resume = screen.getByRole('button', { name: 'Resume' });
+    expect(screen.getByTestId('phase-bar').contains(resume), 'Resume is the phase bar action').toBe(
+      true,
+    );
+    expect(
+      document.querySelectorAll('[data-part="spinner"]'),
+      'nothing is awaited while Resume is still to press',
+    ).toHaveLength(0);
     await userEvent.click(resume);
     expect(pauseActions.resume).toHaveBeenCalledOnce();
     await view.rerender({
@@ -449,6 +504,14 @@ describe('pause panel', () => {
     expect(screen.getByTestId('pause-announcement').textContent).toBe(
       "You're ready to resume. Waiting for your opponent.",
     );
+    const waiting = screen.getByTestId('pause-status');
+    expect(waiting.querySelector('[data-part="spinner"]')?.getAttribute('aria-hidden')).toBe(
+      'true',
+    );
+    expect(
+      document.querySelectorAll('[data-part="spinner"]'),
+      'one spinner for one wait',
+    ).toHaveLength(1);
     await userEvent.click(resume);
     expect(pauseActions.resume).toHaveBeenCalledOnce();
 
@@ -459,6 +522,7 @@ describe('pause panel', () => {
     expect(screen.getByTestId('pause-announcement').textContent).toBe(
       'Your opponent is ready to resume.',
     );
+    expect(screen.getByTestId('pause-status').querySelector('[data-part="spinner"]')).toBeNull();
   });
 
   it('is left out in local games', () => {

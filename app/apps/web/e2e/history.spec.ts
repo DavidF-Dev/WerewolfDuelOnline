@@ -61,8 +61,8 @@ test('finished game appears in history and its replay steps', async ({ browser }
   await expect.poll(async () => (await position(host)).round).toBe(start.round + 1);
   // My view keeps the opponent's hand hidden; the full view shows it.
   await expect(host.getByTestId('replay-hand-p1')).toContainText('hidden');
-  await host.getByRole('button', { name: 'Full' }).click();
-  await expect(host.getByRole('button', { name: 'Full' })).toHaveAttribute('aria-pressed', 'true');
+  await host.getByRole('radio', { name: 'Full' }).check();
+  await expect(host.getByRole('radio', { name: 'Full' })).toBeChecked();
   await expect(host.getByTestId('replay-hand-p1')).not.toContainText('hidden');
 
   await host.getByRole('button', { name: 'Next step' }).click();

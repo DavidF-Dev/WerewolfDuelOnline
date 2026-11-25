@@ -79,15 +79,19 @@ pub enum EventKind {
         marker: Marker,
         n: u8,
     },
-    /// `health_lost` is the Health actually removed, after clamping at zero.
+    /// `seat`'s `attacker` hits `target_seat`'s `character`. `health_lost` is the Health
+    /// actually removed, after clamping at zero.
     AttackHit {
         seat: Seat,
         target_seat: Seat,
+        attacker: Character,
         character: Character,
         health_lost: u8,
     },
+    /// `seat`'s `attacker` attacks and hits nothing.
     AttackMissed {
         seat: Seat,
+        attacker: Character,
     },
     AttackForfeited {
         seat: Seat,
@@ -118,6 +122,11 @@ pub enum EventKind {
         #[cfg_attr(feature = "ts", ts(type = "string"))]
         seed_commitment: [u8; 32],
     },
+    /// The card discarded face down when `round` was dealt, made public once that round ends.
+    DiscardRevealed {
+        round: u32,
+        character: Character,
+    },
 }
 
 impl EventKind {
@@ -143,6 +152,7 @@ impl EventKind {
             EventKind::Resigned { .. } => "event-resigned",
             EventKind::GameOver { .. } => "event-game-over",
             EventKind::SegmentStarted { .. } => "event-segment-started",
+            EventKind::DiscardRevealed { .. } => "event-discard-revealed",
         }
     }
 }

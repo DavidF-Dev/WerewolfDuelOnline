@@ -3,6 +3,7 @@
   import type { Localiser } from '@wwd/client-core';
   import Chip from '../kit/Chip.svelte';
   import { characterName, planStatus } from '../text.js';
+  import { fitText } from '../components/fit-text.js';
   import MarkerList from './MarkerList.svelte';
 
   interface Props {
@@ -36,7 +37,7 @@
 >
   <div class="who">
     <div class="title">
-      <h2 class="name" title={name}>{name}</h2>
+      <h2 class="name" title={name} use:fitText>{name}</h2>
       {#if connected !== undefined}
         <p class="connection" class:connected data-testid="opponent-connection">
           <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
@@ -75,7 +76,7 @@
       <MarkerList localiser={l} {player} {hasBadge} testId="opponent" badgeAtEnd />
     </div>
   </div>
-  <Chip class="status" data-testid="opponent-plan">
+  <Chip class="status" data-testid="opponent-plan" fit>
     {#snippet icon()}{#if sealed && !waitingForMe}<span aria-hidden="true">✓</span>{/if}{/snippet}
     {waitingForMe ? l.t('opponent-waiting-for-you') : status}
   </Chip>
@@ -109,13 +110,10 @@
     min-width: 0;
   }
 
+  /* The line height is the normal size's, so a name shrunk to fit keeps the row's height. */
   .name {
-    font: 700 0.875rem / 1.3 var(--font-body);
+    font: 700 0.875rem / 1.1375rem var(--font-body);
     margin: 0;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   p {

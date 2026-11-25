@@ -56,6 +56,7 @@
   <Button
     variant="primary"
     data-testid="resume"
+    fit
     aria-disabled={ready}
     onclick={() => {
       if (!ready) onResume();

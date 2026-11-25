@@ -3,6 +3,7 @@
   import { plainText, richMessage, type Localiser, type RichPart } from '@wwd/client-core';
   import { initiative } from '../cards.js';
   import CharacterCard from '../components/CharacterCard.svelte';
+  import { fitText } from '../components/fit-text.js';
   import RichText from '../kit/RichText.svelte';
   import { planSummaryParts, planText } from '../text.js';
   import { roundReveal, type SequencedEvent } from './showdown.js';
@@ -94,7 +95,7 @@
           <span aria-hidden="true">
             <span class="line" data-part="plan-line"><RichText parts={planLine(panel)} /></span>
             {#each orderLines(panel) as line (line)}
-              <span class="line muted" data-part="plan-order">{line}</span>
+              <span class="line muted" data-part="plan-order" use:fitText>{line}</span>
             {/each}
           </span>
           <span class="visually-hidden">{spoken(panel)}</span>

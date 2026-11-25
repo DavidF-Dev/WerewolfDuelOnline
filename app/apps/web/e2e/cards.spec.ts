@@ -7,7 +7,10 @@ async function openCards(page: Page, scale = 1): Promise<void> {
   await page.evaluate((s) => {
     document.documentElement.style.setProperty('--text-scale', String(s));
   }, scale);
-  await page.evaluate(() => document.fonts.ready);
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    for (let i = 0; i < 2; i++) await new Promise((done) => requestAnimationFrame(done));
+  });
 }
 
 interface Box {
@@ -96,13 +99,26 @@ test('cards have the design note sizes and anatomy', async ({ page }) => {
 });
 
 for (const scale of [1, 1.5]) {
-  test(`card names and pills fit on one line at every size (${scale * 100} % text)`, async ({
+  test(`card names fit their slot, at 80 % size or more, and pills fit on one line at every size (${scale * 100} % text)`, async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await openCards(page, scale);
     const problems = await page.locator('[data-testid="cards-gallery"]').evaluate((root) => {
       const found: string[] = [];
+      // How far the text runs past the content box, to a fraction of a pixel.
+      const overflow = (element: HTMLElement): number => {
+        const style = getComputedStyle(element);
+        const sides = ['paddingLeft', 'paddingRight', 'borderLeftWidth', 'borderRightWidth'].reduce(
+          (sum, side) => sum + parseFloat(style[side as 'paddingLeft']),
+          0,
+        );
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        return (
+          range.getBoundingClientRect().width - (element.getBoundingClientRect().width - sides)
+        );
+      };
       const where = (el: Element): string => {
         const li = el.closest('li[data-card]') as HTMLElement | null;
         const ul = el.closest('ul[data-size]') as HTMLElement | null;
@@ -111,7 +127,20 @@ for (const scale of [1, 1.5]) {
       for (const name of Array.from(
         root.querySelectorAll<HTMLElement>('.face [data-part="name"]'),
       )) {
-        if (name.scrollWidth > name.clientWidth) found.push(`name of ${where(name)} overflows`);
+        const over = overflow(name);
+        if (over > 0.01) found.push(`name of ${where(name)} overflows by ${over} px`);
+        const shown = parseFloat(getComputedStyle(name).fontSize);
+        const fitted = name.style.fontSize;
+        name.style.fontSize = '';
+        const normal = parseFloat(getComputedStyle(name).fontSize);
+        name.style.fontSize = fitted;
+        // A name may shrink to fit, but never below 80 % of its normal size.
+        if (shown < normal * 0.8 - 0.01) {
+          found.push(`name of ${where(name)} is ${shown} px, below 80 % of ${normal} px`);
+        }
+        if (name.textContent === 'Seer' && shown !== normal) {
+          found.push(`name of ${where(name)} is shrunk though it fits`);
+        }
       }
       for (const text of Array.from(
         root.querySelectorAll<HTMLElement>('.face [data-part="text"]'),

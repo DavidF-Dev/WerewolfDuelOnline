@@ -30,7 +30,7 @@
       </div>
       <p class="step">Plan · choose 1 character and its targets</p>
       <p class="instruction">Ready to seal your plan?</p>
-      <Button variant="primary" data-testid="kit-fit-action">{l.t('plan-seal')}</Button>
+      <Button variant="primary" data-testid="kit-fit-action" fit>{l.t('plan-seal')}</Button>
     </div>
   {/snippet}
 

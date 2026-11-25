@@ -217,6 +217,7 @@
 {#snippet nextButton()}
   <Button
     data-testid="showdown-next"
+    fit
     data-phase-focus
     onclick={(event: MouseEvent) => void next(event)}>{l.t('showdown-next')}</Button
   >

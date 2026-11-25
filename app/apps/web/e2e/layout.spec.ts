@@ -314,10 +314,18 @@ test('a long opponent name stays on one line and the plan still fits', async ({ 
     const style = getComputedStyle(heading);
     const body = document.querySelector<HTMLElement>('[data-part="screen"] main')!;
     const connection = document.querySelector('[data-testid="opponent-connection"]')!;
+    const range = document.createRange();
+    range.selectNodeContents(heading);
+    const fitted = heading.style.fontSize;
+    heading.style.fontSize = '';
+    const normal = parseFloat(getComputedStyle(heading).fontSize);
+    heading.style.fontSize = fitted;
     return {
+      size: parseFloat(style.fontSize),
+      normal,
       height: heading.getBoundingClientRect().height,
       lineHeight: parseFloat(style.lineHeight),
-      truncated: heading.scrollWidth > heading.clientWidth,
+      truncated: range.getBoundingClientRect().width > heading.getBoundingClientRect().width + 0.01,
       sameRow:
         Math.abs(connection.getBoundingClientRect().top - heading.getBoundingClientRect().top) <
         heading.getBoundingClientRect().height,
@@ -326,7 +334,13 @@ test('a long opponent name stays on one line and the plan still fits', async ({ 
     };
   });
   expect(m.height, 'the name is one line').toBeLessThanOrEqual(m.lineHeight + 1);
-  expect(m.truncated, 'the name is cut with an ellipsis').toBe(true);
+  expect(m.size / m.normal, 'the name shrinks to fit').toBeLessThan(1);
+  expect(m.size / m.normal, 'the name is 80 % of its size or more').toBeGreaterThanOrEqual(
+    0.8 - 1e-3,
+  );
+  if (m.truncated) {
+    expect(m.size / m.normal, 'the name is cut only at 80 %').toBeCloseTo(0.8, 3);
+  }
   expect(m.sameRow, 'the connection stays beside the name').toBe(true);
   expect(m.content, 'the plan still fits').toBeLessThanOrEqual(m.shown);
 });
@@ -1303,4 +1317,192 @@ test('each Play hint stays on one line at 360 px', async ({ page }, info) => {
       expect.soft(lines, `${id}, ${option}: "${await hint.textContent()}"`).toBe(1);
     }
   }
+});
+
+/** Each group of one-line labels that fit themselves, and the gallery entries that show it. */
+const FITTED_LABELS: ReadonlyArray<{ group: string; selector: string; entries: string[] }> = [
+  {
+    group: 'bar title',
+    selector: '[data-part="bar-title"]',
+    entries: ['table-plan', 'settings-top', 'how-to-play'],
+  },
+  {
+    group: 'segmented option',
+    selector: '[role="radiogroup"] label > span',
+    entries: ['new-game', 'settings-top'],
+  },
+  {
+    group: 'plan status chip',
+    selector: '[data-testid="opponent-plan"] [data-part="label"]',
+    entries: ['table-plan', 'table-plan-sealed', 'table-showdown'],
+  },
+  {
+    group: 'Badge chip',
+    selector: '[data-testid$="-badge"] [data-part="label"]',
+    entries: ['table-plan', 'table-showdown'],
+  },
+  {
+    group: 'phase bar action',
+    selector: '[data-part="screen"] > .footer button [data-part="label"]',
+    entries: [
+      'table-plan',
+      'table-reveal-hourglasses',
+      'table-reveal-potion',
+      'table-showdown',
+      'table-paused',
+    ],
+  },
+  {
+    group: 'plan panel order line',
+    selector: '[data-part="plan-order"]',
+    entries: ['table-showdown', 'table-round-summary'],
+  },
+  {
+    group: 'opponent name',
+    selector: '[data-testid="opponent"] h2',
+    entries: ['table-plan', 'table-plan-long-name'],
+  },
+];
+
+test('one-line labels fit their box at 80 % of their size or more, else end in an ellipsis', async ({
+  page,
+}, info) => {
+  test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
+  test.setTimeout(300_000);
+  for (const size of [{ width: 320, height: 640 }, ...SIZES]) {
+    await page.setViewportSize(size);
+    for (const { group, selector, entries } of FITTED_LABELS) {
+      for (const id of entries) {
+        for (const scale of [1, 1.5]) {
+          await openEntry(page, id, scale);
+          await page.evaluate(async () => {
+            await document.fonts.ready;
+            for (let i = 0; i < 2; i++) await new Promise((done) => requestAnimationFrame(done));
+          });
+          const where = `${group} in ${id} at ${size.width}×${size.height}, ${scale * 100} %`;
+          const labels = await page.locator(selector).evaluateAll((elements) =>
+            elements.map((element) => {
+              const label = element as HTMLElement;
+              const style = getComputedStyle(label);
+              const sides =
+                parseFloat(style.paddingLeft) +
+                parseFloat(style.paddingRight) +
+                parseFloat(style.borderLeftWidth) +
+                parseFloat(style.borderRightWidth);
+              const range = document.createRange();
+              range.selectNodeContents(label);
+              const inked = range.getBoundingClientRect().width;
+              const room = label.getBoundingClientRect().width - sides;
+              const shown = parseFloat(getComputedStyle(label).fontSize);
+              const fitted = label.style.fontSize;
+              label.style.fontSize = '';
+              const normal = parseFloat(getComputedStyle(label).fontSize);
+              label.style.fontSize = fitted;
+              return {
+                text: label.textContent?.trim() ?? '',
+                fitted: label.style.textOverflow === 'ellipsis',
+                fits: inked <= room + 0.01,
+                height: label.getBoundingClientRect().height,
+                group: Array.from(document.querySelectorAll('[role="radiogroup"]')).indexOf(
+                  label.closest('[role="radiogroup"]')!,
+                ),
+                ratio: shown / normal,
+                title: label.title,
+              };
+            }),
+          );
+          expect(labels.length, `${where}: shown`).toBeGreaterThan(0);
+          for (const label of labels) {
+            const what = `${where}: "${label.text}"`;
+            expect.soft(label.fitted, `${what} fits itself`).toBe(true);
+            expect.soft(label.ratio, `${what} at 80 % or more`).toBeGreaterThanOrEqual(0.8 - 1e-3);
+            if (!label.fits) {
+              expect.soft(label.ratio, `${what} is cut only at 80 %`).toBeCloseTo(0.8, 3);
+              expect.soft(label.title, `${what} keeps its full text as a title`).not.toBe('');
+            }
+          }
+          if (group === 'segmented option') {
+            // A shrunk option keeps the height of the others in its control.
+            for (const control of new Set(labels.map((label) => label.group))) {
+              const heights = labels.filter((l) => l.group === control).map((l) => l.height);
+              expect
+                .soft(
+                  Math.max(...heights) - Math.min(...heights),
+                  `${where}: control ${control} heights`,
+                )
+                .toBeLessThanOrEqual(0.5);
+            }
+          }
+        }
+      }
+    }
+  }
+});
+
+test('a segmented option fits again when it is chosen and turns bold', async ({ page }, info) => {
+  test.skip(info.project.name !== 'desktop', 'measured at a fixed size');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await openEntry(page, 'new-game');
+  const group = page.getByRole('radiogroup').first();
+  const second = group.getByRole('radio').nth(1);
+  await expect(second).not.toBeChecked();
+  /** The second option's face: its text and room in CSS pixels, and its size against its normal one. */
+  const face = () =>
+    group
+      .locator('label > span')
+      .nth(1)
+      .evaluate((element) => {
+        const face = element as HTMLElement;
+        const style = getComputedStyle(face);
+        const sides =
+          parseFloat(style.paddingLeft) +
+          parseFloat(style.paddingRight) +
+          parseFloat(style.borderLeftWidth) +
+          parseFloat(style.borderRightWidth);
+        const range = document.createRange();
+        range.selectNodeContents(face);
+        const regular = range.getBoundingClientRect().width;
+        const fitted = face.style.fontSize;
+        face.style.fontSize = '';
+        const normal = parseFloat(getComputedStyle(face).fontSize);
+        face.style.fontSize = fitted;
+        return {
+          text: regular,
+          room: face.getBoundingClientRect().width - sides,
+          ratio: parseFloat(style.fontSize) / normal,
+        };
+      });
+  // Narrows the control until the second option's text fits in regular type but not in bold.
+  await group.evaluate(async (control) => {
+    const element = control as HTMLElement;
+    const face = element.querySelectorAll<HTMLElement>('label > span')[1]!;
+    const options = element.querySelectorAll('label').length;
+    const range = document.createRange();
+    range.selectNodeContents(face);
+    const regular = range.getBoundingClientRect().width;
+    face.style.fontWeight = '700';
+    const bold = range.getBoundingClientRect().width;
+    face.style.fontWeight = '';
+    const style = getComputedStyle(face);
+    const room =
+      face.getBoundingClientRect().width -
+      parseFloat(style.paddingLeft) -
+      parseFloat(style.paddingRight) -
+      parseFloat(style.borderLeftWidth) -
+      parseFloat(style.borderRightWidth);
+    const width = element.getBoundingClientRect().width;
+    element.style.width = `${width - options * (room - (regular + bold) / 2)}px`;
+    element.style.flex = 'none';
+    for (let i = 0; i < 3; i++) await new Promise((done) => requestAnimationFrame(done));
+  });
+  const before = await face();
+  expect(before.text, 'regular type fits').toBeLessThanOrEqual(before.room + 0.01);
+  expect(before.ratio, 'at its normal size').toBe(1);
+  await second.check();
+  await page.evaluate(
+    () => new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done))),
+  );
+  const after = await face();
+  expect(after.ratio, 'shrunk once bold').toBeLessThan(1);
+  expect(after.text, 'bold type fits once shrunk').toBeLessThanOrEqual(after.room + 0.01);
 });

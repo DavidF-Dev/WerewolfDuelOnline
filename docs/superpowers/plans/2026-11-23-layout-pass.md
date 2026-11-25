@@ -746,3 +746,16 @@ The axe checks also run on the gallery entries, in light, dark and high contrast
 12. **Ability legend:** each icon is centred on the first line of its text.
 
 **Tests:** one per behaviour (hint per selection; no ContinueElsewhere on Invite; Badge right-aligned; spinner present with the waiting text and static under reduced motion; two-line order with no wrap; "Set aside:" label; no outline on programmatically focused headings while keyboard focus on controls still shows one; centred notice; bare icon centres within 1 px of token centres; Game over has no hint lines; replay cards share one top; legend icon centred on its first line). Update spec §8 where these change it.
+
+---
+
+### Task 15: Auto-fit one-line labels (2026-11-25, after CI)
+
+**Why:** on Ubuntu CI, "Wolf Beauty" overflowed its medium card by a fraction of a pixel (font rendering differs from Windows). Labels that must stay on one line should fit by measurement, not by pixel budgets, which also covers the DE and JA names in M5 and every text size.
+
+**Decisions (owner-approved):**
+- A reusable fit action (a Svelte action) shrinks a one-line label's font size in small steps until it fits its box, from its normal size down to a floor of 80 % of it; below the floor the label ends in "…" and the full text stays in the accessible name or `title`. It re-measures on resize, on the text-size setting changing and once fonts have loaded; never per frame.
+- Applied to: card names at every size (the trigger); bar titles; `Segmented` option labels; chips in the opponent strip and my strip (plan status, Badge); phase-bar action buttons; the plan panels' "Second" / "Initiative N" lines; player names in the strips (fit first, then the existing ellipsis).
+- Not applied to running text, the log, dialogs or anything allowed to wrap.
+
+**Tests:** the card test becomes "every name fits its slot and is at least the floor size" at 100 % and 150 %; a short name ("Seer") stays at full size; the fit action has unit tests (shrinks when too wide, stops at the floor then ellipsis, restores when there is room again); each label group above gets one fit assertion in the layout suite.

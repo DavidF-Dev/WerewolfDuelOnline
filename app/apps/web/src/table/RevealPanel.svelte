@@ -14,7 +14,6 @@
   import Label from '../kit/Label.svelte';
   import Note from '../kit/Note.svelte';
   import RichText from '../kit/RichText.svelte';
-  import Spinner from '../kit/Spinner.svelte';
   import Stepper from '../kit/Stepper.svelte';
   import { characterName, commandLabel, planSummaryParts, planText } from '../text.js';
   import { handInstruction, handPrimary } from './primary.svelte.js';
@@ -136,9 +135,10 @@
       variant="primary"
       aria-disabled={sent}
       data-testid="place-hourglasses"
+      fit
       data-phase-focus
       onclick={() => send(chosen)}
-      >{commandLabel(l, chosen)}{#if sent}<Spinner spaced={false} />{/if}</Button
+      busy={sent}>{commandLabel(l, chosen)}</Button
     >
   {/if}
 {/snippet}
@@ -149,6 +149,7 @@
     disabled={aim === undefined}
     aria-disabled={sent}
     data-testid="confirm-potion"
+    fit
     onclick={() => {
       if (aim !== undefined) send(aim);
     }}>{aim === undefined ? l.t('reveal-potion-confirm') : commandLabel(l, aim)}</Button

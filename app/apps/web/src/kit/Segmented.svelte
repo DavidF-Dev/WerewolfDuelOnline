@@ -1,4 +1,6 @@
 <script lang="ts" generics="T extends string">
+  import { fitText } from '../components/fit-text.js';
+
   let {
     label,
     labelledby,
@@ -39,7 +41,8 @@
         data-testid={option.testId}
         onchange={() => onchange(option.value)}
       />
-      <span class="face">{option.label}</span>
+      <!-- The chosen option is bold, so it fits again when it is chosen. -->
+      <span class="face" use:fitText={value === option.value}>{option.label}</span>
     </label>
   {/each}
 </div>
@@ -86,8 +89,10 @@
     width: 100%;
   }
 
+  /* The line height is a length, so a face shrunk to fit stays as tall as its neighbours. */
   .face {
     background: var(--surface);
+    line-height: 1.05rem;
     border-block: 1px solid var(--line);
     padding: 4px clamp(4px, 1.5vw, 8px);
     text-align: center;

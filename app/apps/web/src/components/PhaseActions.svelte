@@ -72,6 +72,7 @@
             variant="primary"
             aria-disabled={sent}
             data-testid="action-next-round"
+            fit
             onclick={() => send(cmd)}>{commandLabel(l, cmd)}</Button
           >
         </li>

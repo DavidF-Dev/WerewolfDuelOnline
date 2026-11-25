@@ -11,6 +11,7 @@
   import { display } from '../settings/display.svelte.js';
   import { artSymbol, type CardArtId } from '../themes/resolve.js';
   import AbilityPillIcon from './AbilityPillIcon.svelte';
+  import { fitText } from './fit-text.js';
 
   interface Props {
     /** The name printed on the card. */
@@ -65,7 +66,9 @@
   data-part="face"
 >
   {#if size === 'target'}
-    <span class="top" data-part="top"><span class="name" data-part="name">{name}</span></span>
+    <span class="top" data-part="top"
+      ><span class="name" data-part="name" use:fitText>{name}</span></span
+    >
     <span class="art" data-part="art" data-pattern={pattern}>
       {@render initiativeNumber()}
       {#if !textOnly}
@@ -78,7 +81,7 @@
   {:else}
     <span class="top" data-part="top">
       {@render initiativeNumber()}
-      <span class="name" data-part="name">{name}</span>
+      <span class="name" data-part="name" use:fitText>{name}</span>
       {@render factionIcon()}
     </span>
     <span class="art" data-part="art" data-pattern={pattern}>
@@ -230,14 +233,13 @@
     text-align: start;
   }
 
+  /* The line height stays at the normal size's, so a name shrunk to fit leaves the rows in place. */
   .name {
     flex: 1;
     font-size: var(--name-size);
     font-weight: 700;
-    line-height: 1.05;
+    line-height: calc(var(--name-size) * 1.05);
     min-width: 0;
-    overflow: hidden;
-    white-space: nowrap;
   }
 
   .faction-icon {

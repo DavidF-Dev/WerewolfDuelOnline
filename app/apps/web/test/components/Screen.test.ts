@@ -40,4 +40,13 @@ describe('Button', () => {
     await userEvent.setup().click(button);
     expect(onclick).toHaveBeenCalledOnce();
   });
+
+  it('keeps a busy spinner beside a fitted label, not inside it', () => {
+    render(Button, { props: { fit: true, busy: true, children: text('Seal plan') } });
+    const button = screen.getByRole('button', { name: 'Seal plan' });
+    const label = button.querySelector('[data-part="label"]');
+    const spinner = button.querySelector('[data-part="spinner"]');
+    expect(label?.textContent).toBe('Seal plan');
+    expect(spinner?.parentElement).toBe(button);
+  });
 });

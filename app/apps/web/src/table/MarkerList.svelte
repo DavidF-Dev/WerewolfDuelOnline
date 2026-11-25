@@ -39,7 +39,7 @@
   {/if}
   {#if hasBadge}
     <li class="badge">
-      <Chip data-testid="{testId}-badge">
+      <Chip data-testid="{testId}-badge" fit>
         {#snippet icon()}<MarkerIcon marker="badge" />{/snippet}{l.t('marker-badge')}
       </Chip>
     </li>
@@ -71,6 +71,10 @@
 
   .badge-at-end {
     flex: 1 1 auto;
+  }
+
+  .badge {
+    min-width: 0;
   }
 
   .badge-at-end .badge {

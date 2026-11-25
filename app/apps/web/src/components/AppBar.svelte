@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import IconButton from '../kit/IconButton.svelte';
+  import { fitText } from './fit-text.js';
   import { trimToCaps } from './trim-to-caps.js';
 
   interface Props {
@@ -34,7 +35,9 @@
       <circle cx="16" cy="9" r="8" fill="var(--bar-a)" opacity="0.55" />
       <path d="M5 20l2.5-6 1.5 2 1-4 1.5 3 1.5-3 1 4 1.5-2L19 20z" fill="var(--bar-a)" />
     </svg>
-    <span class={['title', { brand }]} data-part="bar-title" use:trimToCaps>{title}</span>
+    <span class={['title', { brand }]} data-part="bar-title" use:trimToCaps use:fitText
+      >{title}</span
+    >
   </h1>
   {#if right}
     <div class="right">{@render right()}</div>
@@ -75,7 +78,6 @@
   .title {
     display: block;
     line-height: 1.15;
-    overflow-wrap: anywhere;
   }
 
   .brand {

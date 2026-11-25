@@ -12,7 +12,6 @@
   import Button from '../components/Button.svelte';
   import ConfirmDialog from '../components/ConfirmDialog.svelte';
   import RichText from '../kit/RichText.svelte';
-  import Spinner from '../kit/Spinner.svelte';
   import { display } from '../settings/display.svelte.js';
   import { characterName, planSummaryParts, planText } from '../text.js';
   import HandFan from './HandFan.svelte';
@@ -142,8 +141,9 @@
     aria-describedby={match === undefined ? `${uid}-seal-note` : undefined}
     aria-haspopup={display.confirmPlan ? 'dialog' : undefined}
     data-testid="seal-plan"
+    fit
     onclick={seal}
-    >{l.t('plan-seal')}{#if sent}<Spinner spaced={false} />{/if}</Button
+    busy={sent}>{l.t('plan-seal')}</Button
   >
   {#if match === undefined}
     <span id="{uid}-seal-note" class="visually-hidden">{l.t('plan-seal-incomplete')}</span>

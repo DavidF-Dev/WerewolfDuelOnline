@@ -26,7 +26,7 @@ env:
 jobs:
   check:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: app
@@ -36,6 +36,36 @@ jobs:
       - run: pnpm build
       - run: pnpm lint
       - run: pnpm test
+
+  e2e:
+    name: e2e (${{ matrix.name }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: app
+    strategy:
+      # Every shard reports, so one failure doesn't hide another.
+      fail-fast: false
+      matrix:
+        include:
+          - name: layout 1 of 3
+            command: e2e --grep-invert @pseudo --shard=1/3
+          - name: layout 2 of 3
+            command: e2e --grep-invert @pseudo --shard=2/3
+          - name: layout 3 of 3
+            command: e2e --grep-invert @pseudo --shard=3/3
+          - name: online 1 of 2
+            command: e2e:online --shard=1/2
+          - name: online 2 of 2
+            command: e2e:online --shard=2/2
+          - name: pseudo-locale and PWA
+            command: e2e --grep @pseudo
+            extras: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-app
+      - run: pnpm build
       - name: Get the Playwright version
         id: playwright
         run: echo "version=$(pnpm --filter @wwd/web exec playwright --version | awk '{print $2}')" >> "$GITHUB_OUTPUT"
@@ -51,20 +81,23 @@ jobs:
       - name: Install Playwright system dependencies
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: pnpm --filter @wwd/web exec playwright install-deps chromium
-      - run: pnpm --filter @wwd/web e2e --grep-invert @pseudo
-      - name: Run the layout suite in the pseudo-locale
-        run: pnpm --filter @wwd/web e2e --grep @pseudo
-      - run: pnpm --filter @wwd/web e2e:pwa
-      - run: pnpm --filter @wwd/web e2e:online
+      - name: Run ${{ matrix.name }}
+        env:
+          COMMAND: ${{ matrix.command }}
+        # Unquoted, so the command splits into the script name and its arguments.
+        run: pnpm --filter @wwd/web $COMMAND
+      - name: Run pnpm --filter @wwd/web e2e:pwa
+        if: matrix.extras
+        run: pnpm --filter @wwd/web e2e:pwa
       # The parity run repeats part of e2e:online against wrangler dev, so it runs only on request.
       - name: Run the workerd parity end-to-end tests
-        if: github.event_name == 'workflow_dispatch'
+        if: matrix.extras && github.event_name == 'workflow_dispatch'
         run: pnpm --filter @wwd/web e2e:parity
       - name: Upload Playwright traces
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-traces
+          name: playwright-traces-${{ strategy.job-index }}
           path: app/apps/web/test-results
           if-no-files-found: ignore
 

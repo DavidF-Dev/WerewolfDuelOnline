@@ -16,7 +16,14 @@ import {
   snapshot,
   targetId,
 } from './game.js';
-import { GALLERY_ENTRIES, expectGalleryEntries, openGalleryEntry } from './gallery-entries.js';
+import {
+  GALLERY_ENTRIES,
+  LANGUAGES,
+  expectGalleryEntries,
+  inLanguage,
+  inLanguageTitle,
+  openGalleryEntry,
+} from './gallery-entries.js';
 
 interface Theme {
   name: string;
@@ -215,12 +222,14 @@ test.describe('every gallery entry passes axe in each theme', () => {
     await expectGalleryEntries(page);
   });
 
-  for (const id of GALLERY_ENTRIES) {
-    test(id, async ({ page }, info) => {
-      test.skip(info.project.name !== 'desktop', 'checked at one phone size');
-      await page.setViewportSize({ width: 360, height: 740 });
-      await openGalleryEntry(page, id);
-      await expectAccessible(page, id);
-    });
+  for (const lang of LANGUAGES) {
+    for (const id of GALLERY_ENTRIES) {
+      test(inLanguageTitle(id, lang), async ({ page }, info) => {
+        test.skip(info.project.name !== 'desktop', 'checked at one phone size');
+        await page.setViewportSize({ width: 360, height: 740 });
+        await openGalleryEntry(page, id, inLanguage(lang));
+        await expectAccessible(page, id);
+      });
+    }
   }
 });

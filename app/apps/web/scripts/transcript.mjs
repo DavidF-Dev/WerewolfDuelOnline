@@ -1,11 +1,17 @@
-// Writes three seeded games as markdown logs per view; `--search` finds seeds for the scenarios.
+// Writes three seeded games as markdown logs per view, in the language `--lang` names.
 import { mkdir, readdir, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { Game, defaultRulesConfig, replayTimeline } from '@wwd/engine';
 import { loadEngineForNode } from '@wwd/engine/test-support';
-import { createLocaliser } from '@wwd/client-core';
+import { createLocaliser, loadLocale, LOCALES } from '@wwd/client-core';
+import { optionValue } from './args.mjs';
 
-const OUT = new URL('../visual-output/transcripts/', import.meta.url);
+/** The language the logs are written in. */
+const LANGUAGE = optionValue(process.argv.slice(2), 'lang', LOCALES, 'en');
+const OUT = new URL(
+  `../visual-output/${LANGUAGE === 'en' ? 'transcripts' : `transcripts-${LANGUAGE}`}/`,
+  import.meta.url,
+);
 const MAX_STEPS = 20_000;
 
 /** What the games must show between them, and how to spot each in an event. */
@@ -156,7 +162,8 @@ await loadEngineForNode();
 if (process.argv.includes('--search')) {
   console.log(JSON.stringify(search()));
 } else {
-  const l = createLocaliser('en');
+  await loadLocale(LANGUAGE);
+  const l = createLocaliser(LANGUAGE);
   await mkdir(OUT, { recursive: true });
   // Emptied, not removed, so a shell open in the folder does not block the run.
   for (const name of await readdir(OUT))

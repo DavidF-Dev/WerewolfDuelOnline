@@ -59,7 +59,7 @@
       const created = new GameClient({ room });
       cleanups.push(
         () => created.dispose(),
-        installDevHook(created, l),
+        installDevHook(created),
         created.state.subscribe((value) => {
           snapshot = value;
           notice = null;

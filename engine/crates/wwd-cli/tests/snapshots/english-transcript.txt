@@ -1,0 +1,3366 @@
+# Game 1
+Your hand: Knight, Witch and Villager
+  Play Knight targeting the Wolf King
+  Play Knight targeting the Wolf King and the Fool
+  Play Knight targeting the Wolfen
+  Play Knight targeting the Wolfen and the Fool
+  Play Knight targeting the Wolf Beauty
+  Play Knight targeting the Wolf Beauty and the Fool
+  Play Knight targeting the Fool
+  Play Witch targeting the Fool
+  Play Villager targeting the Fool
+> Play Knight targeting the Wolf Beauty
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Wolf King, Wolfen and Seer
+> Play Wolf King targeting the Seer and the Villager
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Plans revealed. Player 1 plays Knight targeting the Wolf Beauty at initiative 2. Player 2 plays Wolf King targeting the Seer and the Villager at initiative 2. Player 1 resolves first.
+Player 1's Knight resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Knight misses.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Round 1 ends. Player 1 takes the Badge.
+The card set aside in round 1 was the Wolf Beauty.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 2 begins. Player 1 holds the Badge.
+Player 1 is dealt Knight, Seer, Witch and Villager.
+Player 2 is dealt Hunter, Wolfen and Wolf Beauty.
+Your hand: Knight, Seer, Witch and Villager
+> Play Seer targeting the Wolf Beauty and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Hunter, Wolfen and Wolf Beauty
+> Play Hunter targeting the Wolf King, the Wolf Beauty and the Fool
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Seer targeting the Wolf Beauty and the Fool at initiative 4. Player 2 plays Hunter targeting the Wolf King, the Wolf Beauty and the Fool at initiative 1. Player 2 resolves first.
+Player 2's Hunter resolves.
+Your hand: 
+  Keep the Cross
+  Spend a Cross to attack
+> Keep the Cross
+Player 2 makes no attack: the Cross was not spent.
+Player 1's Seer resolves.
+Player 1's Seer misses.
+Round 2 ends. Player 2 takes the Badge.
+The card set aside in round 2 was the Wolf King.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 3 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Wolf King, Knight and Villager.
+Player 1 is dealt Seer, Witch and Wolf Beauty.
+Your hand: Seer, Witch and Wolf Beauty
+> Play Wolf Beauty targeting the Seer
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Wolf King, Knight and Villager
+> Play Wolf King targeting the Knight, the Seer and the Fool
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Seer at initiative 7. Player 2 plays Wolf King targeting the Knight, the Seer and the Fool at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Wolf Beauty resolves.
+Player 1 gains 1 Fang.
+Player 1's Wolf Beauty misses.
+Round 3 ends. Player 1 takes the Badge.
+The card set aside in round 3 was the Wolfen.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 4 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Knight, Wolfen and Seer.
+Player 2 is dealt Hunter, Witch and Wolf Beauty.
+Your hand: Wolf King, Knight, Wolfen and Seer
+> Play Wolf King targeting the Seer, the Villager and the Fool
+Player 1 seals a plan with 3 target cards.
+Your hand: Hunter, Witch and Wolf Beauty
+> Play Hunter targeting the Wolf Beauty and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Seer, the Villager and the Fool at initiative 2. Player 2 plays Hunter targeting the Wolf Beauty and the Fool at initiative 1. Player 2 resolves first.
+Player 2's Hunter resolves.
+Your hand: 
+  Keep the Cross
+  Spend a Cross to attack
+> Spend a Cross to attack
+Player 2 spends 1 Cross.
+Player 2's Hunter misses.
+Player 1's Wolf King resolves.
+Player 1 spends 1 Fang.
+Player 1's Wolf King misses.
+Round 4 ends. Player 2 takes the Badge.
+The card set aside in round 4 was the Villager.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 5 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Wolf King, Knight and Villager.
+Player 1 is dealt Seer, Witch and Wolf Beauty.
+Your hand: Seer, Witch and Wolf Beauty
+> Play Wolf Beauty targeting the Wolf Beauty
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Wolf King, Knight and Villager
+> Play Wolf King targeting the Knight, the Villager and the Fool
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Wolf Beauty at initiative 7. Player 2 plays Wolf King targeting the Knight, the Villager and the Fool at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Wolf Beauty resolves.
+Player 1 gains 1 Fang.
+Player 1's Wolf Beauty misses.
+Round 5 ends. Player 1 takes the Badge.
+The card set aside in round 5 was the Wolfen.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 6 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Wolf King, Witch and Villager.
+Player 2 is dealt Knight, Wolfen and Wolf Beauty.
+Your hand: Hunter, Wolf King, Witch and Villager
+> Play Wolf King targeting the Hunter, the Knight and the Villager
+Player 1 seals a plan with 3 target cards.
+Your hand: Knight, Wolfen and Wolf Beauty
+> Play Wolfen targeting the Seer and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Hunter, the Knight and the Villager at initiative 2. Player 2 plays Wolfen targeting the Seer and the Fool at initiative 4. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Round 6 ends. Player 2 takes the Badge.
+The card set aside in round 6 was the Seer.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 7 begins. Player 2 holds the Badge.
+Player 2 is dealt Knight, Wolfen, Witch and Wolf Beauty.
+Player 1 is dealt Hunter, Seer and Villager.
+Your hand: Hunter, Seer and Villager
+> Play Seer targeting the Wolf Beauty and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Knight, Wolfen, Witch and Wolf Beauty
+> Play Knight targeting the Wolf Beauty and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Seer targeting the Wolf Beauty and the Fool at initiative 5. Player 2 plays Knight targeting the Wolf Beauty and the Fool at initiative 2. Player 2 resolves first.
+Player 2's Knight resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Knight misses.
+Player 1's Seer resolves.
+Player 1's Seer misses.
+Round 7 ends. Player 1 takes the Badge.
+The card set aside in round 7 was the Wolf King.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 8 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Knight, Wolfen and Wolf Beauty.
+Player 2 is dealt Hunter, Seer and Villager.
+Your hand: Wolf King, Knight, Wolfen and Wolf Beauty
+> Play Wolf King targeting the Seer and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Hunter, Seer and Villager
+> Play Seer targeting the Wolf Beauty and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Seer and the Fool at initiative 2. Player 2 plays Seer targeting the Wolf Beauty and the Fool at initiative 5. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1's Wolf King hits Player 2's Seer! Player 2 loses 1 Health.
+Round 8 ends. Player 2 takes the Badge.
+The card set aside in round 8 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 9 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Wolf King, Knight and Seer.
+Player 1 is dealt Wolfen, Wolf Beauty and Villager.
+Your hand: Wolfen, Wolf Beauty and Villager
+> Play Wolfen targeting the Knight
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Wolf King, Knight and Seer
+> Play Wolf King targeting the Hunter, the Knight, the Villager and the Fool
+Player 2 seals a plan with 4 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolfen targeting the Knight at initiative 4. Player 2 plays Wolf King targeting the Hunter, the Knight, the Villager and the Fool at initiative 1. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen misses.
+Round 9 ends. Player 1 takes the Badge.
+The card set aside in round 9 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 10 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Knight, Wolfen and Wolf Beauty.
+Player 2 is dealt Hunter, Witch and Villager.
+Your hand: Wolf King, Knight, Wolfen and Wolf Beauty
+> Play Wolf King targeting the Knight, the Villager and the Fool
+Player 1 seals a plan with 3 target cards.
+Your hand: Hunter, Witch and Villager
+> Play Witch targeting the Fool
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Knight, the Villager and the Fool at initiative 2. Player 2 plays Witch targeting the Fool at initiative 6. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 spends 1 Fang.
+Player 1's Wolf King misses.
+Player 2's Witch resolves.
+Player 2 gains the Potion.
+Round 10 ends. Player 2 takes the Badge.
+The card set aside in round 10 was the Seer.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 11 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Wolfen, Seer and Villager.
+Player 1 is dealt Wolf King, Witch and Wolf Beauty.
+Your hand: Wolf King, Witch and Wolf Beauty
+> Play Wolf King targeting the Knight, the Witch and the Fool
+Player 1 seals a plan with 3 target cards.
+Your hand: Hunter, Wolfen, Seer and Villager
+> Play Wolfen targeting the Wolf King
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Aim the Potion at Hunter
+  Aim the Potion at Knight
+  Aim the Potion at Wolfen
+  Aim the Potion at Seer
+  Aim the Potion at Witch
+  Aim the Potion at Wolf Beauty
+  Aim the Potion at Villager
+> Aim the Potion at Knight
+Player 2 aims the Potion at the Knight.
+Plans revealed. Player 1 plays Wolf King targeting the Knight, the Witch and the Fool at initiative 2. Player 2 plays Wolfen targeting the Wolf King at initiative 4. Player 1 resolves first.
+The Potion misses: Player 1 did not play the Knight.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Round 11 ends. Player 1 takes the Badge.
+The card set aside in round 11 was the Knight.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 12 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Seer, Wolf Beauty and Villager.
+Player 2 is dealt Hunter, Knight and Witch.
+Your hand: Wolf King, Seer, Wolf Beauty and Villager
+> Play Wolf King targeting the Hunter, the Knight and the Villager
+Player 1 seals a plan with 3 target cards.
+Your hand: Hunter, Knight and Witch
+> Play Knight targeting the Wolfen and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Hunter, the Knight and the Villager at initiative 2. Player 2 plays Knight targeting the Wolfen and the Fool at initiative 3. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Player 2's Knight resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Knight misses.
+Round 12 ends. Player 2 takes the Badge.
+The card set aside in round 12 was the Wolfen.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 13 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Knight, Witch and Villager.
+Player 1 is dealt Hunter, Wolfen and Wolf Beauty.
+Your hand: Hunter, Wolfen and Wolf Beauty
+> Play Wolf Beauty targeting the Knight and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Knight, Witch and Villager
+> Play Wolf King targeting the Knight, the Seer and the Witch
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Knight and the Fool at initiative 6. Player 2 plays Wolf King targeting the Knight, the Seer and the Witch at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Wolf Beauty resolves.
+Player 1 gains 1 Fang.
+Player 1's Wolf Beauty misses.
+Round 13 ends. Player 1 takes the Badge.
+The card set aside in round 13 was the Seer.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 14 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Wolfen, Wolf Beauty and Villager.
+Player 2 is dealt Hunter, Seer and Witch.
+Your hand: Wolf King, Wolfen, Wolf Beauty and Villager
+> Play Wolfen targeting the Seer
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Seer and Witch
+> Play Seer targeting the Wolf King
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Plans revealed. Player 1 plays Wolfen targeting the Seer at initiative 4. Player 2 plays Seer targeting the Wolf King at initiative 4. Player 2 resolves first.
+Player 2's Seer resolves.
+Player 2's Seer misses.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen misses.
+Round 14 ends. Player 2 takes the Badge.
+The card set aside in round 14 was the Knight.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 15 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Knight, Seer and Villager.
+Player 1 is dealt Hunter, Wolfen and Wolf Beauty.
+Your hand: Hunter, Wolfen and Wolf Beauty
+> Play Wolfen targeting the Witch
+Player 1 seals a plan with 1 target card.
+Your hand: Wolf King, Knight, Seer and Villager
+> Play Wolf King targeting the Hunter, the Knight, the Witch and the Fool
+Player 2 seals a plan with 4 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolfen targeting the Witch at initiative 4. Player 2 plays Wolf King targeting the Hunter, the Knight, the Witch and the Fool at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen misses.
+Round 15 ends. Player 1 takes the Badge.
+The card set aside in round 15 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 16 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Wolf King, Wolfen and Wolf Beauty.
+Player 2 is dealt Knight, Seer and Witch.
+Your hand: Hunter, Wolf King, Wolfen and Wolf Beauty
+> Play Wolfen targeting the Wolfen and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Knight, Seer and Witch
+> Play Seer targeting the Fool
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 2 Hourglasses
+Player 1 places 2 Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Plans revealed. Player 1 plays Wolfen targeting the Wolfen and the Fool at initiative 2. Player 2 plays Seer targeting the Fool at initiative 4. Player 1 resolves first.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen misses.
+Player 2's Seer resolves.
+Player 2's Seer misses.
+Round 16 ends. Player 2 takes the Badge.
+The card set aside in round 16 was the Villager.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 17 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Wolfen, Wolf Beauty and Villager.
+Player 1 is dealt Knight, Seer and Witch.
+Your hand: Knight, Seer and Witch
+> Play Knight targeting the Wolf King
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Wolfen, Wolf Beauty and Villager
+> Play Wolfen targeting the Witch and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Knight targeting the Wolf King at initiative 3. Player 2 plays Wolfen targeting the Witch and the Fool at initiative 4. Player 1 resolves first.
+Player 1's Knight resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Knight misses.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Round 17 ends. Player 1 takes the Badge.
+The card set aside in round 17 was the Wolf King.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 18 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Knight, Seer and Wolf Beauty.
+Player 2 is dealt Hunter, Witch and Villager.
+Your hand: Wolf King, Knight, Seer and Wolf Beauty
+> Play Wolf King targeting the Witch, the Villager and the Fool
+Player 1 seals a plan with 3 target cards.
+Your hand: Hunter, Witch and Villager
+> Play Hunter targeting the Wolfen and the Wolf Beauty
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Plans revealed. Player 1 plays Wolf King targeting the Witch, the Villager and the Fool at initiative 2. Player 2 plays Hunter targeting the Wolfen and the Wolf Beauty at initiative 0. Player 2 resolves first.
+Player 2's Hunter resolves.
+Player 2 makes no attack: there is no Cross to spend.
+Player 1's Wolf King resolves.
+Player 1 spends 1 Fang.
+Player 1's Wolf King misses.
+Round 18 ends. Player 2 takes the Badge.
+The card set aside in round 18 was the Wolfen.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 19 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Witch, Wolf Beauty and Villager.
+Player 1 is dealt Hunter, Knight and Seer.
+Your hand: Hunter, Knight and Seer
+> Play Hunter targeting the Wolfen and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Witch, Wolf Beauty and Villager
+> Play Wolf King targeting the Seer and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Hunter targeting the Wolfen and the Fool at initiative 1. Player 2 plays Wolf King targeting the Seer and the Fool at initiative 2. Player 1 resolves first.
+Player 1's Hunter resolves.
+Your hand: 
+  Keep the Cross
+  Spend a Cross to attack
+> Spend a Cross to attack
+Player 1 spends 1 Cross.
+Player 1's Hunter misses.
+Player 2's Wolf King resolves.
+Player 2's Wolf King misses.
+Round 19 ends. Player 1 takes the Badge.
+The card set aside in round 19 was the Wolfen.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 20 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Wolf King, Wolfen and Wolf Beauty.
+Player 2 is dealt Knight, Seer and Witch.
+Your hand: Hunter, Wolf King, Wolfen and Wolf Beauty
+> Play Wolfen targeting the Fool
+Player 1 seals a plan with 1 target card.
+Your hand: Knight, Seer and Witch
+> Play Knight targeting the Wolfen and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 2 Hourglasses
+Player 1 places 2 Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolfen targeting the Fool at initiative 2. Player 2 plays Knight targeting the Wolfen and the Fool at initiative 3. Player 1 resolves first.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen misses.
+Player 2's Knight resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Knight misses.
+Round 20 ends. Player 2 takes the Badge.
+The card set aside in round 20 was the Villager.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 21 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Seer, Wolf Beauty and Villager.
+Player 1 is dealt Hunter, Wolfen and Witch.
+Your hand: Hunter, Wolfen and Witch
+> Play Wolfen targeting the Seer and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Seer, Wolf Beauty and Villager
+> Play Wolf Beauty targeting the Witch
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolfen targeting the Seer and the Fool at initiative 4. Player 2 plays Wolf Beauty targeting the Witch at initiative 7. Player 1 resolves first.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen misses.
+Player 2's Wolf Beauty resolves.
+Player 2 gains 1 Fang.
+Player 2's Wolf Beauty misses.
+Round 21 ends. Player 1 takes the Badge.
+The card set aside in round 21 was the Knight.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 22 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Knight, Wolfen and Seer.
+Player 2 is dealt Witch, Wolf Beauty and Villager.
+Your hand: Wolf King, Knight, Wolfen and Seer
+> Play Wolf King targeting the Hunter, the Seer, the Witch and the Villager
+Player 1 seals a plan with 4 target cards.
+Your hand: Witch, Wolf Beauty and Villager
+> Play Witch targeting the Fool
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Hunter, the Seer, the Witch and the Villager at initiative 2. Player 2 plays Witch targeting the Fool at initiative 6. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Player 2's Witch resolves.
+Player 2 gains the Potion.
+Round 22 ends. Player 2 takes the Badge.
+The card set aside in round 22 was the Hunter.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 23 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Wolf King, Wolfen and Witch.
+Player 1 is dealt Seer, Wolf Beauty and Villager.
+Your hand: Seer, Wolf Beauty and Villager
+> Play Wolf Beauty targeting the Seer and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Hunter, Wolf King, Wolfen and Witch
+> Play Wolfen targeting the Seer and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 2 Hourglasses
+Player 1 places 2 Hourglasses.
+Your hand: 
+  Aim the Potion at Hunter
+  Aim the Potion at Wolf King
+  Aim the Potion at Knight
+  Aim the Potion at Wolfen
+  Aim the Potion at Witch
+  Aim the Potion at Wolf Beauty
+  Aim the Potion at Villager
+> Aim the Potion at Wolfen
+Player 2 aims the Potion at the Wolfen.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Seer and the Fool at initiative 5. Player 2 plays Wolfen targeting the Seer and the Fool at initiative 4. Player 2 resolves first.
+The Potion misses: Player 1 did not play the Wolfen.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Player 1's Wolf Beauty resolves.
+Player 1 gains 1 Fang.
+Player 1's Wolf Beauty misses.
+Round 23 ends. Player 1 takes the Badge.
+The card set aside in round 23 was the Knight.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 24 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Knight, Witch and Wolf Beauty.
+Player 2 is dealt Wolfen, Seer and Villager.
+Your hand: Wolf King, Knight, Witch and Wolf Beauty
+> Play Wolf King targeting the Seer and the Villager
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolfen, Seer and Villager
+> Play Seer targeting the Wolfen
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Seer and the Villager at initiative 2. Player 2 plays Seer targeting the Wolfen at initiative 5. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 spends 1 Fang.
+Player 1's Wolf King hits Player 2's Seer! Player 2 loses 1 Health.
+Player 1 wins by reducing Player 2's Health to zero.
+# Game 2
+Your hand: Hunter, Wolfen, Witch and Wolf Beauty
+> Play Wolfen targeting the Wolfen
+Player 1 seals a plan with 1 target card.
+Your hand: Wolf King, Seer and Villager
+> Play Wolf King targeting the Witch and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolfen targeting the Wolfen at initiative 4. Player 2 plays Wolf King targeting the Witch and the Fool at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2's Wolf King misses.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen misses.
+Round 1 ends. Player 2 takes the Badge.
+The card set aside in round 1 was the Knight.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 2 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Knight, Wolf Beauty and Villager.
+Player 1 is dealt Hunter, Wolfen and Witch.
+Your hand: Hunter, Wolfen and Witch
+> Play Hunter targeting the Wolf King and the Wolf Beauty
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Knight, Wolf Beauty and Villager
+> Play Knight targeting the Wolf King
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Hunter targeting the Wolf King and the Wolf Beauty at initiative 1. Player 2 plays Knight targeting the Wolf King at initiative 2. Player 1 resolves first.
+Player 1's Hunter resolves.
+Your hand: 
+  Keep the Cross
+  Spend a Cross to attack
+> Keep the Cross
+Player 1 makes no attack: the Cross was not spent.
+Player 2's Knight resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Knight misses.
+Round 2 ends. Player 1 takes the Badge.
+The card set aside in round 2 was the Seer.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 3 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Wolfen, Seer and Wolf Beauty.
+Player 2 is dealt Hunter, Knight and Witch.
+Your hand: Wolf King, Wolfen, Seer and Wolf Beauty
+> Play Wolf King targeting the Knight, the Seer and the Witch
+Player 1 seals a plan with 3 target cards.
+Your hand: Hunter, Knight and Witch
+> Play Hunter targeting the Wolf Beauty
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Knight, the Seer and the Witch at initiative 1. Player 2 plays Hunter targeting the Wolf Beauty at initiative 1. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Player 2's Hunter resolves.
+Your hand: 
+  Keep the Cross
+  Spend a Cross to attack
+> Keep the Cross
+Player 2 makes no attack: the Cross was not spent.
+Round 3 ends. Player 2 takes the Badge.
+The card set aside in round 3 was the Villager.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 4 begins. Player 2 holds the Badge.
+Player 2 is dealt Knight, Wolfen, Seer and Wolf Beauty.
+Player 1 is dealt Hunter, Wolf King and Witch.
+Your hand: Hunter, Wolf King and Witch
+> Play Wolf King targeting the Hunter, the Knight, the Seer, the Witch and the Fool
+Player 1 seals a plan with 5 target cards.
+Your hand: Knight, Wolfen, Seer and Wolf Beauty
+> Play Seer targeting the Wolf Beauty
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Hunter, the Knight, the Seer, the Witch and the Fool at initiative 2. Player 2 plays Seer targeting the Wolf Beauty at initiative 5. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Player 2's Seer resolves.
+Player 2's Seer misses.
+Round 4 ends. Player 1 takes the Badge.
+The card set aside in round 4 was the Villager.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 5 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Wolf King, Seer and Villager.
+Player 2 is dealt Knight, Wolfen and Witch.
+Your hand: Hunter, Wolf King, Seer and Villager
+> Play Wolf King targeting the Hunter, the Seer and the Villager
+Player 1 seals a plan with 3 target cards.
+Your hand: Knight, Wolfen and Witch
+> Play Wolfen targeting the Witch
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Hunter, the Seer and the Villager at initiative 2. Player 2 plays Wolfen targeting the Witch at initiative 4. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Round 5 ends. Player 2 takes the Badge.
+The card set aside in round 5 was the Wolf Beauty.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 6 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Knight, Seer and Wolf Beauty.
+Player 1 is dealt Hunter, Witch and Villager.
+Your hand: Hunter, Witch and Villager
+> Play Hunter targeting the Wolfen, the Wolf Beauty and the Fool
+Player 1 seals a plan with 3 target cards.
+Your hand: Wolf King, Knight, Seer and Wolf Beauty
+> Play Wolf King targeting the Knight, the Seer, the Witch and the Fool
+Player 2 seals a plan with 4 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Hunter targeting the Wolfen, the Wolf Beauty and the Fool at initiative 1. Player 2 plays Wolf King targeting the Knight, the Seer, the Witch and the Fool at initiative 2. Player 1 resolves first.
+Player 1's Hunter resolves.
+Your hand: 
+  Keep the Cross
+  Spend a Cross to attack
+> Spend a Cross to attack
+Player 1 spends 1 Cross.
+Player 1's Hunter misses.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Round 6 ends. Player 1 takes the Badge.
+The card set aside in round 6 was the Wolfen.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 7 begins. Player 1 holds the Badge.
+Player 1 is dealt Knight, Wolfen, Seer and Wolf Beauty.
+Player 2 is dealt Hunter, Wolf King and Villager.
+Your hand: Knight, Wolfen, Seer and Wolf Beauty
+> Play Wolf Beauty targeting the Seer
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Wolf King and Villager
+> Play Wolf King targeting the Hunter, the Seer, the Witch and the Villager
+Player 2 seals a plan with 4 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Seer at initiative 7. Player 2 plays Wolf King targeting the Hunter, the Seer, the Witch and the Villager at initiative 1. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Wolf Beauty resolves.
+Player 1 gains 1 Fang.
+Player 1's Wolf Beauty misses.
+Round 7 ends. Player 2 takes the Badge.
+The card set aside in round 7 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 8 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Wolfen, Wolf Beauty and Villager.
+Player 1 is dealt Hunter, Seer and Witch.
+Your hand: Hunter, Seer and Witch
+> Play Seer targeting the Wolfen
+Player 1 seals a plan with 1 target card.
+Your hand: Wolf King, Wolfen, Wolf Beauty and Villager
+> Play Wolf Beauty targeting the Wolf King and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Seer targeting the Wolfen at initiative 5. Player 2 plays Wolf Beauty targeting the Wolf King and the Fool at initiative 7. Player 1 resolves first.
+Player 1's Seer resolves.
+Player 1's Seer misses.
+Player 2's Wolf Beauty resolves.
+Player 2 gains 1 Fang.
+Player 2's Wolf Beauty misses.
+Round 8 ends. Player 1 takes the Badge.
+The card set aside in round 8 was the Knight.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 9 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Knight, Wolfen and Witch.
+Player 2 is dealt Hunter, Seer and Wolf Beauty.
+Your hand: Wolf King, Knight, Wolfen and Witch
+> Play Wolf King targeting the Hunter, the Knight and the Seer
+Player 1 seals a plan with 3 target cards.
+Your hand: Hunter, Seer and Wolf Beauty
+> Play Hunter targeting the Wolf Beauty
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Hunter, the Knight and the Seer at initiative 2. Player 2 plays Hunter targeting the Wolf Beauty at initiative 1. Player 2 resolves first.
+Player 2's Hunter resolves.
+Your hand: 
+  Keep the Cross
+  Spend a Cross to attack
+> Spend a Cross to attack
+Player 2 spends 1 Cross.
+Player 2's Hunter misses.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Round 9 ends. Player 2 takes the Badge.
+The card set aside in round 9 was the Villager.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 10 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Wolfen, Wolf Beauty and Villager.
+Player 1 is dealt Hunter, Knight and Seer.
+Your hand: Hunter, Knight and Seer
+> Play Hunter targeting the Wolf King, the Wolf Beauty and the Fool
+Player 1 seals a plan with 3 target cards.
+Your hand: Wolf King, Wolfen, Wolf Beauty and Villager
+> Play Wolfen targeting the Witch and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Hunter targeting the Wolf King, the Wolf Beauty and the Fool at initiative 1. Player 2 plays Wolfen targeting the Witch and the Fool at initiative 4. Player 1 resolves first.
+Player 1's Hunter resolves.
+Player 1 makes no attack: there is no Cross to spend.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Round 10 ends. Player 1 takes the Badge.
+The card set aside in round 10 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 11 begins. Player 1 holds the Badge.
+Player 1 is dealt Knight, Wolfen, Seer and Witch.
+Player 2 is dealt Hunter, Wolf King and Wolf Beauty.
+Your hand: Knight, Wolfen, Seer and Witch
+> Play Wolfen targeting the Witch
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Wolf King and Wolf Beauty
+> Play Wolf King targeting the Knight, the Seer and the Witch
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 2 Hourglasses
+Player 2 places 2 Hourglasses.
+Plans revealed. Player 1 plays Wolfen targeting the Witch at initiative 4. Player 2 plays Wolf King targeting the Knight, the Seer and the Witch at initiative 0. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen misses.
+Round 11 ends. Player 2 takes the Badge.
+The card set aside in round 11 was the Villager.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 12 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Wolfen, Witch and Villager.
+Player 1 is dealt Hunter, Knight and Wolf Beauty.
+Your hand: Hunter, Knight and Wolf Beauty
+> Play Hunter targeting the Wolfen
+Player 1 seals a plan with 1 target card.
+Your hand: Wolf King, Wolfen, Witch and Villager
+> Play Wolf King targeting the Hunter, the Seer and the Fool
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Plans revealed. Player 1 plays Hunter targeting the Wolfen at initiative 0. Player 2 plays Wolf King targeting the Hunter, the Seer and the Fool at initiative 2. Player 1 resolves first.
+Player 1's Hunter resolves.
+Player 1 makes no attack: there is no Cross to spend.
+Player 2's Wolf King resolves.
+Player 2 spends 1 Fang.
+Player 2's Wolf King misses.
+Round 12 ends. Player 1 takes the Badge.
+The card set aside in round 12 was the Seer.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 13 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Seer, Wolf Beauty and Villager.
+Player 2 is dealt Knight, Wolfen and Witch.
+Your hand: Wolf King, Seer, Wolf Beauty and Villager
+> Play Wolf Beauty targeting the Wolf King
+Player 1 seals a plan with 1 target card.
+Your hand: Knight, Wolfen and Witch
+> Play Knight targeting the Wolfen and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Wolf King at initiative 7. Player 2 plays Knight targeting the Wolfen and the Fool at initiative 3. Player 2 resolves first.
+Player 2's Knight resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Knight misses.
+Player 1's Wolf Beauty resolves.
+Player 1 gains 1 Fang.
+Player 1's Wolf Beauty misses.
+Round 13 ends. Player 2 takes the Badge.
+The card set aside in round 13 was the Hunter.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 14 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Knight, Seer and Villager.
+Player 1 is dealt Hunter, Witch and Wolf Beauty.
+Your hand: Hunter, Witch and Wolf Beauty
+> Play Wolf Beauty targeting the Knight and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Knight, Seer and Villager
+> Play Wolf King targeting the Knight
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Knight and the Fool at initiative 7. Player 2 plays Wolf King targeting the Knight at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2's Wolf King misses.
+Player 1's Wolf Beauty resolves.
+Player 1 gains 1 Fang.
+Player 1 wins by collecting enough Fangs.
+# Game 3
+Your hand: Hunter, Knight and Villager
+> Play Hunter targeting the Wolf King and the Wolf Beauty
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Seer, Witch and Wolf Beauty
+> Play Wolf King targeting the Hunter
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Hunter targeting the Wolf King and the Wolf Beauty at initiative 1. Player 2 plays Wolf King targeting the Hunter at initiative 2. Player 1 resolves first.
+Player 1's Hunter resolves.
+Your hand: 
+  Keep the Cross
+  Spend a Cross to attack
+> Spend a Cross to attack
+Player 1 spends 1 Cross.
+Player 1's Hunter hits Player 2's Wolf King! Player 2 loses 1 Health.
+Round 1 ends. Player 1 takes the Badge.
+The card set aside in round 1 was the Wolfen.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 2 begins. Player 1 holds the Badge.
+Player 1 is dealt Knight, Witch, Wolf Beauty and Villager.
+Player 2 is dealt Hunter, Wolf King and Seer.
+Your hand: Knight, Witch, Wolf Beauty and Villager
+> Play Knight targeting the Wolfen
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Wolf King and Seer
+> Play Hunter targeting the Wolf Beauty
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Knight targeting the Wolfen at initiative 2. Player 2 plays Hunter targeting the Wolf Beauty at initiative 1. Player 2 resolves first.
+Player 2's Hunter resolves.
+Your hand: 
+  Keep the Cross
+  Spend a Cross to attack
+> Spend a Cross to attack
+Player 2 spends 1 Cross.
+Player 2's Hunter misses.
+Player 1's Knight resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Knight misses.
+Round 2 ends. Player 2 takes the Badge.
+The card set aside in round 2 was the Wolfen.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 3 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Knight, Wolf Beauty and Villager.
+Player 1 is dealt Wolfen, Seer and Witch.
+Your hand: Wolfen, Seer and Witch
+> Play Wolfen targeting the Wolfen
+Player 1 seals a plan with 1 target card.
+Your hand: Wolf King, Knight, Wolf Beauty and Villager
+> Play Wolf King targeting the Seer
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolfen targeting the Wolfen at initiative 4. Player 2 plays Wolf King targeting the Seer at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2's Wolf King misses.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen misses.
+Round 3 ends. Player 1 takes the Badge.
+The card set aside in round 3 was the Hunter.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 4 begins. Player 1 holds the Badge.
+Player 1 is dealt Knight, Wolfen, Witch and Villager.
+Player 2 is dealt Hunter, Wolf King and Seer.
+Your hand: Knight, Wolfen, Witch and Villager
+> Play Wolfen targeting the Wolfen and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Hunter, Wolf King and Seer
+> Play Wolf King targeting the Seer, the Villager and the Fool
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 2 Hourglasses
+Player 1 places 2 Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolfen targeting the Wolfen and the Fool at initiative 2. Player 2 plays Wolf King targeting the Seer, the Villager and the Fool at initiative 2. Player 1 resolves first.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen misses.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Round 4 ends. Player 2 takes the Badge.
+The card set aside in round 4 was the Wolf Beauty.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 5 begins. Player 2 holds the Badge.
+Player 2 is dealt Knight, Wolfen, Witch and Wolf Beauty.
+Player 1 is dealt Hunter, Seer and Villager.
+Your hand: Hunter, Seer and Villager
+> Play Seer targeting the Fool
+Player 1 seals a plan with 1 target card.
+Your hand: Knight, Wolfen, Witch and Wolf Beauty
+> Play Wolf Beauty targeting the Villager and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Seer targeting the Fool at initiative 5. Player 2 plays Wolf Beauty targeting the Villager and the Fool at initiative 7. Player 1 resolves first.
+Player 1's Seer resolves.
+Player 1's Seer misses.
+Player 2's Wolf Beauty resolves.
+Player 2 gains 1 Fang.
+Player 2's Wolf Beauty misses.
+Round 5 ends. Player 1 takes the Badge.
+The card set aside in round 5 was the Wolf King.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 6 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Knight, Wolfen and Seer.
+Player 2 is dealt Hunter, Wolf Beauty and Villager.
+Your hand: Wolf King, Knight, Wolfen and Seer
+> Play Wolf King targeting the Hunter, the Seer, the Witch and the Fool
+Player 1 seals a plan with 4 target cards.
+Your hand: Hunter, Wolf Beauty and Villager
+> Play Hunter targeting the Wolf King, the Wolf Beauty and the Fool
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Hunter, the Seer, the Witch and the Fool at initiative 1. Player 2 plays Hunter targeting the Wolf King, the Wolf Beauty and the Fool at initiative 1. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Player 2's Hunter resolves.
+Player 2 makes no attack: there is no Cross to spend.
+Round 6 ends. Player 2 takes the Badge.
+The card set aside in round 6 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 7 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Seer, Witch and Villager.
+Player 1 is dealt Hunter, Knight and Wolf Beauty.
+Your hand: Hunter, Knight and Wolf Beauty
+> Play Wolf Beauty targeting the Hunter and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Seer, Witch and Villager
+> Play Wolf King targeting the Hunter, the Knight, the Seer and the Villager
+Player 2 seals a plan with 4 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Hunter and the Fool at initiative 7. Player 2 plays Wolf King targeting the Hunter, the Knight, the Seer and the Villager at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Wolf Beauty resolves.
+Player 1 gains 1 Fang.
+Player 1's Wolf Beauty misses.
+Round 7 ends. Player 1 takes the Badge.
+The card set aside in round 7 was the Wolfen.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 8 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Wolf King, Knight and Wolf Beauty.
+Player 2 is dealt Wolfen, Seer and Villager.
+Your hand: Hunter, Wolf King, Knight and Wolf Beauty
+> Play Wolf Beauty targeting the Villager and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolfen, Seer and Villager
+> Play Wolfen targeting the Villager
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Villager and the Fool at initiative 7. Player 2 plays Wolfen targeting the Villager at initiative 4. Player 2 resolves first.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Player 1's Wolf Beauty resolves.
+Player 1 gains 1 Fang.
+Player 1's Wolf Beauty misses.
+Round 8 ends. Player 2 takes the Badge.
+The card set aside in round 8 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 9 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Knight, Seer and Wolf Beauty.
+Player 1 is dealt Hunter, Witch and Villager.
+Your hand: Hunter, Witch and Villager
+> Play Hunter targeting the Wolf King, the Wolfen and the Fool
+Player 1 seals a plan with 3 target cards.
+Your hand: Wolf King, Knight, Seer and Wolf Beauty
+> Play Wolf King targeting the Knight, the Witch and the Villager
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Hunter targeting the Wolf King, the Wolfen and the Fool at initiative 1. Player 2 plays Wolf King targeting the Knight, the Witch and the Villager at initiative 2. Player 1 resolves first.
+Player 1's Hunter resolves.
+Player 1 makes no attack: there is no Cross to spend.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Round 9 ends. Player 1 takes the Badge.
+The card set aside in round 9 was the Wolfen.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 10 begins. Player 1 holds the Badge.
+Player 1 is dealt Knight, Wolfen, Seer and Wolf Beauty.
+Player 2 is dealt Hunter, Wolf King and Villager.
+Your hand: Knight, Wolfen, Seer and Wolf Beauty
+> Play Wolf Beauty targeting the Witch and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Hunter, Wolf King and Villager
+> Play Wolf King targeting the Hunter, the Seer, the Villager and the Fool
+Player 2 seals a plan with 4 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Witch and the Fool at initiative 7. Player 2 plays Wolf King targeting the Hunter, the Seer, the Villager and the Fool at initiative 1. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Wolf Beauty resolves.
+Player 1 gains 1 Fang.
+Player 1 wins by collecting enough Fangs.
+# Game 4
+Your hand: Hunter, Wolf King, Seer and Witch
+> Play Wolf King targeting the Seer and the Witch
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolfen, Wolf Beauty and Villager
+> Play Wolfen targeting the Hunter and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Seer and the Witch at initiative 2. Player 2 plays Wolfen targeting the Hunter and the Fool at initiative 4. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Round 1 ends. Player 2 takes the Badge.
+The card set aside in round 1 was the Knight.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 2 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolfen, Seer, Witch and Villager.
+Player 1 is dealt Hunter, Knight and Wolf Beauty.
+Your hand: Hunter, Knight and Wolf Beauty
+> Play Knight targeting the Wolf King
+Player 1 seals a plan with 1 target card.
+Your hand: Wolfen, Seer, Witch and Villager
+> Play Wolfen targeting the Witch and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Knight targeting the Wolf King at initiative 3. Player 2 plays Wolfen targeting the Witch and the Fool at initiative 4. Player 1 resolves first.
+Player 1's Knight resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Knight misses.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Round 2 ends. Player 1 takes the Badge.
+The card set aside in round 2 was the Wolf King.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 3 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Knight, Seer and Wolf Beauty.
+Player 2 is dealt Hunter, Witch and Villager.
+Your hand: Wolf King, Knight, Seer and Wolf Beauty
+> Play Wolf King targeting the Hunter and the Knight
+Player 1 seals a plan with 2 target cards.
+Your hand: Hunter, Witch and Villager
+> Play Hunter targeting the Fool
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+  Place 3 Hourglasses
+> Place 3 Hourglasses
+Player 2 places 3 Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Hunter and the Knight at initiative 2. Player 2 plays Hunter targeting the Fool at initiative 0. Player 2 resolves first.
+Player 2's Hunter resolves.
+Your hand: 
+  Keep the Cross
+  Spend a Cross to attack
+> Spend a Cross to attack
+Player 2 spends 1 Cross.
+Player 2's Hunter misses.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Round 3 ends. Player 2 takes the Badge.
+The card set aside in round 3 was the Wolfen.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 4 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Knight, Wolfen and Seer.
+Player 1 is dealt Wolf King, Witch and Villager.
+Your hand: Wolf King, Witch and Villager
+> Play Wolf King targeting the Hunter, the Witch and the Fool
+Player 1 seals a plan with 3 target cards.
+Your hand: Hunter, Knight, Wolfen and Seer
+> Play Wolfen targeting the Knight
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Plans revealed. Player 1 plays Wolf King targeting the Hunter, the Witch and the Fool at initiative 1. Player 2 plays Wolfen targeting the Knight at initiative 4. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Round 4 ends. Player 1 takes the Badge.
+The card set aside in round 4 was the Wolf Beauty.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 5 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Wolf King, Wolfen and Wolf Beauty.
+Player 2 is dealt Knight, Seer and Villager.
+Your hand: Hunter, Wolf King, Wolfen and Wolf Beauty
+> Play Wolf King targeting the Fool
+Player 1 seals a plan with 1 target card.
+Your hand: Knight, Seer and Villager
+> Play Knight targeting the Wolf Beauty and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Plans revealed. Player 1 plays Wolf King targeting the Fool at initiative 2. Player 2 plays Knight targeting the Wolf Beauty and the Fool at initiative 2. Player 2 resolves first.
+Player 2's Knight resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Knight misses.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are no character targets.
+Round 5 ends. Player 2 takes the Badge.
+The card set aside in round 5 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 6 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Wolf King, Wolf Beauty and Villager.
+Player 1 is dealt Knight, Wolfen and Seer.
+Your hand: Knight, Wolfen and Seer
+> Play Knight targeting the Wolf Beauty
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Wolf King, Wolf Beauty and Villager
+> Play Wolf King targeting the Hunter, the Knight, the Witch and the Fool
+Player 2 seals a plan with 4 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Knight targeting the Wolf Beauty at initiative 3. Player 2 plays Wolf King targeting the Hunter, the Knight, the Witch and the Fool at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Knight resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Knight misses.
+Round 6 ends. Player 1 takes the Badge.
+The card set aside in round 6 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 7 begins. Player 1 holds the Badge.
+Player 1 is dealt Knight, Wolfen, Seer and Wolf Beauty.
+Player 2 is dealt Hunter, Witch and Villager.
+Your hand: Knight, Wolfen, Seer and Wolf Beauty
+> Play Seer targeting the Wolf King
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Witch and Villager
+> Play Hunter targeting the Wolfen and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Seer targeting the Wolf King at initiative 5. Player 2 plays Hunter targeting the Wolfen and the Fool at initiative 1. Player 2 resolves first.
+Player 2's Hunter resolves.
+Player 2 makes no attack: there is no Cross to spend.
+Player 1's Seer resolves.
+Player 1's Seer misses.
+Round 7 ends. Player 2 takes the Badge.
+The card set aside in round 7 was the Wolf King.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 8 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Seer, Witch and Villager.
+Player 1 is dealt Knight, Wolfen and Wolf Beauty.
+Your hand: Knight, Wolfen and Wolf Beauty
+> Play Wolf Beauty targeting the Villager and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Seer, Witch and Villager
+> Play Wolf King targeting the Witch, the Villager and the Fool
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Villager and the Fool at initiative 7. Player 2 plays Wolf King targeting the Witch, the Villager and the Fool at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Wolf Beauty resolves.
+Player 1 gains 1 Fang.
+Player 1's Wolf Beauty misses.
+Round 8 ends. Player 1 takes the Badge.
+The card set aside in round 8 was the Hunter.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 9 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Wolf King, Knight and Villager.
+Player 2 is dealt Wolfen, Seer and Wolf Beauty.
+Your hand: Hunter, Wolf King, Knight and Villager
+> Play Wolf King targeting the Hunter, the Knight, the Seer, the Witch and the Fool
+Player 1 seals a plan with 5 target cards.
+Your hand: Wolfen, Seer and Wolf Beauty
+> Play Wolfen targeting the Hunter and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Hunter, the Knight, the Seer, the Witch and the Fool at initiative 2. Player 2 plays Wolfen targeting the Hunter and the Fool at initiative 4. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Round 9 ends. Player 2 takes the Badge.
+The card set aside in round 9 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 10 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Wolf King, Seer and Wolf Beauty.
+Player 1 is dealt Knight, Witch and Villager.
+Your hand: Knight, Witch and Villager
+> Play Knight targeting the Wolf Beauty and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Hunter, Wolf King, Seer and Wolf Beauty
+> Play Wolf King targeting the Knight, the Witch and the Villager
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Plans revealed. Player 1 plays Knight targeting the Wolf Beauty and the Fool at initiative 2. Player 2 plays Wolf King targeting the Knight, the Witch and the Villager at initiative 2. Player 1 resolves first.
+Player 1's Knight resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Knight misses.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Round 10 ends. Player 1 takes the Badge.
+The card set aside in round 10 was the Wolfen.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 11 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolfen, Seer, Wolf Beauty and Villager.
+Player 2 is dealt Wolf King, Knight and Witch.
+Your hand: Wolfen, Seer, Wolf Beauty and Villager
+> Play Wolfen targeting the Hunter
+Player 1 seals a plan with 1 target card.
+Your hand: Wolf King, Knight and Witch
+> Play Wolf King targeting the Hunter, the Witch and the Fool
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 2 Hourglasses
+Player 2 places 2 Hourglasses.
+Plans revealed. Player 1 plays Wolfen targeting the Hunter at initiative 3. Player 2 plays Wolf King targeting the Hunter, the Witch and the Fool at initiative 0. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen misses.
+Round 11 ends. Player 2 takes the Badge.
+The card set aside in round 11 was the Hunter.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 12 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Wolfen, Seer and Witch.
+Player 1 is dealt Knight, Wolf Beauty and Villager.
+Your hand: Knight, Wolf Beauty and Villager
+> Play Wolf Beauty targeting the Hunter and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Wolfen, Seer and Witch
+> Play Seer targeting the Wolfen
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Hunter and the Fool at initiative 6. Player 2 plays Seer targeting the Wolfen at initiative 5. Player 2 resolves first.
+Player 2's Seer resolves.
+Player 2's Seer misses.
+Player 1's Wolf Beauty resolves.
+Player 1 gains 1 Fang.
+Player 1's Wolf Beauty misses.
+Round 12 ends. Player 1 takes the Badge.
+The card set aside in round 12 was the Hunter.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 13 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Wolfen, Witch and Villager.
+Player 2 is dealt Hunter, Knight and Seer.
+Your hand: Wolf King, Wolfen, Witch and Villager
+> Play Wolfen targeting the Wolf Beauty
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Knight and Seer
+> Play Seer targeting the Wolf King
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolfen targeting the Wolf Beauty at initiative 4. Player 2 plays Seer targeting the Wolf King at initiative 5. Player 1 resolves first.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen misses.
+Player 2's Seer resolves.
+Player 2's Seer misses.
+Round 13 ends. Player 2 takes the Badge.
+The card set aside in round 13 was the Wolf Beauty.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 14 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Wolf King, Knight and Villager.
+Player 1 is dealt Seer, Witch and Wolf Beauty.
+Your hand: Seer, Witch and Wolf Beauty
+> Play Wolf Beauty targeting the Knight
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Wolf King, Knight and Villager
+> Play Wolf King targeting the Hunter, the Seer, the Villager and the Fool
+Player 2 seals a plan with 4 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Knight at initiative 7. Player 2 plays Wolf King targeting the Hunter, the Seer, the Villager and the Fool at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Wolf Beauty resolves.
+Player 1 gains 1 Fang.
+Player 1 wins by collecting enough Fangs.
+# Game 5
+Your hand: Hunter, Knight, Wolfen and Wolf Beauty
+> Play Knight targeting the Wolf King and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Seer and Witch
+> Play Wolf King targeting the Seer, the Witch, the Villager and the Fool
+Player 2 seals a plan with 4 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Knight targeting the Wolf King and the Fool at initiative 3. Player 2 plays Wolf King targeting the Seer, the Witch, the Villager and the Fool at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Knight resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Knight misses.
+Round 1 ends. Player 2 takes the Badge.
+The card set aside in round 1 was the Villager.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 2 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Knight, Wolfen and Seer.
+Player 1 is dealt Witch, Wolf Beauty and Villager.
+Your hand: Witch, Wolf Beauty and Villager
+> Play Wolf Beauty targeting the Knight and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Hunter, Knight, Wolfen and Seer
+> Play Hunter targeting the Wolf King and the Wolf Beauty
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Knight and the Fool at initiative 6. Player 2 plays Hunter targeting the Wolf King and the Wolf Beauty at initiative 1. Player 2 resolves first.
+Player 2's Hunter resolves.
+Your hand: 
+  Keep the Cross
+  Spend a Cross to attack
+> Spend a Cross to attack
+Player 2 spends 1 Cross.
+Player 2's Hunter hits Player 1's Wolf Beauty! Player 1 loses 1 Health.
+Round 2 ends. Player 1 takes the Badge.
+The card set aside in round 2 was the Wolf King.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 3 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Wolf King, Knight and Seer.
+Player 2 is dealt Wolfen, Witch and Wolf Beauty.
+Your hand: Hunter, Wolf King, Knight and Seer
+> Play Wolf King targeting the Hunter
+Player 1 seals a plan with 1 target card.
+Your hand: Wolfen, Witch and Wolf Beauty
+> Play Wolf Beauty targeting the Wolf King
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Hunter at initiative 2. Player 2 plays Wolf Beauty targeting the Wolf King at initiative 7. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1's Wolf King misses.
+Player 2's Wolf Beauty resolves.
+Player 2 gains 1 Fang.
+Player 2's Wolf Beauty misses.
+Round 3 ends. Player 2 takes the Badge.
+The card set aside in round 3 was the Villager.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 4 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Wolf King, Knight and Witch.
+Player 1 is dealt Wolfen, Wolf Beauty and Villager.
+Your hand: Wolfen, Wolf Beauty and Villager
+> Play Wolfen targeting the Seer and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Hunter, Wolf King, Knight and Witch
+> Play Wolf King targeting the Hunter and the Witch
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolfen targeting the Seer and the Fool at initiative 4. Player 2 plays Wolf King targeting the Hunter and the Witch at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 spends 1 Fang.
+Player 2's Wolf King misses.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen misses.
+Round 4 ends. Player 1 takes the Badge.
+The card set aside in round 4 was the Seer.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 5 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Witch, Wolf Beauty and Villager.
+Player 2 is dealt Knight, Wolfen and Seer.
+Your hand: Wolf King, Witch, Wolf Beauty and Villager
+> Play Wolf King targeting the Knight, the Witch, the Villager and the Fool
+Player 1 seals a plan with 4 target cards.
+Your hand: Knight, Wolfen and Seer
+> Play Wolfen targeting the Wolfen
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Plans revealed. Player 1 plays Wolf King targeting the Knight, the Witch, the Villager and the Fool at initiative 1. Player 2 plays Wolfen targeting the Wolfen at initiative 3. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Round 5 ends. Player 2 takes the Badge.
+The card set aside in round 5 was the Hunter.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 6 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Knight, Wolf Beauty and Villager.
+Player 1 is dealt Wolf King, Wolfen and Seer.
+Your hand: Wolf King, Wolfen and Seer
+> Play Wolf King targeting the Knight, the Witch and the Fool
+Player 1 seals a plan with 3 target cards.
+Your hand: Hunter, Knight, Wolf Beauty and Villager
+> Play Hunter targeting the Wolf Beauty
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Knight, the Witch and the Fool at initiative 2. Player 2 plays Hunter targeting the Wolf Beauty at initiative 1. Player 2 resolves first.
+Player 2's Hunter resolves.
+Player 2 makes no attack: there is no Cross to spend.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Round 6 ends. Player 1 takes the Badge.
+The card set aside in round 6 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 7 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Knight, Seer and Wolf Beauty.
+Player 2 is dealt Wolfen, Witch and Villager.
+Your hand: Hunter, Knight, Seer and Wolf Beauty
+> Play Hunter targeting the Wolfen
+Player 1 seals a plan with 1 target card.
+Your hand: Wolfen, Witch and Villager
+> Play Wolfen targeting the Witch and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Hunter targeting the Wolfen at initiative 1. Player 2 plays Wolfen targeting the Witch and the Fool at initiative 4. Player 1 resolves first.
+Player 1's Hunter resolves.
+Your hand: 
+  Keep the Cross
+  Spend a Cross to attack
+> Spend a Cross to attack
+Player 1 spends 1 Cross.
+Player 1's Hunter hits Player 2's Wolfen! Player 2 loses 1 Health.
+Round 7 ends. Player 2 takes the Badge.
+The card set aside in round 7 was the Wolf King.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 8 begins. Player 2 holds the Badge.
+Player 2 is dealt Knight, Wolfen, Witch and Wolf Beauty.
+Player 1 is dealt Hunter, Seer and Villager.
+Your hand: Hunter, Seer and Villager
+> Play Hunter targeting the Wolf King and the Wolf Beauty
+Player 1 seals a plan with 2 target cards.
+Your hand: Knight, Wolfen, Witch and Wolf Beauty
+> Play Wolfen targeting the Wolfen
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Hunter targeting the Wolf King and the Wolf Beauty at initiative 1. Player 2 plays Wolfen targeting the Wolfen at initiative 4. Player 1 resolves first.
+Player 1's Hunter resolves.
+Player 1 makes no attack: there is no Cross to spend.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Round 8 ends. Player 1 takes the Badge.
+The card set aside in round 8 was the Wolf King.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 9 begins. Player 1 holds the Badge.
+Player 1 is dealt Knight, Witch, Wolf Beauty and Villager.
+Player 2 is dealt Hunter, Wolf King and Seer.
+Your hand: Knight, Witch, Wolf Beauty and Villager
+> Play Wolf Beauty targeting the Wolf Beauty
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Wolf King and Seer
+> Play Wolf King targeting the Knight, the Seer and the Fool
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Wolf Beauty at initiative 7. Player 2 plays Wolf King targeting the Knight, the Seer and the Fool at initiative 1. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Wolf Beauty resolves.
+Player 1 gains 1 Fang.
+Player 1's Wolf Beauty misses.
+Round 9 ends. Player 2 takes the Badge.
+The card set aside in round 9 was the Wolfen.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 10 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Knight, Wolfen and Witch.
+Player 1 is dealt Wolf King, Seer and Villager.
+Your hand: Wolf King, Seer and Villager
+> Play Wolf King targeting the Hunter and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Hunter, Knight, Wolfen and Witch
+> Play Hunter targeting the Wolf King
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Hunter and the Fool at initiative 2. Player 2 plays Hunter targeting the Wolf King at initiative 0. Player 2 resolves first.
+Player 2's Hunter resolves.
+Player 2 makes no attack: there is no Cross to spend.
+Player 1's Wolf King resolves.
+Player 1's Wolf King misses.
+Round 10 ends. Player 1 takes the Badge.
+The card set aside in round 10 was the Wolf Beauty.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 11 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Knight, Seer and Villager.
+Player 2 is dealt Hunter, Witch and Wolf Beauty.
+Your hand: Wolf King, Knight, Seer and Villager
+> Play Wolf King targeting the Witch
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Witch and Wolf Beauty
+> Play Wolf Beauty targeting the Hunter
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Witch at initiative 2. Player 2 plays Wolf Beauty targeting the Hunter at initiative 7. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1's Wolf King misses.
+Player 2's Wolf Beauty resolves.
+Player 2 gains 1 Fang.
+Player 2's Wolf Beauty misses.
+Round 11 ends. Player 2 takes the Badge.
+The card set aside in round 11 was the Wolfen.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 12 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Knight, Wolf Beauty and Villager.
+Player 1 is dealt Hunter, Wolfen and Witch.
+Your hand: Hunter, Wolfen and Witch
+> Play Wolfen targeting the Knight and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Knight, Wolf Beauty and Villager
+> Play Wolf King targeting the Hunter, the Knight and the Fool
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolfen targeting the Knight and the Fool at initiative 4. Player 2 plays Wolf King targeting the Hunter, the Knight and the Fool at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 spends 1 Fang.
+Player 2's Wolf King misses.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen misses.
+Round 12 ends. Player 1 takes the Badge.
+The card set aside in round 12 was the Seer.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 13 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Wolf King, Wolfen and Seer.
+Player 2 is dealt Witch, Wolf Beauty and Villager.
+Your hand: Hunter, Wolf King, Wolfen and Seer
+> Play Wolf King targeting the Hunter, the Witch and the Villager
+Player 1 seals a plan with 3 target cards.
+Your hand: Witch, Wolf Beauty and Villager
+> Play Villager targeting the Fool
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Hunter, the Witch and the Villager at initiative 2. Player 2 plays Villager targeting the Fool at initiative 8. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Player 2's Villager resolves.
+Player 2 gains 1 Cross.
+Round 13 ends. Player 2 takes the Badge.
+The card set aside in round 13 was the Knight.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 14 begins. Player 2 holds the Badge.
+Player 2 is dealt Knight, Wolfen, Seer and Villager.
+Player 1 is dealt Hunter, Witch and Wolf Beauty.
+Your hand: Hunter, Witch and Wolf Beauty
+> Play Hunter targeting the Wolf Beauty and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Knight, Wolfen, Seer and Villager
+> Play Seer targeting the Wolfen
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Hunter targeting the Wolf Beauty and the Fool at initiative 1. Player 2 plays Seer targeting the Wolfen at initiative 5. Player 1 resolves first.
+Player 1's Hunter resolves.
+Player 1 makes no attack: there is no Cross to spend.
+Player 2's Seer resolves.
+Player 2's Seer misses.
+Round 14 ends. Player 1 takes the Badge.
+The card set aside in round 14 was the Wolf King.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 15 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Seer, Witch and Villager.
+Player 2 is dealt Wolf King, Knight and Wolfen.
+Your hand: Hunter, Seer, Witch and Villager
+> Play Hunter targeting the Wolfen and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Knight and Wolfen
+> Play Wolf King targeting the Hunter, the Knight and the Villager
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Hunter targeting the Wolfen and the Fool at initiative 0. Player 2 plays Wolf King targeting the Hunter, the Knight and the Villager at initiative 2. Player 1 resolves first.
+Player 1's Hunter resolves.
+Player 1 makes no attack: there is no Cross to spend.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Round 15 ends. Player 2 takes the Badge.
+The card set aside in round 15 was the Wolf Beauty.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 16 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Knight, Wolfen and Wolf Beauty.
+Player 1 is dealt Wolf King, Seer and Witch.
+Your hand: Wolf King, Seer and Witch
+> Play Wolf King targeting the Witch
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Knight, Wolfen and Wolf Beauty
+> Play Wolf Beauty targeting the Wolf Beauty and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Witch at initiative 2. Player 2 plays Wolf Beauty targeting the Wolf Beauty and the Fool at initiative 7. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1's Wolf King misses.
+Player 2's Wolf Beauty resolves.
+Player 2 gains 1 Fang.
+Player 2's Wolf Beauty misses.
+Round 16 ends. Player 1 takes the Badge.
+The card set aside in round 16 was the Villager.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 17 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Knight, Wolfen and Villager.
+Player 2 is dealt Wolf King, Seer and Wolf Beauty.
+Your hand: Hunter, Knight, Wolfen and Villager
+> Play Hunter targeting the Wolf King and the Wolfen
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Seer and Wolf Beauty
+> Play Wolf King targeting the Seer, the Villager and the Fool
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Hunter targeting the Wolf King and the Wolfen at initiative 1. Player 2 plays Wolf King targeting the Seer, the Villager and the Fool at initiative 2. Player 1 resolves first.
+Player 1's Hunter resolves.
+Player 1 makes no attack: there is no Cross to spend.
+Player 2's Wolf King resolves.
+Player 2 spends 1 Fang.
+Player 2's Wolf King misses.
+Round 17 ends. Player 2 takes the Badge.
+The card set aside in round 17 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 18 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Knight, Wolfen and Villager.
+Player 1 is dealt Wolf King, Seer and Wolf Beauty.
+Your hand: Wolf King, Seer and Wolf Beauty
+> Play Wolf Beauty targeting the Wolf Beauty
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Knight, Wolfen and Villager
+> Play Wolfen targeting the Fool
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf Beauty targeting the Wolf Beauty at initiative 7. Player 2 plays Wolfen targeting the Fool at initiative 4. Player 2 resolves first.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Player 1's Wolf Beauty resolves.
+Player 1 gains 1 Fang.
+Player 1's Wolf Beauty misses.
+Round 18 ends. Player 1 takes the Badge.
+The card set aside in round 18 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 19 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Knight, Seer and Wolf Beauty.
+Player 2 is dealt Wolf King, Wolfen and Witch.
+Your hand: Hunter, Knight, Seer and Wolf Beauty
+> Play Knight targeting the Wolf King and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Wolfen and Witch
+> Play Wolf King targeting the Knight and the Witch
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Plans revealed. Player 1 plays Knight targeting the Wolf King and the Fool at initiative 3. Player 2 plays Wolf King targeting the Knight and the Witch at initiative 1. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Knight resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Knight misses.
+Round 19 ends. Player 2 takes the Badge.
+The card set aside in round 19 was the Villager.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 20 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Knight, Seer and Villager.
+Player 1 is dealt Hunter, Wolfen and Witch.
+Your hand: Hunter, Wolfen and Witch
+> Play Hunter targeting the Wolfen and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Knight, Seer and Villager
+> Play Wolf King targeting the Hunter, the Knight and the Seer
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Plans revealed. Player 1 plays Hunter targeting the Wolfen and the Fool at initiative 0. Player 2 plays Wolf King targeting the Hunter, the Knight and the Seer at initiative 2. Player 1 resolves first.
+Player 1's Hunter resolves.
+Player 1 makes no attack: there is no Cross to spend.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Round 20 ends. Player 1 takes the Badge.
+The card set aside in round 20 was the Wolf Beauty.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 21 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Seer, Witch and Wolf Beauty.
+Player 2 is dealt Hunter, Knight and Wolfen.
+Your hand: Wolf King, Seer, Witch and Wolf Beauty
+> Play Seer targeting the Wolfen and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Hunter, Knight and Wolfen
+> Play Wolfen targeting the Villager
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Seer targeting the Wolfen and the Fool at initiative 5. Player 2 plays Wolfen targeting the Villager at initiative 4. Player 2 resolves first.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Player 1's Seer resolves.
+Player 1's Seer misses.
+Round 21 ends. Player 2 takes the Badge.
+The card set aside in round 21 was the Villager.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 22 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Wolf King, Knight and Wolfen.
+Player 1 is dealt Seer, Witch and Villager.
+Your hand: Seer, Witch and Villager
+> Play Seer targeting the Wolf King and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Hunter, Wolf King, Knight and Wolfen
+> Play Wolf King targeting the Hunter, the Witch, the Villager and the Fool
+Player 2 seals a plan with 4 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Seer targeting the Wolf King and the Fool at initiative 5. Player 2 plays Wolf King targeting the Hunter, the Witch, the Villager and the Fool at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Seer resolves.
+Player 1's Seer misses.
+Round 22 ends. Player 1 takes the Badge.
+The card set aside in round 22 was the Wolf Beauty.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 23 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Wolf King, Knight and Seer.
+Player 2 is dealt Wolfen, Witch and Wolf Beauty.
+Your hand: Hunter, Wolf King, Knight and Seer
+> Play Wolf King targeting the Villager
+Player 1 seals a plan with 1 target card.
+Your hand: Wolfen, Witch and Wolf Beauty
+> Play Wolfen targeting the Seer
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Plans revealed. Player 1 plays Wolf King targeting the Villager at initiative 2. Player 2 plays Wolfen targeting the Seer at initiative 3. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1's Wolf King misses.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Round 23 ends. Player 2 takes the Badge.
+The card set aside in round 23 was the Villager.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 24 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Knight, Witch and Villager.
+Player 1 is dealt Wolf King, Wolfen and Seer.
+Your hand: Wolf King, Wolfen and Seer
+> Play Wolf King targeting the Villager and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Hunter, Knight, Witch and Villager
+> Play Hunter targeting the Wolf Beauty and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Villager and the Fool at initiative 2. Player 2 plays Hunter targeting the Wolf Beauty and the Fool at initiative 1. Player 2 resolves first.
+Player 2's Hunter resolves.
+Your hand: 
+  Keep the Cross
+  Spend a Cross to attack
+> Spend a Cross to attack
+Player 2 spends 1 Cross.
+Player 2's Hunter misses.
+Player 1's Wolf King resolves.
+Player 1's Wolf King misses.
+Round 24 ends. Player 1 takes the Badge.
+The card set aside in round 24 was the Wolf Beauty.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 25 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Wolf King, Seer and Witch.
+Player 2 is dealt Knight, Wolfen and Villager.
+Your hand: Hunter, Wolf King, Seer and Witch
+> Play Hunter targeting the Wolf King, the Wolfen and the Fool
+Player 1 seals a plan with 3 target cards.
+Your hand: Knight, Wolfen and Villager
+> Play Knight targeting the Wolf Beauty
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Hunter targeting the Wolf King, the Wolfen and the Fool at initiative 1. Player 2 plays Knight targeting the Wolf Beauty at initiative 3. Player 1 resolves first.
+Player 1's Hunter resolves.
+Player 1 makes no attack: there is no Cross to spend.
+Player 2's Knight resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Knight misses.
+Round 25 ends. Player 2 takes the Badge.
+The card set aside in round 25 was the Wolf Beauty.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 26 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Wolfen, Witch and Villager.
+Player 1 is dealt Wolf King, Knight and Wolf Beauty.
+Your hand: Wolf King, Knight and Wolf Beauty
+> Play Wolf King targeting the Witch
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Wolfen, Witch and Villager
+> Play Wolfen targeting the Villager
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Witch at initiative 2. Player 2 plays Wolfen targeting the Villager at initiative 4. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1's Wolf King misses.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Round 26 ends. Player 1 takes the Badge.
+The card set aside in round 26 was the Seer.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 27 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolf King, Knight, Seer and Wolf Beauty.
+Player 2 is dealt Wolfen, Witch and Villager.
+Your hand: Wolf King, Knight, Seer and Wolf Beauty
+> Play Wolf King targeting the Hunter and the Knight
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolfen, Witch and Villager
+> Play Wolfen targeting the Fool
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+  Place 3 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Hunter and the Knight at initiative 2. Player 2 plays Wolfen targeting the Fool at initiative 4. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 spends 1 Fang.
+Player 1's Wolf King misses.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen misses.
+Round 27 ends. Player 2 takes the Badge.
+The card set aside in round 27 was the Hunter.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 28 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Wolf King, Wolfen and Wolf Beauty.
+Player 1 is dealt Knight, Seer and Villager.
+Your hand: Knight, Seer and Villager
+> Play Seer targeting the Wolfen
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Wolf King, Wolfen and Wolf Beauty
+> Play Hunter targeting the Wolf Beauty and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+  Place 3 Hourglasses
+  Place 4 Hourglasses
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Seer targeting the Wolfen at initiative 5. Player 2 plays Hunter targeting the Wolf Beauty and the Fool at initiative 0. Player 2 resolves first.
+Player 2's Hunter resolves.
+Player 2 makes no attack: there is no Cross to spend.
+Player 1's Seer resolves.
+Player 1's Seer misses.
+Round 28 ends. Player 1 takes the Badge.
+The card set aside in round 28 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 29 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Wolfen, Witch and Wolf Beauty.
+Player 2 is dealt Wolf King, Knight and Villager.
+Your hand: Hunter, Wolfen, Witch and Wolf Beauty
+> Play Hunter targeting the Wolfen and the Wolf Beauty
+Player 1 seals a plan with 2 target cards.
+Your hand: Wolf King, Knight and Villager
+> Play Wolf King targeting the Seer and the Villager
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+  Place 3 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Hunter targeting the Wolfen and the Wolf Beauty at initiative 1. Player 2 plays Wolf King targeting the Seer and the Villager at initiative 2. Player 1 resolves first.
+Player 1's Hunter resolves.
+Player 1 makes no attack: there is no Cross to spend.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Round 29 ends. Player 2 takes the Badge.
+The card set aside in round 29 was the Seer.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 30 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Wolfen, Wolf Beauty and Villager.
+Player 1 is dealt Knight, Seer and Witch.
+Your hand: Knight, Seer and Witch
+> Play Knight targeting the Fool
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Wolfen, Wolf Beauty and Villager
+> Play Wolfen targeting the Knight and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+  Place 2 Hourglasses
+  Place 3 Hourglasses
+> Place 3 Hourglasses
+Player 2 places 3 Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Knight targeting the Fool at initiative 3. Player 2 plays Wolfen targeting the Knight and the Fool at initiative 1. Player 2 resolves first.
+Player 2's Wolfen resolves.
+Player 2 gains 1 Hourglass.
+Player 2's Wolfen hits Player 1's Knight! Player 1 loses 1 Health.
+Player 2 wins by reducing Player 1's Health to zero.
+# Game 6
+Your hand: Hunter, Knight, Seer and Wolf Beauty
+> Play Seer targeting the Wolfen
+Player 1 seals a plan with 1 target card.
+Your hand: Wolf King, Wolfen and Villager
+> Play Wolf King targeting the Hunter, the Villager and the Fool
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Seer targeting the Wolfen at initiative 5. Player 2 plays Wolf King targeting the Hunter, the Villager and the Fool at initiative 2. Player 2 resolves first.
+Player 2's Wolf King resolves.
+Player 2 makes no attack: there are not enough Fangs for the extra targets.
+Player 1's Seer resolves.
+Player 1's Seer misses.
+Round 1 ends. Player 2 takes the Badge.
+The card set aside in round 1 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 2 begins. Player 2 holds the Badge.
+Player 2 is dealt Hunter, Seer, Witch and Wolf Beauty.
+Player 1 is dealt Wolf King, Wolfen and Villager.
+Your hand: Wolf King, Wolfen and Villager
+> Play Wolfen targeting the Wolfen
+Player 1 seals a plan with 1 target card.
+Your hand: Hunter, Seer, Witch and Wolf Beauty
+> Play Wolf Beauty targeting the Wolf Beauty
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Wolfen targeting the Wolfen at initiative 4. Player 2 plays Wolf Beauty targeting the Wolf Beauty at initiative 7. Player 1 resolves first.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen misses.
+Player 2's Wolf Beauty resolves.
+Player 2 gains 1 Fang.
+Player 2's Wolf Beauty misses.
+Round 2 ends. Player 1 takes the Badge.
+The card set aside in round 2 was the Knight.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 3 begins. Player 1 holds the Badge.
+Player 1 is dealt Wolfen, Seer, Witch and Wolf Beauty.
+Player 2 is dealt Hunter, Wolf King and Knight.
+Your hand: Wolfen, Seer, Witch and Wolf Beauty
+> Play Seer targeting the Wolf Beauty and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Hunter, Wolf King and Knight
+> Play Hunter targeting the Fool
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 2 places 1 Hourglass.
+Plans revealed. Player 1 plays Seer targeting the Wolf Beauty and the Fool at initiative 5. Player 2 plays Hunter targeting the Fool at initiative 0. Player 2 resolves first.
+Player 2's Hunter resolves.
+Your hand: 
+  Keep the Cross
+  Spend a Cross to attack
+> Spend a Cross to attack
+Player 2 spends 1 Cross.
+Player 2's Hunter misses.
+Player 1's Seer resolves.
+Player 1's Seer misses.
+Round 3 ends. Player 2 takes the Badge.
+The card set aside in round 3 was the Villager.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 4 begins. Player 2 holds the Badge.
+Player 2 is dealt Knight, Seer, Wolf Beauty and Villager.
+Player 1 is dealt Hunter, Wolf King and Wolfen.
+Your hand: Hunter, Wolf King and Wolfen
+> Play Wolfen targeting the Seer and the Fool
+Player 1 seals a plan with 2 target cards.
+Your hand: Knight, Seer, Wolf Beauty and Villager
+> Play Seer targeting the Wolfen
+Player 2 seals a plan with 1 target card.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Plans revealed. Player 1 plays Wolfen targeting the Seer and the Fool at initiative 3. Player 2 plays Seer targeting the Wolfen at initiative 5. Player 1 resolves first.
+Player 1's Wolfen resolves.
+Player 1 gains 1 Hourglass.
+Player 1's Wolfen hits Player 2's Seer! Player 2 loses 1 Health.
+Round 4 ends. Player 1 takes the Badge.
+The card set aside in round 4 was the Witch.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 5 begins. Player 1 holds the Badge.
+Player 1 is dealt Hunter, Wolf King, Knight and Wolfen.
+Player 2 is dealt Seer, Witch and Villager.
+Your hand: Hunter, Wolf King, Knight and Wolfen
+> Play Wolf King targeting the Knight and the Villager
+Player 1 seals a plan with 2 target cards.
+Your hand: Seer, Witch and Villager
+> Play Seer targeting the Wolf King and the Fool
+Player 2 seals a plan with 2 target cards.
+Your hand: 
+  Place 0 Hourglasses
+  Place 1 Hourglass
+> Place 1 Hourglass
+Player 1 places 1 Hourglass.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Plans revealed. Player 1 plays Wolf King targeting the Knight and the Villager at initiative 1. Player 2 plays Seer targeting the Wolf King and the Fool at initiative 5. Player 1 resolves first.
+Player 1's Wolf King resolves.
+Player 1 makes no attack: there are not enough Fangs for the extra targets.
+Player 2's Seer resolves.
+Player 2's Seer misses.
+Round 5 ends. Player 2 takes the Badge.
+The card set aside in round 5 was the Wolf Beauty.
+Your hand: 
+  Next round
+> Next round
+Player 1 is ready for the next round.
+Your hand: 
+  Next round
+> Next round
+Player 2 is ready for the next round.
+Round 6 begins. Player 2 holds the Badge.
+Player 2 is dealt Wolf King, Knight, Wolfen and Villager.
+Player 1 is dealt Hunter, Seer and Witch.
+Your hand: Hunter, Seer and Witch
+> Play Hunter targeting the Wolf King, the Wolf Beauty and the Fool
+Player 1 seals a plan with 3 target cards.
+Your hand: Wolf King, Knight, Wolfen and Villager
+> Play Wolf King targeting the Hunter, the Knight and the Villager
+Player 2 seals a plan with 3 target cards.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 2 places no Hourglasses.
+Your hand: 
+  Place 0 Hourglasses
+> Place 0 Hourglasses
+Player 1 places no Hourglasses.
+Plans revealed. Player 1 plays Hunter targeting the Wolf King, the Wolf Beauty and the Fool at initiative 1. Player 2 plays Wolf King targeting the Hunter, the Knight and the Villager at initiative 2. Player 1 resolves first.
+Player 1's Hunter resolves.
+Your hand: 
+  Keep the Cross
+  Spend a Cross to attack
+> Spend a Cross to attack
+Player 1 spends 1 Cross.
+Player 1's Hunter hits Player 2's Wolf King! Player 2 loses 1 Health.
+Player 1 wins by reducing Player 2's Health to zero.

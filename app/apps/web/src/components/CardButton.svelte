@@ -150,6 +150,9 @@
    */
   const place: Attachment<HTMLElement> = (popover) => {
     if (typeof popover.showPopover !== 'function') return;
+    // A zoomed card would draw its enlarged copy, and place it, at that zoom; the popover undoes it.
+    const inherited = popover.parentElement?.currentCSSZoom ?? 1;
+    if (inherited !== 1) popover.style.zoom = String(1 / inherited);
     popover.showPopover();
     let frame = 0;
     const position = (): void => {

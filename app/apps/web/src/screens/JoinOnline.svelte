@@ -243,7 +243,7 @@
         if (state.opponent.connected) opponentSeen = true;
       }),
       started.manager.state.subscribe((state) => (connection = state)),
-      installDevHook(started.client, l, () => connection),
+      installDevHook(started.client, () => connection),
     ];
     stopGame = () => {
       for (const cleanup of cleanups.reverse()) cleanup();

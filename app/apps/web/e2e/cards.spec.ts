@@ -1,8 +1,8 @@
 import { expect, test, type Locator, type Page } from '@playwright/test';
 
 /** Opens the gallery's cards entry at `scale` times the default text size and waits until it is ready. */
-async function openCards(page: Page, scale = 1): Promise<void> {
-  await page.goto('/#/dev/gallery/cards');
+async function openCards(page: Page, scale = 1, lang = 'en'): Promise<void> {
+  await page.goto(`/#/dev/gallery/cards${lang === 'en' ? '' : `?lang=${lang}`}`);
   await expect(page.locator('html')).toHaveAttribute('data-gallery-ready', 'cards');
   await page.evaluate((s) => {
     document.documentElement.style.setProperty('--text-scale', String(s));
@@ -98,12 +98,18 @@ test('cards have the design note sizes and anatomy', async ({ page }) => {
   }
 });
 
-for (const scale of [1, 1.5]) {
-  test(`card names fit their slot, at 80 % size or more, and pills fit on one line at every size (${scale * 100} % text)`, async ({
+for (const [scale, lang] of [
+  [1, 'en'],
+  [1.5, 'en'],
+  [1, 'de'],
+  [1, 'ja'],
+] as const) {
+  const language = lang === 'en' ? '' : `, ${lang}`;
+  test(`card names fit their slot, at 75 % size or more, and pills fit on one line at every size (${scale * 100} % text${language})`, async ({
     page,
   }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
-    await openCards(page, scale);
+    await openCards(page, scale, lang);
     const problems = await page.locator('[data-testid="cards-gallery"]').evaluate((root) => {
       const found: string[] = [];
       // How far the text runs past the content box, to a fraction of a pixel.
@@ -134,11 +140,11 @@ for (const scale of [1, 1.5]) {
         name.style.fontSize = '';
         const normal = parseFloat(getComputedStyle(name).fontSize);
         name.style.fontSize = fitted;
-        // A name may shrink to fit, but never below 80 % of its normal size.
-        if (shown < normal * 0.8 - 0.01) {
-          found.push(`name of ${where(name)} is ${shown} px, below 80 % of ${normal} px`);
+        // A name may shrink to fit, but never below 75 % of its normal size.
+        if (shown < normal * 0.75 - 0.01) {
+          found.push(`name of ${where(name)} is ${shown} px, below 75 % of ${normal} px`);
         }
-        if (name.textContent === 'Seer' && shown !== normal) {
+        if (['Seer', 'Seherin', '占い師'].includes(name.textContent ?? '') && shown !== normal) {
           found.push(`name of ${where(name)} is shrunk though it fits`);
         }
       }

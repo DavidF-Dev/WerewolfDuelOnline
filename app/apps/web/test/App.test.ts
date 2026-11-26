@@ -20,7 +20,7 @@ afterEach(async () => {
 
 describe('App', () => {
   it('shows the unofficial notice on every route', async () => {
-    render(App, { props: { localiser } });
+    render(App);
     const notice = localiser.t('footer-unofficial');
     expect(screen.getByTestId('home')).toBeTruthy();
     expect(screen.getByTestId('unofficial-notice').textContent).toBe(notice);
@@ -33,12 +33,12 @@ describe('App', () => {
 
   it('opens the address as it is when the app starts, not as it was first loaded', async () => {
     await goTo('#/rejoin');
-    render(App, { props: { localiser } });
+    render(App);
     expect(screen.getByTestId('rejoin')).toBeTruthy();
   });
 
   it('opens the settings, about and how to play screens with one notice each', async () => {
-    render(App, { props: { localiser } });
+    render(App);
     const notice = localiser.t('footer-unofficial');
     for (const [hash, testId] of [
       ['#/settings', 'settings'],

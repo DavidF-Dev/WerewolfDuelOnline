@@ -11,11 +11,12 @@
   import { initiative } from '../cards.js';
   import Button from '../components/Button.svelte';
   import CharacterCard from '../components/CharacterCard.svelte';
+  import { fitText } from '../components/fit-text.js';
   import Label from '../kit/Label.svelte';
   import Note from '../kit/Note.svelte';
   import RichText from '../kit/RichText.svelte';
   import Stepper from '../kit/Stepper.svelte';
-  import { characterName, commandLabel, planSummaryParts, planText } from '../text.js';
+  import { commandLabel, planSummaryParts, planText } from '../text.js';
   import { handInstruction, handPrimary } from './primary.svelte.js';
   import type { SequencedEvent } from './showdown.js';
 
@@ -168,7 +169,7 @@
       {/if}
     </span>
     {#if opponentPlaced !== null}
-      <p class="caption theirs" data-testid="opponent-hourglasses">
+      <p class="caption theirs" data-testid="opponent-hourglasses" use:fitText>
         {l.t('reveal-opponent-placed', { n: opponentPlaced })}
       </p>
     {/if}
@@ -197,9 +198,7 @@
         />
         {#if myCharacter !== null && effective !== null}
           <p class="initiative" data-testid="initiative-change" aria-hidden="true">
-            <span class="muted"
-              >{l.t('reveal-initiative-label', { character: characterName(l, myCharacter) })}</span
-            >
+            <span class="muted">{l.t('reveal-initiative-label', { character: myCharacter })}</span>
             <b
               >{l.t('reveal-initiative-change', {
                 printed: initiative(myCharacter),
@@ -209,7 +208,7 @@
           </p>
           <p role="status" class="visually-hidden" data-testid="effective-initiative">
             {l.t('reveal-initiative', {
-              character: characterName(l, myCharacter),
+              character: myCharacter,
               effective,
               printed: initiative(myCharacter),
             })}
@@ -336,9 +335,12 @@
     text-align: center;
   }
 
+  /* One line, fitted, ending under the face-down card's right edge. */
   .caption.theirs {
     grid-column: 1;
-    justify-self: end;
+    justify-self: stretch;
+    min-width: 0;
+    text-align: end;
   }
 
   .caption.mine {

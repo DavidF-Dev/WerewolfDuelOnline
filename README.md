@@ -14,9 +14,13 @@
 - **Referee:** a small server runs the engine and sends each player only their own view, so hidden cards never reach the other player. It runs on Cloudflare Workers, or self-hosted as a Node server or Docker container.
 - **Web app:** a Svelte app served from GitHub Pages. If a connection drops, it reconnects, and a seat PIN lets a player continue on another device.
 
+## Languages
+
+The app and the `wwd` tool speak English, German and Japanese. The app follows the browser's language unless one is chosen in Settings, and can switch in the middle of a game; `wwd --lang de` or `wwd --lang ja` picks one at the terminal. German and Japanese text load when that language is chosen, and the installed app keeps them for offline play; the Japanese fonts are downloaded only when Japanese is chosen.
+
 ## Status
 
-Milestones M1 to M4 are complete: the rules engine, the local loop, online play, and the finished app, with its screens, settings, pausing and saved games, rematches, history with replays and stats, backups, and installing as an app that opens offline. M5 adds German and Japanese, a full accessibility audit, a rewritten rulebook and a tutorial.
+Milestones M1 to M4 are complete: the rules engine, the local loop, online play, and the finished app, with its screens, settings, pausing and saved games, rematches, history with replays and stats, backups, and installing as an app that opens offline. M5 has added German and Japanese; it goes on with a rewritten rulebook and a tutorial, the deferred gameplay settings and a full accessibility audit.
 
 ## Repository layout
 
@@ -72,5 +76,7 @@ The code and documentation in this repository are licensed under either of
 at your option. Copyright © 2026 David F Dev.
 
 The licence covers this project's own work only. Werewolf: Duel! and its characters belong to their respective owners.
+
+The Japanese font subsets in [`app/apps/web/src/theme/ja-fonts/`](app/apps/web/src/theme/ja-fonts/) (BIZ UDPGothic and Shippori Mincho B1) are licensed under the SIL Open Font License 1.1; their copyright notices and the licence are in [`OFL.txt`](app/apps/web/src/theme/ja-fonts/OFL.txt) beside them.
 
 Unless you explicitly state otherwise, any contribution you intentionally submit for inclusion in this project, as defined in the Apache-2.0 licence, is dual-licensed as above, with no additional terms or conditions.

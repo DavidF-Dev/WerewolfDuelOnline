@@ -1,6 +1,6 @@
 import { showdownOrder, type Character, type PlanView, type Seat, type View } from '@wwd/engine';
-import type { Localiser } from '@wwd/client-core';
-import { characterName, listText, markerLines, planText } from '../text.js';
+import { plainText, type Localiser } from '@wwd/client-core';
+import { listText, markerLines, planText } from '../text.js';
 
 const index = (seat: Seat): 0 | 1 => (seat === 'p0' ? 0 : 1);
 const other = (seat: Seat): Seat => (seat === 'p0' ? 'p1' : 'p0');
@@ -25,8 +25,8 @@ function orderSentence(l: Localiser, view: View, seat: Seat): string | null {
   if (first === null || second === null) return null;
   return l.t('describe-order', {
     first: firstSeat === seat ? 'you' : 'opponent',
-    firstCharacter: characterName(l, first),
-    secondCharacter: characterName(l, second),
+    firstCharacter: first,
+    secondCharacter: second,
   });
 }
 
@@ -45,23 +45,23 @@ export function describe(view: View, seat: Seat, l: Localiser): string {
   const me = view.players[index(seat)];
   const opponentSeat = other(seat);
   const opponent = view.players[index(opponentSeat)];
-  const hand = (me.hand ?? []).map((c) => characterName(l, c));
+  const hand = me.hand ?? [];
   const lines = [
     l.t('describe-round', { round: view.round }),
     turnSentence(l, view, seat),
     hand.length === 0
       ? l.t('describe-hand-empty')
-      : l.t('describe-hand', { cards: listText(hand) }),
-    l.t('describe-my-markers', { markers: listText(markerLines(l, me, view.badge === seat)) }),
+      : plainText(l.cardsMessage('describe-hand', hand)),
+    l.t('describe-my-markers', { markers: listText(l, markerLines(l, me, view.badge === seat)) }),
     planSentence(l, 'my', me.plan),
     l.t('describe-opponent-markers', {
-      markers: listText(markerLines(l, opponent, view.badge === opponentSeat)),
+      markers: listText(l, markerLines(l, opponent, view.badge === opponentSeat)),
     }),
     l.t('describe-opponent-hand', { n: opponent.hand_size }),
     planSentence(l, 'opponent', opponent.plan),
   ];
   if (view.potion_target !== null) {
-    lines.push(l.t('describe-potion-target', { card: characterName(l, view.potion_target.card) }));
+    lines.push(l.t('describe-potion-target', { card: view.potion_target.card }));
   }
   const order = orderSentence(l, view, seat);
   if (order !== null) lines.push(order);

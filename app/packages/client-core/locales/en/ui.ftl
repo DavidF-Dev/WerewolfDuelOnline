@@ -1,4 +1,7 @@
 # Werewolf: Duel! interface text (British English, sentence case).
+# A `character`, `card`, `firstCharacter` or `secondCharacter` argument is a character id, named
+# with CHARACTER as the engine messages describe; a `cards` or `targets` list may declare
+# `.list-case` and `.list-article` for its items.
 
 ## Connection status
 status-connecting = Connecting
@@ -69,6 +72,8 @@ update-reload = Reload
 reference-heading = How to play
 reference-characters-heading = Characters
 reference-characters-intro = Every character and the Fool, with what each does when it resolves. Lower initiative resolves first.
+# Shown beside a character's name in languages other than English: its name as the English edition prints it.
+reference-printed-name = Printed name: { $name }
 
 ## Settings
 settings-heading = Settings
@@ -182,6 +187,8 @@ about-heading = About
 about-version = Version { $version }
 about-credits-heading = Credits
 about-credit-line = { $name }, { $licence }
+# The credit for this game's own engine and app.
+about-credit-engine = Engine and app
 about-theme-credit = Artwork: { $credit }
 about-fonts-notice = The fonts are used under the { $licence }.
 about-licences-heading = Licences
@@ -232,6 +239,7 @@ log-game-started = The game has started.
 game-over-heading = Game over
 game-over-won = You win!
 game-over-lost = You lose.
+# `result` is won or lost, for the player reading it; `winner` and `loser` are names or "You".
 game-over-how = { $reason ->
         [health] { $loser } ran out of { $health } in round { $round }.
         [fangs] { $winner } collected enough { $fangs } in round { $round }.
@@ -245,7 +253,7 @@ rematch-waiting = You asked for a rematch. Waiting for your opponent.
 rematch-opponent-ready = Your opponent wants a rematch.
 rematch-started = Rematch started: game { $number } in this room.
 round-summary = Round { $round } summary
-round-summary-set-aside = Set aside: { $character }
+round-summary-set-aside = Set aside: { CHARACTER($character) }
 round-summary-badge = { $who ->
         [you] { $player } take
        *[opponent] { $player } takes
@@ -267,13 +275,13 @@ plan-status-hidden = Plan: sealed, with { $count ->
     }
 plan-status-revealed = Plan: { $plan }
 card-character =
-    { $name }, initiative { $initiative }, { $faction }
+    { CHARACTER($character) }, initiative { $initiative }, { $faction }
 card-fool = The Fool
 count-badge = Badge: { $n }
 count-potion = Potion: { $n }
 # Starts with the card's visible text in the order it is drawn: the initiative, then the name.
 card-name =
-    { $initiative }, { $name }, { $faction }. { $ability }
+    { $initiative }, { CHARACTER($character) }, { $faction }. { $ability }
 card-fool-name = The Fool. { $ability }
 # A pill drawn on a target card, in place of its abilities, when the card is in the player's own hand.
 card-in-hand = In hand
@@ -340,8 +348,8 @@ plan-character-not-offered = This character can't be played this round.
 target-not-allowed = The chosen character can't target this card.
 target-limit = Remove a target first: this plan can't take another.
 target-choose-character-first = Choose a character first.
-plan-summary-short = { $character } → { $targets }
-plan-summary-short-none = { $character } → no targets
+plan-summary-short = { CHARACTER($character) } → { $targets }
+plan-summary-short-none = { CHARACTER($character) } → no targets
 plan-summary-fool = Fool
 plan-confirm-title = Seal this plan?
 plan-confirm-cancel = Keep choosing
@@ -353,8 +361,8 @@ reveal-stepper = Hourglasses to place
 reveal-hourglass-instruction = How many Hourglasses will you place?
 reveal-fewer = Fewer Hourglasses
 reveal-more = More Hourglasses
-reveal-initiative = { $character }: initiative { $effective } (printed { $printed })
-reveal-initiative-label = { $character } initiative
+reveal-initiative = { CHARACTER($character) }: initiative { $effective } (printed { $printed })
+reveal-initiative-label = { CHARACTER($character) } initiative
 reveal-initiative-change = { $printed } → { $effective }
 reveal-order-note = Lower initiative resolves first.
 reveal-opponent-placed = Placed { $n ->
@@ -372,8 +380,8 @@ showdown-heading = Showdown
 showdown-next = Next result
 showdown-empty = The results appear here as the showdown resolves.
 showdown-hunter-heading = Your Hunter
-showdown-out-yours = { $owner } { $character } is eliminated and doesn't act.
-showdown-out-opponent = { $owner }'s { $character } is eliminated and doesn't act.
+showdown-out-yours = { $owner } { CHARACTER($character) } is eliminated and doesn't act.
+showdown-out-opponent = { $owner }'s { CHARACTER($character) } is eliminated and doesn't act.
 plan-panels-heading = Plans
 plan-panel-plan = { $name }: { $plan }
 plan-panel-position = { $position ->
@@ -429,10 +437,10 @@ describe-opponent-plan-hidden = Your opponent has sealed a plan with { $count ->
         [one] 1 target card
        *[other] { $count } target cards
     }.
-describe-potion-target = Potion target: { $card }.
+describe-potion-target = Potion target: { CHARACTER($card) }.
 describe-order = { $first ->
-        [you] Your { $firstCharacter } resolves first, then your opponent's { $secondCharacter }.
-       *[opponent] Your opponent's { $firstCharacter } resolves first, then your { $secondCharacter }.
+        [you] Your { CHARACTER($firstCharacter) } resolves first, then your opponent's { CHARACTER($secondCharacter) }.
+       *[opponent] Your opponent's { CHARACTER($firstCharacter) } resolves first, then your { CHARACTER($secondCharacter) }.
     }
 describe-turn-you = It's your turn.
 describe-turn-opponent = It's your opponent's turn.
@@ -619,6 +627,8 @@ history-empty = No finished games yet. Online games you finish are kept here, on
 history-won = Won
 history-lost = Lost
 history-summary = { $result } against { $opponent }
+# A row of the history list: `result` (Won or Lost) is drawn in bold.
+history-row-title = { $result } vs { $opponent }
 history-meta = { $date }, { $rounds ->
         [one] 1 round
        *[other] { $rounds } rounds

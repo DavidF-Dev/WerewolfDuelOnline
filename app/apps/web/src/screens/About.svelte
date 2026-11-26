@@ -20,7 +20,11 @@
   <Panel title={l.t('about-credits-heading')}>
     <ul class="rows">
       {#each [...FONT_CREDITS, ...SOFTWARE_CREDITS] as credit (credit.name)}
-        <ListRow>{l.t('about-credit-line', { name: credit.name, licence: credit.licence })}</ListRow
+        <ListRow
+          >{l.t('about-credit-line', {
+            name: credit.nameId === undefined ? credit.name : l.t(credit.nameId),
+            licence: credit.licence,
+          })}</ListRow
         >
       {/each}
       {#each THEME_CREDITS as credit (credit)}

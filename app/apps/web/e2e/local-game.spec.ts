@@ -138,3 +138,30 @@ test('guest seals a plan with the keyboard alone', async ({ context }) => {
   await perform(host, hostPlan);
   await expect.poll(async () => (await snapshot(guest)).lastSeq).toBeGreaterThan(before);
 });
+
+test('switching language mid-game re-renders the table and the log', async ({ context }) => {
+  const { host } = await openTable(context);
+  await expect.poll(async () => (await snapshot(host)).status).toBe('playing');
+  await host.getByTestId('log-toggle').click();
+  const log = host.getByTestId('log-drawer');
+  await expect(log.locator('li').first()).toBeVisible();
+  const english = await host.getByTestId('table').innerText();
+
+  await host.evaluate(() => window.__wwd!.language('pseudo'));
+  await expect(log).toBeVisible();
+  await expect(log.locator('li').first()).toHaveText(/~/);
+  // Every line of text the table shows is now in the pseudo-language, which pads all its words.
+  const lines = (await host.getByTestId('table').innerText())
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => /\p{L}{2}/u.test(line));
+  expect(lines.length).toBeGreaterThan(5);
+  expect(lines.filter((line) => !line.includes('~'))).toEqual([]);
+
+  await host.evaluate(() => window.__wwd!.language('de'));
+  await expect(host.locator('html')).toHaveAttribute('lang', 'de-DE');
+  await host.evaluate(() => window.__wwd!.language('en'));
+  await expect(host.locator('html')).toHaveAttribute('lang', 'en-GB');
+  expect(await host.getByTestId('table').innerText()).toBe(english);
+  expect((await snapshot(host)).status).toBe('playing');
+});

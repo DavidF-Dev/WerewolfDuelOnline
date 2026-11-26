@@ -1,7 +1,19 @@
 import type { Command } from '@wwd/engine';
-import type { ConnectionState, GameClient, GameClientState, Localiser } from '@wwd/client-core';
+import type {
+  ConnectionState,
+  GameClient,
+  GameClientState,
+  Locale,
+  Localiser,
+} from '@wwd/client-core';
 import type { NewRoomRequest } from '@wwd/protocol';
 import { DEFAULT_SERVER, createRoom } from './online.js';
+import {
+  activeLocaliser,
+  applyLanguage,
+  languageSettled,
+  useLocaliser,
+} from './settings/language.svelte.js';
 import { describe } from './table/describe.js';
 import { statusText } from './text.js';
 
@@ -19,6 +31,11 @@ export interface DevHook {
   connection(): ConnectionState | null;
   /** Creates an online room on the default referee, for scripted tests. */
   createOnline(opts?: CreateOnlineOptions): Promise<{ code: string }>;
+  /**
+   * Switches the page to a language as the Language setting does, without saving it; `pseudo` is
+   * the made-up lengthened language that tests use.
+   */
+  language(language: Locale | 'pseudo'): Promise<void>;
 }
 
 export interface CreateOnlineOptions {
@@ -58,6 +75,16 @@ const noGame = (): never => {
   throw new Error('no game is open on this page');
 };
 
+async function language(choice: Locale | 'pseudo'): Promise<void> {
+  const root = document.documentElement;
+  if (choice !== 'pseudo') {
+    applyLanguage(choice, root);
+    return languageSettled();
+  }
+  const { pseudoLocaliser } = await import('@wwd/client-core/pseudo');
+  useLocaliser(pseudoLocaliser(), root);
+}
+
 const BASE_HOOK: DevHook = {
   state: noGame,
   legal: noGame,
@@ -65,6 +92,7 @@ const BASE_HOOK: DevHook = {
   describe: noGame,
   connection: () => null,
   createOnline,
+  language,
 };
 
 /** Exposes the game-less part of `window.__wwd` in development builds. */
@@ -78,7 +106,6 @@ export function installBaseDevHook(): void {
  */
 export function installDevHook(
   client: GameClient,
-  l: Localiser,
   connection: () => ConnectionState | null = () => null,
 ): () => void {
   if (!import.meta.env.DEV) return () => {};
@@ -86,9 +113,10 @@ export function installDevHook(
     state: () => publicState(client.current),
     legal: () => client.current.legal,
     act: (cmd) => client.command(cmd),
-    describe: () => describeTable(l, client.current),
+    describe: () => describeTable(activeLocaliser(), client.current),
     connection,
     createOnline,
+    language,
   };
   window.__wwd = hook;
   return () => {

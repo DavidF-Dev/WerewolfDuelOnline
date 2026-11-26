@@ -14,7 +14,7 @@
   let { localiser: l }: Props = $props();
   const uid = $props.id();
 
-  const oneDecimal = new Intl.NumberFormat('en-GB', { maximumFractionDigits: 1 });
+  const oneDecimal = $derived(new Intl.NumberFormat(l.locale, { maximumFractionDigits: 1 }));
 
   let result = $state.raw<Stats | null>(null);
 
@@ -127,7 +127,7 @@
   th,
   td {
     border-bottom: 1px solid var(--line);
-    padding: 0.375rem;
+    padding: 0.375rem 0.25rem;
     text-align: start;
   }
 

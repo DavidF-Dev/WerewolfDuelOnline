@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import type { Localiser } from '@wwd/client-core';
+  import { LOCALES, type Localiser } from '@wwd/client-core';
   import { MAX_NAME_LENGTH } from '@wwd/protocol';
   import { canShareBackup, exportBackup, saveBackup, shareBackup } from '../backup/export.js';
   import { BackupError, backupFileName, type BackupFile } from '../backup/format.js';
@@ -26,6 +26,11 @@
   import Select from '../kit/Select.svelte';
   import { applySettings } from '../settings/apply.js';
   import Choice from '../settings/Choice.svelte';
+  import {
+    LANGUAGE_NAMES,
+    browserLanguages,
+    resolveLanguage,
+  } from '../settings/language.svelte.js';
   import { COPYRIGHT } from '../credits.js';
   import SettingsGroup from '../settings/SettingsGroup.svelte';
   import { DEFAULT_SETTINGS, TEXT_SIZES, type Settings } from '../settings/settings.js';
@@ -38,7 +43,6 @@
   let { localiser: l }: Props = $props();
   const uid = $props.id();
   const store = getDeviceStore();
-  const ENGLISH = 'English';
 
   let writes: Promise<void> = Promise.resolve();
   let loaded = $state(false);
@@ -224,8 +228,14 @@
             onchange={(event) =>
               update({ language: event.currentTarget.value as Settings['language'] })}
           >
-            <option value="system">{l.t('settings-language-system', { language: ENGLISH })}</option>
-            <option value="en">{ENGLISH}</option>
+            <option value="system"
+              >{l.t('settings-language-system', {
+                language: LANGUAGE_NAMES[resolveLanguage('system', browserLanguages())],
+              })}</option
+            >
+            {#each LOCALES as locale (locale)}
+              <option value={locale} lang={locale}>{LANGUAGE_NAMES[locale]}</option>
+            {/each}
           </Select>
         </span>
       </div>

@@ -90,11 +90,40 @@ writeFileSync(
   typeFiles.map((name) => `export type { ${name} } from './${name}.js';\n`).join(''),
 );
 
-// Generated beside the types so that the compiler emits it with the rest of the package.
-const ftl = readFileSync(join(engineDir, 'locales/en/engine.ftl'), 'utf8');
+// Each language but English is a module of its own, so a bundler splits it from start-up code.
+const localesDir = join(engineDir, 'locales');
+const ftl = (locale) => readFileSync(join(localesDir, locale, 'engine.ftl'), 'utf8');
+const others = readdirSync(localesDir)
+  .sort()
+  .filter((locale) => locale !== 'en');
+for (const locale of others) {
+  writeFileSync(
+    join(generatedDir, `locale-${locale}.ts`),
+    `const text: string = ${JSON.stringify(ftl(locale))};\nexport default text;\n`,
+  );
+}
+const cases = others.flatMap((locale) => [
+  `    case '${locale}':`,
+  `      return (await import('./locale-${locale}.js')).default;`,
+]);
 writeFileSync(
   join(generatedDir, 'locales.ts'),
-  `export const engineFtl: Readonly<Record<string, string>> = { en: ${JSON.stringify(ftl)} };\n`,
+  [
+    '/** The English engine text, by language. */',
+    `export const engineFtl: Readonly<Record<string, string>> = ${JSON.stringify({ en: ftl('en') })};`,
+    '',
+    '/** The engine text of `locale`; a language other than English is loaded when first asked for. */',
+    'export async function loadEngineFtl(locale: string): Promise<string> {',
+    '  switch (locale) {',
+    "    case 'en':",
+    "      return engineFtl['en']!;",
+    ...cases,
+    '    default:',
+    '      throw new Error(`no engine text for ${locale}`);',
+    '  }',
+    '}',
+    '',
+  ].join('\n'),
 );
 
 run(process.execPath, [require.resolve('typescript/bin/tsc'), '-p', 'tsconfig.build.json']);

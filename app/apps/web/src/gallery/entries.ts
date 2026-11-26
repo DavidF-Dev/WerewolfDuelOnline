@@ -384,13 +384,14 @@ export const GALLERY: GalleryEntry[] = [
       props: () => ({ id: HUNTER_PAST_GAME }),
       stage: hunterGame,
       act: async () => {
-        const at = `Step ${HUNTER_STEP} of`;
+        // The step is the first number in the position, in every language.
+        const at = new RegExp(`^\\D*${HUNTER_STEP}\\D`, 'u');
         for (let step = 1; step < HUNTER_STEP; step++) await click('replay-next-step');
         await until(
           () =>
-            document.querySelector('[data-testid="replay-position"]')?.textContent?.includes(at) ||
+            at.test(document.querySelector('[data-testid="replay-position"]')?.textContent ?? '') ||
             null,
-          at,
+          `step ${HUNTER_STEP}`,
         );
         await byTestId('showdown-out');
       },

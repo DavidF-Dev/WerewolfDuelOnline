@@ -4,7 +4,7 @@
   import CharacterCard from '../components/CharacterCard.svelte';
   import Label from '../kit/Label.svelte';
   import RichText from '../kit/RichText.svelte';
-  import { characterName, logParts } from '../text.js';
+  import { logParts } from '../text.js';
   import { handInstruction } from './primary.svelte.js';
   import { showdownSteps } from './showdown.js';
 
@@ -16,9 +16,11 @@
     round: number;
     /** Marks the summary as the latest showdown result. */
     latest?: boolean;
+    /** Draws the set-aside card smaller, for a screen short of room. */
+    compact?: boolean;
   }
 
-  let { localiser: l, events, seat, round, latest = false }: Props = $props();
+  let { localiser: l, events, seat, round, latest = false, compact = false }: Props = $props();
   const uid = $props.id();
 
   interface Summary {
@@ -80,7 +82,7 @@
 
 {#if summary !== null}
   <section
-    class={['summary', { latest }]}
+    class={['summary', { latest, compact }]}
     aria-labelledby="{uid}-heading"
     data-testid="round-summary"
   >
@@ -101,7 +103,7 @@
               parts={richMessage(
                 l,
                 'round-summary-set-aside',
-                { character: characterName(l, summary.setAside) },
+                { character: summary.setAside },
                 { character: 'character' },
               )}
             />
@@ -151,6 +153,10 @@
     align-items: center;
     display: flex;
     gap: 10px;
+  }
+
+  .compact .row > :global(.slot) {
+    zoom: 0.6;
   }
 
   .text {

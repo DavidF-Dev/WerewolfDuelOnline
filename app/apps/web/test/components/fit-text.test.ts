@@ -1,5 +1,5 @@
 import { afterEach, beforeAll, describe, expect, it } from 'vitest';
-import { fitText } from '../../src/components/fit-text.js';
+import { fitCardName, fitText } from '../../src/components/fit-text.js';
 
 /** Each observed element, so a test can report that its box has resized. */
 const observed = new Set<Element>();
@@ -103,6 +103,26 @@ describe('fitText', () => {
     expect(element.style.textOverflow).toBe('ellipsis');
     expect(element.title).toBe('Maximiliane-Alexandra');
     expect(element.textContent).toBe('Maximiliane-Alexandra');
+  });
+
+  it("a card's name may shrink to 75 % of its normal size, where other labels stop at 80 %", async () => {
+    // 14 characters are 84 px wide at 10 px; in 64 px they need 7.5 px, below the 80 % floor.
+    const name = label('Wolfsschönheit', 64).element;
+    mounted.push(fitCardName(name));
+    const other = label('Wolfsschönheit', 64).element;
+    fit(other);
+    await frame();
+    expect(fontSize(name)).toBeCloseTo(7.5, 5);
+    expect(fits(name)).toBe(true);
+    expect(name.hasAttribute('title')).toBe(false);
+    expect(fontSize(other)).toBeCloseTo(8, 5);
+    expect(other.title).toBe('Wolfsschönheit');
+    // Below 75 % a card's name is cut like any other label.
+    const longer = label('Maximiliane-Alexandra', 60).element;
+    mounted.push(fitCardName(longer));
+    await frame();
+    expect(fontSize(longer)).toBeCloseTo(7.5, 5);
+    expect(longer.title).toBe('Maximiliane-Alexandra');
   });
 
   it('grows back to its normal size when its box has room again', async () => {

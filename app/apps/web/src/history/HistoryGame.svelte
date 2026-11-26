@@ -1,7 +1,8 @@
 <script lang="ts">
-  import type { Localiser } from '@wwd/client-core';
+  import { richMessage, type Localiser } from '@wwd/client-core';
   import Button from '../components/Button.svelte';
   import ListRow from '../kit/ListRow.svelte';
+  import RichText from '../kit/RichText.svelte';
   import { replayHref } from '../router.js';
   import type { HistoryRecord } from '../storage/db.js';
 
@@ -20,6 +21,10 @@
     rounds: record.rounds,
     reason: l.t(`reason-${record.reason}`),
   });
+  // The result is drawn in bold, as rich text draws a player's name.
+  const title = $derived(
+    richMessage(l, 'history-row-title', { result, opponent }, { result: 'player' }),
+  );
   const label = $derived(
     l.t('history-replay-label', {
       summary: l.t('history-summary', { result, opponent }),
@@ -30,7 +35,7 @@
 
 <ListRow data-testid="history-game">
   <p class="title">
-    <strong class="result">{result}</strong>{` ${l.t('reveal-versus')} ${opponent}`}
+    <RichText parts={title} />
   </p>
   <p class="meta" data-testid="history-meta">{l.t('history-row-meta', facts)}</p>
   {#snippet end()}

@@ -10,6 +10,10 @@ import type {
   TargetCard,
 } from '@wwd/engine';
 import {
+  characterParts,
+  createLocaliser,
+  GrammarError,
+  listForm,
   plainText,
   richMessage,
   type ClientStatus,
@@ -21,15 +25,22 @@ import {
 } from '@wwd/client-core';
 import { faction, initiative } from './cards.js';
 
-const list = new Intl.ListFormat('en-GB', { type: 'conjunction' });
-
 export const characterName = (l: Localiser, c: Character): string =>
   l.t(`character-${c.replaceAll('_', '-')}`);
+
+let english: Localiser | undefined;
+
+/** The card's name as the English edition prints it, or null when `l`'s language is English. */
+export function printedName(l: Localiser, card: TargetCard): string | null {
+  if (l.language === 'en') return null;
+  english ??= createLocaliser('en');
+  return card === 'fool' ? english.t('card-fool') : characterName(english, card.character);
+}
 
 /** A character card's full accessible name, e.g. "Knight, initiative 3, Human". */
 export const cardName = (l: Localiser, c: Character): string =>
   l.t('card-character', {
-    name: characterName(l, c),
+    character: c,
     initiative: initiative(c),
     faction: l.t(`faction-${faction(c)}`),
   });
@@ -37,7 +48,7 @@ export const cardName = (l: Localiser, c: Character): string =>
 /** A card button's accessible name, e.g. "3, Knight, Human. Gain an Hourglass, …". */
 export const characterLabel = (l: Localiser, c: Character, shownInitiative: number): string =>
   l.t('card-name', {
-    name: characterName(l, c),
+    character: c,
     initiative: shownInitiative,
     faction: l.t(`faction-${faction(c)}`),
     ability: abilityText(l, { character: c }),
@@ -69,29 +80,31 @@ export const abilityParts = (l: Localiser, card: TargetCard): RichPart[] =>
 export const targetName = (l: Localiser, card: TargetCard): string =>
   card === 'fool' ? l.t('card-fool') : cardName(l, card.character);
 
-export function planText(l: Localiser, plan: Plan): string {
-  const character = characterName(l, plan.character);
-  if (plan.targets.length === 0) return l.t('plan-no-targets', { character });
-  const targets = plan.targets.map((card) =>
-    card === 'fool'
-      ? l.t('target-fool')
-      : l.t('target-character', { character: characterName(l, card.character) }),
-  );
-  return l.t('plan-targeting', { character, targets: list.format(targets) });
-}
+export const planText = (l: Localiser, plan: Plan): string => plainText(l.plan(plan));
 
-/** A plan as short rich text, such as "**Knight** → **Wolfen** + **Fool**". */
+/**
+ * A plan as short rich text, such as "**Knight** → **Wolfen** + **Fool**", or the summary message's
+ * id when a target cannot be named.
+ */
 export function planSummaryParts(l: Localiser, plan: Plan): RichPart[] {
-  const character = characterName(l, plan.character);
+  const character = plan.character;
   if (plan.targets.length === 0) {
     return richMessage(l, 'plan-summary-short-none', { character }, { character: 'character' });
   }
-  const names: RichPart[] = plan.targets.flatMap((card, i) => {
-    const name: RichPart = {
-      character: card === 'fool' ? l.t('plan-summary-fool') : characterName(l, card.character),
-    };
-    return i === 0 ? [name] : [{ text: ' + ' }, name];
-  });
+  const form = listForm(l, 'plan-summary-short');
+  let names: RichPart[];
+  try {
+    names = plan.targets.flatMap((card, i) => {
+      const name: readonly RichPart[] =
+        card === 'fool'
+          ? [{ character: l.t('plan-summary-fool', { ...form }) }]
+          : characterParts(l, card.character, form);
+      return i === 0 ? [...name] : [{ text: ' + ' }, ...name];
+    });
+  } catch (error) {
+    if (error instanceof GrammarError) return [{ text: 'plan-summary-short' }];
+    throw error;
+  }
   return richMessage(
     l,
     'plan-summary-short',
@@ -115,9 +128,7 @@ export function commandLabel(l: Localiser, cmd: Command): string {
     return l.t('command-place-hourglasses', { n: cmd.place_hourglasses.n });
   }
   if ('choose_potion_target' in cmd) {
-    return l.t('command-choose-potion-target', {
-      card: characterName(l, cmd.choose_potion_target.card),
-    });
+    return l.t('command-choose-potion-target', { card: cmd.choose_potion_target.card });
   }
   return l.t(
     cmd.hunter_spend_cross.spend
@@ -190,7 +201,17 @@ export function markerLines(l: Localiser, player: PlayerView, hasBadge: boolean)
   ];
 }
 
-export const listText = (items: string[]): string => list.format(items);
+const listFormats = new Map<string, Intl.ListFormat>();
+
+/** `items` joined as a list, in the localiser's language. */
+export function listText(l: Localiser, items: string[]): string {
+  let format = listFormats.get(l.locale);
+  if (format === undefined) {
+    format = new Intl.ListFormat(l.locale, { type: 'conjunction' });
+    listFormats.set(l.locale, format);
+  }
+  return format.format(items);
+}
 
 /** Describes a problem code: an engine message id, a protocol code, or a local message id. */
 export function problemText(l: Localiser, code: string, online = false): string {

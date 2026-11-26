@@ -231,6 +231,17 @@ fn fuzz_reports_games() {
 }
 
 #[test]
+fn german_fuzz_summary_says_whose_health_ran_out() {
+    wwd()
+        .args(["--lang", "de", "fuzz", "--games", "20", "--seed", SEED_HEX])
+        .assert()
+        .success()
+        .stdout(predicate::str::contains(
+            "Siege, weil das Gegenüber kein Leben mehr hatte: ",
+        ));
+}
+
+#[test]
 fn bad_seed_is_a_usage_error() {
     wwd()
         .args(["fuzz", "--games", "1", "--seed", "xyz"])
@@ -414,4 +425,45 @@ fn replay_announces_a_resumed_segment_from_every_perspective() {
             "{viewer}: {out}"
         );
     }
+}
+
+#[test]
+fn lang_option_selects_a_language() {
+    let english = wwd()
+        .args(["play", "--badge", "p0", "--seed", SEED_HEX])
+        .write_stdin("\nq\n")
+        .assert()
+        .success()
+        .get_output()
+        .stdout
+        .clone();
+    let play = |lang: &str| {
+        wwd()
+            .args(["--lang", lang, "play", "--badge", "p0", "--seed", SEED_HEX])
+            .write_stdin("\nq\n")
+            .assert()
+            .success()
+            .get_output()
+            .stdout
+            .clone()
+    };
+    assert_eq!(play("en"), english);
+    let japanese = String::from_utf8(play("ja")).expect("the output is UTF-8");
+    assert!(japanese.contains("第1ラウンド"), "{japanese}");
+    assert!(japanese.contains("あなたの手札"), "{japanese}");
+    assert!(!japanese.contains("Round"), "{japanese}");
+    let german = String::from_utf8(play("de")).expect("the output is UTF-8");
+    assert!(german.contains("Runde 1"), "{german}");
+    assert!(german.contains("Deine Hand"), "{german}");
+    assert!(!german.contains("Round"), "{german}");
+    wwd()
+        .args(["play", "--lang", "de", "--badge", "p0", "--seed", SEED_HEX])
+        .write_stdin("\nq\n")
+        .assert()
+        .success();
+    wwd()
+        .args(["--lang", "fr", "play", "--seed", SEED_HEX])
+        .assert()
+        .code(2)
+        .stderr(predicate::str::contains("--lang"));
 }

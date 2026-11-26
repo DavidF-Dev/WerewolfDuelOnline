@@ -2,7 +2,7 @@
 
 **Werewolf: Duel! Online** is an unofficial digital version of the two-player bluffing card game *Werewolf: Duel!* by Whales Entertainment. It is played in the browser on desktop and mobile as an installable PWA. Friends connect with a join code. A server-side **referee** runs the rules engine and sends each player only their own view.
 
-**Status:** M1 (the rules engine and `wwd` CLI in `engine/`), M2 (WASM bindings, protocol, referee core, client core and an unstyled two-tab web table in `app/`), M3 (online play: the Node and Cloudflare referees, join codes, reconnection, seat PINs, the mobile lifecycle, and the deploy workflow and guide in `docs/deploy.md`) and M4 (the product: every screen in the Moonlit theme, settings, pause and resume including from a save file, rematch, history with replays and stats, backups, and the installable PWA with an offline shell) are complete. The next step is to write the M5 plan.
+**Status:** M1 (the rules engine and `wwd` CLI in `engine/`), M2 (WASM bindings, protocol, referee core, client core and an unstyled two-tab web table in `app/`), M3 (online play: the Node and Cloudflare referees, join codes, reconnection, seat PINs, the mobile lifecycle, and the deploy workflow and guide in `docs/deploy.md`) and M4 (the product: every screen in the Moonlit theme, settings, pause and resume including from a save file, rematch, history with replays and stats, backups, and the installable PWA with an offline shell) are complete. M5's first project, languages (German and Japanese across the app and `wwd`), is complete. The next step is the design for the M5 rulebook and tutorial project.
 
 ## Documents (read these first)
 
@@ -12,6 +12,8 @@
 | [`docs/superpowers/plans/2026-11-22-m1-engine.md`](docs/superpowers/plans/2026-11-22-m1-engine.md) | Implementation plan for M1 (engine + CLI) |
 | [`docs/superpowers/plans/2026-11-23-layout-pass.md`](docs/superpowers/plans/2026-11-23-layout-pass.md) | Implementation plan for the layout pass |
 | [`docs/superpowers/specs/2026-11-24-cards-plan-home-design.md`](docs/superpowers/specs/2026-11-24-cards-plan-home-design.md) | Design note for the cards, the plan screen and Home |
+| [`docs/superpowers/specs/2026-11-26-m5-languages-design.md`](docs/superpowers/specs/2026-11-26-m5-languages-design.md) | Design note for M5 languages: German and Japanese grammar, fonts, checks |
+| [`docs/superpowers/plans/2026-11-26-m5-languages.md`](docs/superpowers/plans/2026-11-26-m5-languages.md) | Implementation plan for M5 languages |
 | [`docs/research/2026-11-21-research-and-recommendations.md`](docs/research/2026-11-21-research-and-recommendations.md) | Background research, alternatives considered, sources |
 | [`docs/mockups/mockups.html`](docs/mockups/mockups.html) | Low-fidelity screen mockups (open in a browser) |
 | [`docs/mockups/cards-and-plan.html`](docs/mockups/cards-and-plan.html) | Card and plan-screen mockups; sections H and I are binding |
@@ -45,9 +47,10 @@ App, from `app/`:
 - `pnpm --filter @wwd/web e2e:online` (Playwright vs a Node referee started in-process, including the axe accessibility checks)
 - `pnpm --filter @wwd/web e2e:pwa` (Playwright vs a production build served by `vite preview`: the offline shell)
 - `pnpm --filter @wwd/web e2e:parity` (the `@parity` subset vs `wrangler dev`; local workerd, no account)
+- `pnpm --filter @wwd/web fonts:ja` (regenerates the committed Japanese font subsets in `apps/web/src/theme/ja-fonts/` after Japanese text changes; it installs the exact-pinned source fonts into a temporary folder. `dev`, `build` and `test` fail, naming this command, when a Japanese character is missing from the subsets)
 - `pnpm --filter @wwd/web icons` (renders the app icon PNGs from its SVG with Playwright's Chromium)
-- `pnpm --filter @wwd/web visual` (draws every gallery entry at four sizes in light, dark and high contrast, beside the mockups, into `apps/web/visual-output/`; open its `index.html`)
-- `pnpm --filter @wwd/web transcript` (writes three seeded games as Markdown logs, one per view, into `apps/web/visual-output/transcripts/`; `--search` finds seeds for its scenarios)
+- `pnpm --filter @wwd/web visual` (draws every gallery entry at four sizes in light, dark and high contrast, beside the mockups, into `apps/web/visual-output/`; open its `index.html`. `--lang de`, `ja` or `pseudo` draws them in that language, and `--lang all` in every language, each in a folder of its own)
+- `pnpm --filter @wwd/web transcript` (writes three seeded games as Markdown logs, one per view, into `apps/web/visual-output/transcripts/`; `--search` finds seeds for its scenarios, and `--lang de` or `ja` writes them in that language into `transcripts-de/` or `transcripts-ja/`)
 - `pnpm --filter @wwd/web dev` (dev server; `window.__wwd` is available only here). It uses the referee at `http://localhost:8787`, so start one of:
   - `pnpm --filter @wwd/referee-node start --test-overrides` (the Node referee; add `--port`, `--data`, `--origins` as needed)
   - `pnpm --filter @wwd/referee-cloudflare dev` (`wrangler dev` in local workerd, with test overrides; never deploys)

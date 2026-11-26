@@ -1,5 +1,6 @@
 import { eventId } from '@wwd/engine';
 import type { Character, Event, ForfeitReason, Plan, Seat, TargetCard } from '@wwd/engine';
+import { characterParts, GrammarError, listForm, type CharacterForm } from './grammar.js';
 import type { MessageArgs, Translator } from './i18n.js';
 import {
   plainText,
@@ -42,42 +43,92 @@ function seatArgs(ctx: Context, key: string, seat: Seat): Message {
   };
 }
 
-function character(ctx: Context, c: Character): string {
-  return ctx.tr.t(`character-${c.replaceAll('_', '-')}`);
-}
-
-/** A character's name as rich text. */
-function named(ctx: Context, c: Character): RichPart[] {
-  return [{ character: character(ctx, c) }];
-}
-
 /** Items joined as a list, each keeping its own parts. */
-function list(ctx: Context, items: RichPart[][]): RichPart[] {
+function list(listParts: ListParts, items: ReadonlyArray<readonly RichPart[]>): RichPart[] {
   let next = 0;
-  return ctx
-    .list(items.map(plainText))
-    .flatMap((part) => (part.type === 'element' ? (items[next++] ?? []) : [{ text: part.value }]));
+  return listParts(items.map(plainText)).flatMap((part) =>
+    part.type === 'element' ? (items[next++] ?? []) : [{ text: part.value }],
+  );
 }
 
-function targetCard(ctx: Context, card: TargetCard): RichPart[] {
-  if (card === 'fool') return [{ text: ctx.tr.t('target-fool') }];
-  const name = character(ctx, card.character);
-  return richMessage(ctx.tr, 'target-character', { character: name }, { character: 'character' });
-}
-
-function plan(ctx: Context, p: Plan): RichPart[] {
-  const name = character(ctx, p.character);
-  if (p.targets.length === 0) {
-    return richMessage(ctx.tr, 'plan-no-targets', { character: name }, { character: 'character' });
+/** The parts of message `id`, or the id alone when a character in it cannot be named. */
+function orId(id: string, parts: () => RichPart[]): RichPart[] {
+  try {
+    return parts();
+  } catch (error) {
+    if (error instanceof GrammarError) return [{ text: id }];
+    throw error;
   }
+}
+
+/**
+ * Message `id` with `cards` as its `cards` list, each in the form that message declares, or the
+ * id alone when a card cannot be named.
+ */
+export function cardsMessage(
+  tr: Translator,
+  listParts: ListParts,
+  id: string,
+  cards: readonly Character[],
+  args: MessageArgs = {},
+): RichPart[] {
+  return orId(id, () => {
+    const names = characterList(tr, listParts, id, cards);
+    return richMessage(tr, id, { ...args, cards: plainText(names) }, { cards: { parts: names } });
+  });
+}
+
+/** `cards` as the list argument of message `id`, each in the form that message declares. */
+function characterList(
+  tr: Translator,
+  listParts: ListParts,
+  id: string,
+  cards: readonly Character[],
+): RichPart[] {
+  const form = listForm(tr, id);
+  return list(
+    listParts,
+    cards.map((c) => characterParts(tr, c, form)),
+  );
+}
+
+function targetCard(tr: Translator, card: TargetCard, form: CharacterForm): RichPart[] {
+  if (card === 'fool') return richMessage(tr, 'target-fool', { ...form });
+  const name = characterParts(tr, card.character, form);
+  return richMessage(
+    tr,
+    'target-character',
+    { character: plainText(name) },
+    { character: { parts: name } },
+  );
+}
+
+/**
+ * A plan as the messages word it, with its character and target names marked out, or the plan
+ * message's id when a target cannot be named.
+ */
+export function planParts(tr: Translator, listParts: ListParts, p: Plan): RichPart[] {
+  if (p.targets.length === 0) {
+    return richMessage(
+      tr,
+      'plan-no-targets',
+      { character: p.character },
+      { character: 'character' },
+    );
+  }
+  return orId('plan-targeting', () => planTargeting(tr, listParts, p));
+}
+
+function planTargeting(tr: Translator, listParts: ListParts, p: Plan): RichPart[] {
+  const form = listForm(tr, 'plan-targeting');
   const targets = list(
-    ctx,
-    p.targets.map((card) => targetCard(ctx, card)),
+    listParts,
+    p.targets.map((card) => targetCard(tr, card, form)),
   );
   return richMessage(
-    ctx.tr,
+    tr,
     'plan-targeting',
-    { character: name, targets: plainText(targets) },
+    { character: p.character, targets: plainText(targets) },
     { character: 'character', targets: { parts: targets } },
   );
 }
@@ -114,8 +165,8 @@ function join(...parts: Message[]): Message {
 }
 
 const plainArgs = (args: MessageArgs): Message => ({ args, kinds: {} });
-const characterArg = (ctx: Context, key: string, c: Character): Message => ({
-  args: { [key]: character(ctx, c) },
+const characterArg = (key: string, c: Character): Message => ({
+  args: { [key]: c },
   kinds: { [key]: 'character' },
 });
 /** A marker argument whose words come from message `id`. */
@@ -135,6 +186,11 @@ const PLAYER_WORDS = {
   your: 'player-your',
   opponentCap: 'player-opponent-cap',
   opponent: 'player-opponent',
+  youDat: 'player-you-dat',
+  yourAccMasculine: 'player-your-acc-masculine',
+  yourAccFeminine: 'player-your-acc-feminine',
+  opponentDat: 'player-opponent-dat',
+  opponentGen: 'player-opponent-gen',
 } as const;
 
 /** The words that stand for a player from a seat's perspective, emphasised as player names. */
@@ -163,13 +219,7 @@ function eventMessage(ctx: Context, event: Event): Message {
     const { seat, cards } = kind.hand_dealt;
     return join(
       seatArgs(ctx, 'actor', seat),
-      partsArg(
-        'cards',
-        list(
-          ctx,
-          cards.map((c) => named(ctx, c)),
-        ),
-      ),
+      partsArg('cards', characterList(ctx.tr, ctx.list, eventId(kind), cards)),
     );
   }
   if ('plan_submitted' in kind) {
@@ -189,7 +239,7 @@ function eventMessage(ctx: Context, event: Event): Message {
     return join(
       seatArgs(ctx, 'actor', seat),
       markerArg(ctx, 'potion', 'potion'),
-      characterArg(ctx, 'card', card),
+      characterArg('card', card),
     );
   }
   if ('plans_revealed' in kind) {
@@ -203,8 +253,8 @@ function eventMessage(ctx: Context, event: Event): Message {
       seatArgs(ctx, 'actor', actor),
       seatArgs(ctx, 'other', other(actor)),
       seatArgs(ctx, 'first', order[0]),
-      partsArg('actorPlan', plan(ctx, plans[a])),
-      partsArg('otherPlan', plan(ctx, plans[o])),
+      partsArg('actorPlan', planParts(ctx.tr, ctx.list, plans[a])),
+      partsArg('otherPlan', planParts(ctx.tr, ctx.list, plans[o])),
       plainArgs({ actorInitiative: effective[a], otherInitiative: effective[o] }),
     );
   }
@@ -214,13 +264,13 @@ function eventMessage(ctx: Context, event: Event): Message {
       seatArgs(ctx, 'victim', victim),
       plainArgs({ result: hit ? 'hit' : 'miss', lost: health_lost }),
       markerArg(ctx, 'potion', 'potion'),
-      characterArg(ctx, 'card', target),
+      characterArg('card', target),
       markerArg(ctx, 'health', 'health'),
     );
   }
   if ('character_resolved' in kind) {
     const { seat, character: c } = kind.character_resolved;
-    return join(seatArgs(ctx, 'actor', seat), characterArg(ctx, 'character', c));
+    return join(seatArgs(ctx, 'actor', seat), characterArg('character', c));
   }
   if ('marker_gained' in kind) {
     const { seat, marker: m, from_opponent } = kind.marker_gained;
@@ -240,15 +290,15 @@ function eventMessage(ctx: Context, event: Event): Message {
     return join(
       seatArgs(ctx, 'actor', seat),
       seatArgs(ctx, 'targetSeat', target_seat),
-      characterArg(ctx, 'attacker', attacker),
-      characterArg(ctx, 'character', c),
+      characterArg('attacker', attacker),
+      characterArg('character', c),
       plainArgs({ lost: health_lost }),
       markerArg(ctx, 'health', 'health'),
     );
   }
   if ('attack_missed' in kind) {
     const { seat, attacker } = kind.attack_missed;
-    return join(seatArgs(ctx, 'actor', seat), characterArg(ctx, 'attacker', attacker));
+    return join(seatArgs(ctx, 'actor', seat), characterArg('attacker', attacker));
   }
   if ('attack_forfeited' in kind) {
     const { seat, reason } = kind.attack_forfeited;
@@ -264,7 +314,7 @@ function eventMessage(ctx: Context, event: Event): Message {
   }
   if ('discard_revealed' in kind) {
     const { round, character: c } = kind.discard_revealed;
-    return join(plainArgs({ round }), characterArg(ctx, 'character', c));
+    return join(plainArgs({ round }), characterArg('character', c));
   }
   if ('next_round_requested' in kind) {
     return seatArgs(ctx, 'actor', kind.next_round_requested.seat);
@@ -289,8 +339,13 @@ export function renderEvent(
   perspective: Seat | null,
 ): string {
   const ctx = { tr, perspective, list };
-  const { args } = join(eventMessage(ctx, event), playerWords(ctx));
-  return tr.t(eventId(event.kind), args);
+  const id = eventId(event.kind);
+  return plainText(
+    orId(id, () => {
+      const { args } = join(eventMessage(ctx, event), playerWords(ctx));
+      return [{ text: tr.t(id, args) }];
+    }),
+  );
 }
 
 /** The event's sentence split into plain text, bold player and character names, and markers. */
@@ -301,6 +356,9 @@ export function richEvent(
   perspective: Seat | null,
 ): RichPart[] {
   const ctx = { tr, perspective, list };
-  const { args, kinds } = join(eventMessage(ctx, event), playerWords(ctx));
-  return richMessage(tr, eventId(event.kind), args, kinds);
+  const id = eventId(event.kind);
+  return orId(id, () => {
+    const { args, kinds } = join(eventMessage(ctx, event), playerWords(ctx));
+    return richMessage(tr, id, args, kinds);
+  });
 }

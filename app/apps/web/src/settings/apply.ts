@@ -1,5 +1,6 @@
 import { loadReadingFont } from '../theme/fonts.js';
 import { setDisplaySettings, system } from './display.svelte.js';
+import { applyLanguage } from './language.svelte.js';
 import { nearestTextSize, type Settings } from './settings.js';
 
 const DARK_QUERY = '(prefers-color-scheme: dark)';
@@ -17,10 +18,12 @@ let applied: { settings: Settings; root: HTMLElement } | undefined;
 
 /**
  * Reflects the settings onto attributes and a variable of `root` for the stylesheet to read,
- * shares the table settings with the components, and loads a chosen reading font.
+ * shares the table settings with the components, makes the chosen language the active one and
+ * loads a chosen reading font.
  */
 export function applySettings(settings: Settings, root: HTMLElement): void {
   applied = { settings, root };
+  applyLanguage(settings.language, root);
   system.reducedMotion = matches(REDUCED_MOTION_QUERY);
   const systemTheme = matches(DARK_QUERY) ? 'dark' : 'light';
   root.setAttribute('data-theme', settings.theme === 'system' ? systemTheme : settings.theme);
@@ -43,17 +46,21 @@ export function applySettings(settings: Settings, root: HTMLElement): void {
 }
 
 /**
- * Re-applies the settings last applied whenever the system's colour scheme or motion preference
- * changes, so the System choices follow it; returns a function that stops watching.
+ * Re-applies the settings last applied whenever the system's colour scheme, motion preference or
+ * languages change, so the System choices follow them; returns a function that stops watching.
  */
 export function watchSystemPreferences(): () => void {
-  if (typeof window.matchMedia !== 'function') return () => undefined;
   const reapply = (): void => {
     if (applied !== undefined) applySettings(applied.settings, applied.root);
   };
-  const lists = [DARK_QUERY, REDUCED_MOTION_QUERY].map((query) => window.matchMedia(query));
+  const lists =
+    typeof window.matchMedia === 'function'
+      ? [DARK_QUERY, REDUCED_MOTION_QUERY].map((query) => window.matchMedia(query))
+      : [];
   for (const list of lists) list.addEventListener('change', reapply);
+  window.addEventListener('languagechange', reapply);
   return () => {
     for (const list of lists) list.removeEventListener('change', reapply);
+    window.removeEventListener('languagechange', reapply);
   };
 }

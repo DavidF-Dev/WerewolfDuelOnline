@@ -9,6 +9,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./pseudo": {
+      "types": "./dist/pseudo.d.ts",
+      "default": "./dist/pseudo.js"
     }
   },
   "files": [

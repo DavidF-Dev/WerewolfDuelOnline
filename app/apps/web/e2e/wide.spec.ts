@@ -1,5 +1,12 @@
 import { expect, test, type Page } from '@playwright/test';
-import { GALLERY_ENTRIES, expectGalleryEntries, openGalleryEntry } from './gallery-entries.js';
+import {
+  GALLERY_ENTRIES,
+  LANGUAGES,
+  expectGalleryEntries,
+  inLanguage,
+  inLanguageTitle,
+  openGalleryEntry,
+} from './gallery-entries.js';
 
 /** The column's width in CSS pixels: 30 rem at the default 16 px. */
 const COLUMN = 480;
@@ -78,39 +85,41 @@ test('the gallery list matches the entries measured here', async ({ page }, info
 });
 
 test.describe('wide screens paint backgrounds edge to edge and keep content in the column', () => {
-  for (const width of [481, 1280, 1920, 2560]) {
-    test(`at ${width} px`, async ({ page }, info) => {
-      test.skip(info.project.name !== 'desktop', 'wide screens are desktop screens');
-      test.setTimeout(240_000);
-      await page.setViewportSize({ width, height: 900 });
-      for (const id of GALLERY_ENTRIES) {
-        await openGalleryEntry(page, id);
-        const m = await measure(page);
-        const start = (m.width - COLUMN) / 2;
-        const end = (m.width + COLUMN) / 2;
-        expect.soft(m.bands.length, `${id}: has bands`).toBeGreaterThan(1);
-        for (const band of m.bands) {
+  for (const lang of LANGUAGES) {
+    for (const width of [481, 1280, 1920, 2560]) {
+      test(inLanguageTitle(`at ${width} px`, lang), async ({ page }, info) => {
+        test.skip(info.project.name !== 'desktop', 'wide screens are desktop screens');
+        test.setTimeout(240_000);
+        await page.setViewportSize({ width, height: 900 });
+        for (const id of GALLERY_ENTRIES) {
+          await openGalleryEntry(page, id, inLanguage(lang));
+          const m = await measure(page);
+          const start = (m.width - COLUMN) / 2;
+          const end = (m.width + COLUMN) / 2;
+          expect.soft(m.bands.length, `${id}: has bands`).toBeGreaterThan(1);
+          for (const band of m.bands) {
+            expect
+              .soft(band.left, `${id}: the ${band.what} starts at the left edge`)
+              .toBeLessThanOrEqual(SLACK);
+            expect
+              .soft(band.right, `${id}: the ${band.what} ends at the right edge`)
+              .toBeGreaterThanOrEqual(m.width - SLACK);
+          }
+          for (const part of m.content) {
+            expect
+              .soft(part.left, `${id}: ${part.what} starts in the column`)
+              .toBeGreaterThanOrEqual(start - SLACK);
+            expect
+              .soft(part.right, `${id}: ${part.what} ends in the column`)
+              .toBeLessThanOrEqual(end + SLACK);
+          }
+          expect.soft(m.scrollWidth, `${id}: no horizontal scroll`).toBeLessThanOrEqual(m.width);
           expect
-            .soft(band.left, `${id}: the ${band.what} starts at the left edge`)
+            .soft(Math.abs(m.topSpare), `${id}: the top band holds only what is shown`)
             .toBeLessThanOrEqual(SLACK);
-          expect
-            .soft(band.right, `${id}: the ${band.what} ends at the right edge`)
-            .toBeGreaterThanOrEqual(m.width - SLACK);
         }
-        for (const part of m.content) {
-          expect
-            .soft(part.left, `${id}: ${part.what} starts in the column`)
-            .toBeGreaterThanOrEqual(start - SLACK);
-          expect
-            .soft(part.right, `${id}: ${part.what} ends in the column`)
-            .toBeLessThanOrEqual(end + SLACK);
-        }
-        expect.soft(m.scrollWidth, `${id}: no horizontal scroll`).toBeLessThanOrEqual(m.width);
-        expect
-          .soft(Math.abs(m.topSpare), `${id}: the top band holds only what is shown`)
-          .toBeLessThanOrEqual(SLACK);
-      }
-    });
+      });
+    }
   }
 });
 

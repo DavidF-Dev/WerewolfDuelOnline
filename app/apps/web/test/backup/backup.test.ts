@@ -1,4 +1,7 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { createLocaliser, loadLocale, LOCALES } from '@wwd/client-core';
 import { contentHash } from '@wwd/engine';
 import { canonicalJson } from '@wwd/protocol';
 import {
@@ -14,6 +17,7 @@ import { exportBackup } from '../../src/backup/export.js';
 import { mergeBackup, previewBackup, readBackup } from '../../src/backup/import.js';
 import { DEFAULT_SETTINGS } from '../../src/settings/settings.js';
 import { openDeviceStore, type DeviceStore } from '../../src/storage/db.js';
+import { finishedGame, recordFrom } from '../history/records.js';
 import { SERVER, historyRecord, populate, sessionRecord } from './fixtures.js';
 
 let store: DeviceStore;
@@ -308,5 +312,56 @@ describe('merging', () => {
     });
     await other.settings.put(backup.settings);
     expect((await previewBackup(other, backup)).settingsDiffer).toBe(false);
+  });
+});
+
+/** Every message of every language that takes no arguments and reads as words, not a name. */
+function messageTexts(): string[] {
+  const root = join(process.cwd(), '../..');
+  const files = (locale: string) => [
+    readFileSync(join(root, `../engine/locales/${locale}/engine.ftl`), 'utf8'),
+    readFileSync(join(root, `packages/client-core/locales/${locale}/ui.ftl`), 'utf8'),
+  ];
+  return LOCALES.flatMap((locale) => {
+    const l = createLocaliser(locale);
+    const ids = files(locale).flatMap((source) =>
+      [...source.matchAll(/^([a-z][a-z0-9-]*) =/gm)].map((match) => match[1]!),
+    );
+    return ids
+      .map((id) => l.t(id))
+      .filter(
+        (text) =>
+          (/\p{L}.*\s.*\p{L}/u.test(text) || /[\p{sc=Han}\p{sc=Hira}\p{sc=Kana}]{4}/u.test(text)) &&
+          !/[{}]/.test(text),
+      );
+  });
+}
+
+describe('languages', () => {
+  it('backups and sessions carry no language text', async () => {
+    await Promise.all(LOCALES.map(loadLocale));
+    await populate(store, NOW);
+    await store.settings.put({ ...(await store.settings.get()), language: 'de' });
+    await store.history.put(recordFrom(finishedGame(3), 'p0', 'g3'));
+    const stored = JSON.stringify([
+      await store.sessions.list(),
+      await store.history.list(),
+      await store.settings.get(),
+    ]);
+    const exported = await gunzipText(await exportBackup(store));
+    const texts = messageTexts();
+    expect(texts.length).toBeGreaterThan(300);
+    for (const text of texts) {
+      expect(stored, text).not.toContain(text);
+      expect(exported, text).not.toContain(text);
+    }
+
+    await other.settings.put({ ...DEFAULT_SETTINGS, language: 'ja' });
+    const backup = await readBackup(await exportBackup(store));
+    await mergeBackup(other, backup, { settings: false });
+    expect((await other.settings.get()).language).toBe('ja');
+    expect(await other.history.list()).toEqual(await store.history.list());
+    await mergeBackup(other, backup, { settings: true });
+    expect((await other.settings.get()).language).toBe('de');
   });
 });

@@ -75,7 +75,7 @@
         snapshot = state;
         notice = null;
       }),
-      installDevHook(created, l),
+      installDevHook(created),
       () => created.dispose(),
     ];
     created.attach(new BroadcastChannelTransport(channelFor(room)));

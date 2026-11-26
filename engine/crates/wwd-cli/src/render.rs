@@ -1,6 +1,8 @@
 //! Turns engine IDs into text using the shared Fluent locale file.
 
 use std::fmt::Write as _;
+use std::sync::Arc;
+use std::sync::atomic::{AtomicUsize, Ordering};
 
 use fluent_bundle::{FluentArgs, FluentBundle, FluentResource};
 use unic_langid::LanguageIdentifier;
@@ -9,7 +11,38 @@ use wwd_core::{
     Seat, TargetCard, WinReason,
 };
 
-const ENGLISH: &str = include_str!("../../../locales/en/engine.ftl");
+use crate::grammar::{self, Form, Forms, character_id};
+
+/// A language the command-line tool prints in.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Language {
+    English,
+    German,
+    Japanese,
+}
+
+impl Language {
+    #[cfg(test)]
+    pub const ALL: [Language; 3] = [Language::English, Language::German, Language::Japanese];
+
+    /// The language's tag, which names its locale folder.
+    pub fn tag(self) -> &'static str {
+        match self {
+            Language::English => "en",
+            Language::German => "de",
+            Language::Japanese => "ja",
+        }
+    }
+
+    /// The language's message file.
+    fn source(self) -> &'static str {
+        match self {
+            Language::English => include_str!("../../../locales/en/engine.ftl"),
+            Language::German => include_str!("../../../locales/de/engine.ftl"),
+            Language::Japanese => include_str!("../../../locales/ja/engine.ftl"),
+        }
+    }
+}
 
 /// Builds `FluentArgs` from `"name" => value` pairs.
 macro_rules! args {
@@ -22,23 +55,87 @@ macro_rules! args {
 }
 pub(crate) use args;
 
-/// The English message bundle.
+/// The message bundle of one language.
 pub struct Locale {
     bundle: FluentBundle<FluentResource>,
+    forms: Arc<Forms>,
+    /// How many `CHARACTER` calls have failed, so that formatting can report them.
+    failures: Arc<AtomicUsize>,
 }
 
 impl Locale {
-    pub fn new() -> Self {
-        let resource = FluentResource::try_new(ENGLISH.to_string())
-            .expect("the bundled locale file is valid Fluent");
+    pub fn new(language: Language) -> Self {
+        Self::from_sources(language, &[])
+    }
+
+    /// The English messages with the messages in `overrides` replacing any of the same ID.
+    #[cfg(test)]
+    pub fn with_overrides(overrides: &[&str]) -> Self {
+        Self::from_sources(Language::English, overrides)
+    }
+
+    fn from_sources(language: Language, overrides: &[&str]) -> Self {
+        let resource = |text: &str| {
+            FluentResource::try_new(text.to_string()).expect("the locale file is valid Fluent")
+        };
         let mut bundle = FluentBundle::new(vec![
-            LanguageIdentifier::from_bytes(b"en").expect("en is a valid language tag"),
+            LanguageIdentifier::from_bytes(language.tag().as_bytes())
+                .expect("each language has a valid tag"),
         ]);
         bundle.set_use_isolating(false);
         bundle
-            .add_resource(resource)
+            .add_resource(resource(language.source()))
             .expect("the bundled locale file has no duplicate messages");
-        Self { bundle }
+        for text in overrides {
+            bundle.add_resource_overriding(resource(text));
+        }
+        let forms = Arc::new(Forms::read(&bundle));
+        let failures = Arc::new(AtomicUsize::new(0));
+        bundle
+            .add_function(
+                "CHARACTER",
+                grammar::character(Arc::clone(&forms), Arc::clone(&failures)),
+            )
+            .expect("no function is named CHARACTER");
+        bundle
+            .add_function(
+                "GENDER",
+                grammar::gender(Arc::clone(&forms), Arc::clone(&failures)),
+            )
+            .expect("no function is named GENDER");
+        Self {
+            bundle,
+            forms,
+            failures,
+        }
+    }
+
+    /// The text of attribute `name` of message `id`, if it has one.
+    fn attribute(&self, id: &str, name: &str) -> Option<String> {
+        let attribute = self.bundle.get_message(id)?.get_attribute(name)?;
+        let mut errors = Vec::new();
+        let text = self
+            .bundle
+            .format_pattern(attribute.value(), None, &mut errors);
+        errors.is_empty().then(|| text.into_owned())
+    }
+
+    /// The form a message's list of characters declares for its items, or the bare name.
+    fn list_form(&self, id: &str) -> Form {
+        let case = self.attribute(id, "list-case");
+        let article = self.attribute(id, "list-article");
+        Form::new(
+            case.as_deref().unwrap_or(Form::BARE.case()),
+            article.as_deref().unwrap_or(Form::BARE.article()),
+        )
+        .unwrap_or(Form::BARE)
+    }
+
+    /// A character's name in `form`, if the locale can give it.
+    fn character_in(&self, character: Character, form: Form) -> Option<String> {
+        self.forms
+            .get(character_id(character), form)
+            .map(str::to_string)
     }
 
     /// Formats message `id`, or describes why it could not be formatted.
@@ -51,8 +148,11 @@ impl Locale {
             .value()
             .ok_or_else(|| format!("message {id} has no value"))?;
         let mut errors = Vec::new();
+        let failures = self.failures.load(Ordering::Relaxed);
         let text = self.bundle.format_pattern(pattern, Some(args), &mut errors);
-        if errors.is_empty() {
+        if self.failures.load(Ordering::Relaxed) != failures {
+            Err(format!("message {id}: a grammar function failed"))
+        } else if errors.is_empty() {
             Ok(text.into_owned())
         } else {
             Err(format!("message {id}: {errors:?}"))
@@ -79,15 +179,19 @@ impl Locale {
         self.plain(character.id())
     }
 
-    /// A target card as a plan names it, with its article.
-    pub fn target_card(&self, card: TargetCard) -> String {
-        match card {
+    /// A target card as a plan names it, with the character's name in `form`, if the locale can
+    /// give it.
+    fn target_card(&self, card: TargetCard, form: Form) -> Option<String> {
+        Some(match card {
             TargetCard::Character(character) => self.text(
                 "target-character",
-                &args!("character" => self.character(character)),
+                &args!("character" => self.character_in(character, form)?),
             ),
-            TargetCard::Fool => self.plain("target-fool"),
-        }
+            TargetCard::Fool => self.text(
+                "target-fool",
+                &args!("case" => form.case(), "article" => form.article()),
+            ),
+        })
     }
 
     pub fn marker(&self, marker: Marker) -> String {
@@ -135,16 +239,34 @@ impl Locale {
         )
     }
 
-    pub fn character_list(&self, cards: &[Character]) -> String {
-        join(cards.iter().map(|&c| self.character(c)))
+    /// `cards` as the list argument of message `id`, each in the form that message declares, if
+    /// the locale can name them all.
+    fn character_list(&self, id: &str, cards: &[Character]) -> Option<String> {
+        let form = self.list_form(id);
+        let names = cards.iter().map(|&c| self.character_in(c, form));
+        Some(self.join(names.collect::<Option<_>>()?))
     }
 
+    /// Message `id` with `cards` as its `cards` list, or the ID when a card cannot be named.
+    pub fn cards_message(&self, id: &str, cards: &[Character]) -> String {
+        self.character_list(id, cards).map_or_else(
+            || id.to_string(),
+            |cards| self.text(id, &args!("cards" => cards)),
+        )
+    }
+
+    /// A plan as the messages word it, or the plan message's ID when a target cannot be named.
     pub fn plan(&self, plan: &Plan) -> String {
-        let character = self.character(plan.character);
+        let character = character_id(plan.character);
         if plan.targets.is_empty() {
             return self.text("plan-no-targets", &args!("character" => character));
         }
-        let targets = join(plan.targets.iter().map(|&t| self.target_card(t)));
+        let form = self.list_form("plan-targeting");
+        let targets = plan.targets.iter().map(|&t| self.target_card(t, form));
+        let Some(targets) = targets.collect::<Option<_>>() else {
+            return "plan-targeting".to_string();
+        };
+        let targets = self.join(targets);
         self.text(
             "plan-targeting",
             &args!("character" => character, "targets" => targets),
@@ -166,7 +288,7 @@ impl Locale {
             }
             Command::ChoosePotionTarget { card } => self.text(
                 "command-choose-potion-target",
-                &args!("card" => self.character(*card)),
+                &args!("card" => character_id(*card)),
             ),
             Command::HunterSpendCross { spend: true } => {
                 self.plain("command-hunter-spend-cross-yes")
@@ -213,7 +335,10 @@ impl Locale {
             }
             EventKind::HandDealt { seat, cards } => {
                 let mut args = self.actor(*seat);
-                args.set("cards", self.character_list(cards));
+                let cards = self
+                    .character_list(id, cards)
+                    .ok_or_else(|| format!("message {id}: a card could not be named"))?;
+                args.set("cards", cards);
                 self.format(id, &args)
             }
             EventKind::PlanSubmitted { seat, target_count } => {
@@ -230,7 +355,7 @@ impl Locale {
             EventKind::PotionTargetChosen { seat, card } => {
                 let mut args = self.actor(*seat);
                 args.set("potion", self.marker(Marker::Potion));
-                args.set("card", self.character(*card));
+                args.set("card", character_id(*card));
                 self.format(id, &args)
             }
             EventKind::PlansRevealed {
@@ -255,14 +380,14 @@ impl Locale {
                 let mut args = self.with_seat(FluentArgs::new(), "victim", *victim);
                 args.set("result", if *hit { "hit" } else { "miss" });
                 args.set("potion", self.marker(Marker::Potion));
-                args.set("card", self.character(*target));
+                args.set("card", character_id(*target));
                 args.set("lost", u32::from(*health_lost));
                 args.set("health", self.plain("marker-health"));
                 self.format(id, &args)
             }
             EventKind::CharacterResolved { seat, character } => {
                 let mut args = self.actor(*seat);
-                args.set("character", self.character(*character));
+                args.set("character", character_id(*character));
                 self.format(id, &args)
             }
             EventKind::MarkerGained {
@@ -290,15 +415,15 @@ impl Locale {
                 health_lost,
             } => {
                 let mut args = self.with_seat(self.actor(*seat), "targetSeat", *target_seat);
-                args.set("attacker", self.character(*attacker));
-                args.set("character", self.character(*character));
+                args.set("attacker", character_id(*attacker));
+                args.set("character", character_id(*character));
                 args.set("lost", u32::from(*health_lost));
                 args.set("health", self.plain("marker-health"));
                 self.format(id, &args)
             }
             EventKind::AttackMissed { seat, attacker } => {
                 let mut args = self.actor(*seat);
-                args.set("attacker", self.character(*attacker));
+                args.set("attacker", character_id(*attacker));
                 self.format(id, &args)
             }
             EventKind::AttackForfeited { seat, reason } => {
@@ -314,7 +439,7 @@ impl Locale {
             }
             EventKind::DiscardRevealed { round, character } => self.format(
                 id,
-                &args!("round" => *round, "character" => self.character(*character)),
+                &args!("round" => *round, "character" => character_id(*character)),
             ),
             EventKind::NextRoundRequested { seat } => self.format(id, &self.actor(*seat)),
             EventKind::Resigned { seat } => self.format(id, &self.actor(*seat)),
@@ -377,6 +502,32 @@ impl Locale {
         self.format(err.id(), &args)
     }
 
+    /// Joins items with the locale's list words, such as "A, B and C".
+    fn join(&self, mut items: Vec<String>) -> String {
+        let pair = |id: &str, first: String, second: String| {
+            self.text(id, &args!("first" => first, "second" => second))
+        };
+        let Some(last) = items.pop() else {
+            return String::new();
+        };
+        let Some(before_last) = items.pop() else {
+            return last;
+        };
+        if items.is_empty() {
+            return pair("cli-list-two", before_last, last);
+        }
+        let mut text = pair("cli-list-end", before_last, last);
+        while let Some(item) = items.pop() {
+            let id = if items.is_empty() {
+                "cli-list-start"
+            } else {
+                "cli-list-middle"
+            };
+            text = pair(id, item, text);
+        }
+        text
+    }
+
     /// A CLI message with its ID prefix, for error output.
     pub fn error(&self, id: &str, args: &FluentArgs) -> String {
         with_id(id, &self.text(id, args))
@@ -395,16 +546,6 @@ fn marker_id(marker: Marker) -> &'static str {
 
 fn with_id(id: &str, text: &str) -> String {
     format!("{id}: {text}")
-}
-
-/// Joins items as English prose: "A", "A and B", "A, B and C".
-fn join(items: impl Iterator<Item = String>) -> String {
-    let items: Vec<String> = items.collect();
-    match items.split_last() {
-        None => String::new(),
-        Some((last, [])) => last.clone(),
-        Some((last, rest)) => format!("{} and {last}", rest.join(", ")),
-    }
 }
 
 /// Lowercase hexadecimal.
@@ -596,7 +737,12 @@ mod tests {
 
     #[test]
     fn every_event_and_error_has_ftl_message() {
-        let loc = Locale::new();
+        for language in Language::ALL {
+            every_event_and_error_formats(&Locale::new(language));
+        }
+    }
+
+    fn every_event_and_error_formats(loc: &Locale) {
         let none = FluentArgs::new();
 
         for kind in event_samples() {
@@ -610,8 +756,12 @@ mod tests {
             loc.format(character.id(), &none).unwrap();
             loc.format(character.faction().id(), &none).unwrap();
         }
-        for id in [
+        loc.format(
             "target-fool",
+            &args!("case" => Form::BARE.case(), "article" => Form::BARE.article()),
+        )
+        .unwrap();
+        for id in [
             "seat-p0",
             "seat-p1",
             "marker-cross",
@@ -647,7 +797,12 @@ mod tests {
 
     #[test]
     fn every_cli_message_formats() {
-        let loc = Locale::new();
+        for language in Language::ALL {
+            every_cli_message_formats_in(&Locale::new(language));
+        }
+    }
+
+    fn every_cli_message_formats_in(loc: &Locale) {
         for kind in parse_error_samples() {
             loc.format(kind.id(), &args!("detail" => "x"))
                 .unwrap_or_else(|why| panic!("{why}"));
@@ -687,7 +842,7 @@ mod tests {
 
     #[test]
     fn attack_hit_names_the_attacker_and_the_victim() {
-        let loc = Locale::new();
+        let loc = Locale::new(Language::English);
         let text = loc.event(&EventKind::AttackHit {
             seat: Seat::P0,
             target_seat: Seat::P1,
@@ -703,7 +858,7 @@ mod tests {
 
     #[test]
     fn changed_event_text_reads_as_prose() {
-        let loc = Locale::new();
+        let loc = Locale::new(Language::English);
         let cases = [
             (
                 EventKind::DiscardRevealed {
@@ -863,7 +1018,7 @@ mod tests {
 
     #[test]
     fn lists_read_as_prose() {
-        let loc = Locale::new();
+        let loc = Locale::new(Language::English);
         let text = loc.event(&EventKind::HandDealt {
             seat: Seat::P1,
             cards: vec![Character::Hunter, Character::Knight, Character::Seer],
@@ -873,7 +1028,7 @@ mod tests {
 
     #[test]
     fn game_over_names_the_loser() {
-        let loc = Locale::new();
+        let loc = Locale::new(Language::English);
         let text = loc.event(&EventKind::GameOver {
             winner: Seat::P0,
             reason: WinReason::Health,
@@ -883,7 +1038,7 @@ mod tests {
 
     #[test]
     fn resignation_text_reads_from_every_perspective() {
-        let loc = Locale::new();
+        let loc = Locale::new(Language::English);
         let seat_args = |actor: &str, other: &str| {
             args!(
                 "actor" => actor.to_string(),
@@ -925,5 +1080,316 @@ mod tests {
             "Player 2 resigns."
         );
         assert_eq!(loc.command(&Command::Resign), "Resign");
+    }
+
+    const GRAMMAR: &str = include_str!("../tests/fixtures/grammar.ftl");
+    const PROBES: &str = include_str!("../tests/fixtures/probes.ftl");
+    const ARTICLES: [&str; 3] = ["def", "indef", "none"];
+    const CASES: [&str; 4] = ["nom", "acc", "dat", "gen"];
+
+    fn forms(loc: &Locale, id: &str) -> Vec<String> {
+        ARTICLES
+            .iter()
+            .flat_map(|article| {
+                CASES.iter().map(move |case| {
+                    loc.text(&format!("probe-{article}-{case}"), &args!("c" => id))
+                })
+            })
+            .collect()
+    }
+
+    #[test]
+    fn character_returns_each_form_from_the_locale_file() {
+        let loc = Locale::with_overrides(&[GRAMMAR, PROBES]);
+        assert_eq!(
+            forms(&loc, "hunter"),
+            [
+                "[der Jäger]",
+                "[den Jäger]",
+                "[dem Jäger]",
+                "[des Jägers]",
+                "[ein Jäger]",
+                "[einen Jäger]",
+                "[einem Jäger]",
+                "[eines Jägers]",
+                "[Jäger]",
+                "[Jäger]",
+                "[Jäger]",
+                "[Jägers]",
+            ]
+        );
+        assert_eq!(
+            forms(&loc, "witch"),
+            [
+                "[die Hexe]",
+                "[die Hexe]",
+                "[der Hexe]",
+                "[der Hexe]",
+                "[eine Hexe]",
+                "[eine Hexe]",
+                "[einer Hexe]",
+                "[einer Hexe]",
+                "[Hexe]",
+                "[Hexe]",
+                "[Hexe]",
+                "[Hexe]",
+            ]
+        );
+        assert_eq!(
+            loc.text("probe-default", &args!("c" => "hunter")),
+            "[Jäger]"
+        );
+        assert_eq!(
+            loc.text("probe-none-acc", &args!("c" => "wolf_king")),
+            "[Wolf King]"
+        );
+        assert!(
+            loc.format("probe-bad-case", &args!("c" => "hunter"))
+                .is_err()
+        );
+        assert!(
+            loc.format("probe-default", &args!("c" => "nobody"))
+                .is_err()
+        );
+    }
+
+    #[test]
+    fn character_returns_the_english_name_for_every_option() {
+        let loc = Locale::with_overrides(&[PROBES]);
+        for character in Character::ALL {
+            let name = loc.character(character);
+            let id = &character.id()["character-".len()..];
+            assert_eq!(
+                loc.text("probe-default", &args!("c" => id)),
+                format!("[{name}]")
+            );
+            assert!(
+                forms(&loc, id)
+                    .iter()
+                    .all(|form| *form == format!("[{name}]"))
+            );
+        }
+    }
+
+    #[test]
+    fn a_list_takes_the_case_its_message_declares() {
+        let loc = Locale::with_overrides(&[GRAMMAR]);
+        let cards = [Character::Hunter, Character::Witch];
+        assert_eq!(
+            loc.event(&EventKind::HandDealt {
+                seat: Seat::P0,
+                cards: cards.to_vec()
+            }),
+            "Player 1 bekommt den Jäger and die Hexe."
+        );
+        assert_eq!(
+            loc.cards_message("cli-your-hand", &cards),
+            "Deine Hand: einem Jäger and einer Hexe"
+        );
+        assert_eq!(
+            loc.plan(&plan(
+                Character::Hunter,
+                &[TargetCard::Character(Character::Witch), TargetCard::Fool]
+            )),
+            "den Jäger gegen die Hexe and den Narren"
+        );
+    }
+
+    const BROKEN_FORM: &str = include_str!("../tests/fixtures/broken-form.ftl");
+    const LISTS: &str = include_str!("../tests/fixtures/lists.ftl");
+
+    #[test]
+    fn a_broken_character_form_makes_the_message_fall_back_to_its_id() {
+        let loc = Locale::with_overrides(&[BROKEN_FORM, PROBES]);
+        let cards = [Character::Hunter, Character::Witch];
+        assert!(
+            loc.format("probe-def-acc", &args!("c" => "hunter"))
+                .is_err()
+        );
+        assert_eq!(
+            loc.event(&EventKind::CharacterResolved {
+                seat: Seat::P0,
+                character: Character::Hunter,
+            }),
+            "event-character-resolved"
+        );
+        assert_eq!(
+            loc.event(&EventKind::HandDealt {
+                seat: Seat::P0,
+                cards: cards.to_vec()
+            }),
+            "event-hand-dealt"
+        );
+        assert_eq!(loc.cards_message("cli-your-hand", &cards), "cli-your-hand");
+        assert_eq!(
+            loc.plan(&plan(
+                Character::Hunter,
+                &[TargetCard::Character(Character::Witch)]
+            )),
+            "plan-targeting"
+        );
+    }
+
+    #[test]
+    fn an_unknown_character_is_an_error_and_the_forms_message_is_not_a_character() {
+        let loc = Locale::with_overrides(&[GRAMMAR, PROBES]);
+        for id in ["nobody", "form", "grammar-character-form", "character-form"] {
+            assert!(
+                loc.format("probe-default", &args!("c" => id)).is_err(),
+                "{id}"
+            );
+            assert!(
+                loc.format("probe-gender", &args!("c" => id)).is_err(),
+                "{id}"
+            );
+        }
+    }
+
+    #[test]
+    fn gender_selects_on_a_characters_gender() {
+        let loc = Locale::with_overrides(&[GRAMMAR, PROBES]);
+        let gender = |id: &str| loc.text("probe-gender", &args!("c" => id));
+        assert_eq!(gender("hunter"), "[er]");
+        assert_eq!(gender("witch"), "[sie]");
+        assert_eq!(gender("wolf_king"), "[es]");
+        assert_eq!(gender("wolf-king"), "[es]");
+    }
+
+    #[test]
+    fn lists_join_with_the_locales_words() {
+        let loc = Locale::with_overrides(&[GRAMMAR, LISTS]);
+        assert_eq!(
+            loc.event(&EventKind::HandDealt {
+                seat: Seat::P0,
+                cards: vec![Character::Hunter, Character::Witch],
+            }),
+            "Player 1 bekommt den Jäger und die Hexe."
+        );
+        let loc = Locale::with_overrides(&[LISTS]);
+        assert_eq!(
+            loc.event(&EventKind::HandDealt {
+                seat: Seat::P1,
+                cards: vec![
+                    Character::Hunter,
+                    Character::Knight,
+                    Character::Seer,
+                    Character::Witch
+                ],
+            }),
+            "Player 2 is dealt Hunter; Knight, Seer und Witch."
+        );
+    }
+
+    #[test]
+    fn each_language_reads_its_own_locale_file() {
+        let tags: Vec<&str> = Language::ALL.iter().map(|l| l.tag()).collect();
+        assert_eq!(tags, ["en", "de", "ja"]);
+        for language in Language::ALL {
+            let loc = Locale::new(language);
+            assert_eq!(loc.bundle.locales[0].to_string(), language.tag());
+            let path = format!(
+                "{}/../../locales/{}/engine.ftl",
+                env!("CARGO_MANIFEST_DIR"),
+                language.tag()
+            );
+            let file = std::fs::read_to_string(path).expect("each language has a locale file");
+            assert_eq!(
+                language.source().replace("\r\n", "\n"),
+                file.replace("\r\n", "\n")
+            );
+        }
+    }
+
+    /// The text of seeded games as the CLI prints it: events, hands, plans and commands.
+    fn transcript(language: Language) -> String {
+        let loc = Locale::new(language);
+        let mut out = String::new();
+        let mut listed_plans = false;
+        for game in 1u8..=6 {
+            let mut chooser = u32::from(game).wrapping_mul(2_654_435_761);
+            let mut state = wwd_core::new_game([game; 32], RulesConfig::default());
+            let _ = writeln!(out, "# Game {game}");
+            for _ in 0..2_000 {
+                if matches!(state.phase, wwd_core::Phase::GameOver { .. }) {
+                    break;
+                }
+                let Some((seat, legal)) = [Seat::P0, Seat::P1].into_iter().find_map(|seat| {
+                    let legal: Vec<Command> = wwd_core::legal_actions(&state, seat)
+                        .into_iter()
+                        .filter(|cmd| *cmd != Command::Resign)
+                        .collect();
+                    (!legal.is_empty()).then_some((seat, legal))
+                }) else {
+                    break;
+                };
+                let hand = &state.player(seat).hand;
+                let _ = writeln!(out, "{}", loc.cards_message("cli-your-hand", hand));
+                // Every plan on offer is listed only once, as the lists are long.
+                let planning = matches!(legal[0], Command::SubmitPlan { .. });
+                if !planning || !listed_plans {
+                    listed_plans |= planning;
+                    for cmd in &legal {
+                        let _ = writeln!(out, "  {}", loc.command(cmd));
+                    }
+                }
+                chooser ^= chooser << 13;
+                chooser ^= chooser >> 17;
+                chooser ^= chooser << 5;
+                let cmd = legal[chooser as usize % legal.len()].clone();
+                let _ = writeln!(out, "> {}", loc.command(&cmd));
+                let events =
+                    wwd_core::apply(&mut state, seat, cmd).expect("a legal command applies");
+                for event in events {
+                    let _ = writeln!(out, "{}", loc.event(&event.kind));
+                }
+            }
+        }
+        out
+    }
+
+    /// Compares `actual` with the snapshot file `name`, which `UPDATE_SNAPSHOTS=1` rewrites.
+    fn matches_snapshot(name: &str, actual: &str) -> bool {
+        let path = format!("{}/tests/snapshots/{name}", env!("CARGO_MANIFEST_DIR"));
+        if std::env::var_os("UPDATE_SNAPSHOTS").is_some() {
+            std::fs::write(&path, actual).expect("the snapshot can be written");
+        }
+        let expected = std::fs::read_to_string(&path)
+            .expect("the snapshot exists; set UPDATE_SNAPSHOTS=1 to write it")
+            .replace("\r\n", "\n");
+        actual == expected
+    }
+
+    #[test]
+    fn english_transcripts_are_unchanged() {
+        assert!(
+            matches_snapshot("english-transcript.txt", &transcript(Language::English)),
+            "the English transcript changed"
+        );
+    }
+
+    #[test]
+    fn a_german_cli_transcript_of_a_seeded_game() {
+        let german = transcript(Language::German);
+        assert!(
+            !german.contains("Player 1") && german.contains("Spieler 1"),
+            "the German transcript is in German"
+        );
+        assert!(
+            matches_snapshot("german-transcript.txt", &german),
+            "the German transcript changed"
+        );
+    }
+
+    #[test]
+    fn a_japanese_cli_transcript_of_a_seeded_game() {
+        let japanese = transcript(Language::Japanese);
+        assert!(
+            !japanese.contains("Player 1") && japanese.contains("プレイヤー1"),
+            "the Japanese transcript is in Japanese"
+        );
+        assert!(
+            matches_snapshot("japanese-transcript.txt", &japanese),
+            "the Japanese transcript changed"
+        );
     }
 }

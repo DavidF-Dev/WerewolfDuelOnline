@@ -8,7 +8,7 @@
   import ListRow from '../kit/ListRow.svelte';
   import Panel from '../kit/Panel.svelte';
   import RichText from '../kit/RichText.svelte';
-  import { abilityParts, cardText, characterName } from '../text.js';
+  import { abilityParts, cardText, characterName, printedName } from '../text.js';
 
   interface Props {
     localiser: Localiser;
@@ -18,6 +18,19 @@
 
   const CARDS: readonly Card[] = [...CHARACTERS.map((character) => ({ character })), 'fool'];
 
+  /** Stands for the printed name while the line around it is formatted. */
+  const NAME = '\u{E0FF}';
+
+  /** The line giving the card's English printed name, split around the name, or null in English. */
+  function printedLine(card: Card): { before: string; name: string; after: string } | null {
+    const name = printedName(l, card);
+    if (name === null) return null;
+    const line = l.t('reference-printed-name', { name: NAME });
+    const at = line.indexOf(NAME);
+    if (at === -1) return { before: line, name: '', after: '' };
+    return { before: line.slice(0, at), name, after: line.slice(at + NAME.length) };
+  }
+
   /** The card's name, initiative and faction, with the name in bold. */
   function title(card: Card): RichPart[] {
     if (card === 'fool') return [{ character: l.t('card-fool') }];
@@ -25,11 +38,11 @@
       l,
       'card-character',
       {
-        name: characterName(l, card.character),
+        character: card.character,
         initiative: initiative(card.character),
         faction: l.t(`faction-${faction(card.character)}`),
       },
-      { name: 'character' },
+      { character: 'character' },
     );
   }
 </script>
@@ -42,6 +55,7 @@
     <p class="note intro">{l.t('reference-characters-intro')}</p>
     <ul class="cards" data-testid="reference-characters">
       {#each CARDS as card (card === 'fool' ? card : card.character)}
+        {@const printed = printedLine(card)}
         <ListRow>
           <div class="character">
             <span class="picture">
@@ -69,6 +83,11 @@
             </span>
             <div class="words">
               <p data-part="reference-name"><RichText parts={title(card)} /></p>
+              {#if printed !== null}
+                <p class="note" data-part="printed-name">
+                  {printed.before}<span lang="en">{printed.name}</span>{printed.after}
+                </p>
+              {/if}
               <p data-part="reference-ability"><RichText parts={abilityParts(l, card)} /></p>
             </div>
           </div>

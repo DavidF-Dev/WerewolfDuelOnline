@@ -1,6 +1,5 @@
 <script lang="ts">
   import { tick } from 'svelte';
-  import type { Localiser } from '@wwd/client-core';
   import { provideAppBanner } from './banner.js';
   import UnofficialNotice from './components/UnofficialNotice.svelte';
   import UpdateBanner from './components/UpdateBanner.svelte';
@@ -17,13 +16,11 @@
   import Replay from './screens/Replay.svelte';
   import Settings from './screens/Settings.svelte';
   import Stats from './screens/Stats.svelte';
+  import { activeLocaliser } from './settings/language.svelte.js';
   import { showScreenTop } from './shell.js';
 
-  interface Props {
-    localiser: Localiser;
-  }
-
-  let { localiser }: Props = $props();
+  // A change of language re-renders every screen in place, so a game in progress carries on.
+  const localiser = $derived(activeLocaliser());
   provideAppBanner(updateBanner);
 
   // Each distinct address gets a fresh screen, so screens read their address only once.

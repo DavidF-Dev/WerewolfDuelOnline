@@ -22,7 +22,7 @@ export default defineConfig({
   ],
   webServer: {
     // Service workers need a production build, which the dev server does not serve.
-    command: `pnpm exec vite build --outDir ${OUT_DIR} --emptyOutDir && pnpm exec vite preview --outDir ${OUT_DIR} --port ${PORTS.pwaApp} --strictPort`,
+    command: `node scripts/check-ja-fonts.mjs && pnpm exec vite build --outDir ${OUT_DIR} --emptyOutDir && pnpm exec vite preview --outDir ${OUT_DIR} --port ${PORTS.pwaApp} --strictPort`,
     url: `http://localhost:${PORTS.pwaApp}`,
     env: { VITE_REFEREE_URL: `http://127.0.0.1:${PORTS.pwaReferee}` },
     // A server already on this port may be serving another build.

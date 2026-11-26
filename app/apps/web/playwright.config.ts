@@ -15,6 +15,7 @@ export default defineConfig({
     'wide.spec.ts',
     'home.spec.ts',
     'hover.spec.ts',
+    'fonts.spec.ts',
   ],
   fullyParallel: true,
   forbidOnly: !!process.env.CI,

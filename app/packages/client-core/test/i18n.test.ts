@@ -1,8 +1,22 @@
 import { readFileSync } from 'node:fs';
-import { beforeAll, describe, expect, it } from 'vitest';
-import type { Event, EventKind, Seat } from '@wwd/engine';
+import { FluentBundle } from '@fluent/bundle';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
+import type { Character, Event, EventKind, Seat } from '@wwd/engine';
 import { loadEngineForNode } from '@wwd/engine/test-support';
-import { createLocaliser } from '../src/index.js';
+import { engineFtl } from '@wwd/engine';
+import {
+  characterParts,
+  createLocaliser,
+  isLocaleLoaded,
+  loadLocale,
+  plainText,
+  richMessage,
+  type MessageArgs,
+  type RichKinds,
+  type RichPart,
+} from '../src/index.js';
+import { localiserFromSources } from '../src/i18n.js';
+import { uiFtl } from '../src/generated/ui-ftl.js';
 import { Xorshift, finishedGame } from './helpers.js';
 
 beforeAll(loadEngineForNode);
@@ -50,8 +64,8 @@ function uiMessages(): Array<[string, string]> {
 
 /** The capitalised words in a UI string that sentence case does not allow. */
 function sentenceCaseProblems(value: string): string[] {
-  // A value may open with a placeholder, such as a number.
-  if (!/^(\p{Lu}|\{ \$)/u.test(value)) return [value];
+  // A value may open with a placeholder, such as a number or a character's name.
+  if (!/^(\p{Lu}|\{ (\$|CHARACTER\())/u.test(value)) return [value];
   // Placeables hold Fluent syntax; text in curly quotes is another product's label, as printed.
   const words = value
     .replace(/\{[^{}]*\}/g, '{}')
@@ -386,5 +400,247 @@ describe('localiser', () => {
       'Screen',
     ]);
     expect(sentenceCaseProblems('Tap “Share” on the Home Screen.')).toEqual(['Home', 'Screen']);
+  });
+});
+
+describe('loading', () => {
+  it('German and Japanese text loads only when it is asked for', async () => {
+    expect(Object.keys(engineFtl)).toEqual(['en']);
+    expect(Object.keys(uiFtl)).toEqual(['en']);
+    expect(isLocaleLoaded('en')).toBe(true);
+    expect(isLocaleLoaded('ja')).toBe(false);
+    expect(() => createLocaliser('ja')).toThrow(/not loaded/);
+    await Promise.all([loadLocale('ja'), loadLocale('ja')]);
+    expect(isLocaleLoaded('ja')).toBe(true);
+    expect(isLocaleLoaded('de')).toBe(false);
+    expect(createLocaliser('ja').t('character-knight')).toBe('騎士');
+    await loadLocale('en');
+  });
+});
+
+const fixture = (name: string): string =>
+  readFileSync(
+    new URL(`../../../../engine/crates/wwd-cli/tests/fixtures/${name}.ftl`, import.meta.url),
+    'utf8',
+  );
+
+/** The English localiser with the test-only `overrides` fixtures loaded over it. */
+const englishWith = (...overrides: string[]) =>
+  localiserFromSources('en', 'en-GB', [engineFtl['en']!, uiFtl['en']!], overrides.map(fixture));
+
+const ARTICLES = ['def', 'indef', 'none'] as const;
+const CASES = ['nom', 'acc', 'dat', 'gen'] as const;
+
+describe('grammar', () => {
+  it('CHARACTER returns each form from the locale file', () => {
+    const l = englishWith('grammar', 'probes');
+    const forms = (c: string) =>
+      ARTICLES.flatMap((article) => CASES.map((kase) => l.t(`probe-${article}-${kase}`, { c })));
+    expect(forms('hunter')).toEqual([
+      '[der Jäger]',
+      '[den Jäger]',
+      '[dem Jäger]',
+      '[des Jägers]',
+      '[ein Jäger]',
+      '[einen Jäger]',
+      '[einem Jäger]',
+      '[eines Jägers]',
+      '[Jäger]',
+      '[Jäger]',
+      '[Jäger]',
+      '[Jägers]',
+    ]);
+    expect(forms('witch')).toEqual([
+      '[die Hexe]',
+      '[die Hexe]',
+      '[der Hexe]',
+      '[der Hexe]',
+      '[eine Hexe]',
+      '[eine Hexe]',
+      '[einer Hexe]',
+      '[einer Hexe]',
+      '[Hexe]',
+      '[Hexe]',
+      '[Hexe]',
+      '[Hexe]',
+    ]);
+    expect(l.t('probe-default', { c: 'hunter' })).toBe('[Jäger]');
+    expect(l.t('probe-none-acc', { c: 'wolf_king' })).toBe('[Wolf King]');
+    expect(l.t('probe-bad-case', { c: 'hunter' })).toBe('probe-bad-case');
+    expect(l.t('probe-default', { c: 'nobody' })).toBe('probe-default');
+  });
+
+  it('CHARACTER returns the English name for every option', () => {
+    const l = englishWith('probes');
+    const ids = [
+      'hunter',
+      'wolf_king',
+      'knight',
+      'wolfen',
+      'seer',
+      'witch',
+      'wolf_beauty',
+      'villager',
+    ];
+    for (const c of ids) {
+      const name = l.t(`character-${c.replaceAll('_', '-')}`);
+      expect(l.t('probe-default', { c })).toBe(`[${name}]`);
+      for (const article of ARTICLES) {
+        for (const kase of CASES) expect(l.t(`probe-${article}-${kase}`, { c })).toBe(`[${name}]`);
+      }
+    }
+  });
+
+  it('a list takes the case its message declares', () => {
+    const l = englishWith('grammar');
+    const dealt = ev({ hand_dealt: { seat: 'p0', cards: ['hunter', 'witch'] } });
+    expect(l.renderEvent(dealt, null)).toBe('Player 1 bekommt den Jäger and die Hexe.');
+    const revealed = ev({
+      plans_revealed: {
+        plans: [
+          { character: 'hunter', targets: [{ character: 'witch' }, 'fool'] },
+          { character: 'witch', targets: [{ character: 'hunter' }] },
+        ],
+        effective: [1, 6],
+        order: ['p0', 'p1'],
+      },
+    });
+    expect(l.renderEvent(revealed, null)).toBe(
+      'Plans revealed. Player 1 plays den Jäger gegen die Hexe and den Narren at initiative 1. ' +
+        'Player 2 plays die Hexe gegen den Jäger at initiative 6. Player 1 resolves first.',
+    );
+  });
+
+  it('a broken character form makes the message fall back to its id', () => {
+    const l = englishWith('broken-form', 'probes');
+    const cards: Character[] = ['hunter', 'witch'];
+    expect(l.t('probe-def-acc', { c: 'hunter' })).toBe('probe-def-acc');
+    expect(() => characterParts(l, 'hunter')).toThrow();
+    const resolved = ev({ character_resolved: { seat: 'p0', character: 'hunter' } });
+    expect(l.renderEvent(resolved, null)).toBe('event-character-resolved');
+    const dealt = ev({ hand_dealt: { seat: 'p0', cards } });
+    expect(l.renderEvent(dealt, 'p0')).toBe('event-hand-dealt');
+    expect(l.richEvent(dealt, 'p0')).toEqual([{ text: 'event-hand-dealt' }]);
+    expect(plainText(l.cardsMessage('cli-your-hand', cards))).toBe('cli-your-hand');
+    expect(plainText(l.plan({ character: 'hunter', targets: [{ character: 'witch' }] }))).toBe(
+      'plan-targeting',
+    );
+  });
+
+  it('an unknown character is an error, and the forms message is not a character', () => {
+    const l = englishWith('grammar', 'probes');
+    for (const c of ['nobody', 'form', 'grammar-character-form', 'character-form']) {
+      expect(l.t('probe-default', { c }), c).toBe('probe-default');
+      expect(l.t('probe-gender', { c }), c).toBe('probe-gender');
+      expect(() => characterParts(l, c), c).toThrow();
+    }
+  });
+
+  it('GENDER selects on a character gender', () => {
+    const l = englishWith('grammar', 'probes');
+    expect(l.t('probe-gender', { c: 'hunter' })).toBe('[er]');
+    expect(l.t('probe-gender', { c: 'witch' })).toBe('[sie]');
+    expect(l.t('probe-gender', { c: 'wolf_king' })).toBe('[es]');
+    expect(l.t('probe-gender', { c: 'wolf-king' })).toBe('[es]');
+    expect(plainText(richMessage(l, 'probe-gender', { c: 'witch' }, { c: 'character' }))).toBe(
+      '[sie]',
+    );
+  });
+
+  it("formats a character's forms once per localiser", () => {
+    const l = englishWith('grammar', 'probes');
+    l.t('probe-def-acc', { c: 'hunter' });
+    const formatted = vi.spyOn(FluentBundle.prototype, 'formatPattern');
+    try {
+      expect(l.t('probe-def-acc', { c: 'hunter' })).toBe('[den Jäger]');
+      expect(formatted).toHaveBeenCalledTimes(1);
+    } finally {
+      formatted.mockRestore();
+    }
+  });
+});
+
+/** An event's rich text, with player, character and marker parts tagged. */
+const tagged = (parts: readonly RichPart[]): string =>
+  parts
+    .map((part) =>
+      'text' in part
+        ? part.text
+        : 'player' in part
+          ? `<p>${part.player}</p>`
+          : 'character' in part
+            ? `<c>${part.character}</c>`
+            : `<m ${part.marker}>${part.label}</m>`,
+    )
+    .join('');
+
+describe('English text', () => {
+  it('English transcripts are unchanged', async () => {
+    const l = createLocaliser('en');
+    const lines: string[] = [];
+    for (let seed = 1; seed <= 6; seed++) {
+      const game = finishedGame(seed.toString(16).padStart(64, '0'), new Xorshift(seed));
+      for (const perspective of ['p0', 'p1', null] as const) {
+        lines.push(`# Game ${seed}, ${perspective ?? 'replay'}`, '');
+        for (const [, event] of game.eventsSince(0, 'omniscient')) {
+          lines.push(`- ${tagged(l.richEvent(event, perspective))}`);
+        }
+        lines.push('');
+      }
+      game.dispose();
+    }
+    await expect(lines.join('\n')).toMatchFileSnapshot('./snapshots/english-transcripts.md');
+  });
+
+  it('English interface messages naming characters are unchanged', async () => {
+    const l = createLocaliser('en');
+    const characters: Character[] = [
+      'hunter',
+      'wolf_king',
+      'knight',
+      'wolfen',
+      'seer',
+      'witch',
+      'wolf_beauty',
+      'villager',
+    ];
+    const marked: RichKinds = {
+      character: 'character',
+      card: 'character',
+      firstCharacter: 'character',
+      secondCharacter: 'character',
+    };
+    const line = (id: string, args: MessageArgs) =>
+      `- ${id}: ${tagged(richMessage(l, id, args, marked))}`;
+    const lines: string[] = [];
+    for (const [i, character] of characters.entries()) {
+      const other = characters[(i + 3) % characters.length]!;
+      const faction = l.t(i % 2 === 0 ? 'faction-human' : 'faction-werewolf');
+      lines.push(`# ${character}`, '');
+      lines.push(
+        line('card-character', { character, initiative: i + 1, faction }),
+        line('card-name', { character, initiative: i + 1, faction, ability: 'Ability.' }),
+        line('round-summary-set-aside', { character }),
+        line('reveal-initiative', { character, effective: i + 2, printed: i + 1 }),
+        line('reveal-initiative-label', { character }),
+        line('showdown-out-yours', { owner: l.t('player-your-cap'), character }),
+        line('showdown-out-opponent', { owner: l.t('player-opponent-cap'), character }),
+        line('describe-potion-target', { card: character }),
+        line('describe-order', { first: 'you', firstCharacter: character, secondCharacter: other }),
+        line('describe-order', {
+          first: 'opponent',
+          firstCharacter: character,
+          secondCharacter: other,
+        }),
+        line('plan-summary-short', { character, targets: 'Fool' }),
+        line('plan-summary-short-none', { character }),
+        line('command-choose-potion-target', { card: character }),
+        `- describe-hand: ${plainText(l.cardsMessage('describe-hand', [character, other]))}`,
+        `- plan: ${tagged(l.plan({ character, targets: ['fool', { character: other }] }))}`,
+        `- plan: ${tagged(l.plan({ character, targets: [] }))}`,
+        '',
+      );
+    }
+    await expect(lines.join('\n')).toMatchFileSnapshot('./snapshots/english-interface.md');
   });
 });

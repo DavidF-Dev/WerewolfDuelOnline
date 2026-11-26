@@ -40,6 +40,19 @@ export function plainText(parts: readonly RichPart[]): string {
     .join('');
 }
 
+const MARK = /^\u{E000}([\u{E100}-\u{E1FF}])([^\u{E000}\u{E001}]*)\u{E001}$/u;
+
+/**
+ * The words of a message argument that `richMessage` may have marked, and a function that marks
+ * other words the same way, so that they take the argument's place in the rich text.
+ */
+export function unmarked(value: string): { words: string; mark: (words: string) => string } {
+  const match = MARK.exec(value);
+  if (match === null) return { words: value, mark: (words) => words };
+  const tag = match[1]!;
+  return { words: match[2]!, mark: (words) => `${OPEN}${tag}${words}${CLOSE}` };
+}
+
 const textOnly = (text: string): RichPart[] => (text === '' ? [] : [{ text }]);
 
 function partsFor(kind: RichKind, value: string): RichPart[] {

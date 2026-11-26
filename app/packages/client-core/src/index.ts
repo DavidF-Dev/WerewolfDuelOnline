@@ -7,7 +7,27 @@ export {
   type PauseState,
   type RejoinAttempt,
 } from './game-client.js';
-export { createLocaliser, type Localiser, type MessageArgs, type Translator } from './i18n.js';
+export {
+  createLocaliser,
+  isLocaleLoaded,
+  loadLocale,
+  localiserFromSources,
+  LOCALES,
+  type Locale,
+  type LocaleSource,
+  type Localiser,
+  type MessageArgs,
+  type Translator,
+} from './i18n.js';
+export {
+  BARE,
+  characterParts,
+  GrammarError,
+  listForm,
+  type Article,
+  type CharacterForm,
+  type GrammaticalCase,
+} from './grammar.js';
 export {
   plainText,
   richMessage,

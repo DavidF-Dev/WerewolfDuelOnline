@@ -106,10 +106,7 @@ fn show_view(loc: &Locale, state: &State, seat: Seat, seen: &mut u32) {
     if let Some(hand) = &own.hand
         && !hand.is_empty()
     {
-        println!(
-            "{}",
-            loc.text("cli-your-hand", &args!("cards" => loc.character_list(hand)))
-        );
+        println!("{}", loc.cards_message("cli-your-hand", hand));
     }
     println!("{}", markers_line(loc, "cli-your-markers", own));
     println!(

@@ -23,7 +23,7 @@ afterEach(async () => {
 describe('app shell', () => {
   it('route change scrolls to top and focuses the heading', async () => {
     const scroll = vi.spyOn(window, 'scrollTo');
-    render(App, { props: { localiser } });
+    render(App);
     expect(document.activeElement).toBe(document.body);
     expect(scroll).not.toHaveBeenCalled();
 

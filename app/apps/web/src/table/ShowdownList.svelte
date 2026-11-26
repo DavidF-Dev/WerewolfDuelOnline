@@ -8,7 +8,7 @@
   import Panel from '../kit/Panel.svelte';
   import RichText from '../kit/RichText.svelte';
   import MarkerIcon from '../components/MarkerIcon.svelte';
-  import { characterName, commandLabel, logParts } from '../text.js';
+  import { commandLabel, logParts } from '../text.js';
   import Button from '../components/Button.svelte';
   import RoundSummary from './RoundSummary.svelte';
   import { handPrimary } from './primary.svelte.js';
@@ -28,6 +28,8 @@
     instant?: boolean;
     /** Told whether every result is shown, whenever that changes. */
     onShown?: (all: boolean) => void;
+    /** Told whether the earlier results are collapsed for want of room, whenever that changes. */
+    onTight?: (tight: boolean) => void;
   }
 
   let {
@@ -40,6 +42,7 @@
     onCaughtUp,
     instant = false,
     onShown,
+    onTight,
   }: Props = $props();
   const uid = $props.id();
 
@@ -111,7 +114,8 @@
   });
 
   function outParts(s: Seat): RichPart[] {
-    const character = reveal === null ? '' : characterName(l, reveal.plans[index(s)].character);
+    if (reveal === null) return [];
+    const character = reveal.plans[index(s)].character;
     const mine = s === seat;
     return richMessage(
       l,
@@ -177,6 +181,7 @@
   // Once the screen runs out of room, the earlier steps stay one line each for the rest of the round.
   let root = $state<HTMLElement>();
   let tight = $state(false);
+  $effect(() => onTight?.(tight));
   $effect(() => {
     void items.length;
     void endedRound;
@@ -232,7 +237,7 @@
     {#each items as item, i (item.key)}
       <li
         class={{ done: !item.out && i < now, now: i === now, out: item.out }}
-        class:collapsed={tight && !item.out && i < now}
+        class:collapsed={tight && i < now}
         data-testid={item.out ? 'showdown-out' : 'showdown-step'}
       >
         <span class="badge" aria-hidden="true"
@@ -265,7 +270,7 @@
     </Panel>
   {/if}
   {#if endedRound !== null}
-    <RoundSummary localiser={l} {events} {seat} round={endedRound} latest />
+    <RoundSummary localiser={l} {events} {seat} round={endedRound} latest compact={tight} />
   {/if}
 </section>
 

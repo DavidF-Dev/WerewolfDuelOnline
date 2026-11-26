@@ -1,8 +1,10 @@
+import { LOCALES, type Locale } from '@wwd/client-core';
+
 /** The text sizes offered, as percentages. */
 export const TEXT_SIZES = [90, 100, 125, 150] as const;
 
 export interface Settings {
-  language: 'system' | 'en';
+  language: 'system' | Locale;
   theme: 'system' | 'light' | 'dark';
   highContrast: boolean;
   /** A percentage, one of `TEXT_SIZES`. */
@@ -61,5 +63,8 @@ export function normaliseSettings(stored: Partial<Settings> | undefined): Settin
     if (value !== undefined) merged[key] = value;
   }
   const settings = merged as Settings;
-  return { ...settings, textSize: nearestTextSize(settings.textSize) };
+  const language = [...LOCALES, 'system'].includes(settings.language)
+    ? settings.language
+    : DEFAULT_SETTINGS.language;
+  return { ...settings, language, textSize: nearestTextSize(settings.textSize) };
 }

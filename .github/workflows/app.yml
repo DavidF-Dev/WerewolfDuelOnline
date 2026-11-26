@@ -51,7 +51,9 @@ jobs:
       - name: Install Playwright system dependencies
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: pnpm --filter @wwd/web exec playwright install-deps chromium
-      - run: pnpm --filter @wwd/web e2e
+      - run: pnpm --filter @wwd/web e2e --grep-invert @pseudo
+      - name: Run the layout suite in the pseudo-locale
+        run: pnpm --filter @wwd/web e2e --grep @pseudo
       - run: pnpm --filter @wwd/web e2e:pwa
       - run: pnpm --filter @wwd/web e2e:online
       # The parity run repeats part of e2e:online against wrangler dev, so it runs only on request.

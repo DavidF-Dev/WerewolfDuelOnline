@@ -47,6 +47,8 @@
   let loadState = $state.raw<'loading' | 'missing' | Loaded>('loading');
   let index = $state(0);
   let mode = $state<Mode>('mine');
+  /** Whether the showdown's earlier results are collapsed for want of room. */
+  let showdownTight = $state(false);
   let menuOpen = $state(false);
 
   onMount(() => {
@@ -278,9 +280,17 @@
 
     <div class="middle" data-testid="phase-panels">
       {#if showdown}
-        <PlanPanels localiser={l} {view} {events} {seat} {names} />
+        <PlanPanels localiser={l} {view} {events} {seat} {names} compact={showdownTight} />
         {#key `${mode}|${index}`}
-          <ShowdownList localiser={l} {events} {seat} legal={[]} onCommand={() => {}} instant />
+          <ShowdownList
+            localiser={l}
+            {events}
+            {seat}
+            legal={[]}
+            onCommand={() => {}}
+            instant
+            onTight={(tight) => (showdownTight = tight)}
+          />
         {/key}
         {#if handsHeld}
           {@render hands(true)}

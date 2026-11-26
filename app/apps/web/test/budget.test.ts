@@ -1,5 +1,5 @@
 // @vitest-environment node
-import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { mkdtemp, readdir, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -95,5 +95,36 @@ describe('performance budget', () => {
 
   it('loads no reading font that is fetched on demand', () => {
     for (const file of sizes.keys()) expect(file).not.toMatch(/lexend|opendyslexic/i);
+  });
+
+  it('starts with the English text only, and no Japanese font', async () => {
+    for (const file of sizes.keys()) expect(file).not.toMatch(/biz-udpgothic|shippori|ja-fonts/i);
+    const scripts = [...sizes.keys()].filter((file) => file.endsWith('.js'));
+    const text = (
+      await Promise.all(scripts.map((file) => readFile(join(outDir, file), 'utf8')))
+    ).join('\n');
+    expect(text).toContain('interface text (British English');
+    expect(text).not.toContain('interface text (German');
+    expect(text).not.toContain('engine text (German');
+    expect(text).not.toContain('interface text (Japanese');
+    expect(text).not.toContain('engine text (Japanese');
+  });
+
+  it('builds the German and Japanese text and the Japanese fonts as files of their own', async () => {
+    const assets = await readdir(join(outDir, 'assets'));
+    const scripts = await Promise.all(
+      assets
+        .filter((file) => file.endsWith('.js'))
+        .map((file) => readFile(join(outDir, 'assets', file), 'utf8')),
+    );
+    for (const header of ['interface text (German', 'interface text (Japanese'])
+      expect(
+        scripts.filter((text) => text.includes(header)),
+        header,
+      ).toHaveLength(1);
+    const fonts = assets.filter((file) =>
+      /^(biz-udpgothic|shippori-mincho-b1)-.*\.woff2$/.test(file),
+    );
+    expect(fonts).toHaveLength(3);
   });
 });

@@ -1,14 +1,16 @@
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { TargetCard } from '@wwd/engine';
-import { createLocaliser } from '@wwd/client-core';
+import { createLocaliser, loadLocale } from '@wwd/client-core';
 import { resetDeviceStore, setDeviceStore } from '../../src/device-store.js';
 import { CHARACTERS } from '../../src/cards.js';
 import About from '../../src/screens/About.svelte';
 import CharacterReference from '../../src/screens/CharacterReference.svelte';
 import Settings from '../../src/screens/Settings.svelte';
+import { applySettings } from '../../src/settings/apply.js';
 import { setDisplaySettings } from '../../src/settings/display.svelte.js';
+import { activeLocaliser } from '../../src/settings/language.svelte.js';
 import { DEFAULT_SETTINGS } from '../../src/settings/settings.js';
 import { openDeviceStore, type DeviceStore } from '../../src/storage/db.js';
 import { abilityText, cardName } from '../../src/text.js';
@@ -22,6 +24,8 @@ beforeEach(async () => {
 });
 
 afterEach(() => {
+  vi.unstubAllGlobals();
+  applySettings(DEFAULT_SETTINGS, document.documentElement);
   resetDeviceStore();
   setDisplaySettings(DEFAULT_SETTINGS);
   const root = document.documentElement;
@@ -160,13 +164,34 @@ describe('Settings', () => {
     await waitFor(async () => expect((await store.identity.get()).displayName).toBe('Mika'));
   });
 
-  it('language lists system and English', async () => {
+  it('the language list names each language in itself', async () => {
+    vi.stubGlobal('navigator', { ...navigator, languages: ['de-AT', 'en'] });
     render(Settings, { props: { localiser } });
     const select = await screen.findByRole('combobox', { name: 'Language' });
-    expect(Array.from(select.querySelectorAll('option')).map((o) => o.textContent)).toEqual([
-      'System (English)',
-      'English',
+    expect(
+      Array.from(select.querySelectorAll('option')).map((o) => [o.value, o.textContent, o.lang]),
+    ).toEqual([
+      ['system', 'System (Deutsch)', ''],
+      ['en', 'English', 'en'],
+      ['de', 'Deutsch', 'de'],
+      ['ja', '日本語', 'ja'],
     ]);
+  });
+
+  it('the system choice names the language the browser picks', async () => {
+    vi.stubGlobal('navigator', { ...navigator, languages: ['fr-FR'] });
+    render(Settings, { props: { localiser } });
+    const select = await screen.findByRole('combobox', { name: 'Language' });
+    expect(select.querySelector('option')?.textContent).toBe('System (English)');
+  });
+
+  it('choosing a language applies it as soon as its text is in, and persists', async () => {
+    const user = userEvent.setup();
+    render(Settings, { props: { localiser } });
+    await user.selectOptions(await screen.findByRole('combobox', { name: 'Language' }), 'ja');
+    await waitFor(() => expect(document.documentElement.lang).toBe('ja-JP'));
+    expect(activeLocaliser().locale).toBe('ja-JP');
+    await waitFor(async () => expect((await store.settings.get()).language).toBe('ja'));
   });
 
   it('has one h1 and a back button', async () => {
@@ -187,6 +212,8 @@ describe('About', () => {
       'OpenDyslexic',
       'Marcellus',
       'Atkinson Hyperlegible Next',
+      'BIZ UDPGothic',
+      'Shippori Mincho B1',
       'idb',
     ]) {
       expect(screen.getByText(new RegExp(`^${name},`))).toBeTruthy();
@@ -199,6 +226,26 @@ describe('About', () => {
   });
 });
 
+describe('About in another language', () => {
+  it('names the engine and app in the active language', async () => {
+    for (const locale of ['de', 'ja'] as const) {
+      await loadLocale(locale);
+      const l = createLocaliser(locale);
+      const { unmount } = render(About, { props: { localiser: l } });
+      expect(screen.queryByText(/Engine and app/)).toBeNull();
+      expect(
+        screen.getByText(
+          l.t('about-credit-line', {
+            name: l.t('about-credit-engine'),
+            licence: 'MIT OR Apache-2.0',
+          }),
+        ),
+      ).toBeTruthy();
+      unmount();
+    }
+  });
+});
+
 describe('Character reference', () => {
   it('lists all eight characters and the Fool with their abilities', () => {
     render(CharacterReference, { props: { localiser } });
@@ -208,6 +255,32 @@ describe('Character reference', () => {
     const names = Array.from(list.querySelectorAll('[data-part="reference-name"]'));
     expect(names.map((name) => name.textContent)).toContain('Knight, initiative 3, Human');
     expect(names.at(-1)?.textContent).toBe('The Fool');
+  });
+
+  it('in another language, each character shows its English printed name in English', async () => {
+    await loadLocale('de');
+    const german = createLocaliser('de');
+    render(CharacterReference, { props: { localiser: german } });
+    const printed = Array.from(
+      screen.getByTestId('reference-characters').querySelectorAll('[data-part="printed-name"]'),
+    );
+    expect(printed.map((line) => line.querySelector('[lang="en"]')?.textContent)).toEqual([
+      'Hunter',
+      'Wolf King',
+      'Knight',
+      'Wolfen',
+      'Seer',
+      'Witch',
+      'Wolf Beauty',
+      'Villager',
+      'The Fool',
+    ]);
+    expect(printed[2]?.textContent).toBe(german.t('reference-printed-name', { name: 'Knight' }));
+  });
+
+  it('in English, no character repeats its name as the printed one', () => {
+    render(CharacterReference, { props: { localiser } });
+    expect(document.querySelectorAll('[data-part="printed-name"]')).toHaveLength(0);
   });
 
   it('each how to play row exposes the ability exactly once in the accessibility tree', () => {

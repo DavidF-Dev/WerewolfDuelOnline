@@ -31,7 +31,7 @@ import type {
 } from './generated/index.js';
 
 export type * from './generated/index.js';
-export { engineFtl } from './generated/locales.js';
+export { engineFtl, loadEngineFtl } from './generated/locales.js';
 
 /** An engine failure; `id` is the Fluent message ID. */
 export class EngineError extends Error {

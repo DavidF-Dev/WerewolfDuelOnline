@@ -1,6 +1,7 @@
 //! `wwd`: a command-line driver for the Werewolf: Duel! engine.
 
 mod edit_parse;
+mod grammar;
 mod interactive;
 mod render;
 
@@ -16,7 +17,7 @@ use wwd_core::{
     State, Tiebreak, Viewer, apply_edit, fuzz, hash, new_game, replay, view, visible_to,
 };
 
-use render::{Locale, args, hex};
+use render::{Language, Locale, args, hex};
 
 const EXIT_FAILURE: u8 = 1;
 const EXIT_USAGE: u8 = 2;
@@ -39,6 +40,9 @@ struct Cli {
     /// Confirms that a command may bypass the rules.
     #[arg(long = "unsafe", global = true)]
     unsafe_mode: bool,
+    /// The language the game's text is printed in.
+    #[arg(long, global = true, value_enum, default_value_t = LangArg::En)]
+    lang: LangArg,
     #[command(subcommand)]
     command: Commands,
 }
@@ -123,6 +127,23 @@ enum TiebreakArg {
 }
 
 #[derive(Clone, Copy, ValueEnum)]
+enum LangArg {
+    En,
+    De,
+    Ja,
+}
+
+impl From<LangArg> for Language {
+    fn from(lang: LangArg) -> Self {
+        match lang {
+            LangArg::En => Language::English,
+            LangArg::De => Language::German,
+            LangArg::Ja => Language::Japanese,
+        }
+    }
+}
+
+#[derive(Clone, Copy, ValueEnum)]
 enum AsArg {
     P0,
     P1,
@@ -164,7 +185,7 @@ fn seed_or_random(seed: Option<Seed>) -> [u8; 32] {
 
 fn main() -> ExitCode {
     let cli = Cli::parse();
-    let loc = Locale::new();
+    let loc = Locale::new(cli.lang.into());
     match run(&loc, cli) {
         Ok(()) => ExitCode::SUCCESS,
         Err(Failure { code, message }) => {

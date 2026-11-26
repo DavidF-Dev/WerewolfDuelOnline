@@ -11,7 +11,7 @@
   import { display } from '../settings/display.svelte.js';
   import { artSymbol, type CardArtId } from '../themes/resolve.js';
   import AbilityPillIcon from './AbilityPillIcon.svelte';
-  import { fitText } from './fit-text.js';
+  import { fitCardName } from './fit-text.js';
 
   interface Props {
     /** The name printed on the card. */
@@ -67,7 +67,7 @@
 >
   {#if size === 'target'}
     <span class="top" data-part="top"
-      ><span class="name" data-part="name" use:fitText>{name}</span></span
+      ><span class="name" data-part="name" use:fitCardName>{name}</span></span
     >
     <span class="art" data-part="art" data-pattern={pattern}>
       {@render initiativeNumber()}
@@ -81,7 +81,7 @@
   {:else}
     <span class="top" data-part="top">
       {@render initiativeNumber()}
-      <span class="name" data-part="name" use:fitText>{name}</span>
+      <span class="name" data-part="name" use:fitCardName>{name}</span>
       {@render factionIcon()}
     </span>
     <span class="art" data-part="art" data-pattern={pattern}>

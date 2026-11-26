@@ -2,6 +2,8 @@
 const STEP = 0.025;
 /** The most steps a label shrinks by: down to 80 % of its normal font size. */
 const MAX_STEPS = 8;
+/** The most steps a card's name shrinks by: down to 75 % of its normal font size. */
+const CARD_NAME_MAX_STEPS = 10;
 /** Overflow smaller than this, in CSS pixels, is rounding rather than text that does not fit. */
 const EPSILON = 0.01;
 
@@ -18,6 +20,8 @@ interface Fit {
   base: number;
   /** How many steps the label is shrunk by while a fit is under way. */
   steps: number;
+  /** The most steps the label may shrink by. */
+  maxSteps: number;
   /** The width of the text and of the room for it, in CSS pixels, from the last measurement. */
   need: number;
   room: number;
@@ -115,7 +119,7 @@ function run(): void {
     }
     // A line's width scales with its font size, so the first trial is the estimated fit.
     const scale = fit.room / fit.need;
-    fit.steps = Math.min(MAX_STEPS, Math.max(1, Math.ceil((1 - scale) / STEP - 1e-9)));
+    fit.steps = Math.min(fit.maxSteps, Math.max(1, Math.ceil((1 - scale) / STEP - 1e-9)));
     trying.push(fit);
   }
   while (trying.length > 0) {
@@ -126,7 +130,7 @@ function run(): void {
     for (const fit of trying) {
       measure(fit);
       if (!overflows(fit)) finish(fit, false);
-      else if (fit.steps === MAX_STEPS) finish(fit, true);
+      else if (fit.steps === fit.maxSteps) finish(fit, true);
       else next.push(fit);
     }
     for (const fit of next) fit.steps++;
@@ -213,6 +217,22 @@ export function fitText(
   element: HTMLElement,
   _look?: unknown,
 ): { update: () => void; destroy: () => void } {
+  return fitWithin(element, MAX_STEPS);
+}
+
+/** `fitText` for a card's name, which may shrink further, down to 75 % of its normal size. */
+export function fitCardName(
+  element: HTMLElement,
+  _look?: unknown,
+): { update: () => void; destroy: () => void } {
+  return fitWithin(element, CARD_NAME_MAX_STEPS);
+}
+
+/** Fits `element` as `fitText` describes, shrinking it by at most `maxSteps` steps. */
+function fitWithin(
+  element: HTMLElement,
+  maxSteps: number,
+): { update: () => void; destroy: () => void } {
   if (fits.size === 0) start();
   element.style.overflowX = clipX;
   element.style.whiteSpace = 'nowrap';
@@ -227,6 +247,7 @@ export function fitText(
     ownTitle: element.hasAttribute('title'),
     base: 0,
     steps: 0,
+    maxSteps,
     need: 0,
     room: 0,
     faces: -1,

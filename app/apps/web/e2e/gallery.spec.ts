@@ -1,4 +1,5 @@
 import { expect, test, type Browser } from '@playwright/test';
+import { GALLERY_ENTRIES, openGalleryEntry } from './gallery-entries.js';
 
 /** Opens gallery entry `id` in a fresh page at 360 × 740 in the light look and returns its screenshot. */
 async function capture(browser: Browser, baseURL: string, id: string): Promise<Buffer> {
@@ -177,4 +178,76 @@ test('a fitted label is fitted once, before it is first drawn, however late the 
     Math.max(...frames) - Math.min(...frames),
     `style changes in frames ${frames.join(', ')}`,
   ).toBeLessThanOrEqual(1);
+});
+
+for (const [language, lang] of [
+  ['German', 'de'],
+  ['Japanese', 'ja'],
+] as const) {
+  test(`no ${language} label ends in an ellipsis at 100 % and 360 px`, async ({ page }, info) => {
+    test.skip(info.project.name !== 'desktop', 'measured at a fixed size');
+    test.setTimeout(300_000);
+    await page.setViewportSize({ width: 360, height: 640 });
+    const cut: string[] = [];
+    for (const id of GALLERY_ENTRIES) {
+      await page.goto('about:blank');
+      await openGalleryEntry(page, id, `lang=${lang}`);
+      await page.evaluate(async () => {
+        await document.fonts.ready;
+        // A label sized by its own text settles over a few frames of fitting.
+        for (let i = 0; i < 6; i++) await new Promise((done) => requestAnimationFrame(done));
+      });
+      const labels = await page.evaluate(() => {
+        const range = document.createRange();
+        return Array.from(document.querySelectorAll<HTMLElement>('body *')).flatMap((element) => {
+          const style = getComputedStyle(element);
+          if (style.textOverflow !== 'ellipsis') return [];
+          // A showdown step already shown is cut to one line of log by design.
+          if (element.closest('[data-testid="showdown-step"], [data-testid="showdown-out"]'))
+            return [];
+          const box = element.getBoundingClientRect();
+          if (box.width === 0 || style.visibility === 'hidden') return [];
+          let cutOff: boolean;
+          if (element.style.textOverflow === 'ellipsis') {
+            // A fitted label, measured as the fitting measures it.
+            const sides =
+              parseFloat(style.paddingLeft) +
+              parseFloat(style.paddingRight) +
+              parseFloat(style.borderLeftWidth) +
+              parseFloat(style.borderRightWidth);
+            const width = parseFloat(style.width);
+            const outer = style.boxSizing === 'border-box' ? width : width + sides;
+            range.selectNodeContents(element);
+            const need = (range.getBoundingClientRect().width * outer) / box.width;
+            // Chrome draws no ellipsis for an overflow of a few hundredths of a pixel.
+            cutOff = need > outer - sides + 0.1;
+          } else {
+            cutOff = element.scrollWidth > element.clientWidth;
+          }
+          return cutOff ? [element.textContent?.trim() ?? ''] : [];
+        });
+      });
+      // The long-name entry cuts the opponent's display name by design; that is a name, not a label.
+      const names =
+        id === 'table-plan-long-name'
+          ? await page.locator('[data-testid="opponent"] h2').allTextContents()
+          : [];
+      for (const label of labels) if (!names.includes(label)) cut.push(`${id}: "${label}"`);
+    }
+    expect(cut).toEqual([]);
+  });
+}
+
+test('an entry can be shown in another language or the pseudo-locale', async ({ page }) => {
+  await openGalleryEntry(page, 'settings-top', 'lang=pseudo');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(/~/);
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en-GB');
+  // A new hash on the same entry keeps the entry mounted, so each language starts a fresh page.
+  await page.goto('about:blank');
+  await openGalleryEntry(page, 'settings-top', 'lang=ja');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ja-JP');
+  await expect(page.getByRole('heading', { level: 1 })).not.toHaveText(/~/);
+  await page.goto('about:blank');
+  await openGalleryEntry(page, 'settings-top');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en-GB');
 });

@@ -1,16 +1,18 @@
 <script lang="ts">
   import { onMount, tick, untrack } from 'svelte';
-  import type { Localiser } from '@wwd/client-core';
+  import { LOCALES, type Localiser } from '@wwd/client-core';
   import { provideAppBanner } from '../banner.js';
   import UnofficialNotice from '../components/UnofficialNotice.svelte';
   import UpdateBanner from '../components/UpdateBanner.svelte';
   import { setDeviceStore } from '../device-store.js';
   import { initSessions, resetSessions } from '../session.js';
   import { applySettings } from '../settings/apply.js';
+  import { languageSettled, useLocaliser } from '../settings/language.svelte.js';
+  import { loadFont } from '../theme/fonts.js';
   import { DEFAULT_SETTINGS } from '../settings/settings.js';
   import { memoryDeviceStore } from '../storage/db.js';
   import { GALLERY } from './entries.js';
-  import { holdStill, useLongNames } from './fixtures.js';
+  import { holdStill, useNames } from './fixtures.js';
   import { provideStaging } from './stage.js';
 
   interface Props {
@@ -33,15 +35,24 @@
 
   /** Starts each entry from the same fresh device: in-memory storage and the default settings. */
   async function prepare(): Promise<void> {
-    // `?names=long` after the entry's id gives every player a 24-character name.
-    const query = location.hash.split('?')[1] ?? '';
-    useLongNames(new URLSearchParams(query).get('names') === 'long');
+    // ?names= picks the players' names (long, japanese, cyrillic) and ?lang= the language.
+    const query = new URLSearchParams(location.hash.split('?')[1] ?? '');
+    const names = query.get('names');
+    useNames(names === 'long' || names === 'japanese' || names === 'cyrillic' ? names : 'usual');
     // Reported as persistent, as most devices store data, so the screens show no in-memory note.
     const store = { ...memoryDeviceStore(), persistent: true };
     setDeviceStore(store);
     resetSessions();
     await initSessions(store);
-    applySettings(DEFAULT_SETTINGS, root);
+    const lang = query.get('lang');
+    const language = LOCALES.find((locale) => locale === lang) ?? 'en';
+    applySettings({ ...DEFAULT_SETTINGS, language }, root);
+    await languageSettled();
+    if (language === 'ja') await loadFont('japanese');
+    if (lang === 'pseudo') {
+      const { pseudoLocaliser } = await import('@wwd/client-core/pseudo');
+      useLocaliser(pseudoLocaliser(), root);
+    }
     // With the fonts in before the entry mounts, its labels are fitted once, before they are first drawn.
     const loads: Array<Promise<unknown>> = [];
     document.fonts?.forEach((face) => loads.push(face.load().catch(() => undefined)));

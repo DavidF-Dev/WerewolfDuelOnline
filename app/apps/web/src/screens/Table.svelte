@@ -133,6 +133,8 @@
 
   // The game and round whose showdown has shown all its results; a game ending in one shows them first.
   let shownAllFor = $state<string | null>(null);
+  /** Whether the showdown's earlier results are collapsed for want of room. */
+  let showdownTight = $state(false);
   const roundKey = $derived(`${client.game}|${view?.round ?? 0}`);
   const resignation = $derived(
     gameOverEvent !== undefined &&
@@ -415,7 +417,14 @@
               />
             {/if}
             {#if showdown}
-              <PlanPanels localiser={l} {view} events={client.events} {seat} {names} />
+              <PlanPanels
+                localiser={l}
+                {view}
+                events={client.events}
+                {seat}
+                {names}
+                compact={showdownTight}
+              />
               {#key view.round}
                 <ShowdownList
                   localiser={l}
@@ -426,6 +435,7 @@
                   errorCount={client.errorCount}
                   onCaughtUp={focusPhase}
                   onShown={(all) => (shownAllFor = all ? roundKey : null)}
+                  onTight={(tight) => (showdownTight = tight)}
                 />
               {/key}
             {/if}

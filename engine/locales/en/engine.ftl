@@ -1,12 +1,15 @@
 # Werewolf: Duel! engine text (British English, sentence case).
-# Character names may later become parameterised messages taking `$case`, for languages
-# that inflect them.
 
 ## Seats
 seat-p0 = Player 1
 seat-p1 = Player 2
 
 ## Characters and factions
+# A message names a character with CHARACTER($id), or CHARACTER($id, case: "acc", article: "def"):
+# the case (nom, acc, dat or gen) and the article (def, indef or none) are optional and default to
+# nom and none. The name in a case is the character's attribute of that name, or its value.
+# GENDER($id) gives the character's `.gender` attribute (masculine, feminine or neuter), or none
+# when it has none, for a message to select on.
 character-hunter = Hunter
 character-wolf-king = Wolf King
 character-knight = Knight
@@ -15,10 +18,15 @@ character-seer = Seer
 character-witch = Witch
 character-wolf-beauty = Wolf Beauty
 character-villager = Villager
+# A character's name with its article: `name` is the name in `case`, and `gender` is the
+# character's `.gender` attribute, or none. English keeps "the" in the messages instead.
+grammar-character-form = { $name }
 
 faction-human = Human
 faction-werewolf = Werewolf
 
+# A plan's target. `character` is the name already in the form the plan's list gives; `case`
+# and `article` give that form for the Fool.
 target-fool = the Fool
 target-character = the { $character }
 
@@ -60,8 +68,10 @@ win-reason-crosses = by collecting enough Crosses
 win-reason-resignation = because the opponent resigned
 
 ## Plans
-plan-targeting = { $character } targeting { $targets }
-plan-no-targets = { $character } with no targets
+# A message that takes a list of characters may give the form of every item in it with
+# `.list-case` and `.list-article`, as CHARACTER takes them.
+plan-targeting = { CHARACTER($character) } targeting { $targets }
+plan-no-targets = { CHARACTER($character) } with no targets
 
 ## Words for a player, seen from one seat
 player-you-cap = You
@@ -70,13 +80,22 @@ player-your-cap = Your
 player-your = your
 player-opponent-cap = Your opponent
 player-opponent = your opponent
+# Further words for languages whose words for a player change with their case, or with the
+# gender of what they own; English does not use them.
+player-you-dat = you
+player-your-acc-masculine = your
+player-your-acc-feminine = your
+player-opponent-dat = your opponent
+player-opponent-gen = your opponent's
 
 ## Events
+# Character arguments are character ids, for CHARACTER; `cards` is a list of characters.
 # Seat arguments are raw selector values: you, opponent, p0 or p1. The matching
 # `...Name` argument holds the display name used for p0 and p1. `badge`, `potion`,
 # `health`, `hourglasses` and `marker` hold the name of a marker, counted where needed.
 # `youCap`, `you`, `yourCap`, `your`, `opponentCap` and `opponent` hold the words that stand
-# for a player in the you and opponent variants, so that they can be emphasised.
+# for a player in the you and opponent variants, so that they can be emphasised; `youDat`,
+# `yourAccMasculine`, `yourAccFeminine`, `opponentDat` and `opponentGen` hold the further words.
 event-game-started = The game begins. Seed commitment: { $commitment }.
 event-round-started = Round { $round } begins. { $actor ->
         [you] { $youCap } hold
@@ -108,7 +127,7 @@ event-potion-target-chosen = { $actor ->
         [you] { $youCap } aim
         [opponent] { $opponentCap } aims
        *[other] { $actorName } aims
-    } the { $potion } at the { $card }.
+    } the { $potion } at the { CHARACTER($card) }.
 event-plans-revealed = Plans revealed. { $actor ->
         [you] { $youCap } play
        *[other] { $actorName } plays
@@ -125,7 +144,7 @@ event-potion-resolved = { $result ->
             [you] { $your }
             [opponent] { $opponent }'s
            *[other] { $victimName }'s
-        } { $card }! { $victim ->
+        } { CHARACTER($card) }! { $victim ->
             [you] { $youCap } lose
             [opponent] { $opponentCap } loses
            *[other] { $victimName } loses
@@ -134,13 +153,13 @@ event-potion-resolved = { $result ->
             [you] { $you }
             [opponent] { $opponent }
            *[other] { $victimName }
-        } did not play the { $card }.
+        } did not play the { CHARACTER($card) }.
     }
 event-character-resolved = { $actor ->
         [you] { $yourCap }
         [opponent] { $opponentCap }'s
        *[other] { $actorName }'s
-    } { $character } resolves.
+    } { CHARACTER($character) } resolves.
 event-marker-gained = { $source ->
         [opponent] { $actor ->
             [you] { $youCap } take
@@ -169,11 +188,11 @@ event-attack-hit = { $actor ->
         [you] { $yourCap }
         [opponent] { $opponentCap }'s
        *[other] { $actorName }'s
-    } { $attacker } hits { $targetSeat ->
+    } { CHARACTER($attacker) } hits { $targetSeat ->
         [you] { $your }
         [opponent] { $opponent }'s
        *[other] { $targetSeatName }'s
-    } { $character }! { $targetSeat ->
+    } { CHARACTER($character) }! { $targetSeat ->
         [you] { $youCap } lose
         [opponent] { $opponentCap } loses
        *[other] { $targetSeatName } loses
@@ -182,7 +201,7 @@ event-attack-missed = { $actor ->
         [you] { $yourCap }
         [opponent] { $opponentCap }'s
        *[other] { $actorName }'s
-    } { $attacker } misses.
+    } { CHARACTER($attacker) } misses.
 event-attack-forfeited = { $actor ->
         [you] { $youCap } make
         [opponent] { $opponentCap } makes
@@ -193,7 +212,7 @@ event-round-ended = Round { $round } ends. { $actor ->
         [opponent] { $opponentCap } takes
        *[other] { $actorName } takes
     } the { $badge }.
-event-discard-revealed = The card set aside in round { $round } was the { $character }.
+event-discard-revealed = The card set aside in round { $round } was the { CHARACTER($character) }.
 event-next-round-requested = { $actor ->
         [you] { $youCap } are
         [opponent] { $opponentCap } is
@@ -230,7 +249,7 @@ command-place-hourglasses = Place { $n ->
         [one] 1 Hourglass
        *[other] { $n } Hourglasses
     }
-command-choose-potion-target = Aim the Potion at { $card }
+command-choose-potion-target = Aim the Potion at { CHARACTER($card) }
 command-hunter-spend-cross-yes = Spend a Cross to attack
 command-hunter-spend-cross-no = Keep the Cross
 command-next-round = Next round
@@ -291,6 +310,13 @@ cli-choose-character = Choose a character (number, or q to quit):
 cli-invalid-choice = That is not a valid choice.
 cli-your-view = Round { $round }. Badge: { $badge }.
 cli-your-hand = Your hand: { $cards }
+# How the command-line tool joins a list. `cli-list-two` joins a list of two; a longer list is
+# `cli-list-start` of its first item and the rest, each later item but the last two is
+# `cli-list-middle` of that item and the rest, and the last two are joined by `cli-list-end`.
+cli-list-two = { $first } and { $second }
+cli-list-start = { $first }, { $second }
+cli-list-middle = { $first }, { $second }
+cli-list-end = { $first } and { $second }
 cli-your-markers = Health { $health }, Crosses { $cross }, Fangs { $fang }, Hourglasses { $hourglass }, placed { $placed }{ $potion ->
         [yes] , holding the Potion
        *[no] { "" }

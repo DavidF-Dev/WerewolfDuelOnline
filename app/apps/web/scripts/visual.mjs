@@ -1,8 +1,9 @@
-// Captures every gallery entry and the mockups, side by side, with a contact sheet linking them.
+// Captures every gallery entry beside the mockups, in one language or (`--lang all`) in each.
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { chromium } from '@playwright/test';
 import { createServer } from 'vite';
+import { optionValue } from './args.mjs';
 
 const WEB_ROOT = fileURLToPath(new URL('..', import.meta.url));
 const OUT = new URL('../visual-output/', import.meta.url);
@@ -36,8 +37,19 @@ const FULL_PAGE = new Set(['cards']);
 /** Entries whose scroll position is what they show. */
 const KEEP_SCROLL = new Set(['settings-scrolled']);
 
+const LANGUAGES = ['en', 'de', 'ja', 'pseudo'];
+
+const CHOSEN = optionValue(process.argv.slice(2), 'lang', [...LANGUAGES, 'all'], 'en');
+/** The languages the entries are drawn in. */
+const DRAWN = CHOSEN === 'all' ? LANGUAGES : [CHOSEN];
+/** Whether each language is drawn into a folder of its own, as with `--lang all`. */
+const FOLDERS = DRAWN.length > 1;
+const languageQuery = (language) => (language === 'en' ? '' : `?lang=${language}`);
+
 const sizeName = ({ width, height }) => `${width}x${height}`;
 const out = (path) => fileURLToPath(new URL(path, OUT));
+/** The path of `path` in the output of `language`. */
+const at = (language, path) => (FOLDERS ? `${language}/${path}` : path);
 const escape = (text) =>
   String(text).replace(
     /[&<>"]/g,
@@ -115,11 +127,11 @@ async function captureMockups(context) {
   return count;
 }
 
-async function captureEntry(context, base, entry, size) {
+async function captureEntry(context, base, language, entry, size) {
   const page = await context.newPage();
   try {
     await page.setViewportSize(size);
-    await page.goto(`${base}#/dev/gallery/${entry.id}`);
+    await page.goto(`${base}#/dev/gallery/${entry.id}${languageQuery(language)}`);
     await page.waitForFunction(
       (id) =>
         document.documentElement.dataset.galleryReady === id ||
@@ -137,7 +149,7 @@ async function captureEntry(context, base, entry, size) {
         await page.evaluate(frames);
       }
       await page.screenshot({
-        path: out(`${entry.id}/${sizeName(size)}-${name}.png`),
+        path: out(at(language, `${entry.id}/${sizeName(size)}-${name}.png`)),
         fullPage: FULL_PAGE.has(entry.id),
       });
     }
@@ -147,30 +159,34 @@ async function captureEntry(context, base, entry, size) {
 }
 
 /** Writes the mockup and the app side by side for each look of an entry with a mockup. */
-async function compare(context, entry) {
+async function compare(context, language, entry) {
   const page = await context.newPage();
   const image = async (path) =>
     `data:image/png;base64,${(await readFile(out(path))).toString('base64')}`;
   for (const [name, look] of Object.entries(LOOKS)) {
     const mockupLook = entry.mockup in REFERENCES ? 'light' : look.mockup;
     const mockup = await image(`mockups/${entry.mockup}-${mockupLook}.png`);
-    const app = await image(`${entry.id}/${COMPARE_SIZE}-${name}.png`);
+    const app = await image(at(language, `${entry.id}/${COMPARE_SIZE}-${name}.png`));
     await page.setContent(`<!doctype html>
       <body style="margin:0;padding:12px;background:#888;font:14px system-ui,sans-serif;display:flex;gap:16px">
         <figure style="margin:0"><figcaption>Mockup ${entry.mockup} (${mockupLook})</figcaption><img src="${mockup}"></figure>
         <figure style="margin:0"><figcaption>App at ${COMPARE_SIZE} (${escape(look.label)})</figcaption><img src="${app}"></figure>
       </body>`);
     await page.evaluate(() => Promise.all([...document.images].map((img) => img.decode())));
-    await page.screenshot({ path: out(`${entry.id}/compare-${name}.png`), fullPage: true });
+    await page.screenshot({
+      path: out(at(language, `${entry.id}/compare-${name}.png`)),
+      fullPage: true,
+    });
   }
   await page.close();
 }
 
-function contactSheet(entries, mockupCount) {
+function contactSheet(language, entries, mockupCount) {
   const img = (path, width) =>
     `<a href="${path}"><img src="${path}" width="${width}" loading="lazy" alt=""></a>`;
+  const mockupFolder = FOLDERS ? '../mockups' : 'mockups';
   const mockups = Array.from({ length: mockupCount }, (_, i) =>
-    MOCKUP_LOOKS.map((look) => img(`mockups/${i + 1}-${look}.png`, 120)).join(''),
+    MOCKUP_LOOKS.map((look) => img(`${mockupFolder}/${i + 1}-${look}.png`, 120)).join(''),
   ).join('');
   const sections = entries.map((entry) => {
     const compares =
@@ -203,7 +219,7 @@ function contactSheet(entries, mockupCount) {
 <style>body{font:14px system-ui,sans-serif;margin:16px}img{vertical-align:top;margin:2px;border:1px solid #ccc}th{text-align:left;font-weight:600}</style>
 </head>
 <body>
-<h1>Visual comparison</h1>
+<h1>Visual comparison (${language})</h1>
 <nav><ul>${entries.map((e) => `<li><a href="#${e.id}">${escape(e.title)}</a></li>`).join('')}</ul></nav>
 <section><h2>Mockups</h2><p>${mockups}</p></section>
 ${sections.join('\n')}
@@ -212,13 +228,28 @@ ${sections.join('\n')}
 `;
 }
 
+/** The index of a run in every language, linking each language's contact sheet. */
+function languageIndex() {
+  return `<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Visual comparison</title>
+<style>body{font:14px system-ui,sans-serif;margin:16px}</style>
+</head>
+<body>
+<h1>Visual comparison</h1>
+<ul>${DRAWN.map((language) => `<li><a href="${language}/index.html">${language}</a></li>`).join('')}</ul>
+</body>
+</html>
+`;
+}
+
 /** Output of other scripts that shares the folder. */
-const KEEP_OUTPUT = new Set(['transcripts']);
+const KEEP_OUTPUT = /^transcripts(-[a-z]+)?$/;
 
 const started = Date.now();
 await mkdir(OUT, { recursive: true });
 for (const name of await readdir(OUT)) {
-  if (!KEEP_OUTPUT.has(name)) await rm(out(name), { recursive: true, force: true });
+  if (!KEEP_OUTPUT.test(name)) await rm(out(name), { recursive: true, force: true });
 }
 const server = await createServer({ root: WEB_ROOT, logLevel: 'warn', clearScreen: false });
 let browser;
@@ -234,20 +265,23 @@ try {
   });
   const entries = await listEntries(context, base);
   const mockupCount = await captureMockups(context);
-  for (const entry of entries) await mkdir(out(entry.id), { recursive: true });
-  const jobs = entries.flatMap((entry) => SIZES.map((size) => ({ entry, size })));
-  await inParallel(jobs, PARALLEL_PAGES, ({ entry, size }) =>
-    captureEntry(context, base, entry, size),
-  );
   const compared = entries.filter((entry) => entry.mockup !== null);
-  for (const entry of compared) await compare(context, entry);
-  await writeFile(out('index.html'), contactSheet(entries, mockupCount));
-  const images =
-    mockupCount * MOCKUP_LOOKS.length +
-    jobs.length * Object.keys(LOOKS).length +
-    compared.length * Object.keys(LOOKS).length;
+  let images = mockupCount * MOCKUP_LOOKS.length;
+  for (const language of DRAWN) {
+    for (const entry of entries) await mkdir(out(at(language, entry.id)), { recursive: true });
+    const jobs = entries.flatMap((entry) => SIZES.map((size) => ({ entry, size })));
+    await inParallel(jobs, PARALLEL_PAGES, ({ entry, size }) =>
+      captureEntry(context, base, language, entry, size),
+    );
+    for (const entry of compared) await compare(context, language, entry);
+    await writeFile(out(at(language, 'index.html')), contactSheet(language, entries, mockupCount));
+    images += (jobs.length + compared.length) * Object.keys(LOOKS).length;
+  }
+  if (FOLDERS) await writeFile(out('index.html'), languageIndex());
   const seconds = ((Date.now() - started) / 1000).toFixed(1);
-  console.log(`wrote ${images} images for ${entries.length} entries in ${seconds} s`);
+  console.log(
+    `wrote ${images} images for ${entries.length} entries in ${DRAWN.join(', ')} in ${seconds} s`,
+  );
   console.log(`open ${out('index.html')}`);
 } finally {
   await browser?.close();

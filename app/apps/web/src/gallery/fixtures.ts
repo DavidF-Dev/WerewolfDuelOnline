@@ -26,14 +26,24 @@ export const LONG_NAME = 'Maximiliane-Alexandra-Ro';
 /** The players' names in the fixtures: the opponent, another past opponent, and this device's. */
 const names = { opponent: OPPONENT, other: 'Jun', mine: DISPLAY_NAME };
 
-/**
- * Gives every player a 24-character name when `long` is true, or the usual short names. Two of
- * them are one word, with nowhere to break a line, and one breaks at its hyphen.
- */
-export function useLongNames(long: boolean): void {
-  names.opponent = long ? 'Maximilianealexandraroxy' : OPPONENT;
-  names.other = long ? 'Bartholomew-Konstantinos' : 'Jun';
-  names.mine = long ? 'Wilhelminajosephineadele' : DISPLAY_NAME;
+/** The names players are given: the usual short ones, or ones that test the layout. */
+export type NameSet = 'usual' | 'long' | 'japanese' | 'cyrillic';
+
+const NAME_SETS: Readonly<Record<NameSet, typeof names>> = {
+  usual: { opponent: OPPONENT, other: 'Jun', mine: DISPLAY_NAME },
+  // 24 characters each; two are one word, with nowhere to break a line, and one breaks at its hyphen.
+  long: {
+    opponent: 'Maximilianealexandraroxy',
+    other: 'Bartholomew-Konstantinos',
+    mine: 'Wilhelminajosephineadele',
+  },
+  japanese: { opponent: '山田花子', other: '佐藤健', mine: '鈴木一郎' },
+  cyrillic: { opponent: 'Анастасия', other: 'Борис', mine: 'Дмитрий' },
+};
+
+/** Gives every player a name from `set`. */
+export function useNames(set: NameSet): void {
+  Object.assign(names, NAME_SETS[set]);
 }
 
 export const OTHER_SERVER = 'https://referee.example';

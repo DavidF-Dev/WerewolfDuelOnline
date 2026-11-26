@@ -60,6 +60,7 @@
       'game-over-how',
       {
         reason: result.reason,
+        result: won ? 'won' : 'lost',
         winner: won ? you : opponentName,
         loser: won ? opponentName : you,
         health: l.t('marker-health'),

@@ -3,6 +3,7 @@ import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { svelteTesting } from '@testing-library/svelte/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import { defineConfig } from 'vitest/config';
+import { FONT_CACHE } from './src/theme/font-cache.js';
 
 /** The public path the app is served from, from `BASE_PATH` (such as `/repo`), or `/`. */
 function basePath(raw: string | undefined): string {
@@ -62,12 +63,14 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
-            // The reading fonts chosen in Settings, cached when first used.
+            // The reading fonts chosen in Settings and the Japanese faces, cached when first used.
             urlPattern: ({ request, sameOrigin }) => sameOrigin && request.destination === 'font',
             handler: 'CacheFirst',
             options: {
-              cacheName: 'reading-fonts',
+              cacheName: FONT_CACHE,
               expiration: { maxEntries: 16 },
+              // A font is the same whatever the request's origin; some servers still vary on it.
+              matchOptions: { ignoreVary: true },
             },
           },
         ],

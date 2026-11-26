@@ -1,5 +1,15 @@
 import { expect, test, type Page } from '@playwright/test';
-import { GALLERY_ENTRIES, expectGalleryEntries, openGalleryEntry } from './gallery-entries.js';
+import {
+  GALLERY_ENTRIES,
+  LANGUAGES,
+  OVERFLOW_LANGUAGES,
+  expectGalleryEntries,
+  inLanguage,
+  inLanguageTitle,
+  languageDetails,
+  openGalleryEntry,
+  type Language,
+} from './gallery-entries.js';
 
 const SIZES = [
   { width: 360, height: 640 },
@@ -63,9 +73,13 @@ function unfinished(id: string, size: string): string | undefined {
     : entry.task;
 }
 
-async function openEntry(page: Page, id: string, textScale = 1): Promise<void> {
-  await page.goto(`/#/dev/gallery/${id}`);
-  await expect(page.locator('html')).toHaveAttribute('data-gallery-ready', id);
+async function openEntry(
+  page: Page,
+  id: string,
+  textScale = 1,
+  lang: Language = 'en',
+): Promise<void> {
+  await openGalleryEntry(page, id, inLanguage(lang));
   if (textScale !== 1) {
     await page.evaluate((scale) => {
       document.documentElement.style.setProperty('--text-scale', String(scale));
@@ -179,19 +193,23 @@ test('the table frame keeps its bar, strips and phase bar on screen', async ({ p
   }
 });
 
-test('at 150% text only the middle scrolls and the bar and phase bar stay', async ({
-  page,
-}, info) => {
-  test.skip(info.project.name !== 'desktop', 'the gallery is measured at fixed sizes');
-  test.setTimeout(240_000);
-  await page.setViewportSize({ width: 360, height: 640 });
-  for (const id of await gameEntries(page)) {
-    await openEntry(page, id, 1.5);
-    const m = await measure(page, ACTIONS[id]?.inline);
-    expectFrame(id, `${id} at 150%`, m);
-    expect.soft(m.shown, `${id} at 150%: the middle keeps some room`).toBeGreaterThan(100);
-  }
-});
+for (const lang of OVERFLOW_LANGUAGES) {
+  test(
+    inLanguageTitle('at 150% text only the middle scrolls and the bar and phase bar stay', lang),
+    languageDetails(lang),
+    async ({ page }, info) => {
+      test.skip(info.project.name !== 'desktop', 'the gallery is measured at fixed sizes');
+      test.setTimeout(240_000);
+      await page.setViewportSize({ width: 360, height: 640 });
+      for (const id of await gameEntries(page)) {
+        await openEntry(page, id, 1.5, lang);
+        const m = await measure(page, ACTIONS[id]?.inline);
+        expectFrame(id, `${id} at 150%`, m);
+        expect.soft(m.shown, `${id} at 150%: the middle keeps some room`).toBeGreaterThan(100);
+      }
+    },
+  );
+}
 
 test.describe('game screens fit without scrolling', () => {
   test('the action list names every game entry', async ({ page }, info) => {
@@ -199,31 +217,56 @@ test.describe('game screens fit without scrolling', () => {
     expect((await gameEntries(page)).sort()).toEqual(Object.keys(ACTIONS).sort());
   });
 
-  for (const id of Object.keys(ACTIONS)) {
-    for (const size of SIZES) {
-      const name = `${size.width}×${size.height}`;
-      test(`${id} at ${name}`, async ({ page }, info) => {
-        test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
-        await page.setViewportSize(size);
-        await openEntry(page, id);
-        const m = await measure(page, ACTIONS[id]?.inline);
-        expectFrame(id, name, m);
-        const task = unfinished(id, name);
-        if (m.banners > 0 && m.content > m.shown) {
-          // While a banner is shown, the middle may scroll by as much as the banner takes.
-          expect(task, 'a banner entry is never unfinished').toBeUndefined();
-          expect(m.content, 'it fits without the banner').toBeLessThanOrEqual(m.shown + m.banners);
-          expect(m.shown, 'the middle keeps some room').toBeGreaterThan(100);
-        } else if (task === undefined) {
-          expect(m.content, 'the body never scrolls').toBeLessThanOrEqual(m.shown);
-        } else {
-          expect(
-            m.content,
-            `still overflows (${task}); take it off UNFINISHED once it fits`,
-          ).toBeGreaterThan(m.shown);
-        }
-      });
+  for (const lang of OVERFLOW_LANGUAGES) {
+    for (const id of Object.keys(ACTIONS)) {
+      for (const size of SIZES) {
+        const name = `${size.width}×${size.height}`;
+        test(
+          inLanguageTitle(`${id} at ${name}`, lang),
+          languageDetails(lang),
+          async ({ page }, info) => {
+            test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
+            await page.setViewportSize(size);
+            await openEntry(page, id, 1, lang);
+            const m = await measure(page, ACTIONS[id]?.inline);
+            expectFrame(id, name, m);
+            const task = unfinished(id, name);
+            if (m.banners > 0 && m.content > m.shown) {
+              // While a banner is shown, the middle may scroll by as much as the banner takes.
+              expect(task, 'a banner entry is never unfinished').toBeUndefined();
+              expect(m.content, 'it fits without the banner').toBeLessThanOrEqual(
+                m.shown + m.banners,
+              );
+              expect(m.shown, 'the middle keeps some room').toBeGreaterThan(100);
+            } else if (task === undefined) {
+              expect(m.content, 'the body never scrolls').toBeLessThanOrEqual(m.shown);
+            } else {
+              expect(
+                m.content,
+                `still overflows (${task}); take it off UNFINISHED once it fits`,
+              ).toBeGreaterThan(m.shown);
+            }
+          },
+        );
+      }
     }
+  }
+});
+
+test.describe('a German showdown with long names fits at 100 % text', () => {
+  for (const id of ['replay-showdown', 'table-round-summary']) {
+    test(`${id} at 360×640 (de)`, async ({ page }, info) => {
+      test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
+      await page.setViewportSize({ width: 360, height: 640 });
+      await openGalleryEntry(page, id, inLanguage('de', 'names=long'));
+      await page.evaluate(async () => {
+        await document.fonts.ready;
+        for (let i = 0; i < 3; i++) await new Promise((done) => requestAnimationFrame(done));
+      });
+      const m = await measure(page, ACTIONS[id]?.inline);
+      expectFrame(id, `${id} with long names`, m);
+      expect(m.content, 'the body never scrolls').toBeLessThanOrEqual(m.shown);
+    });
   }
 });
 
@@ -355,6 +398,7 @@ const measureSteps = (page: Page) =>
         return {
           done: li.classList.contains('done'),
           now: li.classList.contains('now'),
+          out: li.classList.contains('out'),
           collapsed: li.classList.contains('collapsed'),
           lines: Math.round(
             text.getBoundingClientRect().height / parseFloat(getComputedStyle(li).lineHeight),
@@ -406,6 +450,12 @@ test('long showdown lists collapse rather than scroll', async ({ page }, info) =
     expect(step.collapsed, 'an earlier step collapses').toBe(true);
     expect(step.lines, 'to one line').toBe(1);
   }
+  const out = steps.filter((step) => step.out);
+  expect(out.length, 'a character is eliminated').toBeGreaterThan(0);
+  for (const step of out) {
+    expect(step.collapsed, "an eliminated character's step collapses too").toBe(true);
+    expect(step.lines, 'to one line').toBe(1);
+  }
   expect(
     steps.filter((step) => step.now),
     'the round summary is the latest result',
@@ -425,6 +475,76 @@ test('long showdown lists collapse rather than scroll', async ({ page }, info) =
   await openEntry(page, 'table-round-summary');
   for (const step of await measureSteps(page)) {
     expect(step.collapsed, 'nothing collapses while there is room').toBe(false);
+  }
+});
+
+/** Cards drawn smaller than their size, and the screens that draw them so. */
+const SHRUNK_CARDS = [
+  {
+    what: 'the tight round summary',
+    id: 'replay-showdown',
+    scale: 1,
+    card: 'round-set-aside-card',
+  },
+  { what: 'a tight plan panel', id: 'replay-showdown', scale: 1, card: 'plan-panels' },
+  {
+    what: 'the reveal at 150 %',
+    id: 'table-reveal-hourglasses',
+    scale: 1.5,
+    card: 'reveal-my-card',
+  },
+] as const;
+
+test('a card drawn smaller shows its enlarged copy at full size beside it on keyboard focus', async ({
+  page,
+}, info) => {
+  test.skip(info.project.name !== 'desktop', 'keyboard focus at a fixed size');
+  await page.setViewportSize({ width: 360, height: 640 });
+  for (const { what, id, scale, card } of SHRUNK_CARDS) {
+    await page.goto('about:blank');
+    await openEntry(page, id, scale);
+    const holder = page.getByTestId(card);
+    const button = (await holder.evaluate((element) => element.tagName === 'BUTTON'))
+      ? holder
+      : holder.getByRole('button').first();
+    expect(
+      await button.evaluate((element) => element.currentCSSZoom),
+      `${what} is shrunk`,
+    ).toBeLessThan(1);
+    let focused = false;
+    for (let press = 0; press < MAX_TABS && !focused; press++) {
+      await page.keyboard.press('Tab');
+      focused = await button.evaluate((element) => element === document.activeElement);
+    }
+    expect(focused, `${what}: the card takes keyboard focus`).toBe(true);
+    const popover = page.locator('[data-part="popover"]');
+    await expect(popover, `${what}: the enlarged card opens`).toBeVisible();
+    const m = await popover.evaluate(
+      (element, buttonBox) => {
+        const face = element.querySelector('.popover-card')!.getBoundingClientRect();
+        const own = element.getBoundingClientRect();
+        return {
+          drawn: face.width,
+          size: parseFloat(getComputedStyle(document.documentElement).fontSize) * 7.5,
+          own: { left: own.left, right: own.right, top: own.top, bottom: own.bottom },
+          card: buttonBox,
+        };
+      },
+      (await button.boundingBox())!,
+    );
+    expect(m.drawn, `${what}: drawn at the large card's full size`).toBeCloseTo(m.size, 0);
+    expect(m.own.left, `${what}: inside the screen`).toBeGreaterThanOrEqual(0);
+    expect(m.own.right, `${what}: inside the screen`).toBeLessThanOrEqual(360);
+    const beside = m.own.bottom <= m.card.y + 1 || m.own.top >= m.card.y + m.card.height - 1;
+    expect(beside, `${what}: above or below the card`).toBe(true);
+    const centre = m.card.x + m.card.width / 2;
+    const clamped = m.own.left <= 6.5 || m.own.right >= 360 - 6.5;
+    if (!clamped) {
+      expect(
+        Math.abs((m.own.left + m.own.right) / 2 - centre),
+        `${what}: centred on the card`,
+      ).toBeLessThanOrEqual(1);
+    }
   }
 });
 
@@ -706,62 +826,69 @@ test('in the replay only the step log may scroll', async ({ page }, info) => {
   }
 });
 
-test('settings rows put the control on the right', async ({ page }, info) => {
-  test.skip(info.project.name !== 'desktop', 'the gallery is measured at fixed sizes');
-  for (const size of SIZES) {
-    await page.setViewportSize(size);
-    for (const id of ['settings-top', 'settings-scrolled', 'settings-install-ios']) {
-      const where = `${id} at ${size.width}×${size.height}`;
-      await openEntry(page, id);
-      const groups = page.getByTestId('settings').locator('section.panel');
-      await expect(groups, `${where}: every group is a panel`).toHaveCount(6);
-      for (const label of await groups.locator('h2').all()) {
-        await expect(label, `${where}: group labels are uppercase`).toHaveCSS(
-          'text-transform',
-          'uppercase',
-        );
+for (const lang of LANGUAGES) {
+  test(
+    inLanguageTitle('settings rows put the control on the right', lang),
+    async ({ page }, info) => {
+      test.skip(info.project.name !== 'desktop', 'the gallery is measured at fixed sizes');
+      for (const size of SIZES) {
+        await page.setViewportSize(size);
+        for (const id of ['settings-top', 'settings-scrolled', 'settings-install-ios']) {
+          const where = `${id} at ${size.width}×${size.height}`;
+          await openEntry(page, id, 1, lang);
+          const groups = page.getByTestId('settings').locator('section.panel');
+          await expect(groups, `${where}: every group is a panel`).toHaveCount(6);
+          for (const label of await groups.locator('h2').all()) {
+            await expect(label, `${where}: group labels are uppercase`).toHaveCSS(
+              'text-transform',
+              'uppercase',
+            );
+          }
+          const rows = await page.evaluate(() =>
+            Array.from(document.querySelectorAll<HTMLElement>('[data-part="setting"]')).map(
+              (row) => {
+                const box = (selector: string) => {
+                  const rect = row.querySelector(selector)?.getBoundingClientRect();
+                  return rect === undefined
+                    ? null
+                    : { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
+                };
+                const panel = row.closest('.panel')!.getBoundingClientRect();
+                const padding = parseFloat(getComputedStyle(row.closest('.panel')!).paddingRight);
+                return {
+                  name: row.querySelector('[data-part="setting-name"]')?.textContent?.trim() ?? '',
+                  label: box('[data-part="setting-name"]'),
+                  control: box('[data-part="setting-control"]'),
+                  contentRight: panel.right - padding - 1,
+                };
+              },
+            ),
+          );
+          expect(rows.length, `${where}: settings are rows`).toBeGreaterThanOrEqual(5);
+          for (const row of rows) {
+            const what = `${where}: ${row.name}`;
+            expect(row.label, `${what} has a name`).not.toBeNull();
+            expect(row.control, `${what} has a control`).not.toBeNull();
+            expect(row.control!.left, `${what}: control after the name`).toBeGreaterThan(
+              row.label!.right,
+            );
+            expect(
+              Math.abs(row.control!.right - row.contentRight),
+              `${what}: control at the right edge`,
+            ).toBeLessThan(1.5);
+            const [labelMiddle, controlMiddle] = [row.label!, row.control!].map(
+              (box) => (box.top + box.bottom) / 2,
+            );
+            expect(
+              Math.abs(labelMiddle! - controlMiddle!),
+              `${what}: name and control on one line`,
+            ).toBeLessThan(4);
+          }
+        }
       }
-      const rows = await page.evaluate(() =>
-        Array.from(document.querySelectorAll<HTMLElement>('[data-part="setting"]')).map((row) => {
-          const box = (selector: string) => {
-            const rect = row.querySelector(selector)?.getBoundingClientRect();
-            return rect === undefined
-              ? null
-              : { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
-          };
-          const panel = row.closest('.panel')!.getBoundingClientRect();
-          const padding = parseFloat(getComputedStyle(row.closest('.panel')!).paddingRight);
-          return {
-            name: row.querySelector('[data-part="setting-name"]')?.textContent?.trim() ?? '',
-            label: box('[data-part="setting-name"]'),
-            control: box('[data-part="setting-control"]'),
-            contentRight: panel.right - padding - 1,
-          };
-        }),
-      );
-      expect(rows.length, `${where}: settings are rows`).toBeGreaterThanOrEqual(5);
-      for (const row of rows) {
-        const what = `${where}: ${row.name}`;
-        expect(row.label, `${what} has a name`).not.toBeNull();
-        expect(row.control, `${what} has a control`).not.toBeNull();
-        expect(row.control!.left, `${what}: control after the name`).toBeGreaterThan(
-          row.label!.right,
-        );
-        expect(
-          Math.abs(row.control!.right - row.contentRight),
-          `${what}: control at the right edge`,
-        ).toBeLessThan(1.5);
-        const [labelMiddle, controlMiddle] = [row.label!, row.control!].map(
-          (box) => (box.top + box.bottom) / 2,
-        );
-        expect(
-          Math.abs(labelMiddle! - controlMiddle!),
-          `${what}: name and control on one line`,
-        ).toBeLessThan(4);
-      }
-    }
-  }
-});
+    },
+  );
+}
 
 test('text fields and dropdowns are at least 16 px on touch screens', async ({ page }, info) => {
   test.skip(info.project.name !== 'mobile', 'a touch screen has a coarse pointer');
@@ -821,33 +948,41 @@ async function scaleText(page: Page, scale: number): Promise<void> {
 }
 
 test.describe('no horizontal overflow at 320 px', () => {
-  for (const id of GALLERY_ENTRIES) {
-    test(id, async ({ page }, info) => {
-      test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
-      await page.setViewportSize({ width: 320, height: 640 });
-      await openGalleryEntry(page, id);
-      const wide = await page.evaluate(() => {
-        const width = document.documentElement.clientWidth;
-        const found: string[] = [];
-        const root = document.scrollingElement!;
-        if (root.scrollWidth > width) found.push(`the page is ${root.scrollWidth} px wide`);
-        for (const element of Array.from(document.querySelectorAll<HTMLElement>('body *'))) {
-          const style = getComputedStyle(element);
-          if (element.scrollWidth <= element.clientWidth + 1) continue;
-          const what = element.dataset['testid'] ?? element.tagName.toLowerCase();
-          if (['auto', 'scroll'].includes(style.overflowX)) found.push(`${what} scrolls sideways`);
-          // Cutting with an ellipsis is by design; anything else clipped sideways is lost.
-          else if (
-            ['hidden', 'clip'].includes(style.overflowX) &&
-            style.textOverflow !== 'ellipsis'
-          ) {
-            if (element.closest('.visually-hidden') === null) found.push(`${what} is cut sideways`);
+  for (const lang of OVERFLOW_LANGUAGES) {
+    for (const id of GALLERY_ENTRIES) {
+      test(inLanguageTitle(id, lang), languageDetails(lang), async ({ page }, info) => {
+        test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
+        await page.setViewportSize({ width: 320, height: 640 });
+        await openGalleryEntry(page, id, inLanguage(lang));
+        const wide = await page.evaluate(() => {
+          const width = document.documentElement.clientWidth;
+          const found: string[] = [];
+          const root = document.scrollingElement!;
+          if (root.scrollWidth > width) found.push(`the page is ${root.scrollWidth} px wide`);
+          for (const element of Array.from(document.querySelectorAll<HTMLElement>('body *'))) {
+            const style = getComputedStyle(element);
+            if (element.scrollWidth <= element.clientWidth + 1) continue;
+            const what = element.dataset['testid'] ?? element.tagName.toLowerCase();
+            if (['auto', 'scroll'].includes(style.overflowX))
+              found.push(`${what} scrolls sideways`);
+            // Cutting with an ellipsis is by design; anything else clipped sideways is lost.
+            else if (
+              ['hidden', 'clip'].includes(style.overflowX) &&
+              style.textOverflow !== 'ellipsis'
+            ) {
+              if (element.closest('.visually-hidden') === null)
+                found.push(`${what} is cut sideways`);
+            }
+            // A panel's content that reaches past its sides spills over its border.
+            else if (element.classList.contains('panel') && style.overflowX === 'visible') {
+              found.push(`${what} spills out of its panel`);
+            }
           }
-        }
-        return found;
+          return found;
+        });
+        expect(wide).toEqual([]);
       });
-      expect(wide).toEqual([]);
-    });
+    }
   }
 });
 
@@ -984,14 +1119,16 @@ const framingProblems = (page: Page, game: boolean) =>
   }, game);
 
 test.describe('layout survives 150% text and a 24-character name', () => {
-  for (const id of GALLERY_ENTRIES) {
-    test(id, async ({ page }, info) => {
-      test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
-      await page.setViewportSize({ width: 360, height: 640 });
-      await openGalleryEntry(page, id, 'names=long');
-      await scaleText(page, 1.5);
-      expect(await framingProblems(page, ACTIONS[id] !== undefined)).toEqual([]);
-    });
+  for (const lang of OVERFLOW_LANGUAGES) {
+    for (const id of GALLERY_ENTRIES) {
+      test(inLanguageTitle(id, lang), languageDetails(lang), async ({ page }, info) => {
+        test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
+        await page.setViewportSize({ width: 360, height: 640 });
+        await openGalleryEntry(page, id, inLanguage(lang, 'names=long'));
+        await scaleText(page, 1.5);
+        expect(await framingProblems(page, ACTIONS[id] !== undefined)).toEqual([]);
+      });
+    }
   }
 });
 
@@ -1085,87 +1222,111 @@ test('the bar stays at the top of a screen that scrolls', async ({ page }, info)
   }
   expect(scrolled, 'some screens scroll').toBeGreaterThan(3);
 });
-test('the opponent strip puts the Badge under the plan status, at its right edge', async ({
-  page,
-}, info) => {
-  test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
-  for (const size of [{ width: 320, height: 640 }, ...SIZES]) {
-    await page.setViewportSize(size);
-    for (const id of ['table-plan', 'table-plan-sealed', 'table-showdown']) {
-      await openEntry(page, id);
-      const where = `${id} at ${size.width}×${size.height}`;
-      const strip = page.getByTestId('opponent');
-      const status = await strip.getByTestId('opponent-plan').boundingBox();
-      const badge = await strip.getByTestId('opponent-badge').boundingBox();
-      if (status === null || badge === null) throw new Error(`${where}: no status or Badge`);
-      expect
-        .soft(badge.y, `${where}: under the status`)
-        .toBeGreaterThanOrEqual(status.y + status.height);
-      expect
-        .soft(Math.abs(badge.x + badge.width - (status.x + status.width)), `${where}: right edges`)
-        .toBeLessThanOrEqual(1);
-    }
-  }
-});
+for (const lang of LANGUAGES) {
+  test(
+    inLanguageTitle(
+      'the opponent strip puts the Badge under the plan status, at its right edge',
+      lang,
+    ),
+    async ({ page }, info) => {
+      test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
+      for (const size of [{ width: 320, height: 640 }, ...SIZES]) {
+        await page.setViewportSize(size);
+        for (const id of ['table-plan', 'table-plan-sealed', 'table-showdown']) {
+          await openEntry(page, id, 1, lang);
+          const where = `${id} at ${size.width}×${size.height}`;
+          const strip = page.getByTestId('opponent');
+          const status = await strip.getByTestId('opponent-plan').boundingBox();
+          const badge = await strip.getByTestId('opponent-badge').boundingBox();
+          if (status === null || badge === null) throw new Error(`${where}: no status or Badge`);
+          expect
+            .soft(badge.y, `${where}: under the status`)
+            .toBeGreaterThanOrEqual(status.y + status.height);
+          expect
+            .soft(
+              Math.abs(badge.x + badge.width - (status.x + status.width)),
+              `${where}: right edges`,
+            )
+            .toBeLessThanOrEqual(1);
+        }
+      }
+    },
+  );
+}
 
-test('showdown plan panels give the order and the initiative a line each', async ({
-  page,
-}, info) => {
-  test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
-  /** Each panel's order lines: their text, how many line boxes each takes and whether it stays inside. */
-  const orderLines = () =>
-    page.locator('[data-testid^="plan-panel-"]').evaluateAll((items) =>
-      items.map((panel) => {
-        const edge = panel.getBoundingClientRect();
-        return Array.from(
-          panel.querySelectorAll<HTMLElement>('[data-part="plan-order"]'),
-          (line) => {
-            const range = document.createRange();
-            range.selectNodeContents(line);
-            const rects = Array.from(range.getClientRects());
-            return {
-              text: line.textContent?.trim() ?? '',
-              lines: new Set(rects.map((rect) => Math.round(rect.top))).size,
-              inside: rects.every((rect) => rect.right <= edge.right + 0.5),
-            };
-          },
+for (const lang of LANGUAGES) {
+  test(
+    inLanguageTitle('showdown plan panels give the order and the initiative a line each', lang),
+    async ({ page }, info) => {
+      test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
+      /** Each panel's order lines: their text, how many line boxes each takes and whether it stays inside. */
+      const orderLines = () =>
+        page.locator('[data-testid^="plan-panel-"]').evaluateAll((items) =>
+          items.map((panel) => {
+            const edge = panel.getBoundingClientRect();
+            return Array.from(
+              panel.querySelectorAll<HTMLElement>('[data-part="plan-order"]'),
+              (line) => {
+                const range = document.createRange();
+                range.selectNodeContents(line);
+                const rects = Array.from(range.getClientRects());
+                return {
+                  text: line.textContent?.trim() ?? '',
+                  lines: new Set(rects.map((rect) => Math.round(rect.top))).size,
+                  inside: rects.every((rect) => rect.right <= edge.right + 0.5),
+                };
+              },
+            );
+          }),
         );
-      }),
-    );
-  for (const size of [{ width: 320, height: 640 }, ...SIZES]) {
-    await page.setViewportSize(size);
-    for (const scale of [1, 1.5]) {
-      for (const id of ['table-showdown', 'table-round-summary', 'replay-showdown']) {
-        await openEntry(page, id, scale);
-        for (const probe of ['as shown', 'with a changed initiative']) {
-          if (probe !== 'as shown') {
-            // The longest initiative a panel can show, as after placing Hourglasses.
-            await page.evaluate(async () => {
-              for (const panel of Array.from(
-                document.querySelectorAll('[data-testid^="plan-panel-"]'),
-              )) {
-                const initiative = panel.querySelectorAll('[data-part="plan-order"]')[1];
-                if (initiative !== undefined) initiative.textContent = 'Initiative 8 → 0';
+      for (const size of [{ width: 320, height: 640 }, ...SIZES]) {
+        await page.setViewportSize(size);
+        for (const scale of [1, 1.5]) {
+          for (const id of ['table-showdown', 'table-round-summary', 'replay-showdown']) {
+            await openEntry(page, id, scale, lang);
+            for (const probe of ['as shown', 'with a changed initiative']) {
+              if (probe !== 'as shown') {
+                // The longest initiative a panel can show, as after placing Hourglasses.
+                const probed = await page.evaluate(async () => {
+                  const texts: string[] = [];
+                  for (const panel of Array.from(
+                    document.querySelectorAll('[data-testid^="plan-panel-"]'),
+                  )) {
+                    const initiative = panel.querySelectorAll('[data-part="plan-order"]')[1];
+                    if (initiative !== undefined) {
+                      initiative.textContent = initiative.textContent!.replace(/\d.*$/u, '8 → 0');
+                      texts.push(initiative.textContent);
+                    }
+                  }
+                  await new Promise((done) =>
+                    requestAnimationFrame(() => requestAnimationFrame(done)),
+                  );
+                  return texts;
+                });
+                expect(probed, 'both panels show the longest initiative').toHaveLength(2);
+                for (const text of probed) expect(text).toMatch(/8 → 0$/u);
               }
-              await new Promise((done) => requestAnimationFrame(() => requestAnimationFrame(done)));
-            });
-          }
-          const where = `${id} at ${size.width}×${size.height}, ${scale * 100} %, ${probe}`;
-          const panels = await orderLines();
-          expect(panels, `${where}: two plan panels`).toHaveLength(2);
-          for (const lines of panels) {
-            expect.soft(lines[0]?.text, `${where}: order`).toMatch(/^(First|Second)$/);
-            expect.soft(lines[1]?.text, `${where}: initiative`).toMatch(/^Initiative /);
-            for (const line of lines) {
-              expect.soft(line.lines, `${where}: "${line.text}" on one line`).toBe(1);
-              expect.soft(line.inside, `${where}: "${line.text}" inside its panel`).toBe(true);
+              const where = `${id} at ${size.width}×${size.height}, ${scale * 100} %, ${probe}`;
+              const panels = await orderLines();
+              expect(panels, `${where}: two plan panels`).toHaveLength(2);
+              for (const lines of panels) {
+                expect.soft(lines, `${where}: an order and an initiative`).toHaveLength(2);
+                if (lang === 'en') {
+                  expect.soft(lines[0]?.text, `${where}: order`).toMatch(/^(First|Second)$/);
+                  expect.soft(lines[1]?.text, `${where}: initiative`).toMatch(/^Initiative /);
+                }
+                for (const line of lines) {
+                  expect.soft(line.lines, `${where}: "${line.text}" on one line`).toBe(1);
+                  expect.soft(line.inside, `${where}: "${line.text}" inside its panel`).toBe(true);
+                }
+              }
             }
           }
         }
       }
-    }
-  }
-});
+    },
+  );
+}
 
 test('replay hand cards are never raised', async ({ page }, info) => {
   test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
@@ -1220,64 +1381,69 @@ test('the game menu centres the unofficial notice', async ({ page }) => {
 /** Harnesses of the fitted frame itself, which are not screens of the app. */
 const FRAME_HARNESSES = ['kit-fit', 'kit-fit-overflow'];
 
+/** The unofficial notice in each language. */
+const UNOFFICIAL: Readonly<Record<(typeof LANGUAGES)[number], string>> = {
+  en: 'An unofficial digital version of Werewolf: Duel!',
+  de: 'Eine inoffizielle digitale Version von Werewolf: Duel!',
+  ja: 'Werewolf: Duel!の非公式デジタル版です',
+};
+
 test.describe('the unofficial notice is shown, or one bar control away', () => {
-  for (const id of GALLERY_ENTRIES.filter((entry) => !FRAME_HARNESSES.includes(entry))) {
-    test(id, async ({ page }, info) => {
-      test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
-      for (const size of SIZES) {
-        const where = `${id} at ${size.width}×${size.height}`;
-        await page.setViewportSize(size);
-        await openGalleryEntry(page, id);
-        const shown = page.getByTestId('unofficial-notice');
-        if ((await shown.count()) > 0) {
-          await expect(shown.first(), where).toHaveText(
-            'An unofficial digital version of Werewolf: Duel!',
-          );
-          await expect(shown.first(), where).toBeVisible();
-          const foot = page.locator('[data-part="screen"][data-fit] > [data-part="note"]');
-          if ((await foot.count()) > 0) {
-            const notice = foot.getByTestId('unofficial-notice');
-            await expect(notice, `${where}: at the foot of a fitted screen`).toBeInViewport({
-              ratio: 1,
-            });
-            const m = await notice.evaluate((element) => {
-              const range = document.createRange();
-              range.selectNodeContents(element);
-              const text = range.getBoundingClientRect();
-              const box = element.getBoundingClientRect();
-              return {
-                lines: new Set(Array.from(range.getClientRects(), (rect) => Math.round(rect.top)))
-                  .size,
-                offset: text.left + text.width / 2 - (box.left + box.width / 2),
-              };
-            });
-            expect(m.lines, `${where}: one line`).toBe(1);
-            expect(Math.abs(m.offset), `${where}: centred`).toBeLessThanOrEqual(1);
+  for (const lang of LANGUAGES) {
+    for (const id of GALLERY_ENTRIES.filter((entry) => !FRAME_HARNESSES.includes(entry))) {
+      test(inLanguageTitle(id, lang), async ({ page }, info) => {
+        test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
+        for (const size of SIZES) {
+          const where = `${id} at ${size.width}×${size.height}`;
+          await page.setViewportSize(size);
+          await openGalleryEntry(page, id, inLanguage(lang));
+          const shown = page.getByTestId('unofficial-notice');
+          if ((await shown.count()) > 0) {
+            await expect(shown.first(), where).toHaveText(UNOFFICIAL[lang]);
+            await expect(shown.first(), where).toBeVisible();
+            const foot = page.locator('[data-part="screen"][data-fit] > [data-part="note"]');
+            if ((await foot.count()) > 0) {
+              const notice = foot.getByTestId('unofficial-notice');
+              await expect(notice, `${where}: at the foot of a fitted screen`).toBeInViewport({
+                ratio: 1,
+              });
+              const m = await notice.evaluate((element) => {
+                const range = document.createRange();
+                range.selectNodeContents(element);
+                const text = range.getBoundingClientRect();
+                const box = element.getBoundingClientRect();
+                return {
+                  lines: new Set(Array.from(range.getClientRects(), (rect) => Math.round(rect.top)))
+                    .size,
+                  offset: text.left + text.width / 2 - (box.left + box.width / 2),
+                };
+              });
+              expect(m.lines, `${where}: one line`).toBe(1);
+              expect(Math.abs(m.offset), `${where}: centred`).toBeLessThanOrEqual(1);
+            }
+            continue;
           }
-          continue;
-        }
-        for (let i = 0; i < 3 && (await page.locator('dialog[open]').count()) > 0; i++) {
-          await page.keyboard.press('Escape');
-        }
-        const openers = page.locator('header.app-bar [aria-haspopup="dialog"]');
-        const sheet = page.locator('dialog[open]');
-        let found = false;
-        for (let i = 0; !found && i < (await openers.count()); i++) {
-          await openers.nth(i).click();
-          await expect(sheet, `${where}: bar control ${i} opens a sheet`).toHaveCount(1);
-          found = await sheet.getByTestId('unofficial-notice').isVisible();
-          if (found) {
-            await expect(sheet.getByTestId('unofficial-notice')).toHaveText(
-              'An unofficial digital version of Werewolf: Duel!',
-            );
-          } else {
+          for (let i = 0; i < 3 && (await page.locator('dialog[open]').count()) > 0; i++) {
             await page.keyboard.press('Escape');
-            await expect(sheet).toHaveCount(0);
           }
+          const openers = page.locator('header.app-bar [aria-haspopup="dialog"]');
+          const sheet = page.locator('dialog[open]');
+          let found = false;
+          for (let i = 0; !found && i < (await openers.count()); i++) {
+            await openers.nth(i).click();
+            await expect(sheet, `${where}: bar control ${i} opens a sheet`).toHaveCount(1);
+            found = await sheet.getByTestId('unofficial-notice').isVisible();
+            if (found) {
+              await expect(sheet.getByTestId('unofficial-notice')).toHaveText(UNOFFICIAL[lang]);
+            } else {
+              await page.keyboard.press('Escape');
+              await expect(sheet).toHaveCount(0);
+            }
+          }
+          expect(found, `${where}: a bar control opens a sheet showing the notice`).toBe(true);
         }
-        expect(found, `${where}: a bar control opens a sheet showing the notice`).toBe(true);
-      }
-    });
+      });
+    }
   }
 });
 
@@ -1300,24 +1466,31 @@ test('the spacing between prose list items never shifts a row or grid of items',
   }
 });
 
-test('each Play hint stays on one line at 360 px', async ({ page }, info) => {
-  test.skip(info.project.name !== 'desktop', 'measured at a fixed size');
-  await page.setViewportSize({ width: 360, height: 640 });
-  for (const id of ['new-game', 'join', 'local-join']) {
-    await openGalleryEntry(page, id);
-    for (const option of ['Online', 'This device']) {
-      await page.getByRole('radio', { name: option }).check();
-      const hint = page.getByTestId('place-hint');
-      await expect(hint).toHaveCount(1);
-      const lines = await hint.evaluate((element) => {
-        const range = document.createRange();
-        range.selectNodeContents(element);
-        return new Set(Array.from(range.getClientRects(), (rect) => Math.round(rect.top))).size;
-      });
-      expect.soft(lines, `${id}, ${option}: "${await hint.textContent()}"`).toBe(1);
-    }
-  }
-});
+for (const lang of LANGUAGES) {
+  test(
+    inLanguageTitle('each Play hint stays on one line at 360 px', lang),
+    async ({ page }, info) => {
+      test.skip(info.project.name !== 'desktop', 'measured at a fixed size');
+      await page.setViewportSize({ width: 360, height: 640 });
+      for (const id of ['new-game', 'join', 'local-join']) {
+        await openGalleryEntry(page, id, inLanguage(lang));
+        const hint = page.getByTestId('place-hint');
+        await expect(hint).toHaveCount(1);
+        const choice = page.locator(`[aria-describedby="${await hint.getAttribute('id')}"]`);
+        await expect(choice.getByRole('radio')).toHaveCount(2);
+        for (const option of [0, 1]) {
+          await choice.getByRole('radio').nth(option).check();
+          const lines = await hint.evaluate((element) => {
+            const range = document.createRange();
+            range.selectNodeContents(element);
+            return new Set(Array.from(range.getClientRects(), (rect) => Math.round(rect.top))).size;
+          });
+          expect.soft(lines, `${id}, option ${option + 1}: "${await hint.textContent()}"`).toBe(1);
+        }
+      }
+    },
+  );
+}
 
 /** Each group of one-line labels that fit themselves, and the gallery entries that show it. */
 const FITTED_LABELS: ReadonlyArray<{ group: string; selector: string; entries: string[] }> = [
@@ -1362,82 +1535,96 @@ const FITTED_LABELS: ReadonlyArray<{ group: string; selector: string; entries: s
     selector: '[data-testid="opponent"] h2',
     entries: ['table-plan', 'table-plan-long-name'],
   },
+  {
+    group: 'opponent Hourglass caption',
+    selector: '[data-testid="opponent-hourglasses"]',
+    entries: ['table-reveal-potion'],
+  },
 ];
 
-test('one-line labels fit their box at 80 % of their size or more, else end in an ellipsis', async ({
-  page,
-}, info) => {
-  test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
-  test.setTimeout(300_000);
-  for (const size of [{ width: 320, height: 640 }, ...SIZES]) {
-    await page.setViewportSize(size);
-    for (const { group, selector, entries } of FITTED_LABELS) {
-      for (const id of entries) {
-        for (const scale of [1, 1.5]) {
-          await openEntry(page, id, scale);
-          await page.evaluate(async () => {
-            await document.fonts.ready;
-            for (let i = 0; i < 2; i++) await new Promise((done) => requestAnimationFrame(done));
-          });
-          const where = `${group} in ${id} at ${size.width}×${size.height}, ${scale * 100} %`;
-          const labels = await page.locator(selector).evaluateAll((elements) =>
-            elements.map((element) => {
-              const label = element as HTMLElement;
-              const style = getComputedStyle(label);
-              const sides =
-                parseFloat(style.paddingLeft) +
-                parseFloat(style.paddingRight) +
-                parseFloat(style.borderLeftWidth) +
-                parseFloat(style.borderRightWidth);
-              const range = document.createRange();
-              range.selectNodeContents(label);
-              const inked = range.getBoundingClientRect().width;
-              const room = label.getBoundingClientRect().width - sides;
-              const shown = parseFloat(getComputedStyle(label).fontSize);
-              const fitted = label.style.fontSize;
-              label.style.fontSize = '';
-              const normal = parseFloat(getComputedStyle(label).fontSize);
-              label.style.fontSize = fitted;
-              return {
-                text: label.textContent?.trim() ?? '',
-                fitted: label.style.textOverflow === 'ellipsis',
-                fits: inked <= room + 0.01,
-                height: label.getBoundingClientRect().height,
-                group: Array.from(document.querySelectorAll('[role="radiogroup"]')).indexOf(
-                  label.closest('[role="radiogroup"]')!,
-                ),
-                ratio: shown / normal,
-                title: label.title,
-              };
-            }),
-          );
-          expect(labels.length, `${where}: shown`).toBeGreaterThan(0);
-          for (const label of labels) {
-            const what = `${where}: "${label.text}"`;
-            expect.soft(label.fitted, `${what} fits itself`).toBe(true);
-            expect.soft(label.ratio, `${what} at 80 % or more`).toBeGreaterThanOrEqual(0.8 - 1e-3);
-            if (!label.fits) {
-              expect.soft(label.ratio, `${what} is cut only at 80 %`).toBeCloseTo(0.8, 3);
-              expect.soft(label.title, `${what} keeps its full text as a title`).not.toBe('');
-            }
-          }
-          if (group === 'segmented option') {
-            // A shrunk option keeps the height of the others in its control.
-            for (const control of new Set(labels.map((label) => label.group))) {
-              const heights = labels.filter((l) => l.group === control).map((l) => l.height);
-              expect
-                .soft(
-                  Math.max(...heights) - Math.min(...heights),
-                  `${where}: control ${control} heights`,
-                )
-                .toBeLessThanOrEqual(0.5);
+for (const lang of LANGUAGES) {
+  test(
+    inLanguageTitle(
+      'one-line labels fit their box at 80 % of their size or more, else end in an ellipsis',
+      lang,
+    ),
+    async ({ page }, info) => {
+      test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
+      test.setTimeout(300_000);
+      for (const size of [{ width: 320, height: 640 }, ...SIZES]) {
+        await page.setViewportSize(size);
+        for (const { group, selector, entries } of FITTED_LABELS) {
+          for (const id of entries) {
+            for (const scale of [1, 1.5]) {
+              await openEntry(page, id, scale, lang);
+              await page.evaluate(async () => {
+                await document.fonts.ready;
+                for (let i = 0; i < 2; i++)
+                  await new Promise((done) => requestAnimationFrame(done));
+              });
+              const where = `${group} in ${id} at ${size.width}×${size.height}, ${scale * 100} %`;
+              const labels = await page.locator(selector).evaluateAll((elements) =>
+                elements.map((element) => {
+                  const label = element as HTMLElement;
+                  const style = getComputedStyle(label);
+                  const sides =
+                    parseFloat(style.paddingLeft) +
+                    parseFloat(style.paddingRight) +
+                    parseFloat(style.borderLeftWidth) +
+                    parseFloat(style.borderRightWidth);
+                  const range = document.createRange();
+                  range.selectNodeContents(label);
+                  const inked = range.getBoundingClientRect().width;
+                  const room = label.getBoundingClientRect().width - sides;
+                  const shown = parseFloat(getComputedStyle(label).fontSize);
+                  const fitted = label.style.fontSize;
+                  label.style.fontSize = '';
+                  const normal = parseFloat(getComputedStyle(label).fontSize);
+                  label.style.fontSize = fitted;
+                  return {
+                    text: label.textContent?.trim() ?? '',
+                    fitted: label.style.textOverflow === 'ellipsis',
+                    fits: inked <= room + 0.01,
+                    height: label.getBoundingClientRect().height,
+                    group: Array.from(document.querySelectorAll('[role="radiogroup"]')).indexOf(
+                      label.closest('[role="radiogroup"]')!,
+                    ),
+                    ratio: shown / normal,
+                    title: label.title,
+                  };
+                }),
+              );
+              expect(labels.length, `${where}: shown`).toBeGreaterThan(0);
+              for (const label of labels) {
+                const what = `${where}: "${label.text}"`;
+                expect.soft(label.fitted, `${what} fits itself`).toBe(true);
+                expect
+                  .soft(label.ratio, `${what} at 80 % or more`)
+                  .toBeGreaterThanOrEqual(0.8 - 1e-3);
+                if (!label.fits) {
+                  expect.soft(label.ratio, `${what} is cut only at 80 %`).toBeCloseTo(0.8, 3);
+                  expect.soft(label.title, `${what} keeps its full text as a title`).not.toBe('');
+                }
+              }
+              if (group === 'segmented option') {
+                // A shrunk option keeps the height of the others in its control.
+                for (const control of new Set(labels.map((label) => label.group))) {
+                  const heights = labels.filter((l) => l.group === control).map((l) => l.height);
+                  expect
+                    .soft(
+                      Math.max(...heights) - Math.min(...heights),
+                      `${where}: control ${control} heights`,
+                    )
+                    .toBeLessThanOrEqual(0.5);
+                }
+              }
             }
           }
         }
       }
-    }
-  }
-});
+    },
+  );
+}
 
 test('a segmented option fits again when it is chosen and turns bold', async ({ page }, info) => {
   test.skip(info.project.name !== 'desktop', 'measured at a fixed size');
@@ -1505,4 +1692,31 @@ test('a segmented option fits again when it is chosen and turns bold', async ({ 
   const after = await face();
   expect(after.ratio, 'shrunk once bold').toBeLessThan(1);
   expect(after.text, 'bold type fits once shrunk').toBeLessThanOrEqual(after.room + 0.01);
+});
+
+test.describe("a display name outside the active language's script renders and fits", () => {
+  const cases = [
+    { lang: 'de', names: 'japanese', opponent: '山田花子' },
+    { lang: 'ja', names: 'cyrillic', opponent: 'Анастасия' },
+  ] as const;
+  for (const { lang, names, opponent } of cases) {
+    for (const id of ['home', 'table-plan', 'game-over', 'history', 'replay']) {
+      test(`${id} in ${lang} with ${names} names`, async ({ page }, info) => {
+        test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
+        await page.setViewportSize({ width: 360, height: 640 });
+        await openGalleryEntry(page, id, `lang=${lang}&names=${names}`);
+        await expect(page.locator('html')).toHaveAttribute('lang', new RegExp(`^${lang}`));
+        const name = page.getByText(opponent).first();
+        await expect(name).toBeVisible();
+        const box = (await name.boundingBox())!;
+        expect(box.x).toBeGreaterThanOrEqual(0);
+        expect(box.x + box.width).toBeLessThanOrEqual(360.5);
+        expect(
+          await page.evaluate(() => document.scrollingElement!.scrollWidth),
+          'the page is no wider than the screen',
+        ).toBeLessThanOrEqual(360);
+        expect(await framingProblems(page, ACTIONS[id] !== undefined)).toEqual([]);
+      });
+    }
+  }
 });

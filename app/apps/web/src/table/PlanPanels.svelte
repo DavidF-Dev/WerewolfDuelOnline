@@ -15,9 +15,11 @@
     seat: Seat;
     /** How each seat is named. */
     names: Record<Seat, string>;
+    /** Draws the cards smaller, for a screen short of room. */
+    compact?: boolean;
   }
 
-  let { localiser: l, view, events, seat, names }: Props = $props();
+  let { localiser: l, view, events, seat, names, compact = false }: Props = $props();
 
   const index = (s: Seat): 0 | 1 => (s === 'p0' ? 0 : 1);
   const reveal = $derived(roundReveal(events));
@@ -87,7 +89,11 @@
 </script>
 
 {#if panels.length === 2}
-  <ul class="plans" aria-label={l.t('plan-panels-heading')} data-testid="plan-panels">
+  <ul
+    class={['plans', { compact }]}
+    aria-label={l.t('plan-panels-heading')}
+    data-testid="plan-panels"
+  >
     {#each panels as panel (panel.seat)}
       <li class="plan" data-testid="plan-panel-{panel.seat}">
         <CharacterCard localiser={l} character={panel.plan.character} size="target" />
@@ -146,6 +152,10 @@
   .muted {
     color: var(--muted);
     white-space: nowrap;
+  }
+
+  .compact .plan > :global(.slot) {
+    zoom: 0.75;
   }
 
   /* With larger text the panels go one per row, their cards drawn smaller to keep them short. */

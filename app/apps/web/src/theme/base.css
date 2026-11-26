@@ -1,3 +1,14 @@
+/* Japanese: its own faces first, phrase-aware line breaks, taller lines and no faux bold. */
+:root:lang(ja) {
+  --font-fallback: 'BIZ UDPGothic', 'Hiragino Sans', 'Yu Gothic UI', Meiryo, system-ui, sans-serif;
+  --font-body: 'BIZ UDPGothic', var(--font-fallback);
+  --font-display: 'Marcellus', 'Shippori Mincho B1', 'BIZ UDPGothic', serif;
+  --font-label: 'Shippori Mincho B1', 'BIZ UDPGothic', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  --line-height: 1.7;
+  font-synthesis: none;
+  word-break: auto-phrase;
+}
+
 :root[data-font='lexend'] {
   --font-body: 'Lexend', var(--font-fallback);
   --font-display: 'Lexend', var(--font-fallback);

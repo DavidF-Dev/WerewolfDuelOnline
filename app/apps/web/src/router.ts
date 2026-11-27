@@ -1,5 +1,6 @@
 import { readable, type Readable } from 'svelte/store';
 import type { Seat } from '@wwd/engine';
+import { isRulesSection, rulesHref, type RulesSection } from './rules/sections.js';
 
 export type Route =
   | { name: 'home' }
@@ -10,6 +11,8 @@ export type Route =
   | { name: 'settings' }
   | { name: 'about' }
   | { name: 'how-to-play' }
+  | { name: 'rules'; section: RulesSection }
+  | { name: 'tutorial' }
   | { name: 'history' }
   | { name: 'stats' }
   /** `id` is a history record's id, decoded. */
@@ -25,13 +28,14 @@ export type RouteName = Route['name'];
 /** The routes the app links to; the gallery has no address in production builds. */
 export type PageName = Exclude<RouteName, 'gallery'>;
 
-const STATIC: Readonly<Record<string, Exclude<PageName, 'replay'>>> = {
+const STATIC: Readonly<Record<string, Exclude<PageName, 'replay' | 'rules'>>> = {
   '#/local/host': 'local-host',
   '#/local/join': 'local-join',
   '#/online/new': 'online-new',
   '#/settings': 'settings',
   '#/about': 'about',
   '#/how-to-play': 'how-to-play',
+  '#/tutorial': 'tutorial',
   '#/history': 'history',
   '#/stats': 'stats',
   '#/join': 'join',
@@ -46,6 +50,8 @@ const PATHS: Readonly<Record<PageName, string>> = {
   settings: '#/settings',
   about: '#/about',
   'how-to-play': '#/how-to-play',
+  rules: rulesHref('goal'),
+  tutorial: '#/tutorial',
   history: '#/history',
   stats: '#/stats',
   replay: '#/history',
@@ -55,6 +61,7 @@ const PATHS: Readonly<Record<PageName, string>> = {
 
 const JOIN_WITH_CODE = /^#\/join\/([^/]+)$/;
 const REPLAY_WITH_ID = /^#\/history\/([^/]+)$/;
+const RULES_SECTION = /^#\/rules(?:\/([^/]*))?$/;
 
 /** Reads a route from `hash`, such as `#/join/K7Q2MX?server=…`; anything unknown is home. */
 export function routeFor(hash: string): Route {
@@ -79,6 +86,11 @@ export function routeFor(hash: string): Route {
       return { name: 'history' };
     }
   }
+  const rules = RULES_SECTION.exec(path);
+  if (rules !== null) {
+    const section = rules[1] ?? '';
+    return isRulesSection(section) ? { name: 'rules', section } : { name: 'how-to-play' };
+  }
   const name = STATIC[path];
   if (name === 'join') return { name, ...withServer };
   const code = params.get('code') ?? undefined;
@@ -86,6 +98,11 @@ export function routeFor(hash: string): Route {
   if (name === 'local-join') return { name, ...withCode };
   if (name === 'rejoin') return { name, ...withCode, ...withSeat, ...withServer };
   return { name: name ?? 'home' };
+}
+
+// The tutorial always starts afresh from a link, so a page opened on it, as by a reload, opens How to play.
+if (routeFor(location.hash).name === 'tutorial') {
+  history.replaceState(history.state, '', PATHS['how-to-play']);
 }
 
 /** The current route, following `location.hash`. */

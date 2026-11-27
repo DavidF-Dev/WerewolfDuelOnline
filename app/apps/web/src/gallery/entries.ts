@@ -4,17 +4,19 @@ import { exportBackup } from '../backup/export.js';
 import { freezeMarkerChanges } from '../components/MarkerCount.svelte';
 import { getDeviceStore } from '../device-store.js';
 import About from '../screens/About.svelte';
-import CharacterReference from '../screens/CharacterReference.svelte';
 import CreateOnline from '../screens/CreateOnline.svelte';
 import History from '../screens/History.svelte';
 import Home from '../screens/Home.svelte';
 import Host from '../screens/Host.svelte';
+import HowToPlay from '../screens/HowToPlay.svelte';
 import Join from '../screens/Join.svelte';
 import JoinOnline from '../screens/JoinOnline.svelte';
 import Rejoin from '../screens/Rejoin.svelte';
 import Replay from '../screens/Replay.svelte';
+import Rules from '../screens/Rules.svelte';
 import Settings from '../screens/Settings.svelte';
 import Stats from '../screens/Stats.svelte';
+import Tutorial from '../screens/Tutorial.svelte';
 import { targetId } from '../cards.js';
 import {
   badgePlanState,
@@ -139,6 +141,42 @@ const openHomeMore: Act = async () => {
   await byTestId('home-more-menu');
 };
 
+/** Waits until the tutorial's coach shows step `n`, from 1. */
+const coachAt = (n: number): Promise<Element> =>
+  until(() => document.querySelector(`[data-coach-step="${n}"]`), `tutorial step ${n}`);
+
+/** Plays the tutorial up to step `n`, from 1, as the player would. */
+async function tutorialTo(n: number): Promise<void> {
+  await coachAt(1);
+  await byTestId('coach-next');
+  if (n === 1) return;
+  await click('coach-next');
+  await coachAt(2);
+  await byTestId('plan-character-knight');
+  if (n === 2) return;
+  await click('plan-character-knight');
+  await click('target-wolfen');
+  await click('seal-plan');
+  await coachAt(3);
+  await byTestId('place-hourglasses');
+  if (n === 3) return;
+  await click('place-hourglasses');
+  await coachAt(4);
+  await byTestId('showdown-next');
+  if (n === 4) return;
+  await stepShowdown();
+  await click('coach-next');
+  await coachAt(5);
+  await byTestId('round-summary');
+  if (n === 5) return;
+  await click('coach-next');
+  await byTestId('tutorial-done');
+}
+
+/** The tutorial, played up to step `n`, or to its finished page after the last. */
+const tutorial = (n: number, stage?: Stage): Pick<GalleryEntry, 'render' | 'props'> =>
+  staged({ screen: Tutorial, ...(stage && { stage }), act: () => tutorialTo(n) });
+
 const settingsNamed: Stage = async () => {
   await nameThisDevice();
   return offerInstall();
@@ -178,7 +216,13 @@ export const GALLERY: GalleryEntry[] = [
       },
     }),
   },
-  { id: 'home-first-run', game: false, title: 'Home on first run', render: Home, props: {} },
+  {
+    id: 'home-newcomer',
+    game: false,
+    title: 'Home on first run, with the panel for newcomers',
+    render: Home,
+    props: {},
+  },
   { id: 'new-game', game: false, title: 'New game options', render: CreateOnline, props: {} },
   {
     id: 'invite-waiting',
@@ -378,6 +422,15 @@ export const GALLERY: GalleryEntry[] = [
     game: true,
     title: 'Table with the log and rules sheet',
     ...table(planState, () => openSheet('log-toggle', 'log-drawer')),
+  },
+  {
+    id: 'table-rules-sheet',
+    game: true,
+    title: 'Table with the full rules over the log',
+    ...table(planState, async () => {
+      await openSheet('log-toggle', 'log-drawer');
+      await openSheet('full-rules', 'rules-sheet');
+    }),
   },
   {
     id: 'table-continue-elsewhere',
@@ -608,9 +661,87 @@ export const GALLERY: GalleryEntry[] = [
   {
     id: 'how-to-play',
     game: false,
-    title: 'How to play and the characters',
-    render: CharacterReference,
+    title: 'How to play with the tutorial and the rules sections',
+    render: HowToPlay,
     props: {},
+  },
+  {
+    id: 'tutorial-goal',
+    game: true,
+    title: 'Tutorial, step 1: the goal, the markers ringed',
+    ...tutorial(1),
+  },
+  {
+    id: 'tutorial-plan',
+    game: true,
+    title: 'Tutorial, step 2: a plan, only the Knight and the Wolfen offered',
+    ...tutorial(2),
+  },
+  {
+    id: 'tutorial-reveal',
+    game: true,
+    title: "Tutorial, step 3: the reveal, the opponent's Hourglass pill ringed",
+    ...tutorial(3),
+  },
+  {
+    id: 'tutorial-showdown',
+    game: true,
+    title: "Tutorial, step 4: the Knight's showdown step, its markers partway through changing",
+    ...tutorial(4, freezeMarkerChanges),
+  },
+  {
+    id: 'tutorial-round-end',
+    game: true,
+    title: 'Tutorial, step 5: the round summary, the Badge and the set-aside card ringed',
+    ...tutorial(5),
+  },
+  {
+    id: 'tutorial-done',
+    game: false,
+    title: 'Tutorial at its finished page, with where to go next',
+    ...tutorial(6),
+  },
+  {
+    id: 'rules-goal',
+    game: false,
+    title: 'Rules: the goal',
+    render: Rules,
+    props: { section: 'goal' },
+  },
+  {
+    id: 'rules-setup',
+    game: false,
+    title: 'Rules: setting up',
+    render: Rules,
+    props: { section: 'setup' },
+  },
+  {
+    id: 'rules-round',
+    game: false,
+    title: 'Rules: a round in five steps',
+    render: Rules,
+    props: { section: 'round' },
+  },
+  {
+    id: 'rules-markers',
+    game: false,
+    title: 'Rules: what each marker does',
+    render: Rules,
+    props: { section: 'markers' },
+  },
+  {
+    id: 'rules-fine-points',
+    game: false,
+    title: 'Rules: the fine points',
+    render: Rules,
+    props: { section: 'fine-points' },
+  },
+  {
+    id: 'rules-characters',
+    game: false,
+    title: 'Rules: every character and how to read abilities',
+    render: Rules,
+    props: { section: 'characters' },
   },
   {
     id: 'connection-banners',

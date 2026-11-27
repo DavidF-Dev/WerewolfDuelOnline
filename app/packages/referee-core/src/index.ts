@@ -7,7 +7,7 @@ export type {
   RoomDeps,
   RoomOptions,
 } from './deps.js';
-export { closesConnection, generateJoinCode, generatePin } from './codes.js';
+export { closesConnection, generateJoinCode, generatePin, seededRandom } from './codes.js';
 export type {
   FromSaveSnapshot,
   PauseSnapshot,

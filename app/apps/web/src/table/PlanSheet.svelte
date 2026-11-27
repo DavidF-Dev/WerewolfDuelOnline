@@ -12,11 +12,12 @@
   import Button from '../components/Button.svelte';
   import ConfirmDialog from '../components/ConfirmDialog.svelte';
   import RichText from '../kit/RichText.svelte';
-  import { display } from '../settings/display.svelte.js';
   import { characterName, planSummaryParts, planText } from '../text.js';
   import HandFan from './HandFan.svelte';
   import TargetGrid from './TargetGrid.svelte';
+  import type { TutorialAllow } from '../tutorial/script.js';
   import { handInstruction, handPrimary } from './primary.svelte.js';
+  import { tableSettings } from './table-settings.js';
 
   interface Props {
     localiser: Localiser;
@@ -27,9 +28,23 @@
     onCommand: (cmd: Command) => void;
     /** Changes whenever the referee reports a problem, which frees a sent command for a retry. */
     errorCount?: number;
+    /** The one plan a coach offers; every other character and target is disabled. */
+    allow?: TutorialAllow | null;
+    /** Why a choice outside `allow` is disabled. */
+    allowReason?: string;
   }
 
-  let { localiser: l, hand, legal, config, onCommand, errorCount = 0 }: Props = $props();
+  let {
+    localiser: l,
+    hand,
+    legal,
+    config,
+    onCommand,
+    errorCount = 0,
+    allow = null,
+    allowReason = '',
+  }: Props = $props();
+  const settings = tableSettings();
   const uid = $props.id();
 
   type PlanCommand = Extract<Command, { submit_plan: Plan }>;
@@ -39,9 +54,18 @@
   );
   const offered = $derived(
     CHARACTERS.filter(
-      (c) => hand.includes(c) && planCommands.some((cmd) => cmd.submit_plan.character === c),
+      (c) =>
+        hand.includes(c) &&
+        (allow === null || allow.character === c) &&
+        planCommands.some((cmd) => cmd.submit_plan.character === c),
     ),
   );
+  // A coach step that asks for no plan shows the hand as it is, without offering it.
+  const handInert = $derived(allow !== null && allow.character === undefined);
+  const allowed = (card: Card): boolean =>
+    allow === null ||
+    allow.character === undefined ||
+    (allow.targets ?? []).some((t) => targetId(t) === targetId(card));
 
   let chosen = $state<Character | null>(null);
   let selected = $state<Card[]>([]);
@@ -88,6 +112,7 @@
   }
 
   function targetShown(card: Card) {
+    if (!allowed(card)) return { state: 'disabled' as const, reason: allowReason };
     if (active === null) return { state: 'normal' as const };
     const reason = blockedReason(active, card);
     if (reason !== null) return { state: 'disabled' as const, reason };
@@ -138,7 +163,7 @@
 
   function seal(): void {
     if (match === undefined || sent) return;
-    if (display.confirmPlan) confirming = true;
+    if (settings.confirmPlan) confirming = true;
     else send();
   }
 
@@ -163,7 +188,7 @@
     disabled={match === undefined}
     aria-disabled={sent}
     aria-describedby={match === undefined ? `${uid}-seal-note` : undefined}
-    aria-haspopup={display.confirmPlan ? 'dialog' : undefined}
+    aria-haspopup={settings.confirmPlan ? 'dialog' : undefined}
     data-testid="seal-plan"
     fit
     onclick={seal}
@@ -180,14 +205,16 @@
     {hand}
     shown={targetShown}
     onselect={active === null ? undefined : toggle}
+    compact={allow !== null}
   />
   <HandFan
     localiser={l}
     {hand}
     chosen={active}
-    onchoose={choose}
+    onchoose={handInert ? undefined : choose}
+    description={handInert ? allowReason : undefined}
     {offered}
-    reason={l.t('plan-character-not-offered')}
+    reason={allow === null ? l.t('plan-character-not-offered') : allowReason}
     testId="plan-characters"
   />
   {#if !instructed}
@@ -205,7 +232,7 @@
       onConfirm={send}
       onCancel={() => (confirming = false)}
     >
-      {#if display.rulesHints}<p class="note" data-testid="plan-hint">{l.t('hint-plan')}</p>{/if}
+      {#if settings.rulesHints}<p class="note" data-testid="plan-hint">{l.t('hint-plan')}</p>{/if}
     </ConfirmDialog>
   {/if}
 </section>

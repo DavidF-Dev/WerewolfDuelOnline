@@ -13,9 +13,11 @@
     markers?: Markers;
     /** Whether a marker count that changes is shown as a gain or a loss. */
     animate?: boolean;
+    /** Whether to show the Badge, when it differs from the view's, as partway through a showdown. */
+    hasBadge?: boolean;
   }
 
-  let { localiser: l, name, view, seat, markers, animate = false }: Props = $props();
+  let { localiser: l, name, view, seat, markers, animate = false, hasBadge }: Props = $props();
   const player = $derived(view.players[seat === 'p0' ? 0 : 1]);
 </script>
 
@@ -28,7 +30,7 @@
   <MarkerList
     localiser={l}
     markers={markers ?? player}
-    hasBadge={view.badge === seat}
+    hasBadge={hasBadge ?? view.badge === seat}
     {animate}
     testId="my"
     spread

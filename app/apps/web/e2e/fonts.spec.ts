@@ -21,7 +21,7 @@ test('Japanese fonts load only when Japanese is active', async ({ page }) => {
     if (request.resourceType() === 'font') requested.push(request.url());
   });
   for (const lang of ['en', 'de']) {
-    for (const id of ['home', 'table-plan', 'how-to-play']) {
+    for (const id of ['home', 'table-plan', 'how-to-play', 'rules-characters']) {
       await page.goto('about:blank');
       await openGalleryEntry(page, id, `lang=${lang}`);
       expect(await loadedFamilies(page), `${id} in ${lang}`).not.toContainEqual(

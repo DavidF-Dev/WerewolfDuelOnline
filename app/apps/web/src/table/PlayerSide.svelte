@@ -96,6 +96,7 @@
         role="img"
         aria-label={pill.name}
         data-part="side-pill"
+        data-testid="side-pill-{who}"
         ><MarkerIcon marker="hourglass" /><span aria-hidden="true">{pill.text}</span></span
       >
     {/if}

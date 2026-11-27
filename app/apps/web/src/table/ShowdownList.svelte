@@ -1,17 +1,22 @@
 <script lang="ts" module>
   import { motionReduced } from '../settings/apply.js';
-  import { display } from '../settings/display.svelte.js';
+  import { display, type DisplaySettings } from '../settings/display.svelte.js';
 
-  /** How the results are shown: `instant` shows every result at once, whatever the setting. */
-  function showdownSpeed(instant: boolean): 'step' | 'auto' | 'instant' {
+  type Speed = DisplaySettings['showdownSpeed'];
+
+  /** How the results are shown under `setting`; `instant` shows every result at once, whatever it is. */
+  function showdownSpeed(instant: boolean, setting: Speed): Speed {
     if (instant) return 'instant';
-    if (display.showdownSpeed === 'step') return 'step';
-    return motionReduced(display.reducedMotion) ? 'instant' : display.showdownSpeed;
+    if (setting === 'step') return 'step';
+    return motionReduced(display.reducedMotion) ? 'instant' : setting;
   }
 
-  /** How many of a showdown's `total` steps a list just drawn shows. */
-  export const firstShown = (total: number, instant = false): number =>
-    showdownSpeed(instant) === 'instant' ? total : Math.min(1, total);
+  /** How many of a showdown's `total` steps a list just drawn shows under the speed `setting`. */
+  export const firstShown = (
+    total: number,
+    instant = false,
+    setting: Speed = display.showdownSpeed,
+  ): number => (showdownSpeed(instant, setting) === 'instant' ? total : Math.min(1, total));
 </script>
 
 <script lang="ts">
@@ -26,6 +31,7 @@
   import Button from '../components/Button.svelte';
   import RoundSummary from './RoundSummary.svelte';
   import { handPrimary } from './primary.svelte.js';
+  import { tableSettings } from './table-settings.js';
   import { roundReveal, showdownSteps, type SequencedEvent } from './showdown.js';
 
   interface Props {
@@ -74,7 +80,8 @@
 
   const steps = $derived(showdownSteps(events));
   const reveal = $derived(roundReveal(events));
-  const speed = $derived(showdownSpeed(instant));
+  const settings = tableSettings();
+  const speed = $derived(showdownSpeed(instant, settings.showdownSpeed));
   let stepped = $state(untrack(() => startAt));
   const shown = $derived(speed === 'instant' ? steps.length : Math.min(stepped, steps.length));
   const caughtUp = $derived(shown >= steps.length);

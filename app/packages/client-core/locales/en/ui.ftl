@@ -68,12 +68,142 @@ update-region = App updates
 update-available = A new version is available
 update-reload = Reload
 
+## How to play
+how-to-play-heading = How to play
+how-to-play-tutorial-heading = New to the game?
+how-to-play-tutorial-text = Play one guided round against { -tutorial-opponent }. It takes about five minutes, and you can leave at any time.
+how-to-play-tutorial-done-heading = Tutorial finished
+how-to-play-tutorial-again = Play it again
+how-to-play-start-tutorial = Start the tutorial
+how-to-play-rules-heading = Rules
+
+## Rules pages, in our own words: one message per paragraph
+# Marker words are arguments, so that their tokens are drawn: `cross`, `crosses`, `fang`, `fangs`,
+# `hourglass`, `hourglasses`, `potion`, `health` and `badge`. A character is named with CHARACTER
+# and an argument named after it: `hunter`, `wolfKing`, `knight`, `wolfen`, `seer`, `witch`,
+# `wolfBeauty` or `villager`.
+rules-progress = Rules · { $index } of { $total }
+rules-pages = Rules pages
+rules-previous = Previous
+rules-next = Next
+rules-sheet-title = Rules
+
+rules-goal-title = The goal
+rules-goal-summary = Three ways to win.
+rules-goal-intro = Every round, you and your opponent each secretly choose a character to play, and then the two characters act one after the other. You win as soon as one of these is true:
+rules-goal-crosses = You hold 4 { $crosses }.
+rules-goal-fangs = You hold 3 { $fangs }.
+rules-goal-health = Your opponent has no { $health } left.
+rules-goal-instant = The game stops the moment one of these happens, even halfway through a round, so the order in which the characters act matters. If you run out of { $health } yourself, you lose.
+rules-goal-bluff = You never see your opponent's hand. Each round is a guess at the character your opponent has chosen, and a chance to make your own choice hard to read.
+
+rules-setup-title = Setting up
+rules-setup-summary = { $health }, { $crosses }, the { $badge } and the first { $hourglass }.
+rules-setup-cards = There are 8 characters. The number on each one is its initiative: the lower it is, the sooner the character acts. Each character is a Human or a Werewolf, which decides which characters can target it. You and your opponent also each have a set of 9 target cards: one for each character, and the Fool.
+rules-setup-markers = You and your opponent each start with 2 { $health } and 1 { $cross }.
+rules-setup-badge = One of you starts with the { $badge }: the host chooses who, or leaves it to chance. The { $badge } holder is dealt an extra card and decides first, and the { $badge } changes hands after every round.
+rules-setup-hourglass = The player who starts without the { $badge } takes 1 { $hourglass }.
+rules-setup-supply = The rest of the markers make up the supply. A marker you gain comes from the supply, and a marker you spend goes back to it.
+
+rules-round-title = A round
+rules-round-summary = Deal, plan, reveal, showdown, round end.
+rules-round-intro = Every round has the same five steps.
+rules-round-deal-title = Deal
+rules-round-deal = The 8 characters are shuffled, and one is set aside face down, unseen by either of you. The { $badge } holder is dealt 4 of the others and the other player 3. Only you can see your hand.
+rules-round-plan-title = Plan
+rules-round-plan = At the same time, you and your opponent each make a plan: one character from your hand, and at least one target card naming the character you think your opponent chose. Each character's card says what it may target, and the Fool can be added to any plan.
+rules-round-plan-2 = When your plan is ready, you seal it. Your opponent learns how many target cards you chose, but not which ones. The rest of your hand is discarded unseen.
+rules-round-reveal-title = Reveal
+rules-round-reveal = If you hold { $hourglasses }, you may place some or all of them on the character you chose. The { $badge } holder chooses first, then the other player, knowing that number. Each { $hourglass } placed lowers the character's initiative by 1, but never below 0.
+rules-round-reveal-2 = If you hold the { $potion }, you must use it now: name one character that wasn't dealt to you this round.
+rules-round-reveal-3 = Then both plans are turned face up.
+rules-round-showdown-title = Showdown
+rules-round-showdown = The { $potion } comes first. If it names the other player's character, that character is eliminated before anything acts, and its owner loses 1 { $health }.
+rules-round-showdown-2 = Then the characters act, lowest initiative first. On a tie, the character with more { $hourglasses } placed on it goes first, then the { $badge } holder's. A character gains or spends its markers first, and then attacks its targets.
+rules-round-showdown-3 = An attack hits if one of its targets names the other player's character and that character hasn't acted yet. The character hit is eliminated without acting, and its owner loses 1 { $health }, or 2 when the { CHARACTER($seer) } hits.
+rules-round-end-title = Round end
+rules-round-end = The placed { $hourglasses } go back to the supply, the { $badge } passes to the other player, and the card set aside is shown to you both. Once you are both ready, the next round is dealt.
+
+rules-markers-title = Markers
+rules-markers-summary = What each marker does and where it comes from.
+rules-markers-intro = Every marker you and your opponent hold is on show to you both.
+rules-markers-cross = Hold 4 to win. You each start with 1, the { CHARACTER($villager) } gains 1, and the { CHARACTER($hunter) } spends 1 to attack.
+rules-markers-fang = Hold 3 to win. The { CHARACTER($wolfBeauty) } gains 1, and the { CHARACTER($wolfKing) } spends them to attack more than one Human.
+rules-markers-hourglass = Placed on your character in the reveal, each one lowers its initiative by 1. The player without the { $badge } starts with 1, and the { CHARACTER($knight) } and the { CHARACTER($wolfen) } each gain 1.
+rules-markers-potion = The { CHARACTER($witch) } gains it. In the next reveal, its holder must name a character, and if the other player played that character, it is eliminated before anything acts. Then the { $potion } goes back to the supply.
+rules-markers-health = You start with 2 and never get any back. If you have none left, you lose.
+rules-markers-badge = Its holder is dealt 4 cards instead of 3, chooses { $hourglasses } first, and acts first in a tie that the { $hourglasses } placed don't settle. It passes to the other player after every round.
+
+rules-characters-title = Characters
+rules-characters-summary = Every character, and how to read abilities.
+
+rules-fine-points-title = Fine points
+rules-fine-points-summary = Ties, the { $potion }, the Fool and other details.
+rules-fine-points-ties-title = Ties
+rules-fine-points-ties = When both characters end up with the same initiative, the one with more { $hourglasses } placed on it acts first. If that is equal too, the { $badge } holder's character acts first.
+rules-fine-points-empty-supply-title = No { $hourglasses } left
+rules-fine-points-empty-supply = Placed { $hourglasses } stay on the characters until the round ends, so the supply can run out. If the { CHARACTER($knight) } or the { CHARACTER($wolfen) } gains an { $hourglass } then, it is taken from the other player instead. If the other player has none either, nothing is gained.
+rules-fine-points-immune-title = Too late to hit
+rules-fine-points-immune = An attack only hits a character that hasn't acted yet, so once a character has acted, it is safe for the rest of the round. A character is eliminated only once: another hit on it, even after the { $potion }, does nothing more.
+rules-fine-points-potion-title = The { $potion }
+rules-fine-points-potion = The { $potion } can name any character that wasn't dealt to you this round, played or not, including one your own plan targets. It works on every character, the { CHARACTER($witch) } included. The Fool isn't a character, so it can't be named.
+rules-fine-points-wolf-king-title = The { CHARACTER($wolfKing) } and { $fangs }
+rules-fine-points-wolf-king = The { CHARACTER($wolfKing) } can target any number of Humans. Every Human after the first costs 1 { $fang }, paid when it acts. If you can't pay for them all, you pay nothing and it doesn't attack. The Fool costs nothing.
+rules-fine-points-hunter-title = The { CHARACTER($hunter) } and its { $cross }
+rules-fine-points-hunter = When the { CHARACTER($hunter) } acts, you choose whether to spend 1 { $cross }. Only if you do does it attack, at up to 2 Werewolves; with no { $cross }, it can't attack. Keeping the { $cross } brings you closer to holding 4.
+rules-fine-points-hand-title = Cards in your hand
+rules-fine-points-hand = A card dealt to you can't be the character your opponent plays, so your plan can't target it, and the game doesn't offer it. The targets you are offered are the characters you weren't dealt, and the Fool. Your opponent's cards are among them, but so is the card set aside, so every target is a guess.
+rules-fine-points-fool-title = The Fool
+rules-fine-points-fool = The Fool does nothing. Add it to any plan to change how many target cards your opponent sees, or make it your only target to play a character without attacking. The { CHARACTER($witch) } and the { CHARACTER($villager) } can only target the Fool.
+rules-fine-points-options-title = Rules a host can change
+rules-fine-points-options = Older printings of the game settle every tie by the { $badge } alone. A host can choose that rule when creating a game: a tie then always goes to the { $badge } holder.
+rules-fine-points-options-2 = A host can also allow plans with no targets. A character played without targets still gains its markers, but doesn't attack.
+
 ## Character reference
-reference-heading = How to play
-reference-characters-heading = Characters
 reference-characters-intro = Every character and the Fool, with what each does when it resolves. Lower initiative resolves first.
 # Shown beside a character's name in languages other than English: its name as the English edition prints it.
 reference-printed-name = Printed name: { $name }
+
+## Tutorial
+# The scripted opponent's name, defined once; every tutorial message names the opponent through this term.
+-tutorial-opponent = Alicia
+tutorial-opponent-name = { -tutorial-opponent }
+tutorial-heading = Tutorial
+# Above the coach's text in the phase bar, as in "Tutorial · 2 of 5 · Make a plan".
+tutorial-progress = Tutorial · { $step } of { $count } · { $title }
+tutorial-next = Next
+tutorial-finish = Finish
+tutorial-leave = Leave tutorial
+tutorial-starting = Setting up the tutorial…
+tutorial-failed = The tutorial couldn't start. Go back and try again.
+# The coach's text for each step: at most three lines at 360 px and 100 % text. Marker words and
+# characters are arguments, as in the rules pages.
+tutorial-goal-title = Your goal
+tutorial-goal-text = You win with 4 { $crosses } or 3 { $fangs }, or once { -tutorial-opponent } has no { $health } left. These rows of markers keep count.
+tutorial-plan-title = Make a plan
+tutorial-plan-text = You can't see the cards { -tutorial-opponent } holds, so every target is a guess. Most are Werewolves: try the { CHARACTER($knight) } on the { CHARACTER($wolfen) }.
+tutorial-reveal-title = Reveal
+tutorial-reveal-text = Lower initiative acts first: your { CHARACTER($knight) } is 3. If { -tutorial-opponent } is playing the { CHARACTER($wolfen) } you targeted, that is 4. Each { $hourglass } placed lowers initiative by 1. Place 0.
+tutorial-showdown-title = Showdown
+tutorial-showdown-text = The { CHARACTER($knight) } acts first: it gains an { $hourglass } and hits the { CHARACTER($wolfen) }, which is out before it acts. { -tutorial-opponent } loses 1 { $health }.
+tutorial-round-end-title = Round end
+tutorial-round-end-text = The { $badge } changes hands, and the card set aside is shown. A real game goes on like this, round after round, until someone wins.
+tutorial-done-heading = You've played a whole round
+tutorial-done-learned = You've learned
+tutorial-done-goal = The three ways to win
+tutorial-done-plan = Planning one character and its targets
+tutorial-done-reveal = { $hourglasses } and the { $badge }
+tutorial-done-showdown = Who acts first, and what a hit does
+tutorial-done-more = A real game goes on, round after round, until someone wins. Every rule is in the rules pages.
+tutorial-done-play = Play with a friend
+tutorial-done-rules = Read the rules
+tutorial-done-again = Play the tutorial again
+
+## Home: the newcomer panel
+home-newcomer-heading = New to { -game-name }?
+home-newcomer-text = Learn by playing one guided round.
+home-newcomer-learn = Learn to play
+home-newcomer-dismiss = Dismiss
 
 ## Settings
 settings-heading = Settings
@@ -400,6 +530,7 @@ side-label-ordered = { $label } { $position ->
 ## Table layout
 table-you = You
 drawer-summary = Game log and rules
+drawer-full-rules = Full rules
 rules-heading = Rules
 rules-order = Lower initiative resolves first.
 rules-tiebreak-hourglasses-then-badge = On a tie, the player who placed more Hourglasses goes first, then the Badge holder.

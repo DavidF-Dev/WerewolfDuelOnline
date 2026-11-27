@@ -87,3 +87,24 @@ describe('LogDrawer', () => {
     );
   });
 });
+
+describe('Full rules', () => {
+  it('opens the rules over the log at a round, pages through them and closes again', async () => {
+    render(LogDrawer, {
+      props: { localiser, events: [], seat: 'p1', tiebreak: null, open: true, onclose: () => {} },
+    });
+    const row = within(screen.getByRole('region', { name: 'Rules' })).getByTestId('full-rules');
+    expect(row.textContent).toBe('Full rules');
+    await userEvent.click(row);
+    const sheet = screen.getByTestId('rules-sheet');
+    expect(within(sheet).getByRole('heading', { level: 2, name: 'A round' })).toBeTruthy();
+    await userEvent.click(within(sheet).getByTestId('rules-next'));
+    expect(within(sheet).getByRole('heading', { level: 2, name: 'Markers' })).toBeTruthy();
+    await userEvent.click(within(sheet).getByRole('button', { name: localiser.t('sheet-close') }));
+    expect(screen.queryByTestId('rules-sheet')).toBeNull();
+    expect(screen.getByTestId('log-drawer')).toBeTruthy();
+
+    await userEvent.click(screen.getByTestId('full-rules'));
+    expect(screen.getByRole('heading', { level: 2, name: 'A round' })).toBeTruthy();
+  });
+});

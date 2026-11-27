@@ -1,7 +1,7 @@
 # M5 rulebook and tutorial — design
 
 **Date:** 2026-11-26
-**Status:** approved by the owner 2026-11-26 (opponent renamed the same day)
+**Status:** approved by the owner 2026-11-26 (opponent renamed the same day); built 2026-11-27 in English, German and Japanese
 **Milestone:** M5 "Reach" (spec §10), second of four projects: languages (done) → **rulebook and tutorial** → the deferred gameplay settings → the accessibility audit.
 **Builds on:** spec §8.1 item 10 ("How to play: rewritten rulebook, character reference, 5-step interactive tutorial (scripted local game via the memory referee)"), §5 (the rules), §8.4 (localisation), and the M5 languages design (Fluent grammar, the three languages, the checks).
 **Mockups:** drawn on the real screens at 360 × 640 during the design conversation (How to play, two rules pages, Home's first-run panel, tutorial steps 1–4 and the finished page). They are throwaway; this note is the reference.
@@ -61,12 +61,14 @@ How to play becomes a hub (mockup A1):
    2. **Setting up** — Health, Crosses, the Badge and the first Hourglass.
    3. **A round** — deal, plan, reveal, showdown, round end.
    4. **Markers** — Cross, Fang, Hourglass, Potion, Health and the Badge: what each does and where it comes from.
-   5. **Characters** — today's character reference, including "How to read abilities". It keeps its current content and route; it gains the section's number in its label and the Previous/Next row.
-   6. **Fine points** — ties, an empty Hourglass supply, a character that has already acted is immune, the Potion, the Wolf King's Fangs, the Hunter's optional Cross, targeting a card in your own hand, the Fool, and the two rules options a host can pick (the old-printing tie-break and zero targets).
+   5. **Characters** — today's character reference, including "How to read abilities". It keeps its current content, now at `#/rules/characters`; it gains the section's number in its label and the Previous/Next row.
+   6. **Fine points** — ties, an empty Hourglass supply, a character that has already acted is immune, the Potion (it names any character not in your hand this round, including one you already target), the Wolf King's Fangs, the Hunter's optional Cross, why cards in your hand are never targets (they can't be your opponent's character, so the game doesn't offer them), the Fool, and the two rules options a host can pick (the old-printing tie-break and zero targets).
 
 *(My call)* The hub keeps How to play's route, `#/how-to-play`, so existing links still land on How to play; the character reference moves to `#/rules/characters`, and its gallery entry and tests move with it.
 
 Each section is its own screen, `#/rules/<section>` (ids `goal`, `setup`, `round`, `markers`, `characters`, `fine-points`), with the bar's ← back to How to play, a small "Rules · n of 6" label, and **Previous / Next** buttons at the bottom (mockups A2, A3). The pages scroll like any other non-game screen. Pictures are the app's own: cards, pills and marker tokens through the existing components; no new art.
+
+*(Builder's call, 2026-11-27)* A rules page's bar title is its section's name ("The goal", "A round" …), with the "Rules · n of 6" label above the text, as in the approved mockup; the bar's ← always goes to How to play rather than to the previous page. In the game's rules sheet, which has no bar, the sheet's title is "Rules" and each page shows its section's name as a heading.
 
 **Content** (Claude drafts, owner reviews): short paragraphs in our own words, covering all of spec §5 for the default rules. "A round" is the five numbered steps of mockup A3. The text speaks to the reader as "you" and "your opponent".
 
@@ -92,9 +94,9 @@ The game's log drawer keeps its short "Rules" part and adds a **Full rules** row
 | Step | Title | The player | Alicia (scripted) | The coach says (gist) |
 |---|---|---|---|---|
 | 1 | Your goal | taps **Next** | — | Three ways to win: 4 Crosses, 3 Fangs, or your opponent's Health to 0. Points at both rows of markers. |
-| 2 | Make a plan | chooses the **Knight**, targets the **Wolfen**, taps **Seal plan** | plans **Wolfen → Seer** | You can't see Alicia's cards: their character is one of the four you don't hold, and one of those is set aside, so every target is a guess. Three of those four are Werewolves, so a Werewolf is a good bet: try the Wolfen. The number on a card is its initiative: lower acts first, and the Knight (3) acts before the Wolfen (4). *(My call: the coach always presents the target as a guess, never as something the player can know.)* |
-| 3 | Reveal | places 0 Hourglasses (the Badge holder starts with none) | places 0 of their 1 Hourglass | Each Hourglass lowers a character's initiative by 1. The Badge holder chooses first. Had Alicia placed theirs, the Wolfen would have tied the Knight at 3 and gone first, because it placed more Hourglasses. |
-| 4 | Showdown | taps **Next** through the steps | — | The Knight acts first: it gains an Hourglass and hits the Wolfen, so the Wolfen is eliminated before it acts and Alicia loses 1 Health. Alicia's Wolfen was aimed at your Seer, which you didn't play, so it would have missed anyway. |
+| 2 | Make a plan | chooses the **Knight**, targets the **Wolfen**, taps **Seal plan** | plans **Wolfen → Seer** | You can't see Alicia's cards. Alicia's character is one of the four characters you don't hold, which are the targets shown (with the Fool), and one of those four is set aside, so every target is a guess. Three of those four are Werewolves, so a Werewolf is a good bet: try the Wolfen. The number on a card is its initiative: lower acts first, and the Knight (3) acts before the Wolfen (4). *(My call: the coach always presents the target as a guess, never as something the player can know.)* |
+| 3 | Reveal | places 0 Hourglasses (the Badge holder starts with none) | places 0 of their 1 Hourglass | Each Hourglass lowers a character's initiative by 1. The Badge holder chooses first. Alicia's side shows "+?" while deciding, then "+0". Had Alicia placed that Hourglass, the Wolfen would have tied the Knight at 3 and gone first, because more Hourglasses were placed on it. Rings the Hourglass pill. |
+| 4 | Showdown | taps **Next** through the steps | — | The Knight acts first: it gains an Hourglass and hits the Wolfen, so the Wolfen is eliminated before it acts and Alicia loses 1 Health. Both changes land on the Knight's step, where the marker rows animate them; the coach rings Alicia's Health and your Hourglass count. Alicia's Wolfen was aimed at your Seer, which you didn't play, so it would have missed anyway. |
 | 5 | Round end | taps **Finish** | — | The Badge changes hands and the set-aside card is shown. A real game goes on, round after round, until someone wins. |
 
 Then the **finished** page (mockup B5): "You've played a whole round", four ticks (three ways to win; planning one character and its targets; Hourglasses and the Badge; who acts first and what a hit does), the reminder that a real game goes on until someone wins, and **Play with a friend** (New game), **Read the rules** (the rules, at "The goal") and **Play the tutorial again**. Reaching it sets the "tutorial finished" flag.
@@ -112,6 +114,18 @@ Then the **finished** page (mockup B5): "You've played a whole round", four tick
 - The coach is a component of its own, driven by a step list, so the deferred "Tutorial tips" setting can reuse it in real games later.
 
 **Fitting.** The tutorial's screens are gallery entries (one per step plus the finished page) and go through every layout, wide and accessibility check, in every language and the pseudo-locale, like the other game screens.
+
+*(Builder's calls, 2026-11-27)*
+- **Room for the coach.** The coach's text is set a little smaller than a phase instruction (13 px, regular weight), and while a coach is on the table the target grid draws its cards at 90 % rather than 105 %. Without both, three lines of coach text made the plan step scroll at 360 × 640.
+- **Rings.** Each step rings one thing or two:
+  - goal: both rows of markers;
+  - plan: the Knight in the hand and the Wolfen's place in the targets (a target slot has a test id of its own, since the card itself has none until a character is chosen);
+  - reveal: the opponent's Hourglass pill;
+  - showdown: the opponent's Health and your Hourglass count;
+  - round end: the Badge and set-aside lines of the round summary.
+- **The table's settings.** The fixed settings (showdown speed "step", no plan confirmation, no rules hints) reach the table's parts through a table context, so the player's own settings never change.
+- **Buttons.** Explain-only steps show the coach's Next, and the last step shows Finish, in place of whatever the table offers. On the showdown step, the showdown's own Next comes first, and the coach's Next shows once every result is shown. The bar never offers Next round.
+- **Leaving.** Leave tutorial replaces the tutorial's entry in the browser history with How to play. A page opened at `#/tutorial`, as after a reload, is sent to How to play before anything is drawn. Home's **Learn to play** opens the tutorial directly.
 
 ### The opponent's name
 
@@ -134,7 +148,19 @@ Each language defines the name once, as a Fluent term in its `ui.ftl`:
 
 - New Fluent messages in `ui.ftl` for the hub, the six rules pages, the coach, the finished page and Home's panel, in English, German and Japanese. Character names go through `CHARACTER()`; marker names are arguments, so their tokens appear.
 - The completeness, count-sweep and pseudo-locale checks cover them automatically.
+- *(Builder's call, 2026-11-27)* Until German and Japanese are written, those files carry the English text of each new message, and the "every message is translated" check skips them through a per-message allow-list in the locales test (`UNTRANSLATED_MESSAGES`, each id with its reason), not the per-locale `UNTRANSLATED` set, so the rest of each language stays checked. The test also fails once a listed message no longer matches the English, so each entry comes off as it is translated, and the list is empty when the project ends.
 - Japanese font subsets are regenerated for the new text (`fonts:ja`).
+- *(Builder's calls, 2026-11-27)* German and Japanese are written and `UNTRANSLATED_MESSAGES` is empty. German never starts a sentence or title with a `CHARACTER()` article, which is lower case, so such sentences are turned round ("Einen erhält die Wolfsschönheit") and titles use the bare name ("Werwolfkönig und Reißzähne"). The supply is "Vorrat" and 「ストック」. The rules pages' progress label is 「ルール・n/6」 and the coach's 「チュートリアル・n/5・…」, like the replay position. German "Tutorial" and "Plan" read as in English. The tutorial e2e plays the round through in German and Japanese (chosen in Settings), and the coach's three-line check runs in every language.
+
+### Built on the playtest fixes (2026-11-27)
+
+This design predates the playtest fixes and is updated for them:
+- Cards in the player's hand are hidden from the targets, so step 2's grid shows exactly the four characters the player doesn't hold, plus the Fool.
+- Targets are inert until a character is chosen, and unusable ones are faded. The tutorial's "only the taught move" uses that same faded look, so the player's first choice is always the character.
+- The reveal and showdown use the shared player sides (the Hourglass pill, target chips, "Initiative 4 → 3", acting order). The coach rings those parts by their current test ids.
+- Marker counts change on the showdown step that reads them out, with an animation, and the tutorial relies on that in step 4.
+- The rules pages describe the current rules: no in-hand targets, and the Potion as above.
+- No coach text uses a pronoun for the opponent, including "their".
 
 ## Testing
 

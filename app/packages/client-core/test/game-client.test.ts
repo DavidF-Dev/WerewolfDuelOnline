@@ -11,7 +11,12 @@ import {
 } from '@wwd/protocol';
 import { BroadcastChannelHost, MemoryReferee } from '@wwd/referee-memory';
 import { BroadcastChannelTransport, createInMemoryPair, type Transport } from '@wwd/transport';
-import { GameClient, type ClientStatus, type GameClientOptions } from '../src/index.js';
+import {
+  GameClient,
+  sameCommand,
+  type ClientStatus,
+  type GameClientOptions,
+} from '../src/index.js';
 import { Xorshift, finishedGame, flush, playOut, step, until } from './helpers.js';
 
 beforeAll(loadEngineForNode);
@@ -737,5 +742,17 @@ describe('online seat recovery', () => {
     client.resign();
     await flush();
     expect(sent).toEqual([{ type: 'command', cmd: 'resign' }]);
+  });
+});
+
+describe('sameCommand', () => {
+  it('matches commands whatever the order of their keys', () => {
+    const a: Command = { submit_plan: { character: 'knight', targets: [{ character: 'wolfen' }] } };
+    const b = JSON.parse(
+      '{"submit_plan":{"targets":[{"character":"wolfen"}],"character":"knight"}}',
+    );
+    expect(sameCommand(a, b as Command)).toBe(true);
+    expect(sameCommand(a, { submit_plan: { character: 'knight', targets: ['fool'] } })).toBe(false);
+    expect(sameCommand('next_round', 'next_round')).toBe(true);
   });
 });

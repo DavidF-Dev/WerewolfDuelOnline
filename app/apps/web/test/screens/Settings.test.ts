@@ -1,19 +1,15 @@
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import type { TargetCard } from '@wwd/engine';
 import { createLocaliser, loadLocale } from '@wwd/client-core';
 import { resetDeviceStore, setDeviceStore } from '../../src/device-store.js';
-import { CHARACTERS } from '../../src/cards.js';
 import About from '../../src/screens/About.svelte';
-import CharacterReference from '../../src/screens/CharacterReference.svelte';
 import Settings from '../../src/screens/Settings.svelte';
 import { applySettings } from '../../src/settings/apply.js';
 import { setDisplaySettings } from '../../src/settings/display.svelte.js';
 import { activeLocaliser } from '../../src/settings/language.svelte.js';
 import { DEFAULT_SETTINGS } from '../../src/settings/settings.js';
 import { openDeviceStore, type DeviceStore } from '../../src/storage/db.js';
-import { abilityText, cardName } from '../../src/text.js';
 
 const localiser = createLocaliser('en');
 let store: DeviceStore;
@@ -243,96 +239,5 @@ describe('About in another language', () => {
       ).toBeTruthy();
       unmount();
     }
-  });
-});
-
-describe('Character reference', () => {
-  it('lists all eight characters and the Fool with their abilities', () => {
-    render(CharacterReference, { props: { localiser } });
-    expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1);
-    const list = screen.getByTestId('reference-characters');
-    expect(within(list).getAllByRole('listitem')).toHaveLength(9);
-    const names = Array.from(list.querySelectorAll('[data-part="reference-name"]'));
-    expect(names.map((name) => name.textContent)).toContain('Knight, initiative 3, Human');
-    expect(names.at(-1)?.textContent).toBe('The Fool');
-  });
-
-  it('in another language, each character shows its English printed name in English', async () => {
-    await loadLocale('de');
-    const german = createLocaliser('de');
-    render(CharacterReference, { props: { localiser: german } });
-    const printed = Array.from(
-      screen.getByTestId('reference-characters').querySelectorAll('[data-part="printed-name"]'),
-    );
-    expect(printed.map((line) => line.querySelector('[lang="en"]')?.textContent)).toEqual([
-      'Hunter',
-      'Wolf King',
-      'Knight',
-      'Wolfen',
-      'Seer',
-      'Witch',
-      'Wolf Beauty',
-      'Villager',
-      'The Fool',
-    ]);
-    expect(printed[2]?.textContent).toBe(german.t('reference-printed-name', { name: 'Knight' }));
-  });
-
-  it('in English, no character repeats its name as the printed one', () => {
-    render(CharacterReference, { props: { localiser } });
-    expect(document.querySelectorAll('[data-part="printed-name"]')).toHaveLength(0);
-  });
-
-  it('each how to play row exposes the ability exactly once in the accessibility tree', () => {
-    render(CharacterReference, { props: { localiser } });
-    // The text a screen reader reaches: labels and text, skipping aria-hidden subtrees.
-    const exposed = (element: Element): string => {
-      if (element.getAttribute('aria-hidden') === 'true') return '';
-      const label = element.getAttribute('aria-label');
-      if (label !== null) return label;
-      return Array.from(element.childNodes)
-        .map((node) =>
-          node instanceof Element
-            ? exposed(node)
-            : node.nodeType === Node.TEXT_NODE
-              ? (node.textContent ?? '')
-              : '',
-        )
-        .join('');
-    };
-    const rows = within(screen.getByTestId('reference-characters')).getAllByRole('listitem');
-    const cards: TargetCard[] = [...CHARACTERS.map((character) => ({ character })), 'fool'];
-    expect(rows).toHaveLength(cards.length);
-    rows.forEach((row, i) => {
-      const card = cards[i]!;
-      const ability = abilityText(localiser, card);
-      const text = exposed(row).replace(/\s+/g, ' ').trim();
-      expect(text.split(ability).length - 1, ability).toBe(1);
-      expect(row.querySelectorAll('button, a[href], [tabindex]'), 'no control').toHaveLength(0);
-      const name = card === 'fool' ? 'The Fool' : cardName(localiser, card.character);
-      expect(text.startsWith(name), `${name} is named first`).toBe(true);
-    });
-  });
-});
-
-describe('Ability legend', () => {
-  it('how to play shows the ability legend first', () => {
-    render(CharacterReference, { props: { localiser } });
-    const legend = screen.getByTestId('ability-legend');
-    const list = screen.getByTestId('reference-characters');
-    expect(
-      legend.compareDocumentPosition(list) & Node.DOCUMENT_POSITION_FOLLOWING,
-      'the legend comes first',
-    ).toBeTruthy();
-    const beside = (row: HTMLElement) =>
-      Array.from(row.querySelectorAll('[data-part="reference-ability"] [data-part="rich-text"]'));
-    const rows = within(list).getAllByRole('listitem');
-    for (const row of rows) {
-      expect(row.querySelector('[data-part="face"]')?.classList.contains('medium')).toBe(true);
-      expect(beside(row), 'one ability statement beside the card').toHaveLength(1);
-    }
-    const ability = beside(rows[CHARACTERS.indexOf('knight')]!)[0]!;
-    expect(ability.textContent).toBe(abilityText(localiser, { character: 'knight' }));
-    expect(ability.querySelector('[data-part="icon"]')).not.toBeNull();
   });
 });

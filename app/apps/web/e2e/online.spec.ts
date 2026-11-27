@@ -3,10 +3,12 @@ import {
   FULL_GAME_TIMEOUT_MS,
   expectGameOver,
   giveName,
+  isPlan,
   joinAs,
   mulberry32,
   openGameMenu,
   openOnlineTable,
+  perform,
   playToEnd,
   recordEvents,
   resign,
@@ -222,6 +224,31 @@ test('resign ends the game', async ({ browser }) => {
   const row = t.guest.getByTestId('home-session');
   await expect(row).toContainText('Host');
   await expect(row).toContainText('Game over · rematch possible');
+});
+
+test('the rules sheet keeps the table live and returns focus', async ({ browser }) => {
+  const t = await table(browser, 9);
+  await expect.poll(async () => (await snapshot(t.host)).status).toBe('playing');
+  await t.host.getByTestId('log-toggle').click();
+  await t.host.getByTestId('full-rules').click();
+  const sheet = t.host.getByTestId('rules-sheet');
+  await expect(sheet).toHaveAttribute('open', '');
+  await expect(sheet.getByRole('heading', { level: 2, name: 'A round' })).toBeFocused();
+
+  const plan = (await snapshot(t.guest)).legal.find(isPlan);
+  expect(plan).toBeDefined();
+  await perform(t.guest, plan!);
+  await expect.poll(async () => (await snapshot(t.host)).otherPlan).toBe('hidden');
+
+  await sheet.getByTestId('rules-next').click();
+  await expect(sheet.getByRole('heading', { level: 2, name: 'Markers' })).toBeFocused();
+  await t.host.keyboard.press('Escape');
+  await expect(sheet).toHaveCount(0);
+  await expect(t.host.getByTestId('log-drawer')).toHaveAttribute('open', '');
+  await expect(t.host.getByTestId('full-rules')).toBeFocused();
+  await t.host.keyboard.press('Escape');
+  await expect(t.host.getByTestId('log-drawer')).toHaveCount(0);
+  await expect(t.host.getByTestId('opponent-plan')).toContainText('Sealed');
 });
 
 test('rematch gives the badge to the loser', async ({ browser }) => {

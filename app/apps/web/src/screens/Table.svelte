@@ -1,7 +1,7 @@
 <script lang="ts">
   import { tick, untrack, type Snippet } from 'svelte';
   import type { Command, Seat } from '@wwd/engine';
-  import type { GameClientState, Localiser } from '@wwd/client-core';
+  import { plainText, type GameClientState, type Localiser } from '@wwd/client-core';
   import Screen from '../components/Screen.svelte';
   import UnofficialNotice from '../components/UnofficialNotice.svelte';
   import IconButton from '../kit/IconButton.svelte';
@@ -18,9 +18,11 @@
   import RevealPanel from '../table/RevealPanel.svelte';
   import ShowdownList, { firstShown } from '../table/ShowdownList.svelte';
   import { showdownSteps } from '../table/showdown.js';
-  import { shownMarkers } from '../table/shown-markers.js';
+  import { shownBadge, shownMarkers } from '../table/shown-markers.js';
   import TargetGrid from '../table/TargetGrid.svelte';
   import { providePrimary } from '../table/primary.svelte.js';
+  import { provideTableSettings } from '../table/table-settings.js';
+  import type { Coach } from '../tutorial/coach.js';
   import { buzz } from '../haptics.js';
   import { display } from '../settings/display.svelte.js';
   import { targetId } from '../cards.js';
@@ -52,6 +54,11 @@
     onRematch?: () => void;
     /** Opens the finished game's replay; View replay is left out while this is undefined. */
     onViewReplay?: () => void;
+    /**
+     * The coach that explains this table step by step: it holds the phase bar, rings what its step
+     * is about and offers only its step's choice, and the table plays by fixed settings meanwhile.
+     */
+    coach?: Coach | null;
   }
 
   let {
@@ -69,9 +76,13 @@
     paused,
     onRematch,
     onViewReplay,
+    coach = null,
   }: Props = $props();
   let root: HTMLElement | undefined;
   const primary = providePrimary();
+  const settings = provideTableSettings(() => coach !== null);
+  // Why a choice the coach doesn't offer is disabled.
+  const coachReason = $derived(coach === null ? '' : plainText(coach.text));
   let menuOpen = $state(false);
   let logOpen = $state(false);
 
@@ -145,11 +156,12 @@
     view !== null && seat !== null && showdown ? showdownSteps(client.events) : [],
   );
   const reportedShown = $derived(stepsShown?.round === roundKey ? stepsShown.shown : undefined);
-  const markers = $derived(
-    view === null
-      ? null
-      : shownMarkers(view.players, steps, reportedShown ?? firstShown(steps.length)),
+  const shownSteps = $derived(
+    reportedShown ?? firstShown(steps.length, false, settings.showdownSpeed),
   );
+  const markers = $derived(view === null ? null : shownMarkers(view.players, steps, shownSteps));
+  // The Badge moves with the marker counts, on the step that ends the round.
+  const badge = $derived(view === null ? null : shownBadge(view.badge, steps, shownSteps));
   const resignation = $derived(
     gameOverEvent !== undefined &&
       'game_over' in gameOverEvent.kind &&
@@ -166,11 +178,13 @@
   );
 
   const title = $derived(
-    over
-      ? l.t('game-over-heading')
-      : view === null
-        ? l.t('table-heading')
-        : l.t(inShowdown ? 'table-round-showdown' : 'table-round', { round: view.round }),
+    coach !== null
+      ? l.t('tutorial-heading')
+      : over
+        ? l.t('game-over-heading')
+        : view === null
+          ? l.t('table-heading')
+          : l.t(inShowdown ? 'table-round-showdown' : 'table-round', { round: view.round }),
   );
 
   // Changes only when what this seat is asked to do changes, not on every message.
@@ -194,13 +208,19 @@
       return;
     }
     focusMissed = false;
+    const instruction = root.querySelector<HTMLElement>('[data-testid="phase-instruction"]');
+    // The coach's text is what changes with each of its steps.
+    if (coach !== null) {
+      if (hadFocus) instruction?.focus();
+      return;
+    }
     const target =
       root.querySelector<HTMLElement>('[data-focus="game-over"]') ??
       root.querySelector<HTMLElement>('[data-focus="paused"]') ??
       root.querySelector<HTMLElement>('[data-phase-focus]:not([aria-disabled="true"])') ??
       root.querySelector<HTMLElement>('[data-testid="phase-actions"] li button:enabled') ??
       // Until focus has been on the table, the screen's heading keeps it, not the instruction.
-      (hadFocus ? root.querySelector<HTMLElement>('[data-testid="phase-instruction"]') : null);
+      (hadFocus ? instruction : null);
     target?.focus();
   }
 
@@ -209,10 +229,49 @@
   // The panels hand their primary actions to the phase bar after they mount.
   const hostedKey = $derived(primary.shown.map((hosted) => hosted.id).join(','));
 
+  // A coach moves focus only when its step changes.
+  const focusKey = $derived(coach === null ? `${phaseKey}#${hostedKey}` : `coach|${coach.step}`);
   $effect(() => {
-    void phaseKey;
-    void hostedKey;
+    void focusKey;
     untrack(focusPhase);
+  });
+
+  // The coach's button waits while the showdown still has results to step through.
+  const coachButton = $derived(
+    coach !== null && coach.button !== null && !(showdown && shownAllFor !== roundKey),
+  );
+
+  // Rings what the coach's step is about, following the parts as they are drawn and redrawn.
+  $effect(() => {
+    const ids = coach?.ring ?? [];
+    const frame = root;
+    if (frame === undefined) return;
+    const selector = ids.map((id) => `[data-testid="${id}"]`).join(',');
+    const mark = (): void => {
+      frame.querySelectorAll<HTMLElement>('.coach-ring').forEach((ringed) => {
+        if (!ids.includes(ringed.dataset['testid'] ?? '')) ringed.classList.remove('coach-ring');
+      });
+      if (selector === '') return;
+      frame.querySelectorAll(selector).forEach((part) => {
+        // Adding a class it already has would report a change and call this again.
+        if (!part.classList.contains('coach-ring')) part.classList.add('coach-ring');
+      });
+    };
+    mark();
+    if (ids.length === 0) return;
+    const watch = new MutationObserver(mark);
+    watch.observe(frame, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ['class', 'data-testid'],
+    });
+    return () => {
+      watch.disconnect();
+      frame
+        .querySelectorAll('.coach-ring')
+        .forEach((ringed) => ringed.classList.remove('coach-ring'));
+    };
   });
 
   /** Opens a sheet; only a change that arrives while it is open moves focus once it closes. */
@@ -282,6 +341,8 @@
         {onCommand}
         hosted={primary.shown}
         hostedInstruction={primary.instruction}
+        {coach}
+        {coachButton}
       />
     {/key}
   {/if}
@@ -376,7 +437,7 @@
           name={names[opponentSeat]}
           connected={client.opponent.connected}
           player={view.players[index(opponentSeat)]}
-          hasBadge={view.badge === opponentSeat}
+          hasBadge={badge === opponentSeat}
           markers={markers?.[index(opponentSeat)]}
           animate
           {waitingForMe}
@@ -407,11 +468,14 @@
                 config={client.config}
                 {onCommand}
                 errorCount={client.errorCount}
+                allow={coach?.allow ?? null}
+                allowReason={coachReason}
               />
             {:else if phase === 'plan'}
               <TargetGrid
                 localiser={l}
                 {hand}
+                compact={coach !== null}
                 shown={(card) => ({
                   state: myPlan?.targets.some((t) => targetId(t) === targetId(card))
                     ? 'selected'
@@ -430,6 +494,7 @@
                 {onCommand}
                 tiebreak={client.config?.tiebreak ?? null}
                 errorCount={client.errorCount}
+                allow={coach?.allow ?? null}
               />
             {/if}
             {#if showdown}
@@ -467,6 +532,7 @@
           {view}
           {seat}
           markers={markers?.[index(seat)]}
+          hasBadge={badge === seat}
           animate
         />
       {/if}
@@ -485,6 +551,20 @@
     flex-direction: column;
     gap: 6px;
     min-height: 0;
+  }
+
+  /* A dashed ring, a shape as well as a colour, that never moves. */
+  /* It wins over a card's own chosen and focus outlines, so the ring stays while the card is used. */
+  :global([data-testid].coach-ring) {
+    outline: 3px dashed var(--focus) !important;
+    outline-offset: 3px !important;
+  }
+
+  /* Keyboard focus on a ringed part shows as a solid band outside the ring. */
+  :global([data-testid].coach-ring:focus-visible) {
+    box-shadow:
+      0 0 0 calc(3px + var(--focus-width)) var(--bg),
+      0 0 0 calc(5px + var(--focus-width)) var(--focus);
   }
 
   .alert {

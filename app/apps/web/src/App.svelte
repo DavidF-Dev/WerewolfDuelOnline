@@ -5,17 +5,19 @@
   import UpdateBanner from './components/UpdateBanner.svelte';
   import { route } from './router.js';
   import About from './screens/About.svelte';
-  import CharacterReference from './screens/CharacterReference.svelte';
   import CreateOnline from './screens/CreateOnline.svelte';
   import Home from './screens/Home.svelte';
   import History from './screens/History.svelte';
   import Host from './screens/Host.svelte';
+  import HowToPlay from './screens/HowToPlay.svelte';
   import Join from './screens/Join.svelte';
   import JoinOnline from './screens/JoinOnline.svelte';
   import Rejoin from './screens/Rejoin.svelte';
   import Replay from './screens/Replay.svelte';
+  import Rules from './screens/Rules.svelte';
   import Settings from './screens/Settings.svelte';
   import Stats from './screens/Stats.svelte';
+  import Tutorial from './screens/Tutorial.svelte';
   import { activeLocaliser } from './settings/language.svelte.js';
   import { showScreenTop } from './shell.js';
 
@@ -72,7 +74,11 @@
     {:else if $route.name === 'stats'}
       <Stats {localiser} />
     {:else if $route.name === 'how-to-play'}
-      <CharacterReference {localiser} />
+      <HowToPlay {localiser} />
+    {:else if $route.name === 'tutorial'}
+      <Tutorial {localiser} />
+    {:else if $route.name === 'rules'}
+      <Rules {localiser} section={$route.section} />
     {:else}
       <Home {localiser} />
     {/if}

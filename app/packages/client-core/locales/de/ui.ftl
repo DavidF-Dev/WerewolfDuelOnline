@@ -68,12 +68,142 @@ update-region = App-Updates
 update-available = Eine neue Version ist da
 update-reload = Neu laden
 
+## How to play
+how-to-play-heading = So wird gespielt
+how-to-play-tutorial-heading = Neu im Spiel?
+how-to-play-tutorial-text = Spiel eine angeleitete Runde gegen { -tutorial-opponent }. Das dauert etwa fünf Minuten, und du kannst jederzeit aufhören.
+how-to-play-tutorial-done-heading = Tutorial abgeschlossen
+how-to-play-tutorial-again = Noch einmal spielen
+how-to-play-start-tutorial = Tutorial starten
+how-to-play-rules-heading = Regeln
+
+## Rules pages, in our own words: one message per paragraph
+# Marker words are arguments, so that their tokens are drawn: `cross`, `crosses`, `fang`, `fangs`,
+# `hourglass`, `hourglasses`, `potion`, `health` and `badge`. A character is named with CHARACTER
+# and an argument named after it: `hunter`, `wolfKing`, `knight`, `wolfen`, `seer`, `witch`,
+# `wolfBeauty` or `villager`.
+rules-progress = Regeln · { $index } von { $total }
+rules-pages = Regelseiten
+rules-previous = Zurück
+rules-next = Weiter
+rules-sheet-title = Regeln
+
+rules-goal-title = Das Ziel
+rules-goal-summary = Drei Wege zum Sieg.
+rules-goal-intro = In jeder Runde wählen du und dein Gegenüber heimlich je einen Charakter, und dann sind die beiden Charaktere nacheinander dran. Du gewinnst, sobald eines davon zutrifft:
+rules-goal-crosses = Du hast 4 { $crosses }.
+rules-goal-fangs = Du hast 3 { $fangs }.
+rules-goal-health = Dein Gegenüber hat kein { $health } mehr.
+rules-goal-instant = Das Spiel endet in dem Moment, in dem eines davon eintritt, auch mitten in einer Runde. Darum zählt die Reihenfolge, in der die Charaktere dran sind. Hast du selbst kein { $health } mehr, verlierst du.
+rules-goal-bluff = Die Hand deines Gegenübers siehst du nie. Jede Runde ist ein Raten, welchen Charakter dein Gegenüber gewählt hat, und eine Gelegenheit, deine eigene Wahl schwer durchschaubar zu machen.
+
+rules-setup-title = Vorbereitung
+rules-setup-summary = { $health }, { $crosses }, das { $badge } und die erste { $hourglass }.
+rules-setup-cards = Es gibt 8 Charaktere. Die Zahl auf jedem ist seine Initiative: Je niedriger sie ist, desto früher ist der Charakter dran. Jeder Charakter ist ein Mensch oder ein Werwolf, und davon hängt ab, welche Charaktere ihn als Ziel wählen können. Du und dein Gegenüber habt außerdem je 9 Zielkarten: eine für jeden Charakter und eine für den Narren.
+rules-setup-markers = Du und dein Gegenüber beginnt mit je 2 { $health } und 1 { $cross }.
+rules-setup-badge = Einer von euch beginnt mit dem { $badge }: Der Host bestimmt, wer, oder überlässt es dem Zufall. Wer das { $badge } hat, bekommt eine Karte mehr und entscheidet zuerst, und nach jeder Runde wechselt das { $badge } die Seite.
+rules-setup-hourglass = Wer ohne das { $badge } beginnt, nimmt 1 { $hourglass }.
+rules-setup-supply = Die übrigen Marker bilden den Vorrat. Ein Marker, den du erhältst, kommt aus dem Vorrat, und ein Marker, den du ausgibst, geht dorthin zurück.
+
+rules-round-title = Eine Runde
+rules-round-summary = Austeilen, Plan, Aufdecken, Auflösung, Rundenende.
+rules-round-intro = Jede Runde hat dieselben fünf Schritte.
+rules-round-deal-title = Austeilen
+rules-round-deal = Die 8 Charaktere werden gemischt, und einer wird verdeckt beiseitegelegt, ohne dass einer von euch ihn sieht. Wer das { $badge } hat, bekommt 4 der übrigen, der andere Spieler 3. Deine Hand siehst nur du.
+rules-round-plan-title = Plan
+rules-round-plan = Gleichzeitig machen du und dein Gegenüber je einen Plan: einen Charakter aus deiner Hand und mindestens eine Zielkarte mit dem Charakter, den dein Gegenüber deiner Meinung nach gewählt hat. Auf der Karte jedes Charakters steht, worauf er zielen darf, und der Narr passt in jeden Plan.
+rules-round-plan-2 = Ist dein Plan fertig, versiegelst du ihn. Dein Gegenüber erfährt, wie viele Zielkarten du gewählt hast, aber nicht welche. Der Rest deiner Hand wird ungesehen abgelegt.
+rules-round-reveal-title = Aufdecken
+rules-round-reveal = Hast du { $hourglasses }, darfst du einige oder alle davon auf deinen gewählten Charakter setzen. Wer das { $badge } hat, wählt zuerst, dann der andere Spieler, der diese Zahl kennt. Jede gesetzte { $hourglass } senkt die Initiative des Charakters um 1, aber nie unter 0.
+rules-round-reveal-2 = Hast du den { $potion }, musst du ihn jetzt einsetzen: Nenne einen Charakter, der dir in dieser Runde nicht ausgeteilt wurde.
+rules-round-reveal-3 = Dann werden beide Pläne aufgedeckt.
+rules-round-showdown-title = Auflösung
+rules-round-showdown = Zuerst wirkt der { $potion }. Nennt er den Charakter des anderen Spielers, ist dieser Charakter ausgeschaltet, bevor überhaupt ein Charakter dran ist, und sein Besitzer verliert 1 { $health }.
+rules-round-showdown-2 = Dann sind die Charaktere dran, die niedrigste Initiative zuerst. Bei Gleichstand ist zuerst der Charakter mit mehr gesetzten { $hourglasses } dran, sonst der des Spielers mit dem { $badge }. Ein Charakter erhält zuerst seine Marker oder gibt sie aus und greift dann seine Ziele an.
+rules-round-showdown-3 = Ein Angriff trifft, wenn eines seiner Ziele den Charakter des anderen Spielers nennt und dieser Charakter noch nicht dran war. Der getroffene Charakter ist ausgeschaltet und kommt nicht mehr dran, und sein Besitzer verliert 1 { $health }, oder 2, wenn { CHARACTER($seer, article: "def") } trifft.
+rules-round-end-title = Rundenende
+rules-round-end = Die gesetzten { $hourglasses } gehen in den Vorrat zurück, das { $badge } geht an den anderen Spieler, und die beiseitegelegte Karte wird euch beiden gezeigt. Sobald ihr beide bereit seid, wird die nächste Runde ausgeteilt.
+
+rules-markers-title = Die Marker
+rules-markers-summary = Was jeder Marker tut und woher er kommt.
+rules-markers-intro = Alle Marker, die du und dein Gegenüber habt, sind für euch beide sichtbar.
+rules-markers-cross = Mit 4 gewinnst du. Ihr beginnt mit je 1, { CHARACTER($villager, article: "def") } erhält 1, und { CHARACTER($hunter, article: "def") } gibt 1 aus, um anzugreifen.
+rules-markers-fang = Mit 3 gewinnst du. Einen erhält { CHARACTER($wolfBeauty, article: "def") }, und { CHARACTER($wolfKing, article: "def") } gibt welche aus, um mehr als einen Menschen anzugreifen.
+rules-markers-hourglass = Beim Aufdecken auf deinen Charakter gesetzt, senkt jede seine Initiative um 1. Wer das { $badge } nicht hat, beginnt mit 1, und { CHARACTER($knight, article: "def") } und { CHARACTER($wolfen, article: "def") } erhalten je 1.
+rules-markers-potion = Ihn erhält { CHARACTER($witch, article: "def") }. Wer ihn hat, muss beim nächsten Aufdecken einen Charakter nennen; hat der andere Spieler diesen Charakter gespielt, ist dieser Charakter ausgeschaltet, bevor überhaupt ein Charakter dran ist. Danach geht der { $potion } in den Vorrat zurück.
+rules-markers-health = Du beginnst mit 2 und bekommst nie etwas zurück. Ist keines mehr übrig, verlierst du.
+rules-markers-badge = Wer es hat, bekommt 4 Karten statt 3, entscheidet zuerst über { $hourglasses } und ist bei einem Gleichstand zuerst dran, den die gesetzten { $hourglasses } nicht entscheiden. Nach jeder Runde geht es an den anderen Spieler.
+
+rules-characters-title = Charaktere
+rules-characters-summary = Alle Charaktere und wie du ihre Fähigkeiten liest.
+
+rules-fine-points-title = Feinheiten
+rules-fine-points-summary = Gleichstand, der { $potion }, der Narr und weitere Details.
+rules-fine-points-ties-title = Gleichstand
+rules-fine-points-ties = Haben beide Charaktere am Ende dieselbe Initiative, ist der mit mehr gesetzten { $hourglasses } zuerst dran. Ist auch das gleich, ist der Charakter des Spielers mit dem { $badge } zuerst dran.
+rules-fine-points-empty-supply-title = Keine { $hourglasses } mehr
+rules-fine-points-empty-supply = Gesetzte { $hourglasses } bleiben bis zum Rundenende auf den Charakteren, daher kann der Vorrat leer werden. Erhält { CHARACTER($knight, article: "def") } oder { CHARACTER($wolfen, article: "def") } dann eine { $hourglass }, wird sie stattdessen dem anderen Spieler genommen. Hat auch der keine, gibt es nichts.
+rules-fine-points-immune-title = Zu spät für einen Treffer
+rules-fine-points-immune = Ein Angriff trifft nur einen Charakter, der noch nicht dran war. Ein Charakter, der schon dran war, ist also für den Rest der Runde sicher. Ein Charakter wird nur einmal ausgeschaltet: Ein weiterer Treffer, auch nach dem { $potion }, bewirkt nichts mehr.
+rules-fine-points-potion-title = Der { $potion }
+rules-fine-points-potion = Der { $potion } kann jeden Charakter nennen, der dir in dieser Runde nicht ausgeteilt wurde, ob gespielt oder nicht, auch einen, auf den dein eigener Plan zielt. Er wirkt auf jeden Charakter, auch auf { CHARACTER($witch, case: "acc", article: "def") }. Der Narr ist kein Charakter und kann nicht genannt werden.
+rules-fine-points-wolf-king-title = { CHARACTER($wolfKing) } und { $fangs }
+rules-fine-points-wolf-king = Als Ziele kann { CHARACTER($wolfKing, article: "def") } beliebig viele Menschen wählen. Jeder Mensch nach dem ersten kostet 1 { $fang }, zu zahlen, wenn { CHARACTER($wolfKing, article: "def") } dran ist. Kannst du nicht für alle zahlen, zahlst du nichts, und er greift nicht an. Der Narr kostet nichts.
+rules-fine-points-hunter-title = { CHARACTER($hunter) } und { $cross }
+rules-fine-points-hunter = Ist { CHARACTER($hunter, article: "def") } dran, entscheidest du, ob du 1 { $cross } ausgibst. Nur dann greift er bis zu 2 Werwölfe an; ohne { $cross } kann er nicht angreifen. Behältst du das { $cross }, rückt der Sieg mit 4 näher.
+rules-fine-points-hand-title = Karten auf deiner Hand
+rules-fine-points-hand = Eine Karte, die dir ausgeteilt wurde, kann nicht der Charakter sein, den dein Gegenüber spielt. Dein Plan kann sie also nicht als Ziel wählen, und das Spiel bietet sie nicht an. Angeboten werden dir die Charaktere, die du nicht bekommen hast, und der Narr. Darunter sind die Karten deines Gegenübers, aber auch die beiseitegelegte Karte, also ist jedes Ziel geraten.
+rules-fine-points-fool-title = Der Narr
+rules-fine-points-fool = Der Narr bewirkt nichts. Nimm ihn in einen beliebigen Plan, um zu ändern, wie viele Zielkarten dein Gegenüber sieht, oder mach ihn zu deinem einzigen Ziel, um einen Charakter ohne Angriff zu spielen. Nur auf den Narren zielen können { CHARACTER($witch, article: "def") } und { CHARACTER($villager, article: "def") }.
+rules-fine-points-options-title = Regeln, die ein Host ändern kann
+rules-fine-points-options = Ältere Auflagen des Spiels entscheiden jeden Gleichstand allein über das { $badge }. Ein Host kann diese Regel beim Erstellen eines Spiels wählen: Ein Gleichstand geht dann immer an den Spieler mit dem { $badge }.
+rules-fine-points-options-2 = Ein Host kann auch Pläne ohne Ziele erlauben. Ein Charakter, der ohne Ziele gespielt wird, erhält trotzdem seine Marker, greift aber nicht an.
+
 ## Character reference
-reference-heading = So wird gespielt
-reference-characters-heading = Charaktere
 reference-characters-intro = Alle Charaktere und der Narr, und was jeder tut, wenn er an der Reihe ist. Die niedrigere Initiative ist zuerst dran.
 # Shown beside a character's name in languages other than English: its name as the English edition prints it.
 reference-printed-name = Im Original: { $name }
+
+## Tutorial
+# The scripted opponent's name, defined once; every tutorial message names the opponent through this term.
+-tutorial-opponent = Lena
+tutorial-opponent-name = { -tutorial-opponent }
+tutorial-heading = Tutorial
+# Above the coach's text in the phase bar, as in "Tutorial · 2 of 5 · Make a plan".
+tutorial-progress = Tutorial · { $step } von { $count } · { $title }
+tutorial-next = Weiter
+tutorial-finish = Fertig
+tutorial-leave = Tutorial beenden
+tutorial-starting = Tutorial wird vorbereitet …
+tutorial-failed = Das Tutorial konnte nicht starten. Geh zurück und versuch es noch einmal.
+# The coach's text for each step: at most three lines at 360 px and 100 % text. Marker words and
+# characters are arguments, as in the rules pages.
+tutorial-goal-title = Dein Ziel
+tutorial-goal-text = Du gewinnst, wenn du 4 { $crosses } oder 3 { $fangs } hast oder { -tutorial-opponent } kein { $health } mehr hat. Diese Markerreihen zählen mit.
+tutorial-plan-title = Plan machen
+tutorial-plan-text = Die Karten von { -tutorial-opponent } siehst du nicht, also ist jedes Ziel geraten. Die meisten sind Werwölfe: Schick { CHARACTER($knight, case: "acc", article: "def") } auf { CHARACTER($wolfen, case: "acc", article: "def") }.
+tutorial-reveal-title = Aufdecken
+tutorial-reveal-text = Die niedrigere Initiative ist zuerst dran; dein { CHARACTER($knight) } hat 3. Spielt { -tutorial-opponent } { CHARACTER($wolfen, case: "acc", article: "def") }, auf den du zielst, hat er 4. Jede gesetzte { $hourglass } zieht 1 ab. Setz 0.
+tutorial-showdown-title = Auflösung
+tutorial-showdown-text = Zuerst ist { CHARACTER($knight, article: "def") } dran: Er erhält eine { $hourglass } und trifft { CHARACTER($wolfen, case: "acc", article: "def") }, der so nicht mehr drankommt. { -tutorial-opponent } verliert 1 { $health }.
+tutorial-round-end-title = Rundenende
+tutorial-round-end-text = Das { $badge } wechselt die Seite, und die beiseitegelegte Karte wird gezeigt. Ein echtes Spiel geht so weiter, Runde um Runde, bis jemand gewinnt.
+tutorial-done-heading = Du hast eine ganze Runde gespielt
+tutorial-done-learned = Das hast du gelernt
+tutorial-done-goal = Die drei Wege zum Sieg
+tutorial-done-plan = Einen Charakter und seine Ziele planen
+tutorial-done-reveal = { $hourglasses } und das { $badge }
+tutorial-done-showdown = Wer zuerst dran ist und was ein Treffer bewirkt
+tutorial-done-more = Ein echtes Spiel geht Runde um Runde weiter, bis jemand gewinnt. Alle Regeln stehen auf den Regelseiten.
+tutorial-done-play = Mit jemandem spielen
+tutorial-done-rules = Regeln lesen
+tutorial-done-again = Tutorial noch einmal spielen
+
+## Home: the newcomer panel
+home-newcomer-heading = Neu bei { -game-name }?
+home-newcomer-text = Lerne das Spiel in einer angeleiteten Runde.
+home-newcomer-learn = Spielen lernen
+home-newcomer-dismiss = Ausblenden
 
 ## Settings
 settings-heading = Einstellungen
@@ -423,6 +553,7 @@ side-label-ordered = { $label } { $position ->
 ## Table layout
 table-you = Du
 drawer-summary = Spielprotokoll und Regeln
+drawer-full-rules = Alle Regeln
 rules-heading = Regeln
 rules-order = Die niedrigere Initiative ist zuerst dran.
 rules-tiebreak-hourglasses-then-badge = Bei Gleichstand ist zuerst dran, wer mehr Sanduhren gesetzt hat, dann, wer das Abzeichen hat.

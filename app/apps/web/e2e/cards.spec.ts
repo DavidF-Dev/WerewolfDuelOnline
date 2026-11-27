@@ -436,8 +436,8 @@ test('each ability legend icon is centred on the first line of its text', async 
   for (const width of [320, 390, 1280]) {
     await page.setViewportSize({ width, height: 900 });
     for (const scale of [1, 1.5]) {
-      await page.goto('/#/dev/gallery/how-to-play');
-      await expect(page.locator('html')).toHaveAttribute('data-gallery-ready', 'how-to-play');
+      await page.goto('/#/dev/gallery/rules-characters');
+      await expect(page.locator('html')).toHaveAttribute('data-gallery-ready', 'rules-characters');
       await page.evaluate(async (s) => {
         document.documentElement.style.setProperty('--text-scale', String(s));
         await document.fonts.ready;

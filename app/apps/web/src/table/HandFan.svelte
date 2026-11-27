@@ -14,6 +14,8 @@
     offered?: readonly Character[];
     /** The reason shown for a card that can't be chosen. */
     reason?: string;
+    /** Shows the cards as they are, but inert, with this as their description, in place of choosing. */
+    description?: string;
     testId: string;
   }
 
@@ -24,8 +26,11 @@
     onchoose,
     offered = hand,
     reason,
+    description,
     testId,
   }: Props = $props();
+  // Inert cards keep their choosing test ids, so the same card can be found either way.
+  const named = $derived(onchoose !== undefined || description !== undefined);
   const uid = $props.id();
 </script>
 
@@ -37,14 +42,19 @@
     <ul class="fan" data-testid={testId}>
       {#each hand as c (c)}
         {@const choosable = offered.includes(c)}
-        <li data-testid={onchoose === undefined ? `card-${c}` : undefined}>
+        <li data-testid={named ? undefined : `card-${c}`}>
           <CharacterCard
             localiser={l}
             character={c}
             size="medium"
-            state={chosen === c ? 'selected' : choosable ? 'normal' : 'disabled'}
+            state={chosen === c
+              ? 'selected'
+              : choosable || description !== undefined
+                ? 'normal'
+                : 'disabled'}
             reason={choosable ? undefined : reason}
-            testId={onchoose === undefined ? undefined : `plan-character-${c}`}
+            {description}
+            testId={named ? `plan-character-${c}` : undefined}
             onselect={onchoose === undefined ? undefined : () => onchoose(c)}
           />
         </li>

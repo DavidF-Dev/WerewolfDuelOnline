@@ -122,6 +122,11 @@ function canonical(value: unknown): string {
   });
 }
 
+/** Whether two commands are the same, regardless of the order of their keys. */
+export function sameCommand(a: Command, b: Command): boolean {
+  return canonical(a) === canonical(b);
+}
+
 /** The game start or segment start announced by `event`, if it is one. */
 function announcedStart(event: Event): { commitment: string; config?: RulesConfig } | null {
   const { kind } = event;
@@ -216,8 +221,7 @@ export class GameClient {
 
   /** Sends `cmd`; throws unless it is one of the commands the referee currently offers. */
   command(cmd: Command): void {
-    const wanted = canonical(cmd);
-    if (!this.current.legal.some((offered) => canonical(offered) === wanted)) {
+    if (!this.current.legal.some((offered) => sameCommand(offered, cmd))) {
       throw new Error('command is not currently legal');
     }
     if (this.transport === undefined || !this.transport.open) {

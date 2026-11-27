@@ -13,17 +13,19 @@ import { GALLERY, type GalleryEntry } from '../src/gallery/entries.js';
 import Gallery from '../src/gallery/Gallery.svelte';
 import type { PageName } from '../src/router.js';
 import About from '../src/screens/About.svelte';
-import CharacterReference from '../src/screens/CharacterReference.svelte';
 import CreateOnline from '../src/screens/CreateOnline.svelte';
 import History from '../src/screens/History.svelte';
 import Home from '../src/screens/Home.svelte';
 import Host from '../src/screens/Host.svelte';
+import HowToPlay from '../src/screens/HowToPlay.svelte';
 import Join from '../src/screens/Join.svelte';
 import JoinOnline from '../src/screens/JoinOnline.svelte';
 import Rejoin from '../src/screens/Rejoin.svelte';
 import Replay from '../src/screens/Replay.svelte';
+import Rules from '../src/screens/Rules.svelte';
 import Settings from '../src/screens/Settings.svelte';
 import Stats from '../src/screens/Stats.svelte';
+import Tutorial from '../src/screens/Tutorial.svelte';
 import { resetSessions } from '../src/session.js';
 
 const localiser = createLocaliser('en');
@@ -37,7 +39,9 @@ const SCREENS: Record<PageName, Component<any>> = {
   'online-new': CreateOnline,
   settings: Settings,
   about: About,
-  'how-to-play': CharacterReference,
+  'how-to-play': HowToPlay,
+  rules: Rules,
+  tutorial: Tutorial,
   history: History,
   stats: Stats,
   replay: Replay,
@@ -67,6 +71,7 @@ const OVERLAYS: Readonly<Record<string, { entry: string; selector: string }>> = 
   RejoinRequest: { entry: 'table-rejoin-request', selector: '[data-testid="confirm-dialog"]' },
   RemoveGameDialog: { entry: 'home-remove', selector: '[data-testid="confirm-dialog"]' },
   ResignButton: { entry: 'table-resign', selector: '[data-testid="confirm-dialog"]' },
+  RulesSheet: { entry: 'table-rules-sheet', selector: '[data-testid="rules-sheet"][open]' },
   Settings: { entry: 'backup-export', selector: '[data-testid="confirm-dialog"]' },
   ServerConfirm: { entry: 'server-confirm', selector: '[data-testid="server-confirm"]' },
   UpdateBanner: { entry: 'update-banner', selector: '[data-testid="update-banner"] button' },

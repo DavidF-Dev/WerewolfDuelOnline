@@ -15,17 +15,25 @@
     shown?: (card: Card) => { state: CardState; reason?: string };
     /** Chooses or clears a target; without it the grid only shows the cards. */
     onselect?: (card: Card) => void;
+    /** Draws the cards smaller, leaving room for a longer phase bar. */
+    compact?: boolean;
   }
 
-  let { localiser: l, hand, shown = () => ({ state: 'normal' }), onselect }: Props = $props();
+  let {
+    localiser: l,
+    hand,
+    shown = () => ({ state: 'normal' }),
+    onselect,
+    compact = false,
+  }: Props = $props();
   const cards = $derived(shownTargets(hand));
 </script>
 
 <Panel title={l.t('plan-targets-heading')} tight class="target-grid" data-testid="plan-targets">
-  <ul class="grid">
+  <ul class={['grid', { compact }]}>
     {#each cards as card (targetId(card))}
       {@const drawn = shown(card)}
-      <li data-card={targetId(card)}>
+      <li data-card={targetId(card)} data-testid="target-slot-{targetId(card)}">
         <TargetCard
           localiser={l}
           {card}
@@ -64,6 +72,10 @@
     max-width: calc(3 * var(--column) + 2 * var(--column-gap));
     padding: 0;
     width: 100%;
+  }
+
+  .grid.compact {
+    --zoom: 0.9;
   }
 
   .grid li {

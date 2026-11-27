@@ -4,11 +4,14 @@
   import type { Localiser } from '@wwd/client-core';
   import { CHARACTERS, initiative } from '../cards.js';
   import AbilityLegend from '../components/AbilityLegend.svelte';
+  import Button from '../components/Button.svelte';
+  import Icon from '../kit/Icon.svelte';
   import Label from '../kit/Label.svelte';
   import RichText from '../kit/RichText.svelte';
   import Sheet from '../kit/Sheet.svelte';
-  import { display } from '../settings/display.svelte.js';
   import { abilityText, characterLabel, logLine, logParts } from '../text.js';
+  import RulesSheet from './RulesSheet.svelte';
+  import { tableSettings } from './table-settings.js';
 
   interface Props {
     localiser: Localiser;
@@ -23,6 +26,12 @@
   }
 
   let { localiser: l, events, seat, tiebreak, open, onclose }: Props = $props();
+  const settings = tableSettings();
+  let rulesOpen = $state(false);
+  // The full rules close with the log, so they never reopen by themselves with it.
+  $effect(() => {
+    if (!open) rulesOpen = false;
+  });
   const uid = $props.id();
 
   /** How many recent announcements stay in the live log. */
@@ -75,7 +84,7 @@
           {l.t(`rules-tiebreak-${tiebreak.replaceAll('_', '-')}`)}
         {/if}
       </p>
-      {#if display.rulesHints}
+      {#if settings.rulesHints}
         <p data-testid="rules-plan-hint">{l.t('hint-plan')}</p>
       {/if}
       <ul>
@@ -84,9 +93,13 @@
         {/each}
         <li>{l.t('card-fool-name', { ability: abilityText(l, 'fool') })}</li>
       </ul>
+      <Button aria-haspopup="dialog" data-testid="full-rules" onclick={() => (rulesOpen = true)}
+        >{l.t('drawer-full-rules')}<Icon name="chevron" /></Button
+      >
     </section>
     <AbilityLegend localiser={l} />
   </Sheet>
+  <RulesSheet localiser={l} open={rulesOpen} onclose={() => (rulesOpen = false)} />
 {/if}
 
 <style>

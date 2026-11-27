@@ -13,6 +13,8 @@
     testId: string;
     /** The accessible name of the back button; without it there is none. */
     back?: string;
+    /** What the back button does; by default it returns to the previous screen. */
+    onback?: () => void;
     /** What sits before the title when there is no back button. */
     left?: Snippet;
     /** What sits after the title. */
@@ -40,6 +42,7 @@
     brand = false,
     testId,
     back,
+    onback = goBack,
     left,
     right,
     banner,
@@ -110,7 +113,7 @@
 
 <div class="screen" data-part="screen" data-fit={fit || undefined}>
   <div class="top" data-part="top" bind:this={topPart}>
-    <AppBar {title} {brand} headingId="{uid}-heading" {back} onback={goBack} {left} {right} />
+    <AppBar {title} {brand} headingId="{uid}-heading" {back} {onback} {left} {right} />
     {#if shared !== undefined || banner !== undefined}
       <div class="banners" data-part="banners">
         {@render shared?.()}

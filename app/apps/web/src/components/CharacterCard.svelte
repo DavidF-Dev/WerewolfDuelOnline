@@ -14,6 +14,8 @@
     state?: CardState;
     /** Why the card can't be chosen: announced while it is disabled, and shown on focus or a tap. */
     reason?: string;
+    /** A description announced while the card is not disabled. */
+    description?: string;
     onselect?: () => void;
     /** Whether choosing the card toggles it on and off, rather than acting at once. */
     toggle?: boolean;
@@ -27,6 +29,7 @@
     size,
     state,
     reason,
+    description,
     onselect,
     toggle,
     testId,
@@ -45,6 +48,7 @@
   {size}
   {state}
   {reason}
+  {description}
   {onselect}
   {toggle}
   {testId}

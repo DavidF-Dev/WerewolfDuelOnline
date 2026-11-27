@@ -17,10 +17,13 @@
   import type { Snippet } from 'svelte';
   import type { Command } from '@wwd/engine';
   import type { GameClientState, Localiser } from '@wwd/client-core';
+  import Button from '../components/Button.svelte';
   import PhaseActions from '../components/PhaseActions.svelte';
-  import { display } from '../settings/display.svelte.js';
+  import RichText from '../kit/RichText.svelte';
   import { instructionText } from '../text.js';
+  import type { Coach } from '../tutorial/coach.js';
   import type { HostedAction } from './primary.svelte.js';
+  import { tableSettings } from './table-settings.js';
 
   interface Props {
     localiser: Localiser;
@@ -31,6 +34,10 @@
     hosted?: readonly HostedAction[];
     /** An instruction a phase panel hands to the bar, shown in place of the phase's own. */
     hostedInstruction?: Snippet | null;
+    /** The coach, whose step and text take the place of the phase's own. */
+    coach?: Coach | null;
+    /** Whether the coach's button takes the place of the actions offered now. */
+    coachButton?: boolean;
   }
 
   let {
@@ -40,37 +47,76 @@
     onCommand,
     hosted = [],
     hostedInstruction = null,
+    coach = null,
+    coachButton = false,
   }: Props = $props();
 
   const STEPS = [1, 2, 3, 4] as const;
+  const settings = tableSettings();
   const step = $derived(phaseStep(view));
+  const steps = $derived(
+    coach === null ? STEPS : Array.from({ length: coach.count }, (_, i) => i + 1),
+  );
+  const reached = $derived(coach === null ? step.reached : coach.step);
+  const stepLabel = $derived(
+    coach === null
+      ? l.t(step.id)
+      : l.t('tutorial-progress', { step: coach.step, count: coach.count, title: coach.title }),
+  );
   const instruction = $derived(instructionText(l, state));
   const hint = $derived.by(() => {
     const kind = state.pending?.kind ?? 'none';
-    if (!display.rulesHints || state.status !== 'playing' || state.legal.length === 0) return null;
+    if (!settings.rulesHints || state.status !== 'playing' || state.legal.length === 0) return null;
     // A panel that hands over its own instruction shows the rule behind it itself.
     if (kind === 'none' || hostedInstruction !== null) return null;
     return l.t(`hint-${kind.replaceAll('_', '-')}`);
   });
+
+  // Under a coach the round never moves on from the bar.
+  const legal = $derived(
+    coach === null ? state.legal : state.legal.filter((cmd) => cmd !== 'next_round'),
+  );
+  const coachHosted: readonly HostedAction[] = [
+    { id: -1, action: () => coachAction, shown: () => true },
+  ];
+  const actions = $derived(
+    coach !== null && coachButton && coach.button !== null ? coachHosted : hosted,
+  );
 </script>
+
+{#snippet coachText()}
+  <span class="coach" data-testid="coach-text"><RichText parts={coach?.text ?? []} /></span>
+{/snippet}
+
+{#snippet coachAction()}
+  {#if coach?.button}
+    {@const button = coach.button}
+    <Button variant="primary" data-testid="coach-next" fit onclick={() => button.run()}
+      >{button.label}</Button
+    >
+  {/if}
+{/snippet}
 
 <div class="phase-bar" data-testid="phase-bar">
   <div class="steps" aria-hidden="true">
-    {#each STEPS as n (n)}
-      <span data-part="step-bar" data-done={n <= step.reached ? '' : undefined}></span>
+    {#each steps as n (n)}
+      <span data-part="step-bar" data-done={n <= reached ? '' : undefined}></span>
     {/each}
   </div>
-  <p class="step" data-testid="phase-step">{l.t(step.id)}</p>
+  <p class="step" data-testid="phase-step" data-coach-step={coach?.step}>{stepLabel}</p>
   <PhaseActions
     localiser={l}
-    legal={state.legal}
+    {legal}
     {instruction}
-    waiting={state.status === 'playing' && state.legal.length === 0 && hosted.length === 0}
-    {hostedInstruction}
-    {hint}
+    waiting={coach === null &&
+      state.status === 'playing' &&
+      state.legal.length === 0 &&
+      hosted.length === 0}
+    hostedInstruction={coach === null ? hostedInstruction : coachText}
+    hint={coach === null ? hint : null}
     {onCommand}
     errorCount={state.errorCount}
-    {hosted}
+    hosted={actions}
   />
 </div>
 
@@ -90,6 +136,13 @@
 
   .steps [data-done] {
     background: var(--accent);
+  }
+
+  .coach {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.3;
   }
 
   .step {

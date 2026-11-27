@@ -68,12 +68,142 @@ update-region = アプリの更新
 update-available = 新しいバージョンがあります
 update-reload = 再読み込み
 
+## How to play
+how-to-play-heading = 遊び方
+how-to-play-tutorial-heading = はじめて遊びますか？
+how-to-play-tutorial-text = { -tutorial-opponent }を相手に、ガイド付きで1ラウンド遊びます。5分ほどで終わり、いつでもやめられます。
+how-to-play-tutorial-done-heading = チュートリアル完了
+how-to-play-tutorial-again = もう一度遊ぶ
+how-to-play-start-tutorial = チュートリアルを始める
+how-to-play-rules-heading = ルール
+
+## Rules pages, in our own words: one message per paragraph
+# Marker words are arguments, so that their tokens are drawn: `cross`, `crosses`, `fang`, `fangs`,
+# `hourglass`, `hourglasses`, `potion`, `health` and `badge`. A character is named with CHARACTER
+# and an argument named after it: `hunter`, `wolfKing`, `knight`, `wolfen`, `seer`, `witch`,
+# `wolfBeauty` or `villager`.
+rules-progress = ルール・{ $index }/{ $total }
+rules-pages = ルールのページ
+rules-previous = 前へ
+rules-next = 次へ
+rules-sheet-title = ルール
+
+rules-goal-title = 目的
+rules-goal-summary = 勝ち方は3通りです。
+rules-goal-intro = 毎ラウンド、あなたと相手はそれぞれ出すキャラクターをこっそり1体選び、2体のキャラクターが順番に行動します。次のどれかを満たした時点で、あなたの勝ちです：
+rules-goal-crosses = { $crosses }を4個持っている。
+rules-goal-fangs = { $fangs }を3個持っている。
+rules-goal-health = 相手の{ $health }が0になった。
+rules-goal-instant = どれかを満たした瞬間に、ラウンドの途中でもゲームは終わります。そのため、キャラクターが行動する順番が大切です。あなた自身の{ $health }が0になったら、あなたの負けです。
+rules-goal-bluff = 相手の手札を見ることはできません。毎ラウンド、相手が選んだキャラクターを推測し、自分の選択は読まれないように工夫します。
+
+rules-setup-title = 準備
+rules-setup-summary = { $health }、{ $crosses }、{ $badge }、最初の{ $hourglass }。
+rules-setup-cards = キャラクターは8体です。カードの数字がそのキャラクターのイニシアチブで、低いほど先に行動します。各キャラクターは人間か人狼のどちらかで、それによって、どのキャラクターから対象にされるかが決まります。さらに、あなたと相手は対象カードを9枚ずつ持っています。キャラクターごとに1枚と、愚者が1枚です。
+rules-setup-markers = あなたと相手は、それぞれ{ $health }2と{ $cross }1個を持って始めます。
+rules-setup-badge = どちらか一方が{ $badge }を持って始めます。どちらが持つかはホストが決めるか、ランダムにします。{ $badge }を持つプレイヤーはカードを1枚多く配られ、先に決めます。{ $badge }はラウンドが終わるたびに持ち主が替わります。
+rules-setup-hourglass = { $badge }を持たずに始めるプレイヤーは、{ $hourglass }を1個受け取ります。
+rules-setup-supply = 残りのマーカーはストックになります。得たマーカーはストックから取り、使ったマーカーはストックに戻します。
+
+rules-round-title = ラウンドの流れ
+rules-round-summary = 配る、プラン、公開、対決、ラウンド終了。
+rules-round-intro = どのラウンドも、同じ5つのステップで進みます。
+rules-round-deal-title = 配る
+rules-round-deal = 8枚のキャラクターカードを混ぜ、1枚を誰にも見えないよう裏向きのまま除外します。残りから、{ $badge }を持つプレイヤーに4枚、もう一方に3枚配ります。手札は自分にしか見えません。
+rules-round-plan-title = プラン
+rules-round-plan = あなたと相手は同時にプランを立てます。手札からキャラクター1体と、相手が選んだと思うキャラクターを示す対象カードを1枚以上選びます。何を対象にできるかは各キャラクターのカードに書かれています。愚者はどのプランにも加えられます。
+rules-round-plan-2 = プランができたら確定します。相手には、あなたが選んだ対象カードの枚数はわかりますが、どのカードかはわかりません。残りの手札は誰にも見せずに捨てます。
+rules-round-reveal-title = 公開
+rules-round-reveal = { $hourglasses }を持っていれば、その一部またはすべてを選んだキャラクターに置けます。{ $badge }を持つプレイヤーが先に選び、もう一方はその数を知ったうえで選びます。置いた{ $hourglass }1個ごとに、キャラクターのイニシアチブが1下がります。ただし、0より下にはなりません。
+rules-round-reveal-2 = { $potion }を持っていれば、ここで必ず使います。このラウンドで自分に配られなかったキャラクターを1体指名します。
+rules-round-reveal-3 = それから、両方のプランを表向きにします。
+rules-round-showdown-title = 対決
+rules-round-showdown = 最初に{ $potion }を処理します。もう一方のプレイヤーのキャラクターを指名していれば、そのキャラクターはどのキャラクターも行動する前に脱落し、持ち主の{ $health }が1減ります。
+rules-round-showdown-2 = 次に、イニシアチブが低い順にキャラクターが行動します。同じ値のときは、置かれた{ $hourglasses }が多い方が先、それも同じなら{ $badge }を持つプレイヤーのキャラクターが先です。キャラクターはまずマーカーを得るか使い、それから対象を攻撃します。
+rules-round-showdown-3 = 対象のどれかがもう一方のプレイヤーのキャラクターを示していて、そのキャラクターがまだ行動していなければ、攻撃は命中します。命中したキャラクターは行動せずに脱落し、持ち主の{ $health }が1減ります。{ CHARACTER($seer) }が命中させた場合は2減ります。
+rules-round-end-title = ラウンド終了
+rules-round-end = 置いた{ $hourglasses }はストックに戻り、{ $badge }はもう一方のプレイヤーに移り、除外されたカードが2人に公開されます。2人の準備ができたら、次のラウンドを配ります。
+
+rules-markers-title = マーカー
+rules-markers-summary = 各マーカーの働きと、手に入れ方。
+rules-markers-intro = あなたと相手が持つマーカーは、すべて2人に公開されています。
+rules-markers-cross = 4個持てば勝ちです。最初に1個ずつ持ち、{ CHARACTER($villager) }が1個得て、{ CHARACTER($hunter) }は攻撃に1個使います。
+rules-markers-fang = 3個持てば勝ちです。{ CHARACTER($wolfBeauty) }が1個得て、{ CHARACTER($wolfKing) }は2体以上の人間を攻撃するのに使います。
+rules-markers-hourglass = 公開のときに自分のキャラクターに置くと、1個ごとにイニシアチブが1下がります。{ $badge }を持たないプレイヤーが最初に1個持ち、{ CHARACTER($knight) }と{ CHARACTER($wolfen) }がそれぞれ1個得ます。
+rules-markers-potion = { CHARACTER($witch) }が得ます。持っているプレイヤーは次の公開でキャラクターを1体指名し、もう一方のプレイヤーがそのキャラクターを出していれば、そのキャラクターはどのキャラクターも行動する前に脱落します。その後、{ $potion }はストックに戻ります。
+rules-markers-health = 最初は2で、増えることはありません。0になったら負けです。
+rules-markers-badge = 持っているプレイヤーは、カードを3枚ではなく4枚配られ、{ $hourglasses }を先に選び、置いた{ $hourglasses }で決まらない同点のときに先に行動します。ラウンドが終わるたびに、もう一方のプレイヤーに移ります。
+
+rules-characters-title = キャラクター
+rules-characters-summary = すべてのキャラクターと、能力の読み方。
+
+rules-fine-points-title = 細かいルール
+rules-fine-points-summary = 同点、{ $potion }、愚者などについて。
+rules-fine-points-ties-title = 同点
+rules-fine-points-ties = 2体のキャラクターのイニシアチブが同じになったときは、置かれた{ $hourglasses }が多い方が先に行動します。それも同じなら、{ $badge }を持つプレイヤーのキャラクターが先に行動します。
+rules-fine-points-empty-supply-title = { $hourglasses }が足りないとき
+rules-fine-points-empty-supply = 置いた{ $hourglasses }はラウンドが終わるまでキャラクターの上に残るので、ストックがなくなることがあります。そのときに{ CHARACTER($knight) }か{ CHARACTER($wolfen) }が{ $hourglass }を得る場合は、代わりにもう一方のプレイヤーから取ります。もう一方のプレイヤーも持っていなければ、何も得ません。
+rules-fine-points-immune-title = 間に合わない攻撃
+rules-fine-points-immune = 攻撃が命中するのはまだ行動していないキャラクターだけなので、行動を終えたキャラクターはそのラウンドの間は安全です。キャラクターが脱落するのは1回だけで、{ $potion }の後でも、さらに命中しても何も起きません。
+rules-fine-points-potion-title = { $potion }
+rules-fine-points-potion = { $potion }で指名できるのは、このラウンドで自分に配られなかったキャラクターです。出されたかどうかは関係なく、自分のプランで対象にしているキャラクターも指名できます。{ CHARACTER($witch) }も含め、どのキャラクターにも効きます。愚者はキャラクターではないので、指名できません。
+rules-fine-points-wolf-king-title = { CHARACTER($wolfKing) }と{ $fangs }
+rules-fine-points-wolf-king = { CHARACTER($wolfKing) }は人間を何体でも対象にできます。2体目からは1体ごとに{ $fang }が1個必要で、行動するときに払います。全部を払えなければ、何も払わず、攻撃もしません。愚者には何も払いません。
+rules-fine-points-hunter-title = { CHARACTER($hunter) }と{ $cross }
+rules-fine-points-hunter = { CHARACTER($hunter) }が行動するとき、{ $cross }を1個使うかどうかを選びます。使ったときだけ、人狼を2体まで攻撃します。{ $cross }がなければ攻撃できません。{ $cross }を使わずに残せば、4個に近づきます。
+rules-fine-points-hand-title = 手札のカード
+rules-fine-points-hand = 自分に配られたカードは、相手が出すキャラクターではありえません。そのため、プランの対象にはできず、ゲームも選択肢に出しません。選べる対象は、自分に配られなかったキャラクターと愚者です。その中には相手の手札もありますが、除外されたカードもあるので、どの対象も推測です。
+rules-fine-points-fool-title = 愚者
+rules-fine-points-fool = 愚者には効果がありません。どのプランにも加えられるので、相手に見える対象カードの枚数を変えられます。愚者だけを対象にすれば、攻撃せずにキャラクターを出せます。{ CHARACTER($witch) }と{ CHARACTER($villager) }が対象にできるのは愚者だけです。
+rules-fine-points-options-title = ホストが変えられるルール
+rules-fine-points-options = 古い版のゲームでは、同点はすべて{ $badge }だけで決まります。ホストはゲームを作成するときにこのルールを選べます。その場合、同点のときは必ず{ $badge }を持つプレイヤーが先になります。
+rules-fine-points-options-2 = ホストは、対象のないプランを許可することもできます。対象なしで出したキャラクターもマーカーは得ますが、攻撃はしません。
+
 ## Character reference
-reference-heading = 遊び方
-reference-characters-heading = キャラクター
 reference-characters-intro = すべてのキャラクターと愚者、そしてそれぞれが行動したときの効果です。イニシアチブが低い方が先に行動します。
 # Shown beside a character's name in languages other than English: its name as the English edition prints it.
 reference-printed-name = 英語版：{ $name }
+
+## Tutorial
+# The scripted opponent's name, defined once; every tutorial message names the opponent through this term.
+-tutorial-opponent = さくら
+tutorial-opponent-name = { -tutorial-opponent }
+tutorial-heading = チュートリアル
+# Above the coach's text in the phase bar, as in "Tutorial · 2 of 5 · Make a plan".
+tutorial-progress = チュートリアル・{ $step }/{ $count }・{ $title }
+tutorial-next = 次へ
+tutorial-finish = 完了
+tutorial-leave = チュートリアルをやめる
+tutorial-starting = チュートリアルを準備しています…
+tutorial-failed = チュートリアルを始められませんでした。戻って、もう一度お試しください。
+# The coach's text for each step: at most three lines at 360 px and 100 % text. Marker words and
+# characters are arguments, as in the rules pages.
+tutorial-goal-title = 目的
+tutorial-goal-text = { $crosses }4個か{ $fangs }3個を集めるか、{ -tutorial-opponent }の{ $health }を0にすれば勝ちです。マーカーの数はこの2列に表示されます。
+tutorial-plan-title = プランを立てる
+tutorial-plan-text = { -tutorial-opponent }の手札は見えないので、どの対象も推測です。ほとんどが人狼なので、{ CHARACTER($knight) }で{ CHARACTER($wolfen) }を狙ってみましょう。
+tutorial-reveal-title = 公開
+tutorial-reveal-text = イニシアチブが低い方が先です。{ CHARACTER($knight) }は3、対象の{ CHARACTER($wolfen) }を{ -tutorial-opponent }が出していればそちらは4です。{ $hourglass }1個で1下がります。0個置きましょう。
+tutorial-showdown-title = 対決
+tutorial-showdown-text = { CHARACTER($knight) }が先に行動し、{ $hourglass }を得て{ CHARACTER($wolfen) }に命中します。{ CHARACTER($wolfen) }は行動する前に脱落し、{ -tutorial-opponent }の{ $health }が1減ります。
+tutorial-round-end-title = ラウンド終了
+tutorial-round-end-text = { $badge }の持ち主が替わり、除外されたカードが公開されます。本番のゲームでは、誰かが勝つまでこうしてラウンドを重ねます。
+tutorial-done-heading = 1ラウンドを遊び終えました
+tutorial-done-learned = 覚えたこと
+tutorial-done-goal = 3通りの勝ち方
+tutorial-done-plan = キャラクター1体と対象を選ぶプラン
+tutorial-done-reveal = { $hourglasses }と{ $badge }
+tutorial-done-showdown = どちらが先に行動し、命中すると何が起きるか
+tutorial-done-more = 本番のゲームは、誰かが勝つまでラウンドを重ねます。すべてのルールはルールのページにあります。
+tutorial-done-play = 友だちと遊ぶ
+tutorial-done-rules = ルールを読む
+tutorial-done-again = チュートリアルをもう一度
+
+## Home: the newcomer panel
+home-newcomer-heading = { -game-name }ははじめてですか？
+home-newcomer-text = ガイド付きの1ラウンドで遊び方を覚えましょう。
+home-newcomer-learn = 遊び方を覚える
+home-newcomer-dismiss = 閉じる
 
 ## Settings
 settings-heading = 設定
@@ -385,6 +515,7 @@ side-label-ordered = { $label }{ $position ->
 ## Table layout
 table-you = あなた
 drawer-summary = ゲームの記録とルール
+drawer-full-rules = ルール全文
 rules-heading = ルール
 rules-order = イニシアチブが低い方が先に行動します。
 rules-tiebreak-hourglasses-then-badge = 同じ値のときは、砂時計を多く置いたプレイヤーが先に、それも同じならバッジを持つプレイヤーが先に行動します。

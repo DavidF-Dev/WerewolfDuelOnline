@@ -32,6 +32,8 @@
     state?: CardState;
     /** Why the card can't be chosen: announced while it is disabled, and shown on focus or a tap. */
     reason?: string;
+    /** A description announced while the card is not disabled, such as why it is only shown. */
+    description?: string;
     onselect?: () => void;
     /** Whether choosing the card toggles it on and off, rather than acting at once. */
     toggle?: boolean;
@@ -49,6 +51,7 @@
     size = 'large',
     state: shownState = 'normal',
     reason,
+    description,
     onselect,
     toggle = true,
     testId,
@@ -59,6 +62,7 @@
   const actionable = $derived(onselect !== undefined);
   const inspectable = $derived(size !== 'large');
   const showReason = $derived(disabled && reason !== undefined);
+  const described = $derived(showReason ? reason : disabled ? undefined : description);
   // A target card that can't be chosen is drawn faded; a card of any other size is crossed out.
   const faded = $derived(disabled && size === 'target');
 
@@ -198,7 +202,7 @@
       aria-label={label}
       aria-pressed={onselect === undefined || !toggle ? undefined : shownState === 'selected'}
       aria-disabled={disabled ? 'true' : undefined}
-      aria-describedby={showReason ? `${uid}-reason` : undefined}
+      aria-describedby={described === undefined ? undefined : `${uid}-reason`}
       data-testid={testId}
       onclick={select}
       onfocus={focused}
@@ -239,8 +243,8 @@
       </span>
     {/if}
   </span>
-  {#if showReason}
-    <span id="{uid}-reason" class="visually-hidden">{reason}</span>
+  {#if described !== undefined}
+    <span id="{uid}-reason" class="visually-hidden">{described}</span>
   {/if}
 </span>
 

@@ -5,6 +5,7 @@ const JOIN_CODE_ALPHABET = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 const JOIN_CODE_LENGTH = 6;
 const PIN_ALPHABET = '0123456789';
 const PIN_LENGTH = 4;
+const SEED_PATTERN = /^[0-9a-f]{64}$/;
 
 /** Draws `length` characters uniformly from an alphabet of at most 256 characters. */
 function drawUniform(random: Random, alphabet: string, length: number): string {
@@ -52,4 +53,43 @@ export function closesConnection(code: ErrorCode): boolean {
 export function errorTo(conn: ConnId, code: ErrorCode): Outbound {
   const msg = { type: 'error', code } as const;
   return closesConnection(code) ? { conn, msg, close: true } : { conn, msg };
+}
+
+function rotl(x: number, k: number): number {
+  return ((x << k) | (x >>> (32 - k))) >>> 0;
+}
+
+/**
+ * A deterministic, non-cryptographic byte source (xoshiro128**) seeded from 64 hex characters.
+ * For test overrides and scripted games only; never use it where secrecy matters.
+ */
+export function seededRandom(seedHex: string): Random {
+  if (!SEED_PATTERN.test(seedHex)) throw new Error('seed must be 64 lowercase hex characters');
+  const words: number[] = [];
+  for (let i = 0; i < 8; i++) words.push(parseInt(seedHex.slice(i * 8, i * 8 + 8), 16) >>> 0);
+  const s: number[] = [0, 1, 2, 3].map((i) => (words[i]! ^ rotl(words[i + 4]!, 13)) >>> 0);
+  if (!s.some((w) => w !== 0)) s[0] = 1;
+
+  const next = (): number => {
+    const result = Math.imul(rotl(Math.imul(s[1]!, 5) >>> 0, 7), 9) >>> 0;
+    const t = (s[1]! << 9) >>> 0;
+    s[2] = (s[2]! ^ s[0]!) >>> 0;
+    s[3] = (s[3]! ^ s[1]!) >>> 0;
+    s[1] = (s[1]! ^ s[2]!) >>> 0;
+    s[0] = (s[0]! ^ s[3]!) >>> 0;
+    s[2] = (s[2]! ^ t) >>> 0;
+    s[3] = rotl(s[3]!, 11);
+    return result;
+  };
+
+  return {
+    bytes(n: number): Uint8Array {
+      const out = new Uint8Array(n);
+      for (let i = 0; i < n; i += 4) {
+        const w = next();
+        for (let j = 0; j < 4 && i + j < n; j++) out[i + j] = (w >>> (8 * j)) & 0xff;
+      }
+      return out;
+    },
+  };
 }

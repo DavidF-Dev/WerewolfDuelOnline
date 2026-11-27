@@ -33,6 +33,9 @@ interface Entry {
 /** Locales whose text is still the English placeholder, so the translated checks skip them. */
 const UNTRANSLATED: ReadonlySet<Locale> = new Set<Locale>([]);
 
+/** Messages still in English in the other languages, and why; each comes off once translated. */
+const UNTRANSLATED_MESSAGES: Readonly<Record<string, string>> = {};
+
 /** Messages and terms that read the same in every language, such as names. */
 const SAME_IN_EVERY_LANGUAGE: ReadonlySet<string> = new Set([
   '-game-name',
@@ -58,6 +61,8 @@ const SAME_IN_EVERY_LANGUAGE: ReadonlySet<string> = new Set([
   'continue-pin',
   'rejoin-pin-label',
   'pause-heading',
+  'rules-round-plan-title',
+  'tutorial-heading',
 ]);
 
 /** The words for a player that every event message is given, whichever it uses. */
@@ -228,6 +233,7 @@ const TEXT_ARGUMENTS: ReadonlySet<string> = new Set([
   'seed',
   'summary',
   'time',
+  'title',
   'version',
   'when',
 ]);
@@ -540,8 +546,40 @@ describe('locales', () => {
     expect(requiredFor('en')).toBeUndefined();
   });
 
+  it("no tutorial text writes the opponent's name out", () => {
+    const names = LOCALES.map((locale) =>
+      texts(entries(locale, 'ui').get('-tutorial-opponent')?.value).join(''),
+    );
+    expect(names.every((name) => name !== '')).toBe(true);
+    for (const locale of LOCALES) {
+      for (const [id, entry] of entries(locale, 'ui')) {
+        if (id === '-tutorial-opponent') continue;
+        const written = [entry.value, ...Object.values(entry.attributes ?? {})]
+          .flatMap((pattern) => texts(pattern))
+          .join(' ');
+        for (const name of names) {
+          expect(written.includes(name), `${locale} ${id} writes out ${name}`).toBe(false);
+        }
+      }
+    }
+  });
+
   it('the allow-list of untranslated locales names only locales still to translate', () => {
     for (const locale of UNTRANSLATED) expect(LOCALES.filter((l) => l !== 'en')).toContain(locale);
+  });
+
+  it('the allow-list of untranslated messages names only messages still in English', () => {
+    const english = entries('en', 'ui');
+    for (const [id, reason] of Object.entries(UNTRANSLATED_MESSAGES)) {
+      expect(english.has(id), `${id} is an English message`).toBe(true);
+      expect(reason, id).not.toBe('');
+      const original = texts(english.get(id)?.value).join('');
+      for (const locale of LOCALES.filter((l) => l !== 'en')) {
+        expect(texts(entries(locale, 'ui').get(id)?.value).join(''), `${locale} ${id}`).toBe(
+          original,
+        );
+      }
+    }
   });
 
   for (const locale of LOCALES.filter((l) => l !== 'en')) {
@@ -550,7 +588,8 @@ describe('locales', () => {
         const english = entries('en', file);
         for (const [id, entry] of entries(locale, file)) {
           const original = texts(english.get(id)?.value).join('');
-          if (SAME_IN_EVERY_LANGUAGE.has(id) || !/\p{L}/u.test(original)) continue;
+          if (SAME_IN_EVERY_LANGUAGE.has(id) || id in UNTRANSLATED_MESSAGES) continue;
+          if (!/\p{L}/u.test(original)) continue;
           expect(texts(entry.value).join(''), `${locale} ${id}`).not.toBe(original);
         }
       }

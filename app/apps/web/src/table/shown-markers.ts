@@ -59,3 +59,20 @@ export function shownMarkers(
   }
   return result;
 }
+
+/**
+ * Who holds the Badge as of the showdown's first `shown` steps: the live `badge`, or the seat that
+ * held it before the round's end passed it on while that step is still to be shown.
+ */
+export function shownBadge(
+  badge: Seat | null,
+  steps: readonly SequencedEvent[][],
+  shown: number,
+): Seat | null {
+  for (const step of steps.slice(Math.max(0, shown))) {
+    for (const [, { kind }] of step) {
+      if ('round_ended' in kind) return kind.round_ended.next_badge === 'p0' ? 'p1' : 'p0';
+    }
+  }
+  return badge;
+}

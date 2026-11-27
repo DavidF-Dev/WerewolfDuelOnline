@@ -23,6 +23,9 @@
 - Downloads need the owner's explicit yes: `fonts:ja` fetches the source fonts, so Task 4 asks before running it.
 - Playwright suites run one at a time.
 
+- Built on the playtest fixes (engine 0.3.0, protocol 4): hand cards hidden from the targets, the shared reveal/showdown sides, and marker counts on the shown step. See the design note's "Built on the playtest fixes". Ring test ids are the current ones (for example `reveal-sides`, not the old `reveal-versus`).
+- No text uses a pronoun for the opponent, including "their" (see the design note's "The opponent's name").
+
 ## Review Focus
 
 1. **Leaving at any moment** (menu, browser Back, reload), including while the opponent's delayed move is pending or mid-showdown: no command is sent after the run is disposed, no error is shown, and the player lands on How to play. → Task 3, `leaving at every step returns to How to play and sends nothing more`.
@@ -73,7 +76,7 @@
   - Pictures come only from existing components (`CardFace`, pills, `MarkerIcon`, rich text).
 - [ ] **Step 4: Write the English rules text** in `en/ui.ftl`.
   - It covers spec §5 for the default rules: the goal, setting up, a round (the five steps of mockup A3), markers and fine points.
-  - Fine points are: ties, an empty Hourglass supply, a character that has already acted is immune, the Potion, the Wolf King's Fangs, the Hunter's optional Cross, targeting your own card, the Fool, and the two host options (`badge_only` tie-break, zero targets).
+  - Fine points are: ties, an empty Hourglass supply, a character that has already acted is immune, the Potion (any character not in your hand this round, including your own targets), the Wolf King's Fangs, the Hunter's optional Cross, why cards in your hand are never targets, the Fool, and the two host options (`badge_only` tie-break, zero targets).
   - Our own words, "you" / "your opponent", one message per paragraph.
 - [ ] **Step 5: Add the in-game sheet.**
   - The log drawer's Rules part gains a **Full rules** row (`drawer-full-rules`).

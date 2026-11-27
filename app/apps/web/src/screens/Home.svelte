@@ -10,6 +10,7 @@
   import { describeWhen } from '../when.js';
   import Button from '../components/Button.svelte';
   import InstallCard from '../components/InstallCard.svelte';
+  import NewcomerCard from '../components/NewcomerCard.svelte';
   import RemoveGameDialog from '../components/RemoveGameDialog.svelte';
   import Screen from '../components/Screen.svelte';
   import IconButton from '../kit/IconButton.svelte';
@@ -60,7 +61,10 @@
   let now = $state(Date.now());
   // Shown once the first game is finished, until dismissed; never before the settings are read.
   let installCardWanted = $state(false);
+  // Shown only to a brand-new player, until dismissed; never before the settings and history are read.
+  let newcomerCardWanted = $state(false);
   let settingsButton = $state<HTMLButtonElement>();
+  let historyButton = $state<HTMLButtonElement>();
   const installPlatform = $derived(
     installCardWanted && ($install === 'prompt' || $install === 'ios') ? $install : null,
   );
@@ -74,6 +78,12 @@
     installCardWanted = false;
     settingsButton?.focus();
     void patchSettings({ installCardDismissed: true });
+  }
+
+  function dismissNewcomerCard(): void {
+    newcomerCardWanted = false;
+    historyButton?.focus();
+    void patchSettings({ newcomerCardDismissed: true });
   }
 
   function showSessions(records: readonly SessionRecord[]): void {
@@ -113,15 +123,19 @@
   onMount(() => {
     let active = true;
     const store = getDeviceStore();
-    store?.settings.get().then(
-      (settings) => {
-        if (active)
-          installCardWanted = settings.firstGameFinished && !settings.installCardDismissed;
-      },
-      () => {
-        // Without the settings the card stays hidden.
-      },
-    );
+    store?.settings
+      .get()
+      .then(async (settings) => {
+        if (!active) return;
+        installCardWanted = settings.firstGameFinished && !settings.installCardDismissed;
+        if (settings.firstGameFinished || settings.tutorialFinished) return;
+        if (settings.newcomerCardDismissed) return;
+        const history = await store.history.list();
+        if (active) newcomerCardWanted = history.length === 0;
+      })
+      .catch(() => {
+        // Without the settings or the history both cards stay hidden.
+      });
     store?.sessions.list().then(
       (records) => {
         if (active) showSessions(records);
@@ -212,10 +226,15 @@
     <Button data-testid="home-how-to-play" onclick={() => navigate('how-to-play')}
       >{l.t('home-how-to-play')}</Button
     >
-    <Button data-testid="home-history" onclick={() => navigate('history')}
-      >{l.t('home-history')}</Button
+    <Button
+      data-testid="home-history"
+      bind:element={historyButton}
+      onclick={() => navigate('history')}>{l.t('home-history')}</Button
     >
   </div>
+  {#if newcomerCardWanted}
+    <NewcomerCard localiser={l} onDismiss={dismissNewcomerCard} />
+  {/if}
   {#if installPlatform !== null}
     <InstallCard localiser={l} platform={installPlatform} onDismiss={dismissInstallCard} />
   {/if}

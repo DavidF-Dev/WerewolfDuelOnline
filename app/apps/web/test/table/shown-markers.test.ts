@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Command, EventKind, Seat } from '@wwd/engine';
-import { shownMarkers, type Markers } from '../../src/table/shown-markers.js';
+import { shownBadge, shownMarkers, type Markers } from '../../src/table/shown-markers.js';
 import { showdownSteps, type SequencedEvent } from '../../src/table/showdown.js';
 import { newGame, playUntil } from '../games.js';
 
@@ -109,5 +109,17 @@ describe('shownMarkers', () => {
         shown > witchStep,
       );
     }
+  });
+});
+
+describe('shownBadge', () => {
+  it('holds the Badge back until the step that ends the round is shown', () => {
+    const { steps } = showdown();
+    // The round ended with the Badge passing from p0 to p1, as the view now has it.
+    expect(shownBadge('p1', steps, 0)).toBe('p0');
+    expect(shownBadge('p1', steps, 2)).toBe('p0');
+    expect(shownBadge('p1', steps, 3)).toBe('p1');
+    expect(shownBadge('p1', steps.slice(0, 2), 0)).toBe('p1');
+    expect(shownBadge(null, [], 0)).toBeNull();
   });
 });

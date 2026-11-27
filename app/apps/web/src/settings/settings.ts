@@ -22,6 +22,8 @@ export interface Settings {
   server: string | null;
   installCardDismissed: boolean;
   firstGameFinished: boolean;
+  tutorialFinished: boolean;
+  newcomerCardDismissed: boolean;
 }
 
 export const DEFAULT_SETTINGS: Readonly<Settings> = {
@@ -41,6 +43,8 @@ export const DEFAULT_SETTINGS: Readonly<Settings> = {
   server: null,
   installCardDismissed: false,
   firstGameFinished: false,
+  tutorialFinished: false,
+  newcomerCardDismissed: false,
 };
 
 /** The offered text size nearest to `size`, the smaller one on a tie. */

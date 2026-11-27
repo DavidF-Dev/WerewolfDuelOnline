@@ -14,13 +14,17 @@
 - **Referee:** a small server runs the engine and sends each player only their own view, so hidden cards never reach the other player. It runs on Cloudflare Workers, or self-hosted as a Node server or Docker container.
 - **Web app:** a Svelte app served from GitHub Pages. If a connection drops, it reconnects, and a seat PIN lets a player continue on another device.
 
+## How to play
+
+New players can learn in the app: How to play has the rules in our own words, six short pages from the goal to the fine points, and a five-minute tutorial that plays one guided round against a scripted opponent on the real game table. Both work offline.
+
 ## Languages
 
 The app and the `wwd` tool speak English, German and Japanese. The app follows the browser's language unless one is chosen in Settings, and can switch in the middle of a game; `wwd --lang de` or `wwd --lang ja` picks one at the terminal. German and Japanese text load when that language is chosen, and the installed app keeps them for offline play; the Japanese fonts are downloaded only when Japanese is chosen.
 
 ## Status
 
-Milestones M1 to M4 are complete: the rules engine, the local loop, online play, and the finished app, with its screens, settings, pausing and saved games, rematches, history with replays and stats, backups, and installing as an app that opens offline. M5 has added German and Japanese; it goes on with a rewritten rulebook and a tutorial, the deferred gameplay settings and a full accessibility audit.
+Milestones M1 to M4 are complete: the rules engine, the local loop, online play, and the finished app, with its screens, settings, pausing and saved games, rematches, history with replays and stats, backups, and installing as an app that opens offline. M5 has added German and Japanese, and a rulebook and tutorial; it goes on with the deferred gameplay settings and a full accessibility audit.
 
 ## Repository layout
 

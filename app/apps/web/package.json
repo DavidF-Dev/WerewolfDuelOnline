@@ -16,6 +16,7 @@
     "icons": "node scripts/icons.mjs",
     "visual": "node scripts/visual.mjs",
     "transcript": "node scripts/transcript.mjs",
+    "tutorial:seed": "node scripts/tutorial-seed.mjs",
     "fonts:ja": "node scripts/subset-ja-fonts.mjs"
   },
   "dependencies": {

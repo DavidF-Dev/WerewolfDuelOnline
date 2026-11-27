@@ -3,7 +3,6 @@
   import { richMessage, type Localiser, type RichPart } from '@wwd/client-core';
   import AbilityLegend from '../components/AbilityLegend.svelte';
   import CardFace from '../components/CardFace.svelte';
-  import Screen from '../components/Screen.svelte';
   import { CHARACTERS, NO_PILLS, faction, initiative, pillsOf } from '../cards.js';
   import ListRow from '../kit/ListRow.svelte';
   import Panel from '../kit/Panel.svelte';
@@ -12,9 +11,11 @@
 
   interface Props {
     localiser: Localiser;
+    /** The level of the ability legend's heading, one below the heading the section sits under. */
+    level?: 'h2' | 'h3';
   }
 
-  let { localiser: l }: Props = $props();
+  let { localiser: l, level = 'h2' }: Props = $props();
 
   const CARDS: readonly Card[] = [...CHARACTERS.map((character) => ({ character })), 'fool'];
 
@@ -47,61 +48,54 @@
   }
 </script>
 
-<Screen title={l.t('reference-heading')} testId="how-to-play" back={l.t('back')} tight>
-  <Panel>
-    <AbilityLegend localiser={l} level="h2" />
-  </Panel>
-  <Panel title={l.t('reference-characters-heading')}>
-    <p class="note intro">{l.t('reference-characters-intro')}</p>
-    <ul class="cards" data-testid="reference-characters">
-      {#each CARDS as card (card === 'fool' ? card : card.character)}
-        {@const printed = printedLine(card)}
-        <ListRow>
-          <div class="character">
-            <span class="picture">
-              {#if card === 'fool'}
-                <CardFace
-                  name={l.t('card-fool')}
-                  faction="neutral"
-                  initiative={null}
-                  art="fool"
-                  size="medium"
-                  pills={NO_PILLS}
-                  text={cardText(l, card)}
-                />
-              {:else}
-                <CardFace
-                  name={characterName(l, card.character)}
-                  faction={faction(card.character)}
-                  initiative={initiative(card.character)}
-                  art={card.character}
-                  size="medium"
-                  pills={pillsOf(card.character)}
-                  text={cardText(l, card)}
-                />
-              {/if}
-            </span>
-            <div class="words">
-              <p data-part="reference-name"><RichText parts={title(card)} /></p>
-              {#if printed !== null}
-                <p class="note" data-part="printed-name">
-                  {printed.before}<span lang="en">{printed.name}</span>{printed.after}
-                </p>
-              {/if}
-              <p data-part="reference-ability"><RichText parts={abilityParts(l, card)} /></p>
-            </div>
+<Panel>
+  <AbilityLegend localiser={l} {level} />
+</Panel>
+<Panel>
+  <ul class="cards" data-testid="reference-characters">
+    {#each CARDS as card (card === 'fool' ? card : card.character)}
+      {@const printed = printedLine(card)}
+      <ListRow>
+        <div class="character">
+          <span class="picture">
+            {#if card === 'fool'}
+              <CardFace
+                name={l.t('card-fool')}
+                faction="neutral"
+                initiative={null}
+                art="fool"
+                size="medium"
+                pills={NO_PILLS}
+                text={cardText(l, card)}
+              />
+            {:else}
+              <CardFace
+                name={characterName(l, card.character)}
+                faction={faction(card.character)}
+                initiative={initiative(card.character)}
+                art={card.character}
+                size="medium"
+                pills={pillsOf(card.character)}
+                text={cardText(l, card)}
+              />
+            {/if}
+          </span>
+          <div class="words">
+            <p data-part="reference-name"><RichText parts={title(card)} /></p>
+            {#if printed !== null}
+              <p class="note" data-part="printed-name">
+                {printed.before}<span lang="en">{printed.name}</span>{printed.after}
+              </p>
+            {/if}
+            <p data-part="reference-ability"><RichText parts={abilityParts(l, card)} /></p>
           </div>
-        </ListRow>
-      {/each}
-    </ul>
-  </Panel>
-</Screen>
+        </div>
+      </ListRow>
+    {/each}
+  </ul>
+</Panel>
 
 <style>
-  .intro {
-    margin: 0 0 4px;
-  }
-
   .cards {
     list-style: none;
     margin: 0;

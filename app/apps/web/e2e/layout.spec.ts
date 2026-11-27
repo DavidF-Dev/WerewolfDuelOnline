@@ -53,6 +53,7 @@ const ACTIONS: Readonly<Record<string, { bar: string[]; inline?: string; footer?
   'table-rejoin-request': { bar: ['seal-plan'] },
   'table-menu': { bar: ['seal-plan'] },
   'table-log': { bar: ['seal-plan'] },
+  'table-rules-sheet': { bar: ['seal-plan'] },
   'table-continue-elsewhere': { bar: ['seal-plan'] },
   'table-resign': { bar: ['seal-plan'] },
   'game-over-showdown': { bar: ['showdown-next'] },
@@ -65,6 +66,11 @@ const ACTIONS: Readonly<Record<string, { bar: string[]; inline?: string; footer?
   'connection-banners': { bar: ['seal-plan'] },
   'connection-claim-win': { bar: ['seal-plan'] },
   'kit-fit': { bar: ['kit-fit-action'] },
+  'tutorial-goal': { bar: ['coach-next'] },
+  'tutorial-plan': { bar: ['seal-plan'] },
+  'tutorial-reveal': { bar: ['place-hourglasses'] },
+  'tutorial-showdown': { bar: ['showdown-next'] },
+  'tutorial-round-end': { bar: ['coach-next'] },
 };
 
 /**
@@ -1245,7 +1251,8 @@ for (const lang of LANGUAGES) {
       test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
       for (const size of [{ width: 320, height: 640 }, ...SIZES]) {
         await page.setViewportSize(size);
-        for (const id of ['table-plan', 'table-plan-sealed', 'table-showdown']) {
+        // In the showdown the Badge passes on the step that ends the round, which the summary shows.
+        for (const id of ['table-plan', 'table-plan-sealed', 'table-round-summary']) {
           await openEntry(page, id, 1, lang);
           const where = `${id} at ${size.width}×${size.height}`;
           const strip = page.getByTestId('opponent');
@@ -1565,7 +1572,7 @@ const FITTED_LABELS: ReadonlyArray<{ group: string; selector: string; entries: s
   {
     group: 'bar title',
     selector: '[data-part="bar-title"]',
-    entries: ['table-plan', 'settings-top', 'how-to-play'],
+    entries: ['table-plan', 'settings-top', 'how-to-play', 'rules-fine-points'],
   },
   {
     group: 'segmented option',

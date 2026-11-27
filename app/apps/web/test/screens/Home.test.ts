@@ -10,6 +10,8 @@ import JoinOnline from '../../src/screens/JoinOnline.svelte';
 import { initSessions, loadOnlineSession, resetSessions } from '../../src/session.js';
 import { openDeviceStore, type DeviceStore, type SessionRecord } from '../../src/storage/db.js';
 import { sessionId } from '../../src/storage/sessions.js';
+import { DEFAULT_SETTINGS } from '../../src/settings/settings.js';
+import { historyRecord } from '../backup/fixtures.js';
 import { FakeWebSocket } from '../fake-socket.js';
 
 const localiser = createLocaliser('en');
@@ -512,6 +514,61 @@ describe('Home', () => {
       );
       expect(screen.getAllByTestId('home-session')).toHaveLength(1);
       expect(document.activeElement).toBe(moreFor('Mika'));
+    });
+  });
+
+  describe('the newcomer panel', () => {
+    /** Renders Home once it has read the settings and the history; returns the panel, if shown. */
+    async function newcomerPanel(): Promise<HTMLElement | null> {
+      const settings = vi.spyOn(store.settings, 'get');
+      const history = vi.spyOn(store.history, 'list');
+      await renderSettled();
+      await waitFor(() => expect(settings).toHaveBeenCalled());
+      await settings.mock.results[0]!.value;
+      await tick();
+      // The history is read only while no flag already rules the panel out.
+      await history.mock.results[0]?.value;
+      await tick();
+      return screen.queryByTestId('home-newcomer');
+    }
+
+    it('shows for a brand-new player, under How to play and History', async () => {
+      const panel = await newcomerPanel();
+      expect(panel).not.toBeNull();
+      expect(within(panel!).getByRole('heading', { name: 'New to Werewolf: Duel!?' })).toBeTruthy();
+      expect(text(panel)).toContain('Learn by playing one guided round.');
+      const learn = within(panel!).getByRole('link', { name: 'Learn to play' });
+      expect(learn.getAttribute('href')).toBe('#/tutorial');
+      const history = screen.getByRole('button', { name: 'History' });
+      expect(
+        history.compareDocumentPosition(panel!) & Node.DOCUMENT_POSITION_FOLLOWING,
+      ).toBeTruthy();
+    });
+
+    it('is not shown once a game is in History', async () => {
+      await store.history.put(historyRecord('h1', Date.now()));
+      expect(await newcomerPanel()).toBeNull();
+    });
+
+    for (const flag of [
+      'firstGameFinished',
+      'tutorialFinished',
+      'newcomerCardDismissed',
+    ] as const) {
+      it(`is not shown once ${flag} is set`, async () => {
+        await store.settings.put({ ...DEFAULT_SETTINGS, [flag]: true });
+        expect(await newcomerPanel()).toBeNull();
+      });
+    }
+
+    it('dismissing it sets newcomerCardDismissed and hides it', async () => {
+      const user = userEvent.setup();
+      const panel = await newcomerPanel();
+      await user.click(within(panel!).getByRole('button', { name: 'Dismiss' }));
+      expect(screen.queryByTestId('home-newcomer')).toBeNull();
+      await waitFor(async () =>
+        expect((await store.settings.get()).newcomerCardDismissed).toBe(true),
+      );
     });
   });
 });

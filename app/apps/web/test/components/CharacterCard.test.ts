@@ -81,4 +81,20 @@ describe('CharacterCard', () => {
     const strong = renderCard('wolfen');
     expect(strong.container.querySelector('.face')?.classList.contains('strong')).toBe(true);
   });
+
+  const description = (): string | null | undefined =>
+    document.getElementById(screen.getByRole('button').getAttribute('aria-describedby') ?? '')
+      ?.textContent;
+
+  it('a description is announced while the card is not disabled, and the reason while it is', () => {
+    const shown = renderCard('knight', { description: 'Read the coach first.' });
+    expect(description()).toBe('Read the coach first.');
+    shown.unmount();
+    renderCard('knight', {
+      state: 'disabled',
+      reason: 'Not now.',
+      description: 'Read the coach first.',
+    });
+    expect(description()).toBe('Not now.');
+  });
 });

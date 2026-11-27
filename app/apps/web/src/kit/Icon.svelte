@@ -9,8 +9,10 @@
     | 'first'
     | 'previous'
     | 'next'
+    | 'chevron'
     | 'last'
-    | 'update';
+    | 'update'
+    | 'tick';
 </script>
 
 <script lang="ts">
@@ -48,6 +50,8 @@
     <path d="M16 6l-8 6 8 6z" />
   {:else if name === 'next'}
     <path d="M8 6l8 6-8 6z" />
+  {:else if name === 'chevron'}
+    <path d="M9 6l6 6-6 6" />
   {:else if name === 'last'}
     <path d="M18 6v12M6 6l8 6-8 6z" />
   {:else if name === 'settings'}
@@ -61,6 +65,8 @@
       stroke-linecap="butt"
       stroke-dasharray="3.3 3.3"
     />
+  {:else if name === 'tick'}
+    <path d="M5 12.5 10 17.5 19 7" />
   {:else if name === 'update'}
     <path d="M20 12a8 8 0 1 1-2.34-5.66" />
     <path d="M20 4v5h-5" />

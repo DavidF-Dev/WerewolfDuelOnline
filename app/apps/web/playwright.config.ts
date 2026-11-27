@@ -17,6 +17,8 @@ export default defineConfig({
     'home.spec.ts',
     'hover.spec.ts',
     'fonts.spec.ts',
+    'rules.spec.ts',
+    'tutorial.spec.ts',
   ],
   fullyParallel: true,
   forbidOnly: !!process.env.CI,

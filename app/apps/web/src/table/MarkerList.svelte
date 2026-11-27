@@ -56,7 +56,7 @@
 
 <ul class={['markers', { spread, 'badge-at-end': badgeAtEnd }]} data-testid="{testId}-markers">
   {#each COUNTED as marker (marker)}
-    <li data-marker={marker}>
+    <li data-marker={marker} data-testid="{testId}-{marker}">
       <MarkerCount localiser={l} {marker} value={markers[marker]} {animate} />
     </li>
   {/each}

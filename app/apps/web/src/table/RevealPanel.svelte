@@ -15,6 +15,7 @@
   import Note from '../kit/Note.svelte';
   import Stepper from '../kit/Stepper.svelte';
   import { commandLabel } from '../text.js';
+  import type { TutorialAllow } from '../tutorial/script.js';
   import PlayerSide from './PlayerSide.svelte';
   import { handInstruction, handPrimary } from './primary.svelte.js';
   import type { SequencedEvent } from './showdown.js';
@@ -30,6 +31,8 @@
     tiebreak?: Tiebreak | null;
     /** Changes whenever the referee reports a problem, which frees a sent command for a retry. */
     errorCount?: number;
+    /** The one choice a coach offers; every other count, and the Potion, is left out. */
+    allow?: TutorialAllow | null;
   }
 
   let {
@@ -41,6 +44,7 @@
     onCommand,
     tiebreak = null,
     errorCount = 0,
+    allow = null,
   }: Props = $props();
   const uid = $props.id();
 
@@ -53,12 +57,15 @@
   const places = $derived(
     legal
       .filter((cmd): cmd is PlaceCommand => typeof cmd === 'object' && 'place_hourglasses' in cmd)
+      .filter((cmd) => allow === null || allow.hourglasses === cmd.place_hourglasses.n)
       .sort((a, b) => a.place_hourglasses.n - b.place_hourglasses.n),
   );
   const potion = $derived(
-    legal.filter(
-      (cmd): cmd is PotionCommand => typeof cmd === 'object' && 'choose_potion_target' in cmd,
-    ),
+    allow !== null
+      ? []
+      : legal.filter(
+          (cmd): cmd is PotionCommand => typeof cmd === 'object' && 'choose_potion_target' in cmd,
+        ),
   );
   const me = $derived(view.players[seat === 'p0' ? 0 : 1]);
   const myPlan = $derived(

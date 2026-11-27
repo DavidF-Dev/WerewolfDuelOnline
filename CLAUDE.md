@@ -2,7 +2,7 @@
 
 **Werewolf: Duel! Online** is an unofficial digital version of the two-player bluffing card game *Werewolf: Duel!* by Whales Entertainment. It is played in the browser on desktop and mobile as an installable PWA. Friends connect with a join code. A server-side **referee** runs the rules engine and sends each player only their own view.
 
-**Status:** M1 (the rules engine and `wwd` CLI in `engine/`), M2 (WASM bindings, protocol, referee core, client core and an unstyled two-tab web table in `app/`), M3 (online play: the Node and Cloudflare referees, join codes, reconnection, seat PINs, the mobile lifecycle, and the deploy workflow and guide in `docs/deploy.md`) and M4 (the product: every screen in the Moonlit theme, settings, pause and resume including from a save file, rematch, history with replays and stats, backups, and the installable PWA with an offline shell) are complete. M5's first project, languages (German and Japanese across the app and `wwd`), is complete, and so are the playtest fixes (in-hand targets are illegal, engine 0.3.0 and protocol 4; the plan screen, hand, marker and reveal and showdown changes). The next step is the M5 rulebook and tutorial plan, which was paused for the playtest fixes.
+**Status:** M1 (the rules engine and `wwd` CLI in `engine/`), M2 (WASM bindings, protocol, referee core, client core and an unstyled two-tab web table in `app/`), M3 (online play: the Node and Cloudflare referees, join codes, reconnection, seat PINs, the mobile lifecycle, and the deploy workflow and guide in `docs/deploy.md`) and M4 (the product: every screen in the Moonlit theme, settings, pause and resume including from a save file, rematch, history with replays and stats, backups, and the installable PWA with an offline shell) are complete. M5's first project, languages (German and Japanese across the app and `wwd`), is complete, and so are the playtest fixes (in-hand targets are illegal, engine 0.3.0 and protocol 4; the plan screen, hand, marker and reveal and showdown changes). M5's second project, the rulebook and tutorial (How to play as a hub, six rules pages, and a coached tutorial round, in all three languages), is complete. The next step is the design for the deferred gameplay settings.
 
 ## Documents (read these first)
 
@@ -16,7 +16,7 @@
 | [`docs/superpowers/plans/2026-11-26-m5-languages.md`](docs/superpowers/plans/2026-11-26-m5-languages.md) | Implementation plan for M5 languages |
 | [`docs/superpowers/specs/2026-11-27-playtest-fixes-design.md`](docs/superpowers/specs/2026-11-27-playtest-fixes-design.md) | Design note for the playtest fixes: in-hand targets, the plan screen, the hand, markers, the reveal and showdown sides |
 | [`docs/superpowers/plans/2026-11-27-playtest-fixes.md`](docs/superpowers/plans/2026-11-27-playtest-fixes.md) | Implementation plan for the playtest fixes |
-| [`docs/superpowers/specs/2026-11-26-m5-rulebook-tutorial-design.md`](docs/superpowers/specs/2026-11-26-m5-rulebook-tutorial-design.md) | Design note for the M5 rulebook and tutorial (paused for the playtest fixes) |
+| [`docs/superpowers/specs/2026-11-26-m5-rulebook-tutorial-design.md`](docs/superpowers/specs/2026-11-26-m5-rulebook-tutorial-design.md) | Design note for the M5 rulebook and tutorial: the rules pages, the coached tutorial, the opponent's name |
 | [`docs/superpowers/plans/2026-11-26-m5-rulebook-tutorial.md`](docs/superpowers/plans/2026-11-26-m5-rulebook-tutorial.md) | Implementation plan for the M5 rulebook and tutorial |
 | [`docs/research/2026-11-21-research-and-recommendations.md`](docs/research/2026-11-21-research-and-recommendations.md) | Background research, alternatives considered, sources |
 | [`docs/mockups/mockups.html`](docs/mockups/mockups.html) | Low-fidelity screen mockups (open in a browser) |
@@ -55,6 +55,7 @@ App, from `app/`:
 - `pnpm --filter @wwd/web icons` (renders the app icon PNGs from its SVG with Playwright's Chromium)
 - `pnpm --filter @wwd/web visual` (draws every gallery entry at four sizes in light, dark and high contrast, beside the mockups, into `apps/web/visual-output/`; open its `index.html`. `--lang de`, `ja` or `pseudo` draws them in that language, and `--lang all` in every language, each in a folder of its own)
 - `pnpm --filter @wwd/web transcript` (writes three seeded games as Markdown logs, one per view, into `apps/web/visual-output/transcripts/`; `--search` finds seeds for its scenarios, and `--lang de` or `ja` writes them in that language into `transcripts-de/` or `transcripts-ja/`)
+- `pnpm --filter @wwd/web tutorial:seed` (searches for the seed that deals the tutorial its hands; run it when the tutorial's script test says the seed no longer does)
 - `pnpm --filter @wwd/web dev` (dev server; `window.__wwd` is available only here). It uses the referee at `http://localhost:8787`, so start one of:
   - `pnpm --filter @wwd/referee-node start --test-overrides` (the Node referee; add `--port`, `--data`, `--origins` as needed)
   - `pnpm --filter @wwd/referee-cloudflare dev` (`wrangler dev` in local workerd, with test overrides; never deploys)

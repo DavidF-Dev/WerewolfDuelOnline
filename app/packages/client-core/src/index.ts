@@ -1,5 +1,6 @@
 export {
   GameClient,
+  sameCommand,
   type ClientStatus,
   type GameClientOptions,
   type GameClientState,

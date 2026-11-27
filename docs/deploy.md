@@ -291,6 +291,10 @@ current pricing pages before relying on these figures.
   check can report a mismatch, because the earlier rounds' events came from the old engine. After a
   reconnect its log can also repeat or skip lines, since the new engine's event sequence differs
   from the one the client saw. Games started after the deploy are not affected.
+- **A rules change makes earlier commands illegal** (engine 0.3.0 forbids targeting a card in your
+  own hand). A room whose current round already used such a command can't be restored under the
+  new engine, and a client on the old protocol is asked to update. Deploy such a release when no
+  online game is in progress.
 - **Deploying by hand.** Use the package scripts, which pass `--env` and refuse to deploy
   without allowed origins, with a wildcard, with a non-`https` origin (staging also accepts
   `http://localhost:<port>`), with any `TEST_OVERRIDES` value, or with `--env`, `-e`, `--name`,

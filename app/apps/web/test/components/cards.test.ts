@@ -124,16 +124,19 @@ describe('cards', () => {
     ).toBe(true);
   });
 
-  it('a card in hand shows the In hand pill instead of its pills', () => {
-    const { container } = renderTarget({ character: 'knight' }, { size: 'target', inHand: true });
-    const button = screen.getByRole('button');
-    const pill = container.querySelector('[data-part="in-hand"]');
-    expect(pill?.textContent).toBe('In hand');
-    expect(container.querySelector('[data-part="pills"]')?.children).toHaveLength(1);
-    expect(container.querySelector('[data-pill]')).toBeNull();
-    expect(button.getAttribute('aria-describedby')?.split(' ')).toContain(pill?.id);
-    expect(document.getElementById(pill!.id)).toBe(pill);
-    expect(container.querySelector('[data-part="tag"]')).toBeNull();
+  it('a disabled target card is faded, and a disabled card of another size crossed out', () => {
+    for (const size of SIZES) {
+      const { container, unmount } = renderTarget(
+        { character: 'knight' },
+        { size, state: 'disabled' },
+      );
+      const frame = container.querySelector('.frame')!;
+      expect(frame.classList.contains('faded'), size).toBe(size === 'target');
+      expect(frame.classList.contains('crossed'), size).toBe(size !== 'target');
+      unmount();
+    }
+    const { container } = renderTarget({ character: 'knight' }, { size: 'target' });
+    expect(container.querySelector('.frame.faded, .frame.crossed')).toBeNull();
   });
 
   it('card text puts a token before each marker name', () => {
@@ -158,8 +161,6 @@ describe('cards', () => {
       expect(container.querySelector('[data-part="name"]')?.textContent).toBe('Knight');
       unmount();
     }
-    const { container } = renderTarget({ character: 'knight' }, { size: 'target', inHand: true });
-    expect(container.querySelector('[data-part="in-hand"]')).not.toBeNull();
   });
 
   it('target and medium cards show the large card on keyboard focus', async () => {
@@ -294,8 +295,9 @@ describe('cards', () => {
         unmount();
       }
       for (const card of TARGET_CARDS) {
-        for (const inHand of [false, true]) {
-          const { unmount } = renderTarget(card, { size, inHand });
+        for (const state of ['normal', 'disabled'] as const) {
+          const reason = state === 'disabled' ? localiser.t('target-not-allowed') : undefined;
+          const { unmount } = renderTarget(card, { size, state, reason });
           const button = screen.getByRole('button');
           expect(button.childElementCount).toBe(0);
           for (const child of Array.from(drawn(button).children).filter((el) => el !== button)) {

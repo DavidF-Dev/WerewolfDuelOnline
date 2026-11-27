@@ -2,7 +2,7 @@
 
 **Werewolf: Duel! Online** is an unofficial digital version of the two-player bluffing card game *Werewolf: Duel!* by Whales Entertainment. It is played in the browser on desktop and mobile as an installable PWA. Friends connect with a join code. A server-side **referee** runs the rules engine and sends each player only their own view.
 
-**Status:** M1 (the rules engine and `wwd` CLI in `engine/`), M2 (WASM bindings, protocol, referee core, client core and an unstyled two-tab web table in `app/`), M3 (online play: the Node and Cloudflare referees, join codes, reconnection, seat PINs, the mobile lifecycle, and the deploy workflow and guide in `docs/deploy.md`) and M4 (the product: every screen in the Moonlit theme, settings, pause and resume including from a save file, rematch, history with replays and stats, backups, and the installable PWA with an offline shell) are complete. M5's first project, languages (German and Japanese across the app and `wwd`), is complete. The next step is the design for the M5 rulebook and tutorial project.
+**Status:** M1 (the rules engine and `wwd` CLI in `engine/`), M2 (WASM bindings, protocol, referee core, client core and an unstyled two-tab web table in `app/`), M3 (online play: the Node and Cloudflare referees, join codes, reconnection, seat PINs, the mobile lifecycle, and the deploy workflow and guide in `docs/deploy.md`) and M4 (the product: every screen in the Moonlit theme, settings, pause and resume including from a save file, rematch, history with replays and stats, backups, and the installable PWA with an offline shell) are complete. M5's first project, languages (German and Japanese across the app and `wwd`), is complete, and so are the playtest fixes (in-hand targets are illegal, engine 0.3.0 and protocol 4; the plan screen, hand, marker and reveal and showdown changes). The next step is the M5 rulebook and tutorial plan, which was paused for the playtest fixes.
 
 ## Documents (read these first)
 
@@ -14,6 +14,10 @@
 | [`docs/superpowers/specs/2026-11-24-cards-plan-home-design.md`](docs/superpowers/specs/2026-11-24-cards-plan-home-design.md) | Design note for the cards, the plan screen and Home |
 | [`docs/superpowers/specs/2026-11-26-m5-languages-design.md`](docs/superpowers/specs/2026-11-26-m5-languages-design.md) | Design note for M5 languages: German and Japanese grammar, fonts, checks |
 | [`docs/superpowers/plans/2026-11-26-m5-languages.md`](docs/superpowers/plans/2026-11-26-m5-languages.md) | Implementation plan for M5 languages |
+| [`docs/superpowers/specs/2026-11-27-playtest-fixes-design.md`](docs/superpowers/specs/2026-11-27-playtest-fixes-design.md) | Design note for the playtest fixes: in-hand targets, the plan screen, the hand, markers, the reveal and showdown sides |
+| [`docs/superpowers/plans/2026-11-27-playtest-fixes.md`](docs/superpowers/plans/2026-11-27-playtest-fixes.md) | Implementation plan for the playtest fixes |
+| [`docs/superpowers/specs/2026-11-26-m5-rulebook-tutorial-design.md`](docs/superpowers/specs/2026-11-26-m5-rulebook-tutorial-design.md) | Design note for the M5 rulebook and tutorial (paused for the playtest fixes) |
+| [`docs/superpowers/plans/2026-11-26-m5-rulebook-tutorial.md`](docs/superpowers/plans/2026-11-26-m5-rulebook-tutorial.md) | Implementation plan for the M5 rulebook and tutorial |
 | [`docs/research/2026-11-21-research-and-recommendations.md`](docs/research/2026-11-21-research-and-recommendations.md) | Background research, alternatives considered, sources |
 | [`docs/mockups/mockups.html`](docs/mockups/mockups.html) | Low-fidelity screen mockups (open in a browser) |
 | [`docs/mockups/cards-and-plan.html`](docs/mockups/cards-and-plan.html) | Card and plan-screen mockups; sections H and I are binding |

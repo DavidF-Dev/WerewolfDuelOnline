@@ -1,8 +1,10 @@
 import 'fake-indexeddb/auto';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { fireEvent, render, screen, waitFor, within } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { replayTimeline } from '@wwd/engine';
+import { replayTimeline, verifyReplay, type Replay as ReplayRecord } from '@wwd/engine';
 import { createLocaliser } from '@wwd/client-core';
 import { resetDeviceStore, setDeviceStore } from '../../src/device-store.js';
 import History from '../../src/screens/History.svelte';
@@ -195,6 +197,24 @@ describe('Replay', () => {
   it('says so when the game is not on this device', async () => {
     render(Replay, { props: { localiser, id: 'missing' } });
     expect(await screen.findByText('This game is not on this device.')).toBeTruthy();
+  });
+
+  it("a stored game that broke today's rules says it can't be replayed", async () => {
+    // A game recorded by engine 0.1.0 whose plan targets a card in its player's hand.
+    const old = JSON.parse(
+      readFileSync(
+        join(process.cwd(), '../../../engine/crates/wwd-core/tests/fixtures/replay-0.1.0.json'),
+        'utf8',
+      ),
+    ) as ReplayRecord;
+    expect(() => verifyReplay(old)).toThrow('error-replay-rule');
+    // Overwrites the shared record rather than adding one.
+    await store.history.put({ ...record, replay: old });
+    render(Replay, { props: { localiser, id: record.id } });
+    expect(
+      await screen.findByText("This game was played under older rules and can't be replayed."),
+    ).toBeTruthy();
+    expect(screen.queryByTestId('replay-missing')).toBeNull();
   });
 });
 

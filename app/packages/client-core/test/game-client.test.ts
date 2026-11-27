@@ -317,7 +317,7 @@ describe('GameClient', () => {
   it('reconnect resumes from lastSeq', async () => {
     const referee = newReferee(4);
     const room = referee.createRoom(defaultRulesConfig());
-    const rng = new Xorshift(11);
+    const rng = new Xorshift(13);
     const p0 = join(referee, room);
     const p1 = join(referee, room);
     await flush();

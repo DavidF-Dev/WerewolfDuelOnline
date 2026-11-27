@@ -12,23 +12,11 @@
     state?: CardState;
     /** Why the card can't be chosen: announced while it is disabled, and shown on focus or a tap. */
     reason?: string;
-    /** Whether the card is in the player's own hand, shown in place of its ability pills. */
-    inHand?: boolean;
     onselect?: () => void;
     testId?: string;
   }
 
-  let {
-    localiser: l,
-    card,
-    size,
-    state,
-    reason,
-    inHand = false,
-    onselect,
-    testId,
-  }: Props = $props();
-  const inHandText = $derived(inHand ? l.t('card-in-hand') : undefined);
+  let { localiser: l, card, size, state, reason, onselect, testId }: Props = $props();
 </script>
 
 {#if card === 'fool'}
@@ -43,7 +31,6 @@
     {size}
     {state}
     {reason}
-    inHand={inHandText}
     {onselect}
     {testId}
   />
@@ -59,7 +46,6 @@
     {size}
     {state}
     {reason}
-    inHand={inHandText}
     {onselect}
     {testId}
   />

@@ -43,7 +43,16 @@ function setUp(confirmPlan = false, cards: Character[] = ['knight', 'seer', 'vil
 }
 
 const target = (id: string): HTMLElement => screen.getByTestId(`target-${id}`);
-const TARGET_IDS = [...WEREWOLVES, ...HUMANS, 'fool'];
+/** The cards in the Targets panel, which take no choice until a character is chosen. */
+const shownTargets = (): HTMLElement[] =>
+  within(screen.getByRole('region', { name: 'Targets' })).getAllByRole('button');
+
+/** A Human not in `hand`, which the Knight can't target. */
+function otherHuman(hand: readonly Character[]): Character {
+  const human = HUMANS.find((c) => !hand.includes(c));
+  if (human === undefined) throw new Error('unexpected deal');
+  return human;
+}
 
 /** The text of whatever describes `element`. */
 const description = (element: HTMLElement): string =>
@@ -61,9 +70,10 @@ describe('PlanSheet', () => {
 
   it('tapping a hand card chooses the character', async () => {
     const { choose, onCommand } = setUp();
-    for (const card of TARGET_IDS) {
-      expect(target(card).getAttribute('aria-disabled'), card).toBe('true');
-      expect(description(target(card))).toContain('Choose a character first.');
+    for (const card of shownTargets()) {
+      expect(card.getAttribute('aria-disabled')).toBeNull();
+      expect(card.getAttribute('aria-pressed')).toBeNull();
+      expect(card.getAttribute('data-testid')).toBeNull();
     }
     await choose(/^[0-9], Knight,/);
     expect(screen.getByTestId('plan-character-knight').getAttribute('aria-pressed')).toBe('true');
@@ -72,7 +82,7 @@ describe('PlanSheet', () => {
     expect(onCommand).not.toHaveBeenCalled();
   });
 
-  // The 14 px rise itself is measured in the e2e layout spec ("the chosen hand card rises").
+  // The 7 px rise itself is measured in the browser.
   it('the chosen hand card is drawn selected in a Your hand region', async () => {
     const { choose } = setUp();
     const frame = (c: Character) =>
@@ -92,15 +102,18 @@ describe('PlanSheet', () => {
   });
 
   it('tapping a target card toggles it only when legal', async () => {
-    const { choose } = setUp();
-    await userEvent.click(target('wolfen'));
-    expect(target('wolfen').getAttribute('aria-pressed')).toBe('false');
+    const { choose, hand } = setUp();
+    const human = otherHuman(hand);
+    await userEvent.click(shownTargets().find((t) => /Wolfen/.test(t.ariaLabel ?? ''))!);
     await choose(/^[0-9], Knight,/);
-    await userEvent.click(target('seer'));
-    expect(target('seer').getAttribute('aria-pressed')).toBe('false');
-    target('seer').focus();
+    expect(target('wolfen').getAttribute('aria-pressed'), 'a tap before the character').toBe(
+      'false',
+    );
+    await userEvent.click(target(human));
+    expect(target(human).getAttribute('aria-pressed')).toBe('false');
+    target(human).focus();
     await userEvent.keyboard('{Enter}');
-    expect(target('seer').getAttribute('aria-pressed'), 'nor by the keyboard').toBe('false');
+    expect(target(human).getAttribute('aria-pressed'), 'nor by the keyboard').toBe('false');
     await userEvent.click(target('wolfen'));
     expect(target('wolfen').getAttribute('aria-pressed')).toBe('true');
     await userEvent.click(target('wolf_king'));
@@ -115,34 +128,36 @@ describe('PlanSheet', () => {
     await userEvent.click(target('wolfen'));
     await choose(/^[0-9], Knight,/);
     expect(screen.getByTestId('plan-character-knight').getAttribute('aria-pressed')).toBe('false');
-    expect(target('wolfen').getAttribute('aria-pressed')).toBe('false');
-    expect(target('wolfen').getAttribute('aria-disabled')).toBe('true');
+    expect(screen.queryByTestId('target-wolfen')).toBeNull();
+    expect(shownTargets().filter((t) => t.getAttribute('aria-pressed') !== null)).toEqual([]);
     expect(seal().disabled).toBe(true);
     await choose(/^[0-9], Knight,/);
     expect(screen.getByTestId('plan-character-knight').getAttribute('aria-pressed')).toBe('true');
+    expect(target('wolfen').getAttribute('aria-pressed')).toBe('false');
   });
 
   it('a target that cannot be chosen shows its reason when tapped', async () => {
-    const { choose } = setUp();
+    const { choose, hand } = setUp();
+    const human = otherHuman(hand);
     await choose(/^[0-9], Knight,/);
     const slot = (id: string) => target(id).closest('.slot') as HTMLElement;
-    expect(slot('seer').querySelector('[data-part="reason"]')).toBeNull();
-    await userEvent.click(target('seer'));
-    expect(slot('seer').querySelector('[data-part="reason"]')?.textContent).toBe(
+    expect(slot(human).querySelector('[data-part="reason"]')).toBeNull();
+    await userEvent.click(target(human));
+    expect(slot(human).querySelector('[data-part="reason"]')?.textContent).toBe(
       localiser.t('error-target-not-allowed'),
     );
     await userEvent.click(target('wolfen'));
-    expect(slot('seer').querySelector('[data-part="reason"]')).toBeNull();
+    expect(slot(human).querySelector('[data-part="reason"]')).toBeNull();
   });
 
   it("disallowed targets show the engine's reason", async () => {
-    const { choose } = setUp();
+    const { choose, hand } = setUp();
     await choose(/^[0-9], Knight,/);
-    for (const human of HUMANS) {
+    for (const human of HUMANS.filter((c) => !hand.includes(c))) {
       expect(target(human).getAttribute('aria-disabled'), human).toBe('true');
       expect(description(target(human))).toContain(localiser.t('error-target-not-allowed'));
     }
-    for (const werewolf of WEREWOLVES) {
+    for (const werewolf of WEREWOLVES.filter((c) => !hand.includes(c))) {
       expect(target(werewolf).getAttribute('aria-disabled'), werewolf).toBeNull();
     }
     await userEvent.click(target('wolfen'));
@@ -152,15 +167,12 @@ describe('PlanSheet', () => {
     expect(target('fool').getAttribute('aria-disabled')).toBeNull();
   });
 
-  it('marks a target that is in my own hand', async () => {
+  it('leaves the cards in my own hand out of the targets', async () => {
     const { choose, hand } = setUp(false, ['wolf_king', 'knight']);
-    expect(description(target('knight'))).toContain('In hand');
     await choose(/^[0-9], Wolf King,/);
-    expect(target('knight').getAttribute('aria-disabled')).toBeNull();
-    expect(description(target('knight'))).toContain('In hand');
-    const elsewhere = HUMANS.find((c) => !hand.includes(c));
-    if (elsewhere === undefined) throw new Error('unexpected deal');
-    expect(description(target(elsewhere))).not.toContain('In hand');
+    for (const c of hand) expect(screen.queryByTestId(`target-${c}`), c).toBeNull();
+    expect(shownTargets()).toHaveLength(9 - hand.length);
+    expect(target(otherHuman(hand)).getAttribute('aria-disabled')).toBeNull();
   });
 
   it('summarises the plan as it is built', async () => {
@@ -191,7 +203,6 @@ describe('PlanSheet', () => {
   it('confirm dialog appears only with the setting', async () => {
     const first = setUp(false);
     await first.choose(/^[0-9], Villager,/);
-    await userEvent.click(target('fool'));
     await userEvent.click(first.seal());
     expect(screen.queryByRole('alertdialog')).toBeNull();
     expect(first.onCommand).toHaveBeenCalledExactlyOnceWith(first.entry('villager', ['fool']));
@@ -199,7 +210,6 @@ describe('PlanSheet', () => {
 
     const second = setUp(true);
     await second.choose(/^[0-9], Villager,/);
-    await userEvent.click(target('fool'));
     await userEvent.click(second.seal());
     const dialog = screen.getByRole('alertdialog', { name: 'Seal this plan?' });
     expect(dialog.textContent).toContain('Villager targeting the Fool');
@@ -217,7 +227,6 @@ describe('PlanSheet', () => {
   it('sends a plan once however often Seal is pressed', async () => {
     const { choose, seal, onCommand } = setUp();
     await choose(/^[0-9], Villager,/);
-    await userEvent.click(target('fool'));
     expect(seal().querySelector('[data-part="spinner"]')).toBeNull();
     await userEvent.dblClick(seal());
     await userEvent.click(seal());
@@ -231,8 +240,8 @@ describe('PlanSheet', () => {
     const { choose, seal } = setUp();
     await choose(/^[0-9], Knight,/);
     await userEvent.click(target('wolfen'));
-    await choose(/^[0-9], Villager,/);
-    expect(target('fool').getAttribute('aria-pressed')).toBe('false');
+    await choose(/^[0-9], Seer,/);
+    expect(target('wolfen').getAttribute('aria-pressed')).toBe('false');
     expect(seal().disabled).toBe(true);
   });
 });

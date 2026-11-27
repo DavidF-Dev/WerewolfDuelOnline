@@ -1,13 +1,17 @@
 <script lang="ts">
-  import type { PlayerView } from '@wwd/engine';
+  import { onMount, untrack } from 'svelte';
   import type { Localiser } from '@wwd/client-core';
+  import MarkerCount, { MARKER_CHANGE_MS } from '../components/MarkerCount.svelte';
   import MarkerIcon from '../components/MarkerIcon.svelte';
   import Chip from '../kit/Chip.svelte';
+  import type { Markers } from './shown-markers.js';
 
   interface Props {
     localiser: Localiser;
-    player: PlayerView;
+    markers: Markers;
     hasBadge: boolean;
+    /** Whether a count that changes is shown as a gain or a loss. */
+    animate?: boolean;
     /** Prefix for this list's test id. */
     testId: string;
     /** Spreads the markers across the row's width. */
@@ -18,24 +22,55 @@
 
   let {
     localiser: l,
-    player,
+    markers,
     hasBadge,
+    animate = false,
     testId,
     spread = false,
     badgeAtEnd = false,
   }: Props = $props();
+
+  const COUNTED = ['health', 'cross', 'fang', 'hourglass'] as const;
+
+  // A Potion that arrives after the list is first drawn counts as gained.
+  let drawn = $state(false);
+  onMount(() => {
+    drawn = true;
+  });
+
+  // A Potion that leaves stays as long as its loss is shown, hidden from screen readers.
+  let leaving = $state(false);
+  let held = untrack(() => markers.potion);
+  $effect.pre(() => {
+    const now = markers.potion;
+    if (now === held) return;
+    held = now;
+    leaving = !now && untrack(() => animate);
+  });
+  $effect(() => {
+    if (!leaving) return;
+    const timer = setTimeout(() => (leaving = false), MARKER_CHANGE_MS);
+    return () => clearTimeout(timer);
+  });
 </script>
 
 <ul class={['markers', { spread, 'badge-at-end': badgeAtEnd }]} data-testid="{testId}-markers">
-  <li><MarkerIcon localiser={l} marker="health" count={player.health} compact /></li>
-  <li><MarkerIcon localiser={l} marker="cross" count={player.cross} compact /></li>
-  <li><MarkerIcon localiser={l} marker="fang" count={player.fang} compact /></li>
-  <li><MarkerIcon localiser={l} marker="hourglass" count={player.hourglass} compact /></li>
-  {#if player.placed > 0}
-    <li class="placed">{l.t('count-placed', { n: player.placed })}</li>
-  {/if}
-  {#if player.potion}
-    <li><MarkerIcon localiser={l} marker="potion" /></li>
+  {#each COUNTED as marker (marker)}
+    <li data-marker={marker}>
+      <MarkerCount localiser={l} {marker} value={markers[marker]} {animate} />
+    </li>
+  {/each}
+  {#if markers.potion || leaving}
+    <li data-marker="potion" aria-hidden={markers.potion ? undefined : 'true'}>
+      <MarkerCount
+        localiser={l}
+        marker="potion"
+        value={markers.potion ? 1 : 0}
+        from={drawn ? 0 : 1}
+        name={l.t('marker-potion')}
+        {animate}
+      />
+    </li>
   {/if}
   {#if hasBadge}
     <li class="badge">
@@ -79,9 +114,5 @@
 
   .badge-at-end .badge {
     margin-inline-start: auto;
-  }
-
-  .placed {
-    color: var(--muted);
   }
 </style>

@@ -208,10 +208,11 @@ pub enum RuleError {
     WrongPhase,
     CharacterNotInHand,
     TargetNotAllowed,
+    TargetInHand,
     TooManyTargets,
     TooFewTargets,
     NotEnoughHourglasses,
-    InvalidPotionTarget,
+    PotionTargetInHand,
 }
 
 impl RuleError {
@@ -223,10 +224,11 @@ impl RuleError {
             RuleError::WrongPhase => "error-wrong-phase",
             RuleError::CharacterNotInHand => "error-character-not-in-hand",
             RuleError::TargetNotAllowed => "error-target-not-allowed",
+            RuleError::TargetInHand => "error-target-in-hand",
             RuleError::TooManyTargets => "error-too-many-targets",
             RuleError::TooFewTargets => "error-too-few-targets",
             RuleError::NotEnoughHourglasses => "error-not-enough-hourglasses",
-            RuleError::InvalidPotionTarget => "error-invalid-potion-target",
+            RuleError::PotionTargetInHand => "error-potion-target-in-hand",
         }
     }
 }

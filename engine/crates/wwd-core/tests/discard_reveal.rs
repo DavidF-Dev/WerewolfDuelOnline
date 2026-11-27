@@ -6,8 +6,8 @@ use common::scenario;
 use wwd_core::Character::*;
 use wwd_core::{
     BadgeStart, Command, ENGINE_VERSION, Event, EventKind, Phase, Recorder, Replay, ReplayError,
-    RulesConfig, Seat, State, TargetCard, Viewer, Visibility, apply, check_invariants,
-    events_since, new_game, replay_timeline, verify, view,
+    RuleError, RulesConfig, Seat, State, TargetCard, Viewer, Visibility, apply, check_invariants,
+    events_since, legal_actions, new_game, replay_timeline, verify, view,
 };
 
 const SEATS: [Seat; 2] = [Seat::P0, Seat::P1];
@@ -129,11 +129,44 @@ fn old_replay() -> Replay {
     serde_json::from_str(include_str!("fixtures/replay-0.1.0.json")).unwrap()
 }
 
-/// A replay saved by engine 0.1.0, before the discard was revealed, with a resumed segment.
+/// Plays the first legal action of whoever can act until the round or the game ends.
+fn play_round(rec: &mut Recorder) {
+    if rec.state().phase == Phase::RoundOver {
+        for seat in SEATS {
+            rec.apply(seat, Command::NextRound).unwrap();
+        }
+    }
+    while !matches!(rec.state().phase, Phase::RoundOver | Phase::GameOver { .. }) {
+        let (seat, cmd) = SEATS
+            .into_iter()
+            .find_map(|s| {
+                legal_actions(rec.state(), s)
+                    .first()
+                    .map(|c| (s, c.clone()))
+            })
+            .expect("someone can act");
+        rec.apply(seat, cmd).unwrap();
+    }
+}
+
+/// A two-round game resumed for a third round under a new seed, labelled as recorded by
+/// engine 0.1.0, whose replays are re-simulated without comparing checkpoints.
+fn relabelled_0_1_0() -> Replay {
+    let mut rec = Recorder::new([3; 32], RulesConfig::default());
+    play_round(&mut rec);
+    play_round(&mut rec);
+    let boundary = rec.round_boundary().expect("the game is still running");
+    let mut rec = Recorder::resume(boundary, rec.replay().clone(), [4; 32]).unwrap();
+    play_round(&mut rec);
+    let mut old = rec.replay().clone();
+    old.engine_version = "0.1.0".to_string();
+    old
+}
+
+/// A replay labelled as engine 0.1.0, with a resumed segment, is re-simulated and upgraded.
 #[test]
-fn a_replay_recorded_before_the_reveal_still_verifies() {
-    let old = old_replay();
-    assert_eq!(old.engine_version, "0.1.0");
+fn a_replay_labelled_0_1_0_still_verifies() {
+    let old = relabelled_0_1_0();
     assert_ne!(ENGINE_VERSION, "0.1.0");
     assert_eq!(verify(&old), Ok(()));
 
@@ -151,13 +184,26 @@ fn a_replay_recorded_before_the_reveal_still_verifies() {
     assert_eq!(rec.replay().segments.len(), old.segments.len());
 }
 
+/// The saved 0.1.0 game targets a card in its player's own hand, which the rules now forbid.
+#[test]
+fn a_saved_0_1_0_replay_with_an_in_hand_target_no_longer_verifies() {
+    let old = old_replay();
+    assert_eq!(old.engine_version, "0.1.0");
+    let expected = ReplayError::Rule {
+        index: 1,
+        err: RuleError::TargetInHand,
+    };
+    assert_eq!(verify(&old), Err(expected.clone()));
+    assert_eq!(Recorder::from_replay(old).unwrap_err(), expected);
+}
+
 #[test]
 fn a_tampered_old_replay_is_still_rejected() {
-    let mut old = old_replay();
+    let mut old = relabelled_0_1_0();
     old.segments[1].seed[0] ^= 1;
     assert_eq!(verify(&old), Err(ReplayError::CommitmentMismatch(1)));
 
-    let mut unknown = old_replay();
+    let mut unknown = relabelled_0_1_0();
     unknown.engine_version = "0.0.9".to_string();
     assert_eq!(
         verify(&unknown),

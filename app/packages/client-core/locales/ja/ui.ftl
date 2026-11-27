@@ -268,8 +268,6 @@ count-potion = 薬：{ $n }
 card-name =
     { $initiative }、{ CHARACTER($character) }、{ $faction }。{ $ability }
 card-fool-name = 愚者。{ $ability }
-# A pill drawn on a target card, in place of its abilities, when the card is in the player's own hand.
-card-in-hand = 手札
 
 ## Card abilities, in our own words; each marker named is an argument, so it can be drawn as a token
 card-ability-hunter = { $cross }を使えば、人狼を2体まで攻撃できます。
@@ -332,7 +330,6 @@ plan-seal-incomplete = まだプランが完成していません。
 plan-character-not-offered = このキャラクターはこのラウンドでは出せません。
 target-not-allowed = 選んだキャラクターは、このカードを対象にできません。
 target-limit = このプランにはこれ以上対象を加えられません。先に対象を1つ外してください。
-target-choose-character-first = 先にキャラクターを選んでください。
 plan-summary-short = { CHARACTER($character) } → { $targets }
 plan-summary-short-none = { CHARACTER($character) } → 対象なし
 plan-summary-fool = 愚者
@@ -350,13 +347,6 @@ reveal-initiative = { CHARACTER($character) }：イニシアチブ{ $effective }
 reveal-initiative-label = { CHARACTER($character) }のイニシアチブ
 reveal-initiative-change = { $printed } → { $effective }
 reveal-order-note = イニシアチブが低い方が先に行動します。
-reveal-opponent-placed = { $n ->
-        [0] 砂時計を置きませんでした
-       *[other] 砂時計を{ $n }個置きました
-    }
-reveal-face-down = 相手のキャラクター（裏向き）
-reveal-versus = 対
-reveal-my-plan = あなたのプラン：{ $plan }
 reveal-potion-heading = 薬の対象を選ぶ
 reveal-potion-confirm = 先にカードを選んでください
 
@@ -368,20 +358,29 @@ showdown-hunter-heading = あなたの狩人
 showdown-out-yours = { $owner }の{ CHARACTER($character) }は脱落したため、行動しません。
 showdown-out-opponent = { $owner }の{ CHARACTER($character) }は脱落したため、行動しません。
 plan-panels-heading = プラン
-plan-panel-plan = { $name }：{ $plan }
-plan-panel-position = { $position ->
-        [1] 先攻
-       *[other] 後攻
+
+## Player sides in the reveal and showdown
+side-you = あなた
+side-opponent = 相手
+side-initiative = イニシアチブ{ $initiative }
+side-initiative-changed = イニシアチブ{ $printed } → { $effective }
+side-initiative-hidden = イニシアチブ？
+side-target = → { $target }
+side-more-targets = +{ $n }
+side-pill = +{ $n }
+side-pill-choosing = +?
+side-placed = { $n ->
+        [0] 砂時計を置きませんでした
+       *[other] 砂時計を{ $n }個置きました
     }
-plan-panel-initiative = イニシアチブ{ $initiative }
-plan-panel-spoken = { $name }：{ $plan }。{ $position ->
-        [1] 先に行動
-       *[other] 後に行動
-    }、イニシアチブ{ $effective }（カードでは{ $printed }）。
-plan-panel-spoken-unknown = { $name }：{ $plan }。{ $position ->
-        [1] 先に行動
-       *[other] 後に行動
-    }。
+side-placed-choosing = 置く砂時計の数を選んでいます
+side-label = { $who }：{ $plan }。イニシアチブ{ $initiative }。
+side-label-changed = { $who }：{ $plan }。イニシアチブ{ $effective }（カードでは{ $printed }）。
+side-label-hidden = { $who }：キャラクターは裏向き、イニシアチブは不明です。
+side-label-ordered = { $label }{ $position ->
+        [1] 先に行動します。
+       *[other] 後に行動します。
+    }
 
 ## Table layout
 table-you = あなた
@@ -620,6 +619,7 @@ reason-resignation = 投了
 replay-heading = リプレイ
 replay-menu = リプレイメニュー
 replay-missing = このゲームはこの端末にありません。
+replay-unplayable = このゲームは以前のルールでプレイされたため、リプレイを表示できません。
 replay-position = { $step }/{ $total }・第{ $round }ラウンド
 replay-controls = リプレイの操作
 replay-previous-step = 前のステップ

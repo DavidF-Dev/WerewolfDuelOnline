@@ -5,6 +5,7 @@
   import { characterName, planStatus } from '../text.js';
   import { fitText } from '../components/fit-text.js';
   import MarkerList from './MarkerList.svelte';
+  import type { Markers } from './shown-markers.js';
 
   interface Props {
     localiser: Localiser;
@@ -13,11 +14,24 @@
     connected?: boolean;
     player: PlayerView;
     hasBadge: boolean;
+    /** The markers to show, when they differ from the player's own, as partway through a showdown. */
+    markers?: Markers;
+    /** Whether a marker count that changes is shown as a gain or a loss. */
+    animate?: boolean;
     /** Whether the opponent has nothing to do until this seat acts, outside the plan phase. */
     waitingForMe?: boolean;
   }
 
-  let { localiser: l, name, connected, player, hasBadge, waitingForMe = false }: Props = $props();
+  let {
+    localiser: l,
+    name,
+    connected,
+    player,
+    hasBadge,
+    markers,
+    animate = false,
+    waitingForMe = false,
+  }: Props = $props();
   const sealed = $derived(typeof player.plan === 'object' && 'hidden' in player.plan);
   // A revealed plan names only its character here; its targets are told where it resolves.
   const status = $derived(
@@ -73,7 +87,14 @@
         <span aria-hidden="true">{player.hand_size}</span>
         <span class="visually-hidden">{l.t('count-hand', { n: player.hand_size })}</span>
       </span>
-      <MarkerList localiser={l} {player} {hasBadge} testId="opponent" badgeAtEnd />
+      <MarkerList
+        localiser={l}
+        markers={markers ?? player}
+        {hasBadge}
+        {animate}
+        testId="opponent"
+        badgeAtEnd
+      />
     </div>
   </div>
   <Chip class="status" data-testid="opponent-plan" fit>

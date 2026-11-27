@@ -33,13 +33,22 @@ const ACTIONS: Readonly<Record<string, { bar: string[]; inline?: string; footer?
   'table-plan': { bar: ['seal-plan'] },
   'table-plan-seal': { bar: ['seal-plan'] },
   'table-plan-long-name': { bar: ['seal-plan'] },
+  'table-plan-none-chosen': { bar: ['seal-plan'] },
+  'table-plan-badge-hand': { bar: ['seal-plan'] },
+  'table-plan-villager': { bar: ['seal-plan'] },
   'table-plan-sealed': { bar: [] },
   'table-reveal-hourglasses': { bar: ['place-hourglasses'] },
+  'table-reveal-opponent-zero': { bar: ['place-hourglasses'] },
+  'table-reveal-opponent-placed': { bar: ['place-hourglasses'] },
   'table-reveal-potion': { bar: ['confirm-potion'] },
+  'table-reveal-potion-wolf-king-five': { bar: ['confirm-potion'] },
   'table-showdown': { bar: ['showdown-next', 'action-next-round'] },
+  'table-showdown-wolf-king-five': { bar: ['showdown-next', 'action-next-round'] },
   'table-hunter': { bar: [], inline: 'action-hunter-spend' },
   'table-round-summary': { bar: ['action-next-round'] },
   'table-showdown-elimination': { bar: ['action-next-round'] },
+  'table-marker-gain': { bar: ['showdown-next', 'action-next-round'] },
+  'table-marker-loss': { bar: ['showdown-next', 'action-next-round'] },
   'table-paused': { bar: ['resume'] },
   'table-rejoin-request': { bar: ['seal-plan'] },
   'table-menu': { bar: ['seal-plan'] },
@@ -280,8 +289,10 @@ const measurePlan = (page: Page) =>
       return parseFloat(style.outlineWidth) + parseFloat(style.outlineOffset);
     };
     return {
-      targetRows: Array.from(document.querySelectorAll('[data-testid^="target-"]'), (card) =>
-        Math.round(box(card).top),
+      // Each card's slot, since a faded card is drawn smaller inside it.
+      targetRows: Array.from(
+        document.querySelectorAll('[data-testid="plan-targets"] li[data-card]'),
+        (card) => Math.round(box(card).top),
       ),
       targetsBottom: box(document.querySelector('[data-testid="plan-targets"]')!).bottom,
       hand: frames.map((frame) => ({
@@ -295,7 +306,7 @@ const measurePlan = (page: Page) =>
     };
   });
 
-test('the plan shows five then four targets, the hand along the bottom and no large card', async ({
+test('the plan shows the targets not in the hand three to a row, the hand along the bottom and no large card', async ({
   page,
 }, info) => {
   test.skip(info.project.name !== 'desktop', 'the gallery is measured at fixed sizes');
@@ -305,12 +316,12 @@ test('the plan shows five then four targets, the hand along the bottom and no la
     await openEntry(page, 'table-plan');
     const m = await measurePlan(page);
     const rows = [...new Set(m.targetRows)];
-    expect(m.targetRows, `${where}: nine targets`).toHaveLength(9);
+    expect(m.targetRows, `${where}: the targets not in the hand`).toHaveLength(9 - m.hand.length);
     expect(rows, `${where}: two rows of targets`).toHaveLength(2);
     expect(
       m.targetRows.filter((top) => top === rows[0]),
-      `${where}: five on top`,
-    ).toHaveLength(5);
+      `${where}: three on top`,
+    ).toHaveLength(3);
     for (const card of m.hand) {
       expect(card.bottom, `${where}: the hand sits above my strip`).toBeLessThanOrEqual(
         m.myStripTop,
@@ -320,7 +331,7 @@ test('the plan shows five then four targets, the hand along the bottom and no la
   }
 });
 
-test('the chosen hand card rises', async ({ page }, info) => {
+test('the chosen card rises 7 px', async ({ page }, info) => {
   test.skip(info.project.name !== 'desktop', 'the gallery is measured at fixed sizes');
   for (const size of SIZES) {
     const where = `${size.width}×${size.height}`;
@@ -331,7 +342,7 @@ test('the chosen hand card rises', async ({ page }, info) => {
     expect(chosen, `${where}: one chosen card`).toHaveLength(1);
     const raised = chosen[0]!;
     for (const other of m.hand.filter((card) => !card.chosen)) {
-      expect(other.top - raised.top, `${where}: it rises 14 px`).toBeCloseTo(14, 0);
+      expect(other.top - raised.top, `${where}: it rises 7 px`).toBeCloseTo(7, 0);
     }
     expect(raised.top, `${where}: it clears the Targets panel by 4 px`).toBeGreaterThanOrEqual(
       m.targetsBottom + 4,
@@ -491,7 +502,7 @@ const SHRUNK_CARDS = [
     what: 'the reveal at 150 %',
     id: 'table-reveal-hourglasses',
     scale: 1.5,
-    card: 'reveal-my-card',
+    card: 'reveal-side-you',
   },
 ] as const;
 
@@ -1090,9 +1101,11 @@ const framingProblems = (page: Page, game: boolean) =>
         }
       }
       // The hand is fanned, so its cards overlap on purpose.
-      if (card.closest('[data-testid="plan-characters"]') !== null) continue;
+      const fanned = (el: Element) =>
+        el.closest('[data-testid="plan-characters"], [data-testid="my-hand"]') !== null;
+      if (fanned(card)) continue;
       for (const other of cards.slice(i + 1)) {
-        if (other.closest('[data-testid="plan-characters"]') !== null) continue;
+        if (fanned(other)) continue;
         const theirs = shown(other);
         if (theirs !== null && overlap(seen, theirs)) {
           found.push(`${name(card)} overlaps ${name(other)}`);
@@ -1256,16 +1269,20 @@ for (const lang of LANGUAGES) {
 
 for (const lang of LANGUAGES) {
   test(
-    inLanguageTitle('showdown plan panels give the order and the initiative a line each', lang),
+    inLanguageTitle('each player side gives who and the initiative a line each', lang),
     async ({ page }, info) => {
       test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
-      /** Each panel's order lines: their text, how many line boxes each takes and whether it stays inside. */
-      const orderLines = () =>
-        page.locator('[data-testid^="plan-panel-"]').evaluateAll((items) =>
-          items.map((panel) => {
-            const edge = panel.getBoundingClientRect();
+      test.setTimeout(240_000);
+      const SIDES = '[data-testid^="plan-panel-"], [data-testid^="reveal-side-"]';
+      /** Each side's two lines: their text, how many line boxes each takes and whether it stays inside. */
+      const sideLines = () =>
+        page.locator(SIDES).evaluateAll((items) =>
+          items.map((side) => {
+            const edge = side.getBoundingClientRect();
             return Array.from(
-              panel.querySelectorAll<HTMLElement>('[data-part="plan-order"]'),
+              side.querySelectorAll<HTMLElement>(
+                '[data-part="side-who"], [data-part="side-initiative"]',
+              ),
               (line) => {
                 const range = document.createRange();
                 range.selectNodeContents(line);
@@ -1282,46 +1299,97 @@ for (const lang of LANGUAGES) {
       for (const size of [{ width: 320, height: 640 }, ...SIZES]) {
         await page.setViewportSize(size);
         for (const scale of [1, 1.5]) {
-          for (const id of ['table-showdown', 'table-round-summary', 'replay-showdown']) {
+          for (const id of [
+            'table-reveal-potion-wolf-king-five',
+            'table-showdown',
+            'table-round-summary',
+            'replay-showdown',
+          ]) {
             await openEntry(page, id, scale, lang);
             for (const probe of ['as shown', 'with a changed initiative']) {
               if (probe !== 'as shown') {
-                // The longest initiative a panel can show, as after placing Hourglasses.
-                const probed = await page.evaluate(async () => {
+                // The longest initiative a side can show, as after placing Hourglasses.
+                const probed = await page.evaluate(async (selector) => {
                   const texts: string[] = [];
-                  for (const panel of Array.from(
-                    document.querySelectorAll('[data-testid^="plan-panel-"]'),
-                  )) {
-                    const initiative = panel.querySelectorAll('[data-part="plan-order"]')[1];
-                    if (initiative !== undefined) {
-                      initiative.textContent = initiative.textContent!.replace(/\d.*$/u, '8 → 0');
-                      texts.push(initiative.textContent);
+                  for (const side of Array.from(document.querySelectorAll(selector))) {
+                    const line = side.querySelector('[data-part="side-initiative"]');
+                    if (line !== null && /\d/u.test(line.textContent!)) {
+                      line.textContent = line.textContent!.replace(/\d.*$/u, '8 → 0');
+                      texts.push(line.textContent);
                     }
                   }
                   await new Promise((done) =>
                     requestAnimationFrame(() => requestAnimationFrame(done)),
                   );
                   return texts;
-                });
-                expect(probed, 'both panels show the longest initiative').toHaveLength(2);
+                }, SIDES);
+                expect(probed.length, 'a side shows the longest initiative').toBeGreaterThan(0);
                 for (const text of probed) expect(text).toMatch(/8 → 0$/u);
               }
               const where = `${id} at ${size.width}×${size.height}, ${scale * 100} %, ${probe}`;
-              const panels = await orderLines();
-              expect(panels, `${where}: two plan panels`).toHaveLength(2);
-              for (const lines of panels) {
-                expect.soft(lines, `${where}: an order and an initiative`).toHaveLength(2);
+              const sides = await sideLines();
+              expect(sides, `${where}: two sides`).toHaveLength(2);
+              for (const lines of sides) {
+                expect.soft(lines, `${where}: who and the initiative`).toHaveLength(2);
                 if (lang === 'en') {
-                  expect.soft(lines[0]?.text, `${where}: order`).toMatch(/^(First|Second)$/);
+                  expect.soft(lines[0]?.text, `${where}: who`).toMatch(/^(You|Opponent)$/);
                   expect.soft(lines[1]?.text, `${where}: initiative`).toMatch(/^Initiative /);
                 }
                 for (const line of lines) {
                   expect.soft(line.lines, `${where}: "${line.text}" on one line`).toBe(1);
-                  expect.soft(line.inside, `${where}: "${line.text}" inside its panel`).toBe(true);
+                  expect.soft(line.inside, `${where}: "${line.text}" inside its side`).toBe(true);
                 }
               }
             }
           }
+        }
+      }
+    },
+  );
+}
+
+for (const lang of LANGUAGES) {
+  test(
+    inLanguageTitle('five target chips take two rows at most and end in "+n"', lang),
+    async ({ page }, info) => {
+      test.skip(info.project.name !== 'desktop', 'measured at fixed sizes');
+      await page.setViewportSize({ width: 360, height: 640 });
+      for (const id of ['table-reveal-potion-wolf-king-five', 'table-showdown-wolf-king-five']) {
+        await openEntry(page, id, 1, lang);
+        await page.evaluate(async () => {
+          await document.fonts.ready;
+          for (let i = 0; i < 3; i++) await new Promise((done) => requestAnimationFrame(done));
+        });
+        const sides = await page
+          .locator('[data-testid="reveal-side-you"], [data-testid^="plan-panel-"]')
+          .evaluateAll((items) =>
+            items.flatMap((item) => {
+              const list = item.querySelector('[data-part="side-targets"]');
+              if (list === null) return [];
+              const shown = Array.from(list.children).filter(
+                (child) => getComputedStyle(child).display !== 'none',
+              ) as HTMLElement[];
+              const more = list.querySelector<HTMLElement>('[data-part="side-more"]')!;
+              return [
+                {
+                  chips: list.querySelectorAll('[data-part="side-target"]').length,
+                  rows: new Set(shown.map((child) => Math.round(child.getBoundingClientRect().top)))
+                    .size,
+                  more: more.hidden ? null : (more.textContent ?? ''),
+                  name: item.querySelector('[role="group"]')?.getAttribute('aria-label') ?? '',
+                  targets: Array.from(list.querySelectorAll('[data-part="side-target"]'), (chip) =>
+                    (chip.textContent ?? '').replace(/^\S+\s*/u, '').trim(),
+                  ),
+                },
+              ];
+            }),
+          );
+        const five = sides.find((side) => side.chips === 5);
+        expect(five, `${id}: a side with five targets`).toBeDefined();
+        expect(five!.rows, `${id}: two rows at most`).toBeLessThanOrEqual(2);
+        expect(five!.more, `${id}: a "+n" chip`).toMatch(/^\+\d$/u);
+        for (const target of five!.targets) {
+          expect(five!.name, `${id}: the side names ${target}`).toContain(target);
         }
       }
     },
@@ -1526,19 +1594,14 @@ const FITTED_LABELS: ReadonlyArray<{ group: string; selector: string; entries: s
     ],
   },
   {
-    group: 'plan panel order line',
-    selector: '[data-part="plan-order"]',
-    entries: ['table-showdown', 'table-round-summary'],
+    group: 'player side line',
+    selector: '[data-part="side-who"], [data-part="side-initiative"]',
+    entries: ['table-reveal-potion', 'table-showdown', 'table-round-summary'],
   },
   {
     group: 'opponent name',
     selector: '[data-testid="opponent"] h2',
     entries: ['table-plan', 'table-plan-long-name'],
-  },
-  {
-    group: 'opponent Hourglass caption',
-    selector: '[data-testid="opponent-hourglasses"]',
-    entries: ['table-reveal-potion'],
   },
 ];
 

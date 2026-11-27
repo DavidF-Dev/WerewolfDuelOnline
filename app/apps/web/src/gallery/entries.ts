@@ -1,6 +1,7 @@
 import type { Component } from 'svelte';
 import type { GameClientState } from '@wwd/client-core';
 import { exportBackup } from '../backup/export.js';
+import { freezeMarkerChanges } from '../components/MarkerCount.svelte';
 import { getDeviceStore } from '../device-store.js';
 import About from '../screens/About.svelte';
 import CharacterReference from '../screens/CharacterReference.svelte';
@@ -16,11 +17,13 @@ import Settings from '../screens/Settings.svelte';
 import Stats from '../screens/Stats.svelte';
 import { targetId } from '../cards.js';
 import {
+  badgePlanState,
   FIRST_PAST_GAME,
   HUNTER_PAST_GAME,
   HUNTER_STEP,
   OFFLINE,
   ONLINE,
+  eliminationBeforeState,
   eliminationState,
   OTHER_SERVER,
   ROOM,
@@ -29,6 +32,8 @@ import {
   hunterGame,
   hunterState,
   LONG_NAME,
+  opponentPlacedState,
+  opponentZeroState,
   nameThisDevice,
   offerInstall,
   offerIosInstall,
@@ -44,7 +49,10 @@ import {
   returningPlayer,
   roundOverState,
   sealedPlanState,
+  villagerPlanState,
   waitingState,
+  wolfKingPotionState,
+  wolfKingShowdownState,
 } from './fixtures.js';
 import CardsGallery from './CardsGallery.svelte';
 import FitStage from './FitStage.svelte';
@@ -99,15 +107,17 @@ const table = (
     ...(act && { act }),
   });
 
-const chooseKnight: Act = () => click('plan-character-knight');
+/** Chooses the Knight and the targets of its first one-target plan in `state`. */
+const knightIn =
+  (state: () => GameClientState): Act =>
+  async () => {
+    await click('plan-character-knight');
+    for (const card of planOf(state().legal, 'knight', 1).submit_plan.targets) {
+      await click(`target-${targetId(card)}`);
+    }
+  };
 
-/** Chooses the Knight and the targets of its one-target plan. */
-const planKnight: Act = async (l) => {
-  await chooseKnight(l);
-  for (const card of planOf(planState().legal, 'knight', 1).submit_plan.targets) {
-    await click(`target-${targetId(card)}`);
-  }
-};
+const planKnight = knightIn(planState);
 
 /** Opens a sheet with its bar button and waits until it has finished rising. */
 async function openSheet(toggle: string, sheet: string): Promise<void> {
@@ -117,6 +127,11 @@ async function openSheet(toggle: string, sheet: string): Promise<void> {
 }
 
 const openMenu: Act = () => openSheet('game-menu-toggle', 'game-menu');
+
+/** Waits until a marker count shows a change of `kind`. */
+async function markerChange(kind: 'gain' | 'loss'): Promise<void> {
+  await until(() => document.querySelector(`[data-change="${kind}"]`), `a marker ${kind}`);
+}
 
 /** Opens the More menu of the first Continue row. */
 const openHomeMore: Act = async () => {
@@ -207,6 +222,24 @@ export const GALLERY: GalleryEntry[] = [
     ...table(planState, planKnight),
   },
   {
+    id: 'table-plan-none-chosen',
+    game: true,
+    title: 'Table in the plan phase before a character is chosen',
+    ...table(planState),
+  },
+  {
+    id: 'table-plan-badge-hand',
+    game: true,
+    title: 'Table in the plan phase holding the Badge and four cards',
+    ...table(badgePlanState, knightIn(badgePlanState)),
+  },
+  {
+    id: 'table-plan-villager',
+    game: true,
+    title: 'Table in the plan phase with the Villager, the Fool chosen for you',
+    ...table(villagerPlanState, () => click('plan-character-villager')),
+  },
+  {
     id: 'table-plan-long-name',
     game: true,
     title: 'Table in the plan phase facing a long, disconnected name',
@@ -232,21 +265,45 @@ export const GALLERY: GalleryEntry[] = [
     id: 'table-reveal-hourglasses',
     mockup: 4,
     game: true,
-    title: 'Table revealing, placing Hourglasses',
+    title: 'Table revealing, placing Hourglasses while the opponent still chooses',
     ...table(hourglassState),
+  },
+  {
+    id: 'table-reveal-opponent-zero',
+    game: true,
+    title: 'Table revealing, placing Hourglasses after the opponent placed none',
+    ...table(opponentZeroState),
+  },
+  {
+    id: 'table-reveal-opponent-placed',
+    game: true,
+    title: 'Table revealing, placing Hourglasses after the opponent placed some',
+    ...table(opponentPlacedState),
   },
   {
     id: 'table-reveal-potion',
     game: true,
-    title: 'Table revealing, choosing the potion target',
+    title: 'Table revealing, choosing the Potion target',
     ...table(potionState),
+  },
+  {
+    id: 'table-reveal-potion-wolf-king-five',
+    game: true,
+    title: 'Table revealing, naming the Potion target after playing the Wolf King at five targets',
+    ...table(wolfKingPotionState),
   },
   {
     id: 'table-showdown',
     mockup: 5,
     game: true,
-    title: 'Table in the showdown',
+    title: 'Table in the showdown, the sides in acting order',
     ...table(roundOverState, () => click('showdown-next')),
+  },
+  {
+    id: 'table-showdown-wolf-king-five',
+    game: true,
+    title: 'Table in the showdown, with the Wolf King at five targets',
+    ...table(wolfKingShowdownState, () => click('showdown-next')),
   },
   {
     id: 'table-hunter',
@@ -271,6 +328,35 @@ export const GALLERY: GalleryEntry[] = [
     game: true,
     title: 'Table at round end, with a character eliminated before it acted',
     ...table(eliminationState, stepShowdown),
+  },
+  {
+    id: 'table-marker-gain',
+    game: true,
+    title: "Table in the showdown, the opponent's Hourglass count partway through its rise",
+    ...staged({
+      screen: OnlineTable,
+      props: () => ({ state: roundOverState(), connection: ONLINE }),
+      stage: freezeMarkerChanges,
+      act: async () => {
+        await click('showdown-next');
+        await markerChange('gain');
+      },
+    }),
+  },
+  {
+    id: 'table-marker-loss',
+    game: true,
+    title: 'Table as the showdown arrives, a Health count partway through its fall',
+    ...staged({
+      screen: OnlineTable,
+      props: () => ({
+        from: eliminationBeforeState(),
+        state: eliminationState(),
+        connection: ONLINE,
+      }),
+      stage: freezeMarkerChanges,
+      act: () => markerChange('loss'),
+    }),
   },
   { id: 'table-paused', game: true, title: 'Table while paused', ...table(pausedState) },
   {
@@ -405,12 +491,14 @@ export const GALLERY: GalleryEntry[] = [
       screen: Replay,
       props: () => ({ id: FIRST_PAST_GAME }),
       stage: pastGames,
+      // The first showdown step that shows the round summary, with the card set aside.
       act: async () => {
-        for (let step = 0; step < 40 && !present('showdown'); step++) {
+        for (let step = 0; step < 40 && !present('round-set-aside-card'); step++) {
           await click('replay-next-step');
           await new Promise((resolve) => setTimeout(resolve, 0));
         }
         await byTestId('showdown');
+        await byTestId('round-set-aside-card');
       },
     }),
   },

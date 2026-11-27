@@ -50,9 +50,6 @@ const GAME_TERMS = new Set([
 /** Acronyms, which keep their capitals in sentence case. */
 const ACRONYMS = new Set(['PIN', 'PINs']);
 
-// "vs" between two cards is a shorthand that reads as printed in lower case, never a sentence.
-const LOWER_CASE_SHORTHANDS: ReadonlySet<string> = new Set(['reveal-versus']);
-
 /** Every single-line message of the UI file, as [id, value]. */
 function uiMessages(): Array<[string, string]> {
   const ftl = readFileSync(new URL('../locales/en/ui.ftl', import.meta.url), 'utf8');
@@ -64,6 +61,8 @@ function uiMessages(): Array<[string, string]> {
 
 /** The capitalised words in a UI string that sentence case does not allow. */
 function sentenceCaseProblems(value: string): string[] {
+  // A value of symbols and placeholders alone, such as "+{ $n }", has no words to capitalise.
+  if (!/\p{L}/u.test(value.replace(/\{[^{}]*\}/g, ''))) return [];
   // A value may open with a placeholder, such as a number or a character's name.
   if (!/^(\p{Lu}|\{ (\$|CHARACTER\())/u.test(value)) return [value];
   // Placeables hold Fluent syntax; text in curly quotes is another product's label, as printed.
@@ -381,16 +380,15 @@ describe('localiser', () => {
   });
 
   it('ui strings are sentence case', () => {
-    const values = uiMessages()
-      .filter(([id]) => !LOWER_CASE_SHORTHANDS.has(id))
-      .map(([, value]) => value);
+    const values = uiMessages().map(([, value]) => value);
     expect(values.length).toBeGreaterThan(0);
     for (const value of values) expect(sentenceCaseProblems(value), value).toEqual([]);
   });
 
-  it('exempts only the lower-case shorthand between two cards from sentence case', () => {
-    expect([...LOWER_CASE_SHORTHANDS]).toEqual(['reveal-versus']);
-    expect(uiMessages().find(([id]) => id === 'reveal-versus')?.[1]).toBe('vs');
+  it('exempts only a value without words of its own from opening with a capital', () => {
+    expect(sentenceCaseProblems('→ { $target }')).toEqual([]);
+    expect(sentenceCaseProblems('+?')).toEqual([]);
+    expect(sentenceCaseProblems('→ the { $target }')).toEqual(['→ the { $target }']);
   });
 
   it('exempts only a third-party label in curly quotes from sentence case', () => {

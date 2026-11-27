@@ -90,7 +90,8 @@ test('guest seals a plan with the keyboard alone', async ({ context }) => {
   await expect.poll(async () => (await snapshot(guest)).legal.length).toBeGreaterThan(0);
 
   const plans = (await snapshot(guest)).legal.filter(isPlan).map((cmd) => cmd.submit_plan);
-  const plan = plans.find((p) => p.targets.length > 0) ?? plans[0];
+  // A character target, since the app chooses a lone Fool itself.
+  const plan = plans.find((p) => p.targets.some((t) => t !== 'fool')) ?? plans[0];
   expect(plan).toBeDefined();
   if (plan === undefined) return;
 

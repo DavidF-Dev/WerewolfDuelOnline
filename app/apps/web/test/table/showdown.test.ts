@@ -6,14 +6,9 @@ import type { Command, EventKind, Game, Seat, TargetCard } from '@wwd/engine';
 import { createLocaliser } from '@wwd/client-core';
 import { setDisplaySettings } from '../../src/settings/display.svelte.js';
 import { DEFAULT_SETTINGS, type Settings } from '../../src/settings/settings.js';
-import {
-  ONLINE,
-  OPPONENT,
-  hunterState,
-  potionState,
-  roundOverState,
-} from '../../src/gallery/fixtures.js';
+import { ONLINE, hunterState, potionState, roundOverState } from '../../src/gallery/fixtures.js';
 import OnlineTable from '../../src/gallery/OnlineTable.svelte';
+import Table from '../../src/screens/Table.svelte';
 import ShowdownList from '../../src/table/ShowdownList.svelte';
 import { showdownSteps, type SequencedEvent } from '../../src/table/showdown.js';
 import { newGame, playUntil } from '../games.js';
@@ -355,20 +350,28 @@ describe('the showdown middle', () => {
       card === 'fool' ? 'plan-summary-fool' : `character-${card.character.replaceAll('_', '-')}`,
     );
 
-  it('each plan panel gives its order and its initiative on lines of their own', () => {
-    render(OnlineTable, { props: { localiser, state: roundOverState(), connection: ONLINE } });
-    const orders = (['p0', 'p1'] as const).map((seat) =>
-      Array.from(
-        screen.getByTestId(`plan-panel-${seat}`).querySelectorAll('[data-part="plan-order"]'),
-        (line) => line.textContent?.trim(),
-      ),
-    );
-    for (const lines of orders) {
-      expect(lines).toHaveLength(2);
-      expect(lines[0]).toMatch(/^(First|Second)$/);
-      expect(lines[1]).toMatch(/^Initiative \d+( → \d+)?$/);
+  it('the sides go in showdown order, each giving who and the initiative a line', () => {
+    const state = roundOverState();
+    render(OnlineTable, { props: { localiser, state, connection: ONLINE } });
+    const reveal = state.events.findLast(([, event]) => 'plans_revealed' in event.kind)?.[1].kind;
+    if (reveal === undefined || !('plans_revealed' in reveal)) throw new Error('not revealed');
+    const panels = screen.getByTestId('plan-panels');
+    expect(
+      Array.from(panels.children, (side) => (side as HTMLElement).dataset['testid']),
+      'left to right by who acts first',
+    ).toEqual(reveal.plans_revealed.order.map((seat) => `plan-panel-${seat}`));
+    for (const seat of ['p0', 'p1'] as const) {
+      const side = screen.getByTestId(`plan-panel-${seat}`);
+      const line = (part: string) =>
+        side.querySelector(`[data-part="${part}"]`)?.textContent?.trim();
+      expect(line('side-who')).toBe(seat === state.seat ? 'You' : 'Opponent');
+      const name = side.querySelector('[role="group"]')?.getAttribute('aria-label') ?? '';
+      const first = reveal.plans_revealed.order[0] === seat;
+      expect(name, `${seat} says where it acts`).toMatch(
+        first ? /Acts first\.$/ : /Acts second\.$/,
+      );
+      expect(line('side-initiative')).toMatch(/^Initiative \d+( → \d+)?$/);
     }
-    expect(orders.map((lines) => lines[0]).sort()).toEqual(['First', 'Second']);
   });
 
   it('showdown replaces the reveal panels', () => {
@@ -404,17 +407,110 @@ describe('the showdown middle', () => {
         const panel = within(middle).getByTestId(`plan-panel-${seat}`);
         const card = panel.querySelector('.card');
         expect(card?.classList, 'a target-size card').toContain('target');
-        const bold = Array.from(
-          panel.querySelectorAll('[data-part="plan-line"] strong'),
-          (b) => b.textContent,
-        );
-        expect(bold, `${seat}: its player, character and targets`).toEqual([
-          seat === state.seat ? 'You' : OPPONENT,
+        expect(within(panel).getByRole('button').getAttribute('aria-label')).toContain(
           name({ character: plan.revealed.character }),
-          ...plan.revealed.targets.map(name),
-        ]);
+        );
+        const chips = Array.from(panel.querySelectorAll('[data-part="side-target"]'), (chip) =>
+          chip.textContent?.trim(),
+        );
+        expect(chips, `${seat}: a chip per target`).toEqual(
+          plan.revealed.targets.map((target) => `→ ${name(target)}`),
+        );
       }
       unmount();
     }
+  });
+});
+
+describe('the marker rows in the showdown', () => {
+  /** The count shown for `marker` in the opponent's strip. */
+  const opponentCount = (marker: string): HTMLElement =>
+    screen
+      .getByTestId('opponent-markers')
+      .querySelector<HTMLElement>(`[data-marker="${marker}"] [data-part="count-cell"]`)!;
+
+  it("the opponent's Hourglass count rises on the step that reads it out", async () => {
+    setDisplaySettings({ ...DEFAULT_SETTINGS, showdownSpeed: 'step' });
+    const state = roundOverState();
+    const live = state.view!.players[0].hourglass;
+    const steps = showdownSteps(state.events);
+    const gainAt = steps.findIndex((step) =>
+      step.some(
+        ([, e]) =>
+          'marker_gained' in e.kind &&
+          e.kind.marker_gained.seat === 'p0' &&
+          e.kind.marker_gained.marker === 'hourglass',
+      ),
+    );
+    expect(gainAt, 'the opponent gains an Hourglass after the first step').toBeGreaterThan(0);
+    render(OnlineTable, { props: { localiser, state, connection: ONLINE } });
+    for (let shown = 1; shown <= gainAt; shown++) {
+      expect(opponentCount('hourglass').textContent, `step ${shown}`).toContain(`${live - 1}`);
+      expect(opponentCount('hourglass').dataset['change']).toBeUndefined();
+      await userEvent.click(screen.getByRole('button', { name: 'Next result' }));
+    }
+    expect(opponentCount('hourglass').textContent).toContain(`${live}`);
+    expect(opponentCount('hourglass').dataset['change']).toBe('gain');
+    expect(screen.getByText(`Hourglasses: ${live}`)).toBeTruthy();
+  });
+
+  it('shows the live counts once every step is shown, or with instant results', async () => {
+    const state = roundOverState();
+    const live = state.view!.players[0].hourglass;
+
+    setDisplaySettings({ ...DEFAULT_SETTINGS, showdownSpeed: 'instant' });
+    const instant = render(OnlineTable, { props: { localiser, state, connection: ONLINE } });
+    expect(opponentCount('hourglass').textContent).toContain(`${live}`);
+    expect(opponentCount('hourglass').dataset['change']).toBeUndefined();
+    instant.unmount();
+
+    setDisplaySettings({ ...DEFAULT_SETTINGS, showdownSpeed: 'step' });
+    render(OnlineTable, { props: { localiser, state, connection: ONLINE } });
+    for (let n = 1; n < showdownSteps(state.events).length; n++) {
+      await userEvent.click(screen.getByRole('button', { name: 'Next result' }));
+    }
+    expect(screen.queryByRole('button', { name: 'Next result' })).toBeNull();
+    expect(screen.getByText(`Hourglasses: ${live}`)).toBeTruthy();
+    expect(opponentCount('hourglass').textContent).toContain(`${live}`);
+  });
+
+  /** Renders the table at the end of seed 12's first round, then pauses and resumes it after `steps` steps. */
+  async function pauseAfter(steps: number): Promise<{ live: number }> {
+    setDisplaySettings({ ...DEFAULT_SETTINGS, showdownSpeed: 'step' });
+    const playing = roundOverState();
+    const paused = { ...playing, legal: [], pause: { ...playing.pause, paused: true } };
+    const pauseActions = { accept: vi.fn(), cancel: vi.fn(), resume: vi.fn() };
+    const props = { localiser, onCommand: () => {}, pauseActions };
+    const view = render(Table, { props: { ...props, state: playing } });
+    for (let n = 1; n < steps; n++) {
+      await userEvent.click(screen.getByRole('button', { name: 'Next result' }));
+    }
+    // Lets a change the last step showed run out, so only later changes are seen.
+    await new Promise((resolve) => setTimeout(resolve, 1_300));
+    const before = opponentCount('hourglass').textContent;
+    expect(document.querySelector('[data-change]')).toBeNull();
+
+    await view.rerender({ state: paused });
+    expect(screen.queryByTestId('showdown'), 'the list is put away while paused').toBeNull();
+    expect(opponentCount('hourglass').textContent, 'paused').toBe(before);
+    expect(document.querySelector('[data-change]'), 'nothing animates on pausing').toBeNull();
+
+    await view.rerender({ state: playing });
+    expect(screen.getAllByTestId('showdown-step'), 'the list resumes at its step').toHaveLength(
+      steps,
+    );
+    expect(opponentCount('hourglass').textContent, 'resumed').toBe(before);
+    expect(document.querySelector('[data-change]'), 'nothing animates on resuming').toBeNull();
+    return { live: playing.view!.players[0].hourglass };
+  }
+
+  it('a pause before a step keeps its counts back, and resuming does not animate', async () => {
+    const { live } = await pauseAfter(1);
+    expect(opponentCount('hourglass').textContent).toContain(`${live - 1}`);
+  });
+
+  it('a pause after a step keeps its counts, and resuming does not step back', async () => {
+    const { live } = await pauseAfter(2);
+    expect(opponentCount('hourglass').textContent).toContain(`${live}`);
   });
 });

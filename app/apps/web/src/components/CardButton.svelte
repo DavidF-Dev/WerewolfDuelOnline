@@ -32,8 +32,6 @@
     state?: CardState;
     /** Why the card can't be chosen: announced while it is disabled, and shown on focus or a tap. */
     reason?: string;
-    /** The words of a pill drawn in place of the ability pills and announced with the card, such as "In hand". */
-    inHand?: string;
     onselect?: () => void;
     /** Whether choosing the card toggles it on and off, rather than acting at once. */
     toggle?: boolean;
@@ -51,7 +49,6 @@
     size = 'large',
     state: shownState = 'normal',
     reason,
-    inHand,
     onselect,
     toggle = true,
     testId,
@@ -62,11 +59,8 @@
   const actionable = $derived(onselect !== undefined);
   const inspectable = $derived(size !== 'large');
   const showReason = $derived(disabled && reason !== undefined);
-  const describedBy = $derived(
-    [inHand === undefined ? null : `${uid}-in-hand`, showReason ? `${uid}-reason` : null]
-      .filter((id) => id !== null)
-      .join(' ') || undefined,
-  );
+  // A target card that can't be chosen is drawn faded; a card of any other size is crossed out.
+  const faded = $derived(disabled && size === 'target');
 
   let button = $state<HTMLButtonElement>();
   let open = $state(false);
@@ -189,6 +183,8 @@
     class="frame card {size}"
     class:selected={shownState === 'selected'}
     class:disabled
+    class:faded
+    class:crossed={disabled && !faded}
     class:actionable
   >
     <!-- The face is drawn over the button, not inside it: the button's name says all the face shows. -->
@@ -202,7 +198,7 @@
       aria-label={label}
       aria-pressed={onselect === undefined || !toggle ? undefined : shownState === 'selected'}
       aria-disabled={disabled ? 'true' : undefined}
-      aria-describedby={describedBy}
+      aria-describedby={showReason ? `${uid}-reason` : undefined}
       data-testid={testId}
       onclick={select}
       onfocus={focused}
@@ -216,17 +212,7 @@
         if (inspectable) event.preventDefault();
       }}
     ></button>
-    <CardFace
-      {name}
-      {faction}
-      {initiative}
-      {art}
-      {size}
-      {pills}
-      {text}
-      {inHand}
-      inHandId="{uid}-in-hand"
-    />
+    <CardFace {name} {faction} {initiative} {art} {size} {pills} {text} />
     {#if shownState === 'selected'}
       <svg class="tick" viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="12" cy="12" r="11" fill="var(--accent)" />
@@ -243,7 +229,7 @@
     {#if open}
       <span class="popover" data-part="popover" aria-hidden="true" popover="manual" {@attach place}>
         <span class="popover-card">
-          <CardFace {name} {faction} {initiative} {art} {pills} {text} {inHand} />
+          <CardFace {name} {faction} {initiative} {art} {pills} {text} />
         </span>
         {#if reasonOpen}<span class="bubble" data-part="reason">{reason}</span>{/if}
       </span>
@@ -277,6 +263,7 @@
     position: relative;
     transition:
       translate var(--motion-fast) ease-out,
+      scale var(--motion-fast) ease-out,
       box-shadow var(--motion-fast) ease-out;
     width: var(--card-large-width);
   }
@@ -340,7 +327,7 @@
   }
 
   .card.medium.selected {
-    translate: 0 -14px;
+    translate: 0 -7px;
   }
 
   .card.target.selected {
@@ -352,11 +339,11 @@
     outline-offset: 2px;
   }
 
-  .card.disabled {
+  .card.crossed {
     --card-content-opacity: 0.45;
   }
 
-  .card.disabled::after {
+  .card.crossed::after {
     background: linear-gradient(
       to top right,
       transparent 48%,
@@ -367,6 +354,27 @@
     inset: 0;
     pointer-events: none;
     position: absolute;
+  }
+
+  /* Scaled about its centre, so the cards around it keep their places. */
+  .card.faded {
+    --card-content-opacity: 0.6;
+    scale: 0.9;
+    transform-origin: center;
+  }
+
+  .card.faded > :global(.face) {
+    border-color: color-mix(in srgb, var(--edge) 60%, var(--surface));
+    box-shadow: none;
+  }
+
+  /* The name stays readable: the muted ink keeps 4.5:1 where 60 % opacity would not. */
+  .card.faded > :global(.face > [data-part='top']) {
+    opacity: 1;
+  }
+
+  .card.faded :global([data-part='name']) {
+    color: var(--muted);
   }
 
   .tick {

@@ -16,7 +16,9 @@
   import PlanPanels from '../table/PlanPanels.svelte';
   import PlanSheet from '../table/PlanSheet.svelte';
   import RevealPanel from '../table/RevealPanel.svelte';
-  import ShowdownList from '../table/ShowdownList.svelte';
+  import ShowdownList, { firstShown } from '../table/ShowdownList.svelte';
+  import { showdownSteps } from '../table/showdown.js';
+  import { shownMarkers } from '../table/shown-markers.js';
   import TargetGrid from '../table/TargetGrid.svelte';
   import { providePrimary } from '../table/primary.svelte.js';
   import { buzz } from '../haptics.js';
@@ -136,6 +138,18 @@
   /** Whether the showdown's earlier results are collapsed for want of room. */
   let showdownTight = $state(false);
   const roundKey = $derived(`${client.game}|${view?.round ?? 0}`);
+  // The steps the showdown list has shown this round, as it last reported them.
+  let stepsShown = $state<{ round: string; shown: number } | null>(null);
+  // During a showdown, even while paused, the markers are as of the list's last shown step.
+  const steps = $derived(
+    view !== null && seat !== null && showdown ? showdownSteps(client.events) : [],
+  );
+  const reportedShown = $derived(stepsShown?.round === roundKey ? stepsShown.shown : undefined);
+  const markers = $derived(
+    view === null
+      ? null
+      : shownMarkers(view.players, steps, reportedShown ?? firstShown(steps.length)),
+  );
   const resignation = $derived(
     gameOverEvent !== undefined &&
       'game_over' in gameOverEvent.kind &&
@@ -363,6 +377,8 @@
           connected={client.opponent.connected}
           player={view.players[index(opponentSeat)]}
           hasBadge={view.badge === opponentSeat}
+          markers={markers?.[index(opponentSeat)]}
+          animate
           {waitingForMe}
         />
       {/if}
@@ -422,7 +438,6 @@
                 {view}
                 events={client.events}
                 {seat}
-                {names}
                 compact={showdownTight}
               />
               {#key view.round}
@@ -435,6 +450,8 @@
                   errorCount={client.errorCount}
                   onCaughtUp={focusPhase}
                   onShown={(all) => (shownAllFor = all ? roundKey : null)}
+                  onStepsShown={(shown) => (stepsShown = { round: roundKey, shown })}
+                  startAt={reportedShown}
                   onTight={(tight) => (showdownTight = tight)}
                 />
               {/key}
@@ -444,7 +461,14 @@
       </div>
 
       {#if view !== null && seat !== null}
-        <MyArea localiser={l} name={l.t(`seat-${seat}`)} {view} {seat} />
+        <MyArea
+          localiser={l}
+          name={l.t(`seat-${seat}`)}
+          {view}
+          {seat}
+          markers={markers?.[index(seat)]}
+          animate
+        />
       {/if}
     {/if}
   </Screen>

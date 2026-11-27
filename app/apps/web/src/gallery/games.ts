@@ -14,12 +14,20 @@ const isOver = (game: Game): boolean => {
   return typeof phase === 'object' && 'game_over' in phase;
 };
 
-/** A fresh game, made by `create`, in which `seat` was dealt every card in `cards`. */
-export function gameDealing(seat: Seat, cards: Character[], create: CreateGame): Game {
+/**
+ * A fresh game, made by `create`, in which `seat` was dealt every card in `cards`, in a hand that
+ * also meets `also`.
+ */
+export function gameDealing(
+  seat: Seat,
+  cards: Character[],
+  create: CreateGame,
+  also: (hand: readonly Character[]) => boolean = () => true,
+): Game {
   for (let seed = 1; seed < 2000; seed++) {
     const game = create(seed);
     const hand = game.view({ seat }).players[seat === 'p0' ? 0 : 1].hand ?? [];
-    if (cards.every((c) => hand.includes(c))) return game;
+    if (cards.every((c) => hand.includes(c)) && also(hand)) return game;
   }
   throw new Error('no seed deals those cards');
 }

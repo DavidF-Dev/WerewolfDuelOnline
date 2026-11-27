@@ -67,7 +67,7 @@ fn ids_are_the_kebab_case_of_the_serde_names() {
 /// random stream or the canonical encoding is noticed.
 #[test]
 fn golden_cross_round_hash() {
-    let (replay, state) = random_game([10; 32], RulesConfig::default(), [110; 32]);
+    let (replay, state) = random_game([10; 32], RulesConfig::default(), [0; 32]);
     let commands: Vec<&Command> = replay.segments[0]
         .entries
         .iter()
@@ -90,6 +90,6 @@ fn golden_cross_round_hash() {
     let hex: String = hash(&state).iter().map(|b| format!("{b:02x}")).collect();
     assert_eq!(
         hex,
-        "aa9ea5535019461e30a6174e10ed2fa69dc7136ef27496c9fab148d3112c6bba"
+        "138f63a1593e2150df3bd0a14c8919d02e7db5f1ae3c54da7438e04ee8922cf9"
     );
 }

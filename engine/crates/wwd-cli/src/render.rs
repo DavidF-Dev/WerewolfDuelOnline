@@ -697,10 +697,11 @@ mod tests {
         RuleError::WrongPhase => [RuleError::WrongPhase],
         RuleError::CharacterNotInHand => [RuleError::CharacterNotInHand],
         RuleError::TargetNotAllowed => [RuleError::TargetNotAllowed],
+        RuleError::TargetInHand => [RuleError::TargetInHand],
         RuleError::TooManyTargets => [RuleError::TooManyTargets],
         RuleError::TooFewTargets => [RuleError::TooFewTargets],
         RuleError::NotEnoughHourglasses => [RuleError::NotEnoughHourglasses],
-        RuleError::InvalidPotionTarget => [RuleError::InvalidPotionTarget],
+        RuleError::PotionTargetInHand => [RuleError::PotionTargetInHand],
     });
 
     samples!(edit_error_samples -> EditError {

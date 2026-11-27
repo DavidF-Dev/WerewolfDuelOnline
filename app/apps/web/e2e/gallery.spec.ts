@@ -1,5 +1,5 @@
 import { expect, test, type Browser } from '@playwright/test';
-import { GALLERY_ENTRIES, openGalleryEntry } from './gallery-entries.js';
+import { expectGalleryEntries, GALLERY_ENTRIES, openGalleryEntry } from './gallery-entries.js';
 
 /** Opens gallery entry `id` in a fresh page at 360 × 740 in the light look and returns its screenshot. */
 async function capture(browser: Browser, baseURL: string, id: string): Promise<Buffer> {
@@ -100,26 +100,20 @@ async function compareImages(browser: Browser, a: Buffer, b: Buffer): Promise<Co
   }
 }
 
-test('capturing the same entry twice gives the same image', async ({ browser, baseURL }, info) => {
+test('the capture checks name every gallery entry', async ({ page }, info) => {
   test.skip(info.project.name !== 'desktop', 'the gallery renders the same in every project');
-  test.setTimeout(300_000);
-  if (baseURL === undefined) throw new Error('no base URL');
-  const list = await browser.newPage({ baseURL });
-  await list.goto('/#/dev/gallery');
-  await list.locator('[data-entry]').first().waitFor();
-  const ids = await list
-    .locator('[data-entry]')
-    .evaluateAll((items) => items.map((item) => (item as HTMLElement).dataset['entry'] ?? ''));
-  await list.close();
-  expect(ids.length).toBeGreaterThan(30);
+  expect(GALLERY_ENTRIES.length).toBeGreaterThan(30);
+  await expectGalleryEntries(page);
+});
 
-  const first = new Map<string, Buffer>();
-  for (const id of ids) first.set(id, await capture(browser, baseURL, id));
-  // Long enough for a running clock to change a countdown's seconds.
-  await new Promise((resolve) => setTimeout(resolve, 1100));
-  for (const id of ids) {
+for (const id of GALLERY_ENTRIES) {
+  test(`capturing ${id} twice gives the same image`, async ({ browser, baseURL }, info) => {
+    test.skip(info.project.name !== 'desktop', 'the gallery renders the same in every project');
+    if (baseURL === undefined) throw new Error('no base URL');
+    const earlier = await capture(browser, baseURL, id);
+    // Long enough for a running clock to change a countdown's seconds.
+    await new Promise((resolve) => setTimeout(resolve, 1100));
     const second = await capture(browser, baseURL, id);
-    const earlier = first.get(id) ?? Buffer.alloc(0);
     const comparison = await compareImages(browser, earlier, second);
     if (!comparison.same) {
       await info.attach(`${id}-first.png`, { body: earlier, contentType: 'image/png' });
@@ -129,14 +123,12 @@ test('capturing the same entry twice gives the same image', async ({ browser, ba
       }
     }
     const { box, differing, largest } = comparison;
-    expect
-      .soft(
-        comparison.same,
-        `${id}: ${differing} pixels differ by up to ${largest} in ${JSON.stringify(box)}`,
-      )
-      .toBe(true);
-  }
-});
+    expect(
+      comparison.same,
+      `${id}: ${differing} pixels differ by up to ${largest} in ${JSON.stringify(box)}`,
+    ).toBe(true);
+  });
+}
 
 test('a fitted label is fitted once, before it is first drawn, however late the fonts arrive', async ({
   page,

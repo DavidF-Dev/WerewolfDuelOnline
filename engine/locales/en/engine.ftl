@@ -265,10 +265,11 @@ error-not-your-turn = It is not your turn.
 error-wrong-phase = That action is not allowed in this phase.
 error-character-not-in-hand = That character is not in your hand.
 error-target-not-allowed = That character can't target this card.
+error-target-in-hand = You can't target a card in your own hand.
 error-too-many-targets = That plan has too many targets.
 error-too-few-targets = That plan needs more targets.
 error-not-enough-hourglasses = You don't have that many Hourglasses.
-error-invalid-potion-target = That card can't be the Potion target.
+error-potion-target-in-hand = The Potion can't name a card that was in your hand this round.
 
 ## Edit errors
 error-edit-wrong-phase = Hands can only be edited before any plan is submitted.

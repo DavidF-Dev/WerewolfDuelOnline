@@ -335,14 +335,19 @@ describe('server messages', () => {
   });
 });
 
-describe('protocol v3', () => {
+describe('protocol v4', () => {
+  it('a v3 hello gets protocol_version, since in-hand targets became illegal', () => {
+    const raw = JSON.stringify({ type: 'hello', protocol_version: 3, room: ROOM });
+    expect(parseClientMessage(raw)).toEqual({ ok: false, code: 'protocol_version' });
+  });
+
   it('a v2 hello gets protocol_version, since the event shapes changed', () => {
     const raw = JSON.stringify({ type: 'hello', protocol_version: 2, room: ROOM });
     expect(parseClientMessage(raw)).toEqual({ ok: false, code: 'protocol_version' });
   });
 
-  it('is version 3, and a v1 hello gets protocol_version', () => {
-    expect(PROTOCOL_VERSION).toBe(3);
+  it('is version 4, and a v1 hello gets protocol_version', () => {
+    expect(PROTOCOL_VERSION).toBe(4);
     const raw = JSON.stringify({
       type: 'hello',
       protocol_version: 1,

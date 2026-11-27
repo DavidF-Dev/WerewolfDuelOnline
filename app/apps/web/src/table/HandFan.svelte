@@ -68,7 +68,7 @@
     justify-content: center;
     list-style: none;
     margin: 0;
-    padding: 14px 0 0;
+    padding: 7px 0 0;
   }
 
   /* Short of room, the cards overlap further rather than leave the screen; the last shows whole. */
@@ -88,7 +88,8 @@
     margin-inline-start: -30px;
   }
 
-  .fan li:focus-within {
+  /* Only the chosen card, the one being previewed or the one with keyboard focus is drawn on top. */
+  .fan li:has(:global(.frame.selected, .hit:focus-visible, [data-part='popover'])) {
     z-index: 1;
   }
 </style>

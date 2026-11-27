@@ -36,7 +36,7 @@ pub enum Edit {
     SetBadge {
         seat: Seat,
     },
-    /// Only valid in the plan phase with no plans submitted.
+    /// Sets both hands as dealt. Only valid in the plan phase with no plans submitted.
     SetHands {
         hands: [Vec<Character>; 2],
         discard: Character,
@@ -147,6 +147,8 @@ pub fn apply_edit(state: &mut crate::state::State, edit: Edit) -> Result<(), Edi
             let [mut first, mut second] = hands;
             first.sort();
             second.sort();
+            state.players[0].dealt.clone_from(&first);
+            state.players[1].dealt.clone_from(&second);
             state.players[0].hand = first;
             state.players[1].hand = second;
             state.discard = Some(discard);

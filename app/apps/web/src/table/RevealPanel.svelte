@@ -11,12 +11,11 @@
   import { initiative } from '../cards.js';
   import Button from '../components/Button.svelte';
   import CharacterCard from '../components/CharacterCard.svelte';
-  import { fitText } from '../components/fit-text.js';
   import Label from '../kit/Label.svelte';
   import Note from '../kit/Note.svelte';
-  import RichText from '../kit/RichText.svelte';
   import Stepper from '../kit/Stepper.svelte';
-  import { commandLabel, planSummaryParts, planText } from '../text.js';
+  import { commandLabel } from '../text.js';
+  import PlayerSide from './PlayerSide.svelte';
   import { handInstruction, handPrimary } from './primary.svelte.js';
   import type { SequencedEvent } from './showdown.js';
 
@@ -61,16 +60,20 @@
       (cmd): cmd is PotionCommand => typeof cmd === 'object' && 'choose_potion_target' in cmd,
     ),
   );
-  const potionPhase = $derived(
-    potion.length > 0 || (typeof view.phase === 'object' && 'reveal_potion' in view.phase),
+  const me = $derived(view.players[seat === 'p0' ? 0 : 1]);
+  const myPlan = $derived(
+    typeof me.plan === 'object' && 'revealed' in me.plan ? me.plan.revealed : null,
   );
-  const size = $derived(potionPhase ? 'target' : 'medium');
-
-  const myPlan = $derived.by(() => {
-    const plan = view.players[seat === 'p0' ? 0 : 1].plan;
-    return typeof plan === 'object' && 'revealed' in plan ? plan.revealed : null;
-  });
   const myCharacter = $derived(myPlan?.character ?? null);
+  /** My initiative with the Hourglasses I have placed, not the ones still being chosen. */
+  const myInitiative = $derived(
+    myCharacter === null
+      ? null
+      : {
+          printed: initiative(myCharacter),
+          effective: effectiveInitiative(myCharacter, me.placed),
+        },
+  );
 
   /** The Hourglasses the opponent placed this round, once the event has arrived. */
   const opponentPlaced = $derived.by((): number | null => {
@@ -160,26 +163,31 @@
 <section aria-labelledby="{uid}-heading" class="reveal" data-testid="reveal">
   <h2 id="{uid}-heading" class="visually-hidden">{l.t('reveal-heading')}</h2>
 
-  <div class="panel versus" data-testid="reveal-versus">
-    <span class="face-down {size}" role="img" aria-label={l.t('reveal-face-down')}></span>
-    <span class="vs" aria-hidden="true">{l.t('reveal-versus')}</span>
-    <span class="mine-card">
-      {#if myCharacter !== null}
-        <CharacterCard localiser={l} character={myCharacter} {size} testId="reveal-my-card" />
-      {/if}
-    </span>
-    {#if opponentPlaced !== null}
-      <p class="caption theirs" data-testid="opponent-hourglasses" use:fitText>
-        {l.t('reveal-opponent-placed', { n: opponentPlaced })}
-      </p>
-    {/if}
+  <!-- The plans are still face down, so the opponent stays on the left whoever acts first. -->
+  <ul class="sides" aria-label={l.t('plan-panels-heading')} data-testid="reveal-sides">
+    <li data-testid="reveal-side-opponent">
+      <PlayerSide
+        localiser={l}
+        who="opponent"
+        character={null}
+        initiative={null}
+        targets={null}
+        placed={opponentPlaced ?? 'choosing'}
+      />
+    </li>
     {#if myPlan !== null}
-      <p class="caption mine" data-testid="reveal-my-plan">
-        <span aria-hidden="true"><RichText parts={planSummaryParts(l, myPlan)} /></span>
-        <span class="visually-hidden">{l.t('reveal-my-plan', { plan: planText(l, myPlan) })}</span>
-      </p>
+      <li data-testid="reveal-side-you">
+        <PlayerSide
+          localiser={l}
+          who="you"
+          character={myPlan.character}
+          initiative={myInitiative}
+          targets={myPlan.targets}
+          placed={null}
+        />
+      </li>
     {/if}
-  </div>
+  </ul>
 
   {#if chosen !== undefined}
     <div class="panel" role="group" aria-labelledby="{uid}-hourglasses">
@@ -278,75 +286,31 @@
     margin: 0;
   }
 
-  .versus {
-    align-items: center;
-    column-gap: 20px;
+  /* Side by side while both fit; otherwise one per row, their cards drawn smaller. */
+  .sides {
     container-type: inline-size;
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    justify-items: center;
-    row-gap: 4px;
-  }
-
-  /* Larger text makes two medium cards wider than a phone, so both are drawn a little smaller. */
-  @container (width < 15.5rem) {
-    .versus > .medium,
-    .versus > .mine-card {
-      zoom: 0.8;
-    }
-  }
-
-  .face-down {
-    justify-self: end;
-  }
-
-  .mine-card {
     display: flex;
-    justify-self: start;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
-  .vs {
-    color: var(--muted);
-    font-size: 0.8125rem;
-  }
-
-  .face-down {
-    background: repeating-linear-gradient(45deg, var(--chip) 0 6px, var(--surface-2) 6px 12px);
-    border: 2.5px solid var(--muted);
-    border-radius: 9px;
-    display: block;
-  }
-
-  .face-down.medium {
-    height: var(--card-medium-height);
-    width: var(--card-medium-width);
-  }
-
-  .face-down.target {
-    border-radius: 7px;
-    height: var(--card-target-height);
-    width: var(--card-target-width);
-  }
-
-  .caption {
-    color: var(--muted);
-    font-size: 0.6875rem;
-    line-height: 1.3;
-    text-align: center;
-  }
-
-  /* One line, fitted, ending under the face-down card's right edge. */
-  .caption.theirs {
-    grid-column: 1;
-    justify-self: stretch;
+  .sides > li {
+    flex: 1 1 0;
+    margin: 0;
     min-width: 0;
-    text-align: end;
   }
 
-  .caption.mine {
-    color: var(--ink);
-    grid-column: 3;
-    justify-self: start;
+  @container (width < 19rem) {
+    .sides > li {
+      flex-basis: 100%;
+    }
+
+    .sides :global(.side > .slot) {
+      zoom: 0.75;
+    }
   }
 
   .spend {

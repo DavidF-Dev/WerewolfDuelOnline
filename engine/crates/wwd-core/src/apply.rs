@@ -6,7 +6,7 @@ use crate::event::{Event, EventKind, Visibility};
 use crate::game::start_round;
 use crate::showdown::{resolve_showdown, resume_hunter};
 use crate::state::{Phase, PotionTarget, Showdown, State, WinReason};
-use crate::targeting::validate_plan;
+use crate::targeting::{targets_in_hand, validate_plan};
 use crate::types::{Character, Plan, RuleError, Seat, TargetCard, Tiebreak};
 
 /// Applies `cmd` from `seat`, appending to the log and returning only the events this
@@ -127,6 +127,9 @@ fn submit_plan(
     }
     let plan = Plan { character, targets };
     validate_plan(&plan, &state.config)?;
+    if targets_in_hand(&plan.targets, &player.hand) {
+        return Err(RuleError::TargetInHand);
+    }
 
     let target_count = u8::try_from(plan.targets.len()).expect("at most nine target cards");
     state.player_mut(seat).plan = Some(plan);
@@ -174,13 +177,8 @@ fn choose_potion_target(
     card: Character,
     events: &mut Vec<Event>,
 ) -> Result<(), RuleError> {
-    let played = state
-        .player(seat)
-        .plan
-        .as_ref()
-        .is_some_and(|plan| plan.targets.contains(&TargetCard::Character(card)));
-    if played {
-        return Err(RuleError::InvalidPotionTarget);
+    if state.player(seat).dealt.contains(&card) {
+        return Err(RuleError::PotionTargetInHand);
     }
     state.potion_target = Some(PotionTarget { holder: seat, card });
     state.player_mut(seat).potion = false;

@@ -14,7 +14,7 @@ pub enum Command {
     },
     /// Places `n` Hourglasses from reserve onto the planned character.
     PlaceHourglasses { n: u8 },
-    /// Names an unplayed target card as the Potion target.
+    /// Names a character not dealt to this seat this round as the Potion target.
     ChoosePotionTarget { card: Character },
     /// Answers whether the Hunter spends a Cross to attack.
     HunterSpendCross { spend: bool },

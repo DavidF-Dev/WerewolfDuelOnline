@@ -45,6 +45,8 @@
 
   let chosen = $state<Character | null>(null);
   let selected = $state<Card[]>([]);
+  // Whether the Fool in `selected` was chosen by the app rather than the player.
+  let foolByApp = $state(false);
   let confirming = $state(false);
   // One plan per offer: sealing stays inert until a new legal list or a reported problem.
   let sentFor = $state.raw<{ legal: Command[]; errorCount: number } | null>(null);
@@ -73,8 +75,7 @@
   );
 
   /** Why `card` can't be added: the engine's reason when it gives one, else a fallback from `legal`. */
-  function blockedReason(card: Card): string | null {
-    if (active === null) return l.t('target-choose-character-first');
+  function blockedReason(active: Character, card: Card): string | null {
     if (includes(selected, card)) return null;
     const grown = [...selected, card];
     if (forActive.some((p) => fits(p, grown))) return null;
@@ -87,19 +88,42 @@
   }
 
   function targetShown(card: Card) {
-    const reason = blockedReason(card);
+    if (active === null) return { state: 'normal' as const };
+    const reason = blockedReason(active, card);
     if (reason !== null) return { state: 'disabled' as const, reason };
     return { state: includes(selected, card) ? ('selected' as const) : ('normal' as const) };
   }
 
-  /** The plan in short, such as "Knight → Wolfen + Fool", with each card's name emphasised. */
-  /** Chooses `c` as the plan's character, or clears the choice when it is already chosen. */
+  const plansFor = (c: Character): Plan[] =>
+    planCommands.map((cmd) => cmd.submit_plan).filter((p) => p.character === c);
+
+  /** Whether every legal plan for `c` targets the Fool alone, so the app can choose it. */
+  const onlyFool = (c: Character): boolean => {
+    const plans = plansFor(c);
+    return (
+      plans.length > 0 && plans.every((p) => p.targets.length === 1 && p.targets[0] === 'fool')
+    );
+  };
+
+  /**
+   * Chooses `c` as the plan's character, or clears the choice when it is already chosen. A Fool the
+   * player chose stays when `c` may target it; one the app chose is cleared, and chosen again for a
+   * character that can only target the Fool.
+   */
   function choose(c: Character): void {
-    chosen = c === active ? null : c;
-    selected = [];
+    const next = c === active ? null : c;
+    const keepFool =
+      next !== null &&
+      !foolByApp &&
+      includes(selected, 'fool') &&
+      plansFor(next).some((p) => includes(p.targets, 'fool'));
+    chosen = next;
+    foolByApp = !keepFool && next !== null && onlyFool(next);
+    selected = keepFool || foolByApp ? ['fool'] : [];
   }
 
   function toggle(card: Card): void {
+    if (card === 'fool') foolByApp = false;
     selected = includes(selected, card)
       ? selected.filter((s) => targetId(s) !== targetId(card))
       : [...selected, card];
@@ -151,7 +175,12 @@
 {/snippet}
 
 <section aria-label={l.t('plan-heading')} class="plan" data-testid="plan-builder">
-  <TargetGrid localiser={l} {hand} shown={targetShown} onselect={toggle} />
+  <TargetGrid
+    localiser={l}
+    {hand}
+    shown={targetShown}
+    onselect={active === null ? undefined : toggle}
+  />
   <HandFan
     localiser={l}
     {hand}

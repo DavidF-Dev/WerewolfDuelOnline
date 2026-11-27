@@ -227,7 +227,12 @@ export const isPlan = (cmd: Command): cmd is Extract<Command, { submit_plan: Pla
 
 async function performPlan(page: Page, plan: Plan): Promise<void> {
   await page.getByTestId(`plan-character-${plan.character}`).click();
-  for (const card of plan.targets) await page.getByTestId(`target-${targetId(card)}`).click();
+  for (const card of plan.targets) {
+    const target = page.getByTestId(`target-${targetId(card)}`);
+    // The app chooses the Fool itself for a character that can only target the Fool.
+    if ((await target.getAttribute('aria-pressed')) !== 'true') await target.click();
+    await expect(target).toHaveAttribute('aria-pressed', 'true');
+  }
   await page.getByTestId('phase-bar').getByTestId('seal-plan').click();
   // A fresh device asks before sealing a plan.
   await page.getByRole('alertdialog').getByTestId('confirm-yes').click();

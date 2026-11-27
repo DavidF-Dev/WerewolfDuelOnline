@@ -72,7 +72,16 @@ describe('UI helpers', () => {
     expect(idOf(() => abilitySummary('dragon' as never))).toBe('error-invalid-input');
   });
 
-  it('a replay saved by engine 0.1.0 still verifies and replays', () => {
+  it('a replay labelled as engine 0.1.0 still verifies and replays', () => {
+    const game = atRoundOver();
+    const old: Replay = { ...game.replay(), engine_version: '0.1.0' };
+    game.dispose();
+    expect(() => verifyReplay(old)).not.toThrow();
+    const events = replayTimeline(old, 'omniscient').flatMap((step) => step.events);
+    expect(events.some((event) => 'discard_revealed' in event.kind)).toBe(true);
+  });
+
+  it('the saved 0.1.0 replay, which targets a card in hand, no longer verifies', () => {
     const old = JSON.parse(
       readFileSync(
         new URL(
@@ -82,9 +91,8 @@ describe('UI helpers', () => {
         'utf8',
       ),
     ) as Replay;
-    expect(() => verifyReplay(old)).not.toThrow();
-    const events = replayTimeline(old, 'omniscient').flatMap((step) => step.events);
-    expect(events.some((event) => 'discard_revealed' in event.kind)).toBe(true);
+    expect(old.engine_version).toBe('0.1.0');
+    expect(idOf(() => verifyReplay(old))).toBe('error-replay-rule');
   });
 
   it('effectiveInitiative clamps at zero', () => {

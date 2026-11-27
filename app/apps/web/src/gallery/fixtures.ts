@@ -143,15 +143,30 @@ function pendingSeat(game: Game): Seat {
   return seat;
 }
 
-/** The plan phase: this seat holds the Knight, and the opponent has sealed a one-target plan. */
-export const planState = (extra: Partial<GameClientState> = {}): GameClientState =>
+/** The plan phase of the game `deal` makes, once the opponent has sealed a plan with targets. */
+const planPhase = (
+  deal: (create: CreateGame) => Game,
+  extra: Partial<GameClientState> = {},
+): GameClientState =>
   withGames((create) => {
-    const game = gameDealing('p0', ['knight'], create);
+    const game = deal(create);
     const theirs = game.legalActions('p1').find((c) => isPlan(c) && c.submit_plan.targets.length);
     if (theirs === undefined) throw new Error('no plan for the opponent');
     game.apply('p1', theirs);
     return onlineState(game, 'p0', extra);
   });
+
+/** The plan phase: this seat holds the Knight, and the opponent has sealed a one-target plan. */
+export const planState = (extra: Partial<GameClientState> = {}): GameClientState =>
+  planPhase((create) => gameDealing('p0', ['knight'], create), extra);
+
+/** The plan phase with this seat holding the Badge, and so four cards, among them the Knight. */
+export const badgePlanState = (): GameClientState =>
+  planPhase((create) => gameDealing('p0', ['knight'], create, (hand) => hand.length === 4));
+
+/** The plan phase with this seat holding the Villager. */
+export const villagerPlanState = (): GameClientState =>
+  planPhase((create) => gameDealing('p0', ['villager'], create));
 
 /** The plan phase with this seat's plan sealed, waiting for the opponent's. */
 export const sealedPlanState = (): GameClientState =>
@@ -198,6 +213,104 @@ const reaching = (kind: PendingKind, character: Character): GameClientState =>
 
 export const potionState = (): GameClientState => reaching('choose_potion_target', 'witch');
 
+/** Both plans sealed, the opponent having placed no Hourglasses, with this seat to place them. */
+export const opponentZeroState = (): GameClientState =>
+  withGames((create) => {
+    const game = create(12);
+    for (const seat of ['p0', 'p1'] as const) {
+      const plan = game.legalActions(seat)[0];
+      if (plan === undefined) throw new Error('no plan offered');
+      game.apply(seat, plan);
+    }
+    game.apply(pendingSeat(game), { place_hourglasses: { n: 0 } });
+    if (game.pending().kind !== 'place_hourglasses') throw new Error('nobody places second');
+    return onlineState(game, pendingSeat(game));
+  });
+
+/**
+ * Both plans sealed, the opponent having placed every Hourglass it holds (at least one), with this
+ * seat to place them.
+ */
+export const opponentPlacedState = (): GameClientState =>
+  withGames((create) => {
+    for (let seed = 1; seed < 500; seed++) {
+      const game = create(seed);
+      let first = false;
+      for (let step = 0; step < 400; step++) {
+        const pending = game.pending();
+        const seat = pending.seats[0];
+        if (seat === undefined) break;
+        const legal = game.legalActions(seat);
+        if (pending.kind === 'plan') first = true;
+        if (pending.kind === 'place_hourglasses' && legal.length > 1 && first) {
+          game.apply(seat, legal.at(-1)!);
+          if (game.pending().kind !== 'place_hourglasses') break;
+          return onlineState(game, pendingSeat(game));
+        }
+        if (pending.kind === 'place_hourglasses') first = false;
+        const cmd = legal.find((c) => c !== 'resign');
+        if (cmd === undefined) break;
+        game.apply(seat, cmd);
+      }
+    }
+    throw new Error('no seed has the first seat to place hold an Hourglass');
+  });
+
+/**
+ * Plays `game` until `kind` is pending in the round in which the Potion's holder plays the Wolf
+ * King at five targets; returns that seat, or null when the game never gets there. The Witch is
+ * played whenever offered to win the Potion; the holder places no Hourglasses and the other seat
+ * all it holds, which is none in the round this reaches.
+ */
+function playWolfKingFive(game: Game, kind: PendingKind): Seat | null {
+  let holder: Seat | null = null;
+  for (let step = 0; step < 400; step++) {
+    const pending = game.pending();
+    if (holder !== null && pending.kind === kind) return holder;
+    const seat = pending.seats[0];
+    if (seat === undefined) return null;
+    const legal = game.legalActions(seat);
+    let cmd: Command | undefined;
+    if (pending.kind === 'plan' && game.view('omniscient').players[seat === 'p0' ? 0 : 1].potion) {
+      cmd = legal.find(
+        (c) =>
+          isPlan(c) &&
+          c.submit_plan.character === 'wolf_king' &&
+          c.submit_plan.targets.length === 5,
+      );
+      if (cmd === undefined) return null;
+      holder = seat;
+    } else if (pending.kind === 'plan') {
+      cmd = legal.find(
+        (c) => isPlan(c) && c.submit_plan.character === 'witch' && c.submit_plan.targets.length,
+      );
+    } else if (pending.kind === 'place_hourglasses') {
+      cmd = seat === holder ? legal[0] : legal.at(-1);
+    }
+    cmd ??= legal.find((c) => c !== 'resign');
+    if (cmd === undefined) return null;
+    game.apply(seat, cmd);
+  }
+  return null;
+}
+
+/** The round in which the Potion's holder plays the Wolf King at five targets, at `kind`, as the holder. */
+const wolfKingFive = (kind: PendingKind): GameClientState =>
+  withGames((create) => {
+    for (let seed = 1; seed < 2000; seed++) {
+      const game = create(seed);
+      const holder = playWolfKingFive(game, kind);
+      if (holder !== null) return onlineState(game, holder);
+    }
+    throw new Error(`no seed plays the Wolf King at five targets with the Potion to ${kind}`);
+  });
+
+/** The Potion's holder naming its target, having played the Wolf King at five targets. */
+export const wolfKingPotionState = (): GameClientState => wolfKingFive('choose_potion_target');
+
+/** The end of the round in which the Potion's holder played the Wolf King at five targets. */
+export const wolfKingShowdownState = (): GameClientState => wolfKingFive('next_round');
+
 export const hunterState = (): GameClientState => reaching('hunter_choice', 'hunter');
 
 /** The end of the first round, its showdown played out. */
@@ -208,31 +321,45 @@ export const roundOverState = (extra: Partial<GameClientState> = {}): GameClient
     return onlineState(game, 'p1', extra);
   });
 
-/** The end of a first round in which a character was eliminated before it could act. */
-export const eliminationState = (): GameClientState =>
+/**
+ * Plays `game`'s first round, the second seat to plan aiming at the character the first one
+ * played, for at most `limit` commands; returns how many it played.
+ */
+function playAimed(game: Game, limit = Infinity): number {
+  let played = -1;
+  playUntil(
+    game,
+    () => {
+      played += 1;
+      return played >= limit || game.pending().kind === 'next_round' || isGameOver(game);
+    },
+    (legal) => {
+      const aimedAt = game
+        .view('omniscient')
+        .players.map((p) =>
+          typeof p.plan === 'object' && 'revealed' in p.plan ? p.plan.revealed.character : null,
+        )
+        .find((c) => c !== null);
+      return (
+        legal.find(
+          (c) =>
+            isPlan(c) && c.submit_plan.targets.some((t) => t !== 'fool' && t.character === aimedAt),
+        ) ?? legal.find((c) => c !== 'resign')
+      );
+    },
+  );
+  return played;
+}
+
+/**
+ * The second seat's client just before and just after the command that resolves a first round in
+ * which a character is eliminated before it could act.
+ */
+const eliminationStates = (): { before: GameClientState; after: GameClientState } =>
   withGames((create) => {
     for (let seed = 1; seed < 500; seed++) {
       const game = create(seed);
-      // The second seat to plan aims at the character the first one played.
-      playUntil(
-        game,
-        () => game.pending().kind === 'next_round' || isGameOver(game),
-        (legal) => {
-          const played = game
-            .view('omniscient')
-            .players.map((p) =>
-              typeof p.plan === 'object' && 'revealed' in p.plan ? p.plan.revealed.character : null,
-            )
-            .find((c) => c !== null);
-          return (
-            legal.find(
-              (c) =>
-                isPlan(c) &&
-                c.submit_plan.targets.some((t) => t !== 'fool' && t.character === played),
-            ) ?? legal.find((c) => c !== 'resign')
-          );
-        },
-      );
+      const played = playAimed(game);
       if (game.pending().kind !== 'next_round') continue;
       const eliminated = game
         .eventsSince(0, { seat: 'p1' })
@@ -241,10 +368,19 @@ export const eliminationState = (): GameClientState =>
             'attack_hit' in event.kind ||
             ('potion_resolved' in event.kind && event.kind.potion_resolved.hit),
         );
-      if (eliminated) return onlineState(game, 'p1');
+      if (!eliminated) continue;
+      const before = create(seed);
+      playAimed(before, played - 1);
+      return { before: onlineState(before, 'p1'), after: onlineState(game, 'p1') };
     }
     throw new Error('no seed eliminates a character in the first round');
   });
+
+/** The end of a first round in which a character was eliminated before it could act. */
+export const eliminationState = (): GameClientState => eliminationStates().after;
+
+/** The moment before the command that resolves `eliminationState`'s round. */
+export const eliminationBeforeState = (): GameClientState => eliminationStates().before;
 
 const isGameOver = (game: Game): boolean => {
   const { phase } = game.view({ seat: 'p0' });
@@ -404,12 +540,12 @@ export const FIRST_PAST_GAME = historyId(DEFAULT_SERVER, ROOM, 0);
 export const HUNTER_PAST_GAME = historyId(DEFAULT_SERVER, ROOM, 9);
 
 /** The replay step of `hunterGame` at which a Hunter, after its owner's choice, eliminates a character. */
-export const HUNTER_STEP = 83;
+export const HUNTER_STEP = 19;
 
 /** Keeps a past game in which a Hunter's choice leads to an elimination, at step `HUNTER_STEP`. */
 export async function hunterGame(): Promise<void> {
   const record = withGames((create) =>
-    recordFrom(finishedGame(41, create), 'p0', HUNTER_PAST_GAME, {
+    recordFrom(finishedGame(336, create), 'p0', HUNTER_PAST_GAME, {
       opponentName: names.opponent,
       finishedAt: Date.UTC(2026, 10, 23, 19, 30),
     }),

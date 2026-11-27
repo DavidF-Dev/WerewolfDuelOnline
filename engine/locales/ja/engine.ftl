@@ -274,10 +274,11 @@ error-not-your-turn = あなたの番ではありません。
 error-wrong-phase = この操作は今のフェーズではできません。
 error-character-not-in-hand = そのキャラクターは手札にありません。
 error-target-not-allowed = そのキャラクターはこのカードを対象にできません。
+error-target-in-hand = 自分の手札にあるカードは対象にできません。
 error-too-many-targets = このプランは対象が多すぎます。
 error-too-few-targets = このプランは対象が足りません。
 error-not-enough-hourglasses = 砂時計が足りません。
-error-invalid-potion-target = そのカードは薬の対象にできません。
+error-potion-target-in-hand = このラウンドに自分の手札にあったカードは薬の対象にできません。
 
 ## Edit errors
 error-edit-wrong-phase = 手札を編集できるのは、どちらかがプランを確定する前だけです。

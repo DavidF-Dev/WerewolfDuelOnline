@@ -154,7 +154,10 @@ test('every screen passes axe in each theme', async ({ browser }) => {
   const { character, targets } = guestPlan.submit_plan;
   await guest.getByTestId(`plan-character-${character}`).click();
   await expectAccessible(guest, 'Table, plan with a character chosen');
-  for (const card of targets) await guest.getByTestId(`target-${targetId(card)}`).click();
+  for (const card of targets) {
+    const target = guest.getByTestId(`target-${targetId(card)}`);
+    if ((await target.getAttribute('aria-pressed')) !== 'true') await target.click();
+  }
   await guest.getByTestId('seal-plan').click();
   await expect(guest.getByRole('alertdialog')).toBeVisible();
   await expectAccessible(guest, 'Plan confirmation');

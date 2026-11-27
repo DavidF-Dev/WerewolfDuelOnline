@@ -36,6 +36,8 @@ pub struct PlayerState {
     pub potion: bool,
     /// Sorted by initiative.
     pub hand: Vec<Character>,
+    /// This round's hand as dealt, sorted by initiative; kept after `hand` is cleared.
+    pub dealt: Vec<Character>,
     pub plan: Option<Plan>,
 }
 

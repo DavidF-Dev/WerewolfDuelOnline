@@ -6,7 +6,7 @@ use common::{assert_conserved, scenario};
 use wwd_core::Character::*;
 use wwd_core::{
     Character, Command, Edit, Event, EventKind, Phase, Plan, RuleError, Seat, State, TargetCard,
-    Tiebreak, Visibility, WinReason, apply, apply_edit,
+    Tiebreak, Visibility, WinReason, apply, apply_edit, fuzz, legal_actions,
 };
 
 fn c(character: Character) -> TargetCard {
@@ -79,15 +79,58 @@ fn plan_rejects_second_submission() {
 }
 
 #[test]
-fn plan_may_target_own_hand_and_fool_alone() {
+fn plan_cannot_target_a_card_in_hand() {
     let mut state = scenario(
         Seat::P0,
         &[Knight, Wolfen, Seer, Witch],
         &[WolfKing, Hunter, WolfBeauty],
         Villager,
     );
-    assert!(submit(&mut state, Seat::P0, Knight, &[c(Wolfen)]).is_ok());
+    let in_hand = |state: &State, seat: Seat, cmd: &Command| match cmd {
+        Command::SubmitPlan { targets, .. } => targets.iter().any(
+            |t| matches!(t, TargetCard::Character(ch) if state.player(seat).hand.contains(ch)),
+        ),
+        _ => false,
+    };
+    for seat in [Seat::P0, Seat::P1] {
+        let actions = legal_actions(&state, seat);
+        assert!(!actions.is_empty());
+        assert!(!actions.iter().any(|cmd| in_hand(&state, seat, cmd)));
+    }
+    assert!(
+        legal_actions(&state, Seat::P1).contains(&Command::SubmitPlan {
+            character: WolfKing,
+            targets: vec![c(Knight), c(Seer)],
+        })
+    );
+
+    let before = state.clone();
+    assert_eq!(
+        submit(&mut state, Seat::P0, Knight, &[c(Wolfen)]),
+        Err(RuleError::TargetInHand)
+    );
+    assert_eq!(
+        submit(&mut state, Seat::P1, WolfKing, &[c(Knight), c(Hunter)]),
+        Err(RuleError::TargetInHand)
+    );
+    assert_eq!(state, before);
     assert!(submit(&mut state, Seat::P1, Hunter, &[TargetCard::Fool]).is_ok());
+}
+
+#[test]
+fn plan_may_still_target_the_fool() {
+    let mut state = scenario(
+        Seat::P1,
+        &[Villager, Knight, Seer],
+        &[WolfKing, Wolfen, WolfBeauty, Hunter],
+        Witch,
+    );
+    let villager_fool = Command::SubmitPlan {
+        character: Villager,
+        targets: vec![TargetCard::Fool],
+    };
+    assert!(legal_actions(&state, Seat::P0).contains(&villager_fool));
+    assert!(apply(&mut state, Seat::P0, villager_fool).is_ok());
 }
 
 #[test]
@@ -250,8 +293,9 @@ fn reveal_without_potion_hands_off_and_returns_placed_hourglasses() {
     assert_conserved(&state);
 }
 
-#[test]
-fn potion_holder_must_choose_unplayed_target() {
+/// The standard hands with the Potion on P0, Knight→Wolfen against Wolfen→Knight and no
+/// Hourglasses placed, so P0 is to name the Potion target.
+fn at_potion() -> State {
     let mut state = standard();
     apply_edit(
         &mut state,
@@ -270,27 +314,112 @@ fn potion_holder_must_choose_unplayed_target() {
             .any(|e| matches!(e.kind, EventKind::PlansRevealed { .. }))
     );
     assert_eq!(state.phase, Phase::RevealPotion { seat: Seat::P0 });
+    state
+}
 
+fn potion_targets(state: &State, seat: Seat) -> Vec<Character> {
+    legal_actions(state, seat)
+        .into_iter()
+        .map(|cmd| match cmd {
+            Command::ChoosePotionTarget { card } => card,
+            other => panic!("unexpected action {other:?}"),
+        })
+        .collect()
+}
+
+#[test]
+fn potion_cannot_name_a_dealt_card() {
+    let mut state = at_potion();
+    let targets = potion_targets(&state, Seat::P0);
+    assert_eq!(targets, vec![WolfKing, Wolfen, WolfBeauty, Villager]);
+    let before = state.clone();
+    // The Knight was played and the Seer stayed in hand.
+    for card in [Knight, Seer] {
+        assert!(!targets.contains(&card));
+        assert_eq!(
+            apply(&mut state, Seat::P0, Command::ChoosePotionTarget { card }),
+            Err(RuleError::PotionTargetInHand)
+        );
+    }
+    assert_eq!(state, before);
+}
+
+#[test]
+fn potion_may_name_own_plan_target() {
+    let mut state = at_potion();
+    assert!(potion_targets(&state, Seat::P0).contains(&Wolfen));
+    let events = apply(
+        &mut state,
+        Seat::P0,
+        Command::ChoosePotionTarget { card: Wolfen },
+    )
+    .unwrap();
+    assert_eq!(
+        events[0].kind,
+        EventKind::PotionTargetChosen {
+            seat: Seat::P0,
+            card: Wolfen,
+        }
+    );
+    revealed(&events);
+}
+
+#[test]
+fn potion_always_has_a_target() {
+    let report = fuzz(1000, [42; 32]).expect("every pending seat has a legal action");
+    assert_eq!(report.games, 1000);
+
+    let mut state = standard();
+    apply_edit(
+        &mut state,
+        Edit::SetPotion {
+            seat: Some(Seat::P1),
+        },
+    )
+    .unwrap();
+    let humans = [Hunter, Knight, Seer, Witch, Villager];
+    let all_humans: Vec<TargetCard> = humans.into_iter().map(c).collect();
+    submit(&mut state, Seat::P0, Witch, &[TargetCard::Fool]).unwrap();
+    submit(&mut state, Seat::P1, WolfKing, &all_humans).unwrap();
+    place(&mut state, Seat::P0, 0).unwrap();
+    place(&mut state, Seat::P1, 0).unwrap();
+    assert_eq!(state.phase, Phase::RevealPotion { seat: Seat::P1 });
+    assert_eq!(potion_targets(&state, Seat::P1), humans.to_vec());
+}
+
+#[test]
+fn set_hands_edit_sets_dealt() {
+    let state = scenario(
+        Seat::P1,
+        &[Witch, Knight, Seer],
+        &[Villager, WolfKing, Wolfen, Hunter],
+        WolfBeauty,
+    );
+    assert_eq!(state.player(Seat::P0).dealt, vec![Knight, Seer, Witch]);
+    assert_eq!(
+        state.player(Seat::P1).dealt,
+        vec![Hunter, WolfKing, Wolfen, Villager]
+    );
+    for player in &state.players {
+        assert_eq!(player.dealt, player.hand);
+    }
+}
+
+#[test]
+fn potion_holder_names_a_target_before_the_reveal() {
+    let mut state = at_potion();
     assert_eq!(
         apply(
             &mut state,
             Seat::P1,
-            Command::ChoosePotionTarget { card: Seer }
+            Command::ChoosePotionTarget { card: WolfKing }
         ),
         Err(RuleError::NotYourTurn)
-    );
-    assert_eq!(
-        apply(
-            &mut state,
-            Seat::P0,
-            Command::ChoosePotionTarget { card: Wolfen }
-        ),
-        Err(RuleError::InvalidPotionTarget)
     );
     let events = apply(
         &mut state,
         Seat::P0,
-        Command::ChoosePotionTarget { card: Seer },
+        Command::ChoosePotionTarget { card: WolfKing },
     )
     .unwrap();
     assert_eq!(
@@ -299,7 +428,7 @@ fn potion_holder_must_choose_unplayed_target() {
             visibility: Visibility::Public,
             kind: EventKind::PotionTargetChosen {
                 seat: Seat::P0,
-                card: Seer,
+                card: WolfKing,
             },
         }
     );

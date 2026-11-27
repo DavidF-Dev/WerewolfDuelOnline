@@ -283,8 +283,6 @@ count-potion = Potion: { $n }
 card-name =
     { $initiative }, { CHARACTER($character) }, { $faction }. { $ability }
 card-fool-name = The Fool. { $ability }
-# A pill drawn on a target card, in place of its abilities, when the card is in the player's own hand.
-card-in-hand = In hand
 
 ## Card abilities, in our own words; each marker named is an argument, so it can be drawn as a token
 card-ability-hunter = You may spend a { $cross } to attack up to 2 Werewolves.
@@ -347,7 +345,6 @@ plan-seal-incomplete = This is not a complete plan yet.
 plan-character-not-offered = This character can't be played this round.
 target-not-allowed = The chosen character can't target this card.
 target-limit = Remove a target first: this plan can't take another.
-target-choose-character-first = Choose a character first.
 plan-summary-short = { CHARACTER($character) } → { $targets }
 plan-summary-short-none = { CHARACTER($character) } → no targets
 plan-summary-fool = Fool
@@ -365,13 +362,6 @@ reveal-initiative = { CHARACTER($character) }: initiative { $effective } (printe
 reveal-initiative-label = { CHARACTER($character) } initiative
 reveal-initiative-change = { $printed } → { $effective }
 reveal-order-note = Lower initiative resolves first.
-reveal-opponent-placed = Placed { $n ->
-        [one] 1 Hourglass
-       *[other] { $n } Hourglasses
-    }
-reveal-face-down = Your opponent's character, face down
-reveal-versus = vs
-reveal-my-plan = Your plan: { $plan }
 reveal-potion-heading = Choose the Potion target
 reveal-potion-confirm = Choose a card first
 
@@ -383,20 +373,29 @@ showdown-hunter-heading = Your Hunter
 showdown-out-yours = { $owner } { CHARACTER($character) } is eliminated and doesn't act.
 showdown-out-opponent = { $owner }'s { CHARACTER($character) } is eliminated and doesn't act.
 plan-panels-heading = Plans
-plan-panel-plan = { $name }: { $plan }
-plan-panel-position = { $position ->
-        [1] First
-       *[other] Second
+
+## Player sides in the reveal and showdown
+side-you = You
+side-opponent = Opponent
+side-initiative = Initiative { $initiative }
+side-initiative-changed = Initiative { $printed } → { $effective }
+side-initiative-hidden = Initiative ?
+side-target = → { $target }
+side-more-targets = +{ $n }
+side-pill = +{ $n }
+side-pill-choosing = +?
+side-placed = Placed { $n ->
+        [one] 1 Hourglass
+       *[other] { $n } Hourglasses
     }
-plan-panel-initiative = Initiative { $initiative }
-plan-panel-spoken = { $name }: { $plan }. { $position ->
-        [1] Resolves first
-       *[other] Resolves second
-    }, initiative { $effective } (printed { $printed }).
-plan-panel-spoken-unknown = { $name }: { $plan }. { $position ->
-        [1] Resolves first
-       *[other] Resolves second
-    }.
+side-placed-choosing = Still choosing Hourglasses
+side-label = { $who }: { $plan }. Initiative { $initiative }.
+side-label-changed = { $who }: { $plan }. Initiative { $effective } (printed { $printed }).
+side-label-hidden = { $who }: character face down, initiative unknown.
+side-label-ordered = { $label } { $position ->
+        [1] Acts first.
+       *[other] Acts second.
+    }
 
 ## Table layout
 table-you = You
@@ -650,6 +649,7 @@ reason-resignation = Resignation
 replay-heading = Replay
 replay-menu = Replay menu
 replay-missing = This game is not on this device.
+replay-unplayable = This game was played under older rules and can't be replayed.
 replay-position = Step { $step } of { $total }, round { $round }
 replay-controls = Replay controls
 replay-previous-step = Previous step

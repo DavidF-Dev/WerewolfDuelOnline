@@ -651,8 +651,8 @@ fn legal_actions_cover_and_validate() {
             )
         })
         .count();
-    // Any non-empty subset of the five humans and the Fool.
-    assert_eq!(wolf_king_plans, (1 << 6) - 1);
+    // Any non-empty subset of the four humans outside the hand and the Fool.
+    assert_eq!(wolf_king_plans, (1 << 5) - 1);
     assert_eq!(
         legal_actions(&state, Seat::P0),
         legal_actions(&state.clone(), Seat::P0)
@@ -747,7 +747,7 @@ fn legal_actions_for_potion_and_hunter() {
     assert!(legal_actions(&state, Seat::P1).is_empty());
     let expected: Vec<Command> = Character::ALL
         .into_iter()
-        .filter(|&card| card != Wolfen && card != WolfBeauty)
+        .filter(|card| !state.player(Seat::P0).dealt.contains(card))
         .map(|card| Command::ChoosePotionTarget { card })
         .collect();
     assert_eq!(legal_actions(&state, Seat::P0), expected);

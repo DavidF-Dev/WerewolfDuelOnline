@@ -12,7 +12,7 @@ Deine Hand: Ritter, Hexe und Dorfbewohner
 > Ritter gegen die Wolfsschönheit spielen
 Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Jäger, Werwolfkönig, Jungwolf und Seherin
-> Werwolfkönig gegen die Seherin und den Dorfbewohner spielen
+> Werwolfkönig gegen den Dorfbewohner und den Narren spielen
 Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
@@ -23,12 +23,12 @@ Deine Hand:
   1 Sanduhr setzen
 > 1 Sanduhr setzen
 Spieler 1 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Ritter gegen die Wolfsschönheit, Initiative 2. Spieler 2: Werwolfkönig gegen die Seherin und den Dorfbewohner, Initiative 2. Spieler 1 ist zuerst dran.
+Die Pläne sind aufgedeckt. Spieler 1: Ritter gegen die Wolfsschönheit, Initiative 2. Spieler 2: Werwolfkönig gegen den Dorfbewohner und den Narren, Initiative 2. Spieler 1 ist zuerst dran.
 Spieler 1 ist mit dem Ritter am Zug.
 Spieler 1 erhält 1 Sanduhr.
 Der Angriff von Spieler 1 mit dem Ritter geht daneben.
 Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Der Angriff von Spieler 2 mit dem Werwolfkönig geht daneben.
 Runde 1 endet. Spieler 1 bekommt das Abzeichen.
 Die in Runde 1 beiseitegelegte Karte war die Wolfsschönheit.
 Deine Hand: 
@@ -46,8 +46,8 @@ Deine Hand: Ritter, Seherin, Hexe und Dorfbewohner
 > Seherin gegen die Wolfsschönheit und den Narren spielen
 Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Jäger, Jungwolf und Wolfsschönheit
-> Jäger gegen den Werwolfkönig, die Wolfsschönheit und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
+> Wolfsschönheit gegen den Ritter spielen
+Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
@@ -57,813 +57,17 @@ Deine Hand:
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen die Wolfsschönheit und den Narren, Initiative 4. Spieler 2: Jäger gegen den Werwolfkönig, die Wolfsschönheit und den Narren, Initiative 1. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Jäger am Zug.
-Deine Hand: 
-  Das Kreuz behalten
-  Ein Kreuz ausgeben und angreifen
-> Das Kreuz behalten
-Spieler 2 greift nicht an: Das Kreuz wurde nicht ausgegeben.
+Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen die Wolfsschönheit und den Narren, Initiative 4. Spieler 2: Wolfsschönheit gegen den Ritter, Initiative 7. Spieler 1 ist zuerst dran.
 Spieler 1 ist mit der Seherin am Zug.
-Der Angriff von Spieler 1 mit der Seherin geht daneben.
-Runde 2 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 2 beiseitegelegte Karte war der Werwolfkönig.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 3 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Jäger, den Werwolfkönig, den Ritter und den Dorfbewohner.
-Spieler 1 bekommt die Seherin, die Hexe und die Wolfsschönheit.
-Deine Hand: Seherin, Hexe und Wolfsschönheit
-> Wolfsschönheit gegen die Seherin spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jäger, Werwolfkönig, Ritter und Dorfbewohner
-> Werwolfkönig gegen den Ritter, die Seherin und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen die Seherin, Initiative 7. Spieler 2: Werwolfkönig gegen den Ritter, die Seherin und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 1 ist mit der Wolfsschönheit am Zug.
-Spieler 1 erhält 1 Reißzahn.
-Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
-Runde 3 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 3 beiseitegelegte Karte war der Jungwolf.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 4 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Werwolfkönig, den Ritter, den Jungwolf und die Seherin.
-Spieler 2 bekommt den Jäger, die Hexe und die Wolfsschönheit.
-Deine Hand: Werwolfkönig, Ritter, Jungwolf und Seherin
-> Werwolfkönig gegen die Seherin, den Dorfbewohner und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: Jäger, Hexe und Wolfsschönheit
-> Jäger gegen die Wolfsschönheit und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen die Seherin, den Dorfbewohner und den Narren, Initiative 2. Spieler 2: Jäger gegen die Wolfsschönheit und den Narren, Initiative 1. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Jäger am Zug.
-Deine Hand: 
-  Das Kreuz behalten
-  Ein Kreuz ausgeben und angreifen
-> Ein Kreuz ausgeben und angreifen
-Spieler 2 gibt 1 Kreuz aus.
-Der Angriff von Spieler 2 mit dem Jäger geht daneben.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 gibt 1 Reißzahn aus.
-Der Angriff von Spieler 1 mit dem Werwolfkönig geht daneben.
-Runde 4 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 4 beiseitegelegte Karte war der Dorfbewohner.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 5 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Jäger, den Werwolfkönig, den Ritter und den Dorfbewohner.
-Spieler 1 bekommt die Seherin, die Hexe und die Wolfsschönheit.
-Deine Hand: Seherin, Hexe und Wolfsschönheit
-> Wolfsschönheit gegen die Wolfsschönheit spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jäger, Werwolfkönig, Ritter und Dorfbewohner
-> Werwolfkönig gegen den Ritter, den Dorfbewohner und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen die Wolfsschönheit, Initiative 7. Spieler 2: Werwolfkönig gegen den Ritter, den Dorfbewohner und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 1 ist mit der Wolfsschönheit am Zug.
-Spieler 1 erhält 1 Reißzahn.
-Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
-Runde 5 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 5 beiseitegelegte Karte war der Jungwolf.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 6 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Jäger, den Werwolfkönig, die Hexe und den Dorfbewohner.
-Spieler 2 bekommt den Ritter, den Jungwolf und die Wolfsschönheit.
-Deine Hand: Jäger, Werwolfkönig, Hexe und Dorfbewohner
-> Werwolfkönig gegen den Jäger, den Ritter und den Dorfbewohner spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: Ritter, Jungwolf und Wolfsschönheit
-> Jungwolf gegen die Seherin und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger, den Ritter und den Dorfbewohner, Initiative 2. Spieler 2: Jungwolf gegen die Seherin und den Narren, Initiative 4. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 2 ist mit dem Jungwolf am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
-Runde 6 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 6 beiseitegelegte Karte war die Seherin.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 7 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Ritter, den Jungwolf, die Hexe und die Wolfsschönheit.
-Spieler 1 bekommt den Jäger, die Seherin und den Dorfbewohner.
-Deine Hand: Jäger, Seherin und Dorfbewohner
-> Seherin gegen die Wolfsschönheit und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Ritter, Jungwolf, Hexe und Wolfsschönheit
-> Ritter gegen die Wolfsschönheit und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 2 setzt 1 Sanduhr.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen die Wolfsschönheit und den Narren, Initiative 5. Spieler 2: Ritter gegen die Wolfsschönheit und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Ritter am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Ritter geht daneben.
-Spieler 1 ist mit der Seherin am Zug.
-Der Angriff von Spieler 1 mit der Seherin geht daneben.
-Runde 7 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 7 beiseitegelegte Karte war der Werwolfkönig.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 8 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Werwolfkönig, den Ritter, den Jungwolf und die Wolfsschönheit.
-Spieler 2 bekommt den Jäger, die Seherin und den Dorfbewohner.
-Deine Hand: Werwolfkönig, Ritter, Jungwolf und Wolfsschönheit
-> Werwolfkönig gegen die Seherin und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Jäger, Seherin und Dorfbewohner
-> Seherin gegen die Wolfsschönheit und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen die Seherin und den Narren, Initiative 2. Spieler 2: Seherin gegen die Wolfsschönheit und den Narren, Initiative 5. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 trifft mit dem Werwolfkönig die Seherin von Spieler 2! Spieler 2 verliert 1 Leben.
-Runde 8 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 8 beiseitegelegte Karte war die Hexe.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 9 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Jäger, den Werwolfkönig, den Ritter und die Seherin.
-Spieler 1 bekommt den Jungwolf, die Wolfsschönheit und den Dorfbewohner.
-Deine Hand: Jungwolf, Wolfsschönheit und Dorfbewohner
-> Jungwolf gegen den Ritter spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jäger, Werwolfkönig, Ritter und Seherin
-> Werwolfkönig gegen den Jäger, den Ritter, den Dorfbewohner und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 4 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 2 setzt 1 Sanduhr.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen den Ritter, Initiative 4. Spieler 2: Werwolfkönig gegen den Jäger, den Ritter, den Dorfbewohner und den Narren, Initiative 1. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 1 ist mit dem Jungwolf am Zug.
-Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
-Runde 9 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 9 beiseitegelegte Karte war die Hexe.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 10 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Werwolfkönig, den Ritter, den Jungwolf und die Wolfsschönheit.
-Spieler 2 bekommt den Jäger, die Hexe und den Dorfbewohner.
-Deine Hand: Werwolfkönig, Ritter, Jungwolf und Wolfsschönheit
-> Werwolfkönig gegen den Ritter, den Dorfbewohner und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: Jäger, Hexe und Dorfbewohner
-> Hexe gegen den Narren spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Ritter, den Dorfbewohner und den Narren, Initiative 2. Spieler 2: Hexe gegen den Narren, Initiative 6. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 gibt 1 Reißzahn aus.
-Der Angriff von Spieler 1 mit dem Werwolfkönig geht daneben.
-Spieler 2 ist mit der Hexe am Zug.
-Spieler 2 erhält den Trank.
-Runde 10 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 10 beiseitegelegte Karte war die Seherin.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 11 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Jäger, den Jungwolf, die Seherin und den Dorfbewohner.
-Spieler 1 bekommt den Werwolfkönig, die Hexe und die Wolfsschönheit.
-Deine Hand: Werwolfkönig, Hexe und Wolfsschönheit
-> Werwolfkönig gegen den Ritter, die Hexe und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: Jäger, Jungwolf, Seherin und Dorfbewohner
-> Jungwolf gegen den Werwolfkönig spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Mit dem Trank auf den Jäger zielen
-  Mit dem Trank auf den Ritter zielen
-  Mit dem Trank auf den Jungwolf zielen
-  Mit dem Trank auf die Seherin zielen
-  Mit dem Trank auf die Hexe zielen
-  Mit dem Trank auf die Wolfsschönheit zielen
-  Mit dem Trank auf den Dorfbewohner zielen
-> Mit dem Trank auf den Ritter zielen
-Spieler 2 zielt mit dem Trank auf den Ritter.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Ritter, die Hexe und den Narren, Initiative 2. Spieler 2: Jungwolf gegen den Werwolfkönig, Initiative 4. Spieler 1 ist zuerst dran.
-Der Trank geht daneben: Spieler 1 hat den Ritter nicht gespielt.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 2 ist mit dem Jungwolf am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
-Runde 11 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 11 beiseitegelegte Karte war der Ritter.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 12 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Werwolfkönig, die Seherin, die Wolfsschönheit und den Dorfbewohner.
-Spieler 2 bekommt den Jäger, den Ritter und die Hexe.
-Deine Hand: Werwolfkönig, Seherin, Wolfsschönheit und Dorfbewohner
-> Werwolfkönig gegen den Jäger, den Ritter und den Dorfbewohner spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: Jäger, Ritter und Hexe
-> Ritter gegen den Jungwolf und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger, den Ritter und den Dorfbewohner, Initiative 2. Spieler 2: Ritter gegen den Jungwolf und den Narren, Initiative 3. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 2 ist mit dem Ritter am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Ritter geht daneben.
-Runde 12 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 12 beiseitegelegte Karte war der Jungwolf.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 13 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Werwolfkönig, den Ritter, die Hexe und den Dorfbewohner.
-Spieler 1 bekommt den Jäger, den Jungwolf und die Wolfsschönheit.
-Deine Hand: Jäger, Jungwolf und Wolfsschönheit
-> Wolfsschönheit gegen den Ritter und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Werwolfkönig, Ritter, Hexe und Dorfbewohner
-> Werwolfkönig gegen den Ritter, die Seherin und die Hexe spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 1 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Ritter und den Narren, Initiative 6. Spieler 2: Werwolfkönig gegen den Ritter, die Seherin und die Hexe, Initiative 2. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 1 ist mit der Wolfsschönheit am Zug.
-Spieler 1 erhält 1 Reißzahn.
-Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
-Runde 13 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 13 beiseitegelegte Karte war die Seherin.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 14 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Werwolfkönig, den Jungwolf, die Wolfsschönheit und den Dorfbewohner.
-Spieler 2 bekommt den Jäger, die Seherin und die Hexe.
-Deine Hand: Werwolfkönig, Jungwolf, Wolfsschönheit und Dorfbewohner
-> Jungwolf gegen die Seherin spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jäger, Seherin und Hexe
-> Seherin gegen den Werwolfkönig spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-> 1 Sanduhr setzen
-Spieler 2 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen die Seherin, Initiative 4. Spieler 2: Seherin gegen den Werwolfkönig, Initiative 4. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit der Seherin am Zug.
-Der Angriff von Spieler 2 mit der Seherin geht daneben.
-Spieler 1 ist mit dem Jungwolf am Zug.
-Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
-Runde 14 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 14 beiseitegelegte Karte war der Ritter.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 15 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Werwolfkönig, den Ritter, die Seherin und den Dorfbewohner.
-Spieler 1 bekommt den Jäger, den Jungwolf und die Wolfsschönheit.
-Deine Hand: Jäger, Jungwolf und Wolfsschönheit
-> Jungwolf gegen die Hexe spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Werwolfkönig, Ritter, Seherin und Dorfbewohner
-> Werwolfkönig gegen den Jäger, den Ritter, die Hexe und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 4 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen die Hexe, Initiative 4. Spieler 2: Werwolfkönig gegen den Jäger, den Ritter, die Hexe und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 1 ist mit dem Jungwolf am Zug.
-Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
-Runde 15 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 15 beiseitegelegte Karte war die Hexe.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 16 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Jäger, den Werwolfkönig, den Jungwolf und die Wolfsschönheit.
-Spieler 2 bekommt den Ritter, die Seherin und die Hexe.
-Deine Hand: Jäger, Werwolfkönig, Jungwolf und Wolfsschönheit
-> Jungwolf gegen den Jungwolf und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Ritter, Seherin und Hexe
-> Seherin gegen den Narren spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-> 2 Sanduhren setzen
-Spieler 1 setzt 2 Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 2 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen den Jungwolf und den Narren, Initiative 2. Spieler 2: Seherin gegen den Narren, Initiative 4. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jungwolf am Zug.
-Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
-Spieler 2 ist mit der Seherin am Zug.
-Der Angriff von Spieler 2 mit der Seherin geht daneben.
-Runde 16 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 16 beiseitegelegte Karte war der Dorfbewohner.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 17 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Jäger, den Jungwolf, die Wolfsschönheit und den Dorfbewohner.
-Spieler 1 bekommt den Ritter, die Seherin und die Hexe.
-Deine Hand: Ritter, Seherin und Hexe
-> Ritter gegen den Werwolfkönig spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jäger, Jungwolf, Wolfsschönheit und Dorfbewohner
-> Jungwolf gegen die Hexe und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Ritter gegen den Werwolfkönig, Initiative 3. Spieler 2: Jungwolf gegen die Hexe und den Narren, Initiative 4. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Ritter am Zug.
-Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Ritter geht daneben.
-Spieler 2 ist mit dem Jungwolf am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
-Runde 17 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 17 beiseitegelegte Karte war der Werwolfkönig.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 18 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Werwolfkönig, den Ritter, die Seherin und die Wolfsschönheit.
-Spieler 2 bekommt den Jäger, die Hexe und den Dorfbewohner.
-Deine Hand: Werwolfkönig, Ritter, Seherin und Wolfsschönheit
-> Werwolfkönig gegen die Hexe, den Dorfbewohner und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: Jäger, Hexe und Dorfbewohner
-> Jäger gegen den Jungwolf und die Wolfsschönheit spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 2 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen die Hexe, den Dorfbewohner und den Narren, Initiative 2. Spieler 2: Jäger gegen den Jungwolf und die Wolfsschönheit, Initiative 0. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Jäger am Zug.
-Spieler 2 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 gibt 1 Reißzahn aus.
-Der Angriff von Spieler 1 mit dem Werwolfkönig geht daneben.
-Runde 18 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 18 beiseitegelegte Karte war der Jungwolf.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 19 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Werwolfkönig, die Hexe, die Wolfsschönheit und den Dorfbewohner.
-Spieler 1 bekommt den Jäger, den Ritter und die Seherin.
-Deine Hand: Jäger, Ritter und Seherin
-> Jäger gegen den Jungwolf und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Werwolfkönig, Hexe, Wolfsschönheit und Dorfbewohner
-> Werwolfkönig gegen die Seherin und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Jungwolf und den Narren, Initiative 1. Spieler 2: Werwolfkönig gegen die Seherin und den Narren, Initiative 2. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jäger am Zug.
-Deine Hand: 
-  Das Kreuz behalten
-  Ein Kreuz ausgeben und angreifen
-> Ein Kreuz ausgeben und angreifen
-Spieler 1 gibt 1 Kreuz aus.
-Der Angriff von Spieler 1 mit dem Jäger geht daneben.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Der Angriff von Spieler 2 mit dem Werwolfkönig geht daneben.
-Runde 19 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 19 beiseitegelegte Karte war der Jungwolf.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 20 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Jäger, den Werwolfkönig, den Jungwolf und die Wolfsschönheit.
-Spieler 2 bekommt den Ritter, die Seherin und die Hexe.
-Deine Hand: Jäger, Werwolfkönig, Jungwolf und Wolfsschönheit
-> Jungwolf gegen den Narren spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Ritter, Seherin und Hexe
-> Ritter gegen den Jungwolf und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-> 2 Sanduhren setzen
-Spieler 1 setzt 2 Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen den Narren, Initiative 2. Spieler 2: Ritter gegen den Jungwolf und den Narren, Initiative 3. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jungwolf am Zug.
-Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
-Spieler 2 ist mit dem Ritter am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Ritter geht daneben.
-Runde 20 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 20 beiseitegelegte Karte war der Dorfbewohner.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 21 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Werwolfkönig, die Seherin, die Wolfsschönheit und den Dorfbewohner.
-Spieler 1 bekommt den Jäger, den Jungwolf und die Hexe.
-Deine Hand: Jäger, Jungwolf und Hexe
-> Jungwolf gegen die Seherin und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Werwolfkönig, Seherin, Wolfsschönheit und Dorfbewohner
-> Wolfsschönheit gegen die Hexe spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen die Seherin und den Narren, Initiative 4. Spieler 2: Wolfsschönheit gegen die Hexe, Initiative 7. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jungwolf am Zug.
-Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
-Spieler 2 ist mit der Wolfsschönheit am Zug.
-Spieler 2 erhält 1 Reißzahn.
-Der Angriff von Spieler 2 mit der Wolfsschönheit geht daneben.
-Runde 21 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 21 beiseitegelegte Karte war der Ritter.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 22 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Werwolfkönig, den Ritter, den Jungwolf und die Seherin.
-Spieler 2 bekommt die Hexe, die Wolfsschönheit und den Dorfbewohner.
-Deine Hand: Werwolfkönig, Ritter, Jungwolf und Seherin
-> Werwolfkönig gegen den Jäger, die Seherin, die Hexe und den Dorfbewohner spielen
-Spieler 1 versiegelt einen Plan mit 4 Zielkarten.
-Deine Hand: Hexe, Wolfsschönheit und Dorfbewohner
-> Hexe gegen den Narren spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger, die Seherin, die Hexe und den Dorfbewohner, Initiative 2. Spieler 2: Hexe gegen den Narren, Initiative 6. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 2 ist mit der Hexe am Zug.
-Spieler 2 erhält den Trank.
-Runde 22 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 22 beiseitegelegte Karte war der Jäger.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 23 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Jäger, den Werwolfkönig, den Jungwolf und die Hexe.
-Spieler 1 bekommt die Seherin, die Wolfsschönheit und den Dorfbewohner.
-Deine Hand: Seherin, Wolfsschönheit und Dorfbewohner
-> Wolfsschönheit gegen die Seherin und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Jäger, Werwolfkönig, Jungwolf und Hexe
-> Jungwolf gegen die Seherin und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-> 2 Sanduhren setzen
-Spieler 1 setzt 2 Sanduhren.
-Deine Hand: 
-  Mit dem Trank auf den Jäger zielen
-  Mit dem Trank auf den Werwolfkönig zielen
-  Mit dem Trank auf den Ritter zielen
-  Mit dem Trank auf den Jungwolf zielen
-  Mit dem Trank auf die Hexe zielen
-  Mit dem Trank auf die Wolfsschönheit zielen
-  Mit dem Trank auf den Dorfbewohner zielen
-> Mit dem Trank auf den Jungwolf zielen
-Spieler 2 zielt mit dem Trank auf den Jungwolf.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen die Seherin und den Narren, Initiative 5. Spieler 2: Jungwolf gegen die Seherin und den Narren, Initiative 4. Spieler 2 ist zuerst dran.
-Der Trank geht daneben: Spieler 1 hat den Jungwolf nicht gespielt.
-Spieler 2 ist mit dem Jungwolf am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
-Spieler 1 ist mit der Wolfsschönheit am Zug.
-Spieler 1 erhält 1 Reißzahn.
-Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
-Runde 23 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 23 beiseitegelegte Karte war der Ritter.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 24 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Werwolfkönig, den Ritter, die Hexe und die Wolfsschönheit.
-Spieler 2 bekommt den Jungwolf, die Seherin und den Dorfbewohner.
-Deine Hand: Werwolfkönig, Ritter, Hexe und Wolfsschönheit
-> Werwolfkönig gegen die Seherin und den Dorfbewohner spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Jungwolf, Seherin und Dorfbewohner
-> Seherin gegen den Jungwolf spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen die Seherin und den Dorfbewohner, Initiative 2. Spieler 2: Seherin gegen den Jungwolf, Initiative 5. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 gibt 1 Reißzahn aus.
-Spieler 1 trifft mit dem Werwolfkönig die Seherin von Spieler 2! Spieler 2 verliert 1 Leben.
+Spieler 1 trifft mit der Seherin die Wolfsschönheit von Spieler 2! Spieler 2 verliert 2 Leben.
 Spieler 1 gewinnt, weil Spieler 2 kein Leben mehr hat.
 # Game 2
 Deine Hand: Jäger, Jungwolf, Hexe und Wolfsschönheit
-> Jungwolf gegen den Jungwolf spielen
+> Jungwolf gegen den Werwolfkönig spielen
 Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Werwolfkönig, Seherin und Dorfbewohner
-> Werwolfkönig gegen die Hexe und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
+> Werwolfkönig gegen den Jäger, den Ritter und die Hexe spielen
+Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
@@ -873,9 +77,9 @@ Deine Hand:
   1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen den Jungwolf, Initiative 4. Spieler 2: Werwolfkönig gegen die Hexe und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
+Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen den Werwolfkönig, Initiative 4. Spieler 2: Werwolfkönig gegen den Jäger, den Ritter und die Hexe, Initiative 2. Spieler 2 ist zuerst dran.
 Spieler 2 ist mit dem Werwolfkönig am Zug.
-Der Angriff von Spieler 2 mit dem Werwolfkönig geht daneben.
+Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
 Spieler 1 ist mit dem Jungwolf am Zug.
 Spieler 1 erhält 1 Sanduhr.
 Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
@@ -893,10 +97,10 @@ Runde 2 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Werwolfkönig, den Ritter, die Wolfsschönheit und den Dorfbewohner.
 Spieler 1 bekommt den Jäger, den Jungwolf und die Hexe.
 Deine Hand: Jäger, Jungwolf und Hexe
-> Jäger gegen den Werwolfkönig und die Wolfsschönheit spielen
+> Jungwolf gegen die Wolfsschönheit und den Narren spielen
 Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Werwolfkönig, Ritter, Wolfsschönheit und Dorfbewohner
-> Ritter gegen den Werwolfkönig spielen
+> Dorfbewohner gegen den Narren spielen
 Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
@@ -908,16 +112,12 @@ Deine Hand:
   1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Werwolfkönig und die Wolfsschönheit, Initiative 1. Spieler 2: Ritter gegen den Werwolfkönig, Initiative 2. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jäger am Zug.
-Deine Hand: 
-  Das Kreuz behalten
-  Ein Kreuz ausgeben und angreifen
-> Das Kreuz behalten
-Spieler 1 greift nicht an: Das Kreuz wurde nicht ausgegeben.
-Spieler 2 ist mit dem Ritter am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Ritter geht daneben.
+Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen die Wolfsschönheit und den Narren, Initiative 4. Spieler 2: Dorfbewohner gegen den Narren, Initiative 7. Spieler 1 ist zuerst dran.
+Spieler 1 ist mit dem Jungwolf am Zug.
+Spieler 1 erhält 1 Sanduhr.
+Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
+Spieler 2 ist mit dem Dorfbewohner am Zug.
+Spieler 2 erhält 1 Kreuz.
 Runde 2 endet. Spieler 1 bekommt das Abzeichen.
 Die in Runde 2 beiseitegelegte Karte war die Seherin.
 Deine Hand: 
@@ -932,30 +132,25 @@ Runde 3 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Werwolfkönig, den Jungwolf, die Seherin und die Wolfsschönheit.
 Spieler 2 bekommt den Jäger, den Ritter und die Hexe.
 Deine Hand: Werwolfkönig, Jungwolf, Seherin und Wolfsschönheit
-> Werwolfkönig gegen den Ritter, die Seherin und die Hexe spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
+> Wolfsschönheit gegen den Ritter und den Narren spielen
+Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Jäger, Ritter und Hexe
-> Jäger gegen die Wolfsschönheit spielen
+> Ritter gegen die Wolfsschönheit spielen
 Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
+  2 Sanduhren setzen
 > 1 Sanduhr setzen
 Spieler 1 setzt 1 Sanduhr.
 Deine Hand: 
   Keine Sanduhren setzen
-  1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Ritter, die Seherin und die Hexe, Initiative 1. Spieler 2: Jäger gegen die Wolfsschönheit, Initiative 1. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 2 ist mit dem Jäger am Zug.
-Deine Hand: 
-  Das Kreuz behalten
-  Ein Kreuz ausgeben und angreifen
-> Das Kreuz behalten
-Spieler 2 greift nicht an: Das Kreuz wurde nicht ausgegeben.
+Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Ritter und den Narren, Initiative 6. Spieler 2: Ritter gegen die Wolfsschönheit, Initiative 3. Spieler 2 ist zuerst dran.
+Spieler 2 ist mit dem Ritter am Zug.
+Spieler 2 erhält 1 Sanduhr.
+Spieler 2 trifft mit dem Ritter die Wolfsschönheit von Spieler 1! Spieler 1 verliert 1 Leben.
 Runde 3 endet. Spieler 2 bekommt das Abzeichen.
 Die in Runde 3 beiseitegelegte Karte war der Dorfbewohner.
 Deine Hand: 
@@ -970,10 +165,10 @@ Runde 4 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Ritter, den Jungwolf, die Seherin und die Wolfsschönheit.
 Spieler 1 bekommt den Jäger, den Werwolfkönig und die Hexe.
 Deine Hand: Jäger, Werwolfkönig und Hexe
-> Werwolfkönig gegen den Jäger, den Ritter, die Seherin, die Hexe und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 5 Zielkarten.
+> Jäger gegen den Jungwolf und den Narren spielen
+Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Ritter, Jungwolf, Seherin und Wolfsschönheit
-> Seherin gegen die Wolfsschönheit spielen
+> Jungwolf gegen den Dorfbewohner spielen
 Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
@@ -982,13 +177,19 @@ Deine Hand:
 Spieler 2 setzt keine Sanduhren.
 Deine Hand: 
   Keine Sanduhren setzen
+  1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger, den Ritter, die Seherin, die Hexe und den Narren, Initiative 2. Spieler 2: Seherin gegen die Wolfsschönheit, Initiative 5. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 2 ist mit der Seherin am Zug.
-Der Angriff von Spieler 2 mit der Seherin geht daneben.
+Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Jungwolf und den Narren, Initiative 1. Spieler 2: Jungwolf gegen den Dorfbewohner, Initiative 4. Spieler 1 ist zuerst dran.
+Spieler 1 ist mit dem Jäger am Zug.
+Deine Hand: 
+  Das Kreuz behalten
+  Ein Kreuz ausgeben und angreifen
+> Das Kreuz behalten
+Spieler 1 greift nicht an: Das Kreuz wurde nicht ausgegeben.
+Spieler 2 ist mit dem Jungwolf am Zug.
+Spieler 2 erhält 1 Sanduhr.
+Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
 Runde 4 endet. Spieler 1 bekommt das Abzeichen.
 Die in Runde 4 beiseitegelegte Karte war der Dorfbewohner.
 Deine Hand: 
@@ -1003,26 +204,28 @@ Runde 5 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Jäger, den Werwolfkönig, die Seherin und den Dorfbewohner.
 Spieler 2 bekommt den Ritter, den Jungwolf und die Hexe.
 Deine Hand: Jäger, Werwolfkönig, Seherin und Dorfbewohner
-> Werwolfkönig gegen den Jäger, die Seherin und den Dorfbewohner spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
+> Seherin gegen den Jungwolf und den Narren spielen
+Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Ritter, Jungwolf und Hexe
-> Jungwolf gegen die Hexe spielen
+> Jungwolf gegen die Wolfsschönheit spielen
 Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
+  1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
+  2 Sanduhren setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger, die Seherin und den Dorfbewohner, Initiative 2. Spieler 2: Jungwolf gegen die Hexe, Initiative 4. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen den Jungwolf und den Narren, Initiative 5. Spieler 2: Jungwolf gegen die Wolfsschönheit, Initiative 4. Spieler 2 ist zuerst dran.
 Spieler 2 ist mit dem Jungwolf am Zug.
 Spieler 2 erhält 1 Sanduhr.
 Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
+Spieler 1 ist mit der Seherin am Zug.
+Der Angriff von Spieler 1 mit der Seherin geht daneben.
 Runde 5 endet. Spieler 2 bekommt das Abzeichen.
 Die in Runde 5 beiseitegelegte Karte war die Wolfsschönheit.
 Deine Hand: 
@@ -1037,31 +240,31 @@ Runde 6 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Werwolfkönig, den Ritter, die Seherin und die Wolfsschönheit.
 Spieler 1 bekommt den Jäger, die Hexe und den Dorfbewohner.
 Deine Hand: Jäger, Hexe und Dorfbewohner
-> Jäger gegen den Jungwolf, die Wolfsschönheit und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
+> Jäger gegen den Werwolfkönig spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Werwolfkönig, Ritter, Seherin und Wolfsschönheit
-> Werwolfkönig gegen den Ritter, die Seherin, die Hexe und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 4 Zielkarten.
+> Werwolfkönig gegen die Hexe spielen
+Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
   2 Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
+  3 Sanduhren setzen
+> 1 Sanduhr setzen
+Spieler 2 setzt 1 Sanduhr.
 Deine Hand: 
   Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Jungwolf, die Wolfsschönheit und den Narren, Initiative 1. Spieler 2: Werwolfkönig gegen den Ritter, die Seherin, die Hexe und den Narren, Initiative 2. Spieler 1 ist zuerst dran.
+  1 Sanduhr setzen
+> 1 Sanduhr setzen
+Spieler 1 setzt 1 Sanduhr.
+Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Werwolfkönig, Initiative 0. Spieler 2: Werwolfkönig gegen die Hexe, Initiative 1. Spieler 1 ist zuerst dran.
 Spieler 1 ist mit dem Jäger am Zug.
 Deine Hand: 
   Das Kreuz behalten
   Ein Kreuz ausgeben und angreifen
 > Ein Kreuz ausgeben und angreifen
 Spieler 1 gibt 1 Kreuz aus.
-Der Angriff von Spieler 1 mit dem Jäger geht daneben.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Spieler 1 trifft mit dem Jäger den Werwolfkönig von Spieler 2! Spieler 2 verliert 1 Leben.
 Runde 6 endet. Spieler 1 bekommt das Abzeichen.
 Die in Runde 6 beiseitegelegte Karte war der Jungwolf.
 Deine Hand: 
@@ -1076,152 +279,11 @@ Runde 7 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Ritter, den Jungwolf, die Seherin und die Wolfsschönheit.
 Spieler 2 bekommt den Jäger, den Werwolfkönig und den Dorfbewohner.
 Deine Hand: Ritter, Jungwolf, Seherin und Wolfsschönheit
-> Wolfsschönheit gegen die Seherin spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
+> Ritter gegen den Werwolfkönig und den Narren spielen
+Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Jäger, Werwolfkönig und Dorfbewohner
-> Werwolfkönig gegen den Jäger, die Seherin, die Hexe und den Dorfbewohner spielen
-Spieler 2 versiegelt einen Plan mit 4 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-> 1 Sanduhr setzen
-Spieler 2 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen die Seherin, Initiative 7. Spieler 2: Werwolfkönig gegen den Jäger, die Seherin, die Hexe und den Dorfbewohner, Initiative 1. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 1 ist mit der Wolfsschönheit am Zug.
-Spieler 1 erhält 1 Reißzahn.
-Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
-Runde 7 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 7 beiseitegelegte Karte war die Hexe.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 8 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Werwolfkönig, den Jungwolf, die Wolfsschönheit und den Dorfbewohner.
-Spieler 1 bekommt den Jäger, die Seherin und die Hexe.
-Deine Hand: Jäger, Seherin und Hexe
-> Seherin gegen den Jungwolf spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Werwolfkönig, Jungwolf, Wolfsschönheit und Dorfbewohner
-> Wolfsschönheit gegen den Werwolfkönig und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen den Jungwolf, Initiative 5. Spieler 2: Wolfsschönheit gegen den Werwolfkönig und den Narren, Initiative 7. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit der Seherin am Zug.
-Der Angriff von Spieler 1 mit der Seherin geht daneben.
-Spieler 2 ist mit der Wolfsschönheit am Zug.
-Spieler 2 erhält 1 Reißzahn.
-Der Angriff von Spieler 2 mit der Wolfsschönheit geht daneben.
-Runde 8 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 8 beiseitegelegte Karte war der Ritter.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 9 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Werwolfkönig, den Ritter, den Jungwolf und die Hexe.
-Spieler 2 bekommt den Jäger, die Seherin und die Wolfsschönheit.
-Deine Hand: Werwolfkönig, Ritter, Jungwolf und Hexe
-> Werwolfkönig gegen den Jäger, den Ritter und die Seherin spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: Jäger, Seherin und Wolfsschönheit
-> Jäger gegen die Wolfsschönheit spielen
+> Werwolfkönig gegen den Ritter spielen
 Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger, den Ritter und die Seherin, Initiative 2. Spieler 2: Jäger gegen die Wolfsschönheit, Initiative 1. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Jäger am Zug.
-Deine Hand: 
-  Das Kreuz behalten
-  Ein Kreuz ausgeben und angreifen
-> Ein Kreuz ausgeben und angreifen
-Spieler 2 gibt 1 Kreuz aus.
-Der Angriff von Spieler 2 mit dem Jäger geht daneben.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Runde 9 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 9 beiseitegelegte Karte war der Dorfbewohner.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 10 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Werwolfkönig, den Jungwolf, die Wolfsschönheit und den Dorfbewohner.
-Spieler 1 bekommt den Jäger, den Ritter und die Seherin.
-Deine Hand: Jäger, Ritter und Seherin
-> Jäger gegen den Werwolfkönig, die Wolfsschönheit und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: Werwolfkönig, Jungwolf, Wolfsschönheit und Dorfbewohner
-> Jungwolf gegen die Hexe und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Werwolfkönig, die Wolfsschönheit und den Narren, Initiative 1. Spieler 2: Jungwolf gegen die Hexe und den Narren, Initiative 4. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jäger am Zug.
-Spieler 1 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
-Spieler 2 ist mit dem Jungwolf am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
-Runde 10 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 10 beiseitegelegte Karte war die Hexe.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 11 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Ritter, den Jungwolf, die Seherin und die Hexe.
-Spieler 2 bekommt den Jäger, den Werwolfkönig und die Wolfsschönheit.
-Deine Hand: Ritter, Jungwolf, Seherin und Hexe
-> Jungwolf gegen die Hexe spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jäger, Werwolfkönig und Wolfsschönheit
-> Werwolfkönig gegen den Ritter, die Seherin und die Hexe spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
@@ -1232,120 +294,16 @@ Deine Hand:
   2 Sanduhren setzen
 > 2 Sanduhren setzen
 Spieler 2 setzt 2 Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen die Hexe, Initiative 4. Spieler 2: Werwolfkönig gegen den Ritter, die Seherin und die Hexe, Initiative 0. Spieler 2 ist zuerst dran.
+Die Pläne sind aufgedeckt. Spieler 1: Ritter gegen den Werwolfkönig und den Narren, Initiative 3. Spieler 2: Werwolfkönig gegen den Ritter, Initiative 0. Spieler 2 ist zuerst dran.
 Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 1 ist mit dem Jungwolf am Zug.
-Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
-Runde 11 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 11 beiseitegelegte Karte war der Dorfbewohner.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 12 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Werwolfkönig, den Jungwolf, die Hexe und den Dorfbewohner.
-Spieler 1 bekommt den Jäger, den Ritter und die Wolfsschönheit.
-Deine Hand: Jäger, Ritter und Wolfsschönheit
-> Jäger gegen den Jungwolf spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Werwolfkönig, Jungwolf, Hexe und Dorfbewohner
-> Werwolfkönig gegen den Jäger, die Seherin und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 1 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Jungwolf, Initiative 0. Spieler 2: Werwolfkönig gegen den Jäger, die Seherin und den Narren, Initiative 2. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jäger am Zug.
-Spieler 1 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 gibt 1 Reißzahn aus.
-Der Angriff von Spieler 2 mit dem Werwolfkönig geht daneben.
-Runde 12 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 12 beiseitegelegte Karte war die Seherin.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 13 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Werwolfkönig, die Seherin, die Wolfsschönheit und den Dorfbewohner.
-Spieler 2 bekommt den Ritter, den Jungwolf und die Hexe.
-Deine Hand: Werwolfkönig, Seherin, Wolfsschönheit und Dorfbewohner
-> Wolfsschönheit gegen den Werwolfkönig spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Ritter, Jungwolf und Hexe
-> Ritter gegen den Jungwolf und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Werwolfkönig, Initiative 7. Spieler 2: Ritter gegen den Jungwolf und den Narren, Initiative 3. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Ritter am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Ritter geht daneben.
-Spieler 1 ist mit der Wolfsschönheit am Zug.
-Spieler 1 erhält 1 Reißzahn.
-Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
-Runde 13 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 13 beiseitegelegte Karte war der Jäger.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 14 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Werwolfkönig, den Ritter, die Seherin und den Dorfbewohner.
-Spieler 1 bekommt den Jäger, die Hexe und die Wolfsschönheit.
-Deine Hand: Jäger, Hexe und Wolfsschönheit
-> Wolfsschönheit gegen den Ritter und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Werwolfkönig, Ritter, Seherin und Dorfbewohner
-> Werwolfkönig gegen den Ritter spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Ritter und den Narren, Initiative 7. Spieler 2: Werwolfkönig gegen den Ritter, Initiative 2. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Der Angriff von Spieler 2 mit dem Werwolfkönig geht daneben.
-Spieler 1 ist mit der Wolfsschönheit am Zug.
-Spieler 1 erhält 1 Reißzahn.
-Spieler 1 hat genug Reißzähne gesammelt und gewinnt.
+Spieler 2 trifft mit dem Werwolfkönig den Ritter von Spieler 1! Spieler 1 verliert 1 Leben.
+Spieler 2 gewinnt, weil Spieler 1 kein Leben mehr hat.
 # Game 3
 Deine Hand: Jäger, Ritter und Dorfbewohner
 > Jäger gegen den Werwolfkönig und die Wolfsschönheit spielen
 Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Werwolfkönig, Seherin, Hexe und Wolfsschönheit
-> Werwolfkönig gegen den Jäger spielen
+> Werwolfkönig gegen den Dorfbewohner spielen
 Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
@@ -1356,7 +314,7 @@ Deine Hand:
   1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Werwolfkönig und die Wolfsschönheit, Initiative 1. Spieler 2: Werwolfkönig gegen den Jäger, Initiative 2. Spieler 1 ist zuerst dran.
+Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Werwolfkönig und die Wolfsschönheit, Initiative 1. Spieler 2: Werwolfkönig gegen den Dorfbewohner, Initiative 2. Spieler 1 ist zuerst dran.
 Spieler 1 ist mit dem Jäger am Zug.
 Deine Hand: 
   Das Kreuz behalten
@@ -1378,11 +336,11 @@ Runde 2 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Ritter, die Hexe, die Wolfsschönheit und den Dorfbewohner.
 Spieler 2 bekommt den Jäger, den Werwolfkönig und die Seherin.
 Deine Hand: Ritter, Hexe, Wolfsschönheit und Dorfbewohner
-> Ritter gegen den Jungwolf spielen
+> Ritter gegen den Narren spielen
 Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Jäger, Werwolfkönig und Seherin
-> Jäger gegen die Wolfsschönheit spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
+> Werwolfkönig gegen den Ritter und die Hexe spielen
+Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
@@ -1392,17 +350,12 @@ Deine Hand:
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Ritter gegen den Jungwolf, Initiative 2. Spieler 2: Jäger gegen die Wolfsschönheit, Initiative 1. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Jäger am Zug.
-Deine Hand: 
-  Das Kreuz behalten
-  Ein Kreuz ausgeben und angreifen
-> Ein Kreuz ausgeben und angreifen
-Spieler 2 gibt 1 Kreuz aus.
-Der Angriff von Spieler 2 mit dem Jäger geht daneben.
+Die Pläne sind aufgedeckt. Spieler 1: Ritter gegen den Narren, Initiative 2. Spieler 2: Werwolfkönig gegen den Ritter und die Hexe, Initiative 2. Spieler 1 ist zuerst dran.
 Spieler 1 ist mit dem Ritter am Zug.
 Spieler 1 erhält 1 Sanduhr.
 Der Angriff von Spieler 1 mit dem Ritter geht daneben.
+Spieler 2 ist mit dem Werwolfkönig am Zug.
+Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
 Runde 2 endet. Spieler 2 bekommt das Abzeichen.
 Die in Runde 2 beiseitegelegte Karte war der Jungwolf.
 Deine Hand: 
@@ -1417,11 +370,11 @@ Runde 3 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Werwolfkönig, den Ritter, die Wolfsschönheit und den Dorfbewohner.
 Spieler 1 bekommt den Jungwolf, die Seherin und die Hexe.
 Deine Hand: Jungwolf, Seherin und Hexe
-> Jungwolf gegen den Jungwolf spielen
+> Jungwolf gegen den Ritter spielen
 Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Werwolfkönig, Ritter, Wolfsschönheit und Dorfbewohner
-> Werwolfkönig gegen die Seherin spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
+> Werwolfkönig gegen die Seherin und die Hexe spielen
+Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
@@ -1431,9 +384,9 @@ Deine Hand:
   1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen den Jungwolf, Initiative 4. Spieler 2: Werwolfkönig gegen die Seherin, Initiative 2. Spieler 2 ist zuerst dran.
+Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen den Ritter, Initiative 4. Spieler 2: Werwolfkönig gegen die Seherin und die Hexe, Initiative 2. Spieler 2 ist zuerst dran.
 Spieler 2 ist mit dem Werwolfkönig am Zug.
-Der Angriff von Spieler 2 mit dem Werwolfkönig geht daneben.
+Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
 Spieler 1 ist mit dem Jungwolf am Zug.
 Spieler 1 erhält 1 Sanduhr.
 Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
@@ -1451,11 +404,11 @@ Runde 4 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Ritter, den Jungwolf, die Hexe und den Dorfbewohner.
 Spieler 2 bekommt den Jäger, den Werwolfkönig und die Seherin.
 Deine Hand: Ritter, Jungwolf, Hexe und Dorfbewohner
-> Jungwolf gegen den Jungwolf und den Narren spielen
+> Ritter gegen die Wolfsschönheit und den Narren spielen
 Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Jäger, Werwolfkönig und Seherin
-> Werwolfkönig gegen die Seherin, den Dorfbewohner und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
+> Jäger gegen den Jungwolf spielen
+Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
@@ -1466,12 +419,17 @@ Deine Hand:
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen den Jungwolf und den Narren, Initiative 2. Spieler 2: Werwolfkönig gegen die Seherin, den Dorfbewohner und den Narren, Initiative 2. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jungwolf am Zug.
+Die Pläne sind aufgedeckt. Spieler 1: Ritter gegen die Wolfsschönheit und den Narren, Initiative 1. Spieler 2: Jäger gegen den Jungwolf, Initiative 1. Spieler 1 ist zuerst dran.
+Spieler 1 ist mit dem Ritter am Zug.
 Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Der Angriff von Spieler 1 mit dem Ritter geht daneben.
+Spieler 2 ist mit dem Jäger am Zug.
+Deine Hand: 
+  Das Kreuz behalten
+  Ein Kreuz ausgeben und angreifen
+> Ein Kreuz ausgeben und angreifen
+Spieler 2 gibt 1 Kreuz aus.
+Der Angriff von Spieler 2 mit dem Jäger geht daneben.
 Runde 4 endet. Spieler 2 bekommt das Abzeichen.
 Die in Runde 4 beiseitegelegte Karte war die Wolfsschönheit.
 Deine Hand: 
@@ -1489,7 +447,7 @@ Deine Hand: Jäger, Seherin und Dorfbewohner
 > Seherin gegen den Narren spielen
 Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Ritter, Jungwolf, Hexe und Wolfsschönheit
-> Wolfsschönheit gegen den Dorfbewohner und den Narren spielen
+> Jungwolf gegen die Seherin und den Narren spielen
 Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
@@ -1500,12 +458,10 @@ Deine Hand:
   1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen den Narren, Initiative 5. Spieler 2: Wolfsschönheit gegen den Dorfbewohner und den Narren, Initiative 7. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit der Seherin am Zug.
-Der Angriff von Spieler 1 mit der Seherin geht daneben.
-Spieler 2 ist mit der Wolfsschönheit am Zug.
-Spieler 2 erhält 1 Reißzahn.
-Der Angriff von Spieler 2 mit der Wolfsschönheit geht daneben.
+Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen den Narren, Initiative 5. Spieler 2: Jungwolf gegen die Seherin und den Narren, Initiative 4. Spieler 2 ist zuerst dran.
+Spieler 2 ist mit dem Jungwolf am Zug.
+Spieler 2 erhält 1 Sanduhr.
+Spieler 2 trifft mit dem Jungwolf die Seherin von Spieler 1! Spieler 1 verliert 1 Leben.
 Runde 5 endet. Spieler 1 bekommt das Abzeichen.
 Die in Runde 5 beiseitegelegte Karte war der Werwolfkönig.
 Deine Hand: 
@@ -1520,11 +476,11 @@ Runde 6 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Werwolfkönig, den Ritter, den Jungwolf und die Seherin.
 Spieler 2 bekommt den Jäger, die Wolfsschönheit und den Dorfbewohner.
 Deine Hand: Werwolfkönig, Ritter, Jungwolf und Seherin
-> Werwolfkönig gegen den Jäger, die Seherin, die Hexe und den Narren spielen
+> Werwolfkönig gegen den Jäger, die Hexe, den Dorfbewohner und den Narren spielen
 Spieler 1 versiegelt einen Plan mit 4 Zielkarten.
 Deine Hand: Jäger, Wolfsschönheit und Dorfbewohner
-> Jäger gegen den Werwolfkönig, die Wolfsschönheit und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
+> Wolfsschönheit gegen den Jungwolf und den Narren spielen
+Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
@@ -1532,13 +488,15 @@ Deine Hand:
 Spieler 1 setzt 1 Sanduhr.
 Deine Hand: 
   Keine Sanduhren setzen
+  1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger, die Seherin, die Hexe und den Narren, Initiative 1. Spieler 2: Jäger gegen den Werwolfkönig, die Wolfsschönheit und den Narren, Initiative 1. Spieler 1 ist zuerst dran.
+Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger, die Hexe, den Dorfbewohner und den Narren, Initiative 1. Spieler 2: Wolfsschönheit gegen den Jungwolf und den Narren, Initiative 7. Spieler 1 ist zuerst dran.
 Spieler 1 ist mit dem Werwolfkönig am Zug.
 Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 2 ist mit dem Jäger am Zug.
-Spieler 2 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
+Spieler 2 ist mit der Wolfsschönheit am Zug.
+Spieler 2 erhält 1 Reißzahn.
+Der Angriff von Spieler 2 mit der Wolfsschönheit geht daneben.
 Runde 6 endet. Spieler 2 bekommt das Abzeichen.
 Die in Runde 6 beiseitegelegte Karte war die Hexe.
 Deine Hand: 
@@ -1553,22 +511,23 @@ Runde 7 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Werwolfkönig, die Seherin, die Hexe und den Dorfbewohner.
 Spieler 1 bekommt den Jäger, den Ritter und die Wolfsschönheit.
 Deine Hand: Jäger, Ritter und Wolfsschönheit
-> Wolfsschönheit gegen den Jäger und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
+> Wolfsschönheit gegen die Hexe spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Werwolfkönig, Seherin, Hexe und Dorfbewohner
-> Werwolfkönig gegen den Jäger, den Ritter, die Seherin und den Dorfbewohner spielen
-Spieler 2 versiegelt einen Plan mit 4 Zielkarten.
+> Werwolfkönig gegen den Ritter und den Narren spielen
+Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
+  1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
 Deine Hand: 
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Jäger und den Narren, Initiative 7. Spieler 2: Werwolfkönig gegen den Jäger, den Ritter, die Seherin und den Dorfbewohner, Initiative 2. Spieler 2 ist zuerst dran.
+Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen die Hexe, Initiative 7. Spieler 2: Werwolfkönig gegen den Ritter und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
 Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Der Angriff von Spieler 2 mit dem Werwolfkönig geht daneben.
 Spieler 1 ist mit der Wolfsschönheit am Zug.
 Spieler 1 erhält 1 Reißzahn.
 Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
@@ -1586,10 +545,10 @@ Runde 8 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Jäger, den Werwolfkönig, den Ritter und die Wolfsschönheit.
 Spieler 2 bekommt den Jungwolf, die Seherin und den Dorfbewohner.
 Deine Hand: Jäger, Werwolfkönig, Ritter und Wolfsschönheit
-> Wolfsschönheit gegen den Dorfbewohner und den Narren spielen
+> Werwolfkönig gegen die Seherin und den Dorfbewohner spielen
 Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Jungwolf, Seherin und Dorfbewohner
-> Jungwolf gegen den Dorfbewohner spielen
+> Seherin gegen den Werwolfkönig spielen
 Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
@@ -1597,89 +556,21 @@ Deine Hand:
 Spieler 1 setzt keine Sanduhren.
 Deine Hand: 
   Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Dorfbewohner und den Narren, Initiative 7. Spieler 2: Jungwolf gegen den Dorfbewohner, Initiative 4. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Jungwolf am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
-Spieler 1 ist mit der Wolfsschönheit am Zug.
-Spieler 1 erhält 1 Reißzahn.
-Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
-Runde 8 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 8 beiseitegelegte Karte war die Hexe.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 9 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Werwolfkönig, den Ritter, die Seherin und die Wolfsschönheit.
-Spieler 1 bekommt den Jäger, die Hexe und den Dorfbewohner.
-Deine Hand: Jäger, Hexe und Dorfbewohner
-> Jäger gegen den Werwolfkönig, den Jungwolf und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: Werwolfkönig, Ritter, Seherin und Wolfsschönheit
-> Werwolfkönig gegen den Ritter, die Hexe und den Dorfbewohner spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
   1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Werwolfkönig, den Jungwolf und den Narren, Initiative 1. Spieler 2: Werwolfkönig gegen den Ritter, die Hexe und den Dorfbewohner, Initiative 2. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jäger am Zug.
-Spieler 1 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Runde 9 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 9 beiseitegelegte Karte war der Jungwolf.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 10 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Ritter, den Jungwolf, die Seherin und die Wolfsschönheit.
-Spieler 2 bekommt den Jäger, den Werwolfkönig und den Dorfbewohner.
-Deine Hand: Ritter, Jungwolf, Seherin und Wolfsschönheit
-> Wolfsschönheit gegen die Hexe und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Jäger, Werwolfkönig und Dorfbewohner
-> Werwolfkönig gegen den Jäger, die Seherin, den Dorfbewohner und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 4 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 2 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen die Hexe und den Narren, Initiative 7. Spieler 2: Werwolfkönig gegen den Jäger, die Seherin, den Dorfbewohner und den Narren, Initiative 1. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 1 ist mit der Wolfsschönheit am Zug.
-Spieler 1 erhält 1 Reißzahn.
-Spieler 1 hat genug Reißzähne gesammelt und gewinnt.
+Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen die Seherin und den Dorfbewohner, Initiative 2. Spieler 2: Seherin gegen den Werwolfkönig, Initiative 5. Spieler 1 ist zuerst dran.
+Spieler 1 ist mit dem Werwolfkönig am Zug.
+Spieler 1 gibt 1 Reißzahn aus.
+Spieler 1 trifft mit dem Werwolfkönig die Seherin von Spieler 2! Spieler 2 verliert 1 Leben.
+Spieler 1 gewinnt, weil Spieler 2 kein Leben mehr hat.
 # Game 4
 Deine Hand: Jäger, Werwolfkönig, Seherin und Hexe
-> Werwolfkönig gegen die Seherin und die Hexe spielen
+> Werwolfkönig gegen den Ritter und den Narren spielen
 Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Jungwolf, Wolfsschönheit und Dorfbewohner
-> Jungwolf gegen den Jäger und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
+> Jungwolf gegen den Narren spielen
+Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
@@ -1689,9 +580,9 @@ Deine Hand:
   1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen die Seherin und die Hexe, Initiative 2. Spieler 2: Jungwolf gegen den Jäger und den Narren, Initiative 4. Spieler 1 ist zuerst dran.
+Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Ritter und den Narren, Initiative 2. Spieler 2: Jungwolf gegen den Narren, Initiative 4. Spieler 1 ist zuerst dran.
 Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Der Angriff von Spieler 1 mit dem Werwolfkönig geht daneben.
 Spieler 2 ist mit dem Jungwolf am Zug.
 Spieler 2 erhält 1 Sanduhr.
 Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
@@ -1709,11 +600,11 @@ Runde 2 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Jungwolf, die Seherin, die Hexe und den Dorfbewohner.
 Spieler 1 bekommt den Jäger, den Ritter und die Wolfsschönheit.
 Deine Hand: Jäger, Ritter und Wolfsschönheit
-> Ritter gegen den Werwolfkönig spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
+> Jäger gegen den Jungwolf und den Narren spielen
+Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Jungwolf, Seherin, Hexe und Dorfbewohner
-> Jungwolf gegen die Hexe und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
+> Dorfbewohner gegen den Narren spielen
+Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
@@ -1724,13 +615,16 @@ Deine Hand:
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Ritter gegen den Werwolfkönig, Initiative 3. Spieler 2: Jungwolf gegen die Hexe und den Narren, Initiative 4. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Ritter am Zug.
-Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Ritter geht daneben.
-Spieler 2 ist mit dem Jungwolf am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
+Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Jungwolf und den Narren, Initiative 1. Spieler 2: Dorfbewohner gegen den Narren, Initiative 8. Spieler 1 ist zuerst dran.
+Spieler 1 ist mit dem Jäger am Zug.
+Deine Hand: 
+  Das Kreuz behalten
+  Ein Kreuz ausgeben und angreifen
+> Ein Kreuz ausgeben und angreifen
+Spieler 1 gibt 1 Kreuz aus.
+Der Angriff von Spieler 1 mit dem Jäger geht daneben.
+Spieler 2 ist mit dem Dorfbewohner am Zug.
+Spieler 2 erhält 1 Kreuz.
 Runde 2 endet. Spieler 1 bekommt das Abzeichen.
 Die in Runde 2 beiseitegelegte Karte war der Werwolfkönig.
 Deine Hand: 
@@ -1745,33 +639,31 @@ Runde 3 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Werwolfkönig, den Ritter, die Seherin und die Wolfsschönheit.
 Spieler 2 bekommt den Jäger, die Hexe und den Dorfbewohner.
 Deine Hand: Werwolfkönig, Ritter, Seherin und Wolfsschönheit
-> Werwolfkönig gegen den Jäger und den Ritter spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
+> Wolfsschönheit gegen den Dorfbewohner spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Jäger, Hexe und Dorfbewohner
-> Jäger gegen den Narren spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
+> Jäger gegen den Werwolfkönig und den Jungwolf spielen
+Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
-  1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
   2 Sanduhren setzen
-  3 Sanduhren setzen
-> 3 Sanduhren setzen
-Spieler 2 setzt 3 Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger und den Ritter, Initiative 2. Spieler 2: Jäger gegen den Narren, Initiative 0. Spieler 2 ist zuerst dran.
+> 2 Sanduhren setzen
+Spieler 2 setzt 2 Sanduhren.
+Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Dorfbewohner, Initiative 7. Spieler 2: Jäger gegen den Werwolfkönig und den Jungwolf, Initiative 0. Spieler 2 ist zuerst dran.
 Spieler 2 ist mit dem Jäger am Zug.
 Deine Hand: 
   Das Kreuz behalten
   Ein Kreuz ausgeben und angreifen
-> Ein Kreuz ausgeben und angreifen
-Spieler 2 gibt 1 Kreuz aus.
-Der Angriff von Spieler 2 mit dem Jäger geht daneben.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+> Das Kreuz behalten
+Spieler 2 greift nicht an: Das Kreuz wurde nicht ausgegeben.
+Spieler 1 ist mit der Wolfsschönheit am Zug.
+Spieler 1 erhält 1 Reißzahn.
+Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
 Runde 3 endet. Spieler 2 bekommt das Abzeichen.
 Die in Runde 3 beiseitegelegte Karte war der Jungwolf.
 Deine Hand: 
@@ -1786,10 +678,10 @@ Runde 4 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Jäger, den Ritter, den Jungwolf und die Seherin.
 Spieler 1 bekommt den Werwolfkönig, die Hexe und den Dorfbewohner.
 Deine Hand: Werwolfkönig, Hexe und Dorfbewohner
-> Werwolfkönig gegen den Jäger, die Hexe und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
+> Werwolfkönig gegen den Jäger spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Jäger, Ritter, Jungwolf und Seherin
-> Jungwolf gegen den Ritter spielen
+> Jungwolf gegen die Wolfsschönheit spielen
 Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
@@ -1797,12 +689,11 @@ Deine Hand:
 Spieler 2 setzt keine Sanduhren.
 Deine Hand: 
   Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 1 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger, die Hexe und den Narren, Initiative 1. Spieler 2: Jungwolf gegen den Ritter, Initiative 4. Spieler 1 ist zuerst dran.
+> Keine Sanduhren setzen
+Spieler 1 setzt keine Sanduhren.
+Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger, Initiative 2. Spieler 2: Jungwolf gegen die Wolfsschönheit, Initiative 4. Spieler 1 ist zuerst dran.
 Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Der Angriff von Spieler 1 mit dem Werwolfkönig geht daneben.
 Spieler 2 ist mit dem Jungwolf am Zug.
 Spieler 2 erhält 1 Sanduhr.
 Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
@@ -1820,11 +711,11 @@ Runde 5 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Jäger, den Werwolfkönig, den Jungwolf und die Wolfsschönheit.
 Spieler 2 bekommt den Ritter, die Seherin und den Dorfbewohner.
 Deine Hand: Jäger, Werwolfkönig, Jungwolf und Wolfsschönheit
-> Werwolfkönig gegen den Narren spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
+> Werwolfkönig gegen die Seherin, die Hexe, den Dorfbewohner und den Narren spielen
+Spieler 1 versiegelt einen Plan mit 4 Zielkarten.
 Deine Hand: Ritter, Seherin und Dorfbewohner
-> Ritter gegen die Wolfsschönheit und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
+> Ritter gegen den Werwolfkönig spielen
+Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
@@ -1834,12 +725,10 @@ Deine Hand:
   1 Sanduhr setzen
 > 1 Sanduhr setzen
 Spieler 2 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Narren, Initiative 2. Spieler 2: Ritter gegen die Wolfsschönheit und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
+Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen die Seherin, die Hexe, den Dorfbewohner und den Narren, Initiative 2. Spieler 2: Ritter gegen den Werwolfkönig, Initiative 2. Spieler 2 ist zuerst dran.
 Spieler 2 ist mit dem Ritter am Zug.
 Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Ritter geht daneben.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Unter den Zielen ist kein Charakter.
+Spieler 2 trifft mit dem Ritter den Werwolfkönig von Spieler 1! Spieler 1 verliert 1 Leben.
 Runde 5 endet. Spieler 2 bekommt das Abzeichen.
 Die in Runde 5 beiseitegelegte Karte war die Hexe.
 Deine Hand: 
@@ -1854,11 +743,11 @@ Runde 6 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Jäger, den Werwolfkönig, die Wolfsschönheit und den Dorfbewohner.
 Spieler 1 bekommt den Ritter, den Jungwolf und die Seherin.
 Deine Hand: Ritter, Jungwolf und Seherin
-> Ritter gegen die Wolfsschönheit spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
+> Jungwolf gegen die Hexe und den Narren spielen
+Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Jäger, Werwolfkönig, Wolfsschönheit und Dorfbewohner
-> Werwolfkönig gegen den Jäger, den Ritter, die Hexe und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 4 Zielkarten.
+> Werwolfkönig gegen die Seherin und die Hexe spielen
+Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
@@ -1868,12 +757,12 @@ Deine Hand:
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Ritter gegen die Wolfsschönheit, Initiative 3. Spieler 2: Werwolfkönig gegen den Jäger, den Ritter, die Hexe und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
+Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen die Hexe und den Narren, Initiative 4. Spieler 2: Werwolfkönig gegen die Seherin und die Hexe, Initiative 2. Spieler 2 ist zuerst dran.
 Spieler 2 ist mit dem Werwolfkönig am Zug.
 Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 1 ist mit dem Ritter am Zug.
+Spieler 1 ist mit dem Jungwolf am Zug.
 Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Ritter geht daneben.
+Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
 Runde 6 endet. Spieler 1 bekommt das Abzeichen.
 Die in Runde 6 beiseitegelegte Karte war die Hexe.
 Deine Hand: 
@@ -1888,11 +777,11 @@ Runde 7 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Ritter, den Jungwolf, die Seherin und die Wolfsschönheit.
 Spieler 2 bekommt den Jäger, die Hexe und den Dorfbewohner.
 Deine Hand: Ritter, Jungwolf, Seherin und Wolfsschönheit
-> Seherin gegen den Werwolfkönig spielen
+> Wolfsschönheit gegen den Jäger spielen
 Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Jäger, Hexe und Dorfbewohner
-> Jäger gegen den Jungwolf und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
+> Hexe gegen den Narren spielen
+Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
@@ -1901,13 +790,14 @@ Spieler 1 setzt keine Sanduhren.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen den Werwolfkönig, Initiative 5. Spieler 2: Jäger gegen den Jungwolf und den Narren, Initiative 1. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Jäger am Zug.
-Spieler 2 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
-Spieler 1 ist mit der Seherin am Zug.
-Der Angriff von Spieler 1 mit der Seherin geht daneben.
+> 1 Sanduhr setzen
+Spieler 2 setzt 1 Sanduhr.
+Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Jäger, Initiative 7. Spieler 2: Hexe gegen den Narren, Initiative 5. Spieler 2 ist zuerst dran.
+Spieler 2 ist mit der Hexe am Zug.
+Spieler 2 erhält den Trank.
+Spieler 1 ist mit der Wolfsschönheit am Zug.
+Spieler 1 erhält 1 Reißzahn.
+Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
 Runde 7 endet. Spieler 2 bekommt das Abzeichen.
 Die in Runde 7 beiseitegelegte Karte war der Werwolfkönig.
 Deine Hand: 
@@ -1922,14 +812,13 @@ Runde 8 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Werwolfkönig, die Seherin, die Hexe und den Dorfbewohner.
 Spieler 1 bekommt den Ritter, den Jungwolf und die Wolfsschönheit.
 Deine Hand: Ritter, Jungwolf und Wolfsschönheit
-> Wolfsschönheit gegen den Dorfbewohner und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
+> Jungwolf gegen den Narren spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Werwolfkönig, Seherin, Hexe und Dorfbewohner
-> Werwolfkönig gegen die Hexe, den Dorfbewohner und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
+> Werwolfkönig gegen den Narren spielen
+Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
-  1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
 Deine Hand: 
@@ -1937,12 +826,20 @@ Deine Hand:
   1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Dorfbewohner und den Narren, Initiative 7. Spieler 2: Werwolfkönig gegen die Hexe, den Dorfbewohner und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
+Deine Hand: 
+  Mit dem Trank auf den Jäger zielen
+  Mit dem Trank auf den Ritter zielen
+  Mit dem Trank auf den Jungwolf zielen
+  Mit dem Trank auf die Wolfsschönheit zielen
+> Mit dem Trank auf die Wolfsschönheit zielen
+Spieler 2 zielt mit dem Trank auf die Wolfsschönheit.
+Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen den Narren, Initiative 4. Spieler 2: Werwolfkönig gegen den Narren, Initiative 2. Spieler 2 ist zuerst dran.
+Der Trank geht daneben: Spieler 1 hat die Wolfsschönheit nicht gespielt.
 Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 1 ist mit der Wolfsschönheit am Zug.
-Spieler 1 erhält 1 Reißzahn.
-Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
+Spieler 2 greift nicht an: Unter den Zielen ist kein Charakter.
+Spieler 1 ist mit dem Jungwolf am Zug.
+Spieler 1 erhält 1 Sanduhr.
+Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
 Runde 8 endet. Spieler 1 bekommt das Abzeichen.
 Die in Runde 8 beiseitegelegte Karte war der Jäger.
 Deine Hand: 
@@ -1957,24 +854,25 @@ Runde 9 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Jäger, den Werwolfkönig, den Ritter und den Dorfbewohner.
 Spieler 2 bekommt den Jungwolf, die Seherin und die Wolfsschönheit.
 Deine Hand: Jäger, Werwolfkönig, Ritter und Dorfbewohner
-> Werwolfkönig gegen den Jäger, den Ritter, die Seherin, die Hexe und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 5 Zielkarten.
+> Ritter gegen die Wolfsschönheit spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Jungwolf, Seherin und Wolfsschönheit
-> Jungwolf gegen den Jäger und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
+> Jungwolf gegen die Hexe spielen
+Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
+  2 Sanduhren setzen
+> 2 Sanduhren setzen
+Spieler 1 setzt 2 Sanduhren.
 Deine Hand: 
   Keine Sanduhren setzen
-  1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger, den Ritter, die Seherin, die Hexe und den Narren, Initiative 2. Spieler 2: Jungwolf gegen den Jäger und den Narren, Initiative 4. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Die Pläne sind aufgedeckt. Spieler 1: Ritter gegen die Wolfsschönheit, Initiative 1. Spieler 2: Jungwolf gegen die Hexe, Initiative 4. Spieler 1 ist zuerst dran.
+Spieler 1 ist mit dem Ritter am Zug.
+Spieler 1 erhält 1 Sanduhr.
+Der Angriff von Spieler 1 mit dem Ritter geht daneben.
 Spieler 2 ist mit dem Jungwolf am Zug.
 Spieler 2 erhält 1 Sanduhr.
 Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
@@ -1992,15 +890,14 @@ Runde 10 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Jäger, den Werwolfkönig, die Seherin und die Wolfsschönheit.
 Spieler 1 bekommt den Ritter, die Hexe und den Dorfbewohner.
 Deine Hand: Ritter, Hexe und Dorfbewohner
-> Ritter gegen die Wolfsschönheit und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
+> Ritter gegen den Werwolfkönig spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Jäger, Werwolfkönig, Seherin und Wolfsschönheit
-> Werwolfkönig gegen den Ritter, die Hexe und den Dorfbewohner spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
+> Wolfsschönheit gegen den Narren spielen
+Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
-  2 Sanduhren setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
 Deine Hand: 
@@ -2008,12 +905,13 @@ Deine Hand:
   1 Sanduhr setzen
 > 1 Sanduhr setzen
 Spieler 1 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Ritter gegen die Wolfsschönheit und den Narren, Initiative 2. Spieler 2: Werwolfkönig gegen den Ritter, die Hexe und den Dorfbewohner, Initiative 2. Spieler 1 ist zuerst dran.
+Die Pläne sind aufgedeckt. Spieler 1: Ritter gegen den Werwolfkönig, Initiative 2. Spieler 2: Wolfsschönheit gegen den Narren, Initiative 7. Spieler 1 ist zuerst dran.
 Spieler 1 ist mit dem Ritter am Zug.
 Spieler 1 erhält 1 Sanduhr.
 Der Angriff von Spieler 1 mit dem Ritter geht daneben.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Spieler 2 ist mit der Wolfsschönheit am Zug.
+Spieler 2 erhält 1 Reißzahn.
+Der Angriff von Spieler 2 mit der Wolfsschönheit geht daneben.
 Runde 10 endet. Spieler 1 bekommt das Abzeichen.
 Die in Runde 10 beiseitegelegte Karte war der Jungwolf.
 Deine Hand: 
@@ -2028,11 +926,11 @@ Runde 11 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Jungwolf, die Seherin, die Wolfsschönheit und den Dorfbewohner.
 Spieler 2 bekommt den Werwolfkönig, den Ritter und die Hexe.
 Deine Hand: Jungwolf, Seherin, Wolfsschönheit und Dorfbewohner
-> Jungwolf gegen den Jäger spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
+> Jungwolf gegen die Hexe und den Narren spielen
+Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Werwolfkönig, Ritter und Hexe
-> Werwolfkönig gegen den Jäger, die Hexe und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
+> Werwolfkönig gegen die Seherin und den Narren spielen
+Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
@@ -2041,12 +939,11 @@ Spieler 1 setzt 1 Sanduhr.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
-  2 Sanduhren setzen
-> 2 Sanduhren setzen
-Spieler 2 setzt 2 Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen den Jäger, Initiative 3. Spieler 2: Werwolfkönig gegen den Jäger, die Hexe und den Narren, Initiative 0. Spieler 2 ist zuerst dran.
+> 1 Sanduhr setzen
+Spieler 2 setzt 1 Sanduhr.
+Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen die Hexe und den Narren, Initiative 3. Spieler 2: Werwolfkönig gegen die Seherin und den Narren, Initiative 1. Spieler 2 ist zuerst dran.
 Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Der Angriff von Spieler 2 mit dem Werwolfkönig geht daneben.
 Spieler 1 ist mit dem Jungwolf am Zug.
 Spieler 1 erhält 1 Sanduhr.
 Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
@@ -2064,78 +961,11 @@ Runde 12 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Werwolfkönig, den Jungwolf, die Seherin und die Hexe.
 Spieler 1 bekommt den Ritter, die Wolfsschönheit und den Dorfbewohner.
 Deine Hand: Ritter, Wolfsschönheit und Dorfbewohner
-> Wolfsschönheit gegen den Jäger und den Narren spielen
+> Wolfsschönheit gegen den Werwolfkönig und den Narren spielen
 Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Werwolfkönig, Jungwolf, Seherin und Hexe
-> Seherin gegen den Jungwolf spielen
+> Jungwolf gegen den Dorfbewohner spielen
 Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 1 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Jäger und den Narren, Initiative 6. Spieler 2: Seherin gegen den Jungwolf, Initiative 5. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit der Seherin am Zug.
-Der Angriff von Spieler 2 mit der Seherin geht daneben.
-Spieler 1 ist mit der Wolfsschönheit am Zug.
-Spieler 1 erhält 1 Reißzahn.
-Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
-Runde 12 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 12 beiseitegelegte Karte war der Jäger.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 13 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Werwolfkönig, den Jungwolf, die Hexe und den Dorfbewohner.
-Spieler 2 bekommt den Jäger, den Ritter und die Seherin.
-Deine Hand: Werwolfkönig, Jungwolf, Hexe und Dorfbewohner
-> Jungwolf gegen die Wolfsschönheit spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jäger, Ritter und Seherin
-> Seherin gegen den Werwolfkönig spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen die Wolfsschönheit, Initiative 4. Spieler 2: Seherin gegen den Werwolfkönig, Initiative 5. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jungwolf am Zug.
-Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
-Spieler 2 ist mit der Seherin am Zug.
-Der Angriff von Spieler 2 mit der Seherin geht daneben.
-Runde 13 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 13 beiseitegelegte Karte war die Wolfsschönheit.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 14 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Jäger, den Werwolfkönig, den Ritter und den Dorfbewohner.
-Spieler 1 bekommt die Seherin, die Hexe und die Wolfsschönheit.
-Deine Hand: Seherin, Hexe und Wolfsschönheit
-> Wolfsschönheit gegen den Ritter spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jäger, Werwolfkönig, Ritter und Dorfbewohner
-> Werwolfkönig gegen den Jäger, die Seherin, den Dorfbewohner und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 4 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
@@ -2145,19 +975,20 @@ Deine Hand:
   1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Ritter, Initiative 7. Spieler 2: Werwolfkönig gegen den Jäger, die Seherin, den Dorfbewohner und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Werwolfkönig und den Narren, Initiative 7. Spieler 2: Jungwolf gegen den Dorfbewohner, Initiative 4. Spieler 2 ist zuerst dran.
+Spieler 2 ist mit dem Jungwolf am Zug.
+Spieler 2 erhält 1 Sanduhr.
+Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
 Spieler 1 ist mit der Wolfsschönheit am Zug.
 Spieler 1 erhält 1 Reißzahn.
 Spieler 1 hat genug Reißzähne gesammelt und gewinnt.
 # Game 5
 Deine Hand: Jäger, Ritter, Jungwolf und Wolfsschönheit
-> Ritter gegen den Werwolfkönig und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
+> Jungwolf gegen die Seherin spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Werwolfkönig, Seherin und Hexe
-> Werwolfkönig gegen die Seherin, die Hexe, den Dorfbewohner und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 4 Zielkarten.
+> Werwolfkönig gegen den Jäger, den Dorfbewohner und den Narren spielen
+Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
@@ -2167,12 +998,12 @@ Deine Hand:
   1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Ritter gegen den Werwolfkönig und den Narren, Initiative 3. Spieler 2: Werwolfkönig gegen die Seherin, die Hexe, den Dorfbewohner und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
+Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen die Seherin, Initiative 4. Spieler 2: Werwolfkönig gegen den Jäger, den Dorfbewohner und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
 Spieler 2 ist mit dem Werwolfkönig am Zug.
 Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 1 ist mit dem Ritter am Zug.
+Spieler 1 ist mit dem Jungwolf am Zug.
 Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Ritter geht daneben.
+Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
 Runde 1 endet. Spieler 2 bekommt das Abzeichen.
 Die in Runde 1 beiseitegelegte Karte war der Dorfbewohner.
 Deine Hand: 
@@ -2187,10 +1018,10 @@ Runde 2 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Jäger, den Ritter, den Jungwolf und die Seherin.
 Spieler 1 bekommt die Hexe, die Wolfsschönheit und den Dorfbewohner.
 Deine Hand: Hexe, Wolfsschönheit und Dorfbewohner
-> Wolfsschönheit gegen den Ritter und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
+> Wolfsschönheit gegen die Seherin spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Jäger, Ritter, Jungwolf und Seherin
-> Jäger gegen den Werwolfkönig und die Wolfsschönheit spielen
+> Jungwolf gegen den Werwolfkönig und den Narren spielen
 Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
@@ -2202,14 +1033,13 @@ Deine Hand:
   1 Sanduhr setzen
 > 1 Sanduhr setzen
 Spieler 1 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Ritter und den Narren, Initiative 6. Spieler 2: Jäger gegen den Werwolfkönig und die Wolfsschönheit, Initiative 1. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Jäger am Zug.
-Deine Hand: 
-  Das Kreuz behalten
-  Ein Kreuz ausgeben und angreifen
-> Ein Kreuz ausgeben und angreifen
-Spieler 2 gibt 1 Kreuz aus.
-Spieler 2 trifft mit dem Jäger die Wolfsschönheit von Spieler 1! Spieler 1 verliert 1 Leben.
+Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen die Seherin, Initiative 6. Spieler 2: Jungwolf gegen den Werwolfkönig und den Narren, Initiative 4. Spieler 2 ist zuerst dran.
+Spieler 2 ist mit dem Jungwolf am Zug.
+Spieler 2 erhält 1 Sanduhr.
+Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
+Spieler 1 ist mit der Wolfsschönheit am Zug.
+Spieler 1 erhält 1 Reißzahn.
+Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
 Runde 2 endet. Spieler 1 bekommt das Abzeichen.
 Die in Runde 2 beiseitegelegte Karte war der Werwolfkönig.
 Deine Hand: 
@@ -2224,11 +1054,11 @@ Runde 3 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Jäger, den Werwolfkönig, den Ritter und die Seherin.
 Spieler 2 bekommt den Jungwolf, die Hexe und die Wolfsschönheit.
 Deine Hand: Jäger, Werwolfkönig, Ritter und Seherin
-> Werwolfkönig gegen den Jäger spielen
+> Jäger gegen die Wolfsschönheit spielen
 Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Jungwolf, Hexe und Wolfsschönheit
-> Wolfsschönheit gegen den Werwolfkönig spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
+> Wolfsschönheit gegen den Jäger und den Narren spielen
+Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
@@ -2236,11 +1066,16 @@ Spieler 1 setzt keine Sanduhren.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger, Initiative 2. Spieler 2: Wolfsschönheit gegen den Werwolfkönig, Initiative 7. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Der Angriff von Spieler 1 mit dem Werwolfkönig geht daneben.
+  2 Sanduhren setzen
+> 2 Sanduhren setzen
+Spieler 2 setzt 2 Sanduhren.
+Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen die Wolfsschönheit, Initiative 1. Spieler 2: Wolfsschönheit gegen den Jäger und den Narren, Initiative 5. Spieler 1 ist zuerst dran.
+Spieler 1 ist mit dem Jäger am Zug.
+Deine Hand: 
+  Das Kreuz behalten
+  Ein Kreuz ausgeben und angreifen
+> Das Kreuz behalten
+Spieler 1 greift nicht an: Das Kreuz wurde nicht ausgegeben.
 Spieler 2 ist mit der Wolfsschönheit am Zug.
 Spieler 2 erhält 1 Reißzahn.
 Der Angriff von Spieler 2 mit der Wolfsschönheit geht daneben.
@@ -2258,27 +1093,29 @@ Runde 4 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Jäger, den Werwolfkönig, den Ritter und die Hexe.
 Spieler 1 bekommt den Jungwolf, die Wolfsschönheit und den Dorfbewohner.
 Deine Hand: Jungwolf, Wolfsschönheit und Dorfbewohner
-> Jungwolf gegen die Seherin und den Narren spielen
+> Wolfsschönheit gegen den Ritter und den Narren spielen
 Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Jäger, Werwolfkönig, Ritter und Hexe
-> Werwolfkönig gegen den Jäger und die Hexe spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
+> Jäger gegen den Narren spielen
+Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
-  1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
 Deine Hand: 
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen die Seherin und den Narren, Initiative 4. Spieler 2: Werwolfkönig gegen den Jäger und die Hexe, Initiative 2. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 gibt 1 Reißzahn aus.
-Der Angriff von Spieler 2 mit dem Werwolfkönig geht daneben.
-Spieler 1 ist mit dem Jungwolf am Zug.
-Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
+Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Ritter und den Narren, Initiative 7. Spieler 2: Jäger gegen den Narren, Initiative 1. Spieler 2 ist zuerst dran.
+Spieler 2 ist mit dem Jäger am Zug.
+Deine Hand: 
+  Das Kreuz behalten
+  Ein Kreuz ausgeben und angreifen
+> Das Kreuz behalten
+Spieler 2 greift nicht an: Das Kreuz wurde nicht ausgegeben.
+Spieler 1 ist mit der Wolfsschönheit am Zug.
+Spieler 1 erhält 1 Reißzahn.
+Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
 Runde 4 endet. Spieler 1 bekommt das Abzeichen.
 Die in Runde 4 beiseitegelegte Karte war die Seherin.
 Deine Hand: 
@@ -2293,24 +1130,22 @@ Runde 5 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Werwolfkönig, die Hexe, die Wolfsschönheit und den Dorfbewohner.
 Spieler 2 bekommt den Ritter, den Jungwolf und die Seherin.
 Deine Hand: Werwolfkönig, Hexe, Wolfsschönheit und Dorfbewohner
-> Werwolfkönig gegen den Ritter, die Hexe, den Dorfbewohner und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 4 Zielkarten.
+> Werwolfkönig gegen den Narren spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Ritter, Jungwolf und Seherin
-> Jungwolf gegen den Jungwolf spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
+> Jungwolf gegen den Dorfbewohner und den Narren spielen
+Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 1 setzt 1 Sanduhr.
+> Keine Sanduhren setzen
+Spieler 1 setzt keine Sanduhren.
 Deine Hand: 
   Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 2 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Ritter, die Hexe, den Dorfbewohner und den Narren, Initiative 1. Spieler 2: Jungwolf gegen den Jungwolf, Initiative 3. Spieler 1 ist zuerst dran.
+> Keine Sanduhren setzen
+Spieler 2 setzt keine Sanduhren.
+Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Narren, Initiative 2. Spieler 2: Jungwolf gegen den Dorfbewohner und den Narren, Initiative 4. Spieler 1 ist zuerst dran.
 Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Spieler 1 greift nicht an: Unter den Zielen ist kein Charakter.
 Spieler 2 ist mit dem Jungwolf am Zug.
 Spieler 2 erhält 1 Sanduhr.
 Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
@@ -2328,25 +1163,29 @@ Runde 6 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Jäger, den Ritter, die Wolfsschönheit und den Dorfbewohner.
 Spieler 1 bekommt den Werwolfkönig, den Jungwolf und die Seherin.
 Deine Hand: Werwolfkönig, Jungwolf und Seherin
-> Werwolfkönig gegen den Ritter, die Hexe und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
+> Werwolfkönig gegen den Jäger und den Narren spielen
+Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Jäger, Ritter, Wolfsschönheit und Dorfbewohner
-> Jäger gegen die Wolfsschönheit spielen
+> Jäger gegen den Narren spielen
 Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
+> 1 Sanduhr setzen
+Spieler 2 setzt 1 Sanduhr.
 Deine Hand: 
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Ritter, die Hexe und den Narren, Initiative 2. Spieler 2: Jäger gegen die Wolfsschönheit, Initiative 1. Spieler 2 ist zuerst dran.
+Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger und den Narren, Initiative 2. Spieler 2: Jäger gegen den Narren, Initiative 0. Spieler 2 ist zuerst dran.
 Spieler 2 ist mit dem Jäger am Zug.
-Spieler 2 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
+Deine Hand: 
+  Das Kreuz behalten
+  Ein Kreuz ausgeben und angreifen
+> Das Kreuz behalten
+Spieler 2 greift nicht an: Das Kreuz wurde nicht ausgegeben.
 Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Der Angriff von Spieler 1 mit dem Werwolfkönig geht daneben.
 Runde 6 endet. Spieler 1 bekommt das Abzeichen.
 Die in Runde 6 beiseitegelegte Karte war die Hexe.
 Deine Hand: 
@@ -2361,148 +1200,10 @@ Runde 7 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Jäger, den Ritter, die Seherin und die Wolfsschönheit.
 Spieler 2 bekommt den Jungwolf, die Hexe und den Dorfbewohner.
 Deine Hand: Jäger, Ritter, Seherin und Wolfsschönheit
-> Jäger gegen den Jungwolf spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
+> Wolfsschönheit gegen den Dorfbewohner und den Narren spielen
+Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Jungwolf, Hexe und Dorfbewohner
-> Jungwolf gegen die Hexe und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Jungwolf, Initiative 1. Spieler 2: Jungwolf gegen die Hexe und den Narren, Initiative 4. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jäger am Zug.
-Deine Hand: 
-  Das Kreuz behalten
-  Ein Kreuz ausgeben und angreifen
-> Ein Kreuz ausgeben und angreifen
-Spieler 1 gibt 1 Kreuz aus.
-Spieler 1 trifft mit dem Jäger den Jungwolf von Spieler 2! Spieler 2 verliert 1 Leben.
-Runde 7 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 7 beiseitegelegte Karte war der Werwolfkönig.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 8 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Ritter, den Jungwolf, die Hexe und die Wolfsschönheit.
-Spieler 1 bekommt den Jäger, die Seherin und den Dorfbewohner.
-Deine Hand: Jäger, Seherin und Dorfbewohner
-> Jäger gegen den Werwolfkönig und die Wolfsschönheit spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Ritter, Jungwolf, Hexe und Wolfsschönheit
-> Jungwolf gegen den Jungwolf spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Werwolfkönig und die Wolfsschönheit, Initiative 1. Spieler 2: Jungwolf gegen den Jungwolf, Initiative 4. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jäger am Zug.
-Spieler 1 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
-Spieler 2 ist mit dem Jungwolf am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
-Runde 8 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 8 beiseitegelegte Karte war der Werwolfkönig.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 9 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Ritter, die Hexe, die Wolfsschönheit und den Dorfbewohner.
-Spieler 2 bekommt den Jäger, den Werwolfkönig und die Seherin.
-Deine Hand: Ritter, Hexe, Wolfsschönheit und Dorfbewohner
-> Wolfsschönheit gegen die Wolfsschönheit spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jäger, Werwolfkönig und Seherin
-> Werwolfkönig gegen den Ritter, die Seherin und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-> 1 Sanduhr setzen
-Spieler 2 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen die Wolfsschönheit, Initiative 7. Spieler 2: Werwolfkönig gegen den Ritter, die Seherin und den Narren, Initiative 1. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 1 ist mit der Wolfsschönheit am Zug.
-Spieler 1 erhält 1 Reißzahn.
-Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
-Runde 9 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 9 beiseitegelegte Karte war der Jungwolf.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 10 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Jäger, den Ritter, den Jungwolf und die Hexe.
-Spieler 1 bekommt den Werwolfkönig, die Seherin und den Dorfbewohner.
-Deine Hand: Werwolfkönig, Seherin und Dorfbewohner
-> Werwolfkönig gegen den Jäger und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Jäger, Ritter, Jungwolf und Hexe
-> Jäger gegen den Werwolfkönig spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 2 setzt 1 Sanduhr.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger und den Narren, Initiative 2. Spieler 2: Jäger gegen den Werwolfkönig, Initiative 0. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Jäger am Zug.
-Spieler 2 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Der Angriff von Spieler 1 mit dem Werwolfkönig geht daneben.
-Runde 10 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 10 beiseitegelegte Karte war die Wolfsschönheit.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 11 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Werwolfkönig, den Ritter, die Seherin und den Dorfbewohner.
-Spieler 2 bekommt den Jäger, die Hexe und die Wolfsschönheit.
-Deine Hand: Werwolfkönig, Ritter, Seherin und Dorfbewohner
-> Werwolfkönig gegen die Hexe spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jäger, Hexe und Wolfsschönheit
-> Wolfsschönheit gegen den Jäger spielen
+> Jungwolf gegen den Ritter spielen
 Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
@@ -2512,668 +1213,19 @@ Deine Hand:
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen die Hexe, Initiative 2. Spieler 2: Wolfsschönheit gegen den Jäger, Initiative 7. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Der Angriff von Spieler 1 mit dem Werwolfkönig geht daneben.
-Spieler 2 ist mit der Wolfsschönheit am Zug.
-Spieler 2 erhält 1 Reißzahn.
-Der Angriff von Spieler 2 mit der Wolfsschönheit geht daneben.
-Runde 11 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 11 beiseitegelegte Karte war der Jungwolf.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 12 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Werwolfkönig, den Ritter, die Wolfsschönheit und den Dorfbewohner.
-Spieler 1 bekommt den Jäger, den Jungwolf und die Hexe.
-Deine Hand: Jäger, Jungwolf und Hexe
-> Jungwolf gegen den Ritter und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Werwolfkönig, Ritter, Wolfsschönheit und Dorfbewohner
-> Werwolfkönig gegen den Jäger, den Ritter und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen den Ritter und den Narren, Initiative 4. Spieler 2: Werwolfkönig gegen den Jäger, den Ritter und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 gibt 1 Reißzahn aus.
-Der Angriff von Spieler 2 mit dem Werwolfkönig geht daneben.
-Spieler 1 ist mit dem Jungwolf am Zug.
-Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
-Runde 12 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 12 beiseitegelegte Karte war die Seherin.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 13 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Jäger, den Werwolfkönig, den Jungwolf und die Seherin.
-Spieler 2 bekommt die Hexe, die Wolfsschönheit und den Dorfbewohner.
-Deine Hand: Jäger, Werwolfkönig, Jungwolf und Seherin
-> Werwolfkönig gegen den Jäger, die Hexe und den Dorfbewohner spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: Hexe, Wolfsschönheit und Dorfbewohner
-> Dorfbewohner gegen den Narren spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger, die Hexe und den Dorfbewohner, Initiative 2. Spieler 2: Dorfbewohner gegen den Narren, Initiative 8. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 2 ist mit dem Dorfbewohner am Zug.
-Spieler 2 erhält 1 Kreuz.
-Runde 13 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 13 beiseitegelegte Karte war der Ritter.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 14 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Ritter, den Jungwolf, die Seherin und den Dorfbewohner.
-Spieler 1 bekommt den Jäger, die Hexe und die Wolfsschönheit.
-Deine Hand: Jäger, Hexe und Wolfsschönheit
-> Jäger gegen die Wolfsschönheit und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Ritter, Jungwolf, Seherin und Dorfbewohner
-> Seherin gegen den Jungwolf spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen die Wolfsschönheit und den Narren, Initiative 1. Spieler 2: Seherin gegen den Jungwolf, Initiative 5. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jäger am Zug.
-Spieler 1 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
-Spieler 2 ist mit der Seherin am Zug.
-Der Angriff von Spieler 2 mit der Seherin geht daneben.
-Runde 14 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 14 beiseitegelegte Karte war der Werwolfkönig.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 15 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Jäger, die Seherin, die Hexe und den Dorfbewohner.
-Spieler 2 bekommt den Werwolfkönig, den Ritter und den Jungwolf.
-Deine Hand: Jäger, Seherin, Hexe und Dorfbewohner
-> Jäger gegen den Jungwolf und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Werwolfkönig, Ritter und Jungwolf
-> Werwolfkönig gegen den Jäger, den Ritter und den Dorfbewohner spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 1 setzt 1 Sanduhr.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Jungwolf und den Narren, Initiative 0. Spieler 2: Werwolfkönig gegen den Jäger, den Ritter und den Dorfbewohner, Initiative 2. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jäger am Zug.
-Spieler 1 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Runde 15 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 15 beiseitegelegte Karte war die Wolfsschönheit.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 16 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Jäger, den Ritter, den Jungwolf und die Wolfsschönheit.
-Spieler 1 bekommt den Werwolfkönig, die Seherin und die Hexe.
-Deine Hand: Werwolfkönig, Seherin und Hexe
-> Werwolfkönig gegen die Hexe spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jäger, Ritter, Jungwolf und Wolfsschönheit
-> Wolfsschönheit gegen die Wolfsschönheit und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen die Hexe, Initiative 2. Spieler 2: Wolfsschönheit gegen die Wolfsschönheit und den Narren, Initiative 7. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Der Angriff von Spieler 1 mit dem Werwolfkönig geht daneben.
-Spieler 2 ist mit der Wolfsschönheit am Zug.
-Spieler 2 erhält 1 Reißzahn.
-Der Angriff von Spieler 2 mit der Wolfsschönheit geht daneben.
-Runde 16 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 16 beiseitegelegte Karte war der Dorfbewohner.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 17 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Jäger, den Ritter, den Jungwolf und den Dorfbewohner.
-Spieler 2 bekommt den Werwolfkönig, die Seherin und die Wolfsschönheit.
-Deine Hand: Jäger, Ritter, Jungwolf und Dorfbewohner
-> Jäger gegen den Werwolfkönig und den Jungwolf spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Werwolfkönig, Seherin und Wolfsschönheit
-> Werwolfkönig gegen die Seherin, den Dorfbewohner und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Werwolfkönig und den Jungwolf, Initiative 1. Spieler 2: Werwolfkönig gegen die Seherin, den Dorfbewohner und den Narren, Initiative 2. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jäger am Zug.
-Spieler 1 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 gibt 1 Reißzahn aus.
-Der Angriff von Spieler 2 mit dem Werwolfkönig geht daneben.
-Runde 17 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 17 beiseitegelegte Karte war die Hexe.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 18 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Jäger, den Ritter, den Jungwolf und den Dorfbewohner.
-Spieler 1 bekommt den Werwolfkönig, die Seherin und die Wolfsschönheit.
-Deine Hand: Werwolfkönig, Seherin und Wolfsschönheit
-> Wolfsschönheit gegen die Wolfsschönheit spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jäger, Ritter, Jungwolf und Dorfbewohner
-> Jungwolf gegen den Narren spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen die Wolfsschönheit, Initiative 7. Spieler 2: Jungwolf gegen den Narren, Initiative 4. Spieler 2 ist zuerst dran.
+Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Dorfbewohner und den Narren, Initiative 7. Spieler 2: Jungwolf gegen den Ritter, Initiative 4. Spieler 2 ist zuerst dran.
 Spieler 2 ist mit dem Jungwolf am Zug.
 Spieler 2 erhält 1 Sanduhr.
 Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
 Spieler 1 ist mit der Wolfsschönheit am Zug.
 Spieler 1 erhält 1 Reißzahn.
-Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
-Runde 18 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 18 beiseitegelegte Karte war die Hexe.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 19 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Jäger, den Ritter, die Seherin und die Wolfsschönheit.
-Spieler 2 bekommt den Werwolfkönig, den Jungwolf und die Hexe.
-Deine Hand: Jäger, Ritter, Seherin und Wolfsschönheit
-> Ritter gegen den Werwolfkönig und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Werwolfkönig, Jungwolf und Hexe
-> Werwolfkönig gegen den Ritter und die Hexe spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 2 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Ritter gegen den Werwolfkönig und den Narren, Initiative 3. Spieler 2: Werwolfkönig gegen den Ritter und die Hexe, Initiative 1. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 1 ist mit dem Ritter am Zug.
-Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Ritter geht daneben.
-Runde 19 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 19 beiseitegelegte Karte war der Dorfbewohner.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 20 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Werwolfkönig, den Ritter, die Seherin und den Dorfbewohner.
-Spieler 1 bekommt den Jäger, den Jungwolf und die Hexe.
-Deine Hand: Jäger, Jungwolf und Hexe
-> Jäger gegen den Jungwolf und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Werwolfkönig, Ritter, Seherin und Dorfbewohner
-> Werwolfkönig gegen den Jäger, den Ritter und die Seherin spielen
-Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 1 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Jungwolf und den Narren, Initiative 0. Spieler 2: Werwolfkönig gegen den Jäger, den Ritter und die Seherin, Initiative 2. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jäger am Zug.
-Spieler 1 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Runde 20 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 20 beiseitegelegte Karte war die Wolfsschönheit.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 21 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Werwolfkönig, die Seherin, die Hexe und die Wolfsschönheit.
-Spieler 2 bekommt den Jäger, den Ritter und den Jungwolf.
-Deine Hand: Werwolfkönig, Seherin, Hexe und Wolfsschönheit
-> Seherin gegen den Jungwolf und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Jäger, Ritter und Jungwolf
-> Jungwolf gegen den Dorfbewohner spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen den Jungwolf und den Narren, Initiative 5. Spieler 2: Jungwolf gegen den Dorfbewohner, Initiative 4. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Jungwolf am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
-Spieler 1 ist mit der Seherin am Zug.
-Der Angriff von Spieler 1 mit der Seherin geht daneben.
-Runde 21 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 21 beiseitegelegte Karte war der Dorfbewohner.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 22 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Jäger, den Werwolfkönig, den Ritter und den Jungwolf.
-Spieler 1 bekommt die Seherin, die Hexe und den Dorfbewohner.
-Deine Hand: Seherin, Hexe und Dorfbewohner
-> Seherin gegen den Werwolfkönig und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Jäger, Werwolfkönig, Ritter und Jungwolf
-> Werwolfkönig gegen den Jäger, die Hexe, den Dorfbewohner und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 4 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen den Werwolfkönig und den Narren, Initiative 5. Spieler 2: Werwolfkönig gegen den Jäger, die Hexe, den Dorfbewohner und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 1 ist mit der Seherin am Zug.
-Der Angriff von Spieler 1 mit der Seherin geht daneben.
-Runde 22 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 22 beiseitegelegte Karte war die Wolfsschönheit.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 23 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Jäger, den Werwolfkönig, den Ritter und die Seherin.
-Spieler 2 bekommt den Jungwolf, die Hexe und die Wolfsschönheit.
-Deine Hand: Jäger, Werwolfkönig, Ritter und Seherin
-> Werwolfkönig gegen den Dorfbewohner spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jungwolf, Hexe und Wolfsschönheit
-> Jungwolf gegen die Seherin spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 2 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Dorfbewohner, Initiative 2. Spieler 2: Jungwolf gegen die Seherin, Initiative 3. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Der Angriff von Spieler 1 mit dem Werwolfkönig geht daneben.
-Spieler 2 ist mit dem Jungwolf am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
-Runde 23 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 23 beiseitegelegte Karte war der Dorfbewohner.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 24 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Jäger, den Ritter, die Hexe und den Dorfbewohner.
-Spieler 1 bekommt den Werwolfkönig, den Jungwolf und die Seherin.
-Deine Hand: Werwolfkönig, Jungwolf und Seherin
-> Werwolfkönig gegen den Dorfbewohner und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Jäger, Ritter, Hexe und Dorfbewohner
-> Jäger gegen die Wolfsschönheit und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Dorfbewohner und den Narren, Initiative 2. Spieler 2: Jäger gegen die Wolfsschönheit und den Narren, Initiative 1. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Jäger am Zug.
-Deine Hand: 
-  Das Kreuz behalten
-  Ein Kreuz ausgeben und angreifen
-> Ein Kreuz ausgeben und angreifen
-Spieler 2 gibt 1 Kreuz aus.
-Der Angriff von Spieler 2 mit dem Jäger geht daneben.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Der Angriff von Spieler 1 mit dem Werwolfkönig geht daneben.
-Runde 24 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 24 beiseitegelegte Karte war die Wolfsschönheit.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 25 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Jäger, den Werwolfkönig, die Seherin und die Hexe.
-Spieler 2 bekommt den Ritter, den Jungwolf und den Dorfbewohner.
-Deine Hand: Jäger, Werwolfkönig, Seherin und Hexe
-> Jäger gegen den Werwolfkönig, den Jungwolf und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
-Deine Hand: Ritter, Jungwolf und Dorfbewohner
-> Ritter gegen die Wolfsschönheit spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Werwolfkönig, den Jungwolf und den Narren, Initiative 1. Spieler 2: Ritter gegen die Wolfsschönheit, Initiative 3. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jäger am Zug.
-Spieler 1 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
-Spieler 2 ist mit dem Ritter am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Ritter geht daneben.
-Runde 25 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 25 beiseitegelegte Karte war die Wolfsschönheit.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 26 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Jäger, den Jungwolf, die Hexe und den Dorfbewohner.
-Spieler 1 bekommt den Werwolfkönig, den Ritter und die Wolfsschönheit.
-Deine Hand: Werwolfkönig, Ritter und Wolfsschönheit
-> Werwolfkönig gegen die Hexe spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jäger, Jungwolf, Hexe und Dorfbewohner
-> Jungwolf gegen den Dorfbewohner spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen die Hexe, Initiative 2. Spieler 2: Jungwolf gegen den Dorfbewohner, Initiative 4. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Der Angriff von Spieler 1 mit dem Werwolfkönig geht daneben.
-Spieler 2 ist mit dem Jungwolf am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
-Runde 26 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 26 beiseitegelegte Karte war die Seherin.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 27 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Werwolfkönig, den Ritter, die Seherin und die Wolfsschönheit.
-Spieler 2 bekommt den Jungwolf, die Hexe und den Dorfbewohner.
-Deine Hand: Werwolfkönig, Ritter, Seherin und Wolfsschönheit
-> Werwolfkönig gegen den Jäger und den Ritter spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Jungwolf, Hexe und Dorfbewohner
-> Jungwolf gegen den Narren spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-  3 Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Jäger und den Ritter, Initiative 2. Spieler 2: Jungwolf gegen den Narren, Initiative 4. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 gibt 1 Reißzahn aus.
-Der Angriff von Spieler 1 mit dem Werwolfkönig geht daneben.
-Spieler 2 ist mit dem Jungwolf am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Der Angriff von Spieler 2 mit dem Jungwolf geht daneben.
-Runde 27 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 27 beiseitegelegte Karte war der Jäger.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 28 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Jäger, den Werwolfkönig, den Jungwolf und die Wolfsschönheit.
-Spieler 1 bekommt den Ritter, die Seherin und den Dorfbewohner.
-Deine Hand: Ritter, Seherin und Dorfbewohner
-> Seherin gegen den Jungwolf spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jäger, Werwolfkönig, Jungwolf und Wolfsschönheit
-> Jäger gegen die Wolfsschönheit und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-  3 Sanduhren setzen
-  4 Sanduhren setzen
-> 1 Sanduhr setzen
-Spieler 2 setzt 1 Sanduhr.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen den Jungwolf, Initiative 5. Spieler 2: Jäger gegen die Wolfsschönheit und den Narren, Initiative 0. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Jäger am Zug.
-Spieler 2 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
-Spieler 1 ist mit der Seherin am Zug.
-Der Angriff von Spieler 1 mit der Seherin geht daneben.
-Runde 28 endet. Spieler 1 bekommt das Abzeichen.
-Die in Runde 28 beiseitegelegte Karte war die Hexe.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 29 beginnt. Spieler 1 hat das Abzeichen.
-Spieler 1 bekommt den Jäger, den Jungwolf, die Hexe und die Wolfsschönheit.
-Spieler 2 bekommt den Werwolfkönig, den Ritter und den Dorfbewohner.
-Deine Hand: Jäger, Jungwolf, Hexe und Wolfsschönheit
-> Jäger gegen den Jungwolf und die Wolfsschönheit spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: Werwolfkönig, Ritter und Dorfbewohner
-> Werwolfkönig gegen die Seherin und den Dorfbewohner spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-  3 Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Jungwolf und die Wolfsschönheit, Initiative 1. Spieler 2: Werwolfkönig gegen die Seherin und den Dorfbewohner, Initiative 2. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jäger am Zug.
-Spieler 1 greift nicht an: Es gibt kein Kreuz zum Ausgeben.
-Spieler 2 ist mit dem Werwolfkönig am Zug.
-Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Runde 29 endet. Spieler 2 bekommt das Abzeichen.
-Die in Runde 29 beiseitegelegte Karte war die Seherin.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 1 ist bereit für die nächste Runde.
-Deine Hand: 
-  Nächste Runde
-> Nächste Runde
-Spieler 2 ist bereit für die nächste Runde.
-Runde 30 beginnt. Spieler 2 hat das Abzeichen.
-Spieler 2 bekommt den Jäger, den Jungwolf, die Wolfsschönheit und den Dorfbewohner.
-Spieler 1 bekommt den Ritter, die Seherin und die Hexe.
-Deine Hand: Ritter, Seherin und Hexe
-> Ritter gegen den Narren spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: Jäger, Jungwolf, Wolfsschönheit und Dorfbewohner
-> Jungwolf gegen den Ritter und den Narren spielen
-Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
-Deine Hand: 
-  Keine Sanduhren setzen
-  1 Sanduhr setzen
-  2 Sanduhren setzen
-  3 Sanduhren setzen
-> 3 Sanduhren setzen
-Spieler 2 setzt 3 Sanduhren.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Ritter gegen den Narren, Initiative 3. Spieler 2: Jungwolf gegen den Ritter und den Narren, Initiative 1. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Jungwolf am Zug.
-Spieler 2 erhält 1 Sanduhr.
-Spieler 2 trifft mit dem Jungwolf den Ritter von Spieler 1! Spieler 1 verliert 1 Leben.
-Spieler 2 gewinnt, weil Spieler 1 kein Leben mehr hat.
+Spieler 1 hat genug Reißzähne gesammelt und gewinnt.
 # Game 6
 Deine Hand: Jäger, Ritter, Seherin und Wolfsschönheit
-> Seherin gegen den Jungwolf spielen
+> Jäger gegen den Werwolfkönig spielen
 Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Werwolfkönig, Jungwolf und Dorfbewohner
-> Werwolfkönig gegen den Jäger, den Dorfbewohner und den Narren spielen
+> Werwolfkönig gegen die Seherin, die Hexe und den Narren spielen
 Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
@@ -3184,11 +1236,15 @@ Deine Hand:
   1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen den Jungwolf, Initiative 5. Spieler 2: Werwolfkönig gegen den Jäger, den Dorfbewohner und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
+Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Werwolfkönig, Initiative 1. Spieler 2: Werwolfkönig gegen die Seherin, die Hexe und den Narren, Initiative 2. Spieler 1 ist zuerst dran.
+Spieler 1 ist mit dem Jäger am Zug.
+Deine Hand: 
+  Das Kreuz behalten
+  Ein Kreuz ausgeben und angreifen
+> Das Kreuz behalten
+Spieler 1 greift nicht an: Das Kreuz wurde nicht ausgegeben.
 Spieler 2 ist mit dem Werwolfkönig am Zug.
 Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
-Spieler 1 ist mit der Seherin am Zug.
-Der Angriff von Spieler 1 mit der Seherin geht daneben.
 Runde 1 endet. Spieler 2 bekommt das Abzeichen.
 Die in Runde 1 beiseitegelegte Karte war die Hexe.
 Deine Hand: 
@@ -3203,10 +1259,10 @@ Runde 2 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Jäger, die Seherin, die Hexe und die Wolfsschönheit.
 Spieler 1 bekommt den Werwolfkönig, den Jungwolf und den Dorfbewohner.
 Deine Hand: Werwolfkönig, Jungwolf und Dorfbewohner
-> Jungwolf gegen den Jungwolf spielen
-Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
+> Werwolfkönig gegen den Ritter, die Hexe und den Narren spielen
+Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
 Deine Hand: Jäger, Seherin, Hexe und Wolfsschönheit
-> Wolfsschönheit gegen die Wolfsschönheit spielen
+> Jäger gegen den Jungwolf spielen
 Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: 
   Keine Sanduhren setzen
@@ -3217,13 +1273,15 @@ Deine Hand:
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen den Jungwolf, Initiative 4. Spieler 2: Wolfsschönheit gegen die Wolfsschönheit, Initiative 7. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jungwolf am Zug.
-Spieler 1 erhält 1 Sanduhr.
-Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
-Spieler 2 ist mit der Wolfsschönheit am Zug.
-Spieler 2 erhält 1 Reißzahn.
-Der Angriff von Spieler 2 mit der Wolfsschönheit geht daneben.
+Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Ritter, die Hexe und den Narren, Initiative 2. Spieler 2: Jäger gegen den Jungwolf, Initiative 1. Spieler 2 ist zuerst dran.
+Spieler 2 ist mit dem Jäger am Zug.
+Deine Hand: 
+  Das Kreuz behalten
+  Ein Kreuz ausgeben und angreifen
+> Das Kreuz behalten
+Spieler 2 greift nicht an: Das Kreuz wurde nicht ausgegeben.
+Spieler 1 ist mit dem Werwolfkönig am Zug.
+Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
 Runde 2 endet. Spieler 1 bekommt das Abzeichen.
 Die in Runde 2 beiseitegelegte Karte war der Ritter.
 Deine Hand: 
@@ -3238,31 +1296,26 @@ Runde 3 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Jungwolf, die Seherin, die Hexe und die Wolfsschönheit.
 Spieler 2 bekommt den Jäger, den Werwolfkönig und den Ritter.
 Deine Hand: Jungwolf, Seherin, Hexe und Wolfsschönheit
-> Seherin gegen die Wolfsschönheit und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
+> Jungwolf gegen den Dorfbewohner spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Jäger, Werwolfkönig und Ritter
-> Jäger gegen den Narren spielen
-Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
+> Werwolfkönig gegen die Hexe, den Dorfbewohner und den Narren spielen
+Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
-  1 Sanduhr setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 2 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen die Wolfsschönheit und den Narren, Initiative 5. Spieler 2: Jäger gegen den Narren, Initiative 0. Spieler 2 ist zuerst dran.
-Spieler 2 ist mit dem Jäger am Zug.
-Deine Hand: 
-  Das Kreuz behalten
-  Ein Kreuz ausgeben und angreifen
-> Ein Kreuz ausgeben und angreifen
-Spieler 2 gibt 1 Kreuz aus.
-Der Angriff von Spieler 2 mit dem Jäger geht daneben.
-Spieler 1 ist mit der Seherin am Zug.
-Der Angriff von Spieler 1 mit der Seherin geht daneben.
+> Keine Sanduhren setzen
+Spieler 2 setzt keine Sanduhren.
+Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen den Dorfbewohner, Initiative 4. Spieler 2: Werwolfkönig gegen die Hexe, den Dorfbewohner und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
+Spieler 2 ist mit dem Werwolfkönig am Zug.
+Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Spieler 1 ist mit dem Jungwolf am Zug.
+Spieler 1 erhält 1 Sanduhr.
+Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
 Runde 3 endet. Spieler 2 bekommt das Abzeichen.
 Die in Runde 3 beiseitegelegte Karte war der Dorfbewohner.
 Deine Hand: 
@@ -3277,24 +1330,27 @@ Runde 4 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Ritter, die Seherin, die Wolfsschönheit und den Dorfbewohner.
 Spieler 1 bekommt den Jäger, den Werwolfkönig und den Jungwolf.
 Deine Hand: Jäger, Werwolfkönig und Jungwolf
-> Jungwolf gegen die Seherin und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
+> Jungwolf gegen den Narren spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
 Deine Hand: Ritter, Seherin, Wolfsschönheit und Dorfbewohner
-> Seherin gegen den Jungwolf spielen
+> Dorfbewohner gegen den Narren spielen
 Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
-Deine Hand: 
-  Keine Sanduhren setzen
-> Keine Sanduhren setzen
-Spieler 2 setzt keine Sanduhren.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
 > 1 Sanduhr setzen
-Spieler 1 setzt 1 Sanduhr.
-Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen die Seherin und den Narren, Initiative 3. Spieler 2: Seherin gegen den Jungwolf, Initiative 5. Spieler 1 ist zuerst dran.
+Spieler 2 setzt 1 Sanduhr.
+Deine Hand: 
+  Keine Sanduhren setzen
+  1 Sanduhr setzen
+> Keine Sanduhren setzen
+Spieler 1 setzt keine Sanduhren.
+Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen den Narren, Initiative 4. Spieler 2: Dorfbewohner gegen den Narren, Initiative 7. Spieler 1 ist zuerst dran.
 Spieler 1 ist mit dem Jungwolf am Zug.
 Spieler 1 erhält 1 Sanduhr.
-Spieler 1 trifft mit dem Jungwolf die Seherin von Spieler 2! Spieler 2 verliert 1 Leben.
+Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
+Spieler 2 ist mit dem Dorfbewohner am Zug.
+Spieler 2 erhält 1 Kreuz.
 Runde 4 endet. Spieler 1 bekommt das Abzeichen.
 Die in Runde 4 beiseitegelegte Karte war die Hexe.
 Deine Hand: 
@@ -3309,7 +1365,7 @@ Runde 5 beginnt. Spieler 1 hat das Abzeichen.
 Spieler 1 bekommt den Jäger, den Werwolfkönig, den Ritter und den Jungwolf.
 Spieler 2 bekommt die Seherin, die Hexe und den Dorfbewohner.
 Deine Hand: Jäger, Werwolfkönig, Ritter und Jungwolf
-> Werwolfkönig gegen den Ritter und den Dorfbewohner spielen
+> Jungwolf gegen den Dorfbewohner und den Narren spielen
 Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Seherin, Hexe und Dorfbewohner
 > Seherin gegen den Werwolfkönig und den Narren spielen
@@ -3317,15 +1373,17 @@ Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
   1 Sanduhr setzen
-> 1 Sanduhr setzen
-Spieler 1 setzt 1 Sanduhr.
+  2 Sanduhren setzen
+> 2 Sanduhren setzen
+Spieler 1 setzt 2 Sanduhren.
 Deine Hand: 
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
 Spieler 2 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Werwolfkönig gegen den Ritter und den Dorfbewohner, Initiative 1. Spieler 2: Seherin gegen den Werwolfkönig und den Narren, Initiative 5. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Werwolfkönig am Zug.
-Spieler 1 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen den Dorfbewohner und den Narren, Initiative 2. Spieler 2: Seherin gegen den Werwolfkönig und den Narren, Initiative 5. Spieler 1 ist zuerst dran.
+Spieler 1 ist mit dem Jungwolf am Zug.
+Spieler 1 erhält 1 Sanduhr.
+Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
 Spieler 2 ist mit der Seherin am Zug.
 Der Angriff von Spieler 2 mit der Seherin geht daneben.
 Runde 5 endet. Spieler 2 bekommt das Abzeichen.
@@ -3342,11 +1400,295 @@ Runde 6 beginnt. Spieler 2 hat das Abzeichen.
 Spieler 2 bekommt den Werwolfkönig, den Ritter, den Jungwolf und den Dorfbewohner.
 Spieler 1 bekommt den Jäger, die Seherin und die Hexe.
 Deine Hand: Jäger, Seherin und Hexe
-> Jäger gegen den Werwolfkönig, die Wolfsschönheit und den Narren spielen
-Spieler 1 versiegelt einen Plan mit 3 Zielkarten.
+> Seherin gegen die Wolfsschönheit und den Narren spielen
+Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: Werwolfkönig, Ritter, Jungwolf und Dorfbewohner
-> Werwolfkönig gegen den Jäger, den Ritter und den Dorfbewohner spielen
+> Werwolfkönig gegen den Jäger, die Seherin und den Narren spielen
 Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
+Deine Hand: 
+  Keine Sanduhren setzen
+> Keine Sanduhren setzen
+Spieler 2 setzt keine Sanduhren.
+Deine Hand: 
+  Keine Sanduhren setzen
+  1 Sanduhr setzen
+> 1 Sanduhr setzen
+Spieler 1 setzt 1 Sanduhr.
+Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen die Wolfsschönheit und den Narren, Initiative 4. Spieler 2: Werwolfkönig gegen den Jäger, die Seherin und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
+Spieler 2 ist mit dem Werwolfkönig am Zug.
+Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Spieler 1 ist mit der Seherin am Zug.
+Der Angriff von Spieler 1 mit der Seherin geht daneben.
+Runde 6 endet. Spieler 1 bekommt das Abzeichen.
+Die in Runde 6 beiseitegelegte Karte war die Wolfsschönheit.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 1 ist bereit für die nächste Runde.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 2 ist bereit für die nächste Runde.
+Runde 7 beginnt. Spieler 1 hat das Abzeichen.
+Spieler 1 bekommt den Jäger, die Seherin, die Wolfsschönheit und den Dorfbewohner.
+Spieler 2 bekommt den Werwolfkönig, den Ritter und die Hexe.
+Deine Hand: Jäger, Seherin, Wolfsschönheit und Dorfbewohner
+> Seherin gegen den Narren spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
+Deine Hand: Werwolfkönig, Ritter und Hexe
+> Ritter gegen die Wolfsschönheit spielen
+Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
+Deine Hand: 
+  Keine Sanduhren setzen
+> Keine Sanduhren setzen
+Spieler 1 setzt keine Sanduhren.
+Deine Hand: 
+  Keine Sanduhren setzen
+> Keine Sanduhren setzen
+Spieler 2 setzt keine Sanduhren.
+Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen den Narren, Initiative 5. Spieler 2: Ritter gegen die Wolfsschönheit, Initiative 3. Spieler 2 ist zuerst dran.
+Spieler 2 ist mit dem Ritter am Zug.
+Spieler 2 erhält 1 Sanduhr.
+Der Angriff von Spieler 2 mit dem Ritter geht daneben.
+Spieler 1 ist mit der Seherin am Zug.
+Der Angriff von Spieler 1 mit der Seherin geht daneben.
+Runde 7 endet. Spieler 2 bekommt das Abzeichen.
+Die in Runde 7 beiseitegelegte Karte war der Jungwolf.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 1 ist bereit für die nächste Runde.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 2 ist bereit für die nächste Runde.
+Runde 8 beginnt. Spieler 2 hat das Abzeichen.
+Spieler 2 bekommt den Jäger, den Werwolfkönig, den Ritter und den Jungwolf.
+Spieler 1 bekommt die Seherin, die Hexe und den Dorfbewohner.
+Deine Hand: Seherin, Hexe und Dorfbewohner
+> Seherin gegen die Wolfsschönheit spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
+Deine Hand: Jäger, Werwolfkönig, Ritter und Jungwolf
+> Werwolfkönig gegen den Dorfbewohner und den Narren spielen
+Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
+Deine Hand: 
+  Keine Sanduhren setzen
+  1 Sanduhr setzen
+> Keine Sanduhren setzen
+Spieler 2 setzt keine Sanduhren.
+Deine Hand: 
+  Keine Sanduhren setzen
+> Keine Sanduhren setzen
+Spieler 1 setzt keine Sanduhren.
+Die Pläne sind aufgedeckt. Spieler 1: Seherin gegen die Wolfsschönheit, Initiative 5. Spieler 2: Werwolfkönig gegen den Dorfbewohner und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
+Spieler 2 ist mit dem Werwolfkönig am Zug.
+Der Angriff von Spieler 2 mit dem Werwolfkönig geht daneben.
+Spieler 1 ist mit der Seherin am Zug.
+Der Angriff von Spieler 1 mit der Seherin geht daneben.
+Runde 8 endet. Spieler 1 bekommt das Abzeichen.
+Die in Runde 8 beiseitegelegte Karte war die Wolfsschönheit.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 1 ist bereit für die nächste Runde.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 2 ist bereit für die nächste Runde.
+Runde 9 beginnt. Spieler 1 hat das Abzeichen.
+Spieler 1 bekommt den Jungwolf, die Seherin, die Wolfsschönheit und den Dorfbewohner.
+Spieler 2 bekommt den Jäger, den Werwolfkönig und die Hexe.
+Deine Hand: Jungwolf, Seherin, Wolfsschönheit und Dorfbewohner
+> Jungwolf gegen die Hexe spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
+Deine Hand: Jäger, Werwolfkönig und Hexe
+> Werwolfkönig gegen den Ritter spielen
+Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
+Deine Hand: 
+  Keine Sanduhren setzen
+> Keine Sanduhren setzen
+Spieler 1 setzt keine Sanduhren.
+Deine Hand: 
+  Keine Sanduhren setzen
+  1 Sanduhr setzen
+> 1 Sanduhr setzen
+Spieler 2 setzt 1 Sanduhr.
+Die Pläne sind aufgedeckt. Spieler 1: Jungwolf gegen die Hexe, Initiative 4. Spieler 2: Werwolfkönig gegen den Ritter, Initiative 1. Spieler 2 ist zuerst dran.
+Spieler 2 ist mit dem Werwolfkönig am Zug.
+Der Angriff von Spieler 2 mit dem Werwolfkönig geht daneben.
+Spieler 1 ist mit dem Jungwolf am Zug.
+Spieler 1 erhält 1 Sanduhr.
+Der Angriff von Spieler 1 mit dem Jungwolf geht daneben.
+Runde 9 endet. Spieler 2 bekommt das Abzeichen.
+Die in Runde 9 beiseitegelegte Karte war der Ritter.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 1 ist bereit für die nächste Runde.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 2 ist bereit für die nächste Runde.
+Runde 10 beginnt. Spieler 2 hat das Abzeichen.
+Spieler 2 bekommt den Werwolfkönig, die Hexe, die Wolfsschönheit und den Dorfbewohner.
+Spieler 1 bekommt den Jäger, den Ritter und den Jungwolf.
+Deine Hand: Jäger, Ritter und Jungwolf
+> Jäger gegen die Wolfsschönheit spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
+Deine Hand: Werwolfkönig, Hexe, Wolfsschönheit und Dorfbewohner
+> Werwolfkönig gegen den Ritter, die Seherin und den Narren spielen
+Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
+Deine Hand: 
+  Keine Sanduhren setzen
+> Keine Sanduhren setzen
+Spieler 2 setzt keine Sanduhren.
+Deine Hand: 
+  Keine Sanduhren setzen
+  1 Sanduhr setzen
+> Keine Sanduhren setzen
+Spieler 1 setzt keine Sanduhren.
+Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen die Wolfsschönheit, Initiative 1. Spieler 2: Werwolfkönig gegen den Ritter, die Seherin und den Narren, Initiative 2. Spieler 1 ist zuerst dran.
+Spieler 1 ist mit dem Jäger am Zug.
+Deine Hand: 
+  Das Kreuz behalten
+  Ein Kreuz ausgeben und angreifen
+> Das Kreuz behalten
+Spieler 1 greift nicht an: Das Kreuz wurde nicht ausgegeben.
+Spieler 2 ist mit dem Werwolfkönig am Zug.
+Spieler 2 greift nicht an: Für die weiteren Ziele fehlen Reißzähne.
+Runde 10 endet. Spieler 1 bekommt das Abzeichen.
+Die in Runde 10 beiseitegelegte Karte war die Seherin.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 1 ist bereit für die nächste Runde.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 2 ist bereit für die nächste Runde.
+Runde 11 beginnt. Spieler 1 hat das Abzeichen.
+Spieler 1 bekommt den Werwolfkönig, den Ritter, die Wolfsschönheit und den Dorfbewohner.
+Spieler 2 bekommt den Jäger, den Jungwolf und die Hexe.
+Deine Hand: Werwolfkönig, Ritter, Wolfsschönheit und Dorfbewohner
+> Wolfsschönheit gegen den Jungwolf spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
+Deine Hand: Jäger, Jungwolf und Hexe
+> Jäger gegen den Werwolfkönig, die Wolfsschönheit und den Narren spielen
+Spieler 2 versiegelt einen Plan mit 3 Zielkarten.
+Deine Hand: 
+  Keine Sanduhren setzen
+  1 Sanduhr setzen
+> Keine Sanduhren setzen
+Spieler 1 setzt keine Sanduhren.
+Deine Hand: 
+  Keine Sanduhren setzen
+> Keine Sanduhren setzen
+Spieler 2 setzt keine Sanduhren.
+Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Jungwolf, Initiative 7. Spieler 2: Jäger gegen den Werwolfkönig, die Wolfsschönheit und den Narren, Initiative 1. Spieler 2 ist zuerst dran.
+Spieler 2 ist mit dem Jäger am Zug.
+Deine Hand: 
+  Das Kreuz behalten
+  Ein Kreuz ausgeben und angreifen
+> Das Kreuz behalten
+Spieler 2 greift nicht an: Das Kreuz wurde nicht ausgegeben.
+Spieler 1 ist mit der Wolfsschönheit am Zug.
+Spieler 1 erhält 1 Reißzahn.
+Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
+Runde 11 endet. Spieler 2 bekommt das Abzeichen.
+Die in Runde 11 beiseitegelegte Karte war die Seherin.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 1 ist bereit für die nächste Runde.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 2 ist bereit für die nächste Runde.
+Runde 12 beginnt. Spieler 2 hat das Abzeichen.
+Spieler 2 bekommt den Jäger, den Werwolfkönig, den Ritter und die Seherin.
+Spieler 1 bekommt die Hexe, die Wolfsschönheit und den Dorfbewohner.
+Deine Hand: Hexe, Wolfsschönheit und Dorfbewohner
+> Wolfsschönheit gegen den Werwolfkönig spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
+Deine Hand: Jäger, Werwolfkönig, Ritter und Seherin
+> Jäger gegen den Jungwolf spielen
+Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
+Deine Hand: 
+  Keine Sanduhren setzen
+> Keine Sanduhren setzen
+Spieler 2 setzt keine Sanduhren.
+Deine Hand: 
+  Keine Sanduhren setzen
+  1 Sanduhr setzen
+> 1 Sanduhr setzen
+Spieler 1 setzt 1 Sanduhr.
+Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen den Werwolfkönig, Initiative 6. Spieler 2: Jäger gegen den Jungwolf, Initiative 1. Spieler 2 ist zuerst dran.
+Spieler 2 ist mit dem Jäger am Zug.
+Deine Hand: 
+  Das Kreuz behalten
+  Ein Kreuz ausgeben und angreifen
+> Ein Kreuz ausgeben und angreifen
+Spieler 2 gibt 1 Kreuz aus.
+Der Angriff von Spieler 2 mit dem Jäger geht daneben.
+Spieler 1 ist mit der Wolfsschönheit am Zug.
+Spieler 1 erhält 1 Reißzahn.
+Der Angriff von Spieler 1 mit der Wolfsschönheit geht daneben.
+Runde 12 endet. Spieler 1 bekommt das Abzeichen.
+Die in Runde 12 beiseitegelegte Karte war der Jungwolf.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 1 ist bereit für die nächste Runde.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 2 ist bereit für die nächste Runde.
+Runde 13 beginnt. Spieler 1 hat das Abzeichen.
+Spieler 1 bekommt den Jäger, den Jungwolf, die Wolfsschönheit und den Dorfbewohner.
+Spieler 2 bekommt den Ritter, die Seherin und die Hexe.
+Deine Hand: Jäger, Jungwolf, Wolfsschönheit und Dorfbewohner
+> Jäger gegen den Werwolfkönig und den Narren spielen
+Spieler 1 versiegelt einen Plan mit 2 Zielkarten.
+Deine Hand: Ritter, Seherin und Hexe
+> Hexe gegen den Narren spielen
+Spieler 2 versiegelt einen Plan mit 1 Zielkarte.
+Deine Hand: 
+  Keine Sanduhren setzen
+> Keine Sanduhren setzen
+Spieler 1 setzt keine Sanduhren.
+Deine Hand: 
+  Keine Sanduhren setzen
+> Keine Sanduhren setzen
+Spieler 2 setzt keine Sanduhren.
+Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Werwolfkönig und den Narren, Initiative 1. Spieler 2: Hexe gegen den Narren, Initiative 6. Spieler 1 ist zuerst dran.
+Spieler 1 ist mit dem Jäger am Zug.
+Deine Hand: 
+  Das Kreuz behalten
+  Ein Kreuz ausgeben und angreifen
+> Ein Kreuz ausgeben und angreifen
+Spieler 1 gibt 1 Kreuz aus.
+Der Angriff von Spieler 1 mit dem Jäger geht daneben.
+Spieler 2 ist mit der Hexe am Zug.
+Spieler 2 erhält den Trank.
+Runde 13 endet. Spieler 2 bekommt das Abzeichen.
+Die in Runde 13 beiseitegelegte Karte war der Werwolfkönig.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 1 ist bereit für die nächste Runde.
+Deine Hand: 
+  Nächste Runde
+> Nächste Runde
+Spieler 2 ist bereit für die nächste Runde.
+Runde 14 beginnt. Spieler 2 hat das Abzeichen.
+Spieler 2 bekommt den Werwolfkönig, den Ritter, die Hexe und den Dorfbewohner.
+Spieler 1 bekommt den Jäger, den Jungwolf und die Wolfsschönheit.
+Deine Hand: Jäger, Jungwolf und Wolfsschönheit
+> Wolfsschönheit gegen die Hexe spielen
+Spieler 1 versiegelt einen Plan mit 1 Zielkarte.
+Deine Hand: Werwolfkönig, Ritter, Hexe und Dorfbewohner
+> Werwolfkönig gegen den Jäger und den Narren spielen
+Spieler 2 versiegelt einen Plan mit 2 Zielkarten.
 Deine Hand: 
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
@@ -3355,12 +1697,17 @@ Deine Hand:
   Keine Sanduhren setzen
 > Keine Sanduhren setzen
 Spieler 1 setzt keine Sanduhren.
-Die Pläne sind aufgedeckt. Spieler 1: Jäger gegen den Werwolfkönig, die Wolfsschönheit und den Narren, Initiative 1. Spieler 2: Werwolfkönig gegen den Jäger, den Ritter und den Dorfbewohner, Initiative 2. Spieler 1 ist zuerst dran.
-Spieler 1 ist mit dem Jäger am Zug.
 Deine Hand: 
-  Das Kreuz behalten
-  Ein Kreuz ausgeben und angreifen
-> Ein Kreuz ausgeben und angreifen
-Spieler 1 gibt 1 Kreuz aus.
-Spieler 1 trifft mit dem Jäger den Werwolfkönig von Spieler 2! Spieler 2 verliert 1 Leben.
-Spieler 1 gewinnt, weil Spieler 2 kein Leben mehr hat.
+  Mit dem Trank auf den Jäger zielen
+  Mit dem Trank auf den Jungwolf zielen
+  Mit dem Trank auf die Seherin zielen
+  Mit dem Trank auf die Wolfsschönheit zielen
+> Mit dem Trank auf den Jungwolf zielen
+Spieler 2 zielt mit dem Trank auf den Jungwolf.
+Die Pläne sind aufgedeckt. Spieler 1: Wolfsschönheit gegen die Hexe, Initiative 7. Spieler 2: Werwolfkönig gegen den Jäger und den Narren, Initiative 2. Spieler 2 ist zuerst dran.
+Der Trank geht daneben: Spieler 1 hat den Jungwolf nicht gespielt.
+Spieler 2 ist mit dem Werwolfkönig am Zug.
+Der Angriff von Spieler 2 mit dem Werwolfkönig geht daneben.
+Spieler 1 ist mit der Wolfsschönheit am Zug.
+Spieler 1 erhält 1 Reißzahn.
+Spieler 1 hat genug Reißzähne gesammelt und gewinnt.

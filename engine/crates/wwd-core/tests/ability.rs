@@ -94,16 +94,16 @@ fn victim_for(character: Character) -> Character {
     }
 }
 
-/// A round dealt so that P0 holds `character` and `extra`, and P1 holds `victim`.
+/// A round dealt so that P0 holds `character`, and P1 holds `victim` and `extra`.
 fn deal(character: Character, victim: Character, extra: &[Character]) -> State {
     let mut spare = Character::ALL
         .into_iter()
         .filter(|&c| c != character && c != victim && !extra.contains(&c));
     let mut p0 = vec![character];
-    p0.extend(extra);
-    p0.extend(spare.by_ref().take(4 - p0.len()));
+    p0.extend(spare.by_ref().take(3));
     let mut p1 = vec![victim];
-    p1.extend(spare.by_ref().take(2));
+    p1.extend(extra);
+    p1.extend(spare.by_ref().take(3 - p1.len()));
     let discard = spare.next().expect("one card is left over");
     scenario(Seat::P0, &p0, &p1, discard)
 }

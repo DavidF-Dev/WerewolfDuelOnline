@@ -4,16 +4,15 @@
 - Round 1 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Wolfen</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>You</p> seal a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>You</p> seal a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Villager</c> targeting the Fool at initiative 8. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the <c>Seer</c> at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
 - <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
+- <p>Your</p> <c>Villager</c> resolves.
+- <p>You</p> gain 1 <m cross>Cross</m>.
 - Round 1 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 1 was the <c>Knight</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -21,13 +20,13 @@
 - Round 2 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>You</p> seal a plan with 5 target cards.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> seals a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>You</p> resolve first.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the Fool at initiative 4. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Your</p> <c>Wolf King</c> misses.
 - <p>Your opponent</p>'s <c>Wolfen</c> resolves.
 - <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p>'s <c>Wolfen</c> misses.
@@ -38,34 +37,33 @@
 - Round 3 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>You</p> seal a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 6. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> at initiative 6. <p>You</p> resolve first.
+- <p>Your</p> <c>Hunter</c> resolves.
+- <p>You</p> make no attack: the <m cross>Cross</m> was not spent.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Your opponent</p> gains 1 <m fang>Fang</m>.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
 - Round 3 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 3 was the <c>Witch</c>.
-- <p>Your opponent</p> is ready for the next round.
 - <p>You</p> are ready for the next round.
+- <p>Your opponent</p> is ready for the next round.
 - Round 4 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the Fool at initiative 7. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> spend 1 <m cross>Cross</m>.
-- <p>Your</p> <c>Hunter</c> misses.
+- Plans revealed. <p>You</p> play <c>Witch</c> targeting the Fool at initiative 6. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 6. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Your opponent</p> gains 1 <m fang>Fang</m>.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
+- <p>Your</p> <c>Witch</c> resolves.
+- <p>You</p> gain the <m potion>Potion</m>.
 - Round 4 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 4 was the <c>Knight</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -73,14 +71,35 @@
 - Round 5 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> seal a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolfen</c> at initiative 7. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolf Beauty</c> at initiative 5. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Seer</c> resolves.
-- <p>Your opponent</p>'s <c>Seer</c> hits <p>your</p> <c>Wolf Beauty</c>! <p>You</p> lose 2 <m health>Health</m>.
-- <p>Your opponent</p> wins by reducing <p>your</p> <m health>Health</m> to zero.
+- <p>You</p> aim the <m potion>Potion</m> at the <c>Knight</c>.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Villager</c> at initiative 7. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
+- The <m potion>Potion</m> misses: <p>your opponent</p> did not play the <c>Knight</c>.
+- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
+- <p>Your opponent</p>'s <c>Wolf King</c> misses.
+- <p>Your</p> <c>Wolf Beauty</c> resolves.
+- <p>You</p> gain 1 <m fang>Fang</m>.
+- <p>Your</p> <c>Wolf Beauty</c> misses.
+- Round 5 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
+- The card set aside in round 5 was the <c>Knight</c>.
+- <p>Your opponent</p> is ready for the next round.
+- <p>You</p> are ready for the next round.
+- Round 6 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
+- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
+- <p>You</p> are dealt <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
+- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolf King</c> at initiative 5. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Seer</c> and the Fool at initiative 7. <p>You</p> resolve first.
+- <p>Your</p> <c>Seer</c> resolves.
+- <p>Your</p> <c>Seer</c> misses.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
+- <p>Your opponent</p> wins by collecting enough <m fang>Fangs</m>.
 
 # Game 1, p1
 
@@ -88,16 +107,15 @@
 - Round 1 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Wolf Beauty</c>.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>You</p> seal a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 4. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c> and the <c>Seer</c> at initiative 2. <p>Your opponent</p> plays <c>Villager</c> targeting the Fool at initiative 8. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
 - <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
+- <p>Your opponent</p>'s <c>Villager</c> resolves.
+- <p>Your opponent</p> gains 1 <m cross>Cross</m>.
 - Round 1 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 1 was the <c>Knight</c>.
 - <p>You</p> are ready for the next round.
@@ -105,13 +123,13 @@
 - Round 2 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> seals a plan with 5 target cards.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> seal a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the Fool at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Your opponent</p>'s <c>Wolf King</c> misses.
 - <p>Your</p> <c>Wolfen</c> resolves.
 - <p>You</p> gain 1 <m hourglass>Hourglass</m>.
 - <p>Your</p> <c>Wolfen</c> misses.
@@ -122,34 +140,33 @@
 - Round 3 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>You</p> seal a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 6. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolf King</c> at initiative 6. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Hunter</c> resolves.
+- <p>Your opponent</p> makes no attack: the <m cross>Cross</m> was not spent.
 - <p>Your</p> <c>Wolf Beauty</c> resolves.
 - <p>You</p> gain 1 <m fang>Fang</m>.
 - <p>Your</p> <c>Wolf Beauty</c> misses.
 - Round 3 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 3 was the <c>Witch</c>.
-- <p>You</p> are ready for the next round.
 - <p>Your opponent</p> is ready for the next round.
+- <p>You</p> are ready for the next round.
 - Round 4 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 2 target cards.
+- <p>You</p> place 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the Fool at initiative 7. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> spends 1 <m cross>Cross</m>.
-- <p>Your opponent</p>'s <c>Hunter</c> misses.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 6. <p>Your opponent</p> plays <c>Witch</c> targeting the Fool at initiative 6. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf Beauty</c> resolves.
 - <p>You</p> gain 1 <m fang>Fang</m>.
 - <p>Your</p> <c>Wolf Beauty</c> misses.
+- <p>Your opponent</p>'s <c>Witch</c> resolves.
+- <p>Your opponent</p> gains the <m potion>Potion</m>.
 - Round 4 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 4 was the <c>Knight</c>.
 - <p>You</p> are ready for the next round.
@@ -157,14 +174,35 @@
 - Round 5 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 1 target card.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> seals a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolf Beauty</c> at initiative 5. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolfen</c> at initiative 7. <p>You</p> resolve first.
-- <p>Your</p> <c>Seer</c> resolves.
-- <p>Your</p> <c>Seer</c> hits <p>your opponent</p>'s <c>Wolf Beauty</c>! <p>Your opponent</p> loses 2 <m health>Health</m>.
-- <p>You</p> win by reducing <p>your opponent</p>'s <m health>Health</m> to zero.
+- <p>Your opponent</p> aims the <m potion>Potion</m> at the <c>Knight</c>.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Villager</c> at initiative 7. <p>You</p> resolve first.
+- The <m potion>Potion</m> misses: <p>you</p> did not play the <c>Knight</c>.
+- <p>Your</p> <c>Wolf King</c> resolves.
+- <p>Your</p> <c>Wolf King</c> misses.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
+- Round 5 ends. <p>You</p> take the <m badge>Badge</m>.
+- The card set aside in round 5 was the <c>Knight</c>.
+- <p>You</p> are ready for the next round.
+- <p>Your opponent</p> is ready for the next round.
+- Round 6 begins. <p>You</p> hold the <m badge>Badge</m>.
+- <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
+- <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 2 target cards.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Seer</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolf King</c> at initiative 5. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Seer</c> resolves.
+- <p>Your opponent</p>'s <c>Seer</c> misses.
+- <p>Your</p> <c>Wolf Beauty</c> resolves.
+- <p>You</p> gain 1 <m fang>Fang</m>.
+- <p>You</p> win by collecting enough <m fang>Fangs</m>.
 
 # Game 1, replay
 
@@ -172,16 +210,15 @@
 - Round 1 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Wolfen</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Wolf Beauty</c>.
-- <p>Player 2</p> seals a plan with 3 target cards.
-- <p>Player 1</p> seals a plan with 2 target cards.
+- <p>Player 2</p> seals a plan with 2 target cards.
+- <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 4. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Player 2</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Villager</c> targeting the Fool at initiative 8. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the <c>Seer</c> at initiative 2. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Wolf King</c> resolves.
 - <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 1</p>'s <c>Wolfen</c> resolves.
-- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p>'s <c>Wolfen</c> misses.
+- <p>Player 1</p>'s <c>Villager</c> resolves.
+- <p>Player 1</p> gains 1 <m cross>Cross</m>.
 - Round 1 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 1 was the <c>Knight</c>.
 - <p>Player 2</p> is ready for the next round.
@@ -189,13 +226,13 @@
 - Round 2 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>Player 1</p> seals a plan with 5 target cards.
+- <p>Player 1</p> seals a plan with 2 target cards.
 - <p>Player 2</p> seals a plan with 1 target card.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 1. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>Player 1</p> resolves first.
+- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Wolfen</c> targeting the Fool at initiative 4. <p>Player 1</p> resolves first.
 - <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Player 1</p>'s <c>Wolf King</c> misses.
 - <p>Player 2</p>'s <c>Wolfen</c> resolves.
 - <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Player 2</p>'s <c>Wolfen</c> misses.
@@ -206,34 +243,33 @@
 - Round 3 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>Player 2</p> is dealt <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
-- <p>Player 1</p> seals a plan with 3 target cards.
-- <p>Player 2</p> seals a plan with 2 target cards.
+- <p>Player 1</p> seals a plan with 2 target cards.
+- <p>Player 2</p> seals a plan with 1 target card.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 6. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> at initiative 6. <p>Player 1</p> resolves first.
+- <p>Player 1</p>'s <c>Hunter</c> resolves.
+- <p>Player 1</p> makes no attack: the <m cross>Cross</m> was not spent.
 - <p>Player 2</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Player 2</p> gains 1 <m fang>Fang</m>.
 - <p>Player 2</p>'s <c>Wolf Beauty</c> misses.
 - Round 3 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 3 was the <c>Witch</c>.
-- <p>Player 2</p> is ready for the next round.
 - <p>Player 1</p> is ready for the next round.
+- <p>Player 2</p> is ready for the next round.
 - Round 4 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
+- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 2</p> seals a plan with 2 target cards.
+- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 1. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the Fool at initiative 7. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Hunter</c> resolves.
-- <p>Player 1</p> spends 1 <m cross>Cross</m>.
-- <p>Player 1</p>'s <c>Hunter</c> misses.
+- Plans revealed. <p>Player 1</p> plays <c>Witch</c> targeting the Fool at initiative 6. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 6. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Player 2</p> gains 1 <m fang>Fang</m>.
 - <p>Player 2</p>'s <c>Wolf Beauty</c> misses.
+- <p>Player 1</p>'s <c>Witch</c> resolves.
+- <p>Player 1</p> gains the <m potion>Potion</m>.
 - Round 4 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 4 was the <c>Knight</c>.
 - <p>Player 2</p> is ready for the next round.
@@ -241,14 +277,35 @@
 - Round 5 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>Player 2</p> seals a plan with 1 target card.
+- <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Wolfen</c> at initiative 7. <p>Player 2</p> plays <c>Seer</c> targeting the <c>Wolf Beauty</c> at initiative 5. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Seer</c> resolves.
-- <p>Player 2</p>'s <c>Seer</c> hits <p>Player 1</p>'s <c>Wolf Beauty</c>! <p>Player 1</p> loses 2 <m health>Health</m>.
-- <p>Player 2</p> wins by reducing <p>Player 1</p>'s <m health>Health</m> to zero.
+- <p>Player 1</p> aims the <m potion>Potion</m> at the <c>Knight</c>.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Villager</c> at initiative 7. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the Fool at initiative 2. <p>Player 2</p> resolves first.
+- The <m potion>Potion</m> misses: <p>Player 2</p> did not play the <c>Knight</c>.
+- <p>Player 2</p>'s <c>Wolf King</c> resolves.
+- <p>Player 2</p>'s <c>Wolf King</c> misses.
+- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Player 1</p> gains 1 <m fang>Fang</m>.
+- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
+- Round 5 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
+- The card set aside in round 5 was the <c>Knight</c>.
+- <p>Player 2</p> is ready for the next round.
+- <p>Player 1</p> is ready for the next round.
+- Round 6 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
+- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
+- <p>Player 1</p> is dealt <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
+- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 2</p> seals a plan with 2 target cards.
+- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
+- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Seer</c> targeting the <c>Wolf King</c> at initiative 5. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Seer</c> and the Fool at initiative 7. <p>Player 1</p> resolves first.
+- <p>Player 1</p>'s <c>Seer</c> resolves.
+- <p>Player 1</p>'s <c>Seer</c> misses.
+- <p>Player 2</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Player 2</p> gains 1 <m fang>Fang</m>.
+- <p>Player 2</p> wins by collecting enough <m fang>Fangs</m>.
 
 # Game 2, p0
 
@@ -257,15 +314,12 @@
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Knight</c>, <c>Wolfen</c> and <c>Witch</c>.
 - <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Villager</c> and the Fool at initiative 4. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolf King</c> at initiative 3. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
-- <p>Your</p> <c>Wolf King</c> misses.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
+- <p>Your</p> <c>Wolf King</c> hits <p>your opponent</p>'s <c>Knight</c>! <p>Your opponent</p> loses 1 <m health>Health</m>.
 - Round 1 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 1 was the <c>Seer</c>.
 - <p>You</p> are ready for the next round.
@@ -273,15 +327,13 @@
 - Round 2 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Witch</c> targeting the Fool at initiative 6. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolfen</c>, the <c>Wolf Beauty</c> and the Fool at initiative 0. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: the <m cross>Cross</m> was not spent.
-- <p>Your</p> <c>Witch</c> resolves.
-- <p>You</p> gain the <m potion>Potion</m>.
+- Plans revealed. <p>You</p> play <c>Witch</c> targeting the Fool at initiative 6. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Witch</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
+- <p>Your opponent</p>'s <c>Wolf King</c> hits <p>your</p> <c>Witch</c>! <p>You</p> lose 1 <m health>Health</m>.
 - Round 2 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 2 was the <c>Seer</c>.
 - <p>You</p> are ready for the next round.
@@ -289,19 +341,17 @@
 - Round 3 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Witch</c> and <c>Villager</c>.
+- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> seals a plan with 3 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- <p>You</p> aim the <m potion>Potion</m> at the <c>Knight</c>.
-- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolf King</c> at initiative 3. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolf Beauty</c> and the Fool at initiative 0. <p>Your opponent</p> resolves first.
-- The <m potion>Potion</m> misses: <p>your opponent</p> did not play the <c>Knight</c>.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the Fool at initiative 7. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> at initiative 1. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Hunter</c> resolves.
 - <p>Your opponent</p> spends 1 <m cross>Cross</m>.
 - <p>Your opponent</p>'s <c>Hunter</c> misses.
-- <p>Your</p> <c>Knight</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Knight</c> misses.
+- <p>Your</p> <c>Wolf Beauty</c> resolves.
+- <p>You</p> gain 1 <m fang>Fang</m>.
+- <p>Your</p> <c>Wolf Beauty</c> misses.
 - Round 3 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 3 was the <c>Wolfen</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -309,15 +359,16 @@
 - Round 4 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Seer</c>.
 - <p>You</p> are dealt <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Witch</c> targeting the Fool at initiative 5. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Witch</c> resolves.
-- <p>You</p> gain the <m potion>Potion</m>.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolfen</c> at initiative 7. <p>Your opponent</p> plays <c>Seer</c> targeting the Fool at initiative 5. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Seer</c> resolves.
+- <p>Your opponent</p>'s <c>Seer</c> misses.
+- <p>Your</p> <c>Wolf Beauty</c> resolves.
+- <p>You</p> gain 1 <m fang>Fang</m>.
+- <p>Your</p> <c>Wolf Beauty</c> misses.
 - Round 4 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 4 was the <c>Knight</c>.
 - <p>You</p> are ready for the next round.
@@ -325,100 +376,13 @@
 - Round 5 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 4 target cards.
-- <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> aim the <m potion>Potion</m> at the <c>Knight</c>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Witch</c> at initiative 7. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> resolves first.
-- The <m potion>Potion</m> misses: <p>your opponent</p> did not play the <c>Knight</c>.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
-- Round 5 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 5 was the <c>Witch</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 6 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 5 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- Round 6 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 6 was the <c>Seer</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 7 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Witch</c>.
 - <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 3. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>You</p> resolve first.
-- <p>Your</p> <c>Knight</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Knight</c> misses.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
-- Round 7 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 7 was the <c>Wolf Beauty</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 8 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
-- <p>You</p> are dealt <c>Wolfen</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 4 target cards.
-- <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Witch</c> at initiative 3. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Witch</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolf King</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Seer</c> at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
-- Round 8 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 8 was the <c>Seer</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 9 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Knight</c>, <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Wolfen</c>.
-- <p>Your opponent</p> seals a plan with 4 target cards.
-- <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolf King</c> at initiative 6. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
-- Round 9 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 9 was the <c>Witch</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 10 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Witch</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> at initiative 7. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Seer</c> at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Your opponent</p>'s <c>Wolf King</c> misses.
 - <p>Your</p> <c>Wolf Beauty</c> resolves.
 - <p>You</p> gain 1 <m fang>Fang</m>.
 - <p>You</p> win by collecting enough <m fang>Fangs</m>.
@@ -430,15 +394,12 @@
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Knight</c>, <c>Wolfen</c> and <c>Witch</c>.
 - <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 2 target cards.
+- <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Villager</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolf King</c> at initiative 3. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p>'s <c>Wolf King</c> misses.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
+- <p>Your opponent</p>'s <c>Wolf King</c> hits <p>your</p> <c>Knight</c>! <p>You</p> lose 1 <m health>Health</m>.
 - Round 1 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 1 was the <c>Seer</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -446,15 +407,13 @@
 - Round 2 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 3 target cards.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> place 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolfen</c>, the <c>Wolf Beauty</c> and the Fool at initiative 0. <p>Your opponent</p> plays <c>Witch</c> targeting the Fool at initiative 6. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: the <m cross>Cross</m> was not spent.
-- <p>Your opponent</p>'s <c>Witch</c> resolves.
-- <p>Your opponent</p> gains the <m potion>Potion</m>.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Witch</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Witch</c> targeting the Fool at initiative 6. <p>You</p> resolve first.
+- <p>Your</p> <c>Wolf King</c> resolves.
+- <p>Your</p> <c>Wolf King</c> hits <p>your opponent</p>'s <c>Witch</c>! <p>Your opponent</p> loses 1 <m health>Health</m>.
 - Round 2 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 2 was the <c>Seer</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -462,19 +421,17 @@
 - Round 3 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Witch</c> and <c>Villager</c>.
+- <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> seal a plan with 3 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p> aims the <m potion>Potion</m> at the <c>Knight</c>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolf Beauty</c> and the Fool at initiative 0. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolf King</c> at initiative 3. <p>You</p> resolve first.
-- The <m potion>Potion</m> misses: <p>you</p> did not play the <c>Knight</c>.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolfen</c> at initiative 1. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the Fool at initiative 7. <p>You</p> resolve first.
 - <p>Your</p> <c>Hunter</c> resolves.
 - <p>You</p> spend 1 <m cross>Cross</m>.
 - <p>Your</p> <c>Hunter</c> misses.
-- <p>Your opponent</p>'s <c>Knight</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Knight</c> misses.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
 - Round 3 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 3 was the <c>Wolfen</c>.
 - <p>You</p> are ready for the next round.
@@ -482,15 +439,16 @@
 - Round 4 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Seer</c>.
 - <p>Your opponent</p> is dealt <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 2 target cards.
+- <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> plays <c>Witch</c> targeting the Fool at initiative 5. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Witch</c> resolves.
-- <p>Your opponent</p> gains the <m potion>Potion</m>.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Seer</c> targeting the Fool at initiative 5. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolfen</c> at initiative 7. <p>You</p> resolve first.
+- <p>Your</p> <c>Seer</c> resolves.
+- <p>Your</p> <c>Seer</c> misses.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
 - Round 4 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 4 was the <c>Knight</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -498,100 +456,13 @@
 - Round 5 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 4 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> aims the <m potion>Potion</m> at the <c>Knight</c>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Witch</c> at initiative 7. <p>You</p> resolve first.
-- The <m potion>Potion</m> misses: <p>you</p> did not play the <c>Knight</c>.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
-- Round 5 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 5 was the <c>Witch</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 6 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 5 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 2. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- Round 6 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 6 was the <c>Seer</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 7 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Witch</c>.
 - <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 3. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Knight</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Knight</c> misses.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
-- Round 7 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 7 was the <c>Wolf Beauty</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 8 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 4 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Witch</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Witch</c> at initiative 3. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Seer</c> at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> and the Fool at initiative 7. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
-- Round 8 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 8 was the <c>Seer</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 9 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Knight</c>, <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Wolfen</c>.
-- <p>You</p> seal a plan with 4 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> at initiative 6. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
-- Round 9 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 9 was the <c>Witch</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 10 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Witch</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Seer</c> at initiative 1. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> at initiative 7. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Your</p> <c>Wolf King</c> misses.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Your opponent</p> gains 1 <m fang>Fang</m>.
 - <p>Your opponent</p> wins by collecting enough <m fang>Fangs</m>.
@@ -603,15 +474,12 @@
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>Player 2</p> is dealt <c>Knight</c>, <c>Wolfen</c> and <c>Witch</c>.
 - <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 2 target cards.
+- <p>Player 2</p> seals a plan with 1 target card.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Villager</c> and the Fool at initiative 4. <p>Player 1</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Knight</c> targeting the <c>Wolf King</c> at initiative 3. <p>Player 1</p> resolves first.
 - <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p>'s <c>Wolf King</c> misses.
-- <p>Player 2</p>'s <c>Wolfen</c> resolves.
-- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Wolfen</c> misses.
+- <p>Player 1</p>'s <c>Wolf King</c> hits <p>Player 2</p>'s <c>Knight</c>! <p>Player 2</p> loses 1 <m health>Health</m>.
 - Round 1 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 1 was the <c>Seer</c>.
 - <p>Player 1</p> is ready for the next round.
@@ -619,15 +487,13 @@
 - Round 2 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>Player 1</p> is dealt <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 2</p> seals a plan with 3 target cards.
+- <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Witch</c> targeting the Fool at initiative 6. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolfen</c>, the <c>Wolf Beauty</c> and the Fool at initiative 0. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Hunter</c> resolves.
-- <p>Player 2</p> makes no attack: the <m cross>Cross</m> was not spent.
-- <p>Player 1</p>'s <c>Witch</c> resolves.
-- <p>Player 1</p> gains the <m potion>Potion</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Witch</c> targeting the Fool at initiative 6. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Witch</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Wolf King</c> resolves.
+- <p>Player 2</p>'s <c>Wolf King</c> hits <p>Player 1</p>'s <c>Witch</c>! <p>Player 1</p> loses 1 <m health>Health</m>.
 - Round 2 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 2 was the <c>Seer</c>.
 - <p>Player 1</p> is ready for the next round.
@@ -635,19 +501,17 @@
 - Round 3 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Witch</c> and <c>Villager</c>.
+- <p>Player 2</p> seals a plan with 1 target card.
 - <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 2</p> seals a plan with 3 target cards.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p> aims the <m potion>Potion</m> at the <c>Knight</c>.
-- Plans revealed. <p>Player 1</p> plays <c>Knight</c> targeting the <c>Wolf King</c> at initiative 3. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolf Beauty</c> and the Fool at initiative 0. <p>Player 2</p> resolves first.
-- The <m potion>Potion</m> misses: <p>Player 2</p> did not play the <c>Knight</c>.
+- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the Fool at initiative 7. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> at initiative 1. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Hunter</c> resolves.
 - <p>Player 2</p> spends 1 <m cross>Cross</m>.
 - <p>Player 2</p>'s <c>Hunter</c> misses.
-- <p>Player 1</p>'s <c>Knight</c> resolves.
-- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p>'s <c>Knight</c> misses.
+- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Player 1</p> gains 1 <m fang>Fang</m>.
+- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
 - Round 3 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 3 was the <c>Wolfen</c>.
 - <p>Player 2</p> is ready for the next round.
@@ -655,15 +519,16 @@
 - Round 4 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Seer</c>.
 - <p>Player 1</p> is dealt <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 2</p> seals a plan with 2 target cards.
+- <p>Player 2</p> seals a plan with 1 target card.
 - <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Witch</c> targeting the Fool at initiative 5. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the <c>Witch</c> at initiative 2. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 1</p>'s <c>Witch</c> resolves.
-- <p>Player 1</p> gains the <m potion>Potion</m>.
+- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Wolfen</c> at initiative 7. <p>Player 2</p> plays <c>Seer</c> targeting the Fool at initiative 5. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Seer</c> resolves.
+- <p>Player 2</p>'s <c>Seer</c> misses.
+- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Player 1</p> gains 1 <m fang>Fang</m>.
+- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
 - Round 4 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 4 was the <c>Knight</c>.
 - <p>Player 1</p> is ready for the next round.
@@ -671,100 +536,13 @@
 - Round 5 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Villager</c>.
-- <p>Player 2</p> seals a plan with 4 target cards.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> aims the <m potion>Potion</m> at the <c>Knight</c>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Witch</c> at initiative 7. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Player 2</p> resolves first.
-- The <m potion>Potion</m> misses: <p>Player 2</p> did not play the <c>Knight</c>.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 1</p> gains 1 <m fang>Fang</m>.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
-- Round 5 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 5 was the <c>Witch</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 6 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Villager</c>.
-- <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 1</p> seals a plan with 5 target cards.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Hunter</c> resolves.
-- <p>Player 2</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- Round 6 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 6 was the <c>Seer</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 7 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Witch</c>.
 - <p>Player 1</p> seals a plan with 2 target cards.
 - <p>Player 2</p> seals a plan with 1 target card.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Knight</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 3. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Knight</c> resolves.
-- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p>'s <c>Knight</c> misses.
-- <p>Player 2</p>'s <c>Wolfen</c> resolves.
-- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Wolfen</c> misses.
-- Round 7 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 7 was the <c>Wolf Beauty</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 8 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
-- <p>Player 1</p> is dealt <c>Wolfen</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 2</p> seals a plan with 4 target cards.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Witch</c> at initiative 3. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Witch</c> and the Fool at initiative 2. <p>Player 2</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> and the Fool at initiative 7. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Seer</c> at initiative 2. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 1</p>'s <c>Wolfen</c> resolves.
-- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p>'s <c>Wolfen</c> misses.
-- Round 8 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 8 was the <c>Seer</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 9 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Knight</c>, <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Wolfen</c>.
-- <p>Player 2</p> seals a plan with 4 target cards.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> at initiative 6. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 1</p> gains 1 <m fang>Fang</m>.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
-- Round 9 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 9 was the <c>Witch</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 10 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Witch</c>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> at initiative 7. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Seer</c> at initiative 1. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Player 2</p>'s <c>Wolf King</c> misses.
 - <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Player 1</p> gains 1 <m fang>Fang</m>.
 - <p>Player 1</p> wins by collecting enough <m fang>Fangs</m>.
@@ -775,14 +553,13 @@
 - Round 1 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Seer</c>.
 - <p>You</p> are dealt <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolfen</c> and the Fool at initiative 3. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> spends 1 <m cross>Cross</m>.
-- <p>Your opponent</p>'s <c>Hunter</c> misses.
+- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolfen</c> and the Fool at initiative 3. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Witch</c> at initiative 2. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
+- <p>Your opponent</p>'s <c>Wolf King</c> misses.
 - <p>Your</p> <c>Knight</c> resolves.
 - <p>You</p> gain 1 <m hourglass>Hourglass</m>.
 - <p>Your</p> <c>Knight</c> misses.
@@ -793,16 +570,16 @@
 - Round 2 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> seals a plan with 4 target cards.
+- <p>Your opponent</p> seals a plan with 3 target cards.
 - <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- <p>You</p> place 2 <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolf Beauty</c> at initiative 3. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolf Beauty</c> at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c> and the Fool at initiative 2. <p>You</p> resolve first.
 - <p>Your</p> <c>Knight</c> resolves.
 - <p>You</p> gain 1 <m hourglass>Hourglass</m>.
 - <p>Your</p> <c>Knight</c> misses.
+- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
+- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
 - Round 2 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 2 was the <c>Witch</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -810,29 +587,31 @@
 - Round 3 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Witch</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 4 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place 3 <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 0. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the Fool at initiative 1. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
+- <p>You</p> place 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Hunter</c> at initiative 6. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
+- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p>'s <c>Wolfen</c> misses.
+- <p>Your</p> <c>Wolf Beauty</c> resolves.
+- <p>You</p> gain 1 <m fang>Fang</m>.
+- <p>Your</p> <c>Wolf Beauty</c> misses.
 - Round 3 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 3 was the <c>Villager</c>.
-- <p>Your opponent</p> is ready for the next round.
 - <p>You</p> are ready for the next round.
+- <p>Your opponent</p> is ready for the next round.
 - Round 4 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Knight</c>, <c>Wolfen</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> seal a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolf King</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Seer</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 0. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
+- <p>Your opponent</p> makes no attack: the <m cross>Cross</m> was not spent.
 - <p>Your</p> <c>Wolf Beauty</c> resolves.
 - <p>You</p> gain 1 <m fang>Fang</m>.
 - <p>Your</p> <c>Wolf Beauty</c> misses.
@@ -847,10 +626,12 @@
 - <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolfen</c> and the Fool at initiative 3. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the Fool at initiative 2. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolfen</c> and the Fool at initiative 3. <p>You</p> resolve first.
+- <p>Your</p> <c>Wolf King</c> resolves.
+- <p>You</p> make no attack: there are no character targets.
 - <p>Your opponent</p>'s <c>Knight</c> resolves.
 - <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Knight</c> hits <p>your</p> <c>Wolfen</c>! <p>You</p> lose 1 <m health>Health</m>.
+- <p>Your opponent</p>'s <c>Knight</c> misses.
 - Round 5 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 5 was the <c>Wolf Beauty</c>.
 - <p>You</p> are ready for the next round.
@@ -862,28 +643,27 @@
 - <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the Fool at initiative 0. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolfen</c> at initiative 0. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
+- <p>Your opponent</p> makes no attack: the <m cross>Cross</m> was not spent.
 - <p>Your</p> <c>Wolf King</c> resolves.
 - <p>Your</p> <c>Wolf King</c> misses.
 - Round 6 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 6 was the <c>Knight</c>.
-- <p>Your opponent</p> is ready for the next round.
 - <p>You</p> are ready for the next round.
+- <p>Your opponent</p> is ready for the next round.
 - Round 7 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Witch</c> targeting the Fool at initiative 6. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Villager</c> and the Fool at initiative 7. <p>You</p> resolve first.
-- <p>Your</p> <c>Witch</c> resolves.
-- <p>You</p> gain the <m potion>Potion</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
+- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolfen</c> and the Fool at initiative 5. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c> at initiative 2. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
+- <p>Your opponent</p>'s <c>Wolf King</c> misses.
+- <p>Your</p> <c>Seer</c> resolves.
+- <p>Your</p> <c>Seer</c> misses.
 - Round 7 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 7 was the <c>Knight</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -891,17 +671,17 @@
 - Round 8 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Witch</c>.
 - <p>Your opponent</p> is dealt <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> aim the <m potion>Potion</m> at the <c>Wolf King</c>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolfen</c> at initiative 5. <p>You</p> resolve first.
-- The <m potion>Potion</m> misses: <p>your opponent</p> did not play the <c>Wolf King</c>.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Seer</c> resolves.
-- <p>Your opponent</p>'s <c>Seer</c> misses.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Seer</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> and the Fool at initiative 7. <p>You</p> resolve first.
+- <p>Your</p> <c>Wolfen</c> resolves.
+- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
+- <p>Your</p> <c>Wolfen</c> misses.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
 - Round 8 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 8 was the <c>Hunter</c>.
 - <p>You</p> are ready for the next round.
@@ -910,99 +690,62 @@
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Seer</c> and <c>Witch</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 1 target card.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
+- <p>You</p> place 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Hunter</c> and the Fool at initiative 3. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
+- <p>Your opponent</p> spends 1 <m cross>Cross</m>.
+- <p>Your opponent</p>'s <c>Hunter</c> misses.
 - <p>Your</p> <c>Wolfen</c> resolves.
 - <p>You</p> gain 1 <m hourglass>Hourglass</m>.
 - <p>Your</p> <c>Wolfen</c> misses.
 - Round 9 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 9 was the <c>Villager</c>.
-- <p>Your opponent</p> is ready for the next round.
 - <p>You</p> are ready for the next round.
+- <p>Your opponent</p> is ready for the next round.
 - Round 10 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Witch</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> seals a plan with 3 target cards.
+- <p>You</p> seal a plan with 1 target card.
 - <p>You</p> place 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolf King</c> at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Witch</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Knight</c> at initiative 3. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> spends 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf King</c> misses.
-- <p>Your</p> <c>Seer</c> resolves.
-- <p>Your</p> <c>Seer</c> misses.
+- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Your</p> <c>Wolfen</c> resolves.
+- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
+- <p>Your</p> <c>Wolfen</c> misses.
 - Round 10 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 10 was the <c>Knight</c>.
-- <p>Your opponent</p> is ready for the next round.
 - <p>You</p> are ready for the next round.
+- <p>Your opponent</p> is ready for the next round.
 - Round 11 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Seer</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p>'s <c>Wolf King</c> misses.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
-- Round 11 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 11 was the <c>Knight</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 12 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Knight</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Seer</c>.
-- <p>Your opponent</p> seals a plan with 4 target cards.
-- <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolf Beauty</c> at initiative 3. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Knight</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Knight</c> misses.
-- Round 12 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 12 was the <c>Wolfen</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 13 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Knight</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Witch</c> targeting the Fool at initiative 5. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the Fool at initiative 7. <p>You</p> resolve first.
-- <p>Your</p> <c>Witch</c> resolves.
-- <p>You</p> gain the <m potion>Potion</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
-- Round 13 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 13 was the <c>Wolf King</c>.
-- <p>You</p> are ready for the next round.
+- Plans revealed. <p>You</p> play <c>Witch</c> targeting the Fool at initiative 5. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Witch</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
+- <p>Your opponent</p>'s <c>Wolf King</c> hits <p>your</p> <c>Witch</c>! <p>You</p> lose 1 <m health>Health</m>.
+- Round 11 ends. <p>You</p> take the <m badge>Badge</m>.
+- The card set aside in round 11 was the <c>Knight</c>.
 - <p>Your opponent</p> is ready for the next round.
-- Round 14 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> is dealt <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> are ready for the next round.
+- Round 12 begins. <p>You</p> hold the <m badge>Badge</m>.
+- <p>You</p> are dealt <c>Knight</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
+- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Seer</c>.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> seal a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> aim the <m potion>Potion</m> at the <c>Wolfen</c>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Seer</c> at initiative 7. <p>Your opponent</p> plays <c>Seer</c> targeting the Fool at initiative 5. <p>Your opponent</p> resolves first.
-- The <m potion>Potion</m> misses: <p>your opponent</p> did not play the <c>Wolfen</c>.
-- <p>Your opponent</p>'s <c>Seer</c> resolves.
-- <p>Your opponent</p>'s <c>Seer</c> misses.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolf King</c> at initiative 7. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
+- <p>Your opponent</p> spends 1 <m fang>Fang</m>.
+- <p>Your opponent</p>'s <c>Wolf King</c> misses.
 - <p>Your</p> <c>Wolf Beauty</c> resolves.
 - <p>You</p> gain 1 <m fang>Fang</m>.
 - <p>You</p> win by collecting enough <m fang>Fangs</m>.
@@ -1013,14 +756,13 @@
 - Round 1 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Seer</c>.
 - <p>Your opponent</p> is dealt <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 2 target cards.
+- <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolfen</c> and the Fool at initiative 3. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> spend 1 <m cross>Cross</m>.
-- <p>Your</p> <c>Hunter</c> misses.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Witch</c> at initiative 2. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolfen</c> and the Fool at initiative 3. <p>You</p> resolve first.
+- <p>Your</p> <c>Wolf King</c> resolves.
+- <p>Your</p> <c>Wolf King</c> misses.
 - <p>Your opponent</p>'s <c>Knight</c> resolves.
 - <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p>'s <c>Knight</c> misses.
@@ -1031,16 +773,16 @@
 - Round 2 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>You</p> seal a plan with 4 target cards.
+- <p>You</p> seal a plan with 3 target cards.
 - <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- <p>Your opponent</p> places 2 <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolf Beauty</c> at initiative 3. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolf Beauty</c> at initiative 1. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Knight</c> resolves.
 - <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p>'s <c>Knight</c> misses.
+- <p>Your</p> <c>Wolf King</c> resolves.
+- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
 - Round 2 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 2 was the <c>Witch</c>.
 - <p>You</p> are ready for the next round.
@@ -1048,29 +790,31 @@
 - Round 3 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Witch</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 4 target cards.
+- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places 3 <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 0. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
+- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Hunter</c> at initiative 6. <p>You</p> resolve first.
+- <p>Your</p> <c>Wolfen</c> resolves.
+- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
+- <p>Your</p> <c>Wolfen</c> misses.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
 - Round 3 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 3 was the <c>Villager</c>.
-- <p>You</p> are ready for the next round.
 - <p>Your opponent</p> is ready for the next round.
+- <p>You</p> are ready for the next round.
 - Round 4 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Knight</c>, <c>Wolfen</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> and the Fool at initiative 7. <p>You</p> resolve first.
+- <p>You</p> place 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 0. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Seer</c> and the Fool at initiative 7. <p>You</p> resolve first.
 - <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
+- <p>You</p> make no attack: the <m cross>Cross</m> was not spent.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Your opponent</p> gains 1 <m fang>Fang</m>.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
@@ -1085,10 +829,12 @@
 - <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolfen</c> and the Fool at initiative 3. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolfen</c> and the Fool at initiative 3. <p>Your opponent</p> plays <c>Wolf King</c> targeting the Fool at initiative 2. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
+- <p>Your opponent</p> makes no attack: there are no character targets.
 - <p>Your</p> <c>Knight</c> resolves.
 - <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Knight</c> hits <p>your opponent</p>'s <c>Wolfen</c>! <p>Your opponent</p> loses 1 <m health>Health</m>.
+- <p>Your</p> <c>Knight</c> misses.
 - Round 5 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 5 was the <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -1100,28 +846,27 @@
 - <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c> and the Fool at initiative 0. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Villager</c> and the Fool at initiative 2. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolfen</c> at initiative 0. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Villager</c> and the Fool at initiative 2. <p>You</p> resolve first.
 - <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
+- <p>You</p> make no attack: the <m cross>Cross</m> was not spent.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
 - <p>Your opponent</p>'s <c>Wolf King</c> misses.
 - Round 6 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 6 was the <c>Knight</c>.
-- <p>You</p> are ready for the next round.
 - <p>Your opponent</p> is ready for the next round.
+- <p>You</p> are ready for the next round.
 - Round 7 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Villager</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Witch</c> targeting the Fool at initiative 6. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Witch</c> resolves.
-- <p>Your opponent</p> gains the <m potion>Potion</m>.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c> at initiative 2. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolfen</c> and the Fool at initiative 5. <p>You</p> resolve first.
+- <p>Your</p> <c>Wolf King</c> resolves.
+- <p>Your</p> <c>Wolf King</c> misses.
+- <p>Your opponent</p>'s <c>Seer</c> resolves.
+- <p>Your opponent</p>'s <c>Seer</c> misses.
 - Round 7 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 7 was the <c>Knight</c>.
 - <p>You</p> are ready for the next round.
@@ -1129,17 +874,17 @@
 - Round 8 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Witch</c>.
 - <p>You</p> are dealt <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> aims the <m potion>Potion</m> at the <c>Wolf King</c>.
-- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolfen</c> at initiative 5. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> resolves first.
-- The <m potion>Potion</m> misses: <p>you</p> did not play the <c>Wolf King</c>.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Seer</c> resolves.
-- <p>Your</p> <c>Seer</c> misses.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolf King</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Seer</c> and the Fool at initiative 4. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
+- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p>'s <c>Wolfen</c> misses.
+- <p>Your</p> <c>Wolf Beauty</c> resolves.
+- <p>You</p> gain 1 <m fang>Fang</m>.
+- <p>Your</p> <c>Wolf Beauty</c> misses.
 - Round 8 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 8 was the <c>Hunter</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -1148,99 +893,62 @@
 - <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c>, <c>Seer</c> and <c>Witch</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>You</p> resolve first.
+- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Hunter</c> and the Fool at initiative 3. <p>You</p> resolve first.
 - <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
+- <p>You</p> spend 1 <m cross>Cross</m>.
+- <p>Your</p> <c>Hunter</c> misses.
 - <p>Your opponent</p>'s <c>Wolfen</c> resolves.
 - <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p>'s <c>Wolfen</c> misses.
 - Round 9 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 9 was the <c>Villager</c>.
-- <p>You</p> are ready for the next round.
 - <p>Your opponent</p> is ready for the next round.
+- <p>You</p> are ready for the next round.
 - Round 10 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Witch</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> seal a plan with 3 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Witch</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolf King</c> at initiative 4. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 3. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> spend 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf King</c> misses.
-- <p>Your opponent</p>'s <c>Seer</c> resolves.
-- <p>Your opponent</p>'s <c>Seer</c> misses.
+- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
+- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p>'s <c>Wolfen</c> misses.
 - Round 10 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 10 was the <c>Knight</c>.
-- <p>You</p> are ready for the next round.
 - <p>Your opponent</p> is ready for the next round.
+- <p>You</p> are ready for the next round.
 - Round 11 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Seer</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 7. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>Your</p> <c>Wolf King</c> misses.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
-- Round 11 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 11 was the <c>Knight</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 12 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Knight</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Seer</c>.
-- <p>You</p> seal a plan with 4 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolf Beauty</c> at initiative 3. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Knight</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Knight</c> misses.
-- Round 12 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 12 was the <c>Wolfen</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 13 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Knight</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the Fool at initiative 7. <p>Your opponent</p> plays <c>Witch</c> targeting the Fool at initiative 5. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Witch</c> resolves.
-- <p>Your opponent</p> gains the <m potion>Potion</m>.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
-- Round 13 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 13 was the <c>Wolf King</c>.
-- <p>Your opponent</p> is ready for the next round.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Witch</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Witch</c> targeting the Fool at initiative 5. <p>You</p> resolve first.
+- <p>Your</p> <c>Wolf King</c> resolves.
+- <p>Your</p> <c>Wolf King</c> hits <p>your opponent</p>'s <c>Witch</c>! <p>Your opponent</p> loses 1 <m health>Health</m>.
+- Round 11 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
+- The card set aside in round 11 was the <c>Knight</c>.
 - <p>You</p> are ready for the next round.
-- Round 14 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
-- <p>You</p> are dealt <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> is ready for the next round.
+- Round 12 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
+- <p>Your opponent</p> is dealt <c>Knight</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
+- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Seer</c>.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> seals a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> aims the <m potion>Potion</m> at the <c>Wolfen</c>.
-- Plans revealed. <p>You</p> play <c>Seer</c> targeting the Fool at initiative 5. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Seer</c> at initiative 7. <p>You</p> resolve first.
-- The <m potion>Potion</m> misses: <p>you</p> did not play the <c>Wolfen</c>.
-- <p>Your</p> <c>Seer</c> resolves.
-- <p>Your</p> <c>Seer</c> misses.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> at initiative 7. <p>You</p> resolve first.
+- <p>Your</p> <c>Wolf King</c> resolves.
+- <p>You</p> spend 1 <m fang>Fang</m>.
+- <p>Your</p> <c>Wolf King</c> misses.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Your opponent</p> gains 1 <m fang>Fang</m>.
 - <p>Your opponent</p> wins by collecting enough <m fang>Fangs</m>.
@@ -1251,14 +959,13 @@
 - Round 1 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Seer</c>.
 - <p>Player 1</p> is dealt <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 2</p> seals a plan with 2 target cards.
+- <p>Player 2</p> seals a plan with 1 target card.
 - <p>Player 1</p> seals a plan with 2 target cards.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Knight</c> targeting the <c>Wolfen</c> and the Fool at initiative 3. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Hunter</c> resolves.
-- <p>Player 2</p> spends 1 <m cross>Cross</m>.
-- <p>Player 2</p>'s <c>Hunter</c> misses.
+- Plans revealed. <p>Player 1</p> plays <c>Knight</c> targeting the <c>Wolfen</c> and the Fool at initiative 3. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Witch</c> at initiative 2. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Wolf King</c> resolves.
+- <p>Player 2</p>'s <c>Wolf King</c> misses.
 - <p>Player 1</p>'s <c>Knight</c> resolves.
 - <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Player 1</p>'s <c>Knight</c> misses.
@@ -1269,16 +976,16 @@
 - Round 2 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Villager</c>.
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>Player 2</p> seals a plan with 4 target cards.
+- <p>Player 2</p> seals a plan with 3 target cards.
 - <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
+- <p>Player 1</p> places 2 <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Knight</c> targeting the <c>Wolf Beauty</c> at initiative 3. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- Plans revealed. <p>Player 1</p> plays <c>Knight</c> targeting the <c>Wolf Beauty</c> at initiative 1. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c> and the Fool at initiative 2. <p>Player 1</p> resolves first.
 - <p>Player 1</p>'s <c>Knight</c> resolves.
 - <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Player 1</p>'s <c>Knight</c> misses.
+- <p>Player 2</p>'s <c>Wolf King</c> resolves.
+- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
 - Round 2 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 2 was the <c>Witch</c>.
 - <p>Player 2</p> is ready for the next round.
@@ -1286,29 +993,31 @@
 - Round 3 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Witch</c>.
 - <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 1</p> seals a plan with 4 target cards.
+- <p>Player 2</p> seals a plan with 1 target card.
+- <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places 3 <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 0. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the Fool at initiative 1. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 2</p>'s <c>Hunter</c> resolves.
-- <p>Player 2</p> makes no attack: there is no <m cross>Cross</m> to spend.
+- <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Hunter</c> at initiative 6. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Wolfen</c> resolves.
+- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Player 2</p>'s <c>Wolfen</c> misses.
+- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Player 1</p> gains 1 <m fang>Fang</m>.
+- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
 - Round 3 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 3 was the <c>Villager</c>.
-- <p>Player 2</p> is ready for the next round.
 - <p>Player 1</p> is ready for the next round.
+- <p>Player 2</p> is ready for the next round.
 - Round 4 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Knight</c>, <c>Wolfen</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 1</p> seals a plan with 2 target cards.
+- <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> and the Fool at initiative 7. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
+- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Seer</c> and the Fool at initiative 7. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 0. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Hunter</c> resolves.
-- <p>Player 2</p> makes no attack: there is no <m cross>Cross</m> to spend.
+- <p>Player 2</p> makes no attack: the <m cross>Cross</m> was not spent.
 - <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Player 1</p> gains 1 <m fang>Fang</m>.
 - <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
@@ -1323,10 +1032,12 @@
 - <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>Player 2</p> plays <c>Knight</c> targeting the <c>Wolfen</c> and the Fool at initiative 3. <p>Player 2</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the Fool at initiative 2. <p>Player 2</p> plays <c>Knight</c> targeting the <c>Wolfen</c> and the Fool at initiative 3. <p>Player 1</p> resolves first.
+- <p>Player 1</p>'s <c>Wolf King</c> resolves.
+- <p>Player 1</p> makes no attack: there are no character targets.
 - <p>Player 2</p>'s <c>Knight</c> resolves.
 - <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Knight</c> hits <p>Player 1</p>'s <c>Wolfen</c>! <p>Player 1</p> loses 1 <m health>Health</m>.
+- <p>Player 2</p>'s <c>Knight</c> misses.
 - Round 5 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 5 was the <c>Wolf Beauty</c>.
 - <p>Player 1</p> is ready for the next round.
@@ -1338,28 +1049,27 @@
 - <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Villager</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the Fool at initiative 0. <p>Player 2</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Villager</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolfen</c> at initiative 0. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Hunter</c> resolves.
-- <p>Player 2</p> makes no attack: there is no <m cross>Cross</m> to spend.
+- <p>Player 2</p> makes no attack: the <m cross>Cross</m> was not spent.
 - <p>Player 1</p>'s <c>Wolf King</c> resolves.
 - <p>Player 1</p>'s <c>Wolf King</c> misses.
 - Round 6 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 6 was the <c>Knight</c>.
-- <p>Player 2</p> is ready for the next round.
 - <p>Player 1</p> is ready for the next round.
+- <p>Player 2</p> is ready for the next round.
 - Round 7 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>Player 1</p> is dealt <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 2</p> seals a plan with 1 target card.
+- <p>Player 1</p> seals a plan with 2 target cards.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Witch</c> targeting the Fool at initiative 6. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Villager</c> and the Fool at initiative 7. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Witch</c> resolves.
-- <p>Player 1</p> gains the <m potion>Potion</m>.
-- <p>Player 2</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 2</p> gains 1 <m fang>Fang</m>.
-- <p>Player 2</p>'s <c>Wolf Beauty</c> misses.
+- Plans revealed. <p>Player 1</p> plays <c>Seer</c> targeting the <c>Wolfen</c> and the Fool at initiative 5. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Knight</c> at initiative 2. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Wolf King</c> resolves.
+- <p>Player 2</p>'s <c>Wolf King</c> misses.
+- <p>Player 1</p>'s <c>Seer</c> resolves.
+- <p>Player 1</p>'s <c>Seer</c> misses.
 - Round 7 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 7 was the <c>Knight</c>.
 - <p>Player 2</p> is ready for the next round.
@@ -1367,17 +1077,17 @@
 - Round 8 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Witch</c>.
 - <p>Player 2</p> is dealt <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 1</p> seals a plan with 3 target cards.
-- <p>Player 2</p> seals a plan with 1 target card.
+- <p>Player 1</p> seals a plan with 2 target cards.
+- <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> aims the <m potion>Potion</m> at the <c>Wolf King</c>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c> and the <c>Villager</c> at initiative 2. <p>Player 2</p> plays <c>Seer</c> targeting the <c>Wolfen</c> at initiative 5. <p>Player 1</p> resolves first.
-- The <m potion>Potion</m> misses: <p>Player 2</p> did not play the <c>Wolf King</c>.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 2</p>'s <c>Seer</c> resolves.
-- <p>Player 2</p>'s <c>Seer</c> misses.
+- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Seer</c> and the Fool at initiative 4. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> and the Fool at initiative 7. <p>Player 1</p> resolves first.
+- <p>Player 1</p>'s <c>Wolfen</c> resolves.
+- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Player 1</p>'s <c>Wolfen</c> misses.
+- <p>Player 2</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Player 2</p> gains 1 <m fang>Fang</m>.
+- <p>Player 2</p>'s <c>Wolf Beauty</c> misses.
 - Round 8 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 8 was the <c>Hunter</c>.
 - <p>Player 1</p> is ready for the next round.
@@ -1386,99 +1096,62 @@
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Seer</c> and <c>Witch</c>.
 - <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 1</p> seals a plan with 2 target cards.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
+- <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Hunter</c> and the Fool at initiative 3. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Hunter</c> resolves.
-- <p>Player 2</p> makes no attack: there is no <m cross>Cross</m> to spend.
+- <p>Player 2</p> spends 1 <m cross>Cross</m>.
+- <p>Player 2</p>'s <c>Hunter</c> misses.
 - <p>Player 1</p>'s <c>Wolfen</c> resolves.
 - <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Player 1</p>'s <c>Wolfen</c> misses.
 - Round 9 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 9 was the <c>Villager</c>.
-- <p>Player 2</p> is ready for the next round.
 - <p>Player 1</p> is ready for the next round.
+- <p>Player 2</p> is ready for the next round.
 - Round 10 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Witch</c>.
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 2</p> seals a plan with 3 target cards.
+- <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Seer</c> targeting the <c>Wolf King</c> at initiative 4. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Witch</c> and the Fool at initiative 2. <p>Player 2</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 3. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> spends 1 <m fang>Fang</m>.
-- <p>Player 2</p>'s <c>Wolf King</c> misses.
-- <p>Player 1</p>'s <c>Seer</c> resolves.
-- <p>Player 1</p>'s <c>Seer</c> misses.
+- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Player 1</p>'s <c>Wolfen</c> resolves.
+- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Player 1</p>'s <c>Wolfen</c> misses.
 - Round 10 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 10 was the <c>Knight</c>.
-- <p>Player 2</p> is ready for the next round.
 - <p>Player 1</p> is ready for the next round.
+- <p>Player 2</p> is ready for the next round.
 - Round 11 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Villager</c>.
 - <p>Player 1</p> is dealt <c>Seer</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 7. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the Fool at initiative 2. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p>'s <c>Wolf King</c> misses.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 1</p> gains 1 <m fang>Fang</m>.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
-- Round 11 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 11 was the <c>Knight</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 12 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Knight</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Seer</c>.
-- <p>Player 2</p> seals a plan with 4 target cards.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Knight</c> targeting the <c>Wolf Beauty</c> at initiative 3. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 1</p>'s <c>Knight</c> resolves.
-- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p>'s <c>Knight</c> misses.
-- Round 12 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 12 was the <c>Wolfen</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 13 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Knight</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 2</p> seals a plan with 1 target card.
 - <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Witch</c> targeting the Fool at initiative 5. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the Fool at initiative 7. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Witch</c> resolves.
-- <p>Player 1</p> gains the <m potion>Potion</m>.
-- <p>Player 2</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 2</p> gains 1 <m fang>Fang</m>.
-- <p>Player 2</p>'s <c>Wolf Beauty</c> misses.
-- Round 13 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 13 was the <c>Wolf King</c>.
-- <p>Player 1</p> is ready for the next round.
+- Plans revealed. <p>Player 1</p> plays <c>Witch</c> targeting the Fool at initiative 5. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Witch</c> and the Fool at initiative 2. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Wolf King</c> resolves.
+- <p>Player 2</p>'s <c>Wolf King</c> hits <p>Player 1</p>'s <c>Witch</c>! <p>Player 1</p> loses 1 <m health>Health</m>.
+- Round 11 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
+- The card set aside in round 11 was the <c>Knight</c>.
 - <p>Player 2</p> is ready for the next round.
-- Round 14 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
-- <p>Player 2</p> is dealt <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 2</p> seals a plan with 1 target card.
+- <p>Player 1</p> is ready for the next round.
+- Round 12 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
+- <p>Player 1</p> is dealt <c>Knight</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
+- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Seer</c>.
+- <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> aims the <m potion>Potion</m> at the <c>Wolfen</c>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Seer</c> at initiative 7. <p>Player 2</p> plays <c>Seer</c> targeting the Fool at initiative 5. <p>Player 2</p> resolves first.
-- The <m potion>Potion</m> misses: <p>Player 2</p> did not play the <c>Wolfen</c>.
-- <p>Player 2</p>'s <c>Seer</c> resolves.
-- <p>Player 2</p>'s <c>Seer</c> misses.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> at initiative 7. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Wolf King</c> resolves.
+- <p>Player 2</p> spends 1 <m fang>Fang</m>.
+- <p>Player 2</p>'s <c>Wolf King</c> misses.
 - <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Player 1</p> gains 1 <m fang>Fang</m>.
 - <p>Player 1</p> wins by collecting enough <m fang>Fangs</m>.
@@ -1493,10 +1166,13 @@
 - <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Wolf Beauty</c> at initiative 4. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> at initiative 6. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolf King</c> at initiative 2. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Knight</c> resolves.
+- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p>'s <c>Knight</c> misses.
 - <p>Your</p> <c>Wolfen</c> resolves.
 - <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> hits <p>your opponent</p>'s <c>Wolf Beauty</c>! <p>Your opponent</p> loses 1 <m health>Health</m>.
+- <p>Your</p> <c>Wolfen</c> misses.
 - Round 1 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 1 was the <c>Seer</c>.
 - <p>You</p> are ready for the next round.
@@ -1504,17 +1180,16 @@
 - Round 2 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 3 target cards.
 - <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
 - <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 0. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Knight</c> and the Fool at initiative 4. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 0. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Witch</c> and the <c>Villager</c> at initiative 1. <p>You</p> resolve first.
 - <p>Your</p> <c>Hunter</c> resolves.
 - <p>You</p> spend 1 <m cross>Cross</m>.
 - <p>Your</p> <c>Hunter</c> misses.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
+- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
+- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
 - Round 2 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 2 was the <c>Knight</c>.
 - <p>You</p> are ready for the next round.
@@ -1522,15 +1197,16 @@
 - Round 3 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Seer</c>.
-- <p>Your opponent</p> seals a plan with 5 target cards.
-- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolfen</c> at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 2. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Knight</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
 - <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Your</p> <c>Wolfen</c> resolves.
+- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
+- <p>Your</p> <c>Wolfen</c> misses.
 - Round 3 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 3 was the <c>Witch</c>.
 - <p>You</p> are ready for the next round.
@@ -1539,14 +1215,15 @@
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Witch</c>.
 - <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 4 target cards.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolf Beauty</c> at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Witch</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- <p>You</p> place 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 0. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolfen</c> at initiative 3. <p>You</p> resolve first.
 - <p>Your</p> <c>Hunter</c> resolves.
 - <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
+- <p>Your opponent</p>'s <c>Knight</c> resolves.
+- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p>'s <c>Knight</c> misses.
 - Round 4 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 4 was the <c>Wolf Beauty</c>.
 - <p>You</p> are ready for the next round.
@@ -1555,13 +1232,12 @@
 - <p>You</p> are dealt <c>Knight</c>, <c>Seer</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Villager</c>.
 - <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Wolfen</c> targeting the Fool at initiative 4. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolf Beauty</c> at initiative 1. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Hunter</c> resolves.
+- <p>Your opponent</p> makes no attack: the <m cross>Cross</m> was not spent.
 - <p>Your</p> <c>Wolf Beauty</c> resolves.
 - <p>You</p> gain 1 <m fang>Fang</m>.
 - <p>Your</p> <c>Wolf Beauty</c> misses.
@@ -1572,28 +1248,27 @@
 - Round 6 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c> and <c>Wolfen</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Hunter</c> at initiative 4. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 5. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Seer</c> targeting the Fool at initiative 5. <p>You</p> resolve first.
+- <p>Your</p> <c>Wolf King</c> resolves.
+- <p>Your</p> <c>Wolf King</c> misses.
 - <p>Your opponent</p>'s <c>Seer</c> resolves.
 - <p>Your opponent</p>'s <c>Seer</c> misses.
 - Round 6 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 6 was the <c>Witch</c>.
-- <p>Your opponent</p> is ready for the next round.
 - <p>You</p> are ready for the next round.
+- <p>Your opponent</p> is ready for the next round.
 - Round 7 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
 - <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c> at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Seer</c>, the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Seer</c> at initiative 2. <p>You</p> resolve first.
 - <p>Your</p> <c>Hunter</c> resolves.
 - <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
@@ -1605,15 +1280,16 @@
 - Round 8 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Wolfen</c>.
 - <p>You</p> are dealt <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 4 target cards.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 5. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolfen</c> at initiative 7. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Witch</c> at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Seer</c> resolves.
-- <p>Your</p> <c>Seer</c> misses.
+- <p>Your opponent</p>'s <c>Wolf King</c> misses.
+- <p>Your</p> <c>Wolf Beauty</c> resolves.
+- <p>You</p> gain 1 <m fang>Fang</m>.
+- <p>Your</p> <c>Wolf Beauty</c> misses.
 - Round 8 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 8 was the <c>Witch</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -1622,10 +1298,10 @@
 - <p>You</p> are dealt <c>Hunter</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> seal a plan with 2 target cards.
+- <p>You</p> seal a plan with 3 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolfen</c> and the <c>Wolf Beauty</c> at initiative 1. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Witch</c> at initiative 4. <p>You</p> resolve first.
+- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Seer</c> at initiative 3. <p>You</p> resolve first.
 - <p>Your</p> <c>Hunter</c> resolves.
 - <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
 - <p>Your opponent</p>'s <c>Wolfen</c> resolves.
@@ -1638,17 +1314,17 @@
 - Round 10 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Wolfen</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Seer</c> and the Fool at initiative 3. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolfen</c> at initiative 3. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
+- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Wolf King</c> at initiative 4. <p>Your opponent</p> plays <c>Knight</c> targeting the Fool at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Knight</c> resolves.
 - <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p>'s <c>Knight</c> misses.
+- <p>Your</p> <c>Wolfen</c> resolves.
+- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
+- <p>Your</p> <c>Wolfen</c> misses.
 - Round 10 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 10 was the <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -1656,33 +1332,33 @@
 - Round 11 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Knight</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Witch</c>.
-- <p>Your opponent</p> seals a plan with 4 target cards.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> seal a plan with 1 target card.
 - <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Knight</c> at initiative 6. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 1. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Witch</c> at initiative 3. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
+- <p>Your opponent</p>'s <c>Wolf King</c> misses.
+- <p>Your</p> <c>Wolfen</c> resolves.
+- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
+- <p>Your</p> <c>Wolfen</c> misses.
 - Round 11 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 11 was the <c>Villager</c>.
-- <p>Your opponent</p> is ready for the next round.
 - <p>You</p> are ready for the next round.
+- <p>Your opponent</p> is ready for the next round.
 - Round 12 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Villager</c> targeting the Fool at initiative 8. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Hunter</c> at initiative 3. <p>Your opponent</p> resolves first.
+- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- <p>You</p> place 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolf King</c> at initiative 4. <p>Your opponent</p> plays <c>Wolfen</c> targeting the Fool at initiative 4. <p>You</p> resolve first.
+- <p>Your</p> <c>Seer</c> resolves.
+- <p>Your</p> <c>Seer</c> misses.
 - <p>Your opponent</p>'s <c>Wolfen</c> resolves.
 - <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p>'s <c>Wolfen</c> misses.
-- <p>Your</p> <c>Villager</c> resolves.
-- <p>You</p> gain 1 <m cross>Cross</m>.
 - Round 12 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 12 was the <c>Wolf King</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -1690,11 +1366,11 @@
 - Round 13 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 5. <p>Your opponent</p> plays <c>Knight</c> targeting the Fool at initiative 2. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p> places 2 <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolfen</c> and the Fool at initiative 5. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolf King</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Knight</c> resolves.
 - <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p>'s <c>Knight</c> misses.
@@ -1707,15 +1383,16 @@
 - Round 14 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c> and <c>Seer</c>.
-- <p>You</p> seal a plan with 4 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
+- <p>You</p> seal a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the Fool at initiative 0. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: the <m cross>Cross</m> was not spent.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 5. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Villager</c> at initiative 4. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
+- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p>'s <c>Wolfen</c> misses.
+- <p>Your</p> <c>Seer</c> resolves.
+- <p>Your</p> <c>Seer</c> misses.
 - Round 14 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 14 was the <c>Villager</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -1726,14 +1403,13 @@
 - <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> seal a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Wolfen</c> and the Fool at initiative 4. <p>You</p> resolve first.
+- <p>Your opponent</p> places 2 <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Seer</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Seer</c> and the Fool at initiative 5. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> spend 1 <m fang>Fang</m>.
 - <p>Your</p> <c>Wolf King</c> misses.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
 - Round 15 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 15 was the <c>Seer</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -1742,12 +1418,13 @@
 - <p>Your opponent</p> is dealt <c>Seer</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Wolfen</c>.
 - <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 3 target cards.
+- <p>You</p> seal a plan with 4 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 7. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Witch</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> and the Fool at initiative 7. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>You</p> spend 2 <m fang>Fangs</m>.
+- <p>Your</p> <c>Wolf King</c> misses.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Your opponent</p> gains 1 <m fang>Fang</m>.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
@@ -1758,50 +1435,52 @@
 - Round 17 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Wolfen</c> and <c>Witch</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 4 target cards.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolfen</c> at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the Fool at initiative 2. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: the <m cross>Cross</m> was not spent.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolfen</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> spends 1 <m fang>Fang</m>.
+- <p>Your opponent</p> spends 2 <m fang>Fangs</m>.
 - <p>Your opponent</p>'s <c>Wolf King</c> misses.
+- <p>Your</p> <c>Wolf Beauty</c> resolves.
+- <p>You</p> gain 1 <m fang>Fang</m>.
+- <p>Your</p> <c>Wolf Beauty</c> misses.
 - Round 17 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 17 was the <c>Villager</c>.
-- <p>Your opponent</p> is ready for the next round.
 - <p>You</p> are ready for the next round.
+- <p>Your opponent</p> is ready for the next round.
 - Round 18 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Knight</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Seer</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 6. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>Your</p> <c>Wolf King</c> misses.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
+- Plans revealed. <p>You</p> play <c>Villager</c> targeting the Fool at initiative 8. <p>Your opponent</p> plays <c>Witch</c> targeting the Fool at initiative 6. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Witch</c> resolves.
+- <p>Your opponent</p> gains the <m potion>Potion</m>.
+- <p>Your</p> <c>Villager</c> resolves.
+- <p>You</p> gain 1 <m cross>Cross</m>.
 - Round 18 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 18 was the <c>Seer</c>.
-- <p>Your opponent</p> is ready for the next round.
 - <p>You</p> are ready for the next round.
+- <p>Your opponent</p> is ready for the next round.
 - Round 19 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Witch</c>.
 - <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 2 target cards.
+- <p>You</p> seal a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Seer</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Wolfen</c> and the Fool at initiative 4. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>Your</p> <c>Wolf King</c> misses.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
+- <p>Your opponent</p> aims the <m potion>Potion</m> at the <c>Wolf King</c>.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> and the Fool at initiative 7. <p>You</p> resolve first.
+- The <m potion>Potion</m> misses: <p>you</p> did not play the <c>Wolf King</c>.
+- <p>Your</p> <c>Hunter</c> resolves.
+- <p>You</p> make no attack: the <m cross>Cross</m> was not spent.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
 - Round 19 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 19 was the <c>Villager</c>.
 - <p>You</p> are ready for the next round.
@@ -1809,62 +1488,98 @@
 - Round 20 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Hunter</c> at initiative 4. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 4. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Seer</c> resolves.
-- <p>Your opponent</p>'s <c>Seer</c> misses.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Hunter</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Hunter</c> resolves.
+- <p>Your opponent</p> spends 1 <m cross>Cross</m>.
+- <p>Your opponent</p>'s <c>Hunter</c> misses.
 - <p>Your</p> <c>Wolfen</c> resolves.
 - <p>You</p> gain 1 <m hourglass>Hourglass</m>.
 - <p>Your</p> <c>Wolfen</c> misses.
 - Round 20 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 20 was the <c>Wolf King</c>.
-- <p>You</p> are ready for the next round.
 - <p>Your opponent</p> is ready for the next round.
+- <p>You</p> are ready for the next round.
 - Round 21 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Wolfen</c> and <c>Witch</c>.
-- <p>Your opponent</p> seals a plan with 5 target cards.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> place 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolfen</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the Fool at initiative 6. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Seer</c> at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Your opponent</p>'s <c>Wolf King</c> misses.
 - <p>Your</p> <c>Wolf Beauty</c> resolves.
 - <p>You</p> gain 1 <m fang>Fang</m>.
 - <p>Your</p> <c>Wolf Beauty</c> misses.
 - Round 21 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 21 was the <c>Knight</c>.
-- <p>Your opponent</p> is ready for the next round.
 - <p>You</p> are ready for the next round.
+- <p>Your opponent</p> is ready for the next round.
 - Round 22 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c> and <c>Seer</c>.
 - <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolfen</c> at initiative 1. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Villager</c> and the Fool at initiative 7. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>You</p> resolve first.
+- <p>Your</p> <c>Hunter</c> resolves.
+- <p>You</p> make no attack: the <m cross>Cross</m> was not spent.
+- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
+- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p>'s <c>Wolfen</c> misses.
+- Round 22 ends. <p>You</p> take the <m badge>Badge</m>.
+- The card set aside in round 22 was the <c>Wolf King</c>.
+- <p>You</p> are ready for the next round.
+- <p>Your opponent</p> is ready for the next round.
+- Round 23 begins. <p>You</p> hold the <m badge>Badge</m>.
+- <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
+- <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
+- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>You</p> seal a plan with 1 target card.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolfen</c> at initiative 1. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 6. <p>You</p> resolve first.
 - <p>Your</p> <c>Hunter</c> resolves.
 - <p>You</p> make no attack: the <m cross>Cross</m> was not spent.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Your opponent</p> gains 1 <m fang>Fang</m>.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
-- Round 22 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 22 was the <c>Wolf King</c>.
-- <p>Your opponent</p> is ready for the next round.
+- Round 23 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
+- The card set aside in round 23 was the <c>Wolf King</c>.
 - <p>You</p> are ready for the next round.
-- Round 23 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> is ready for the next round.
+- Round 24 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
+- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
+- <p>You</p> are dealt <c>Hunter</c>, <c>Witch</c> and <c>Villager</c>.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolfen</c> at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>You</p> resolve first.
+- <p>Your</p> <c>Hunter</c> resolves.
+- <p>You</p> spend 1 <m cross>Cross</m>.
+- <p>Your</p> <c>Hunter</c> hits <p>your opponent</p>'s <c>Wolf King</c>! <p>Your opponent</p> loses 1 <m health>Health</m>.
+- Round 24 ends. <p>You</p> take the <m badge>Badge</m>.
+- The card set aside in round 24 was the <c>Knight</c>.
+- <p>You</p> are ready for the next round.
+- <p>Your opponent</p> is ready for the next round.
+- Round 25 begins. <p>You</p> hold the <m badge>Badge</m>.
+- <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
+- <p>Your opponent</p> is dealt <c>Knight</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
+- <p>You</p> seal a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Villager</c> targeting the Fool at initiative 8. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Witch</c> and the Fool at initiative 7. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Witch</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Seer</c> at initiative 7. <p>You</p> resolve first.
+- <p>Your</p> <c>Wolfen</c> resolves.
+- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
+- <p>Your</p> <c>Wolfen</c> misses.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Your opponent</p> gains 1 <m fang>Fang</m>.
 - <p>Your opponent</p> wins by collecting enough <m fang>Fangs</m>.
@@ -1879,10 +1594,13 @@
 - <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> at initiative 6. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Wolf Beauty</c> at initiative 4. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolf King</c> at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>You</p> resolve first.
+- <p>Your</p> <c>Knight</c> resolves.
+- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
+- <p>Your</p> <c>Knight</c> misses.
 - <p>Your opponent</p>'s <c>Wolfen</c> resolves.
 - <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> hits <p>your</p> <c>Wolf Beauty</c>! <p>You</p> lose 1 <m health>Health</m>.
+- <p>Your opponent</p>'s <c>Wolfen</c> misses.
 - Round 1 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 1 was the <c>Seer</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -1890,17 +1608,16 @@
 - Round 2 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 2 target cards.
+- <p>You</p> seal a plan with 3 target cards.
 - <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- <p>You</p> place 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Knight</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 0. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Witch</c> and the <c>Villager</c> at initiative 1. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 0. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Hunter</c> resolves.
 - <p>Your opponent</p> spends 1 <m cross>Cross</m>.
 - <p>Your opponent</p>'s <c>Hunter</c> misses.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
+- <p>Your</p> <c>Wolf King</c> resolves.
+- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
 - Round 2 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 2 was the <c>Knight</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -1908,15 +1625,16 @@
 - Round 3 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c> and <c>Seer</c>.
-- <p>You</p> seal a plan with 5 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Knight</c> and the Fool at initiative 4. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
 - <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
+- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p>'s <c>Wolfen</c> misses.
 - Round 3 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 3 was the <c>Witch</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -1925,14 +1643,15 @@
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Witch</c>.
 - <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 4 target cards.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Witch</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolf Beauty</c> at initiative 1. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>You</p> seal a plan with 1 target card.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolfen</c> at initiative 3. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 0. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Hunter</c> resolves.
 - <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
+- <p>Your</p> <c>Knight</c> resolves.
+- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
+- <p>Your</p> <c>Knight</c> misses.
 - Round 4 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 4 was the <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -1941,13 +1660,12 @@
 - <p>Your opponent</p> is dealt <c>Knight</c>, <c>Seer</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Villager</c>.
 - <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 1 target card.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the Fool at initiative 4. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 7. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolf Beauty</c> at initiative 1. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 7. <p>You</p> resolve first.
+- <p>Your</p> <c>Hunter</c> resolves.
+- <p>You</p> make no attack: the <m cross>Cross</m> was not spent.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Your opponent</p> gains 1 <m fang>Fang</m>.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
@@ -1958,28 +1676,27 @@
 - Round 6 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Wolfen</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 5. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Hunter</c> at initiative 4. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
+- Plans revealed. <p>You</p> play <c>Seer</c> targeting the Fool at initiative 5. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
+- <p>Your opponent</p>'s <c>Wolf King</c> misses.
 - <p>Your</p> <c>Seer</c> resolves.
 - <p>Your</p> <c>Seer</c> misses.
 - Round 6 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 6 was the <c>Witch</c>.
-- <p>You</p> are ready for the next round.
 - <p>Your opponent</p> is ready for the next round.
+- <p>You</p> are ready for the next round.
 - Round 7 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>You</p> seal a plan with 3 target cards.
 - <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Seer</c>, the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> at initiative 1. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Seer</c> at initiative 2. <p>Your opponent</p> plays <c>Hunter</c> targeting the Fool at initiative 1. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Hunter</c> resolves.
 - <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
 - <p>Your</p> <c>Wolf King</c> resolves.
@@ -1991,15 +1708,16 @@
 - Round 8 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Wolfen</c>.
 - <p>Your opponent</p> is dealt <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 4 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
+- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 5. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Witch</c> at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolfen</c> at initiative 7. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Seer</c> resolves.
-- <p>Your opponent</p>'s <c>Seer</c> misses.
+- <p>Your</p> <c>Wolf King</c> misses.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
 - Round 8 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 8 was the <c>Witch</c>.
 - <p>You</p> are ready for the next round.
@@ -2008,10 +1726,10 @@
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 3 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Witch</c> at initiative 4. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> and the <c>Wolf Beauty</c> at initiative 1. <p>Your opponent</p> resolves first.
+- <p>You</p> place 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Seer</c> at initiative 3. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Hunter</c> resolves.
 - <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
 - <p>Your</p> <c>Wolfen</c> resolves.
@@ -2024,17 +1742,17 @@
 - Round 10 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolfen</c> at initiative 3. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Seer</c> and the Fool at initiative 3. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> place 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Knight</c> targeting the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Wolf King</c> at initiative 4. <p>You</p> resolve first.
 - <p>Your</p> <c>Knight</c> resolves.
 - <p>You</p> gain 1 <m hourglass>Hourglass</m>.
 - <p>Your</p> <c>Knight</c> misses.
+- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
+- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p>'s <c>Wolfen</c> misses.
 - Round 10 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 10 was the <c>Wolf Beauty</c>.
 - <p>You</p> are ready for the next round.
@@ -2042,33 +1760,33 @@
 - Round 11 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Knight</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Witch</c>.
-- <p>You</p> seal a plan with 4 target cards.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> seals a plan with 1 target card.
 - <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 1. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Knight</c> at initiative 6. <p>You</p> resolve first.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Witch</c> at initiative 3. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
+- <p>Your</p> <c>Wolf King</c> misses.
+- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
+- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p>'s <c>Wolfen</c> misses.
 - Round 11 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 11 was the <c>Villager</c>.
-- <p>You</p> are ready for the next round.
 - <p>Your opponent</p> is ready for the next round.
+- <p>You</p> are ready for the next round.
 - Round 12 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Hunter</c> at initiative 3. <p>Your opponent</p> plays <c>Villager</c> targeting the Fool at initiative 8. <p>You</p> resolve first.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the Fool at initiative 4. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolf King</c> at initiative 4. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Seer</c> resolves.
+- <p>Your opponent</p>'s <c>Seer</c> misses.
 - <p>Your</p> <c>Wolfen</c> resolves.
 - <p>You</p> gain 1 <m hourglass>Hourglass</m>.
 - <p>Your</p> <c>Wolfen</c> misses.
-- <p>Your opponent</p>'s <c>Villager</c> resolves.
-- <p>Your opponent</p> gains 1 <m cross>Cross</m>.
 - Round 12 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 12 was the <c>Wolf King</c>.
 - <p>You</p> are ready for the next round.
@@ -2076,11 +1794,11 @@
 - Round 13 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Knight</c> targeting the Fool at initiative 2. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 5. <p>You</p> resolve first.
+- <p>You</p> place 2 <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolf King</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolfen</c> and the Fool at initiative 5. <p>You</p> resolve first.
 - <p>Your</p> <c>Knight</c> resolves.
 - <p>You</p> gain 1 <m hourglass>Hourglass</m>.
 - <p>Your</p> <c>Knight</c> misses.
@@ -2093,15 +1811,16 @@
 - Round 14 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Seer</c>.
-- <p>Your opponent</p> seals a plan with 4 target cards.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>You</p> seal a plan with 1 target card.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c> and the Fool at initiative 0. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: the <m cross>Cross</m> was not spent.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Villager</c> at initiative 4. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 5. <p>You</p> resolve first.
+- <p>Your</p> <c>Wolfen</c> resolves.
+- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
+- <p>Your</p> <c>Wolfen</c> misses.
+- <p>Your opponent</p>'s <c>Seer</c> resolves.
+- <p>Your opponent</p>'s <c>Seer</c> misses.
 - Round 14 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 14 was the <c>Villager</c>.
 - <p>You</p> are ready for the next round.
@@ -2112,14 +1831,13 @@
 - <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Wolfen</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> resolves first.
+- <p>You</p> place 2 <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Seer</c> and the Fool at initiative 5. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Seer</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> spends 1 <m fang>Fang</m>.
 - <p>Your opponent</p>'s <c>Wolf King</c> misses.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
+- <p>Your</p> <c>Wolf Beauty</c> resolves.
+- <p>You</p> gain 1 <m fang>Fang</m>.
+- <p>Your</p> <c>Wolf Beauty</c> misses.
 - Round 15 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 15 was the <c>Seer</c>.
 - <p>You</p> are ready for the next round.
@@ -2128,12 +1846,13 @@
 - <p>You</p> are dealt <c>Seer</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Wolfen</c>.
 - <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 3 target cards.
+- <p>Your opponent</p> seals a plan with 4 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolf King</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Witch</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Your opponent</p> spends 2 <m fang>Fangs</m>.
+- <p>Your opponent</p>'s <c>Wolf King</c> misses.
 - <p>Your</p> <c>Wolf Beauty</c> resolves.
 - <p>You</p> gain 1 <m fang>Fang</m>.
 - <p>Your</p> <c>Wolf Beauty</c> misses.
@@ -2144,50 +1863,52 @@
 - Round 17 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Wolfen</c> and <c>Witch</c>.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 4 target cards.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: the <m cross>Cross</m> was not spent.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolfen</c> and the Fool at initiative 7. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> spend 1 <m fang>Fang</m>.
+- <p>You</p> spend 2 <m fang>Fangs</m>.
 - <p>Your</p> <c>Wolf King</c> misses.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
 - Round 17 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 17 was the <c>Villager</c>.
-- <p>You</p> are ready for the next round.
 - <p>Your opponent</p> is ready for the next round.
+- <p>You</p> are ready for the next round.
 - Round 18 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Knight</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
+- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 6. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Seer</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p>'s <c>Wolf King</c> misses.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
+- Plans revealed. <p>You</p> play <c>Witch</c> targeting the Fool at initiative 6. <p>Your opponent</p> plays <c>Villager</c> targeting the Fool at initiative 8. <p>You</p> resolve first.
+- <p>Your</p> <c>Witch</c> resolves.
+- <p>You</p> gain the <m potion>Potion</m>.
+- <p>Your opponent</p>'s <c>Villager</c> resolves.
+- <p>Your opponent</p> gains 1 <m cross>Cross</m>.
 - Round 18 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 18 was the <c>Seer</c>.
-- <p>You</p> are ready for the next round.
 - <p>Your opponent</p> is ready for the next round.
+- <p>You</p> are ready for the next round.
 - Round 19 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Witch</c>.
 - <p>You</p> are dealt <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Wolfen</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Seer</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p>'s <c>Wolf King</c> misses.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
+- <p>You</p> aim the <m potion>Potion</m> at the <c>Wolf King</c>.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolf King</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Hunter</c> targeting the Fool at initiative 1. <p>Your opponent</p> resolves first.
+- The <m potion>Potion</m> misses: <p>your opponent</p> did not play the <c>Wolf King</c>.
+- <p>Your opponent</p>'s <c>Hunter</c> resolves.
+- <p>Your opponent</p> makes no attack: the <m cross>Cross</m> was not spent.
+- <p>Your</p> <c>Wolf Beauty</c> resolves.
+- <p>You</p> gain 1 <m fang>Fang</m>.
+- <p>Your</p> <c>Wolf Beauty</c> misses.
 - Round 19 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 19 was the <c>Villager</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -2195,62 +1916,98 @@
 - Round 20 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Hunter</c> at initiative 4. <p>You</p> resolve first.
-- <p>Your</p> <c>Seer</c> resolves.
-- <p>Your</p> <c>Seer</c> misses.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Hunter</c> and the Fool at initiative 4. <p>You</p> resolve first.
+- <p>Your</p> <c>Hunter</c> resolves.
+- <p>You</p> spend 1 <m cross>Cross</m>.
+- <p>Your</p> <c>Hunter</c> misses.
 - <p>Your opponent</p>'s <c>Wolfen</c> resolves.
 - <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p>'s <c>Wolfen</c> misses.
 - Round 20 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 20 was the <c>Wolf King</c>.
-- <p>Your opponent</p> is ready for the next round.
 - <p>You</p> are ready for the next round.
+- <p>Your opponent</p> is ready for the next round.
 - Round 21 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Wolfen</c> and <c>Witch</c>.
-- <p>You</p> seal a plan with 5 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolfen</c> and the Fool at initiative 7. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Seer</c> at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the Fool at initiative 6. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Your</p> <c>Wolf King</c> misses.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Your opponent</p> gains 1 <m fang>Fang</m>.
 - <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
 - Round 21 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 21 was the <c>Knight</c>.
-- <p>You</p> are ready for the next round.
 - <p>Your opponent</p> is ready for the next round.
+- <p>You</p> are ready for the next round.
 - Round 22 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Wolfen</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c> and <c>Seer</c>.
 - <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 2 target cards.
+- <p>You</p> seal a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Villager</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolfen</c> at initiative 1. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Hunter</c> resolves.
+- <p>Your opponent</p> makes no attack: the <m cross>Cross</m> was not spent.
+- <p>Your</p> <c>Wolfen</c> resolves.
+- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
+- <p>Your</p> <c>Wolfen</c> misses.
+- Round 22 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
+- The card set aside in round 22 was the <c>Wolf King</c>.
+- <p>Your opponent</p> is ready for the next round.
+- <p>You</p> are ready for the next round.
+- Round 23 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
+- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
+- <p>You</p> are dealt <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
+- <p>You</p> seal a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- <p>You</p> place 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 6. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> at initiative 1. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Hunter</c> resolves.
 - <p>Your opponent</p> makes no attack: the <m cross>Cross</m> was not spent.
 - <p>Your</p> <c>Wolf Beauty</c> resolves.
 - <p>You</p> gain 1 <m fang>Fang</m>.
 - <p>Your</p> <c>Wolf Beauty</c> misses.
-- Round 22 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 22 was the <c>Wolf King</c>.
-- <p>You</p> are ready for the next round.
+- Round 23 ends. <p>You</p> take the <m badge>Badge</m>.
+- The card set aside in round 23 was the <c>Wolf King</c>.
 - <p>Your opponent</p> is ready for the next round.
-- Round 23 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> are ready for the next round.
+- Round 24 begins. <p>You</p> hold the <m badge>Badge</m>.
+- <p>You</p> are dealt <c>Wolf King</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
+- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Witch</c> and <c>Villager</c>.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> seal a plan with 2 target cards.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolfen</c> at initiative 1. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Hunter</c> resolves.
+- <p>Your opponent</p> spends 1 <m cross>Cross</m>.
+- <p>Your opponent</p>'s <c>Hunter</c> hits <p>your</p> <c>Wolf King</c>! <p>You</p> lose 1 <m health>Health</m>.
+- Round 24 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
+- The card set aside in round 24 was the <c>Knight</c>.
+- <p>Your opponent</p> is ready for the next round.
+- <p>You</p> are ready for the next round.
+- Round 25 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
+- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
+- <p>You</p> are dealt <c>Knight</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
+- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Witch</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Villager</c> targeting the Fool at initiative 8. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Seer</c> at initiative 7. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Witch</c> and the Fool at initiative 4. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
+- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p>'s <c>Wolfen</c> misses.
 - <p>Your</p> <c>Wolf Beauty</c> resolves.
 - <p>You</p> gain 1 <m fang>Fang</m>.
 - <p>You</p> win by collecting enough <m fang>Fangs</m>.
@@ -2265,10 +2022,13 @@
 - <p>Player 2</p> seals a plan with 1 target card.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Wolf Beauty</c> at initiative 4. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> at initiative 6. <p>Player 1</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>Player 2</p> plays <c>Knight</c> targeting the <c>Wolf King</c> at initiative 2. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Knight</c> resolves.
+- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Player 2</p>'s <c>Knight</c> misses.
 - <p>Player 1</p>'s <c>Wolfen</c> resolves.
 - <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p>'s <c>Wolfen</c> hits <p>Player 2</p>'s <c>Wolf Beauty</c>! <p>Player 2</p> loses 1 <m health>Health</m>.
+- <p>Player 1</p>'s <c>Wolfen</c> misses.
 - Round 1 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 1 was the <c>Seer</c>.
 - <p>Player 1</p> is ready for the next round.
@@ -2276,17 +2036,16 @@
 - Round 2 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 2</p> seals a plan with 2 target cards.
+- <p>Player 2</p> seals a plan with 3 target cards.
 - <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
+- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
 - <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 0. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Knight</c> and the Fool at initiative 4. <p>Player 1</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 0. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Witch</c> and the <c>Villager</c> at initiative 1. <p>Player 1</p> resolves first.
 - <p>Player 1</p>'s <c>Hunter</c> resolves.
 - <p>Player 1</p> spends 1 <m cross>Cross</m>.
 - <p>Player 1</p>'s <c>Hunter</c> misses.
-- <p>Player 2</p>'s <c>Wolfen</c> resolves.
-- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Wolfen</c> misses.
+- <p>Player 2</p>'s <c>Wolf King</c> resolves.
+- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
 - Round 2 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 2 was the <c>Knight</c>.
 - <p>Player 1</p> is ready for the next round.
@@ -2294,15 +2053,16 @@
 - Round 3 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Seer</c>.
-- <p>Player 2</p> seals a plan with 5 target cards.
-- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 2</p> seals a plan with 2 target cards.
+- <p>Player 1</p> seals a plan with 2 target cards.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> at initiative 1. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Hunter</c> resolves.
-- <p>Player 1</p> makes no attack: there is no <m cross>Cross</m> to spend.
+- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Knight</c> and the Fool at initiative 4. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Villager</c> at initiative 2. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Wolf King</c> resolves.
 - <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Player 1</p>'s <c>Wolfen</c> resolves.
+- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Player 1</p>'s <c>Wolfen</c> misses.
 - Round 3 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 3 was the <c>Witch</c>.
 - <p>Player 1</p> is ready for the next round.
@@ -2311,14 +2071,15 @@
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Witch</c>.
 - <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 4 target cards.
-- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolf Beauty</c> at initiative 1. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Witch</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Player 2</p> seals a plan with 1 target card.
+- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
+- <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 0. <p>Player 2</p> plays <c>Knight</c> targeting the <c>Wolfen</c> at initiative 3. <p>Player 1</p> resolves first.
 - <p>Player 1</p>'s <c>Hunter</c> resolves.
 - <p>Player 1</p> makes no attack: there is no <m cross>Cross</m> to spend.
+- <p>Player 2</p>'s <c>Knight</c> resolves.
+- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Player 2</p>'s <c>Knight</c> misses.
 - Round 4 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 4 was the <c>Wolf Beauty</c>.
 - <p>Player 1</p> is ready for the next round.
@@ -2327,13 +2088,12 @@
 - <p>Player 1</p> is dealt <c>Knight</c>, <c>Seer</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Villager</c>.
 - <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 1 target card.
+- <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 7. <p>Player 2</p> plays <c>Wolfen</c> targeting the Fool at initiative 4. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolfen</c> resolves.
-- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Wolfen</c> misses.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 7. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolf Beauty</c> at initiative 1. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Hunter</c> resolves.
+- <p>Player 2</p> makes no attack: the <m cross>Cross</m> was not spent.
 - <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Player 1</p> gains 1 <m fang>Fang</m>.
 - <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
@@ -2344,28 +2104,27 @@
 - Round 6 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Wolfen</c>.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 2</p> seals a plan with 1 target card.
+- <p>Player 1</p> seals a plan with 2 target cards.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Hunter</c> at initiative 4. <p>Player 2</p> plays <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 5. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolfen</c> resolves.
-- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p>'s <c>Wolfen</c> misses.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Seer</c> targeting the Fool at initiative 5. <p>Player 1</p> resolves first.
+- <p>Player 1</p>'s <c>Wolf King</c> resolves.
+- <p>Player 1</p>'s <c>Wolf King</c> misses.
 - <p>Player 2</p>'s <c>Seer</c> resolves.
 - <p>Player 2</p>'s <c>Seer</c> misses.
 - Round 6 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 6 was the <c>Witch</c>.
-- <p>Player 2</p> is ready for the next round.
 - <p>Player 1</p> is ready for the next round.
+- <p>Player 2</p> is ready for the next round.
 - Round 7 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>Player 2</p> seals a plan with 3 target cards.
 - <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> at initiative 1. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Seer</c>, the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Player 1</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the Fool at initiative 1. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Seer</c> at initiative 2. <p>Player 1</p> resolves first.
 - <p>Player 1</p>'s <c>Hunter</c> resolves.
 - <p>Player 1</p> makes no attack: there is no <m cross>Cross</m> to spend.
 - <p>Player 2</p>'s <c>Wolf King</c> resolves.
@@ -2377,15 +2136,16 @@
 - Round 8 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Wolfen</c>.
 - <p>Player 1</p> is dealt <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 2</p> seals a plan with 4 target cards.
-- <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
+- <p>Player 2</p> seals a plan with 1 target card.
+- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 5. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Wolfen</c> at initiative 7. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Witch</c> at initiative 2. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 1</p>'s <c>Seer</c> resolves.
-- <p>Player 1</p>'s <c>Seer</c> misses.
+- <p>Player 2</p>'s <c>Wolf King</c> misses.
+- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Player 1</p> gains 1 <m fang>Fang</m>.
+- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
 - Round 8 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 8 was the <c>Witch</c>.
 - <p>Player 2</p> is ready for the next round.
@@ -2394,10 +2154,10 @@
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Player 2</p> is dealt <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 1</p> seals a plan with 2 target cards.
+- <p>Player 1</p> seals a plan with 3 target cards.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> and the <c>Wolf Beauty</c> at initiative 1. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Witch</c> at initiative 4. <p>Player 1</p> resolves first.
+- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Seer</c> at initiative 3. <p>Player 1</p> resolves first.
 - <p>Player 1</p>'s <c>Hunter</c> resolves.
 - <p>Player 1</p> makes no attack: there is no <m cross>Cross</m> to spend.
 - <p>Player 2</p>'s <c>Wolfen</c> resolves.
@@ -2410,17 +2170,17 @@
 - Round 10 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Villager</c>.
 - <p>Player 1</p> is dealt <c>Wolfen</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>Player 1</p> seals a plan with 2 target cards.
 - <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Seer</c> and the Fool at initiative 3. <p>Player 2</p> plays <c>Knight</c> targeting the <c>Wolfen</c> at initiative 3. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolfen</c> resolves.
-- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p>'s <c>Wolfen</c> misses.
+- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
+- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Wolf King</c> at initiative 4. <p>Player 2</p> plays <c>Knight</c> targeting the Fool at initiative 2. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Knight</c> resolves.
 - <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Player 2</p>'s <c>Knight</c> misses.
+- <p>Player 1</p>'s <c>Wolfen</c> resolves.
+- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Player 1</p>'s <c>Wolfen</c> misses.
 - Round 10 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 10 was the <c>Wolf Beauty</c>.
 - <p>Player 2</p> is ready for the next round.
@@ -2428,33 +2188,33 @@
 - Round 11 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Knight</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Witch</c>.
-- <p>Player 2</p> seals a plan with 4 target cards.
+- <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Knight</c> at initiative 6. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 1. <p>Player 2</p> resolves first.
+- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Witch</c> at initiative 3. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Villager</c> and the Fool at initiative 2. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 1</p> gains 1 <m fang>Fang</m>.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
+- <p>Player 2</p>'s <c>Wolf King</c> misses.
+- <p>Player 1</p>'s <c>Wolfen</c> resolves.
+- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Player 1</p>'s <c>Wolfen</c> misses.
 - Round 11 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 11 was the <c>Villager</c>.
-- <p>Player 2</p> is ready for the next round.
 - <p>Player 1</p> is ready for the next round.
+- <p>Player 2</p> is ready for the next round.
 - Round 12 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>Player 1</p> is dealt <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Villager</c> targeting the Fool at initiative 8. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Hunter</c> at initiative 3. <p>Player 2</p> resolves first.
+- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
+- <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Seer</c> targeting the <c>Wolf King</c> at initiative 4. <p>Player 2</p> plays <c>Wolfen</c> targeting the Fool at initiative 4. <p>Player 1</p> resolves first.
+- <p>Player 1</p>'s <c>Seer</c> resolves.
+- <p>Player 1</p>'s <c>Seer</c> misses.
 - <p>Player 2</p>'s <c>Wolfen</c> resolves.
 - <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Player 2</p>'s <c>Wolfen</c> misses.
-- <p>Player 1</p>'s <c>Villager</c> resolves.
-- <p>Player 1</p> gains 1 <m cross>Cross</m>.
 - Round 12 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 12 was the <c>Wolf King</c>.
 - <p>Player 2</p> is ready for the next round.
@@ -2462,11 +2222,11 @@
 - Round 13 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Player 2</p> is dealt <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
+- <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 1 target card.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 5. <p>Player 2</p> plays <c>Knight</c> targeting the Fool at initiative 2. <p>Player 2</p> resolves first.
+- <p>Player 2</p> places 2 <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Seer</c> targeting the <c>Wolfen</c> and the Fool at initiative 5. <p>Player 2</p> plays <c>Knight</c> targeting the <c>Wolf King</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Knight</c> resolves.
 - <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Player 2</p>'s <c>Knight</c> misses.
@@ -2479,15 +2239,16 @@
 - Round 14 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Seer</c>.
-- <p>Player 1</p> seals a plan with 4 target cards.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
+- <p>Player 1</p> seals a plan with 2 target cards.
+- <p>Player 2</p> seals a plan with 1 target card.
+- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the Fool at initiative 0. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Hunter</c> resolves.
-- <p>Player 2</p> makes no attack: the <m cross>Cross</m> was not spent.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- Plans revealed. <p>Player 1</p> plays <c>Seer</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 5. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Villager</c> at initiative 4. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Wolfen</c> resolves.
+- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Player 2</p>'s <c>Wolfen</c> misses.
+- <p>Player 1</p>'s <c>Seer</c> resolves.
+- <p>Player 1</p>'s <c>Seer</c> misses.
 - Round 14 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 14 was the <c>Villager</c>.
 - <p>Player 2</p> is ready for the next round.
@@ -2498,14 +2259,13 @@
 - <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 1</p> seals a plan with 2 target cards.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the <c>Villager</c> at initiative 2. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Wolfen</c> and the Fool at initiative 4. <p>Player 1</p> resolves first.
+- <p>Player 2</p> places 2 <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Seer</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Seer</c> and the Fool at initiative 5. <p>Player 1</p> resolves first.
 - <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> spends 1 <m fang>Fang</m>.
 - <p>Player 1</p>'s <c>Wolf King</c> misses.
-- <p>Player 2</p>'s <c>Wolfen</c> resolves.
-- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Wolfen</c> misses.
+- <p>Player 2</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Player 2</p> gains 1 <m fang>Fang</m>.
+- <p>Player 2</p>'s <c>Wolf Beauty</c> misses.
 - Round 15 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 15 was the <c>Seer</c>.
 - <p>Player 2</p> is ready for the next round.
@@ -2514,12 +2274,13 @@
 - <p>Player 2</p> is dealt <c>Seer</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Wolfen</c>.
 - <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 1</p> seals a plan with 3 target cards.
+- <p>Player 1</p> seals a plan with 4 target cards.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 7. <p>Player 1</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Witch</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> and the Fool at initiative 7. <p>Player 1</p> resolves first.
 - <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Player 1</p> spends 2 <m fang>Fangs</m>.
+- <p>Player 1</p>'s <c>Wolf King</c> misses.
 - <p>Player 2</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Player 2</p> gains 1 <m fang>Fang</m>.
 - <p>Player 2</p>'s <c>Wolf Beauty</c> misses.
@@ -2530,50 +2291,52 @@
 - Round 17 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Wolfen</c> and <c>Witch</c>.
-- <p>Player 2</p> seals a plan with 3 target cards.
-- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 2</p> seals a plan with 4 target cards.
+- <p>Player 1</p> seals a plan with 2 target cards.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> at initiative 1. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the Fool at initiative 2. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Hunter</c> resolves.
-- <p>Player 1</p> makes no attack: the <m cross>Cross</m> was not spent.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Wolfen</c> and the Fool at initiative 7. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> spends 1 <m fang>Fang</m>.
+- <p>Player 2</p> spends 2 <m fang>Fangs</m>.
 - <p>Player 2</p>'s <c>Wolf King</c> misses.
+- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Player 1</p> gains 1 <m fang>Fang</m>.
+- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
 - Round 17 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 17 was the <c>Villager</c>.
-- <p>Player 2</p> is ready for the next round.
 - <p>Player 1</p> is ready for the next round.
+- <p>Player 2</p> is ready for the next round.
 - Round 18 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Knight</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Villager</c>.
-- <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
+- <p>Player 2</p> seals a plan with 1 target card.
+- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Seer</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 6. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p>'s <c>Wolf King</c> misses.
-- <p>Player 2</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 2</p> gains 1 <m fang>Fang</m>.
-- <p>Player 2</p>'s <c>Wolf Beauty</c> misses.
+- Plans revealed. <p>Player 1</p> plays <c>Villager</c> targeting the Fool at initiative 8. <p>Player 2</p> plays <c>Witch</c> targeting the Fool at initiative 6. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Witch</c> resolves.
+- <p>Player 2</p> gains the <m potion>Potion</m>.
+- <p>Player 1</p>'s <c>Villager</c> resolves.
+- <p>Player 1</p> gains 1 <m cross>Cross</m>.
 - Round 18 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 18 was the <c>Seer</c>.
-- <p>Player 2</p> is ready for the next round.
 - <p>Player 1</p> is ready for the next round.
+- <p>Player 2</p> is ready for the next round.
 - Round 19 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Witch</c>.
 - <p>Player 2</p> is dealt <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
 - <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 1</p> seals a plan with 2 target cards.
+- <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Seer</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Wolfen</c> and the Fool at initiative 4. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p>'s <c>Wolf King</c> misses.
-- <p>Player 2</p>'s <c>Wolfen</c> resolves.
-- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Wolfen</c> misses.
+- <p>Player 2</p> aims the <m potion>Potion</m> at the <c>Wolf King</c>.
+- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the Fool at initiative 1. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf King</c> and the Fool at initiative 7. <p>Player 1</p> resolves first.
+- The <m potion>Potion</m> misses: <p>Player 1</p> did not play the <c>Wolf King</c>.
+- <p>Player 1</p>'s <c>Hunter</c> resolves.
+- <p>Player 1</p> makes no attack: the <m cross>Cross</m> was not spent.
+- <p>Player 2</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Player 2</p> gains 1 <m fang>Fang</m>.
+- <p>Player 2</p>'s <c>Wolf Beauty</c> misses.
 - Round 19 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 19 was the <c>Villager</c>.
 - <p>Player 1</p> is ready for the next round.
@@ -2581,62 +2344,98 @@
 - Round 20 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Player 1</p> is dealt <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
+- <p>Player 1</p> seals a plan with 2 target cards.
 - <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
+- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Hunter</c> at initiative 4. <p>Player 2</p> plays <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 4. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Seer</c> resolves.
-- <p>Player 2</p>'s <c>Seer</c> misses.
+- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Hunter</c> and the Fool at initiative 4. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Hunter</c> resolves.
+- <p>Player 2</p> spends 1 <m cross>Cross</m>.
+- <p>Player 2</p>'s <c>Hunter</c> misses.
 - <p>Player 1</p>'s <c>Wolfen</c> resolves.
 - <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Player 1</p>'s <c>Wolfen</c> misses.
 - Round 20 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 20 was the <c>Wolf King</c>.
-- <p>Player 1</p> is ready for the next round.
 - <p>Player 2</p> is ready for the next round.
+- <p>Player 1</p> is ready for the next round.
 - Round 21 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Wolfen</c> and <c>Witch</c>.
-- <p>Player 2</p> seals a plan with 5 target cards.
-- <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
+- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 2</p> seals a plan with 1 target card.
+- <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Wolfen</c> and the Fool at initiative 7. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Player 2</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the Fool at initiative 6. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Seer</c> at initiative 2. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Player 2</p>'s <c>Wolf King</c> misses.
 - <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Player 1</p> gains 1 <m fang>Fang</m>.
 - <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
 - Round 21 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 21 was the <c>Knight</c>.
-- <p>Player 2</p> is ready for the next round.
 - <p>Player 1</p> is ready for the next round.
+- <p>Player 2</p> is ready for the next round.
 - Round 22 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Wolfen</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Knight</c> and <c>Seer</c>.
 - <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 2 target cards.
+- <p>Player 2</p> seals a plan with 1 target card.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolfen</c> at initiative 1. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Villager</c> and the Fool at initiative 7. <p>Player 1</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the Fool at initiative 1. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>Player 1</p> resolves first.
+- <p>Player 1</p>'s <c>Hunter</c> resolves.
+- <p>Player 1</p> makes no attack: the <m cross>Cross</m> was not spent.
+- <p>Player 2</p>'s <c>Wolfen</c> resolves.
+- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Player 2</p>'s <c>Wolfen</c> misses.
+- Round 22 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
+- The card set aside in round 22 was the <c>Wolf King</c>.
+- <p>Player 1</p> is ready for the next round.
+- <p>Player 2</p> is ready for the next round.
+- Round 23 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
+- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
+- <p>Player 2</p> is dealt <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
+- <p>Player 2</p> seals a plan with 2 target cards.
+- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
+- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> at initiative 1. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 6. <p>Player 1</p> resolves first.
 - <p>Player 1</p>'s <c>Hunter</c> resolves.
 - <p>Player 1</p> makes no attack: the <m cross>Cross</m> was not spent.
 - <p>Player 2</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Player 2</p> gains 1 <m fang>Fang</m>.
 - <p>Player 2</p>'s <c>Wolf Beauty</c> misses.
-- Round 22 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 22 was the <c>Wolf King</c>.
-- <p>Player 2</p> is ready for the next round.
+- Round 23 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
+- The card set aside in round 23 was the <c>Wolf King</c>.
 - <p>Player 1</p> is ready for the next round.
-- Round 23 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 2</p> is dealt <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 2</p> is ready for the next round.
+- Round 24 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
+- <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
+- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Witch</c> and <c>Villager</c>.
+- <p>Player 1</p> seals a plan with 2 target cards.
 - <p>Player 2</p> seals a plan with 2 target cards.
+- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
+- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolfen</c> at initiative 1. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Player 1</p> resolves first.
+- <p>Player 1</p>'s <c>Hunter</c> resolves.
+- <p>Player 1</p> spends 1 <m cross>Cross</m>.
+- <p>Player 1</p>'s <c>Hunter</c> hits <p>Player 2</p>'s <c>Wolf King</c>! <p>Player 2</p> loses 1 <m health>Health</m>.
+- Round 24 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
+- The card set aside in round 24 was the <c>Knight</c>.
+- <p>Player 1</p> is ready for the next round.
+- <p>Player 2</p> is ready for the next round.
+- Round 25 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
+- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
+- <p>Player 2</p> is dealt <c>Knight</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
+- <p>Player 1</p> seals a plan with 2 target cards.
+- <p>Player 2</p> seals a plan with 1 target card.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Villager</c> targeting the Fool at initiative 8. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Witch</c> and the Fool at initiative 7. <p>Player 2</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Witch</c> and the Fool at initiative 4. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Seer</c> at initiative 7. <p>Player 1</p> resolves first.
+- <p>Player 1</p>'s <c>Wolfen</c> resolves.
+- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Player 1</p>'s <c>Wolfen</c> misses.
 - <p>Player 2</p>'s <c>Wolf Beauty</c> resolves.
 - <p>Player 2</p> gains 1 <m fang>Fang</m>.
 - <p>Player 2</p> wins by collecting enough <m fang>Fangs</m>.
@@ -2648,12 +2447,12 @@
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> seal a plan with 3 target cards.
+- <p>You</p> seal a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 3. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the Fool at initiative 3. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Your</p> <c>Wolf King</c> misses.
 - <p>Your opponent</p>'s <c>Wolfen</c> resolves.
 - <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p>'s <c>Wolfen</c> misses.
@@ -2664,13 +2463,14 @@
 - Round 2 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Knight</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>Your opponent</p> seals a plan with 4 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolf Beauty</c> at initiative 5. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolf Beauty</c> at initiative 5. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Witch</c> at initiative 3. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
+- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p>'s <c>Wolfen</c> misses.
 - <p>Your</p> <c>Seer</c> resolves.
 - <p>Your</p> <c>Seer</c> misses.
 - Round 2 ends. <p>You</p> take the <m badge>Badge</m>.
@@ -2684,7 +2484,7 @@
 - <p>You</p> seal a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolf King</c> at initiative 3. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c> and the <c>Seer</c> at initiative 2. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolf King</c> at initiative 3. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
 - <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
 - <p>Your opponent</p>'s <c>Knight</c> resolves.
@@ -2698,12 +2498,12 @@
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Seer</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> seal a plan with 1 target card.
+- <p>You</p> seal a plan with 3 target cards.
 - <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the Fool at initiative 2. <p>Your opponent</p> plays <c>Seer</c> targeting the Fool at initiative 4. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolf King</c> at initiative 4. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are no character targets.
+- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
 - <p>Your opponent</p>'s <c>Seer</c> resolves.
 - <p>Your opponent</p>'s <c>Seer</c> misses.
 - Round 4 ends. <p>You</p> take the <m badge>Badge</m>.
@@ -2714,13 +2514,13 @@
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolfen</c> at initiative 3. <p>Your opponent</p> plays <c>Wolfen</c> targeting the Fool at initiative 4. <p>You</p> resolve first.
-- <p>Your</p> <c>Knight</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Knight</c> hits <p>your opponent</p>'s <c>Wolfen</c>! <p>Your opponent</p> loses 1 <m health>Health</m>.
+- Plans revealed. <p>You</p> play <c>Villager</c> targeting the Fool at initiative 8. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Villager</c> and the Fool at initiative 7. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> hits <p>your</p> <c>Villager</c>! <p>You</p> lose 1 <m health>Health</m>.
 - Round 5 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 5 was the <c>Hunter</c>.
 - <p>You</p> are ready for the next round.
@@ -2729,15 +2529,14 @@
 - <p>Your opponent</p> is dealt <c>Knight</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Witch</c>.
 - <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c> at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>Your</p> <c>Wolf King</c> misses.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
+- Plans revealed. <p>You</p> play <c>Witch</c> targeting the Fool at initiative 6. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 4. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Seer</c> resolves.
+- <p>Your opponent</p>'s <c>Seer</c> misses.
+- <p>Your</p> <c>Witch</c> resolves.
+- <p>You</p> gain the <m potion>Potion</m>.
 - Round 6 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 6 was the <c>Wolf Beauty</c>.
 - <p>You</p> are ready for the next round.
@@ -2745,15 +2544,16 @@
 - Round 7 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Knight</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 3 target cards.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolfen</c> and the Fool at initiative 0. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolfen</c> at initiative 5. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: the <m cross>Cross</m> was not spent.
-- <p>Your opponent</p>'s <c>Seer</c> resolves.
-- <p>Your opponent</p>'s <c>Seer</c> misses.
+- <p>You</p> aim the <m potion>Potion</m> at the <c>Seer</c>.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Knight</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolfen</c> at initiative 5. <p>Your opponent</p> resolves first.
+- The <m potion>Potion</m> hits <p>your opponent</p>'s <c>Seer</c>! <p>Your opponent</p> loses 1 <m health>Health</m>.
+- <p>Your</p> <c>Wolf Beauty</c> resolves.
+- <p>You</p> gain 1 <m fang>Fang</m>.
+- <p>Your</p> <c>Wolf Beauty</c> misses.
 - Round 7 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 7 was the <c>Wolf King</c>.
 - <p>You</p> are ready for the next round.
@@ -2761,16 +2561,16 @@
 - Round 8 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 2 target cards.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 5. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
+- <p>You</p> spend 1 <m fang>Fang</m>.
+- <p>Your</p> <c>Wolf King</c> misses.
+- <p>Your opponent</p>'s <c>Seer</c> resolves.
+- <p>Your opponent</p>'s <c>Seer</c> misses.
 - Round 8 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 8 was the <c>Hunter</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -2778,15 +2578,16 @@
 - Round 9 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Wolfen</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> seal a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolf Beauty</c> at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolf Beauty</c> at initiative 1. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Witch</c> and the Fool at initiative 4. <p>You</p> resolve first.
 - <p>Your</p> <c>Hunter</c> resolves.
 - <p>You</p> make no attack: the <m cross>Cross</m> was not spent.
+- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
+- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p>'s <c>Wolfen</c> misses.
 - Round 9 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 9 was the <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -2794,454 +2595,13 @@
 - Round 10 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Witch</c>.
-- <p>You</p> seal a plan with 3 target cards.
+- <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> seals a plan with 1 target card.
 - <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolfen</c>, the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Seer</c> at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p>'s <c>Wolf King</c> misses.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: the <m cross>Cross</m> was not spent.
-- Round 10 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 10 was the <c>Wolf Beauty</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 11 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Seer</c>.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Seer</c>, the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Hunter</c> at initiative 4. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
-- Round 11 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 11 was the <c>Wolf Beauty</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 12 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c> and <c>Wolfen</c>.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolfen</c> and the Fool at initiative 4. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolfen</c> at initiative 4. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Seer</c> resolves.
-- <p>Your opponent</p>'s <c>Seer</c> misses.
-- Round 12 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 12 was the <c>Wolf Beauty</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 13 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Witch</c>.
-- <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf Beauty</c> at initiative 1. <p>Your opponent</p> plays <c>Wolfen</c> targeting the Fool at initiative 4. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: the <m cross>Cross</m> was not spent.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
-- Round 13 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 13 was the <c>Seer</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 14 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c> and the <c>Witch</c> at initiative 2. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> spend 1 <m cross>Cross</m>.
-- <p>Your</p> <c>Hunter</c> misses.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- Round 14 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 14 was the <c>Wolfen</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 15 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Witch</c>.
-- <p>Your opponent</p> is dealt <c>Knight</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 6 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 7. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
-- Round 15 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 15 was the <c>Seer</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 16 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c> and <c>Seer</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Seer</c> and the Fool at initiative 4. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
-- Round 16 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 16 was the <c>Hunter</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 17 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places 2 <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Knight</c> at initiative 0. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> spends 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf King</c> hits <p>your</p> <c>Hunter</c>! <p>You</p> lose 1 <m health>Health</m>.
-- Round 17 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 17 was the <c>Seer</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 18 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Seer</c>.
-- <p>You</p> are dealt <c>Wolfen</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Witch</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> spends 1 <m cross>Cross</m>.
-- <p>Your opponent</p>'s <c>Hunter</c> misses.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
-- Round 18 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 18 was the <c>Witch</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 19 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c> at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- Round 19 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 19 was the <c>Witch</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 20 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Seer</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 4 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 0. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the Fool at initiative 2. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- Round 20 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 20 was the <c>Witch</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 21 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Seer</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c> and <c>Wolfen</c>.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Seer</c> at initiative 7. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
-- Round 21 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 21 was the <c>Villager</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 22 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Knight</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Seer</c>.
-- <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Villager</c> at initiative 7. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
-- Round 22 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 22 was the <c>Wolfen</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 23 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Knight</c>, <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Wolfen</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolfen</c> at initiative 7. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
-- Round 23 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 23 was the <c>Witch</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 24 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Knight</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Witch</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Wolfen</c> and the Fool at initiative 4. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> spend 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf King</c> misses.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
-- Round 24 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 24 was the <c>Villager</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 25 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c> and <c>Seer</c>.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolfen</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> spend 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf King</c> misses.
-- Round 25 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 25 was the <c>Villager</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 26 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>You</p> are dealt <c>Wolfen</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 4. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Seer</c> resolves.
-- <p>Your opponent</p>'s <c>Seer</c> misses.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
-- Round 26 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 26 was the <c>Knight</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 27 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c> and <c>Wolfen</c>.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Witch</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> spend 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf King</c> misses.
-- Round 27 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 27 was the <c>Wolf Beauty</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 28 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Seer</c>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c> and the <c>Seer</c> at initiative 2. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolf Beauty</c> at initiative 3. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Knight</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Knight</c> misses.
-- Round 28 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 28 was the <c>Witch</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 29 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> is dealt <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Witch</c> at initiative 4. <p>Your opponent</p> plays <c>Villager</c> targeting the Fool at initiative 8. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
-- <p>Your opponent</p>'s <c>Villager</c> resolves.
-- <p>Your opponent</p> gains 1 <m cross>Cross</m>.
-- Round 29 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 29 was the <c>Wolf King</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 30 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>You</p> are dealt <c>Knight</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Knight</c> at initiative 6. <p>Your opponent</p> plays <c>Hunter</c> targeting the Fool at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> spends 1 <m cross>Cross</m>.
-- <p>Your opponent</p>'s <c>Hunter</c> misses.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
-- Round 30 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 30 was the <c>Wolfen</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 31 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> seal a plan with 4 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c>, the <c>Witch</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Witch</c> at initiative 4. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
-- Round 31 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 31 was the <c>Hunter</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 32 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>Your opponent</p> places 2 <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Witch</c> at initiative 7. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 0. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
-- Round 32 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 32 was the <c>Seer</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 33 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Wolfen</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
-- <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 3. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Knight</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Knight</c> misses.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
-- Round 33 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 33 was the <c>Wolf King</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 34 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Knight</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Wolfen</c>.
-- <p>You</p> seal a plan with 4 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Seer</c> targeting the Fool at initiative 5. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> spend 2 <m fang>Fangs</m>.
-- <p>Your</p> <c>Wolf King</c> misses.
-- <p>Your opponent</p>'s <c>Seer</c> resolves.
-- <p>Your opponent</p>'s <c>Seer</c> misses.
-- Round 34 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 34 was the <c>Wolf Beauty</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 35 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> seals a plan with 4 target cards.
-- <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolf Beauty</c> at initiative 3. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Knight</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Knight</c> misses.
-- Round 35 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 35 was the <c>Witch</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 36 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c> and <c>Witch</c>.
-- <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolf King</c> at initiative 3. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> spends 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf King</c> hits <p>your</p> <c>Knight</c>! <p>You</p> lose 1 <m health>Health</m>.
+- <p>Your opponent</p>'s <c>Seer</c> hits <p>your</p> <c>Wolfen</c>! <p>You</p> lose 1 <m health>Health</m>.
 - <p>Your opponent</p> wins by reducing <p>your</p> <m health>Health</m> to zero.
 
 # Game 5, p1
@@ -3251,12 +2611,12 @@
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Wolfen</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> seals a plan with 3 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Knight</c> at initiative 3. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the Fool at initiative 3. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Villager</c> at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Your opponent</p>'s <c>Wolf King</c> misses.
 - <p>Your</p> <c>Wolfen</c> resolves.
 - <p>You</p> gain 1 <m hourglass>Hourglass</m>.
 - <p>Your</p> <c>Wolfen</c> misses.
@@ -3267,13 +2627,14 @@
 - Round 2 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Knight</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>You</p> seal a plan with 4 target cards.
+- <p>You</p> seal a plan with 1 target card.
 - <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> place 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolf Beauty</c> at initiative 5. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Witch</c> at initiative 3. <p>Your opponent</p> plays <c>Seer</c> targeting the <c>Wolf Beauty</c> at initiative 5. <p>You</p> resolve first.
+- <p>Your</p> <c>Wolfen</c> resolves.
+- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
+- <p>Your</p> <c>Wolfen</c> misses.
 - <p>Your opponent</p>'s <c>Seer</c> resolves.
 - <p>Your opponent</p>'s <c>Seer</c> misses.
 - Round 2 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
@@ -3287,7 +2648,7 @@
 - <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolf King</c> at initiative 3. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolf King</c> at initiative 3. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the <c>Seer</c> at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
 - <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
 - <p>Your</p> <c>Knight</c> resolves.
@@ -3301,12 +2662,12 @@
 - <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Seer</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 3 target cards.
 - <p>You</p> place 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Seer</c> targeting the Fool at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the Fool at initiative 2. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolf King</c> at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are no character targets.
+- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
 - <p>Your</p> <c>Seer</c> resolves.
 - <p>Your</p> <c>Seer</c> misses.
 - Round 4 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
@@ -3317,13 +2678,13 @@
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> seal a plan with 1 target card.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the Fool at initiative 4. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolfen</c> at initiative 3. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Knight</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Knight</c> hits <p>your</p> <c>Wolfen</c>! <p>You</p> lose 1 <m health>Health</m>.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Villager</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Villager</c> targeting the Fool at initiative 8. <p>You</p> resolve first.
+- <p>Your</p> <c>Wolf Beauty</c> resolves.
+- <p>You</p> gain 1 <m fang>Fang</m>.
+- <p>Your</p> <c>Wolf Beauty</c> hits <p>your opponent</p>'s <c>Villager</c>! <p>Your opponent</p> loses 1 <m health>Health</m>.
 - Round 5 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 5 was the <c>Hunter</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -3332,15 +2693,14 @@
 - <p>You</p> are dealt <c>Knight</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Witch</c>.
 - <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- <p>You</p> seal a plan with 2 target cards.
+- <p>You</p> place 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c> at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p>'s <c>Wolf King</c> misses.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
+- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Witch</c> targeting the Fool at initiative 6. <p>You</p> resolve first.
+- <p>Your</p> <c>Seer</c> resolves.
+- <p>Your</p> <c>Seer</c> misses.
+- <p>Your opponent</p>'s <c>Witch</c> resolves.
+- <p>Your opponent</p> gains the <m potion>Potion</m>.
 - Round 6 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 6 was the <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -3348,15 +2708,16 @@
 - Round 7 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Knight</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolfen</c> at initiative 5. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolfen</c> and the Fool at initiative 0. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: the <m cross>Cross</m> was not spent.
-- <p>Your</p> <c>Seer</c> resolves.
-- <p>Your</p> <c>Seer</c> misses.
+- <p>Your opponent</p> aims the <m potion>Potion</m> at the <c>Seer</c>.
+- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolfen</c> at initiative 5. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Knight</c> and the Fool at initiative 7. <p>You</p> resolve first.
+- The <m potion>Potion</m> hits <p>your</p> <c>Seer</c>! <p>You</p> lose 1 <m health>Health</m>.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
+- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
 - Round 7 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 7 was the <c>Wolf King</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -3364,16 +2725,16 @@
 - Round 8 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Wolfen</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 5. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
+- <p>Your opponent</p> spends 1 <m fang>Fang</m>.
+- <p>Your opponent</p>'s <c>Wolf King</c> misses.
+- <p>Your</p> <c>Seer</c> resolves.
+- <p>Your</p> <c>Seer</c> misses.
 - Round 8 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 8 was the <c>Hunter</c>.
 - <p>You</p> are ready for the next round.
@@ -3381,15 +2742,16 @@
 - Round 9 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c> and <c>Wolfen</c>.
-- <p>You</p> seal a plan with 3 target cards.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 1. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolf Beauty</c> at initiative 1. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>You</p> place no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Witch</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolf Beauty</c> at initiative 1. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Hunter</c> resolves.
 - <p>Your opponent</p> makes no attack: the <m cross>Cross</m> was not spent.
+- <p>Your</p> <c>Wolfen</c> resolves.
+- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
+- <p>Your</p> <c>Wolfen</c> misses.
 - Round 9 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 9 was the <c>Wolf Beauty</c>.
 - <p>You</p> are ready for the next round.
@@ -3397,454 +2759,13 @@
 - Round 10 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Witch</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>You</p> seal a plan with 1 target card.
 - <p>You</p> place 1 <m hourglass>Hourglass</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Seer</c> at initiative 1. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolfen</c>, the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>Your</p> <c>Wolf King</c> misses.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: the <m cross>Cross</m> was not spent.
-- Round 10 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 10 was the <c>Wolf Beauty</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 11 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Seer</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Hunter</c> at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Seer</c>, the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
-- Round 11 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 11 was the <c>Wolf Beauty</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 12 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Wolfen</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolfen</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolfen</c> at initiative 4. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>You</p> resolve first.
 - <p>Your</p> <c>Seer</c> resolves.
-- <p>Your</p> <c>Seer</c> misses.
-- Round 12 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 12 was the <c>Wolf Beauty</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 13 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Witch</c>.
-- <p>You</p> are dealt <c>Wolfen</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the Fool at initiative 4. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: the <m cross>Cross</m> was not spent.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
-- Round 13 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 13 was the <c>Seer</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 14 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> spends 1 <m cross>Cross</m>.
-- <p>Your opponent</p>'s <c>Hunter</c> misses.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- Round 14 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 14 was the <c>Wolfen</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 15 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Witch</c>.
-- <p>You</p> are dealt <c>Knight</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 6 target cards.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
-- Round 15 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 15 was the <c>Seer</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 16 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Wolfen</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Seer</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Seer</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
-- Round 16 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 16 was the <c>Hunter</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 17 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place 2 <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Knight</c> at initiative 0. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 1. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> spend 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf King</c> hits <p>your opponent</p>'s <c>Hunter</c>! <p>Your opponent</p> loses 1 <m health>Health</m>.
-- Round 17 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 17 was the <c>Seer</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 18 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Seer</c>.
-- <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Witch</c> and the Fool at initiative 4. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> spend 1 <m cross>Cross</m>.
-- <p>Your</p> <c>Hunter</c> misses.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
-- Round 18 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 18 was the <c>Witch</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 19 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- Round 19 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 19 was the <c>Witch</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 20 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Seer</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 4 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 0. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- Round 20 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 20 was the <c>Witch</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 21 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Seer</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c> and <c>Wolfen</c>.
-- <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c> at initiative 1. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Seer</c> at initiative 7. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
-- Round 21 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 21 was the <c>Villager</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 22 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Knight</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Seer</c>.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Villager</c> at initiative 7. <p>Your opponent</p> plays <c>Hunter</c> targeting the Fool at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Hunter</c> resolves.
-- <p>Your opponent</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
-- Round 22 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 22 was the <c>Wolfen</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 23 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Knight</c>, <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Wolfen</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolfen</c> at initiative 7. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
-- Round 23 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 23 was the <c>Witch</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 24 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Knight</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Witch</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Wolfen</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> spends 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf King</c> misses.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
-- Round 24 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 24 was the <c>Villager</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 25 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c> and <c>Seer</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolfen</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the Fool at initiative 2. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> spends 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf King</c> misses.
-- Round 25 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 25 was the <c>Villager</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 26 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 4. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 7. <p>You</p> resolve first.
-- <p>Your</p> <c>Seer</c> resolves.
-- <p>Your</p> <c>Seer</c> misses.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
-- Round 26 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 26 was the <c>Knight</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 27 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c> and <c>Wolfen</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Witch</c> and the Fool at initiative 2. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> make no attack: there is no <m cross>Cross</m> to spend.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> spends 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf King</c> misses.
-- Round 27 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 27 was the <c>Wolf Beauty</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 28 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Seer</c>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 3 target cards.
-- <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolf Beauty</c> at initiative 3. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c> and the <c>Seer</c> at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Knight</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Knight</c> misses.
-- Round 28 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 28 was the <c>Witch</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 29 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>You</p> are dealt <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Villager</c> targeting the Fool at initiative 8. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Witch</c> at initiative 4. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
-- <p>Your</p> <c>Villager</c> resolves.
-- <p>You</p> gain 1 <m cross>Cross</m>.
-- Round 29 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 29 was the <c>Wolf King</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 30 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>Your opponent</p> is dealt <c>Knight</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Hunter</c> targeting the Fool at initiative 1. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Knight</c> at initiative 6. <p>You</p> resolve first.
-- <p>Your</p> <c>Hunter</c> resolves.
-- <p>You</p> spend 1 <m cross>Cross</m>.
-- <p>Your</p> <c>Hunter</c> misses.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
-- Round 30 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 30 was the <c>Wolfen</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 31 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>You</p> are dealt <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 1 target card.
-- <p>Your opponent</p> seals a plan with 4 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Witch</c> at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c>, the <c>Witch</c> and the Fool at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Wolfen</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Wolfen</c> misses.
-- Round 31 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 31 was the <c>Hunter</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 32 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> seal a plan with 3 target cards.
-- <p>You</p> place 2 <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 0. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Witch</c> at initiative 7. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
-- Round 32 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 32 was the <c>Seer</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 33 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Hunter</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 3. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>You</p> resolve first.
-- <p>Your</p> <c>Knight</c> resolves.
-- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
-- <p>Your</p> <c>Knight</c> misses.
-- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Wolfen</c> misses.
-- Round 33 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 33 was the <c>Wolf King</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 34 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Knight</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Wolfen</c>.
-- <p>Your opponent</p> seals a plan with 4 target cards.
-- <p>You</p> seal a plan with 1 target card.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Seer</c> targeting the Fool at initiative 5. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> spends 2 <m fang>Fangs</m>.
-- <p>Your opponent</p>'s <c>Wolf King</c> misses.
-- <p>Your</p> <c>Seer</c> resolves.
-- <p>Your</p> <c>Seer</c> misses.
-- Round 34 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
-- The card set aside in round 34 was the <c>Wolf Beauty</c>.
-- <p>Your opponent</p> is ready for the next round.
-- <p>You</p> are ready for the next round.
-- Round 35 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Villager</c>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>You</p> seal a plan with 4 target cards.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolf Beauty</c> at initiative 3. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Knight</c> resolves.
-- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Your opponent</p>'s <c>Knight</c> misses.
-- Round 35 ends. <p>You</p> take the <m badge>Badge</m>.
-- The card set aside in round 35 was the <c>Witch</c>.
-- <p>You</p> are ready for the next round.
-- <p>Your opponent</p> is ready for the next round.
-- Round 36 begins. <p>You</p> hold the <m badge>Badge</m>.
-- <p>You</p> are dealt <c>Wolf King</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>Your opponent</p> is dealt <c>Hunter</c>, <c>Knight</c> and <c>Witch</c>.
-- <p>Your opponent</p> seals a plan with 1 target card.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolf King</c> at initiative 3. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> spend 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf King</c> hits <p>your opponent</p>'s <c>Knight</c>! <p>Your opponent</p> loses 1 <m health>Health</m>.
+- <p>Your</p> <c>Seer</c> hits <p>your opponent</p>'s <c>Wolfen</c>! <p>Your opponent</p> loses 1 <m health>Health</m>.
 - <p>You</p> win by reducing <p>your opponent</p>'s <m health>Health</m> to zero.
 
 # Game 5, replay
@@ -3854,12 +2775,12 @@
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
 - <p>Player 2</p> is dealt <c>Wolfen</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 1</p> seals a plan with 3 target cards.
+- <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 3. <p>Player 1</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Villager</c> at initiative 2. <p>Player 2</p> plays <c>Wolfen</c> targeting the Fool at initiative 3. <p>Player 1</p> resolves first.
 - <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Player 1</p>'s <c>Wolf King</c> misses.
 - <p>Player 2</p>'s <c>Wolfen</c> resolves.
 - <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
 - <p>Player 2</p>'s <c>Wolfen</c> misses.
@@ -3870,13 +2791,14 @@
 - Round 2 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Villager</c>.
 - <p>Player 1</p> is dealt <c>Knight</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>Player 2</p> seals a plan with 4 target cards.
+- <p>Player 2</p> seals a plan with 1 target card.
 - <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Seer</c> targeting the <c>Wolf Beauty</c> at initiative 5. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- Plans revealed. <p>Player 1</p> plays <c>Seer</c> targeting the <c>Wolf Beauty</c> at initiative 5. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Witch</c> at initiative 3. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Wolfen</c> resolves.
+- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Player 2</p>'s <c>Wolfen</c> misses.
 - <p>Player 1</p>'s <c>Seer</c> resolves.
 - <p>Player 1</p>'s <c>Seer</c> misses.
 - Round 2 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
@@ -3890,7 +2812,7 @@
 - <p>Player 1</p> seals a plan with 2 target cards.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Player 2</p> plays <c>Knight</c> targeting the <c>Wolf King</c> at initiative 3. <p>Player 1</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the <c>Seer</c> at initiative 2. <p>Player 2</p> plays <c>Knight</c> targeting the <c>Wolf King</c> at initiative 3. <p>Player 1</p> resolves first.
 - <p>Player 1</p>'s <c>Wolf King</c> resolves.
 - <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
 - <p>Player 2</p>'s <c>Knight</c> resolves.
@@ -3904,12 +2826,12 @@
 - <p>Player 2</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Seer</c>.
 - <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 1</p> seals a plan with 3 target cards.
 - <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the Fool at initiative 2. <p>Player 2</p> plays <c>Seer</c> targeting the Fool at initiative 4. <p>Player 1</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Seer</c> targeting the <c>Wolf King</c> at initiative 4. <p>Player 1</p> resolves first.
 - <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are no character targets.
+- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
 - <p>Player 2</p>'s <c>Seer</c> resolves.
 - <p>Player 2</p>'s <c>Seer</c> misses.
 - Round 4 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
@@ -3920,13 +2842,13 @@
 - <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>Player 2</p> is dealt <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 2</p> seals a plan with 1 target card.
+- <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Knight</c> targeting the <c>Wolfen</c> at initiative 3. <p>Player 2</p> plays <c>Wolfen</c> targeting the Fool at initiative 4. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Knight</c> resolves.
-- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p>'s <c>Knight</c> hits <p>Player 2</p>'s <c>Wolfen</c>! <p>Player 2</p> loses 1 <m health>Health</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Villager</c> targeting the Fool at initiative 8. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Villager</c> and the Fool at initiative 7. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Player 2</p> gains 1 <m fang>Fang</m>.
+- <p>Player 2</p>'s <c>Wolf Beauty</c> hits <p>Player 1</p>'s <c>Villager</c>! <p>Player 1</p> loses 1 <m health>Health</m>.
 - Round 5 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 5 was the <c>Hunter</c>.
 - <p>Player 1</p> is ready for the next round.
@@ -3935,15 +2857,14 @@
 - <p>Player 2</p> is dealt <c>Knight</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Witch</c>.
 - <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
+- <p>Player 2</p> seals a plan with 2 target cards.
+- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Knight</c> at initiative 2. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p>'s <c>Wolf King</c> misses.
-- <p>Player 2</p>'s <c>Wolfen</c> resolves.
-- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Wolfen</c> misses.
+- Plans revealed. <p>Player 1</p> plays <c>Witch</c> targeting the Fool at initiative 6. <p>Player 2</p> plays <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 4. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Seer</c> resolves.
+- <p>Player 2</p>'s <c>Seer</c> misses.
+- <p>Player 1</p>'s <c>Witch</c> resolves.
+- <p>Player 1</p> gains the <m potion>Potion</m>.
 - Round 6 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 6 was the <c>Wolf Beauty</c>.
 - <p>Player 1</p> is ready for the next round.
@@ -3951,15 +2872,16 @@
 - Round 7 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Player 2</p> is dealt <c>Knight</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>Player 1</p> seals a plan with 3 target cards.
+- <p>Player 1</p> seals a plan with 2 target cards.
 - <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
+- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolfen</c> and the Fool at initiative 0. <p>Player 2</p> plays <c>Seer</c> targeting the <c>Wolfen</c> at initiative 5. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Hunter</c> resolves.
-- <p>Player 1</p> makes no attack: the <m cross>Cross</m> was not spent.
-- <p>Player 2</p>'s <c>Seer</c> resolves.
-- <p>Player 2</p>'s <c>Seer</c> misses.
+- <p>Player 1</p> aims the <m potion>Potion</m> at the <c>Seer</c>.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Knight</c> and the Fool at initiative 7. <p>Player 2</p> plays <c>Seer</c> targeting the <c>Wolfen</c> at initiative 5. <p>Player 2</p> resolves first.
+- The <m potion>Potion</m> hits <p>Player 2</p>'s <c>Seer</c>! <p>Player 2</p> loses 1 <m health>Health</m>.
+- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
+- <p>Player 1</p> gains 1 <m fang>Fang</m>.
+- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
 - Round 7 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 7 was the <c>Wolf King</c>.
 - <p>Player 1</p> is ready for the next round.
@@ -3967,16 +2889,16 @@
 - Round 8 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Wolfen</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
-- <p>Player 1</p> seals a plan with 3 target cards.
-- <p>Player 2</p> seals a plan with 1 target card.
+- <p>Player 1</p> seals a plan with 2 target cards.
+- <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>Player 1</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Villager</c> at initiative 2. <p>Player 2</p> plays <c>Seer</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 5. <p>Player 1</p> resolves first.
 - <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 2</p>'s <c>Wolfen</c> resolves.
-- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Wolfen</c> misses.
+- <p>Player 1</p> spends 1 <m fang>Fang</m>.
+- <p>Player 1</p>'s <c>Wolf King</c> misses.
+- <p>Player 2</p>'s <c>Seer</c> resolves.
+- <p>Player 2</p>'s <c>Seer</c> misses.
 - Round 8 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 8 was the <c>Hunter</c>.
 - <p>Player 2</p> is ready for the next round.
@@ -3984,15 +2906,16 @@
 - Round 9 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Wolfen</c>.
-- <p>Player 2</p> seals a plan with 3 target cards.
+- <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 1</p> seals a plan with 2 target cards.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolf Beauty</c> at initiative 1. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 1. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> and the <c>Wolf Beauty</c> at initiative 1. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Witch</c> and the Fool at initiative 4. <p>Player 1</p> resolves first.
 - <p>Player 1</p>'s <c>Hunter</c> resolves.
 - <p>Player 1</p> makes no attack: the <m cross>Cross</m> was not spent.
+- <p>Player 2</p>'s <c>Wolfen</c> resolves.
+- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Player 2</p>'s <c>Wolfen</c> misses.
 - Round 9 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 9 was the <c>Wolf Beauty</c>.
 - <p>Player 2</p> is ready for the next round.
@@ -4000,454 +2923,13 @@
 - Round 10 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Villager</c>.
 - <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Witch</c>.
-- <p>Player 1</p> seals a plan with 3 target cards.
+- <p>Player 1</p> seals a plan with 1 target card.
 - <p>Player 2</p> seals a plan with 1 target card.
 - <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolfen</c>, the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Seer</c> at initiative 1. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p>'s <c>Wolf King</c> misses.
-- <p>Player 1</p>'s <c>Hunter</c> resolves.
-- <p>Player 1</p> makes no attack: the <m cross>Cross</m> was not spent.
-- Round 10 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 10 was the <c>Wolf Beauty</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 11 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Seer</c>.
-- <p>Player 1</p> seals a plan with 3 target cards.
-- <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Seer</c>, the <c>Witch</c> and the <c>Villager</c> at initiative 2. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Hunter</c> at initiative 4. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 2</p>'s <c>Wolfen</c> resolves.
-- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Wolfen</c> misses.
-- Round 11 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 11 was the <c>Wolf Beauty</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 12 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Wolfen</c>.
-- <p>Player 1</p> seals a plan with 3 target cards.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Player 2</p> plays <c>Seer</c> targeting the <c>Wolfen</c> and the Fool at initiative 4. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
+- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>Player 2</p> plays <c>Seer</c> targeting the <c>Wolfen</c> at initiative 4. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Seer</c> resolves.
-- <p>Player 2</p>'s <c>Seer</c> misses.
-- Round 12 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 12 was the <c>Wolf Beauty</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 13 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Witch</c>.
-- <p>Player 2</p> is dealt <c>Wolfen</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> at initiative 1. <p>Player 2</p> plays <c>Wolfen</c> targeting the Fool at initiative 4. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Hunter</c> resolves.
-- <p>Player 1</p> makes no attack: the <m cross>Cross</m> was not spent.
-- <p>Player 2</p>'s <c>Wolfen</c> resolves.
-- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Wolfen</c> misses.
-- Round 13 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 13 was the <c>Seer</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 14 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 3 target cards.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c> and the <c>Witch</c> at initiative 2. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Hunter</c> resolves.
-- <p>Player 1</p> spends 1 <m cross>Cross</m>.
-- <p>Player 1</p>'s <c>Hunter</c> misses.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- Round 14 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 14 was the <c>Wolfen</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 15 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Wolfen</c> and <c>Witch</c>.
-- <p>Player 2</p> is dealt <c>Knight</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 1</p> seals a plan with 6 target cards.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 7. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 2</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 2</p> gains 1 <m fang>Fang</m>.
-- <p>Player 2</p>'s <c>Wolf Beauty</c> misses.
-- Round 15 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 15 was the <c>Seer</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 16 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Wolfen</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Seer</c>.
-- <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Seer</c> and the <c>Villager</c> at initiative 2. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Seer</c> and the Fool at initiative 4. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 2</p>'s <c>Wolfen</c> resolves.
-- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Wolfen</c> misses.
-- Round 16 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 16 was the <c>Hunter</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 17 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Villager</c>.
-- <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places 2 <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 1. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Knight</c> at initiative 0. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> spends 1 <m fang>Fang</m>.
-- <p>Player 2</p>'s <c>Wolf King</c> hits <p>Player 1</p>'s <c>Hunter</c>! <p>Player 1</p> loses 1 <m health>Health</m>.
-- Round 17 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 17 was the <c>Seer</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 18 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Seer</c>.
-- <p>Player 1</p> is dealt <c>Wolfen</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 3 target cards.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Witch</c> and the Fool at initiative 4. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Hunter</c> resolves.
-- <p>Player 2</p> spends 1 <m cross>Cross</m>.
-- <p>Player 2</p>'s <c>Hunter</c> misses.
-- <p>Player 1</p>'s <c>Wolfen</c> resolves.
-- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p>'s <c>Wolfen</c> misses.
-- Round 18 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 18 was the <c>Witch</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 19 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
-- <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>Player 2</p> seals a plan with 3 target cards.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> at initiative 1. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Hunter</c> resolves.
-- <p>Player 1</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- Round 19 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 19 was the <c>Witch</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 20 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolfen</c> and <c>Seer</c>.
-- <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 4 target cards.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 0. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the Fool at initiative 2. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Hunter</c> resolves.
-- <p>Player 1</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- Round 20 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 20 was the <c>Witch</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 21 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Seer</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Knight</c> and <c>Wolfen</c>.
-- <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Seer</c> at initiative 7. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolf King</c> at initiative 1. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Hunter</c> resolves.
-- <p>Player 2</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 1</p> gains 1 <m fang>Fang</m>.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
-- Round 21 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 21 was the <c>Villager</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 22 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Knight</c>, <c>Witch</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Seer</c>.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Hunter</c> targeting the Fool at initiative 1. <p>Player 2</p> plays <c>Wolf Beauty</c> targeting the <c>Villager</c> at initiative 7. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Hunter</c> resolves.
-- <p>Player 1</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Player 2</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 2</p> gains 1 <m fang>Fang</m>.
-- <p>Player 2</p>'s <c>Wolf Beauty</c> misses.
-- Round 22 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 22 was the <c>Wolfen</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 23 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Knight</c>, <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Wolfen</c>.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Wolfen</c> at initiative 7. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolfen</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Hunter</c> resolves.
-- <p>Player 2</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 1</p> gains 1 <m fang>Fang</m>.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
-- Round 23 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 23 was the <c>Witch</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 24 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Knight</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Witch</c>.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Witch</c> at initiative 2. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Wolfen</c> and the Fool at initiative 4. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> spends 1 <m fang>Fang</m>.
-- <p>Player 1</p>'s <c>Wolf King</c> misses.
-- <p>Player 2</p>'s <c>Wolfen</c> resolves.
-- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Wolfen</c> misses.
-- Round 24 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 24 was the <c>Villager</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 25 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Knight</c> and <c>Seer</c>.
-- <p>Player 1</p> seals a plan with 3 target cards.
-- <p>Player 2</p> seals a plan with 3 target cards.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolfen</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Hunter</c> resolves.
-- <p>Player 2</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> spends 1 <m fang>Fang</m>.
-- <p>Player 1</p>'s <c>Wolf King</c> misses.
-- Round 25 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 25 was the <c>Villager</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 26 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>Player 1</p> is dealt <c>Wolfen</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 7. <p>Player 2</p> plays <c>Seer</c> targeting the <c>Wolf King</c> and the Fool at initiative 4. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Seer</c> resolves.
-- <p>Player 2</p>'s <c>Seer</c> misses.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 1</p> gains 1 <m fang>Fang</m>.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
-- Round 26 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 26 was the <c>Knight</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 27 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Knight</c> and <c>Wolfen</c>.
-- <p>Player 1</p> seals a plan with 3 target cards.
-- <p>Player 2</p> seals a plan with 3 target cards.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Witch</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Hunter</c> targeting the <c>Wolf King</c>, the <c>Wolf Beauty</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Hunter</c> resolves.
-- <p>Player 2</p> makes no attack: there is no <m cross>Cross</m> to spend.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> spends 1 <m fang>Fang</m>.
-- <p>Player 1</p>'s <c>Wolf King</c> misses.
-- Round 27 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 27 was the <c>Wolf Beauty</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 28 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Seer</c>.
-- <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 1</p> seals a plan with 3 target cards.
-- <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c> and the <c>Seer</c> at initiative 2. <p>Player 2</p> plays <c>Knight</c> targeting the <c>Wolf Beauty</c> at initiative 3. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 2</p>'s <c>Knight</c> resolves.
-- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Knight</c> misses.
-- Round 28 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 28 was the <c>Witch</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 29 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>Player 2</p> is dealt <c>Knight</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Witch</c> at initiative 4. <p>Player 2</p> plays <c>Villager</c> targeting the Fool at initiative 8. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolfen</c> resolves.
-- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p>'s <c>Wolfen</c> misses.
-- <p>Player 2</p>'s <c>Villager</c> resolves.
-- <p>Player 2</p> gains 1 <m cross>Cross</m>.
-- Round 29 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 29 was the <c>Wolf King</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 30 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Seer</c> and <c>Witch</c>.
-- <p>Player 1</p> is dealt <c>Knight</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Knight</c> at initiative 6. <p>Player 2</p> plays <c>Hunter</c> targeting the Fool at initiative 1. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Hunter</c> resolves.
-- <p>Player 2</p> spends 1 <m cross>Cross</m>.
-- <p>Player 2</p>'s <c>Hunter</c> misses.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 1</p> gains 1 <m fang>Fang</m>.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
-- Round 30 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 30 was the <c>Wolfen</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 31 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>Player 2</p> is dealt <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 1</p> seals a plan with 4 target cards.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Seer</c>, the <c>Witch</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Witch</c> at initiative 4. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 2</p>'s <c>Wolfen</c> resolves.
-- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Wolfen</c> misses.
-- Round 31 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 31 was the <c>Hunter</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 32 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Wolf King</c>, <c>Knight</c> and <c>Villager</c>.
-- <p>Player 1</p> is dealt <c>Wolfen</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 2</p> seals a plan with 3 target cards.
-- <p>Player 2</p> places 2 <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Witch</c> at initiative 7. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 0. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 1</p> gains 1 <m fang>Fang</m>.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
-- Round 32 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 32 was the <c>Seer</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 33 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Wolfen</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 2</p> is dealt <c>Hunter</c>, <c>Knight</c> and <c>Wolf Beauty</c>.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Seer</c> at initiative 4. <p>Player 2</p> plays <c>Knight</c> targeting the <c>Wolf Beauty</c> and the Fool at initiative 3. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Knight</c> resolves.
-- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 2</p>'s <c>Knight</c> misses.
-- <p>Player 1</p>'s <c>Wolfen</c> resolves.
-- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p>'s <c>Wolfen</c> misses.
-- Round 33 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 33 was the <c>Wolf King</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 34 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Knight</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Wolf King</c> and <c>Wolfen</c>.
-- <p>Player 1</p> seals a plan with 4 target cards.
-- <p>Player 2</p> seals a plan with 1 target card.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Witch</c>, the <c>Villager</c> and the Fool at initiative 1. <p>Player 2</p> plays <c>Seer</c> targeting the Fool at initiative 5. <p>Player 1</p> resolves first.
-- <p>Player 1</p>'s <c>Wolf King</c> resolves.
-- <p>Player 1</p> spends 2 <m fang>Fangs</m>.
-- <p>Player 1</p>'s <c>Wolf King</c> misses.
-- <p>Player 2</p>'s <c>Seer</c> resolves.
-- <p>Player 2</p>'s <c>Seer</c> misses.
-- Round 34 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
-- The card set aside in round 34 was the <c>Wolf Beauty</c>.
-- <p>Player 1</p> is ready for the next round.
-- <p>Player 2</p> is ready for the next round.
-- Round 35 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Villager</c>.
-- <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Seer</c> and <c>Wolf Beauty</c>.
-- <p>Player 2</p> seals a plan with 4 target cards.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Knight</c> targeting the <c>Wolf Beauty</c> at initiative 3. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c>, the <c>Villager</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 1</p>'s <c>Knight</c> resolves.
-- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
-- <p>Player 1</p>'s <c>Knight</c> misses.
-- Round 35 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
-- The card set aside in round 35 was the <c>Witch</c>.
-- <p>Player 2</p> is ready for the next round.
-- <p>Player 1</p> is ready for the next round.
-- Round 36 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
-- <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Wolfen</c>, <c>Seer</c> and <c>Villager</c>.
-- <p>Player 1</p> is dealt <c>Hunter</c>, <c>Knight</c> and <c>Witch</c>.
-- <p>Player 1</p> seals a plan with 1 target card.
-- <p>Player 2</p> seals a plan with 2 target cards.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Knight</c> targeting the <c>Wolf King</c> at initiative 3. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the <c>Witch</c> at initiative 2. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> spends 1 <m fang>Fang</m>.
-- <p>Player 2</p>'s <c>Wolf King</c> hits <p>Player 1</p>'s <c>Knight</c>! <p>Player 1</p> loses 1 <m health>Health</m>.
+- <p>Player 2</p>'s <c>Seer</c> hits <p>Player 1</p>'s <c>Wolfen</c>! <p>Player 1</p> loses 1 <m health>Health</m>.
 - <p>Player 2</p> wins by reducing <p>Player 1</p>'s <m health>Health</m> to zero.
 
 # Game 6, p0
@@ -4456,16 +2938,14 @@
 - Round 1 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Witch</c>.
 - <p>You</p> are dealt <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 3 target cards.
+- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 1 target card.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Wolfen</c> and the Fool at initiative 6. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> resolves first.
-- <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
+- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Knight</c> at initiative 6. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Wolf Beauty</c> at initiative 4. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
+- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p>'s <c>Wolfen</c> hits <p>your</p> <c>Wolf Beauty</c>! <p>You</p> lose 1 <m health>Health</m>.
 - Round 1 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 1 was the <c>Hunter</c>.
 - <p>You</p> are ready for the next round.
@@ -4473,16 +2953,16 @@
 - Round 2 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Wolfen</c>, <c>Seer</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Villager</c>.
-- <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 3 target cards.
+- <p>You</p> seal a plan with 1 target card.
+- <p>Your opponent</p> seals a plan with 2 target cards.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> resolves first.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Seer</c> at initiative 2. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
 - <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>Your</p> <c>Wolf Beauty</c> misses.
+- <p>Your</p> <c>Wolfen</c> resolves.
+- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
+- <p>Your</p> <c>Wolfen</c> misses.
 - Round 2 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 2 was the <c>Hunter</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -4491,15 +2971,13 @@
 - <p>Your opponent</p> is dealt <c>Wolf King</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>You</p> are dealt <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>You</p> seal a plan with 2 target cards.
-- <p>Your opponent</p> seals a plan with 4 target cards.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf Beauty</c> targeting the <c>Seer</c> and the Fool at initiative 7. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> resolves first.
+- <p>Your opponent</p> seals a plan with 2 target cards.
+- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
+- <p>You</p> place 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Knight</c> targeting the <c>Wolf King</c> and the Fool at initiative 2. <p>Your opponent</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the Fool at initiative 1. <p>Your opponent</p> resolves first.
 - <p>Your opponent</p>'s <c>Wolf King</c> resolves.
-- <p>Your opponent</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your</p> <c>Wolf Beauty</c> resolves.
-- <p>You</p> gain 1 <m fang>Fang</m>.
-- <p>You</p> win by collecting enough <m fang>Fangs</m>.
+- <p>Your opponent</p>'s <c>Wolf King</c> hits <p>your</p> <c>Knight</c>! <p>You</p> lose 1 <m health>Health</m>.
+- <p>Your opponent</p> wins by reducing <p>your</p> <m health>Health</m> to zero.
 
 # Game 6, p1
 
@@ -4507,16 +2985,14 @@
 - Round 1 begins. <p>You</p> hold the <m badge>Badge</m>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Witch</c>.
 - <p>Your opponent</p> is dealt <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 3 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 1 target card.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
 - <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Wolfen</c> and the Fool at initiative 6. <p>You</p> resolve first.
-- <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
+- Plans revealed. <p>You</p> play <c>Wolfen</c> targeting the <c>Wolf Beauty</c> at initiative 4. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Knight</c> at initiative 6. <p>You</p> resolve first.
+- <p>Your</p> <c>Wolfen</c> resolves.
+- <p>You</p> gain 1 <m hourglass>Hourglass</m>.
+- <p>Your</p> <c>Wolfen</c> hits <p>your opponent</p>'s <c>Wolf Beauty</c>! <p>Your opponent</p> loses 1 <m health>Health</m>.
 - Round 1 ends. <p>Your opponent</p> takes the <m badge>Badge</m>.
 - The card set aside in round 1 was the <c>Hunter</c>.
 - <p>Your opponent</p> is ready for the next round.
@@ -4524,16 +3000,16 @@
 - Round 2 begins. <p>Your opponent</p> holds the <m badge>Badge</m>.
 - <p>Your opponent</p> is dealt <c>Wolfen</c>, <c>Seer</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Knight</c> and <c>Villager</c>.
-- <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 3 target cards.
+- <p>Your opponent</p> seals a plan with 1 target card.
+- <p>You</p> seal a plan with 2 target cards.
 - <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
 - <p>You</p> place no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 7. <p>You</p> resolve first.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Seer</c> at initiative 2. <p>Your opponent</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
 - <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> misses.
+- <p>Your opponent</p>'s <c>Wolfen</c> resolves.
+- <p>Your opponent</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p>'s <c>Wolfen</c> misses.
 - Round 2 ends. <p>You</p> take the <m badge>Badge</m>.
 - The card set aside in round 2 was the <c>Hunter</c>.
 - <p>You</p> are ready for the next round.
@@ -4542,15 +3018,13 @@
 - <p>You</p> are dealt <c>Wolf King</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Your opponent</p> is dealt <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>Your opponent</p> seals a plan with 2 target cards.
-- <p>You</p> seal a plan with 4 target cards.
-- <p>You</p> place no <m hourglass>Hourglasses</m>.
-- <p>Your opponent</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Your opponent</p> plays <c>Wolf Beauty</c> targeting the <c>Seer</c> and the Fool at initiative 7. <p>You</p> resolve first.
+- <p>You</p> seal a plan with 2 target cards.
+- <p>You</p> place 1 <m hourglass>Hourglass</m>.
+- <p>Your opponent</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>You</p> play <c>Wolf King</c> targeting the <c>Knight</c> and the Fool at initiative 1. <p>Your opponent</p> plays <c>Knight</c> targeting the <c>Wolf King</c> and the Fool at initiative 2. <p>You</p> resolve first.
 - <p>Your</p> <c>Wolf King</c> resolves.
-- <p>You</p> make no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Your opponent</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Your opponent</p> gains 1 <m fang>Fang</m>.
-- <p>Your opponent</p> wins by collecting enough <m fang>Fangs</m>.
+- <p>Your</p> <c>Wolf King</c> hits <p>your opponent</p>'s <c>Knight</c>! <p>Your opponent</p> loses 1 <m health>Health</m>.
+- <p>You</p> win by reducing <p>your opponent</p>'s <m health>Health</m> to zero.
 
 # Game 6, replay
 
@@ -4558,16 +3032,14 @@
 - Round 1 begins. <p>Player 2</p> holds the <m badge>Badge</m>.
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Knight</c>, <c>Wolfen</c> and <c>Witch</c>.
 - <p>Player 1</p> is dealt <c>Seer</c>, <c>Wolf Beauty</c> and <c>Villager</c>.
-- <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 3 target cards.
+- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 2</p> seals a plan with 1 target card.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Wolfen</c> and the Fool at initiative 6. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Player 2</p> resolves first.
-- <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 1</p> gains 1 <m fang>Fang</m>.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
+- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Knight</c> at initiative 6. <p>Player 2</p> plays <c>Wolfen</c> targeting the <c>Wolf Beauty</c> at initiative 4. <p>Player 2</p> resolves first.
+- <p>Player 2</p>'s <c>Wolfen</c> resolves.
+- <p>Player 2</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Player 2</p>'s <c>Wolfen</c> hits <p>Player 1</p>'s <c>Wolf Beauty</c>! <p>Player 1</p> loses 1 <m health>Health</m>.
 - Round 1 ends. <p>Player 1</p> takes the <m badge>Badge</m>.
 - The card set aside in round 1 was the <c>Hunter</c>.
 - <p>Player 1</p> is ready for the next round.
@@ -4575,16 +3047,16 @@
 - Round 2 begins. <p>Player 1</p> holds the <m badge>Badge</m>.
 - <p>Player 1</p> is dealt <c>Wolfen</c>, <c>Seer</c>, <c>Witch</c> and <c>Wolf Beauty</c>.
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Knight</c> and <c>Villager</c>.
-- <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 3 target cards.
+- <p>Player 1</p> seals a plan with 1 target card.
+- <p>Player 2</p> seals a plan with 2 target cards.
 - <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
 - <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Hunter</c> and the Fool at initiative 7. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Knight</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Player 2</p> resolves first.
+- Plans revealed. <p>Player 1</p> plays <c>Wolfen</c> targeting the <c>Knight</c> at initiative 4. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c> and the <c>Seer</c> at initiative 2. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Wolf King</c> resolves.
 - <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 1</p> gains 1 <m fang>Fang</m>.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> misses.
+- <p>Player 1</p>'s <c>Wolfen</c> resolves.
+- <p>Player 1</p> gains 1 <m hourglass>Hourglass</m>.
+- <p>Player 1</p>'s <c>Wolfen</c> misses.
 - Round 2 ends. <p>Player 2</p> takes the <m badge>Badge</m>.
 - The card set aside in round 2 was the <c>Hunter</c>.
 - <p>Player 2</p> is ready for the next round.
@@ -4593,12 +3065,10 @@
 - <p>Player 2</p> is dealt <c>Wolf King</c>, <c>Seer</c>, <c>Witch</c> and <c>Villager</c>.
 - <p>Player 1</p> is dealt <c>Knight</c>, <c>Wolfen</c> and <c>Wolf Beauty</c>.
 - <p>Player 1</p> seals a plan with 2 target cards.
-- <p>Player 2</p> seals a plan with 4 target cards.
-- <p>Player 2</p> places no <m hourglass>Hourglasses</m>.
-- <p>Player 1</p> places no <m hourglass>Hourglasses</m>.
-- Plans revealed. <p>Player 1</p> plays <c>Wolf Beauty</c> targeting the <c>Seer</c> and the Fool at initiative 7. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Hunter</c>, the <c>Knight</c>, the <c>Seer</c> and the <c>Witch</c> at initiative 2. <p>Player 2</p> resolves first.
+- <p>Player 2</p> seals a plan with 2 target cards.
+- <p>Player 2</p> places 1 <m hourglass>Hourglass</m>.
+- <p>Player 1</p> places 1 <m hourglass>Hourglass</m>.
+- Plans revealed. <p>Player 1</p> plays <c>Knight</c> targeting the <c>Wolf King</c> and the Fool at initiative 2. <p>Player 2</p> plays <c>Wolf King</c> targeting the <c>Knight</c> and the Fool at initiative 1. <p>Player 2</p> resolves first.
 - <p>Player 2</p>'s <c>Wolf King</c> resolves.
-- <p>Player 2</p> makes no attack: there are not enough <m fang>Fangs</m> for the extra targets.
-- <p>Player 1</p>'s <c>Wolf Beauty</c> resolves.
-- <p>Player 1</p> gains 1 <m fang>Fang</m>.
-- <p>Player 1</p> wins by collecting enough <m fang>Fangs</m>.
+- <p>Player 2</p>'s <c>Wolf King</c> hits <p>Player 1</p>'s <c>Knight</c>! <p>Player 1</p> loses 1 <m health>Health</m>.
+- <p>Player 2</p> wins by reducing <p>Player 1</p>'s <m health>Health</m> to zero.

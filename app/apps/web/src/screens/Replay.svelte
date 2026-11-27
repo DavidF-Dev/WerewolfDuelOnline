@@ -44,7 +44,7 @@
   let { localiser: l, id }: Props = $props();
   const uid = $props.id();
 
-  let loadState = $state.raw<'loading' | 'missing' | Loaded>('loading');
+  let loadState = $state.raw<'loading' | 'missing' | 'unplayable' | Loaded>('loading');
   let index = $state(0);
   let mode = $state<Mode>('mine');
   /** Whether the showdown's earlier results are collapsed for want of room. */
@@ -54,10 +54,15 @@
   onMount(() => {
     let active = true;
     void (async () => {
-      let result: Loaded | 'missing' = 'missing';
+      let record: HistoryRecord | undefined;
       try {
-        const record = await getDeviceStore()?.history.get(id);
-        if (record !== undefined) {
+        record = await getDeviceStore()?.history.get(id);
+      } catch {
+        // A store that cannot be read holds no record to show.
+      }
+      let result: Loaded | 'missing' | 'unplayable' = 'missing';
+      if (record !== undefined) {
+        try {
           const steps = {
             mine: replayTimeline(record.replay, { seat: record.seat }),
             full: replayTimeline(record.replay, 'omniscient'),
@@ -66,9 +71,9 @@
             s.events.some((event) => 'round_started' in event.kind) ? [i] : [],
           );
           result = { record, steps, roundStarts };
+        } catch {
+          result = 'unplayable';
         }
-      } catch {
-        // A record that cannot be played is treated as missing.
       }
       if (active) loadState = result;
     })();
@@ -259,6 +264,8 @@
   {/if}
   {#if loadState === 'missing'}
     <p data-testid="replay-missing">{l.t('replay-missing')}</p>
+  {:else if loadState === 'unplayable'}
+    <p data-testid="replay-unplayable">{l.t('replay-unplayable')}</p>
   {:else if loaded !== null && step !== undefined && view !== undefined}
     <Segmented
       label={l.t('replay-view-group')}
@@ -276,11 +283,12 @@
       name={names[opponentSeat]}
       player={playerOf(view.players, opponentSeat)}
       hasBadge={view.badge === opponentSeat}
+      animate
     />
 
     <div class="middle" data-testid="phase-panels">
       {#if showdown}
-        <PlanPanels localiser={l} {view} {events} {seat} {names} compact={showdownTight} />
+        <PlanPanels localiser={l} {view} {events} {seat} compact={showdownTight} />
         {#key `${mode}|${index}`}
           <ShowdownList
             localiser={l}
@@ -300,7 +308,7 @@
       {/if}
     </div>
 
-    <MyArea localiser={l} name={names[seat]} {view} {seat} />
+    <MyArea localiser={l} name={names[seat]} {view} {seat} animate />
 
     <!-- Only the log scrolls, inside its panel, when a step does not fit beside the table. -->
     <div class="log-slot">

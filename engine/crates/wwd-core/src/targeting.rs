@@ -1,3 +1,5 @@
+use std::collections::BTreeSet;
+
 use serde::{Deserialize, Serialize};
 
 use crate::event::Marker;
@@ -121,4 +123,11 @@ pub fn validate_plan(plan: &Plan, config: &RulesConfig) -> Result<(), RuleError>
         return Err(RuleError::TooFewTargets);
     }
     Ok(())
+}
+
+/// Whether any of `targets` names a character in `hand`. The Fool is never in a hand.
+pub(crate) fn targets_in_hand(targets: &BTreeSet<TargetCard>, hand: &[Character]) -> bool {
+    targets
+        .iter()
+        .any(|target| matches!(target, TargetCard::Character(c) if hand.contains(c)))
 }

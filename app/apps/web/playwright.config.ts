@@ -6,6 +6,7 @@ export default defineConfig({
   testDir: 'e2e',
   testMatch: [
     'local-game.spec.ts',
+    'showdown.spec.ts',
     'gallery.spec.ts',
     'kit.spec.ts',
     'cards.spec.ts',

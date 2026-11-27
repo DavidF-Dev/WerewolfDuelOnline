@@ -20,9 +20,10 @@ use crate::view::{View, Viewer, view, visible_to};
 /// The replay file layout version this engine reads and writes.
 pub const REPLAY_FORMAT_VERSION: u32 = 1;
 
-/// Earlier engine versions whose replays this engine plays the same way. Their logs, and so
-/// their checkpoint hashes, differ, so those checkpoints are not compared.
-const COMPATIBLE_ENGINE_VERSIONS: [&str; 1] = ["0.1.0"];
+/// Earlier engine versions whose replays this engine re-simulates under its own rules,
+/// checking every command. Their states, and so their checkpoint hashes, differ, so those
+/// checkpoints are not compared.
+const COMPATIBLE_ENGINE_VERSIONS: [&str; 2] = ["0.1.0", "0.2.0"];
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[cfg_attr(feature = "ts", derive(ts_rs::TS), ts(export))]
@@ -306,6 +307,7 @@ fn player_from_boundary(player: &BoundaryPlayer) -> PlayerState {
         placed: 0,
         potion: player.potion,
         hand: Vec::new(),
+        dealt: Vec::new(),
         plan: None,
     }
 }

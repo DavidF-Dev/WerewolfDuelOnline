@@ -295,8 +295,6 @@ count-potion = Trank: { $n }
 card-name =
     { $initiative }, { CHARACTER($character) }, { $faction }. { $ability }
 card-fool-name = Der Narr. { $ability }
-# A pill drawn on a target card, in place of its abilities, when the card is in the player's own hand.
-card-in-hand = Hand
 
 ## Card abilities, in our own words; each marker named is an argument, so it can be drawn as a token
 card-ability-hunter = Gib, wenn du willst, ein { $cross } aus, um bis zu 2 Werwölfe anzugreifen.
@@ -359,7 +357,6 @@ plan-seal-incomplete = Der Plan ist noch nicht vollständig.
 plan-character-not-offered = Dieser Charakter kann in dieser Runde nicht gespielt werden.
 target-not-allowed = Der gewählte Charakter kann diese Karte nicht als Ziel wählen.
 target-limit = Entferne zuerst ein Ziel: Mehr Ziele nimmt dieser Plan nicht.
-target-choose-character-first = Wähle zuerst einen Charakter.
 plan-summary-short = { CHARACTER($character) } → { $targets }
 plan-summary-short-none = { CHARACTER($character) } → keine Ziele
 # The Fool as the summary lists its targets: bare names, without an article.
@@ -378,14 +375,6 @@ reveal-initiative = { CHARACTER($character) }: Initiative { $effective } (aufged
 reveal-initiative-label = Initiative { CHARACTER($character, case: "gen", article: "def") }
 reveal-initiative-change = { $printed } → { $effective }
 reveal-order-note = Die niedrigere Initiative ist zuerst dran.
-reveal-opponent-placed = { $n ->
-        [0] Keine Sanduhren
-        [one] 1 Sanduhr
-       *[other] { $n } Sanduhren
-    } gesetzt
-reveal-face-down = Charakter deines Gegenübers, verdeckt
-reveal-versus = gegen
-reveal-my-plan = Dein Plan: { $plan }
 reveal-potion-heading = Ziel für den Trank wählen
 reveal-potion-confirm = Erst eine Karte wählen
 
@@ -406,20 +395,30 @@ showdown-out-opponent = { $owner } verliert den Zug mit { CHARACTER($character, 
        *[other] Er
     } ist ausgeschaltet.
 plan-panels-heading = Pläne
-plan-panel-plan = { $name }: { $plan }
-plan-panel-position = { $position ->
-        [1] Zuerst
-       *[other] Danach
+
+## Player sides in the reveal and showdown
+side-you = Du
+side-opponent = Dein Gegenüber
+side-initiative = Initiative { $initiative }
+side-initiative-changed = Initiative { $printed } → { $effective }
+side-initiative-hidden = Initiative ?
+side-target = → { $target }
+side-more-targets = +{ $n }
+side-pill = +{ $n }
+side-pill-choosing = +?
+side-placed = { $n ->
+        [0] Keine Sanduhren
+        [one] 1 Sanduhr
+       *[other] { $n } Sanduhren
+    } gesetzt
+side-placed-choosing = Setzt noch Sanduhren
+side-label = { $who }: { $plan }. Initiative { $initiative }.
+side-label-changed = { $who }: { $plan }. Initiative { $effective } (aufgedruckt { $printed }).
+side-label-hidden = { $who }: Charakter verdeckt, Initiative unbekannt.
+side-label-ordered = { $label } { $position ->
+        [1] Ist zuerst dran.
+       *[other] Ist als Zweites dran.
     }
-plan-panel-initiative = Initiative { $initiative }
-plan-panel-spoken = { $name }: { $plan }. { $position ->
-        [1] Zuerst dran
-       *[other] Als Zweites dran
-    }, Initiative { $effective } (aufgedruckt { $printed }).
-plan-panel-spoken-unknown = { $name }: { $plan }. { $position ->
-        [1] Zuerst dran
-       *[other] Als Zweites dran
-    }.
 
 ## Table layout
 table-you = Du
@@ -682,6 +681,7 @@ reason-resignation = Aufgabe
 replay-heading = Wiederholung
 replay-menu = Menü der Wiederholung
 replay-missing = Dieses Spiel ist nicht auf diesem Gerät.
+replay-unplayable = Dieses Spiel wurde nach älteren Regeln gespielt und lässt sich nicht als Wiederholung abspielen.
 replay-position = Schritt { $step } von { $total }, Runde { $round }
 replay-controls = Steuerung der Wiederholung
 replay-previous-step = Vorheriger Schritt

@@ -74,7 +74,7 @@ describe('referee-cloudflare room object', () => {
   it('full game over websockets', async () => {
     const code = await createRoom({ test: { seed: SEED } });
     const [p0, p1] = await join(code);
-    await play([p0, p1], new Xorshift(1));
+    await play([p0, p1], new Xorshift(3));
     const replay = p0.ofType('game_over')[0]!.replay;
     expect(p1.ofType('game_over')[0]!.replay).toEqual(replay);
     expect(() => verifyReplay(replay)).not.toThrow();
@@ -84,7 +84,7 @@ describe('referee-cloudflare room object', () => {
   it('room survives eviction', async () => {
     const code = await createRoom({ test: { seed: SEED } });
     const [p0, p1] = await join(code);
-    const rng = new Xorshift(2);
+    const rng = new Xorshift(3);
     expect(await play([p0, p1], rng, 6)).toBe(6);
     const before = await runInDurableObject(roomStub(code), (instance) => instance);
 
@@ -185,7 +185,7 @@ describe('referee-cloudflare room object', () => {
   it('a rematch works across a hibernation wake', async () => {
     const code = await createRoom({ test: { seed: SEED } });
     const [p0, p1] = await join(code);
-    await play([p0, p1], new Xorshift(1));
+    await play([p0, p1], new Xorshift(3));
     p0.send(encode({ type: 'rematch_request' }));
     await until(() => p0.ofType('rematch_status').some((m) => m.ready.length === 1));
 

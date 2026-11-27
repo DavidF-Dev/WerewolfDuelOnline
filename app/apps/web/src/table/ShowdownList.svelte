@@ -1,9 +1,23 @@
-<script lang="ts">
-  import { tick } from 'svelte';
-  import type { Command, Seat } from '@wwd/engine';
-  import { richMessage, type Localiser, type RichPart } from '@wwd/client-core';
+<script lang="ts" module>
   import { motionReduced } from '../settings/apply.js';
   import { display } from '../settings/display.svelte.js';
+
+  /** How the results are shown: `instant` shows every result at once, whatever the setting. */
+  function showdownSpeed(instant: boolean): 'step' | 'auto' | 'instant' {
+    if (instant) return 'instant';
+    if (display.showdownSpeed === 'step') return 'step';
+    return motionReduced(display.reducedMotion) ? 'instant' : display.showdownSpeed;
+  }
+
+  /** How many of a showdown's `total` steps a list just drawn shows. */
+  export const firstShown = (total: number, instant = false): number =>
+    showdownSpeed(instant) === 'instant' ? total : Math.min(1, total);
+</script>
+
+<script lang="ts">
+  import { tick, untrack } from 'svelte';
+  import type { Command, Seat } from '@wwd/engine';
+  import { richMessage, type Localiser, type RichPart } from '@wwd/client-core';
   import Label from '../kit/Label.svelte';
   import Panel from '../kit/Panel.svelte';
   import RichText from '../kit/RichText.svelte';
@@ -28,6 +42,10 @@
     instant?: boolean;
     /** Told whether every result is shown, whenever that changes. */
     onShown?: (all: boolean) => void;
+    /** How many steps are shown when the list is drawn, while the speed steps through them. */
+    startAt?: number;
+    /** Told how many of the steps are shown, whenever that changes. */
+    onStepsShown?: (shown: number) => void;
     /** Told whether the earlier results are collapsed for want of room, whenever that changes. */
     onTight?: (tight: boolean) => void;
   }
@@ -42,6 +60,8 @@
     onCaughtUp,
     instant = false,
     onShown,
+    startAt = 1,
+    onStepsShown,
     onTight,
   }: Props = $props();
   const uid = $props.id();
@@ -54,20 +74,15 @@
 
   const steps = $derived(showdownSteps(events));
   const reveal = $derived(roundReveal(events));
-  const speed = $derived(
-    instant
-      ? 'instant'
-      : display.showdownSpeed === 'step'
-        ? 'step'
-        : motionReduced(display.reducedMotion)
-          ? 'instant'
-          : display.showdownSpeed,
-  );
-  let stepped = $state(1);
+  const speed = $derived(showdownSpeed(instant));
+  let stepped = $state(untrack(() => startAt));
   const shown = $derived(speed === 'instant' ? steps.length : Math.min(stepped, steps.length));
   const caughtUp = $derived(shown >= steps.length);
   $effect.pre(() => {
     onShown?.(caughtUp);
+  });
+  $effect.pre(() => {
+    onStepsShown?.(shown);
   });
 
   /** The round that the last shown step ends, which the round summary closes in place of a line. */

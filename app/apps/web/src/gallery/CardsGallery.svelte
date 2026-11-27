@@ -24,13 +24,11 @@
     title: string;
     state: CardState;
     reason?: string;
-    inHand?: boolean;
   }
 
   const shownStates: readonly Shown[] = $derived([
     { title: 'Selected', state: 'selected' },
     { title: 'Disabled with its reason', state: 'disabled', reason: l.t('target-not-allowed') },
-    { title: 'In hand', state: 'normal', inHand: true },
   ]);
 </script>
 
@@ -57,7 +55,6 @@
               size="target"
               state={shown.state}
               reason={shown.reason}
-              inHand={shown.inHand}
               onselect={() => undefined}
             />
           </li>

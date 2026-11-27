@@ -6,7 +6,7 @@ import { createLocaliser } from '@wwd/client-core';
 import { TARGET_CARDS, targetId } from '../../src/cards.js';
 import Table from '../../src/screens/Table.svelte';
 import TargetGrid from '../../src/table/TargetGrid.svelte';
-import { isInHand } from '../../src/table/targets.js';
+import { isInHand, shownTargets } from '../../src/table/targets.js';
 import { newGame, stateFor } from '../games.js';
 
 const localiser = createLocaliser('en');
@@ -26,6 +26,15 @@ describe('Targets', () => {
       'wolfen',
     ]);
     expect(isInHand('fool', hand)).toBe(false);
+    expect(shownTargets(hand).map(targetId)).toEqual([
+      'hunter',
+      'wolf_king',
+      'seer',
+      'witch',
+      'wolf_beauty',
+      'villager',
+      'fool',
+    ]);
   });
 
   it('targets panel has no manual marks', async () => {
@@ -33,7 +42,8 @@ describe('Targets', () => {
     render(TargetGrid, { props: { localiser, hand } });
     const panel = screen.getByRole('region', { name: 'Targets' });
     const cards = within(panel).getAllByRole('button');
-    expect(cards).toHaveLength(TARGET_CARDS.length);
+    const shown = shownTargets(hand);
+    expect(cards).toHaveLength(TARGET_CARDS.length - hand.length);
 
     const before = cards.map((card) => card.outerHTML);
     for (const card of cards) await userEvent.click(card);
@@ -43,11 +53,10 @@ describe('Targets', () => {
     ).toEqual(before);
 
     cards.forEach((card, i) => {
-      const id = targetId(TARGET_CARDS[i]!);
+      const id = targetId(shown[i]!);
       expect(card.getAttribute('aria-pressed'), id).toBeNull();
-      expect(description(card), id).toBe(hand.includes(id as Character) ? 'In hand' : '');
+      expect(description(card), id).toBe('');
     });
-    expect(panel.querySelectorAll('[data-part="in-hand"]')).toHaveLength(hand.length);
     expect(panel.textContent).not.toMatch(/ruled out|possible/i);
 
     cleanup();
@@ -72,15 +81,16 @@ describe('Targets', () => {
         frame.classList.contains('selected'),
       );
     const planned = mine.submit_plan.targets.map(targetId);
-    expect(drawn()).toEqual(TARGET_CARDS.map((card) => planned.includes(targetId(card))));
+    const myHand = state.view?.players[1].hand ?? [];
+    const expected = shownTargets(myHand).map((card) => planned.includes(targetId(card)));
+    expect(drawn()).toEqual(expected);
     const sealedCards = within(sealed).getAllByRole('button');
     const html = sealedCards.map((card) => card.outerHTML);
     for (const card of sealedCards) await userEvent.click(card);
     expect(sealedCards.map((card) => card.outerHTML)).toEqual(html);
-    expect(drawn()).toEqual(TARGET_CARDS.map((card) => planned.includes(targetId(card))));
-    const myHand = state.view?.players[1].hand ?? [];
-    expect(sealed.querySelectorAll('[data-part="in-hand"]')).toHaveLength(
-      TARGET_CARDS.filter((card) => isInHand(card, myHand)).length,
+    expect(drawn()).toEqual(expected);
+    expect(planned.filter((id) => !shownTargets(myHand).some((c) => targetId(c) === id))).toEqual(
+      [],
     );
   });
 

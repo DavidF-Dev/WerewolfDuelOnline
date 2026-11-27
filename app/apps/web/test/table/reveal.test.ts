@@ -4,6 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { effectiveInitiative, type Command, type Game, type Seat } from '@wwd/engine';
 import { createLocaliser } from '@wwd/client-core';
 import { initiative as printedInitiative } from '../../src/cards.js';
+import { opponentPlacedState } from '../../src/gallery/fixtures.js';
 import RevealPanel from '../../src/table/RevealPanel.svelte';
 import { newGame, playUntil } from '../games.js';
 
@@ -90,30 +91,30 @@ describe('RevealPanel', () => {
     expect(onCommand.mock.calls[0]?.[0], 'the legal entry itself is sent').toBe(legal[2]);
   });
 
-  it('reveal shows the face-down card against mine', () => {
+  it("reveal shows the opponent's face-down side on the left, then mine with its targets", () => {
     const { game, seat } = atSecondHourglassChoice();
     renderPanel(game, seat);
-    const versus = screen.getByTestId('reveal-versus');
-    const faceDown = within(versus).getByRole('img', {
-      name: "Your opponent's character, face down",
-    });
-    const mine = within(versus).getByTestId('reveal-my-card');
-    const vs = within(versus).getByText('vs');
-    const follows = (a: Element, b: Element): boolean =>
-      (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0;
-    expect(follows(faceDown, vs) && follows(vs, mine), 'face-down, vs, then mine').toBe(true);
-    expect(mine.getAttribute('aria-label')).toContain(myCharacter(game, seat));
-    const frame = mine.closest('.card');
-    if (frame === null) throw new Error('no card frame');
-    expect(sizeOf(frame), 'a medium card while placing Hourglasses').toBe('medium');
-    expect(sizeOf(faceDown), 'the face-down card matches mine').toBe('medium');
+    const versus = screen.getByTestId('reveal-sides');
+    const sides = Array.from(versus.children, (side) => (side as HTMLElement).dataset['testid']);
+    expect(sides, 'opponent left, you right').toEqual(['reveal-side-opponent', 'reveal-side-you']);
+
+    const theirs = within(versus).getByTestId('reveal-side-opponent');
+    expect(theirs.querySelector('[data-part="side-face-down"]')).not.toBeNull();
+    expect(theirs.querySelector('.card'), 'their card stays face down').toBeNull();
+    expect(theirs.querySelector('[data-part="side-initiative"]')?.textContent?.trim()).toBe(
+      'Initiative ?',
+    );
 
     const plan = game.view({ seat }).players[seat === 'p0' ? 0 : 1].plan;
     if (typeof plan !== 'object' || !('revealed' in plan)) throw new Error('no plan');
-    const summary = within(versus).getByTestId('reveal-my-plan');
-    const bold = Array.from(summary.querySelectorAll('strong'), (b) => b.textContent);
-    expect(bold[0]).toBe(myCharacter(game, seat));
-    expect(bold, 'the character and each target').toHaveLength(1 + plan.revealed.targets.length);
+    const mine = within(versus).getByTestId('reveal-side-you');
+    const card = within(mine).getByRole('button', { name: new RegExp(myCharacter(game, seat)) });
+    expect(sizeOf(card.closest('.card')!), 'a target-size card').toBe('target');
+    expect(mine.querySelector('[data-part="side-who"]')?.textContent?.trim()).toBe('You');
+    expect(mine.querySelectorAll('[data-part="side-target"]')).toHaveLength(
+      plan.revealed.targets.length,
+    );
+    expect(mine.querySelector('[data-part="side-pill"]'), 'my side shows my targets').toBeNull();
   });
 
   it('spend panel shows the initiative change, a track and the tiebreak', async () => {
@@ -149,7 +150,11 @@ describe('RevealPanel', () => {
   it("shows the opponent's choice once it arrives", () => {
     const { game, seat } = atSecondHourglassChoice();
     renderPanel(game, seat);
-    expect(screen.getByTestId('opponent-hourglasses').textContent).toBe('Placed 0 Hourglasses');
+    const pill = within(screen.getByTestId('reveal-side-opponent')).getByRole('img', {
+      name: 'Placed 0 Hourglasses',
+    });
+    expect(pill.textContent?.trim()).toBe('+0');
+    expect(pill.classList).toContain('muted');
     expect(screen.getByTestId('hourglass-count').textContent).toBe('0');
   });
 
@@ -161,12 +166,12 @@ describe('RevealPanel', () => {
     ];
     const { onCommand } = renderPanel(game, seat, legal);
     expect(screen.queryByTestId('hourglass-count')).toBeNull();
-    const versus = screen.getByTestId('reveal-versus');
-    const faceDown = within(versus).getByRole('img', {
-      name: "Your opponent's character, face down",
-    });
-    expect(sizeOf(faceDown), 'the Potion uses target-size cards').toBe('target');
-    expect(sizeOf(within(versus).getByTestId('reveal-my-card').closest('.card')!)).toBe('target');
+    const mine = screen.getByTestId('reveal-side-you');
+    expect(sizeOf(mine.querySelector('.card')!), 'a target-size card').toBe('target');
+    expect(
+      screen.getByTestId('reveal-side-opponent').querySelector('[data-part="side-face-down"]'),
+      "the opponent's card stays face down",
+    ).not.toBeNull();
     const picker = screen.getByRole('region', { name: 'Choose the Potion target' });
     expect(picker.querySelectorAll('[data-testid^="action-potion-"]')).toHaveLength(2);
     const confirm = screen.getByTestId('confirm-potion');
@@ -181,5 +186,24 @@ describe('RevealPanel', () => {
     expect(onCommand).toHaveBeenCalledExactlyOnceWith({
       choose_potion_target: { card: 'wolf_king' },
     });
+  });
+  it('the opponent-placed state draws the pill at full strength', () => {
+    const state = opponentPlacedState();
+    render(RevealPanel, {
+      props: {
+        localiser,
+        view: state.view!,
+        seat: state.seat!,
+        events: state.events,
+        legal: state.legal,
+        onCommand: () => {},
+      },
+    });
+    const pill = screen
+      .getByTestId('reveal-side-opponent')
+      .querySelector('[data-part="side-pill"]')!;
+    expect(pill.textContent?.trim()).toMatch(/^[+][1-9]/u);
+    expect(pill.classList).not.toContain('muted');
+    expect(pill.getAttribute('aria-label')).toMatch(/^Placed [1-9]/u);
   });
 });

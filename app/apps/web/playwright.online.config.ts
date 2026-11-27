@@ -3,7 +3,13 @@ import { PORTS } from './e2e/ports.js';
 
 export default defineConfig({
   testDir: 'e2e',
-  testMatch: ['online.spec.ts', 'pause.spec.ts', 'history.spec.ts', 'a11y.spec.ts'],
+  testMatch: [
+    'online.spec.ts',
+    'showdown-online.spec.ts',
+    'pause.spec.ts',
+    'history.spec.ts',
+    'a11y.spec.ts',
+  ],
   globalSetup: './e2e/node-referee.ts',
   fullyParallel: true,
   // Tests drive two or more pages through whole games, so one worker per core overloads a local machine.

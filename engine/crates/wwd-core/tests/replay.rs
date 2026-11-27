@@ -503,3 +503,47 @@ fn crafted_supply_exhausting_replay_fails_cleanly() {
     assert_eq!(replay(&crafted).unwrap_err(), expected.clone());
     assert_eq!(Recorder::from_replay(crafted).unwrap_err(), expected);
 }
+
+#[test]
+fn replay_from_0_2_0_without_in_hand_targets_verifies() {
+    let mut old = played(5, 3).replay().clone();
+    old.engine_version = "0.2.0".to_string();
+    assert_eq!(verify(&old), Ok(()));
+
+    let rec = Recorder::from_replay(old.clone()).unwrap();
+    assert_eq!(rec.replay().engine_version, wwd_core::ENGINE_VERSION);
+    assert_eq!(verify(rec.replay()), Ok(()));
+    assert_eq!(rec.state().round, 3);
+}
+
+#[test]
+fn replay_from_0_2_0_with_an_in_hand_target_fails() {
+    use wwd_core::{RuleError, TargetCard};
+
+    let (seed, seat, hand) = (0..=u8::MAX)
+        .find_map(|seed| {
+            let rec = Recorder::new([seed; 32], config());
+            SEATS.into_iter().find_map(|seat| {
+                let hand = rec.state().player(seat).hand.clone();
+                hand.contains(&Character::Wolfen)
+                    .then_some((seed, seat, hand))
+            })
+        })
+        .expect("some seed deals the Wolfen");
+    let target = *hand.iter().find(|&&c| c != Character::Wolfen).unwrap();
+    let mut old = Recorder::new([seed; 32], config()).replay().clone();
+    old.engine_version = "0.2.0".to_string();
+    old.segments[0].entries.push(ReplayEntry::Command {
+        seat,
+        cmd: Command::SubmitPlan {
+            character: Character::Wolfen,
+            targets: vec![TargetCard::Character(target)],
+        },
+    });
+    let expected = ReplayError::Rule {
+        index: 0,
+        err: RuleError::TargetInHand,
+    };
+    assert_eq!(verify(&old), Err(expected.clone()));
+    assert_eq!(Recorder::from_replay(old).unwrap_err(), expected);
+}

@@ -17,6 +17,7 @@ fn starting_player() -> PlayerState {
         placed: 0,
         potion: false,
         hand: Vec::new(),
+        dealt: Vec::new(),
         plan: None,
     }
 }
@@ -102,6 +103,7 @@ pub(crate) fn start_round(state: &mut State, events: &mut Vec<Event>) {
             },
         });
         let player = state.player_mut(seat);
+        player.dealt.clone_from(&hand);
         player.hand = hand;
         player.plan = None;
     }

@@ -161,7 +161,10 @@ export function verifyReplay(replay: Replay): void {
   guard(() => wasmVerifyReplay(replay));
 }
 
-/** The Fluent ID of the first rule the plan breaks, or `null` if the rules allow it. */
+/**
+ * The Fluent ID of the first targeting rule the plan's shape breaks, or `null` if it breaks none;
+ * it does not check the hand.
+ */
 export function validatePlan(plan: Plan, config: RulesConfig): string | null {
   return guard(() => wasmValidatePlan(plan, config) ?? null);
 }

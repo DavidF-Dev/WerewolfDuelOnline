@@ -385,7 +385,7 @@ fn wolf_king_payment_edges() {
     assert_eq!(state.player(Seat::P0).fang, 1);
     assert_conserved(&state);
 
-    let humans = [c(Seer), c(Knight), c(Villager)];
+    let humans = [c(Seer), c(Knight), c(Witch)];
     let (state, events) = wolf_king(1, &humans);
     let kinds_b = kinds(&events);
     assert!(kinds_b.contains(&EventKind::AttackForfeited {
@@ -693,9 +693,9 @@ fn potion_eliminates_the_witch() {
 
 #[test]
 fn potion_naming_a_card_the_opponent_did_not_play_misses() {
-    let (state, events) = potion_round(&[WolfKing, Wolfen, Witch], Witch, Hunter);
+    let (state, events) = potion_round(&[WolfKing, Wolfen, Witch], Witch, WolfKing);
     assert!(kinds(&events).contains(&EventKind::PotionResolved {
-        target: Hunter,
+        target: WolfKing,
         victim: Seat::P1,
         hit: false,
         health_lost: 0,

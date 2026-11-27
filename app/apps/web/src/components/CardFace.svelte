@@ -24,23 +24,9 @@
     pills: readonly AbilityPill[];
     /** The ability text drawn below the pills on large and medium cards. */
     text: readonly RichPart[];
-    /** The words of a pill drawn in place of the ability pills, such as "In hand". */
-    inHand?: string;
-    /** The id of the "In hand" pill, so the card can be described by it. */
-    inHandId?: string;
   }
 
-  let {
-    name,
-    faction,
-    initiative,
-    art,
-    size = 'large',
-    pills,
-    text,
-    inHand,
-    inHandId,
-  }: Props = $props();
+  let { name, faction, initiative, art, size = 'large', pills, text }: Props = $props();
 
   const THEME = 'placeholder';
   const textOnly = $derived(display.cardText === 'text-only');
@@ -92,11 +78,7 @@
       {/if}
     </span>
   {/if}
-  {#if inHand !== undefined}
-    <span class="pills" data-part="pills">
-      <span class="pill in-hand" id={inHandId} data-part="in-hand">{inHand}</span>
-    </span>
-  {:else if !textOnly && pills.length > 0}
+  {#if !textOnly && pills.length > 0}
     <span class="pills" data-part="pills">
       {#each pills as pill, i (i)}
         <AbilityPillIcon {pill} />
@@ -299,33 +281,6 @@
     padding: var(--pills-pad);
   }
 
-  .pill {
-    align-items: center;
-    border-radius: 999px;
-    box-sizing: border-box;
-    display: inline-flex;
-    flex: none;
-    font-size: var(--pill-font);
-    font-weight: 700;
-    gap: var(--pill-gap);
-    line-height: var(--pill-line);
-    padding: var(--pill-pad);
-    white-space: nowrap;
-  }
-
-  .in-hand {
-    background: var(--chip);
-    border: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 0.625rem;
-  }
-
-  .target .in-hand {
-    font-size: 0.5rem;
-    line-height: 0.8125rem;
-    padding: 0 0.3125rem;
-  }
-
   .text {
     flex: 1;
     font-size: var(--text-size);
@@ -346,13 +301,8 @@
     }
 
     .glyph,
-    .faction-icon,
-    .in-hand {
+    .faction-icon {
       color: CanvasText;
-    }
-
-    .in-hand {
-      border-color: CanvasText;
     }
   }
 </style>

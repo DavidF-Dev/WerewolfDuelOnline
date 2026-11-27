@@ -18,10 +18,10 @@ pub fn legal_actions(state: &State, seat: Seat) -> Vec<Command> {
             .map(|n| Command::PlaceHourglasses { n })
             .collect(),
         Phase::RevealPotion { seat: turn } if turn == seat => {
-            let targets = state.player(seat).plan.as_ref().map(|plan| &plan.targets);
+            let dealt = &state.player(seat).dealt;
             Character::ALL
                 .into_iter()
-                .filter(|&card| !targets.is_some_and(|t| t.contains(&TargetCard::Character(card))))
+                .filter(|card| !dealt.contains(card))
                 .map(|card| Command::ChoosePotionTarget { card })
                 .collect()
         }
@@ -48,13 +48,13 @@ pub fn can_resign(state: &State, _seat: Seat) -> bool {
 }
 
 /// Every plan from `hand` that passes validation: each subset of the character's
-/// allowed target cards plus the Fool.
+/// allowed target cards outside `hand`, plus the Fool.
 fn plan_actions(hand: &[Character], config: &RulesConfig) -> Vec<Command> {
     let mut actions = Vec::new();
     for &character in hand {
         let candidates: Vec<TargetCard> = Character::ALL
             .into_iter()
-            .filter(|&target| may_target(attack_rule(character), target))
+            .filter(|&target| may_target(attack_rule(character), target) && !hand.contains(&target))
             .map(TargetCard::Character)
             .chain(std::iter::once(TargetCard::Fool))
             .collect();

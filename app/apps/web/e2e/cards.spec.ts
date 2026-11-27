@@ -471,3 +471,116 @@ test('each ability legend icon is centred on the first line of its text', async 
     }
   }
 });
+
+/** Opens the gallery entry `id` at 390 × 844 and waits until it is ready. */
+async function openEntry(page: Page, id: string): Promise<void> {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(`/#/dev/gallery/${id}`);
+  await expect(page.locator('html')).toHaveAttribute('data-gallery-ready', id);
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    for (let i = 0; i < 2; i++) await new Promise((done) => requestAnimationFrame(done));
+  });
+}
+
+test('a deselected hand card goes back under its neighbours', async ({ page, isMobile }) => {
+  await openEntry(page, 'table-plan-none-chosen');
+  const knight = page.getByTestId('plan-character-knight');
+  const tap = (): Promise<void> => (isMobile ? knight.tap() : knight.click());
+  const stacking = (): Promise<{ knight: boolean; z: string }[]> =>
+    page
+      .getByTestId('plan-characters')
+      .locator(':scope > li')
+      .evaluateAll((items) =>
+        items.map((li) => ({
+          knight: li.querySelector('[data-testid="plan-character-knight"]') !== null,
+          z: getComputedStyle(li).zIndex,
+        })),
+      );
+
+  await tap();
+  await expect(knight).toHaveAttribute('aria-pressed', 'true');
+  const chosen = await stacking();
+  const raised = chosen.find((li) => li.knight)!.z;
+  for (const other of chosen.filter((li) => !li.knight)) {
+    expect(other.z, 'the chosen card is above its neighbours').not.toBe(raised);
+  }
+
+  await tap();
+  await expect(knight).toHaveAttribute('aria-pressed', 'false');
+  const deselected = await stacking();
+  const own = deselected.find((li) => li.knight)!.z;
+  expect(deselected.length).toBeGreaterThan(1);
+  for (const other of deselected.filter((li) => !li.knight)) expect(own).toBe(other.z);
+});
+
+test("targets the chosen character can't use are faded and smaller, never crossed", async ({
+  page,
+}) => {
+  await openEntry(page, 'table-plan');
+  const looks = await page
+    .getByTestId('plan-targets')
+    .locator('li[data-card]')
+    .evaluateAll((items) =>
+      items.map((li) => {
+        const button = li.querySelector('button')!;
+        const frame = li.querySelector<HTMLElement>('.frame')!;
+        const art = frame.querySelector<HTMLElement>('[data-part="art"]')!;
+        const top = frame.querySelector<HTMLElement>('[data-part="top"]')!;
+        const slot = li.getBoundingClientRect();
+        const drawn = frame.getBoundingClientRect();
+        return {
+          card: li.dataset['card'],
+          disabled: button.getAttribute('aria-disabled') === 'true',
+          cross: getComputedStyle(frame, '::after').content,
+          opacity: getComputedStyle(art).opacity,
+          name: getComputedStyle(top).opacity,
+          scale: getComputedStyle(frame).scale,
+          // Scaled about its centre, the card's centre stays where its slot's is.
+          offset: Math.abs(drawn.x + drawn.width / 2 - (slot.x + slot.width / 2)),
+        };
+      }),
+    );
+  expect(looks.filter((look) => look.disabled).length).toBeGreaterThan(0);
+  for (const look of looks) {
+    expect(look.cross, look.card).toBe('none');
+    expect(look.offset, look.card).toBeLessThan(0.5);
+    expect(look.opacity, look.card).toBe(look.disabled ? '0.6' : '1');
+    expect(look.name, `${look.card}: the name is never faded`).toBe('1');
+    expect(look.scale, look.card).toBe(look.disabled ? '0.9' : 'none');
+  }
+});
+
+test("the Potion picker offers no card from this round's hand, but offers your own target", async ({
+  page,
+}) => {
+  await openEntry(page, 'table-reveal-potion');
+  const round = await page.evaluate(async () => {
+    const fixtures = (await import(/* @vite-ignore */ '/src/gallery/fixtures.ts' as string)) as {
+      potionState: () => import('@wwd/client-core').GameClientState;
+    };
+    const state = fixtures.potionState();
+    const dealt = state.events.flatMap(([, event]) =>
+      'hand_dealt' in event.kind && event.kind.hand_dealt.seat === state.seat
+        ? [event.kind.hand_dealt.cards]
+        : [],
+    );
+    const plan = state.view!.players[state.seat === 'p0' ? 0 : 1].plan;
+    const targets =
+      typeof plan === 'object' && 'revealed' in plan
+        ? plan.revealed.targets.flatMap((t) => (t === 'fool' ? [] : [t.character]))
+        : [];
+    return { hand: dealt.at(-1) ?? [], targets };
+  });
+  const offered = await page
+    .getByTestId('potion-picker')
+    .locator('[data-testid^="action-potion-"]')
+    .evaluateAll((buttons) =>
+      buttons.map((b) => (b as HTMLElement).dataset['testid']!.replace('action-potion-', '')),
+    );
+  expect(round.hand.length).toBeGreaterThan(0);
+  expect(round.targets.length, 'the holder targets a character').toBeGreaterThan(0);
+  expect(offered.filter((c) => round.hand.includes(c as never))).toEqual([]);
+  expect(offered.length).toBe(8 - round.hand.length);
+  for (const target of round.targets) expect(offered).toContain(target);
+});

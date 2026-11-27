@@ -17,6 +17,8 @@
         count?: number;
         /** Shows only the count beside the icon, keeping the full label for hover and screen readers. */
         compact?: boolean;
+        /** The label in place of the count's own. */
+        name?: string;
         label?: undefined;
         ring?: undefined;
       }
@@ -27,6 +29,7 @@
         localiser?: undefined;
         count?: undefined;
         compact?: undefined;
+        name?: undefined;
         ring?: undefined;
       }
     | {
@@ -38,11 +41,13 @@
         label?: undefined;
         count?: undefined;
         compact?: undefined;
+        name?: undefined;
       };
 
-  let { localiser: l, marker, count, compact = false, label: word, ring }: Props = $props();
+  let { localiser: l, marker, count, compact = false, name, label: word, ring }: Props = $props();
   const label = $derived(
     word ??
+      name ??
       (l === undefined
         ? undefined
         : count === undefined
@@ -70,7 +75,8 @@
     class={['marker', 'labelled', marker, { compact }]}
     data-part="marker"
     title={compact ? label : undefined}
-    >{@render icon()}{#if compact && count !== undefined}<span aria-hidden="true">{count}</span
+    >{@render icon()}{#if compact && count !== undefined}<span data-part="count" aria-hidden="true"
+        >{count}</span
       ><span class="visually-hidden">{label}</span>{:else}<span>{label}</span>{/if}</span
   >
 {/if}

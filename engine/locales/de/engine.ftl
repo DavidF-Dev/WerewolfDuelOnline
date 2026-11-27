@@ -396,10 +396,11 @@ error-not-your-turn = Du bist nicht dran.
 error-wrong-phase = Das ist in dieser Phase nicht erlaubt.
 error-character-not-in-hand = Dieser Charakter ist nicht auf deiner Hand.
 error-target-not-allowed = Dieser Charakter kann diese Karte nicht als Ziel wählen.
+error-target-in-hand = Du kannst keine Karte auf deiner eigenen Hand als Ziel wählen.
 error-too-many-targets = Dieser Plan hat zu viele Ziele.
 error-too-few-targets = Dieser Plan braucht mehr Ziele.
 error-not-enough-hourglasses = So viele Sanduhren hast du nicht.
-error-invalid-potion-target = Diese Karte kann nicht das Ziel des Tranks sein.
+error-potion-target-in-hand = Eine Karte, die in dieser Runde auf deiner Hand war, kann nicht das Ziel des Tranks sein.
 
 ## Edit errors
 error-edit-wrong-phase = Die Hände lassen sich nur bearbeiten, bevor ein Plan versiegelt ist.
